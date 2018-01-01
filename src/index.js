@@ -7,7 +7,7 @@ import {IntlProvider} from 'react-intl';
 //console.log($);
 
 import App from './App';
-import './index.css';
+import './css/index.css';
 
 ReactDOM.render(
     <IntlProvider locale="en">

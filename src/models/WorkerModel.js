@@ -70,7 +70,7 @@ class WorkerModel {
     }
 
     getOverrate() {
-        return (((1 + (this.standing/(12*4*7*8)))*100)-100).toFixed(2);
+        return (((1 + (this.standing/(24*7*32)))*100)-100).toFixed(2);
     }
 
     isWorkingTime(time, micromanagement) {

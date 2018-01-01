@@ -6,7 +6,8 @@ import _ from 'lodash';
 
 import $ from 'jquery'
 
-import './App.css';
+import './css/App.css';
+import './css/bootstrap-slider.css';
 
 import Layout from './components/Layout';
 import {addMessage, addAction} from './components/ToastNest';
@@ -530,112 +531,6 @@ class App extends Component {
         if (updating) this.setState({data: data});
     }
 
-    rollTurn() {
-        const data = this.state.data;
-
-        switch (tick) {
-            case 5:
-                addAction('Hi there! Important messages will appear in this corner of the screen.', {timeOut: 15000, extendedTimeOut: 5000, closeButton: false}, 'success');
-                break;
-            case 24:
-                addAction('First of all, choose the origin and formation of your character.', {timeOut: 15000, extendedTimeOut: 5000, closeButton: false}, 'success');
-                break;
-            case 10:
-             //   addAction('Then find your first project.', {timeOut: 15000, extendedTimeOut: 5000}, 'success');
-                break;
-            default:
-                break;
-        }
-
-
-        if (tick < (24 * 7)) {
-            return false; // no generation first week
-        }
-
-        let probability = Math.min(50, (10 + (projects_done*0.1))) / 24;
-
-        if (data.offered_projects.freelance.length < 5 && _.random(0.0, 100.0) < probability) {
-            let quality = Math.ceil(_.random(1, (tick / (24*30)) + (projects_done*0.2)));
-            let size =
-                (quality < 3) ? 1 : (
-                    (quality < 5) ? _.random(1, _.random(1, 2)) : (
-                        (quality < 10) ? _.random(1, 2) : (
-                            (quality < 15) ? (_.random(0, 1) ? _.random(1, 2) : _.random(1, 3)) : (
-                                (quality < 20) ? _.random(1, 3) : (
-                                    (quality < 25) ? (_.random(0, 1) ? _.random(1, 3) : _.random(1, 4)) : (
-                                        (quality < 30) ? _.random(1, 4) : (
-                                            (quality < 35) ? (_.random(0, 1) ? _.random(1, 4) : _.random(2, 4)) : (
-                                                (quality < 40) ? _.random(2, 4) : (
-                                                    (quality < 45) ? _.random(_.random(2, 4), 4) : (
-                                                        (quality < 50) ? _.random(3, 4) : 4
-                                                    )
-                                                )
-                                            )
-                                        )
-                                    )
-                                )
-                            )
-                        )
-                    )
-                );
-
-            //console.log('probability: ' + probability.toFixed(2) + ' quality: ' + quality + ' size: ' + size);
-            data.offered_projects.freelance.push(ProjectModel.generate(quality, size));
-            addAction('New job!', {timeOut: 3000, extendedTimeOut: 1000});
-        }
-        if (_.random(1, 100) < Math.sqrt(probability)) {
-            _.remove(data.candidates.resumes, (candidate) => { return (candidate.id === data.candidates.resumes[0].id); });
-        }
-
-
-        if (Math.floor(_.random(1, 24 * (50 - Math.min(25, projects_done*0.2)))) === 1 && data.candidates.resumes.length < 5) {
-            let worker = WorkerModel.generate(_.random(2, 5));
-            data.candidates.resumes.push(worker);
-            addAction('New resume: ' + worker.name);
-        }
-        if (_.random(1, 24*7*8) === 1 && data.candidates.resumes.length > 0) {
-            _.remove(data.candidates.resumes, (candidate) => { return (candidate.id === data.candidates.resumes[0].id); });
-        }
-
-        if (Math.floor(_.random(1, (24*7*4*12)/(1+(projects_done*0.1)))) === 1 && data.candidates.resumes.length < 5) {
-            let experience = _.random(10, 20);
-            let worker = WorkerModel.generate(experience);
-            worker.standing += experience * 12 * _.random(5, 10+experience);
-            data.candidates.resumes.push(worker);
-            let max_skill = _.maxBy(Object.keys(worker.stats), function (o) { return worker.stats[o]; });
-            addAction('Excellent '+max_skill+' ninja '+worker.name+' looking for a job');
-        }
-
-/*
-        if (Math.floor(_.random(1, (24*2) + (projects_done*0.1))) === 1 && data.offered_projects.freelance.length < 5) {
-            data.offered_projects.freelance.push(ProjectModel.generate(_.random(1, 3), _.random(1, 2)));
-            addAction('New freelance job!', {timeOut: 3000, extendedTimeOut: 1000});
-        }
-        if (_.random(1, 24*7) === 1 && data.offered_projects.freelance.length > 0) {
-            _.remove(data.offered_projects.freelance, (candidate) => { return (candidate.id === data.offered_projects.freelance[0].id); });
-        }
-
-        if (Math.floor(_.random(1, 24*((7*8)/(1+projects_done*0.1)))) === 1 && data.offered_projects.freelance.length < 5) {
-            data.offered_projects.freelance.push(ProjectModel.generate(_.random(15, 30 + Math.sqrt(projects_done)), 4));
-            addAction('New big deal!', {timeOut: 5000, extendedTimeOut: 3000});
-        }
-        */
-
-
-        if (tick < (24 * 30 * 5)) {
-            return false; // no additional generation first 5 month
-        }
-
-        if (!data.wasRecentlyHackathon && _.random(1, 24*60)) {
-            data.wasRecentlyHackathon = true;
-            data.offered_projects.hot.push(Lorer.hackathon());
-        }
-
-
-
-        //this.setState({data: data});
-    }
-
     nextDay() {
         let data = this.state.data;
         let time = data.date;
@@ -654,11 +549,11 @@ class App extends Component {
             console.log('A new day');
             //time.hour = 1;
             data.workers.forEach((worker) => {
-               // console.log('worker '+worker.id+' morale '+worker.morale);
+                // console.log('worker '+worker.id+' morale '+worker.morale);
                 if (worker.morale < 100 && _.random(1, 7)) worker.morale++;
 
                 if (!worker.is_player) {
-                    let dissatisfaction = Math.floor((10000 - Math.pow(worker.calcEfficiency() + 25, 2)) / 30);
+                    let dissatisfaction = Math.floor((10000 - Math.pow(worker.calcEfficiency() + 33, 2)) / 30);
                     let smoothing = 1 + (parseInt(worker.getOverrate(), 10) / 100);
                     let breakpoint = _.random(1, 10000);
                     //console.log(dissatisfaction, worker.calcEfficiency(), Math.floor(Math.pow(worker.calcEfficiency(), 2)), breakpoint);
@@ -698,12 +593,125 @@ class App extends Component {
         time.day = game_date.getUTCDay();
 
         time.is_working_time = !!(
-            time.hour >= 10 &&
-            time.hour <= 18 &&
-            time.day !== 6 &&
-            time.day !== 0);
+        time.hour >= 10 &&
+        time.hour <= 18 &&
+        time.day !== 6 &&
+        time.day !== 0);
 
         data.date = time;
+        //this.setState({data: data});
+    }
+
+    rollTurn() {
+        const data = this.state.data;
+
+        switch (tick) {
+            case 5:
+                addAction('Hi there! Important messages will appear in this corner of the screen.', {timeOut: 15000, extendedTimeOut: 5000, closeButton: false}, 'success');
+                break;
+            case 24:
+                addAction('First of all, choose the origin and formation of your character.', {timeOut: 15000, extendedTimeOut: 5000, closeButton: false}, 'success');
+                break;
+            case 10:
+             //   addAction('Then find your first project.', {timeOut: 15000, extendedTimeOut: 5000}, 'success');
+                break;
+            default:
+                break;
+        }
+
+
+        if (tick < (24 * 7)) {
+            return false; // no generation first week
+        }
+
+        let probability = Math.min(50, (10 + (projects_done*0.1))) / 24;
+
+        if (data.offered_projects.freelance.length < 5 && _.random(0.0, 100.0) < probability) {
+            let quality = Math.ceil(_.random(1, (tick / (24*30)) + (projects_done*0.1)));
+            let size =
+                (quality < 3) ? 1 : (
+                    (quality < 5) ? _.random(1, _.random(1, 2)) : (
+                        (quality < 10) ? _.random(1, 2) : (
+                            (quality < 15) ? (_.random(0, 1) ? _.random(1, 2) : _.random(1, 3)) : (
+                                (quality < 20) ? _.random(1, 3) : (
+                                    (quality < 25) ? (_.random(0, 1) ? _.random(1, 3) : _.random(1, 4)) : (
+                                        (quality < 30) ? _.random(1, 4) : (
+                                            (quality < 35) ? (_.random(0, 1) ? _.random(1, 4) : _.random(2, 4)) : (
+                                                (quality < 40) ? _.random(2, 4) : (
+                                                    (quality < 45) ? _.random(_.random(2, 4), 4) : (
+                                                        (quality < 50) ? _.random(3, 4) : 4
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                );
+
+            //console.log('probability: ' + probability.toFixed(2) + ' quality: ' + quality + ' size: ' + size);
+            data.offered_projects.freelance.push(ProjectModel.generate(quality, size));
+            addAction('New job!', {timeOut: 3000, extendedTimeOut: 1000});
+        }
+
+        if (data.candidates.resumes.length > 0) { //  WTF section
+            if (_.random(1, 100) < Math.sqrt(probability)) {
+                _.remove(data.candidates.resumes, (candidate) => {
+                    return (candidate.id === data.candidates.resumes[0].id);
+                });
+            }
+            if (_.random(1, 24 * 7 * 8) === 1) {
+                _.remove(data.candidates.resumes, (candidate) => {
+                    return (candidate.id === data.candidates.resumes[0].id);
+                });
+            }
+        }
+
+        let spike = (tick > (24 * 30) & tick < (24 * 60)) ? 40 : 0;
+        if (Math.floor(_.random(1, 24 * (50 - Math.max(spike, Math.min(25, projects_done*0.2))))) === 1 && data.candidates.resumes.length < 5) {
+            let worker = WorkerModel.generate(_.random(1, Math.floor(5 + projects_done*0.1)));
+            data.candidates.resumes.push(worker);
+            addAction('New resume: ' + worker.name);
+        }
+
+        if (Math.floor(_.random(1, (24*7*4*12)/(1+(projects_done*0.1)))) === 1 && data.candidates.resumes.length < 5) {
+            let experience = _.random(10, 20);
+            let worker = WorkerModel.generate(experience);
+            worker.standing += experience * 12 * _.random(5, 10+experience);
+            data.candidates.resumes.push(worker);
+            let max_skill = _.maxBy(Object.keys(worker.stats), function (o) { return worker.stats[o]; });
+            addAction('Excellent '+max_skill+' ninja '+worker.name+' looking for a job');
+        }
+
+/*
+        if (Math.floor(_.random(1, (24*2) + (projects_done*0.1))) === 1 && data.offered_projects.freelance.length < 5) {
+            data.offered_projects.freelance.push(ProjectModel.generate(_.random(1, 3), _.random(1, 2)));
+            addAction('New freelance job!', {timeOut: 3000, extendedTimeOut: 1000});
+        }
+        if (_.random(1, 24*7) === 1 && data.offered_projects.freelance.length > 0) {
+            _.remove(data.offered_projects.freelance, (candidate) => { return (candidate.id === data.offered_projects.freelance[0].id); });
+        }
+
+        if (Math.floor(_.random(1, 24*((7*8)/(1+projects_done*0.1)))) === 1 && data.offered_projects.freelance.length < 5) {
+            data.offered_projects.freelance.push(ProjectModel.generate(_.random(15, 30 + Math.sqrt(projects_done)), 4));
+            addAction('New big deal!', {timeOut: 5000, extendedTimeOut: 3000});
+        }
+        */
+
+
+        if (tick < (24 * 30 * 5)) {
+            return false; // no additional generation first 5 month
+        }
+
+        if (!data.wasRecentlyHackathon && _.random(1, 24*60)) {
+            data.wasRecentlyHackathon = true;
+            data.offered_projects.hot.push(Lorer.hackathon());
+        }
+
+
+
         //this.setState({data: data});
     }
 
