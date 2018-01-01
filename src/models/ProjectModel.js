@@ -366,8 +366,8 @@ class ProjectModel {
         //console.log(projects_generated);
         let q = Math.floor(quality * size * 0.1);
         let h = (_.random(0, quality) * (0 + _.random(1, Math.pow(hired, 2))));
-        let d = (_.random(0, quality) * (0 + _.random(1, projects_done/2)));
-        let g = (_.random(0, quality) * (0 + _.random(1, Math.floor(Math.sqrt(projects_generated/2)))));
+        let d = (_.random(0, quality) * (0 + _.random(1, Math.floor(Math.sqrt(projects_done*2)))));
+        let g = (_.random(0, quality) * (0 + _.random(1, Math.floor(Math.sqrt(projects_generated*0.1)))));
         let r = _.random(1, 10);
 
         console.log('gen_stats: q: '+q+' h: '+h+' d: '+d+' g: '+g+' r: '+r);
