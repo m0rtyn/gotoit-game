@@ -4,6 +4,8 @@ import _ from 'lodash';
 //import '../node_modules/react-bootstrap-slider/node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css';
 //import * from 'bootstrap-slider';
 
+import $ from 'jquery'
+
 import './App.css';
 
 import Layout from './components/Layout';
