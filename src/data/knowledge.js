@@ -70,9 +70,9 @@ export const player_backgrounds = {
   //  autodidact: {name: 'Autodidact', money: 1000, start_tech: ['creativity'], text: 'Inspired researcher, looking own way. Eclectic stats.'},
   //  university: {name: 'Student', money: 5000, start_tech: ['tdd'], text: 'Fundamental education according to verified program. Flat stats.'},
     comprehensive: {name: 'Comprehensive', money: 3000, start_tech: ['rad'], text: 'Has no weaknesses. But is poor and not special.'},
-    specialist: {name: 'Specialist', money: 4000, start_tech: ['agile'], text: 'Raised their professional skills to enormous heights.'},
-    coworker: {name: 'Coworker', money: 5000, start_tech: ['pair'], text: 'Works with the Partner, covering each other.'},
-    businessman: {name: 'Businessman', money: 6000, start_tech: ['micromanagement'], text: 'Made a fortune doing business. Good credit story.'}
+    specialist: {name: 'Specialist', money: 5000, start_tech: ['agile'], text: 'Raised their professional skills to enormous heights.'},
+    coworker: {name: 'Coworker', money: 7000, start_tech: ['pair'], text: 'Works with the Partner, covering each other.'},
+    businessman: {name: 'Businessman', money: 9000, start_tech: ['micromanagement'], text: 'Made a fortune doing business. Good credit story.'}
 };
 
 export const player_specialities = {
@@ -91,9 +91,9 @@ export const offices = {
 };
 
 export const loans = {
-    1: {size: 1, money: 5000, interest: 40, time: 12, open_after_tick: 24*30, min_credit_score: 300, name: 'Small Credit', text: ''},
+    1: {size: 1, money: 5000, interest: 40, time: 3, open_after_tick: 24*30, min_credit_score: 300, name: 'Small Credit', text: ''},
     2: {size: 2, money: 10000, interest: 30, time: 6, open_after_tick: 24*30*6, min_credit_score: 500, name: 'Medium Credit', text: ''},
-    3: {size: 3, money: 25000, interest: 20, time: 2, open_after_tick: 24*30*12, min_credit_score: 700, name: 'Big Credit', text: ''},
+    3: {size: 3, money: 25000, interest: 20, time: 12, open_after_tick: 24*30*12, min_credit_score: 700, name: 'Big Credit', text: ''},
 };
 
 export default {};

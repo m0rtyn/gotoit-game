@@ -53,7 +53,7 @@ class Creation extends Component {
             this.props.data.helpers.hireEmployer(WorkerModel.generate(8));
             this.props.data.helpers.upOffice(2); // this.props.data.office = new OfficeModel(2);
         } else if (this.state.selected_background === 'businessman') {
-            this.props.data.early_payed_loans += 30;
+            this.props.data.early_payed_loans += 100;
         }
 
         this.props.data.helpers.playGame();
