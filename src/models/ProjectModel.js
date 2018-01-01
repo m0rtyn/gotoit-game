@@ -225,7 +225,7 @@ class ProjectModel {
         return this.planedTasksQuantity();
     }
 
-    static generate(quality=1, size=4, kind=_.sample(_.keys(project_kinds)), platform = _.sample(_.keys(project_platforms))) {
+    static generate(quality = 1, size = 4, kind = _.sample(_.keys(project_kinds)), platform = _.sample(_.keys(project_platforms))) {
         //console.log("gen quality="+quality+", size="+size);
         projects_generated++;
 
@@ -366,11 +366,11 @@ class ProjectModel {
         //console.log(projects_generated);
         let q = Math.floor(quality * size * 0.1);
         let h = (_.random(0, quality) * (0 + _.random(1, Math.pow(hired, 2))));
-        let d = (_.random(0, quality) * (0 + _.random(1, projects_done)));
+        let d = (_.random(0, quality) * (0 + _.random(1, projects_done/2)));
         let g = (_.random(0, quality) * (0 + _.random(1, Math.floor(Math.sqrt(projects_generated/2)))));
         let r = _.random(1, 10);
 
-        //console.log('gen_stats: q: '+q+' h: '+h+' d: '+d+' g: '+g+' r: '+r);
+        console.log('gen_stats: q: '+q+' h: '+h+' d: '+d+' g: '+g+' r: '+r);
         return Math.floor( q + h + d + g + r);
     }
 
