@@ -159,6 +159,19 @@ class bulkStyler {
         }
         return _.mapValues(stats_bulk, function (stat) { return Math.ceil(stat); });
     }
+
+    static projectPlayer(stats_bulk) { // TO DO
+        return stats_bulk;
+    }
+
+    static projectTeam(stats_bulk) { // TO DO
+        return stats_bulk;
+    }
+
+    static projectHistory(stats_bulk) { // TO DO
+        return stats_bulk;
+    }
+
 }
 
 

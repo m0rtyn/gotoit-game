@@ -9,10 +9,10 @@ export const skills_names = _.keys(skills);
 
 
 export const roles = {
-    design: {name: 'Design', description: 'Design'},
-    manage: {name: 'Management', description: 'Management'},
-    program: {name: 'Programming', description: 'Programming'},
-    admin: {name: 'Administrating', description: "Administrating"}
+    design: {name: 'Design', profession_name: 'Designer', description: 'Design'},
+    manage: {name: 'Management', profession_name: 'Manager', description: 'Management'},
+    program: {name: 'Programming', profession_name: 'Programmer', description: 'Programming'},
+    admin: {name: 'Administrating', profession_name: 'Administrator', description: "Administrating"}
 };
 
 

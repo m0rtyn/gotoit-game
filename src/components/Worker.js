@@ -128,7 +128,7 @@ class Worker extends Component {
                                             worker.accept_default = e.target.checked;
                                             this.manageAll(e);
                                         }}/>
-                                    Auto join new projects
+                                    Auto join to new projects
                                 </label>
                             </div>
                             <div className="flex-container-row slim">
@@ -140,7 +140,7 @@ class Worker extends Component {
                                                 id={role}
                                                 checked={this.props.data.helpers.getRole(worker.id, role)}
                                                 onChange={this.changeRole}/>
-                                            <span> {roles[role].name} </span>
+                                            <span>as {roles[role].profession_name} </span>
                                         </label>
                                     </div>
                                 )}

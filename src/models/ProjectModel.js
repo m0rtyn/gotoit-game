@@ -225,7 +225,7 @@ class ProjectModel {
         return this.planedTasksQuantity();
     }
 
-    static generate(quality = 1, size = 4, kind = _.sample(_.keys(project_kinds)), platform = _.sample(_.keys(project_platforms))) {
+    static generate(quality = 1, size = 4, fit_mode = false, kind = _.sample(_.keys(project_kinds)), platform = _.sample(_.keys(project_platforms))) {
         //console.log("gen quality="+quality+", size="+size);
         projects_generated++;
 
@@ -239,6 +239,17 @@ class ProjectModel {
         stats_bulk = bulkStyler.speciality(stats_bulk);
         stats_bulk = bulkStyler.projectKind(stats_bulk, kind);
         stats_bulk = bulkStyler.projectPlatform(stats_bulk, platform);
+        switch (fit_mode) {
+            case 'player':
+                stats_bulk = bulkStyler.projectPlayer(stats_bulk);
+                break;
+            case 'team':
+                stats_bulk = bulkStyler.projectTeam(stats_bulk);
+                break;
+            case 'history':
+                stats_bulk = bulkStyler.projectHistory(stats_bulk);
+                break;
+        }
 
         let stats = JSON.parse(JSON.stringify(skills));
 
@@ -264,6 +275,12 @@ class ProjectModel {
         return new ProjectModel(this.genName(), 'project', kind, platform, reward, penalty, stats, size, deadline);
     }
 
+    static generateStorylineProject(quality, size) {
+        let bulk = this.generate(quality, size, 'player');
+        bulk.is_storyline = true;
+        return bulk;
+    }
+
     static genReward(s, size) {
         return 2000 + Math.ceil((_.max(s) + _.sum(s)) * 5 * size);
     }
@@ -276,8 +293,6 @@ class ProjectModel {
         return 48 +  // constant for anti-weekend effect on small projects
             Math.floor((((_.max(s) + _.sum(s)) * 3) / (size)));
     }
-
-
 
     static generateTraining(worker, skill=null) {
         let level = Math.floor((worker.statsSum()/4*0.5) + (worker.stats[skill]*2));
