@@ -550,7 +550,7 @@ class App extends Component {
             //time.hour = 1;
             data.workers.forEach((worker) => {
                 // console.log('worker '+worker.id+' morale '+worker.morale);
-                if (worker.morale < 100 && _.random(1, 7)) worker.morale++;
+                if (worker.morale < 100 && _.random(1, 24)) worker.morale++;
 
                 if (!worker.is_player) {
                     let dissatisfaction = Math.floor((10000 - Math.pow(worker.calcEfficiency() + 33, 2)) / 30);
@@ -792,7 +792,7 @@ class App extends Component {
                 if (!is_working_time) {
                     if (overtime) {
                         if (worker.morale > 0) {
-                            if (_.random(1, 4) === 1) {
+                            if (_.random(1, 3) === 1) {
                                 overtimed = true;
                                 //chatMessage(worker.name, 'I overtime today');
                             //    console.log('overtime on '+worker.morale);

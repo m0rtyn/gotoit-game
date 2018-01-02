@@ -135,7 +135,7 @@ class Narrator {
                 case num < 700: return ' Encouraged'+drawNum(num)+' and ready to work.';
                 case num < 800: return ' Full'+drawNum(num)+' of energy.';
                 case num < 900: return ' Rested and full'+drawNum(num)+' of energy.';
-                case num <= 1000: return ' Fresh'+drawNum(num)+' from holidays';
+                case num <= 1000: return ' Fresh'+drawNum(num)+' from holidays.';
                 default:
                     console.log('error case: ' + num);
             }

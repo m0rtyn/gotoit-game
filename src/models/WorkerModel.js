@@ -20,7 +20,7 @@ class WorkerModel {
         this.is_player = is_player;
         this.expirience = JSON.parse(JSON.stringify(skills));
         this.standing = 0;
-        this.morale = 10;
+        this.morale = 100;
         this.accept_default = true;
 
         this.temper = {
@@ -113,8 +113,11 @@ class WorkerModel {
 
     workloadPenalty() {
         const task_preferred = (Math.ceil((tick - this.facts.tick_hired)/24) * 3);
-        const tasks_stream = 20 * (1-((200+task_preferred) / ((200+(this.facts.tasks_done - this.facts.training_tasks_done)))));
-        return Math.max(Math.min(Math.floor(tasks_stream), 20), -20);
+        const tasks_stream = Math.max(Math.min(Math.floor(20 * (1-((200+task_preferred) / ((200+(this.facts.tasks_done - this.facts.training_tasks_done)))))), 20), -20);
+        const overloaded = Math.floor((100 - this.morale) / 5);
+        console.log('Workload: ' + tasks_stream + ' ' + overloaded);
+        return (Math.abs(tasks_stream) > overloaded) ? tasks_stream : overloaded;
+       // return Math.max(Math.abs(Math.max(Math.min(Math.floor(tasks_stream), 20), -20)), Math.abs(Math.floor(overloaded)));
     }
 
     difficultyPenalty() {
