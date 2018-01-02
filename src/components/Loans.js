@@ -45,7 +45,7 @@ class Loans extends Component {
     calcCreditScore() {
         const data = this.props.data;
         const inertia = 500;
-        let good_factors = (Math.sqrt(data.old_loans.length) * 20) + (Math.sqrt(data.early_payed_loans) * 4);
+        let good_factors = (Math.sqrt(data.old_loans.length) * 100) + (Math.sqrt(data.early_payed_loans) * 1);
         let bad_factors = Math.pow(data.taken_loans.length, 1.5) * 75;
 
         let score_rate = 420 * ((inertia + good_factors) / (inertia + bad_factors));

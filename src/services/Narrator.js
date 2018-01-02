@@ -108,7 +108,7 @@ class Narrator {
                 let realCollectivePenalty = () => {
                     switch (penalty.level) {
                         case'very low': return ' feels depressed by '+drawNum(penalty.value)+' the level of experience of the colleagues.';
-                        case 'lower': return ' feels upset by their low skills compared'+drawNum(penalty.value)+' to the skills of colleagues.';
+                        case 'lower': return ' feels upset by low skills compared'+drawNum(penalty.value)+' to the skills of colleagues.';
                         case 'low': return ' feels like a follower'+drawNum(penalty.value)+' in the team.';
                         case 'normal': return ' feels comfortably'+drawNum(penalty.value)+' in the team.';
                         case 'high': return ' feels like a leader'+drawNum(penalty.value)+' in the team.';
