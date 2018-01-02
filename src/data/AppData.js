@@ -58,7 +58,7 @@ var app_state =
         projects_end_reports: [],
         projects_archive_reports: [],
         simplified_reports: [],
-        projects_known_technologies: [],
+        projects_known_technologies: ['overtime'],
         projects_technologies: [],
         projects_default_technologies: [],
 

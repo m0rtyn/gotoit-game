@@ -223,11 +223,15 @@ class WorkerModel {
 
         let stats = bulkStyler.speciality(stats_bulk);
 
+        return this.generateWithStats(stats);
+    }
+
+    static generateWithStats(stats) {
         return new WorkerModel(this.genName(), stats);
     }
 
     static generateBlank() {
-        return new WorkerModel(this.genName(), JSON.parse(JSON.stringify(skills)));
+        return this.generateWithStats(JSON.parse(JSON.stringify(skills)));
     }
 
     static generateAgency(agency_state) {
@@ -238,7 +242,7 @@ class WorkerModel {
             return stat;
         });
         //console.log(stats);
-        let worker =  new WorkerModel(this.genName(), stats);
+        let worker = this.generateWithStats(stats);
         worker.standing = Math.floor(_.random(agency_state.min_salary, agency_state.max_salary) * 26.888);
         //console.log(worker);
         return worker;

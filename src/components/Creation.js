@@ -8,7 +8,7 @@ import bulkStyler from '../services/bulkStyler';
 
 import WorkerModel from '../models/WorkerModel';
 
-import {player_backgrounds, player_specialities, technologies, skills_1} from '../data/knowledge';
+import {player_backgrounds, player_tech, player_teams, player_specialities, technologies, skills_1} from '../data/knowledge';
 
 export var player = null;
 
@@ -16,45 +16,106 @@ class Creation extends Component {
     constructor(props) {
         super(props);
 
+        let back = _.sample(_.keys(player_backgrounds));
+        let tech = _.sample(_.keys(player_tech));
+        let spec = _.sample(_.keys(player_specialities));
+        let team = _.sample(_.keys(player_teams));
+
         this.state = {
             step: 'welcome', // welcome, creation
             suggest_name: WorkerModel.genName(),
-            selected_background: _.sample(_.keys(player_backgrounds)), //'comprehensive',
-            selected_speciality: _.sample(_.keys(player_specialities)), //'university',
+            selected_background: _.sample(_.keys(player_backgrounds)), //'specialist',
+            selected_tech: tech, // start_tech_list: ['rad', 'creativity', 'tdd', 'refactoring']
+            selected_speciality: spec, //'design',
+            selected_team: team, //'partner',
         };
 
+
         this.embark = this.embark.bind(this);
+    }
+
+    getPlayerStats() {
+        let stats = JSON.parse(JSON.stringify(skills_1));
+
+        stats = bulkStyler.playerBackground(stats, this.state.selected_background);
+
+        if (this.state.selected_background === 'specialist') {
+            stats = bulkStyler.playerSpeciality(stats, this.state.selected_speciality);
+        }
+
+        return stats;
     }
 
     embark() {
         console.log('embrk');
 
-
         let data = this.props.data;
-        data.money += player_backgrounds[this.state.selected_background].money
-        let stats = JSON.parse(JSON.stringify(skills_1));
-        stats = bulkStyler.playerSpeciality(stats, this.state.selected_speciality);
-        stats = bulkStyler.playerBackground(stats, this.state.selected_background);
+        data.money += player_backgrounds[this.state.selected_background].money;
 
-        let worker = WorkerModel.generatePlayer();
+        let stats = this.getPlayerStats();
 
-        worker.stats = stats;
-        worker.name = this.state.suggest_name;
+        let tmp_player = WorkerModel.generatePlayer();
 
-        data.workers[0] = worker; //: [WorkerModel.generatePlayer()]
-        player = worker;
+        tmp_player.stats = stats;
+        tmp_player.name = this.state.suggest_name;
 
-        data.stage = 'game';
-        data.projects_known_technologies = data.projects_known_technologies.concat(player_backgrounds[this.state.selected_background].start_tech);
-       // data.projects_known_technologies = data.projects_known_technologies.concat(player_specialities[this.state.selected_speciality].start_tech);
-        this.refs.creation.closePortal();
+        data.workers[0] = tmp_player; //: [WorkerModel.generatePlayer()]
+        player = tmp_player;
+
+        /*
+        switch (this.state.selected_background) {
+            case 'technologist':
+
+                break;
+            case 'specialist':
+
+                break;
+            case 'coworker':
+                this.props.data.helpers.hireEmployer(WorkerModel.generate(8));
+                this.props.data.helpers.upOffice(2);
+                break;
+            case 'businessman':
+                this.props.data.early_payed_loans += 100;
+                break;
+
+        }
+        */
 
         if (this.state.selected_background === 'coworker') {
-            this.props.data.helpers.hireEmployer(WorkerModel.generate(8));
+            switch (this.state.selected_team) {
+                case 'apprentice':
+                    this.props.data.helpers.hireEmployer(WorkerModel.generateWithStats(bulkStyler.partnerSpeciality(JSON.parse(JSON.stringify(stats)), 'apprentice')));
+                    break;
+                case 'partner':
+                    this.props.data.helpers.hireEmployer(WorkerModel.generateWithStats(bulkStyler.partnerSpeciality(JSON.parse(JSON.stringify(stats)), 'partner')));
+                    break;
+                case 'helpers':
+                    this.props.data.helpers.hireEmployer(WorkerModel.generateWithStats(bulkStyler.partnerSpeciality(JSON.parse(JSON.stringify(stats)), 'helper1')));
+                    this.props.data.helpers.hireEmployer(WorkerModel.generateWithStats(bulkStyler.partnerSpeciality(JSON.parse(JSON.stringify(stats)), 'helper2')));
+                    break;
+                case 'full':
+                    this.props.data.helpers.hireEmployer(WorkerModel.generate(3));
+                    this.props.data.helpers.hireEmployer(WorkerModel.generate(3));
+                    this.props.data.helpers.hireEmployer(WorkerModel.generate(3));
+                    break;
+            }
+         //   this.props.data.helpers.hireEmployer(WorkerModel.generate(8));
             this.props.data.helpers.upOffice(2); // this.props.data.office = new OfficeModel(2);
-        } else if (this.state.selected_background === 'businessman') {
+        }
+
+        if (this.state.selected_background === 'businessman') {
             this.props.data.early_payed_loans += 100;
         }
+
+        if (this.state.selected_background === 'technologist') {
+            data.projects_known_technologies = data.projects_known_technologies.concat(this.state.selected_tech);
+        }
+        else {
+            data.projects_known_technologies = data.projects_known_technologies.concat(player_backgrounds[this.state.selected_background].start_tech);
+        }
+
+        data.stage = 'game';
+        this.refs.creation.closePortal();
 
         this.props.data.helpers.playGame();
     }
@@ -67,10 +128,7 @@ class Creation extends Component {
         const data = this.props.data;
         //const worker = data.workers[0];
 
-        let stats = bulkStyler.playerBackground(
-                    bulkStyler.playerSpeciality(JSON.parse(JSON.stringify(skills_1)),
-                        this.state.selected_speciality),
-                        this.state.selected_background);
+        let stats = this.getPlayerStats();
 
         const stats_data = _.mapValues(stats, (val, key) => {
             return {name: key, val: stats[key]};
@@ -122,7 +180,8 @@ class Creation extends Component {
                                                             {player_backgrounds[background].name}
                                                         </h3>
                                                         <p className="slim">{player_backgrounds[background].text}</p>
-                                                        <p>Start tech: {technologies[player_backgrounds[background].start_tech].name}</p>
+                                                        <p> Start tech: {('technologist' === background) ? "rad, creativity, tdd or refactoring" : technologies[player_backgrounds[background].start_tech].name}
+                                                        </p>
                                                     </label>
                                                 </div>
                                             </div>
@@ -130,24 +189,63 @@ class Creation extends Component {
                                     </div>
                                 </div>
                                 <div className="panel panel-success">
-                                    <div className="flex-container-row">
-                                        {Object.keys(player_specialities).map((speciality) => {
-                                            return <div key={speciality} className="flex-element">
-                                                <div className="radio">
-                                                    <label className="slim">
-                                                        <h3 className="text-center">
-                                                            <input type="radio" name="speciality" value={speciality}
-                                                                   checked={this.state.selected_speciality === speciality}
-                                                                   onChange={(event) => {
-                                                                       this.setState({selected_speciality: event.target.value})
-                                                                   }}/>
-                                                            {player_specialities[speciality].name}
-                                                        </h3>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        })}
-                                    </div>
+                                        {(() => {
+                                            switch (this.state.selected_background) {
+                                                case "technologist":   return <div className="flex-container-row">
+                                                    {Object.keys(player_tech).map((tech) => {
+                                                        return <div key={tech} className="flex-element">
+                                                            <div className="radio">
+                                                                <label className="slim">
+                                                                    <h3 className="text-center">
+                                                                        <input type="radio" name="tech" value={tech}
+                                                                               checked={this.state.selected_tech === tech}
+                                                                               onChange={(event) => {
+                                                                                   this.setState({selected_tech: event.target.value});
+                                                                               }}/>
+                                                                        {player_tech[tech].name}
+                                                                    </h3>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    })} </div>;
+                                                case "specialist":   return <div className="flex-container-row">
+                                                    {Object.keys(player_specialities).map((speciality) => {
+                                                        return <div key={speciality} className="flex-element">
+                                                            <div className="radio">
+                                                                <label className="slim">
+                                                                    <h3 className="text-center">
+                                                                        <input type="radio" name="speciality" value={speciality}
+                                                                               checked={this.state.selected_speciality === speciality}
+                                                                               onChange={(event) => {
+                                                                                   this.setState({selected_speciality: event.target.value});
+                                                                               }}/>
+                                                                        {player_specialities[speciality].name}
+                                                                    </h3>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    })} </div>;
+                                                case "coworker": return <div className="flex-container-row">
+                                                    {Object.keys(player_teams).map((team) => {
+                                                        return <div key={team} className="flex-element">
+                                                            <div className="radio">
+                                                                <label className="slim">
+                                                                    <h3 className="text-center">
+                                                                        <input type="radio" name="team" value={team}
+                                                                               checked={this.state.selected_team === team}
+                                                                               onChange={(event) => {
+                                                                                   this.setState({selected_team: event.target.value});
+                                                                               }}/>
+                                                                        {player_teams[team].name}
+                                                                    </h3>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    })} </div>;
+                                                case "businessman":  return <p className="panel">The credit account of a businessman is too good to be wasted. Just use these opportunities to hire and train workers from the very beginning.</p>;
+                                                default:      return "OOPSSS!";
+                                            }
+                                        })()}
                                 </div>
                                 <div className="panel panel-warning">
                                     <h4 className="text-center fat">
