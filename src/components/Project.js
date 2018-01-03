@@ -12,7 +12,7 @@ import TeamDialog from './TeamDialog';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
 
-import {skills_names, skills, technologies} from '../data/knowledge';
+import {skills_names, workers_bonus_items, skills, technologies} from '../data/knowledge';
 
 
 class Project extends Component {
@@ -276,7 +276,7 @@ class Project extends Component {
                                                                         onChange={(event) => {
                                                                             data.helpers.modifyRelation(event.target.id, project.id, event.target.checked, skill);
                                                                         }}/>
-                                                                    {(worker.stats[skill] + worker.expirience[skill]/100).toFixed(2)}
+                                                                    {(worker.stats[skill] + worker.expirience[skill]/100).toFixed(2) + ((worker.items[skill] === true) ? ' +'+workers_bonus_items[skill].bonus+'%' : '')}
                                                                 </label>
                                                             </div>};
                                                     });
