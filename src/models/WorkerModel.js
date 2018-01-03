@@ -41,6 +41,8 @@ class WorkerModel {
 
         this.items = JSON.parse(JSON.stringify(skills));
 
+        this.fed_ticker = 0;
+
         this.facts = {
             project_finished: 0,
             tick_hired: 0, money_earned: 0,
@@ -75,13 +77,15 @@ class WorkerModel {
         return (((1 + (this.standing/(24*7*32)))*100)-100).toFixed(2);
     }
 
-    isWorkingTime(time, micromanagement) {
+    isWorkingTime(time, micromanagement, office_things) {
         let variability = _.random(-this.temper.variability, this.temper.variability);
         let mod = variability + this.temper.earliness;
 
+        //let office_things_bonus = (office_things.coffeemaker ? 10 : 0) + (office_things.lanch ? 25 : 0 ) + office_things.gadget;
+
         let is_working_time = (
-            time.hour >= 9 + mod &&
-            time.hour <= 17 + mod &&
+            time.hour >= (office_things.coffeemaker ? -1 : 0)   + 9 + mod &&
+            time.hour <= (this.fed_ticker > 1 ? 2 : 0 )        + 17 + mod &&
             ((time.day !== 6 && time.day !== 0) || _.random(1, (20-(this.temper.variability*2))) === 1) && // variability guys work on weekends more often
             (_.random(1, 10 - this.temper.variability) !==1) // variability guys eblanyat more often
         ) ? true : false;
@@ -102,8 +106,13 @@ class WorkerModel {
 
         let efficiency = this.calcEfficiency();
 
+        /*
         if (((tick - this.facts.tick_hired)/24) < 30) return 100;
         if (((tick - this.facts.tick_hired)/24) < 100) return Math.floor((efficiency + 100) / 2);
+        */
+
+        // smooth first 14 days
+        if (((tick - this.facts.tick_hired)/24) < 14) return Math.floor((efficiency + 100) / 2);
 
         return efficiency;
     }
@@ -156,14 +165,15 @@ class WorkerModel {
     }
 
     calcEfficiencyReal() { // happinessReal
-        const stamina = this.staminaPenalty();
+      //  const stamina = this.staminaPenalty();
         const tasks_stream = this.workloadPenalty();
         const tasks_difficulty = this.difficultyPenalty();
         const education_stream = this.educationPenalty();
         const collective = this.collectivePenalty();
 
-        let efficiency = 10 +
-            + (10 - Math.abs(stamina))
+        let efficiency = 20 +
+            + getData().office_things.gadget
+         //   + (10 - Math.abs(stamina))
             + (20 - Math.abs(tasks_stream))
             + (20 - Math.abs(tasks_difficulty))
             + (20 - Math.abs(education_stream))

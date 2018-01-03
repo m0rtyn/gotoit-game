@@ -84,7 +84,8 @@ class Worker extends Component {
                 case ratio <= 0.5: return 'progress-bar-danger';
                 case ratio <= 0.75: return 'progress-bar-warning';
                 case ratio <= 1: return 'progress-bar-success';
-                default: alert('broken ratio: '+ratio);
+                case ratio  > 1: return 'progress-bar-success'; // High bonus
+                default: //alert('broken ratio: '+ratio);
             }
         }) ();
 
@@ -115,7 +116,7 @@ class Worker extends Component {
                                 <div className="col-md-2">Efficiency</div>
                                 <div className="col-md-9 progress">
                                     <div className={efficiency_bar_style} role="progressbar"
-                                         style={{width: worker.getEfficiency()+'%'}}>
+                                         style={{width: Math.min(100, worker.getEfficiency())+'%'}}>
                                         <label>{worker.getEfficiency()}%</label>
                                     </div>
                                 </div>

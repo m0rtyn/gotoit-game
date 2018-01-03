@@ -55,6 +55,7 @@ class App extends Component {
         this.hireEmployer = this.hireEmployer.bind(this);
         this.dismissEmployer = this.dismissEmployer.bind(this);
         this.buyItem = this.buyItem.bind(this);
+
         this.contractSearch = this.contractSearch.bind(this);
         this.rejectOffered = this.rejectOffered.bind(this);
         this.acceptOffered = this.acceptOffered.bind(this);
@@ -72,8 +73,14 @@ class App extends Component {
         this.unlockTechnology = this.unlockTechnology.bind(this);
         this.getTechnology = this.getTechnology.bind(this);
         this.changeTechnology = this.changeTechnology.bind(this);
+
         this.upOffice = this.upOffice.bind(this);
         this.downOffice = this.downOffice.bind(this);
+        this.buyCoffeemaker = this.buyCoffeemaker.bind(this);
+        this.lunchOff = this.lunchOff.bind(this);
+        this.lunchOn = this.lunchOn.bind(this);
+        this.getGadgetCost = this.getGadgetCost.bind(this);
+        this.buyGadget = this.buyGadget.bind(this);
 
         this.howManyEmployers = this.howManyEmployers.bind(this);
 
@@ -117,8 +124,14 @@ class App extends Component {
         app_state.data.helpers['unlockTechnology'] = this.unlockTechnology;
         app_state.data.helpers['getTechnology'] = this.getTechnology;
         app_state.data.helpers['changeTechnology'] = this.changeTechnology;
+
         app_state.data.helpers['upOffice'] = this.upOffice;
         app_state.data.helpers['downOffice'] = this.downOffice;
+        app_state.data.helpers['buyCoffeemaker'] = this.buyCoffeemaker;
+        app_state.data.helpers['lunchOff'] = this.lunchOff;
+        app_state.data.helpers['lunchOn'] = this.lunchOn;
+        app_state.data.helpers['getGadgetCost'] = this.getGadgetCost;
+        app_state.data.helpers['buyGadget'] = this.buyGadget;
 
         this.state = app_state;
 
@@ -247,6 +260,7 @@ class App extends Component {
             this.chargeMoney(item.money);
             let worker = _.find(data.workers, (id) => { return (worker_id === id); });
             worker.items[skill] = true;
+            this.setState({data: data});
         }
         else {
             console.log('not enough money');
@@ -482,8 +496,64 @@ class App extends Component {
     }
 
     downOffice() {
-        this.changeOffice(this.state.data.office.size - 1);
+        let data = this.state.data;
+        let new_size = data.office.size - 1;
+
+        if (new_size < 4) { data.office_things.gadget = 0; }
+        if (new_size < 3) { data.office_things.lanch = false; }
+        if (new_size < 2) { data.office_things.coffeemaker = false; }
+
+        this.changeOffice(new_size);
     }
+
+    buyCoffeemaker() {
+        let data = this.state.data;
+
+        if (data.money >= 5000) {
+            this.chargeMoney(5000);
+            data.office_things.coffeemaker = true;
+            this.setState({data: data});
+        }
+        else {
+            console.log('not enough money');
+        }
+    }
+
+    lunchOff() {
+        let data = this.state.data;
+        data.office_things.lunch = false;
+        this.setState({data: data});
+    }
+
+    lunchOn() {
+        let data = this.state.data;
+        data.office_things.lunch = true;
+        this.setState({data: data});
+    }
+
+    getGadgetCost() {
+        let cost = 1000;
+
+        for (let i = 0; i < this.state.data.office_things.gadget; i++) {
+            cost *= 2;
+        }
+
+        return cost; //  Math.pow(1000, this.state.data.office_things.gadget);
+    }
+
+    buyGadget() {
+        let data = this.state.data;
+
+        if (data.money >= this.getGadgetCost()) {
+            this.chargeMoney(this.getGadgetCost());
+            data.office_things.gadget++;
+            this.setState({data: data});
+        }
+        else {
+            console.log('not enough money');
+        }
+    }
+
 
     howManyEmployers() {
         return this.state.data.workers.length;
@@ -586,6 +656,20 @@ class App extends Component {
             });
         }
 
+        if (time.hour === 14 && data.office_things.lunch) { // lunch time!
+            if ((data.workers.length * 25) <= data.money) {
+                this.chargeMoney(data.workers.length * 25);
+                data.workers.forEach((worker) => { worker.fed_ticker += 24; });
+            }
+            else {
+                addAction('Not enough money for lunch', {
+                    timeOut: 5000,
+                    extendedTimeOut: 2000
+                }, 'error');
+                this.lunchOff();
+            }
+        }
+
         if (time.date !== 1 && game_date.getDate() === 1) {
             // first day
             if (data.office.size > 1) {
@@ -641,7 +725,7 @@ class App extends Component {
             return false; // no generation first week
         }
 
-        let probability = Math.min(50, (10 + (projects_done*0.1))) / 24;
+        let probability = Math.min(100, (20 + (data.workers.length * projects_done * 0.1))) / 24;
 
         if (data.offered_projects.freelance.length < 5 && _.random(0.0, 100.0) < probability) {
             let quality = Math.ceil(_.random(1, (tick / (24*30)) + (projects_done*0.1)));
@@ -777,6 +861,9 @@ class App extends Component {
                 worker.drainStamina();
             }
 
+            // hunger
+            if (worker.fed_ticker > 0) worker.fed_ticker--;
+
             // if you money end, your guys don't work
             if (!worker.is_player && (data.money - worker.getSalary()) < 0) return false;
 
@@ -805,7 +892,7 @@ class App extends Component {
                 };
 
                 // Overtime
-                let is_working_time = worker.isWorkingTime(data.date, micromanagement);
+                let is_working_time = worker.isWorkingTime(data.date, micromanagement, data.office_things);
                 if (!is_working_time) {
                     if (overtime) {
                         if (worker.morale > 0) {

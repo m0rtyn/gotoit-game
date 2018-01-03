@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Office from './Office';
+import Office from './Header';
 import People from './People';
 import Projects from './Projects';
 import Chat from './Chat';

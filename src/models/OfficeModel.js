@@ -8,6 +8,8 @@ class OfficeModel {
         this.space = offices[size_arg].space;
         this.price = offices[size_arg].price;
     }
+
+
 }
 
 export default OfficeModel;

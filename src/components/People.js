@@ -7,6 +7,7 @@ import StatsBar from './StatsBar';
 
 import Worker from './Worker';
 import HiringAgency from './HiringAgency';
+import Office from './Office';
 
 import {skills, offices} from '../data/knowledge';
 
@@ -75,14 +76,16 @@ class People extends Component {
                                 </div>
                             </TeamDialog>
                         </Portal>
+
                         <div className="panel panel-warning">
-                        <span>
-                            {(data.office.size > 1 && offices[data.office.size-1].space >= data.workers.length)
-                                ? ((data.office.size === 2)
+                            <span>
+                                {(data.office.size > 1 && offices[data.office.size-1].space >= data.workers.length)
+                                    ? ((data.office.size === 2)
                                     ? <button onClick={() => {data.helpers.downOffice();}} className="btn btn-warning">Cancel the Office</button>
                                     : <button onClick={() => {data.helpers.downOffice();}} className="btn btn-warning">Downgrade the Office</button>)
-                                : ''}
-                        </span>
+                                    : ''}
+                                <button onClick={() => {data.helpers.upOffice();}} className="btn btn-warning">Extend the Office</button>
+                            </span>
                         </div>
                     </div>
                     :
@@ -96,6 +99,9 @@ class People extends Component {
                         </span>
                     </div>
                     }
+
+                <Office data={this.props.data}/>
+
             </div>
         );
     }

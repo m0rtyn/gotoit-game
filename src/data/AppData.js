@@ -30,6 +30,11 @@ var app_state =
         early_payed_loans: 0,
 
         office: new OfficeModel(1),
+        office_things: {
+            coffeemaker: false,
+            lunch: false,
+            gadget: 0
+        },
 
         candidates: {
             resumes: [
