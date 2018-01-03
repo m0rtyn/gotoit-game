@@ -10,8 +10,8 @@ export const skills_names = _.keys(skills);
 
 export const roles = {
     design: {name: 'Design', profession_name: 'Designer', description: 'Design'},
-    manage: {name: 'Management', profession_name: 'Manager', description: 'Management'},
     program: {name: 'Programming', profession_name: 'Programmer', description: 'Programming'},
+    manage: {name: 'Management', profession_name: 'Manager', description: 'Management'},
     admin: {name: 'Administrating', profession_name: 'Administrator', description: "Administrating"}
 };
 
@@ -64,6 +64,12 @@ export const education = {
     workshop: {name: 'Workshop', hide: true, description: ''}
 };
 
+export const workers_bonus_items = {
+    design: {name: 'Tablet', money: 2500, bonus: 25, description: ''},
+    program: {name: 'Laptop', money: 2500, bonus: 25, description: ''},
+    manage: {name: 'Phone', money: 2500, bonus: 25, description: ''},
+    admin: {name: 'Netbook', money: 2500, bonus: 25, description: ''}
+};
 
 export const player_backgrounds = {
   //  autodidact: {name: 'Autodidact', money: 1000, start_tech: ['creativity'], text: 'Inspired researcher, looking own way. Eclectic stats.'},
@@ -83,16 +89,16 @@ export const player_tech = {
 
 export const player_specialities = {
     design: {name: 'Designer'},
-    manage: {name: 'Manager'},
     program: {name: 'Programmer'},
+    manage: {name: 'Manager'},
     admin: {name: 'Administrator'}
 };
 
 export const player_teams = {
-    apprentice: {name: 'Apprentice'},
-    partner: {name: 'Partner'},
-    helpers: {name: 'Two helpers'},
-    full: {name: 'Full team'}
+    apprentice: {name: 'Apprentice', description: 'Your partner is your follower and like you in skills.'},
+    partner: {name: 'Partner', description: 'Your partner is your complete opposite and covers your weaknesses.'},
+    helpers: {name: 'Two helpers', description: 'Your team is two reliable helpers that cover your weaknesses.'},
+    full: {name: 'Full team', description: 'Your team is three random employees.'}
 };
 
 

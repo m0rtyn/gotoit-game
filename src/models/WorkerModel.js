@@ -5,7 +5,7 @@ import _ from 'lodash';
 import {chatMessage} from "../components/Chat";
 
 import bulkStyler from '../services/bulkStyler';
-import {skills} from '../data/knowledge';
+import {skills, workers_bonus_items} from '../data/knowledge';
 
 import Narrator from '../services/Narrator';
 import ValueCache from '../services/ValueCache';
@@ -38,6 +38,8 @@ class WorkerModel {
         this.in_vacation = false;
         this.to_leave_ticker = 0;
         this.to_leave = false;
+
+        this.items = JSON.parse(JSON.stringify(skills));
 
         this.facts = {
             project_finished: 0,
@@ -115,7 +117,7 @@ class WorkerModel {
         const task_preferred = (Math.ceil((tick - this.facts.tick_hired)/24) * 3);
         const tasks_stream = Math.max(Math.min(Math.floor(20 * (1-((200+task_preferred) / ((200+(this.facts.tasks_done - this.facts.training_tasks_done)))))), 20), -20);
         const overloaded = Math.floor((100 - this.morale) / 5);
-        console.log('Workload: ' + tasks_stream + ' ' + overloaded);
+     //   console.log('Workload: ' + tasks_stream + ' ' + overloaded);
         return (Math.abs(tasks_stream) > overloaded) ? tasks_stream : overloaded;
        // return Math.max(Math.abs(Math.max(Math.min(Math.floor(tasks_stream), 20), -20)), Math.abs(Math.floor(overloaded)));
     }
@@ -190,6 +192,11 @@ class WorkerModel {
         }
         else {
             resource = r(stat);
+        }
+
+        if (this.items[stat] === true) {
+            resource *= 1 + (workers_bonus_items[stat].bonus/100);
+            resource = Math.floor(resource);
         }
 
         let ret = {};

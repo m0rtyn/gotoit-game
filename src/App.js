@@ -4,7 +4,7 @@ import _ from 'lodash';
 //import '../node_modules/react-bootstrap-slider/node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css';
 //import * from 'bootstrap-slider';
 
-import $ from 'jquery'
+//import $ from 'jquery'
 
 import './css/App.css';
 import './css/bootstrap-slider.css';
@@ -19,7 +19,7 @@ import OfficeModel from './models/OfficeModel';
 
 import Lorer from './services/Lorer';
 
-import {skills_names, technologies, skills_true} from './data/knowledge';
+import {skills_names, workers_bonus_items, technologies, skills_true} from './data/knowledge';
 
 import app_state from './data/AppData';
 
@@ -54,6 +54,7 @@ class App extends Component {
         this.agencySearch = this.agencySearch.bind(this);
         this.hireEmployer = this.hireEmployer.bind(this);
         this.dismissEmployer = this.dismissEmployer.bind(this);
+        this.buyItem = this.buyItem.bind(this);
         this.contractSearch = this.contractSearch.bind(this);
         this.rejectOffered = this.rejectOffered.bind(this);
         this.acceptOffered = this.acceptOffered.bind(this);
@@ -97,6 +98,8 @@ class App extends Component {
         app_state.data.helpers['agencySearch'] = this.agencySearch;
         app_state.data.helpers['hireEmployer'] = this.hireEmployer;
         app_state.data.helpers['dismissEmployer'] = this.dismissEmployer;
+        app_state.data.helpers['buyItem'] = this.buyItem;
+
         app_state.data.helpers['contractSearch'] = this.contractSearch;
         app_state.data.helpers['rejectOffered'] = this.rejectOffered;
         app_state.data.helpers['acceptOffered'] = this.acceptOffered;
@@ -234,6 +237,20 @@ class App extends Component {
         let data = this.state.data;
         _.remove(data.workers, (worker) => { return (worker.id === id); });
         this.setState({data: data});
+    }
+
+    buyItem(worker_id, skill) {
+        let data = this.state.data;
+        let item = workers_bonus_items[skill];
+
+        if (data.money >= item.money) {
+            this.chargeMoney(item.money);
+            let worker = _.find(data.workers, (id) => { return (worker_id === id); });
+            worker.items[skill] = true;
+        }
+        else {
+            console.log('not enough money');
+        }
     }
 
     contractSearch(agency_state, agency_reward) {
@@ -429,7 +446,7 @@ class App extends Component {
         if (!(project_id in data.projects_technologies)) data.projects_technologies[project_id] = {};
         data.projects_technologies[project_id][technology] = value;
         data.projects_default_technologies[technology] = value;
-       this.setState({data: data});
+        this.setState({data: data});
     }
 
 

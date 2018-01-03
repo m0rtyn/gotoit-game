@@ -77,7 +77,7 @@ _.keys(project_platforms).forEach((platform) => {
         for (let top = 1; top <= 10; top++) {
             let q = (11-top)*2;
             let size = Math.ceil(q/5);
-            app_state.data.simplified_reports.push(ProjectModel.generate(q, size, kind, platform).generateReport(false));
+            app_state.data.simplified_reports.push(ProjectModel.generate(q, size, false, kind, platform).generateReport(false));
         }
     });
 });

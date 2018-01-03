@@ -24,7 +24,7 @@ class Creation extends Component {
         this.state = {
             step: 'welcome', // welcome, creation
             suggest_name: WorkerModel.genName(),
-            selected_background: _.sample(_.keys(player_backgrounds)), //'specialist',
+            selected_background: back, //'specialist',
             selected_tech: tech, // start_tech_list: ['rad', 'creativity', 'tdd', 'refactoring']
             selected_speciality: spec, //'design',
             selected_team: team, //'partner',
@@ -98,6 +98,8 @@ class Creation extends Component {
                     this.props.data.helpers.hireEmployer(WorkerModel.generate(3));
                     this.props.data.helpers.hireEmployer(WorkerModel.generate(3));
                     break;
+                default:
+                    console.log('Wrong team?');
             }
          //   this.props.data.helpers.hireEmployer(WorkerModel.generate(8));
             this.props.data.helpers.upOffice(2); // this.props.data.office = new OfficeModel(2);
@@ -191,7 +193,7 @@ class Creation extends Component {
                                 <div className="panel panel-success">
                                         {(() => {
                                             switch (this.state.selected_background) {
-                                                case "technologist":   return <div className="flex-container-row">
+                                                case "technologist":   return <div><div className="flex-container-row">
                                                     {Object.keys(player_tech).map((tech) => {
                                                         return <div key={tech} className="flex-element">
                                                             <div className="radio">
@@ -207,7 +209,10 @@ class Creation extends Component {
                                                                 </label>
                                                             </div>
                                                         </div>
-                                                    })} </div>;
+                                                    })}
+                                                    </div>
+                                                    <p className="text-center">{technologies[this.state.selected_tech].description}</p>
+                                                    </div>;
                                                 case "specialist":   return <div className="flex-container-row">
                                                     {Object.keys(player_specialities).map((speciality) => {
                                                         return <div key={speciality} className="flex-element">
@@ -224,8 +229,9 @@ class Creation extends Component {
                                                                 </label>
                                                             </div>
                                                         </div>
-                                                    })} </div>;
-                                                case "coworker": return <div className="flex-container-row">
+                                                    })}
+                                                    </div>;
+                                                case "coworker": return <div><div className="flex-container-row">
                                                     {Object.keys(player_teams).map((team) => {
                                                         return <div key={team} className="flex-element">
                                                             <div className="radio">
@@ -241,7 +247,10 @@ class Creation extends Component {
                                                                 </label>
                                                             </div>
                                                         </div>
-                                                    })} </div>;
+                                                    })}
+                                                    </div>
+                                                        <p className="text-center">{player_teams[this.state.selected_team].description}</p>
+                                                    </div>;
                                                 case "businessman":  return <p className="panel">The credit account of a businessman is too good to be wasted. Just use these opportunities to hire and train workers from the very beginning.</p>;
                                                 default:      return "OOPSSS!";
                                             }

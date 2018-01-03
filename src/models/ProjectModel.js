@@ -240,6 +240,8 @@ class ProjectModel {
         stats_bulk = bulkStyler.projectKind(stats_bulk, kind);
         stats_bulk = bulkStyler.projectPlatform(stats_bulk, platform);
         switch (fit_mode) {
+            case false:
+                break;
             case 'player':
                 stats_bulk = bulkStyler.projectPlayer(stats_bulk);
                 break;
@@ -249,6 +251,8 @@ class ProjectModel {
             case 'history':
                 stats_bulk = bulkStyler.projectHistory(stats_bulk);
                 break;
+            default:
+                console.log('Wrong fit mode?');
         }
 
         let stats = JSON.parse(JSON.stringify(skills));
@@ -385,7 +389,7 @@ class ProjectModel {
         let g = (_.random(0, quality) * (0 + _.random(1, Math.floor(Math.sqrt(projects_generated*0.1)))));
         let r = _.random(1, 10);
 
-        console.log('gen_stats: q: '+q+' h: '+h+' d: '+d+' g: '+g+' r: '+r);
+     //   console.log('gen_stats: q: '+q+' h: '+h+' d: '+d+' g: '+g+' r: '+r);
         return Math.floor( q + h + d + g + r);
     }
 
