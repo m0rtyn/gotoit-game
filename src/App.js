@@ -753,7 +753,7 @@ class App extends Component {
                 );
 
             //console.log('probability: ' + probability.toFixed(2) + ' quality: ' + quality + ' size: ' + size);
-            data.offered_projects.freelance.push(ProjectModel.generate(quality, size));
+            data.offered_projects.freelance.push(ProjectModel.generate(quality, size, 'history'));
             addAction('New job!', {timeOut: 3000, extendedTimeOut: 1000});
         }
 
@@ -772,12 +772,12 @@ class App extends Component {
 
         let spike = (tick > (24 * 30) & tick < (24 * 60)) ? 40 : 0;
         if (Math.floor(_.random(1, 24 * (50 - Math.max(spike, Math.min(25, projects_done*0.2))))) === 1 && data.candidates.resumes.length < 5) {
-            let worker = WorkerModel.generate(_.random(1, Math.floor(5 + projects_done*0.1)));
+            let worker = WorkerModel.generate(_.random(1, Math.floor(5 + projects_done*0.1 + tick * 0.01)));
             data.candidates.resumes.push(worker);
             addAction('New resume: ' + worker.name);
         }
 
-        if (Math.floor(_.random(1, (24*7*4*12)/(1+(projects_done*0.1)))) === 1 && data.candidates.resumes.length < 5) {
+        if (Math.floor(_.random(1, (24*7*12)/(1+(projects_done*0.1)))) === 1 && data.candidates.resumes.length < 5) {
             let experience = _.random(10, 20);
             let worker = WorkerModel.generate(experience);
             worker.standing += experience * 12 * _.random(5, 10+experience);
@@ -802,8 +802,8 @@ class App extends Component {
         */
 
 
-        if (tick < (24 * 30 * 5)) {
-            return false; // no additional generation first 5 month
+        if (tick < (24 * 30 * 12)) {
+            return false; // no additional generation first 12 month
         }
 
         if (!data.wasRecentlyHackathon && _.random(1, 24*60)) {
@@ -936,6 +936,7 @@ class App extends Component {
                 // Creativity
                 if (creativity && is_working_time && (_.random(1, 5) === 1)) {
                     skip_work = true;
+                    worker.standing--;
                     worker.facts.training_tasks_done += worker.getSideResource();
                     chatMessage(formName(), 'I spent an hour to my pet-project.', 'warning');
                 }

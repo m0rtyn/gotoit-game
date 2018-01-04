@@ -74,7 +74,7 @@ class ProjectModel {
                 }
                 else {
                     tasks = all_work - complexity_penalty;
-                    bugs = complexity_penalty;
+                    bugs = Math.min(complexity_penalty, all_work);
                 }
 
                 if (tasks > 0) {
@@ -280,7 +280,7 @@ class ProjectModel {
     }
 
     static generateStorylineProject(quality, size) {
-        let bulk = this.generate(quality, size, 'player');
+        let bulk = this.generate(quality, size, 'team');
         bulk.is_storyline = true;
         return bulk;
     }

@@ -67,10 +67,6 @@ class Worker extends Component {
             };
         });
 
-        console.log(worker);
-        console.log(stats_data);
-
-
         const efficiency_data = {
             work_load: {name: 'Work Load', val: worker.workloadPenalty()},
             work_difficulty: {name: 'Task Difficulty', val: worker.difficultyPenalty()},

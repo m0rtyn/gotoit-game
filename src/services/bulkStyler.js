@@ -1,6 +1,10 @@
 
 import _ from 'lodash';
 
+import {getData} from '../App';
+
+import {skills} from '../data/knowledge';
+
 class bulkStyler {
     static speciality(stats_bulk) {
         let speciality = ['none', 'specialist', 'dualist'][_.random(0, 2)];
@@ -15,15 +19,15 @@ class bulkStyler {
                 break;
             case 'specialist':
                 stats_bulk[order[0]] *= 2;
-                stats_bulk[order[1]] *= 0.7;
-                stats_bulk[order[2]] *= 0.8;
-                stats_bulk[order[3]] *= 0.9;
+                stats_bulk[order[1]] *= 0.6;
+                stats_bulk[order[2]] *= 0.7;
+                stats_bulk[order[3]] *= 0.8;
                 break;
             case 'dualist':
-                stats_bulk[order[0]] *= 1.5;
-                stats_bulk[order[1]] *= 1.7;
+                stats_bulk[order[0]] *= 1.6;
+                stats_bulk[order[1]] *= 1.8;
                 stats_bulk[order[2]] *= 0.6;
-                stats_bulk[order[3]] *= 0.9;
+                stats_bulk[order[3]] *= 0.8;
                 break;
             default:
                 console.log('error case: ' + speciality);
@@ -196,16 +200,64 @@ class bulkStyler {
     }
 
     static projectPlayer(stats_bulk) { // TO DO
-        return stats_bulk;
+        //let worker = _.find(data.workers, (id) => { return (worker_id === id); });
+        //let player = _.find(getData().workers, (id) => { return ("player" === id); });
+        //console.log(getData().workers, getData().workers[0], player);
+
+        let player = getData().workers[0];
+        let stats = player.stats;
+        let order = Object.keys(stats_bulk).sort(function(a,b){return stats[b]-stats[a]});
+
+        return this.styleBulk(stats_bulk, order);
     }
 
     static projectTeam(stats_bulk) { // TO DO
-        return stats_bulk;
+        let workers = getData().workers;
+        let stats = JSON.parse(JSON.stringify(skills));
+
+        _.each(workers, (worker) => {
+            _.each(worker.stats, (val, stat) => {
+                stats[stat] += val;
+            })
+        });
+
+        let order = Object.keys(stats_bulk).sort(function(a,b){return stats[b]-stats[a]});
+
+        return this.styleBulk(stats_bulk, order);
     }
 
     static projectHistory(stats_bulk) { // TO DO
-        return stats_bulk;
+        if (getData().projects_archive_reports.length === 0) {
+            return stats_bulk;
+        }
+
+        let projects = getData().projects_archive_reports;
+        let stats = JSON.parse(JSON.stringify(skills));
+
+        _.each(projects, (project) => {
+            if (project.stage === 'finish') {
+                _.each(project.needs_original, (val, stat) => {
+                    stats[stat] += val;
+                })
+            }
+        });
+
+        let order = Object.keys(stats_bulk).sort(function(a,b){return stats[b]-stats[a]});
+
+        return this.styleBulk(stats_bulk, order);
     }
+
+    static styleBulk(stats_bulk, order) {
+        console.log(stats_bulk, order);
+        stats_bulk[order[0]] *= 2;
+        stats_bulk[order[1]] *= 1.3;
+        stats_bulk[order[2]] *= 0.7;
+        stats_bulk[order[3]] *= 0.5;
+        console.log(stats_bulk);
+        return _.mapValues(stats_bulk, function (stat) { return Math.ceil(stat); });
+    }
+
+
 
 }
 

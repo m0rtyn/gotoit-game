@@ -87,8 +87,8 @@ class WorkerModel {
         let is_working_time = (
             time.hour >= (office_things.coffeemaker ? -1 : 0)   + 9 + mod &&
             time.hour <= (this.fed_ticker > 1 ? 2 : 0 )        + 17 + mod &&
-            ((time.day !== 6 && time.day !== 0) || _.random(1, (20-(this.temper.variability*2))) === 1) && // variability guys work on weekends more often
-            (_.random(1, 10 - this.temper.variability) !==1) // variability guys eblanyat more often
+            ((time.day !== 6 && time.day !== 0) || _.random(1, (20-(this.temper.variability*3))) === 1) && // variability guys work on weekends more often
+            (_.random(1, 10 - (this.temper.variability * 0.5)) !==1) // variability guys eblanyat more often
         ) ? true : false;
 
         return this.efficiencyCheck(micromanagement) ? is_working_time : false;

@@ -7,6 +7,7 @@ import StatsBar from './StatsBar';
 import bulkStyler from '../services/bulkStyler';
 
 import WorkerModel from '../models/WorkerModel';
+import ProjectModel from '../models/ProjectModel';
 
 import {player_backgrounds, player_tech, player_teams, player_specialities, technologies, skills_1} from '../data/knowledge';
 
@@ -62,6 +63,8 @@ class Creation extends Component {
         data.workers[0] = tmp_player; //: [WorkerModel.generatePlayer()]
         player = tmp_player;
 
+
+
         /*
         switch (this.state.selected_background) {
             case 'technologist':
@@ -115,6 +118,13 @@ class Creation extends Component {
         else {
             data.projects_known_technologies = data.projects_known_technologies.concat(player_backgrounds[this.state.selected_background].start_tech);
         }
+
+        // i must hard set :(
+        data.helpers.brutalSet({data: data});
+
+        data.offered_projects.freelance.push(ProjectModel.generate(1, 1, 'player'));
+        data.offered_projects.freelance.push(ProjectModel.generate(2, 1, 'player'));
+        data.offered_projects.freelance.push(ProjectModel.generate(3, 1, 'player'));
 
         data.stage = 'game';
         this.refs.creation.closePortal();
