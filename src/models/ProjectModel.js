@@ -126,7 +126,7 @@ class ProjectModel {
                 let learn = tasks + (bugs * 2);
                 learned[stat] +=
                     (learn) *
-                    (pair ? 2 : 1) *
+                    (pair ? 1.25 : 1) *
                     (creativity ? 1.5 : 1) *
                     (this.type === 'training' ? 2 : 1) *
                     (this.type === 'hackathon' ? 4 : 1);

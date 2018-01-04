@@ -42,10 +42,6 @@ class Worker extends Component {
         this.props.data.helpers.changeRole(this.props.worker.id, event.target.id, event.target.checked);
     }
 
-    buyItem(skill) {
-        this.props.data.helpers.buyItem(this.props.worker, skill);
-    }
-
     teach(skill, source) {
       //  console.log(skill, source);
 
@@ -64,12 +60,16 @@ class Worker extends Component {
 
         const manage_button = <button className="btn btn-success btn-sm">Manage</button>;
 
-        const stats_data = _.mapValues(worker.stats, (val, key) => {
+        const stats_data = _.mapValues(worker.stats, (val, stat) => {
             return {
-                name: key,
-                val: (worker.stats[key] + worker.expirience[key]/100).toFixed(2) + ((worker.items[key] === true) ? ' +'+workers_bonus_items[key].bonus+'%' : '')
+                name: stat,
+                val: worker.getStatsData(stat)
             };
         });
+
+        console.log(worker);
+        console.log(stats_data);
+
 
         const efficiency_data = {
             work_load: {name: 'Work Load', val: worker.workloadPenalty()},
@@ -158,31 +158,37 @@ class Worker extends Component {
                         <div className="panel panel-success text-center">
                             <StatsBar stats={stats_data} data={this.props.data} />
 
+                            {/*    bonus items */}
                             <div>
                                 <div className="flex-container-row">
                                 {skills_names.map((skill) => {
-                                    let item = workers_bonus_items[skill];
-                                    if (worker.items[skill] !== true) {
-                                        return <div className="flex-element" key={skill}>
-                                            <button
-                                                className={data.money >= item.money ? "btn btn-info" : "btn btn-info disabled"}
-                                                title={item.description} id={item} onClick={() => {
-                                                if (data.money >= item.money) {
-                                                    this.buyItem(skill)
-                                                }
-                                            }}>Buy {item.name} ${item.money}</button>
-                                        </div>
-                                    }
-                                    else {
-                                        return <div className="flex-element" key={skill}>
-                                            <label className='badge'>{item.name} add {item.bonus}%</label>
-                                        </div>
-                                    }
-                                })}
+                                    return <div className="flex-element flex-container-column" key={skill}>
+                                        {Object.keys(workers_bonus_items[skill]).map((item_key) => {
+                                            let item = workers_bonus_items[skill][item_key];
+                                            return worker.items[skill][item_key] === true
+                                                ? <div className="flex-element" key={item_key}>
+                                                        <label className='badge'>{item.name} {item.description}</label>
+                                                    </div>
+                                                : <div className="flex-element" key={item_key}>
+                                                    <button
+                                                        className={data.money >= item.money ? "btn btn-info" : "btn btn-info disabled"}
+                                                        title={item.description} id={item} onClick={() => {
+                                                        if (data.money >= item.money) {
+                                                            data.helpers.buyItem(worker, skill, item_key);
+                                                        }
+                                                    }}>Buy {item.name} ${item.money}</button>
+                                                </div>
+                                            })
+                                        }
+                                    </div>
+                                    })}
                                 </div>
                             </div>
+                        </div>
 
-                            <div>
+                        {/*    deprecated training project */}
+                        <div>
+                            <div className="panel panel-info text-center">
                                 {Object.keys(education).map((source) =>
                                     ((!education[source].hide)
                                         ? <div className="flex-container-row" key={source}>
@@ -196,6 +202,7 @@ class Worker extends Component {
                                 )}
                             </div>
                         </div>
+
                         <div>
                             {/*    Which projects {worker.name} has to work?   */}
                             <div className="panel panel-info">

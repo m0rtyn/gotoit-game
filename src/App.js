@@ -252,14 +252,14 @@ class App extends Component {
         this.setState({data: data});
     }
 
-    buyItem(worker_id, skill) {
+    buyItem(worker_id, skill, item_key) {
         let data = this.state.data;
-        let item = workers_bonus_items[skill];
+        let item = workers_bonus_items[skill][item_key];
 
         if (data.money >= item.money) {
             this.chargeMoney(item.money);
             let worker = _.find(data.workers, (id) => { return (worker_id === id); });
-            worker.items[skill] = true;
+            worker.items[skill][item_key] = true;
             this.setState({data: data});
         }
         else {

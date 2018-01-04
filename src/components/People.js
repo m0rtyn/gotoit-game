@@ -84,7 +84,9 @@ class People extends Component {
                                     ? <button onClick={() => {data.helpers.downOffice();}} className="btn btn-warning">Cancel the Office</button>
                                     : <button onClick={() => {data.helpers.downOffice();}} className="btn btn-warning">Downgrade the Office</button>)
                                     : ''}
-                                <button onClick={() => {data.helpers.upOffice();}} className="btn btn-warning">Extend the Office</button>
+                                {data.office.size < 4
+                                    ? <button onClick={() => {data.helpers.upOffice();}} className="btn btn-warning">Extend the Office</button>
+                                    : ''}
                             </span>
                         </div>
                     </div>

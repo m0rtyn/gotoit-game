@@ -40,6 +40,7 @@ class WorkerModel {
         this.to_leave = false;
 
         this.items = JSON.parse(JSON.stringify(skills));
+        _.forEach(this.items, (val, key) => { this.items[key] = {exp: false, flat: false, percent: false}; });
 
         this.fed_ticker = 0;
 
@@ -187,6 +188,10 @@ class WorkerModel {
         //return 100;
     }
 
+    getStatsData(stat) {
+        return (this.stats[stat] + this.expirience[stat]/100).toFixed(2) + ((this.items[stat].flat === true) ? ' +'+workers_bonus_items[stat].flat.bonus+' ' : '') + ((this.items[stat].percent === true) ? ' +'+workers_bonus_items[stat].percent.bonus+'% ' : '');
+    }
+
     getResources(worker_roles, focus_on=null, micromanagement) {
         let r = (stat) => { return _.random(1, this.stats[stat]); };
         let resource = 0;
@@ -204,8 +209,12 @@ class WorkerModel {
             resource = r(stat);
         }
 
-        if (this.items[stat] === true) {
-            resource *= 1 + (workers_bonus_items[stat].bonus/100);
+        if (this.items[stat].flat === true) {
+            resource += workers_bonus_items[stat].flat.bonus;
+        }
+
+        if (this.items[stat].percent === true) {
+            resource *= 1 + (workers_bonus_items[stat].percent.bonus/100);
             resource = Math.floor(resource);
         }
 
@@ -227,7 +236,11 @@ class WorkerModel {
     addExperience(learned) {
         Object.keys(learned).forEach((stat) => {
             if (learned[stat] !== 0) {
-                this.expirience[stat] += Math.ceil((learned[stat] * 5) / (this.stats[stat]));
+                let learned_stat = Math.ceil((learned[stat] * 5) / (this.stats[stat]));
+                if (workers_bonus_items[stat].exp.bonus) {
+                    learned_stat *= 1 + (workers_bonus_items[stat].percent.bonus/100);
+                }
+                this.expirience[stat] += learned_stat;
                 if (this.expirience[stat] >= 100) {
                   //  console.log('stat rise');
                     chatMessage(this.name, ' rise '+stat+' skill!', 'success');

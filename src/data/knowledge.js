@@ -65,10 +65,26 @@ export const education = {
 };
 
 export const workers_bonus_items = {
-    design: {name: 'Tablet', money: 2500, bonus: 25, description: ''},
-    program: {name: 'Laptop', money: 2500, bonus: 25, description: ''},
-    manage: {name: 'Phone', money: 2500, bonus: 25, description: ''},
-    admin: {name: 'Netbook', money: 2500, bonus: 25, description: ''}
+    design: {
+        exp: {name: 'Sketchbook', money: 500, bonus: 10, description: 'add 10% EXP'},
+        flat: {name: 'Tablet', money: 2500, bonus: 10, description: 'add 10 to skill'},
+        percent: {name: '4K Monitor', money: 10000, bonus: 10, description: 'add 10% to skill'}
+    },
+    program: {
+        exp: {name: 'IDE', money: 500, bonus: 10, description: 'add 10% EXP'},
+        flat: {name: 'Laptop', money: 2500, bonus: 10, description: 'add 10 to skill'},
+        percent: {name: 'CI Server', money: 10000, bonus: 10, description: 'add 10% to skill'}
+    },
+    manage: {
+        exp: {name: 'Phone', money: 500, bonus: 10, description: 'add 10% EXP'},
+        flat: {name: 'Bug tracker', money: 2500, bonus: 10, description: 'add 10 to skill'},
+        percent: {name: 'ERP System', money: 10000, bonus: 10, description: 'add 10% to skill'}
+    },
+    admin: {
+        exp: {name: 'Virtual Server', money: 500, bonus: 10, description: 'add 10% EXP'},
+        flat: {name: 'Netbook', money: 2500, bonus: 10, description: 'add 10 to skill'},
+        percent: {name: 'Test Network', money: 10000, bonus: 10, description: 'add 10% to skill'}
+    }
 };
 
 export const player_backgrounds = {
