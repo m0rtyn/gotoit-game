@@ -844,7 +844,7 @@ class App extends Component {
             this.pushNewCandidate();
         }
 
-        let probability = Math.min(50, (10 + (data.workers.length * projects_done * 0.1))) / 24;
+        let probability = Math.min(10, (1 + (data.workers.length * projects_done * 0.1))) / 24;
         if (data.offered_projects.length < 5 && _.random(0.0, 100.0) < probability) {
             this.pushNewProject();
         }
