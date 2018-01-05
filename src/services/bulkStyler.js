@@ -41,10 +41,10 @@ class bulkStyler {
 
         switch (background) {
             case 'technologist': // high like 15
-                stats_bulk[order[0]] += 5;
-                stats_bulk[order[1]] += 5;
-                stats_bulk[order[2]] += 5;
-                stats_bulk[order[3]] += 5;
+                stats_bulk[order[0]] += 4;
+                stats_bulk[order[1]] += 4;
+                stats_bulk[order[2]] += 4;
+                stats_bulk[order[3]] += 4;
                 break;
             case 'specialist': // med like 10
                 stats_bulk[order[0]] += 1;
@@ -53,8 +53,8 @@ class bulkStyler {
                 stats_bulk[order[3]] += 1;
                 break;
             case 'coworker': // low like 7
-                stats_bulk[order[0]] += 6;
-                stats_bulk[order[1]] += 6;
+                stats_bulk[order[0]] += 3;
+                stats_bulk[order[1]] += 3;
                 stats_bulk[order[2]] += 1;
                 stats_bulk[order[3]] += 1;
                 break;
@@ -73,16 +73,16 @@ class bulkStyler {
     static playerSpeciality(stats_bulk, speciality) {
         switch (speciality) {
             case 'design':
-                stats_bulk['design'] += 13;
+                stats_bulk['design'] += 7;
                 break;
             case 'manage':
-                stats_bulk['manage'] += 13;
+                stats_bulk['manage'] += 7;
                 break;
             case 'program':
-                stats_bulk['program'] += 13;
+                stats_bulk['program'] += 7;
                 break;
             case 'admin':
-                stats_bulk['admin'] += 13;
+                stats_bulk['admin'] += 7;
                 break;
             default:
                 console.log('error case: ' + speciality);
@@ -102,21 +102,21 @@ class bulkStyler {
                 stats_bulk[order[3]] += -1;
                 break;
             case 'partner':
-                stats_bulk[order[0]] += -6;
-                stats_bulk[order[1]] += -6;
-                stats_bulk[order[2]] += 4;
-                stats_bulk[order[3]] += 4;
+                stats_bulk[order[0]] += -3;
+                stats_bulk[order[1]] += -3;
+                stats_bulk[order[2]] += 1;
+                stats_bulk[order[3]] += 1;
                 break;
             case 'helper1':
-                stats_bulk[order[0]] += -6;
-                stats_bulk[order[1]] += -6;
+                stats_bulk[order[0]] += -3;
+                stats_bulk[order[1]] += -3;
                 stats_bulk[order[2]] += -1;
-                stats_bulk[order[3]] += 4;
+                stats_bulk[order[3]] += 1;
                 break;
             case 'helper2':
-                stats_bulk[order[0]] += -6;
-                stats_bulk[order[1]] += -6;
-                stats_bulk[order[2]] += 4;
+                stats_bulk[order[0]] += -3;
+                stats_bulk[order[1]] += -3;
+                stats_bulk[order[2]] += 1;
                 stats_bulk[order[3]] += -1;
                 break;
             default:

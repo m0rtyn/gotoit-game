@@ -97,9 +97,9 @@ class Creation extends Component {
                     this.props.data.helpers.hireEmployer(WorkerModel.generateWithStats(bulkStyler.partnerSpeciality(JSON.parse(JSON.stringify(stats)), 'helper2')));
                     break;
                 case 'full':
-                    this.props.data.helpers.hireEmployer(WorkerModel.generate(3));
-                    this.props.data.helpers.hireEmployer(WorkerModel.generate(3));
-                    this.props.data.helpers.hireEmployer(WorkerModel.generate(3));
+                    this.props.data.helpers.hireEmployer(WorkerModel.generate(1));
+                    this.props.data.helpers.hireEmployer(WorkerModel.generate(1));
+                    this.props.data.helpers.hireEmployer(WorkerModel.generate(1));
                     break;
                 default:
                     console.log('Wrong team?');
