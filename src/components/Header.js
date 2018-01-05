@@ -3,6 +3,7 @@ import {FormattedDate} from 'react-intl';
 import classNames from 'classnames';
 
 import Loans from './Loans';
+import Market from './Market';
 
 class Header extends Component {
     render() {
@@ -18,6 +19,18 @@ class Header extends Component {
                 <div>
                     <p className="flex-container-row" style={{paddingLeft: 20}}>
                         <span className="flex-element">
+
+                        </span>
+                        <span className="flex-element pull-right" onClick={() => {
+                            console.log(data);
+                        }}>
+                            {(date.is_working_time ?
+                                <label className="label-success">Working</label> :
+                                (date.day > 5) ?
+                                    <label className="label-default">Weekends</label> :
+                                    <label className="label-info">Sleeping</label>)}
+                        </span>
+                        <span className="flex-element">
                             <FormattedDate
                             value={game_date}
                             weekday="short"
@@ -25,10 +38,9 @@ class Header extends Component {
                             month="short"
                             year="numeric"
                             hour="numeric"
-                            />
+                                />
                         </span>
-
-                        <span>
+                        <span className="flex-element">
                             <span onClick={() => {
                                 if (data.game_paused) {
                                     data.helpers.playGame();
@@ -46,7 +58,6 @@ class Header extends Component {
                                     i++;
                                 }
                             }}>
-
                                 {[1, 3, 7].map((speed, index) => {
                                     return <span key={index}>
                                         {data.game_speed_multiplier === speed
@@ -59,25 +70,22 @@ class Header extends Component {
                                      className="img" style={{width: 28, height: 28}}/>
                             </span>
                         </span>
-
                         <span className="flex-element">
-                            Money {data.money}
+                            <h5>Money {data.money}
                             <label onClick={() => {
                                 data.helpers.addMoney(100000);
                             }}>$</label>
-                            <Loans data={data} />
+                                <Loans data={data} />
+                                <Market data={data} />
+                            </h5>
                         </span>
+                        <span className="flex-element">
 
-                        <span className="flex-element pull-right" onClick={() => {
-                            console.log(data);
-                        }}>
-                        {(date.is_working_time ?
-                            <label className="label-success">Working</label> :
-                            (date.day > 5) ?
-                                <label className="label-default">Weekends</label> :
-                                <label className="label-info">Sleeping</label>)}
-                    </span>
-                </p>
+                        </span>
+                        <span className="flex-element">
+
+                        </span>
+                    </p>
                 </div>
             </div>
         );

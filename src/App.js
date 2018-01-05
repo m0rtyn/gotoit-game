@@ -45,6 +45,9 @@ class App extends Component {
         this.tick = this.tick.bind(this);
         this.addMoney = this.addMoney.bind(this);
         this.chargeMoney = this.chargeMoney.bind(this);
+        this.buyBTC = this.buyBTC.bind(this);
+        this.sellBTC = this.sellBTC.bind(this);
+        this.buyMiner = this.buyMiner.bind(this);
 
         this.getRelation = this.getRelation.bind(this);
         this.modifyRelation = this.modifyRelation.bind(this);
@@ -101,6 +104,9 @@ class App extends Component {
         app_state.data.helpers['tick'] = this.tick;
         app_state.data.helpers['addMoney'] = this.addMoney;
         app_state.data.helpers['chargeMoney'] = this.chargeMoney;
+        app_state.data.helpers['buyBTC'] = this.buyBTC;
+        app_state.data.helpers['sellBTC'] = this.sellBTC;
+        app_state.data.helpers['buyMiner'] = this.buyMiner;
 
         app_state.data.helpers['modifyRelation'] = this.modifyRelation;
         app_state.data.helpers['getRelation'] = this.getRelation;
@@ -582,6 +588,43 @@ class App extends Component {
         this.setState({data: data});
     }
 
+    buyBTC() {
+        let data = this.state.data;
+        if (data.money >= 100) {
+            this.chargeMoney(100);
+            data.btc += 100 / data.current_btc_price;
+        }
+        else {
+            console.log('not enough money');
+        }
+        this.setState({data: data});
+    }
+
+    sellBTC() {
+        let data = this.state.data;
+        let cost = 100 / data.current_btc_price;
+        if (data.btc >= cost) {
+            data.btc -= cost;
+            data.money += 100 / data.current_btc_price;
+        }
+        else {
+            console.log('not enough btc');
+        }
+        this.setState({data: data});
+    }
+
+    buyMiner() {
+        let data = this.state.data;
+        if (data.btc >= 10) {
+            data.btc -= 10;
+            data.miner++;
+        }
+        else {
+            console.log('not enough btc');
+        }
+        this.setState({data: data});
+    }
+
     changeOffice(new_size) {
         let data = this.state.data;
         data.office = new OfficeModel(new_size);
@@ -826,6 +869,13 @@ class App extends Component {
                 break;
         }
 
+        const x = tick + 3000;
+
+        data.current_btc_price = Math.floor(Math.abs(Math.sin(x/19)) * x/3 + Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x * 2 + Math.abs(Math.sin(Math.sqrt(x/227))) * x + x);
+
+        //data.current_btc_price = Math.abs(Math.sin(x/19)) * x + Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x + Math.abs(Math.sin(Math.sqrt(x/227))) * x + x;
+
+        //data.current_btc_price = Math.floor(Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x + Math.abs(Math.sin(Math.sqrt(x/227))) * x);
 
         /*
         if (tick < (24 * 7)) {

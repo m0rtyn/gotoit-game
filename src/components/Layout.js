@@ -11,12 +11,12 @@ class Layout extends Component {
     render() {
         return (
             <div>
+                <Office data={this.props.data} />
                 <div className="App row slim-top">
                     <div className="col-md-3 slim">
                         <People data={this.props.data}/>
                     </div>
                     <div className="col-md-6 ">
-                        <Office data={this.props.data} />
                         <Projects data={this.props.data} />
                     </div>
                     <div className="col-md-3 slim">

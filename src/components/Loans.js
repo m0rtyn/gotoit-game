@@ -55,10 +55,10 @@ class Loans extends Component {
     render() {
         const data = this.props.data;
 
-        const search_button = <button className="btn-link">loans</button>;
+        const open_button = <button className="btn-link">Loans</button>;
 
         return (
-            <Portal ref="loans" closeOnEsc openByClickOn={search_button}>
+            <Portal ref="loans" closeOnEsc openByClickOn={open_button}>
                 <TeamDialog>
                     <div className="text-center">
                         <h3 className="text-center">Loans</h3>
