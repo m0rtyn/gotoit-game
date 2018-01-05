@@ -53,6 +53,7 @@ class App extends Component {
         this.rejectCandidate = this.rejectCandidate.bind(this);
         this.agencySearch = this.agencySearch.bind(this);
         this.hireEmployer = this.hireEmployer.bind(this);
+        this.riseEmployer = this.riseEmployer.bind(this);
         this.dismissEmployer = this.dismissEmployer.bind(this);
         this.buyItem = this.buyItem.bind(this);
 
@@ -104,6 +105,7 @@ class App extends Component {
         app_state.data.helpers['rejectCandidate'] = this.rejectCandidate;
         app_state.data.helpers['agencySearch'] = this.agencySearch;
         app_state.data.helpers['hireEmployer'] = this.hireEmployer;
+        app_state.data.helpers['riseEmployer'] = this.riseEmployer;
         app_state.data.helpers['dismissEmployer'] = this.dismissEmployer;
         app_state.data.helpers['buyItem'] = this.buyItem;
 
@@ -242,6 +244,27 @@ class App extends Component {
         //data.workers_roles[worker.id] = JSON.parse(JSON.stringify(skills_true));
         skills_names.forEach((skill) => { this.changeRole(worker.id, skill, true); });
         this.modifyRelation(worker.id, null, true);
+        this.setState({data: data});
+    }
+
+    riseEmployer(worker_id) {
+        let data = this.state.data;
+     //   let worker = _.find(data.workers, (id) => { return (worker_id === id); });
+        let worker = _.find(data.workers, (worker) => { return (worker_id === worker.id); });
+        //console.log(worker_id, worker, data.workers);
+        //console.log(worker);
+        worker.standing += 1000;
+        worker.standing_after_salary_rising += 1000;
+        worker.morale += 10;
+
+        worker.to_vacation = false;
+        worker.to_vacation_ticker = 0;
+        if (worker.stamina < 0) { worker.stamina = 0; }
+        worker.stamina += 250;
+
+        //console.log(worker);
+
+        addMessage('You raised salary to '+worker.name+'!', {timeOut: 5000, extendedTimeOut: 2000}, 'info');
         this.setState({data: data});
     }
 
@@ -820,46 +843,65 @@ class App extends Component {
         const data = this.state.data;
 
         _.shuffle(data.workers).forEach((worker) => {
-            // worker quiting
-            if (worker.to_leave) {
-                if (worker.to_leave_ticker <= 0) {
-                    addAction(worker.name+' resigned from your company', {timeOut: 20000, extendedTimeOut: 10000}, 'error');
-                    this.dismissEmployer(worker.id);
+
+            if (!worker.is_player) {
+                // worker quiting
+                if (worker.to_leave) {
+                    if (worker.to_leave_ticker <= 0) {
+                        addAction(worker.name + ' resigned from your company', {
+                            timeOut: 20000,
+                            extendedTimeOut: 10000
+                        }, 'error');
+                        this.dismissEmployer(worker.id);
+                    }
+                    else {
+                        worker.to_leave_ticker--;
+                    }
                 }
-                else {
-                    worker.to_leave_ticker--;
+
+                // Vacation
+                if (!worker.to_vacation && !worker.in_vacation && worker.stamina <= 0) {
+                    worker.to_vacation = true;
+                    worker.to_vacation_ticker = 24 * 7 * 2; // 2 weeks
+                    addAction(worker.name + ' leaves on vacation in two weeks', {
+                        timeOut: 10000,
+                        extendedTimeOut: 5000
+                    }, 'error');
+                }
+                if (worker.to_vacation) {
+                    worker.to_vacation_ticker--;
+                    if (worker.to_vacation_ticker <= 0) {
+                        worker.to_vacation = false;
+                        worker.in_vacation = true;
+                        let long = _.random(2, 3);
+                        worker.in_vacation_ticker = 24 * 7 * long; // 2-3 weeks
+                        addAction(worker.name + ' leaves on a ' + long + ' week vacation now', {
+                            timeOut: 15000,
+                            extendedTimeOut: 8000
+                        }, 'error');
+                    }
+                }
+                if (worker.in_vacation) {
+                    //console.log('worker in vacation');
+                    worker.in_vacation_ticker--;
+                    if (worker.in_vacation_ticker === 0) {
+                        worker.in_vacation = false;
+                        worker.stamina = 1000;
+                        addAction(worker.name + ' comes back from vacation', {
+                            timeOut: 5000,
+                            extendedTimeOut: 3000
+                        }, 'success');
+                    }
+                    return false;
+                }
+                if (_.random(1, (1 + parseFloat(worker.getOverrate())).toFixed(0)) === 1) { // additional drain even worker do not work
+                    worker.drainStamina();
+                }
+                if (worker.standing_after_salary_rising > 0) {
+                    worker.standing_after_salary_rising--;
                 }
             }
 
-            // Vacation
-            if (!worker.to_vacation && !worker.in_vacation && worker.stamina <= 0) {
-                worker.to_vacation = true;
-                worker.to_vacation_ticker = 24 * 7 * 2; // 2 weeks
-                addAction(worker.name+' leaves on vacation in two weeks', {timeOut: 10000, extendedTimeOut: 5000}, 'error');
-            }
-            if (worker.to_vacation) {
-                worker.to_vacation_ticker--;
-                if (worker.to_vacation_ticker <= 0) {
-                    worker.to_vacation = false;
-                    worker.in_vacation = true;
-                    let long =  _.random(2, 3);
-                    worker.in_vacation_ticker = 24 * 7 * long; // 1-3 weeks
-                    addAction(worker.name+' leaves on a '+long+' week vacation now', {timeOut: 15000, extendedTimeOut: 8000}, 'error');
-                }
-            }
-            if (worker.in_vacation) {
-                //console.log('worker in vacation');
-                worker.in_vacation_ticker--;
-                if (worker.in_vacation_ticker === 0) {
-                    worker.in_vacation = false;
-                    worker.stamina = 1000;
-                    addAction(worker.name+' comes back from vacation', {timeOut: 5000, extendedTimeOut: 3000}, 'success');
-                }
-                return false;
-            }
-            if (_.random(1, (1 + parseFloat(worker.getOverrate())).toFixed(0)) === 1) { // additional drain even worker do not work
-                worker.drainStamina();
-            }
 
             // hunger
             if (worker.fed_ticker > 0) worker.fed_ticker--;

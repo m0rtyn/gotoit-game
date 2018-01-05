@@ -20,6 +20,7 @@ class WorkerModel {
         this.is_player = is_player;
         this.expirience = JSON.parse(JSON.stringify(skills));
         this.standing = 0;
+        this.standing_after_salary_rising = 0;
         this.morale = 100;
         this.accept_default = true;
 
@@ -74,10 +75,6 @@ class WorkerModel {
         }
     }
 
-    getOverrate() {
-        return (((1 + (this.standing/(24*7*32)))*100)-100).toFixed(2);
-    }
-
     isWorkingTime(time, micromanagement, office_things) {
         let variability = _.random(-this.temper.variability, this.temper.variability);
         let mod = variability + this.temper.earliness;
@@ -103,7 +100,7 @@ class WorkerModel {
     }
 
     getEfficiency() {
-        if (tick < 10) return 100;
+     //   if (tick < 10) return 100;
 
         let efficiency = this.calcEfficiency();
 
@@ -113,7 +110,7 @@ class WorkerModel {
         */
 
         // smooth first 14 days
-        if (((tick - this.facts.tick_hired)/24) < 14) return Math.floor((efficiency + 100) / 2);
+     //   if (((tick - this.facts.tick_hired)/24) < 14) return Math.floor((efficiency + 100) / 2);
 
         return efficiency;
     }
@@ -160,6 +157,14 @@ class WorkerModel {
         return Math.max(Math.min(Math.floor(collective), 20), -20);
     }
 
+    getOverrate() {
+        return (((1 + (this.standing/(24*7*59.524)))*100)-100).toFixed(2);
+    }
+
+    getMotivate() {
+        return Math.sqrt(this.standing_after_salary_rising)/Math.PI;
+    }
+
     calcEfficiency() { // happiness
        // return this.calcEfficiencyReal();
         return this.efficiency.get();
@@ -173,6 +178,8 @@ class WorkerModel {
         const collective = this.collectivePenalty();
 
         let efficiency = 20 +
+            + Math.floor(this.getOverrate() / 10)
+            + this.getMotivate()
             + getData().office_things.gadget
          //   + (10 - Math.abs(stamina))
             + (20 - Math.abs(tasks_stream))
@@ -180,6 +187,7 @@ class WorkerModel {
             + (20 - Math.abs(education_stream))
             + (20 - Math.abs(collective));
 
+        console.log(Math.floor(this.getOverrate() / 10));
         //console.log(efficiency);
         //console.log(tasks_stream, tasks_difficulty, education_stream, collective);
 

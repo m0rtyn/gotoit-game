@@ -96,10 +96,15 @@ class Worker extends Component {
                             {worker.name}
                             {worker.in_vacation ? ' on vacation! ' : ''}
                         </h2>
+
+                        {worker.is_player ? '' : <div className="panel panel-success text-center">
+                            Worker salary: ${worker.getSalary()}. Overrate bonus: {worker.getOverrate()}%.
+                            <button className="btn btn-danger btn-sm" onClick={() => { data.helpers.riseEmployer(worker.id)}}>Rise Salary</button>
+                        </div>}
+
                         <ul>
                             <p>Hired {Math.ceil((this.props.data.date.tick - worker.facts.tick_hired)/24)} days ago.
-                                {!worker.is_player ? <span>Got {worker.facts.money_earned}$ of salary
-                                    . Overrate: {worker.getOverrate()}% </span> : ' '}
+                                {!worker.is_player ? <span>Got {worker.facts.money_earned}$ of salary.</span> : ''}
                                 Finished {worker.facts.project_finished} project.
                                 Did {worker.facts.tasks_done} of {worker.facts.tasks_done + worker.facts.bugs_passed} tasks.
                                 Passed {worker.facts.bugs_passed} bugs.
@@ -237,7 +242,7 @@ class Worker extends Component {
                 <div className="progress slim">
                     {/* <div classNames('progress-bar', (100 / worker.getEfficiency() < 0.5 ? 'progress-bar-danger' : 'progress-bar-warning')) role="progressbar"  */}
                     <div className={efficiency_bar_style} role="progressbar"
-                         style={{width: worker.getEfficiency()+'%'}}>
+                         style={{width: Math.min(100, worker.getEfficiency())+'%'}}>
                         <label>{worker.getEfficiency()}%</label>
                     </div>
                 </div>

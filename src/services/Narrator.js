@@ -61,7 +61,7 @@ class Narrator {
                 case num < 80: return 'Worker '+worker.name+' is satisfied'+drawNum(num)+' with their job.';
                 case num < 90: return 'Worker '+worker.name+' is very satisfied'+drawNum(num)+' with their job.';
                 case num < 100: return 'Worker '+worker.name+' almost loves'+drawNum(num)+' their job.';
-                case num === 100: return 'Worker '+worker.name+' loves'+drawNum(num)+' their job.';
+                case num >= 100: return 'Worker '+worker.name+' loves'+drawNum(num)+' their job.';
                 default:
                     console.log('error case: ' + num);
             }
@@ -135,7 +135,8 @@ class Narrator {
                 case num < 700: return ' Encouraged'+drawNum(num)+' and ready to work.';
                 case num < 800: return ' Full'+drawNum(num)+' of energy.';
                 case num < 900: return ' Rested and full'+drawNum(num)+' of energy.';
-                case num <= 1000: return ' Fresh'+drawNum(num)+' from holidays.';
+                case num < 1000: return ' Fresh'+drawNum(num)+' from holidays.';
+                case num >= 1000: return ' Can not even think '+drawNum(num)+' about rest.';
                 default:
                     console.log('error case: ' + num);
             }
