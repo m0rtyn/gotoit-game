@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import _ from 'lodash';
+
 import Creation from './Creation';
 import ProjectEndScreen from './ProjectEndScreen';
 import HotOffer from './HotOffer';
@@ -13,9 +15,13 @@ class PopupsNest extends Component {
             end_screen_project = data.projects_end_reports[0];
         }
 
-        let hot_offer_project = null;
-        if (data.offered_projects.hot.length > 0) {
-            hot_offer_project = data.offered_projects.hot[0];
+        let hot_offer_project = _.find(data.offered_projects, (project) => { return (true === project.hot); });
+
+        if (hot_offer_project) {
+            //hot_offer_project.hot = false;
+        }
+        else {
+            hot_offer_project = null;
         }
 
         return (

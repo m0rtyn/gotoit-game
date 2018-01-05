@@ -48,7 +48,7 @@ class Header extends Component {
                             }}>
 
                                 {[1, 3, 7].map((speed, index) => {
-                                    return <span>
+                                    return <span key={index}>
                                         {data.game_speed_multiplier === speed
                                             ? <button className="" style={{width: 28, height: 28}}><u>{index+1}</u></button>
                                             : <button className="" style={{width: 28, height: 28}} onClick={() => { data.helpers.setGameSpeed(speed); }}>{index+1}</button>}

@@ -187,7 +187,7 @@ class WorkerModel {
             + (20 - Math.abs(education_stream))
             + (20 - Math.abs(collective));
 
-        console.log(Math.floor(this.getOverrate() / 10));
+       // console.log(Math.floor(this.getOverrate() / 10));
         //console.log(efficiency);
         //console.log(tasks_stream, tasks_difficulty, education_stream, collective);
 

@@ -44,15 +44,12 @@ var app_state =
             agency: []
         },
 
-        offered_projects: {
-            freelance: [
-          //      ProjectModel.generate(1, 1),
-          //      ProjectModel.generate(2, 1),
-          //      ProjectModel.generate(3, 1)
-            ],
-            contract: [],
-            hot: []
-        },
+        offered_projects: [],
+
+        rumor: 0,
+        meetup: 0,
+        reputation: 0,
+        demo: 0,
 
         hiring_agency_state: {},
         sales_agency_state: {},

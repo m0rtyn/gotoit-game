@@ -58,6 +58,9 @@ class App extends Component {
         this.dismissEmployer = this.dismissEmployer.bind(this);
         this.buyItem = this.buyItem.bind(this);
 
+        this.salesDepartmentUp = this.salesDepartmentUp.bind(this);
+        this.hrDepartmentUp = this.hrDepartmentUp.bind(this);
+
         this.contractSearch = this.contractSearch.bind(this);
         this.rejectOffered = this.rejectOffered.bind(this);
         this.acceptOffered = this.acceptOffered.bind(this);
@@ -110,6 +113,9 @@ class App extends Component {
         app_state.data.helpers['riseEmployer'] = this.riseEmployer;
         app_state.data.helpers['dismissEmployer'] = this.dismissEmployer;
         app_state.data.helpers['buyItem'] = this.buyItem;
+
+        app_state.data.helpers['salesDepartmentUp'] = this.salesDepartmentUp;
+        app_state.data.helpers['hrDepartmentUp'] = this.hrDepartmentUp;
 
         app_state.data.helpers['contractSearch'] = this.contractSearch;
         app_state.data.helpers['rejectOffered'] = this.rejectOffered;
@@ -292,38 +298,104 @@ class App extends Component {
         }
     }
 
+    salesDepartmentUp(action) {
+        let data = this.state.data;
+
+        switch (action) {
+            case 'cold':
+                data.reputation++;
+                break;
+            case 'advert':
+                if (data.money >= 100) {
+                    this.chargeMoney(100);
+                    data.reputation += 10;
+                }
+                else {
+                    console.log('not enough money');
+                }
+                break;
+            case 'demo':
+                if (data.rumor >= 10) {
+                    data.rumor -= 10;
+                    data.demo++;
+                }
+                else {
+                    console.log('not enough rumor');
+                }
+                break;
+            default:
+                console.log('Unexpected action '+action);
+        }
+
+        this.setState({data: data});
+    }
+
+    hrDepartmentUp(action) {
+        let data = this.state.data;
+
+        switch (action) {
+            case 'looking':
+                data.rumor++;
+                break;
+            case 'vacancy':
+                if (data.money >= 100) {
+                    this.chargeMoney(100);
+                    data.rumor += 10;
+                }
+                else {
+                    console.log('not enough money');
+                }
+                break;
+            case 'meetup':
+                if (data.reputation >= 10) {
+                    data.reputation -= 10;
+                    data.meetup++;
+                }
+                else {
+                    console.log('not enough reputation');
+                }
+                break;
+            default:
+                console.log('Unexpected action '+action);
+        }
+
+        this.setState({data: data});
+    }
+
     contractSearch(agency_state, agency_reward) {
         let data = this.state.data;
         this.chargeMoney(agency_reward);
         let project = ProjectModel.generateAgency(agency_state);
         data.sales_agency_state = agency_state;
-        data.offered_projects.contract.push(project);
+        data.offered_projects.push(project);
         this.setState({data: data});
     }
 
-    rejectOffered(id, type) { // rejectOffer
+    rejectOffered(id) { // rejectOffer
         let data = this.state.data;
-        _.remove(data.offered_projects[type], (candidate) => { return (candidate.id === id); });
+        _.remove(data.offered_projects, (candidate) => { return (candidate.id === id); });
         this.setState({data: data});
     }
 
-    acceptOffered(id, type) {
+    acceptOffered(id) {
         let data = this.state.data;
-        let project = (_.remove(data.offered_projects[type], (candidate) => { return (candidate.id === id); }))[0];
+        let project = (_.remove(data.offered_projects, (candidate) => { return (candidate.id === id); }))[0];
+        project.hot = false;
         this.acceptAndMoveProject(project);
         addMessage('Accepted '+project.name+' project', {timeOut: 5000, extendedTimeOut: 2000}, 'info');
         this.setState({data: data});
     }
 
-    startOffered(id, type) {
+    startOffered(id) {
         let data = this.state.data;
-        let project = (_.remove(data.offered_projects[type], (candidate) => { return (candidate.id === id); }))[0];
+        let project = (_.remove(data.offered_projects, (candidate) => { return (candidate.id === id); }))[0];
 
         if (!project) {
-            console.log('Broker offered project '+id+' '+type);
+            console.log('Broker offered project '+id);
             return false;
         }
 
+        project.hot = false;
         project.briefing = true;
         this.acceptAndMoveProject(project);
         this.openProject(id);
@@ -332,6 +404,7 @@ class App extends Component {
 
     acceptAndMoveProject(project) {
         let data = this.state.data;
+        project.hot = false;
         data.projects.push(project);
         Object.keys(data.projects_default_technologies).forEach((technology) => {
             if (data.projects_default_technologies[technology]) {
@@ -443,23 +516,23 @@ class App extends Component {
         if (project.is_storyline || project.stage !== 'finish' ) return;
 
         if (project.type === 'training' && !data.achievements.includes('FirstTraining')) {
-            data.offered_projects.hot.push(Lorer.afterFirstTraining(project));
+            data.offered_projects.push(Lorer.afterFirstTraining(project));
             data.achievements.push('FirstTraining')
         }
         if (project.size === 1 && !data.achievements.includes('FirstPart')) {
-            data.offered_projects.hot.push(Lorer.afterFirstPart(project));
+            data.offered_projects.push(Lorer.afterFirstPart(project));
             data.achievements.push('FirstPart')
         }
         if (project.size === 2 && !data.achievements.includes('FirstModule')) {
-            data.offered_projects.hot.push(Lorer.afterFirstModule(project));
+            data.offered_projects.push(Lorer.afterFirstModule(project));
             data.achievements.push('FirstModule')
         }
         if (project.size === 3 && !data.achievements.includes('FirstApplication')) {
-            data.offered_projects.hot.push(Lorer.afterFirstApplication(project));
+            data.offered_projects.push(Lorer.afterFirstApplication(project));
             data.achievements.push('FirstApplication')
         }
         if (project.size === 4 && !data.achievements.includes('BigDeal')) {
-            data.offered_projects.hot.push(Lorer.afterFirstBigDeal(project));
+            data.offered_projects.push(Lorer.afterFirstBigDeal(project));
             data.achievements.push('BigDeal')
         }
 
@@ -754,42 +827,29 @@ class App extends Component {
         }
 
 
+        /*
         if (tick < (24 * 7)) {
             return false; // no generation first week
         }
+        */
 
-        let probability = Math.min(100, (20 + (data.workers.length * projects_done * 0.1))) / 24;
 
-        if (data.offered_projects.freelance.length < 5 && _.random(0.0, 100.0) < probability) {
-            let quality = Math.ceil(_.random(1, (tick / (24*30)) + (projects_done*0.1)));
-            let size =
-                (quality < 3) ? 1 : (
-                    (quality < 5) ? _.random(1, _.random(1, 2)) : (
-                        (quality < 10) ? _.random(1, 2) : (
-                            (quality < 15) ? (_.random(0, 1) ? _.random(1, 2) : _.random(1, 3)) : (
-                                (quality < 20) ? _.random(1, 3) : (
-                                    (quality < 25) ? (_.random(0, 1) ? _.random(1, 3) : _.random(1, 4)) : (
-                                        (quality < 30) ? _.random(1, 4) : (
-                                            (quality < 35) ? (_.random(0, 1) ? _.random(1, 4) : _.random(2, 4)) : (
-                                                (quality < 40) ? _.random(2, 4) : (
-                                                    (quality < 45) ? _.random(_.random(2, 4), 4) : (
-                                                        (quality < 50) ? _.random(3, 4) : 4
-                                                    )
-                                                )
-                                            )
-                                        )
-                                    )
-                                )
-                            )
-                        )
-                    )
-                );
-
-            //console.log('probability: ' + probability.toFixed(2) + ' quality: ' + quality + ' size: ' + size);
-            data.offered_projects.freelance.push(ProjectModel.generate(quality, size, 'history'));
-            addAction('New job!', {timeOut: 3000, extendedTimeOut: 1000});
+        if (data.reputation >= 100) {
+            data.reputation -= 100;
+            this.pushNewProject();
         }
 
+        if (data.rumor >= 100) {
+            data.rumor -= 100;
+            this.pushNewCandidate();
+        }
+
+        let probability = Math.min(50, (10 + (data.workers.length * projects_done * 0.1))) / 24;
+        if (data.offered_projects.length < 5 && _.random(0.0, 100.0) < probability) {
+            this.pushNewProject();
+        }
+
+        /*
         if (data.candidates.resumes.length > 0) { //  WTF section
             if (_.random(1, 100) < Math.sqrt(probability)) {
                 _.remove(data.candidates.resumes, (candidate) => {
@@ -802,12 +862,11 @@ class App extends Component {
                 });
             }
         }
+        */
 
         let spike = (tick > (24 * 30) & tick < (24 * 60)) ? 40 : 0;
         if (Math.floor(_.random(1, 24 * (50 - Math.max(spike, Math.min(25, projects_done*0.2))))) === 1 && data.candidates.resumes.length < 5) {
-            let worker = WorkerModel.generate(_.random(1, Math.floor(5 + projects_done*0.1 + tick * 0.01)));
-            data.candidates.resumes.push(worker);
-            addAction('New resume: ' + worker.name);
+            this.pushNewCandidate();
         }
 
         if (Math.floor(_.random(1, (24*7*12)/(1+(projects_done*0.1)))) === 1 && data.candidates.resumes.length < 5) {
@@ -819,34 +878,56 @@ class App extends Component {
             addAction('Excellent '+max_skill+' ninja '+worker.name+' looking for a job');
         }
 
-/*
-        if (Math.floor(_.random(1, (24*2) + (projects_done*0.1))) === 1 && data.offered_projects.freelance.length < 5) {
-            data.offered_projects.freelance.push(ProjectModel.generate(_.random(1, 3), _.random(1, 2)));
-            addAction('New freelance job!', {timeOut: 3000, extendedTimeOut: 1000});
-        }
-        if (_.random(1, 24*7) === 1 && data.offered_projects.freelance.length > 0) {
-            _.remove(data.offered_projects.freelance, (candidate) => { return (candidate.id === data.offered_projects.freelance[0].id); });
-        }
-
-        if (Math.floor(_.random(1, 24*((7*8)/(1+projects_done*0.1)))) === 1 && data.offered_projects.freelance.length < 5) {
-            data.offered_projects.freelance.push(ProjectModel.generate(_.random(15, 30 + Math.sqrt(projects_done)), 4));
-            addAction('New big deal!', {timeOut: 5000, extendedTimeOut: 3000});
-        }
-        */
-
-
         if (tick < (24 * 30 * 12)) {
             return false; // no additional generation first 12 month
         }
 
         if (!data.wasRecentlyHackathon && _.random(1, 24*60)) {
             data.wasRecentlyHackathon = true;
-            data.offered_projects.hot.push(Lorer.hackathon());
+            data.offered_projects.push(Lorer.hackathon());
         }
 
 
 
         //this.setState({data: data});
+    }
+
+    pushNewProject() {
+        const data = this.state.data;
+        let quality = Math.ceil(_.random(1, (tick / (24*30)) + (projects_done*0.1)));
+        let size =
+            (quality < 3) ? 1 : (
+                (quality < 5) ? _.random(1, _.random(1, 2)) : (
+                    (quality < 10) ? _.random(1, 2) : (
+                        (quality < 15) ? (_.random(0, 1) ? _.random(1, 2) : _.random(1, 3)) : (
+                            (quality < 20) ? _.random(1, 3) : (
+                                (quality < 25) ? (_.random(0, 1) ? _.random(1, 3) : _.random(1, 4)) : (
+                                    (quality < 30) ? _.random(1, 4) : (
+                                        (quality < 35) ? (_.random(0, 1) ? _.random(1, 4) : _.random(2, 4)) : (
+                                            (quality < 40) ? _.random(2, 4) : (
+                                                (quality < 45) ? _.random(_.random(2, 4), 4) : (
+                                                    (quality < 50) ? _.random(3, 4) : 4
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+
+        //console.log('probability: ' + probability.toFixed(2) + ' quality: ' + quality + ' size: ' + size);
+        data.offered_projects.push(ProjectModel.generate(quality, size, 'history'));
+        addAction('New job!', {timeOut: 3000, extendedTimeOut: 1000});
+    }
+
+    pushNewCandidate() {
+        const data = this.state.data;
+        let worker = WorkerModel.generate(_.random(1, Math.floor(3 + projects_done*0.1 + tick * 0.001)));
+        data.candidates.resumes.push(worker);
+        addAction('New resume: ' + worker.name);
     }
 
     work() {

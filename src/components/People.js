@@ -6,7 +6,9 @@ import TeamDialog from './TeamDialog';
 import StatsBar from './StatsBar';
 
 import Worker from './Worker';
+
 import HiringAgency from './HiringAgency';
+import HrDepartment from './HrDepartment';
 import Office from './Office';
 
 import {skills, offices} from '../data/knowledge';
@@ -62,14 +64,19 @@ class People extends Component {
                                 <h3 className="text-center">Hiring</h3>
                                 <div className="row">
                                     <div className="col-md-6">
-                                        <h4 className="text-center fat">Resume</h4>
+                                        <h4 className="text-center fat">
+                                            Resume
+                                            <HiringAgency data={data} />
+                                        </h4>
                                         {data.candidates.resumes.map(resumes_candidate)}
                                     </div>
                                     <div className="col-md-6">
                                         <h4 className="text-center slim-top">
+                                            Hr Department
                                             <button  className="btn btn-info hidden" onClick={data.helpers.agencySearch}>Search 1000$</button>
-                                            <HiringAgency data={data} />
                                         </h4>
+
+                                        <HrDepartment data={this.props.data} />
 
                                         {data.candidates.agency.map(agency_candidate)}
                                     </div>

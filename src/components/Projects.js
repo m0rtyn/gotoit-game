@@ -6,6 +6,7 @@ import MarketTop from './MarketTop';
 import ProjectOfferBlock from './ProjectOfferBlock';
 
 import SalesAgency from './SalesAgency';
+import SalesDepartment from './SalesDepartment';
 import Project from './Project';
 import ProjectReport from './ProjectReport';
 
@@ -22,8 +23,9 @@ class Projects extends Component {
             return <ProjectOfferBlock key={candidate.id} candidate={candidate} data={this.props.data} type={type} />;
         };
 
-        let freelance_offered = (candidate) => { return project_block_template(candidate, 'freelance'); };
-        let contract_offered  = (candidate) => { return project_block_template(candidate, 'contract'); };
+        let offered = (candidate) => { return project_block_template(candidate); };
+       // let freelance_offered = (candidate) => { return project_block_template(candidate, 'freelance'); };
+       // let contract_offered  = (candidate) => { return project_block_template(candidate, 'contract'); };
 
         return (
             <div>
@@ -37,15 +39,16 @@ class Projects extends Component {
                                 </h3>
                                 <div className="row">
                                     <div className="col-md-6">
-                                        <h4 className="text-center fat">Freelance</h4>
-                                        {this.props.data.offered_projects.freelance.map(freelance_offered)}
+                                        <h4 className="text-center fat">Offered Projects
+                                            <SalesAgency data={this.props.data} /></h4>
+                                        {this.props.data.offered_projects.map(offered)}
                                     </div>
                                     <div className="col-md-6">
                                         <h4 className="text-center slim-top">
+                                            Sales Department
                                             <button className="btn btn-info hidden" onClick={this.props.data.helpers.contractSearch}>Search 1000$</button>
-                                            <SalesAgency data={this.props.data} />
                                         </h4>
-                                        {this.props.data.offered_projects.contract.map(contract_offered)}
+                                        <SalesDepartment data={this.props.data} />
                                     </div>
                                 </div>
                             </TeamDialog>

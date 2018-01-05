@@ -20,6 +20,7 @@ class ProjectModel {
         this.id = _.uniqueId('project');
         this.name = name;
         this.type = type; //  project, training, hackathon, draft
+        this.hot = false;
         this.kind = kind;
         this.platform = platform;
         this.reward = reward;
@@ -282,6 +283,7 @@ class ProjectModel {
     static generateStorylineProject(quality, size) {
         let bulk = this.generate(quality, size, 'team');
         bulk.is_storyline = true;
+        bulk.hot = true;
         return bulk;
     }
 
