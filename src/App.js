@@ -36,6 +36,7 @@ class App extends Component {
 
         this.playGame = this.playGame.bind(this);
         this.pauseGame = this.pauseGame.bind(this);
+        this.setGameSpeed = this.setGameSpeed.bind(this);
 
         this.brutalSet = this.brutalSet.bind(this);
         this.brutalGet = this.brutalGet.bind(this);
@@ -88,6 +89,7 @@ class App extends Component {
 
         app_state.data.helpers['playGame'] = this.playGame;
         app_state.data.helpers['pauseGame'] = this.pauseGame;
+        app_state.data.helpers['setGameSpeed'] = this.setGameSpeed;
 
         app_state.data.helpers['brutalSet'] = this.brutalSet;
         app_state.data.helpers['brutalGet'] = this.brutalGet;
@@ -598,7 +600,7 @@ class App extends Component {
         data.game_paused = false;
         this.timerID = setInterval(
             () => this.tick(true),
-            this.state.data.game_speed
+            Math.floor(this.state.data.game_speed / this.state.data.game_speed_multiplier)
         );
         this.setState({data: data});
     }
@@ -607,6 +609,14 @@ class App extends Component {
         const data = this.state.data;
         data.game_paused = true;
         clearInterval(this.timerID);
+        this.setState({data: data});
+    }
+
+    setGameSpeed(speed) {
+        const data = this.state.data;
+        this.pauseGame();
+        data.game_speed_multiplier = speed;
+        this.playGame();
         this.setState({data: data});
     }
 

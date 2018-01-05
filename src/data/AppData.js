@@ -10,7 +10,8 @@ import {project_platforms, project_kinds} from './knowledge';
 var app_state =
 {
     data: {
-        game_speed: 500,
+        game_speed: 1000,
+        game_speed_multiplier: 1,
         game_paused: true,
         stage: 'start',
         date: {

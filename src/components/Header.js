@@ -36,7 +36,7 @@ class Header extends Component {
                                     data.helpers.pauseGame();
                                 }
                             }}>
-                                <span className={classNames('glyphicon', (data.game_paused ? 'glyphicon-play' : 'glyphicon-pause'))} style={{width: 16, height: 16}}></span>
+                                <span className={classNames('glyphicon', (data.game_paused ? 'glyphicon-play' : 'glyphicon-pause'))} style={{width: 28, height: 28}}></span>
                             </span>
                             <span onClick={() => {
                                 let i = 1;
@@ -46,8 +46,17 @@ class Header extends Component {
                                     i++;
                                 }
                             }}>
+
+                                {[1, 3, 7].map((speed, index) => {
+                                    return <span>
+                                        {data.game_speed_multiplier === speed
+                                            ? <button className="" style={{width: 28, height: 28}}><u>{index+1}</u></button>
+                                            : <button className="" style={{width: 28, height: 28}} onClick={() => { data.helpers.setGameSpeed(speed); }}>{index+1}</button>}
+                                    </span>
+                                })}
+
                                 <img src={"24-hours-icon.png"} alt={"Next Day"} title={"Next Day"}
-                                     className="img" style={{width: 16, height: 16}}/>
+                                     className="img" style={{width: 28, height: 28}}/>
                             </span>
                         </span>
 
