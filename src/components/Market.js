@@ -29,7 +29,7 @@ class Market extends Component {
                             {data.miner ? <div>
                                 You have {data.miner} miner
                             </div> : ''}
-                            <button className={data.btc >= 10 ? "btn btn-info" : "btn btn-info disabled"} onClick={() => data.helpers.buyMiner()}>Buy Miner for 10 BTC</button>
+                            <button className={data.btc >= 1 ? "btn btn-info" : "btn btn-info disabled"} onClick={() => data.helpers.buyMiner()}>Buy Miner for 1 BTC</button>
                         </div>
                     </div>
                 </TeamDialog>

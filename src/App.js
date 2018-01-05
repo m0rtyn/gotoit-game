@@ -615,8 +615,8 @@ class App extends Component {
 
     buyMiner() {
         let data = this.state.data;
-        if (data.btc >= 10) {
-            data.btc -= 10;
+        if (data.btc >= 1) {
+            data.btc -= 1;
             data.miner++;
         }
         else {
@@ -892,6 +892,18 @@ class App extends Component {
         if (data.rumor >= 100) {
             data.rumor -= 100;
             this.pushNewCandidate();
+        }
+
+        if (_.random(0, 24*356) < data.meetup) {
+            data.rumor++;
+        }
+
+        if (_.random(0, 24*356) < data.demo) {
+            data.reputation++;
+        }
+
+        if (_.random(0, 24*356) < data.miner) {
+            data.btc++;
         }
 
         let probability = Math.min(10, (1 + (data.workers.length * projects_done * 0.1))) / 24;
