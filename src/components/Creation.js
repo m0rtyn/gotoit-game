@@ -85,9 +85,6 @@ class Creation extends Component {
                     case 'apprentice':
                         data.helpers.hireEmployer(WorkerModel.generateWithStats(bulkStyler.partnerSpeciality(JSON.parse(JSON.stringify(stats)), 'apprentice')));
                         break;
-                    case 'partner':
-                        data.helpers.hireEmployer(WorkerModel.generateWithStats(bulkStyler.partnerSpeciality(JSON.parse(JSON.stringify(stats)), 'partner')));
-                        break;
                     case 'helpers':
                         data.helpers.hireEmployer(WorkerModel.generateWithStats(bulkStyler.partnerSpeciality(JSON.parse(JSON.stringify(stats)), 'helper1')));
                         data.helpers.hireEmployer(WorkerModel.generateWithStats(bulkStyler.partnerSpeciality(JSON.parse(JSON.stringify(stats)), 'helper2')));
@@ -106,14 +103,11 @@ class Creation extends Component {
 
             case 'businessman':
                 switch (this.state.selected_biz) {
-                    case 'money':
-                        data.money += 5000;
-                        break;
                     case 'btc':
                         data.btc += 5000 / data.current_btc_price;
                         break;
                     case 'credit':
-                        data.early_payed_loans += 1000;
+                        data.early_payed_loans += 9200;
                         break;
                     case 'office':
                         data.helpers.changeOffice(3);
@@ -192,7 +186,7 @@ class Creation extends Component {
                                     <div className="flex-container-row">
                                         {Object.keys(player_backgrounds).map((background) => {
                                             return <div key={background} className="flex-element slim">
-                                                <div className="radio slim">
+                                                <div className="radio text-center slim">
                                                     <label className="slim">
                                                         <h3 className="text-center">
                                                             <input type="radio" name="background" value={background}
@@ -218,7 +212,7 @@ class Creation extends Component {
                                                 case "technologist":   return <div><div className="flex-container-row">
                                                     {Object.keys(selected_background.spices).map((tech) => {
                                                         return <div key={tech} className="flex-element">
-                                                            <div className="radio">
+                                                            <div className="radio text-center">
                                                                 <label className="slim">
                                                                     <h3 className="text-center">
                                                                         <input type="radio" name="tech" value={tech}
@@ -238,7 +232,7 @@ class Creation extends Component {
                                                 case "specialist":   return <div><div className="flex-container-row">
                                                     {Object.keys(selected_background.spices).map((speciality) => {
                                                         return <div key={speciality} className="flex-element">
-                                                            <div className="radio">
+                                                            <div className="radio text-center">
                                                                 <label className="slim">
                                                                     <h3 className="text-center">
                                                                         <input type="radio" name="speciality" value={speciality}
@@ -258,7 +252,7 @@ class Creation extends Component {
                                                 case "coworker": return <div><div className="flex-container-row">
                                                     {Object.keys(selected_background.spices).map((team) => {
                                                         return <div key={team} className="flex-element">
-                                                            <div className="radio">
+                                                            <div className="radio text-center">
                                                                 <label className="slim">
                                                                     <h3 className="text-center">
                                                                         <input type="radio" name="team" value={team}
@@ -278,7 +272,7 @@ class Creation extends Component {
                                                 case "businessman": return <div><div className="flex-container-row">
                                                     {Object.keys(selected_background.spices).map((biz) => {
                                                         return <div key={biz} className="flex-element">
-                                                            <div className="radio">
+                                                            <div className="radio text-center">
                                                                 <label className="slim">
                                                                     <h3 className="text-center">
                                                                         <input type="radio" name="biz" value={biz}

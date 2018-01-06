@@ -75,8 +75,10 @@ class Header extends Component {
                             <label onClick={() => {
                                 data.helpers.addMoney(100000);
                             }}>$</label>
-                                <Loans data={data} />
-                                <Market data={data} />
+                                <div>
+                                    <Loans data={data} />
+                                    <Market data={data} />
+                                </div>
                             </div>
                         </span>
                         <span className="flex-element">

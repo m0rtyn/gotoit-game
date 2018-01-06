@@ -55,7 +55,7 @@ class Loans extends Component {
     render() {
         const data = this.props.data;
 
-        const open_button = <button className="btn-link">Loans</button>;
+        const open_button = <button className="btn btn-info btn-xs">Loans</button>;
 
         return (
             <Portal ref="loans" closeOnEsc openByClickOn={open_button}>
@@ -91,7 +91,7 @@ class Loans extends Component {
                                         <label className="flex-element"> Money: {loan.money}$ </label>
                                         <label className="flex-element"> Time: {loan.time} month </label>
                                         <label className="flex-element"> Interest: {loan.interest}% </label>
-                                        <label className="flex-element">
+                                        <label className={paid_percent ? "flex-element" : "flex-element hidden"}>
                                             <button
                                                 className={this.getEarlyCost(loan) <= data.money ? "btn btn-success btn-sm" : "btn btn-success btn-sm disabled"}
                                                 onClick={() => { if (this.getEarlyCost(loan) <= data.money) this.earlyRepayment(i); }}
@@ -104,7 +104,7 @@ class Loans extends Component {
                                         <div className="progress">
                                             <div className='progress-bar progress-bar-warning' role="progressbar"
                                                  style={{width: (100 - paid_percent) + '%'}}>
-                                                <label>balance</label>
+                                                <label>debt</label>
                                             </div>
                                             <div className='progress-bar progress-bar-success' role="progressbar"
                                                  style={{width: paid_percent + '%'}}>

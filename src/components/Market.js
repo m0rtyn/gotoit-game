@@ -8,7 +8,7 @@ class Market extends Component {
     render() {
         const data = this.props.data;
 
-        const open_button = <button className="btn-link">Market</button>;
+        const open_button = <button className="btn btn-info btn-xs">Market</button>;
 
         return (
             <Portal ref="loans" closeOnEsc openByClickOn={open_button}>

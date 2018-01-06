@@ -19,7 +19,6 @@ export const player_backgrounds = {
     //  university: {name: 'Student', money: 5000, start_tech: ['tdd'], text: 'Fundamental education according to verified program. Flat stats.'},
     technologist: {name: 'Technologist', money: 5000, start_tech: ['rad', 'creativity', 'tdd', 'refactoring'], text: 'Has a wide range of start technology.', spices: {
         rad: {name: 'RAD'},
-        creativity: {name: 'Creativity boost'},
         tdd: {name: 'TDD'},
         refactoring: {name: 'Refactoring'}
     }},
@@ -30,23 +29,21 @@ export const player_backgrounds = {
     }},
     coworker: {name: 'Teamplayer', money: 5000, start_tech: ['pair'], text: 'An experienced team player.', spices: {
         apprentice: {name: 'Apprentice', description: 'Your partner is your follower and like you in skills.'},
-        partner: {name: 'Partner', description: 'Your partner is your complete opposite and covers your weaknesses.'},
-        helpers: {name: 'Two helpers', description: 'Your team is two reliable helpers that cover your weaknesses.'},
+        helpers: {name: 'Two helpers', description: 'Your team is two reliable helpers that support your skills.'},
         full: {name: 'Full team', description: 'Your team is three random employees.'}
     }},
     businessman: {name: 'Businessman', money: 5000, start_tech: ['micromanagement'], text: 'Made a fortune doing business.', spices: {
-        money: {name: 'USD savings', description: 'You have saved up a few dollars.'},
-        btc: {name: 'BTC savings', description: 'Once you bought some bitcoins. Now they are worth a lot.'},
         credit: {name: 'Credit Rating', description: 'Good credit story increase your credit rating and allow to take addition credit.'},
+        btc: {name: 'BTC savings', description: 'Once you bought some bitcoins. Now they are worth a lot.'},
         office: {name: 'Dream office', description: 'You rented a spacious office and bought a coffeemake. What\'s next?'}
     }}
 };
 
 export const technologies = {
     overtime: {name: 'Overtime Work', acronym: 'Over', price: 0, description: 'Overtime helps to finish project on time but exhausts team.'},
+    creativity: {name: 'Creativity boost', acronym: 'Free', price: 0, description: "Every fifth working hour is given to pet projects that boost experience."},
 
     rad: {name: 'Rapid Development', acronym: 'RAD', price: 10000, description: 'Faster Development at the cost of increasing complexity.'},
-    creativity: {name: 'Creativity boost', acronym: 'Free', price: 10000, description: "Every fifth working hour is given to pet projects that boost experience."},
     tdd: {name: 'Test Driven Development', acronym: 'TDD', price: 10000, description: 'Developing tests that reduce the probability of errors.'},
     refactoring: {name: 'Non-stop refactoring', acronym: 'Ref', price: 10000, description: "The complexity of the code - it's just a task for refactoring."},
 

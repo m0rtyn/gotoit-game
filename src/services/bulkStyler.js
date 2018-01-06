@@ -66,13 +66,13 @@ class bulkStyler {
     static playerSpeciality(stats_bulk, speciality) {
         switch (speciality) {
             case 'design':
-                stats_bulk['design'] += 7;
+                stats_bulk['design'] += 6;
                 break;
             case 'manage':
-                stats_bulk['manage'] += 7;
+                stats_bulk['manage'] += 6;
                 break;
             case 'program':
-                stats_bulk['program'] += 7;
+                stats_bulk['program'] += 6;
                 break;
             default:
                 console.log('error case: ' + speciality);
@@ -98,12 +98,12 @@ class bulkStyler {
             case 'helper1':
                 stats_bulk[order[0]] += -1;
                 stats_bulk[order[1]] += -3;
-                stats_bulk[order[2]] += -3;
+                stats_bulk[order[2]] += -1;
                 break;
             case 'helper2':
                 stats_bulk[order[0]] += -3;
                 stats_bulk[order[1]] += -1;
-                stats_bulk[order[2]] += -3;
+                stats_bulk[order[2]] += -1;
                 break;
             default:
                 console.log('error case: ' + speciality);

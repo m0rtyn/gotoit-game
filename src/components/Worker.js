@@ -172,7 +172,7 @@ class Worker extends Component {
                                                     </div>
                                                 : <div className="flex-element" key={item_key}>
                                                     <button
-                                                        className={data.money >= item.money ? "btn btn-info" : "btn btn-info disabled"}
+                                                        className={data.money >= item.money ? "btn btn-info btn-xs" : "btn btn-info btn-xs disabled"}
                                                         title={item.description} id={item} onClick={() => {
                                                         if (data.money >= item.money) {
                                                             data.helpers.buyItem(worker, skill, item_key);
