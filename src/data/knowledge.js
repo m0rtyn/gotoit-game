@@ -1,7 +1,7 @@
 
 import _ from 'lodash';
 
-export const skills = {design: 0, manage: 0, program: 0, admin: 0};
+export const skills = {design: 0, manage: 0, program: 0};
 export const skills_1 = _.mapValues(skills, () => { return 1; });
 export const skills_true = _.mapValues(skills, () => { return true; });
 export const skills_false = _.mapValues(skills, () => { return false; });
@@ -11,8 +11,7 @@ export const skills_names = _.keys(skills);
 export const roles = {
     design: {name: 'Design', profession_name: 'Designer', description: 'Design'},
     program: {name: 'Programming', profession_name: 'Programmer', description: 'Programming'},
-    manage: {name: 'Management', profession_name: 'Manager', description: 'Management'},
-    admin: {name: 'Administrating', profession_name: 'Administrator', description: "Administrating"}
+    manage: {name: 'Management', profession_name: 'Manager', description: 'Management'}
 };
 
 export const player_backgrounds = {
@@ -27,8 +26,7 @@ export const player_backgrounds = {
     specialist: {name: 'Specialist', money: 5000, start_tech: ['agile'], text: 'Raised their professional skills to enormous heights and buy some professional stuff.', spices: {
         design: {name: 'Designer'},
         manage: {name: 'Manager'},
-        program: {name: 'Programmer'},
-        admin: {name: 'Administrator'}
+        program: {name: 'Programmer'}
     }},
     coworker: {name: 'Teamplayer', money: 5000, start_tech: ['pair'], text: 'An experienced team player.', spices: {
         apprentice: {name: 'Apprentice', description: 'Your partner is your follower and like you in skills.'},
@@ -72,11 +70,6 @@ export const workers_bonus_items = {
         exp: {name: 'Phone', money: 500, bonus: 10, description: 'add 10% EXP'},
         flat: {name: 'Bug tracker', money: 2500, bonus: 1, description: 'add 10 to skill'},
         percent: {name: 'ERP System', money: 10000, bonus: 10, description: 'add 10% to skill'}
-    },
-    admin: {
-        exp: {name: 'Virtual Server', money: 500, bonus: 10, description: 'add 10% EXP'},
-        flat: {name: 'Netbook', money: 2500, bonus: 1, description: 'add 10 to skill'},
-        percent: {name: 'Test Network', money: 10000, bonus: 10, description: 'add 10% to skill'}
     }
 };
 
@@ -91,15 +84,16 @@ export const project_platforms = {
     crossplatform: {name: 'Cross-platform'},
     mobile: {name: 'Mobile'},
     browser: {name: 'Browser'},
-    desktop: {name: 'Desktop'},
-    embedded: {name: 'Embedded'}
+    desktop: {name: 'Desktop'}
 };
 
 export const project_kinds = {
     application: {name: 'Application'},
     game: {name: 'Game'},
+    site: {name: 'Site'},
+    editor: {name: 'Editor'},
+    magazine: {name: 'Magazine'},
     service: {name: 'Service'},
-    system: {name: 'System'},
     database: {name: 'Database'}
 };
 

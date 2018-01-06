@@ -55,7 +55,7 @@ class ProjectModel {
         return {
             id: this.id, name: this.getName(), is_player: is_player, type: this.type,
             platform: this.platform, kind: this.kind, stage: this.stage,
-            design: this.needs_max.design, manage: this.needs_max.manage, program: this.needs_max.program, admin: this.needs_max.admin,
+            design: this.needs_max.design, manage: this.needs_max.manage, program: this.needs_max.program,
             total: this.totalScore()
         }
     }
@@ -231,9 +231,8 @@ class ProjectModel {
         projects_generated++;
 
         let stats_bulk = {
-            program: this.genStat(quality, size),
             design: this.genStat(quality, size),
-            admin: this.genStat(quality, size),
+            program: this.genStat(quality, size),
             manage: this.genStat(quality, size)
         };
 

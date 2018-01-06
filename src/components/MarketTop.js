@@ -104,7 +104,6 @@ class MarketTop extends Component {
                                             <th>design</th>
                                             <th>manage</th>
                                             <th>program</th>
-                                            <th>admin</th>
                                             <th>Total</th>
                                         </tr>
                                         </thead>
@@ -116,7 +115,6 @@ class MarketTop extends Component {
                                                 <td className={(row.is_player ? 'table-success' : '')}>{row.design}</td>
                                                 <td className={(row.is_player ? 'table-success' : '')}>{row.manage}</td>
                                                 <td className={(row.is_player ? 'table-success' : '')}>{row.program}</td>
-                                                <td className={(row.is_player ? 'table-success' : '')}>{row.admin}</td>
                                                 <td className={(row.is_player ? 'table-success' : '')}>{row.total}</td>
                                             </tr>
                                         )}

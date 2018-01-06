@@ -31,7 +31,6 @@ class ProjectEndScreen extends Component {
         let kind_top_handler = all_top_handler.filter('kind', project.kind);
         let platform_kind_top_handler = all_top_handler.filter('platform', project.platform).filter('kind', project.kind);
 
-
         return (
             <div>
                 <Portal closeOnEsc ref="end_screen" onClose={data.helpers.projectArchiving}>

@@ -16,6 +16,7 @@ import {chatMessage} from "./components/Chat";
 import WorkerModel from './models/WorkerModel';
 import ProjectModel from './models/ProjectModel';
 import OfficeModel from './models/OfficeModel';
+import ProjectsTop from './services/ProjectsTop';
 
 import Lorer from './services/Lorer';
 
@@ -483,9 +484,27 @@ class App extends Component {
     finishProject(id) {
         projects_done++;
         let data = this.state.data;
+        let project = _.find(data.projects, (project) => { return (project.id === id); });
+
         data.workers.forEach((worker) => { worker.facts.project_finished++; });
-        this.addMoney(_.find(data.projects, (project) => { return (project.id === id); }).reward);
+        this.addMoney(project.reward);
+
         this.projectReporting(id, 'finish');
+
+        let all_top_handler = ProjectsTop.getHandler(data.simplified_reports);
+        let platform_top_handler = all_top_handler.filter('platform', project.platform);
+        let kind_top_handler = all_top_handler.filter('kind', project.kind);
+        let platform_kind_top_handler = all_top_handler.filter('platform', project.platform).filter('kind', project.kind);
+
+        const getBonus = (handler) => {
+            return Math.max(0, 11 - handler.getTopNumber(id));
+        };
+
+        const bonus_points = getBonus(all_top_handler) * 3 + getBonus(platform_top_handler) * 2 + getBonus(kind_top_handler) * 2 + getBonus(platform_kind_top_handler) * 1 ;
+
+        data.rumor += Math.floor(bonus_points / 10);
+        data.reputation += bonus_points;
+
         this.setState({data: data});
     }
 
@@ -896,11 +915,11 @@ class App extends Component {
             this.pushNewCandidate();
         }
 
-        if (_.random(0, 24*356) < data.meetup) {
+        if (_.random(0, 24*30) < data.meetup) {
             data.rumor++;
         }
 
-        if (_.random(0, 24*356) < data.demo) {
+        if (_.random(0, 24) < data.demo) {
             data.reputation++;
         }
 

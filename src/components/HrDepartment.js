@@ -23,7 +23,7 @@ class HrDepartment extends Component {
                     </div>
                     <div>
                         <button className={10 <= data.reputation ? "btn btn-info" : "btn btn-info disabled"} onClick={() => {data.helpers.hrDepartmentUp('meetup')}}>Meet Up: cost 10 Reputation</button>
-                        {(data.meetup > 0) ? <span>You {data.meetup} generate {data.meetup} reputation/yer</span> : ''}
+                        {(data.meetup > 0) ? <span>You {data.meetup} generate {data.meetup} reputation/month</span> : ''}
                     </div>
                 </div>
             </div>

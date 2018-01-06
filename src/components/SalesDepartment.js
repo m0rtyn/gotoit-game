@@ -23,7 +23,7 @@ class SalesDepartment extends Component {
                     </div>
                     <div>
                         <button className={10 <= data.rumor ? "btn btn-info" : "btn btn-info disabled"} onClick={() => {data.helpers.salesDepartmentUp('demo')}}>Live Demo: cost 10 Rumor</button>
-                        {(data.demo > 0) ? <span>You {data.demo} generate {data.demo} reputation/yer</span> : ''}
+                        {(data.demo > 0) ? <span>You {data.demo} generate {data.demo} reputation/day</span> : ''}
                     </div>
                 </div>
             </div>

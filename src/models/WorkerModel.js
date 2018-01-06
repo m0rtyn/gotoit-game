@@ -260,7 +260,7 @@ class WorkerModel {
     }
 
     static generate(quality=1) {
-        let stats_bulk = {design: this.genStat(quality), manage: this.genStat(quality), program: this.genStat(quality), admin: this.genStat(quality)};
+        let stats_bulk = {design: this.genStat(quality), manage: this.genStat(quality), program: this.genStat(quality)};
 
         let stats = bulkStyler.speciality(stats_bulk);
 
@@ -294,7 +294,7 @@ class WorkerModel {
 
         return new WorkerModel(
             name,
-            _.mapValues(skills, () => { return 1; }), // {design: 1, manage: 1, program: 1, admin: 1},
+            _.mapValues(skills, () => { return 1; }), // {design: 1, manage: 1, program: 1},
             true
         );
     }
