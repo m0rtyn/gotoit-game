@@ -113,7 +113,7 @@ class Creation extends Component {
                         data.btc += 5000 / data.current_btc_price;
                         break;
                     case 'credit':
-                        data.early_payed_loans += 100;
+                        data.early_payed_loans += 1000;
                         break;
                     case 'office':
                         data.helpers.changeOffice(3);

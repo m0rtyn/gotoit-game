@@ -617,8 +617,8 @@ class App extends Component {
 
     buyMiner() {
         let data = this.state.data;
-        if (data.btc >= 1) {
-            data.btc -= 1;
+        if (data.btc >= 0.1) {
+            data.btc -= 0.1;
             data.miner++;
         }
         else {

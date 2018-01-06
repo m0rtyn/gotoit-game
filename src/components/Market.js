@@ -44,9 +44,9 @@ class Market extends Component {
                         </div>
                         <div>
                             {data.miner ? <div>
-                                You have {data.miner} miner
+                                You have {data.miner} miner which generate {data.miner} BTC/Year.
                             </div> : ''}
-                            <button className={data.btc >= 1 ? "btn btn-info" : "btn btn-info disabled"} onClick={() => data.helpers.buyMiner()}>Buy Miner for 1 BTC</button>
+                            <button className={data.btc >= 0.1 ? "btn btn-info" : "btn btn-info disabled"} onClick={() => data.helpers.buyMiner()}>Buy Miner for 1 BTC</button>
                         </div>
                     </div>
                 </TeamDialog>
