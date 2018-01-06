@@ -191,13 +191,14 @@ class Creation extends Component {
                                                                    }}/>
                                                             {player_backgrounds[background].name}
                                                         </h3>
-                                                        <p className="slim">{player_backgrounds[background].text}</p>
-                                                        <p> Start tech: {('technologist' === background) ? "rad, creativity, tdd or refactoring" : technologies[player_backgrounds[background].start_tech].name}
-                                                        </p>
                                                     </label>
                                                 </div>
                                             </div>
                                         })}
+                                    </div>
+                                    <div>
+                                        <p className="text-center slim">{player_backgrounds[this.state.selected_background].text}</p>
+                                        <p className="text-center slim"> Start tech: {('technologist' === this.state.selected_background) ? "rad, creativity, tdd or refactoring" : technologies[player_backgrounds[this.state.selected_background].start_tech].name} </p>
                                     </div>
                                 </div>
                                 <div className="panel panel-success">
@@ -288,9 +289,7 @@ class Creation extends Component {
                                 </div>
                                 <div className="panel panel-warning">
                                     <h4 className="text-center fat">
-                                        <p className="fat">
-                                            /*Your start money: {selected_background.money}*/
-                                        $. Your start skills:</p>
+                                        <p className="fat">Your start skills:</p>
                                         <StatsBar stats={stats_data} data={data}/>
                                     </h4>
                                 </div>

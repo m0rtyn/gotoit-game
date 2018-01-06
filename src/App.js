@@ -590,11 +590,11 @@ class App extends Component {
         this.setState({data: data});
     }
 
-    buyBTC() {
+    buyBTC(usd) {
         let data = this.state.data;
-        if (data.money >= 100) {
-            this.chargeMoney(100);
-            data.btc += 100 / data.current_btc_price;
+        if (data.money >= usd) {
+            this.chargeMoney(usd);
+            data.btc += usd / data.current_btc_price;
         }
         else {
             console.log('not enough money');
@@ -602,12 +602,12 @@ class App extends Component {
         this.setState({data: data});
     }
 
-    sellBTC() {
+    sellBTC(usd) {
         let data = this.state.data;
-        let cost = 100 / data.current_btc_price;
+        let cost = usd / data.current_btc_price;
         if (data.btc >= cost) {
             data.btc -= cost;
-            data.money += 100 / data.current_btc_price;
+            data.money += usd;
         }
         else {
             console.log('not enough btc');

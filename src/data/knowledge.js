@@ -19,10 +19,10 @@ export const player_backgrounds = {
     //  autodidact: {name: 'Autodidact', money: 1000, start_tech: ['creativity'], text: 'Inspired researcher, looking own way. Eclectic stats.'},
     //  university: {name: 'Student', money: 5000, start_tech: ['tdd'], text: 'Fundamental education according to verified program. Flat stats.'},
     technologist: {name: 'Technologist', money: 5000, start_tech: ['rad', 'creativity', 'tdd', 'refactoring'], text: 'Has a wide range of start technology.', spices: {
-        rad: {name: 'Rapid Development'},
+        rad: {name: 'RAD'},
         creativity: {name: 'Creativity boost'},
-        tdd: {name: 'Test Driven Development'},
-        refactoring: {name: 'Non-stop refactoring'}
+        tdd: {name: 'TDD'},
+        refactoring: {name: 'Refactoring'}
     }},
     specialist: {name: 'Specialist', money: 5000, start_tech: ['agile'], text: 'Raised their professional skills to enormous heights.', spices: {
         design: {name: 'Designer'},
