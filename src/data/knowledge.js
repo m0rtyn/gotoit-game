@@ -24,13 +24,13 @@ export const player_backgrounds = {
         tdd: {name: 'TDD'},
         refactoring: {name: 'Refactoring'}
     }},
-    specialist: {name: 'Specialist', money: 5000, start_tech: ['agile'], text: 'Raised their professional skills to enormous heights.', spices: {
+    specialist: {name: 'Specialist', money: 5000, start_tech: ['agile'], text: 'Raised their professional skills to enormous heights and buy some professional stuff.', spices: {
         design: {name: 'Designer'},
-        program: {name: 'Programmer'},
         manage: {name: 'Manager'},
+        program: {name: 'Programmer'},
         admin: {name: 'Administrator'}
     }},
-    coworker: {name: 'Teamplayer', money: 5000, start_tech: ['pair'], text: 'Works with the Partner, covering each other.', spices: {
+    coworker: {name: 'Teamplayer', money: 5000, start_tech: ['pair'], text: 'An experienced team player.', spices: {
         apprentice: {name: 'Apprentice', description: 'Your partner is your follower and like you in skills.'},
         partner: {name: 'Partner', description: 'Your partner is your complete opposite and covers your weaknesses.'},
         helpers: {name: 'Two helpers', description: 'Your team is two reliable helpers that cover your weaknesses.'},

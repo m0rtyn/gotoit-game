@@ -9,7 +9,7 @@ import bulkStyler from '../services/bulkStyler';
 import WorkerModel from '../models/WorkerModel';
 import ProjectModel from '../models/ProjectModel';
 
-import {player_backgrounds, technologies, skills_1} from '../data/knowledge';
+import {player_backgrounds, workers_bonus_items, technologies, skills_1} from '../data/knowledge';
 
 export var player = null;
 
@@ -66,56 +66,67 @@ class Creation extends Component {
         player = tmp_player;
 
 
-        if (this.state.selected_background === 'coworker') {
-            switch (this.state.selected_team) {
-                case 'apprentice':
-                    data.helpers.hireEmployer(WorkerModel.generateWithStats(bulkStyler.partnerSpeciality(JSON.parse(JSON.stringify(stats)), 'apprentice')));
-                    break;
-                case 'partner':
-                    data.helpers.hireEmployer(WorkerModel.generateWithStats(bulkStyler.partnerSpeciality(JSON.parse(JSON.stringify(stats)), 'partner')));
-                    break;
-                case 'helpers':
-                    data.helpers.hireEmployer(WorkerModel.generateWithStats(bulkStyler.partnerSpeciality(JSON.parse(JSON.stringify(stats)), 'helper1')));
-                    data.helpers.hireEmployer(WorkerModel.generateWithStats(bulkStyler.partnerSpeciality(JSON.parse(JSON.stringify(stats)), 'helper2')));
-                    break;
-                case 'full':
-                    data.helpers.hireEmployer(WorkerModel.generate(1));
-                    data.helpers.hireEmployer(WorkerModel.generate(1));
-                    data.helpers.hireEmployer(WorkerModel.generate(1));
-                    break;
-                default:
-                    console.log('Wrong team?');
-            }
-            //   data.helpers.hireEmployer(WorkerModel.generate(8));
-            data.helpers.changeOffice(2); // data.office = new OfficeModel(2);
-        }
-
-        if (this.state.selected_background === 'businessman') {
-            switch (this.state.selected_biz) {
-                case 'money':
-                    data.money += 5000;
-                    break;
-                case 'btc':
-                    data.btc += 5000 / data.current_btc_price;
-                    break;
-                case 'credit':
-                    data.early_payed_loans += 100;
-                    break;
-                case 'office':
-                    data.helpers.changeOffice(3);
-                    data.office_things.coffeemaker = true;
-                    data.office_things.lunch = true;
-                    break;
-                default:
-                    console.log('Wrong biz?');
-            }
-        }
-
         if (this.state.selected_background === 'technologist') {
             data.projects_known_technologies = data.projects_known_technologies.concat(this.state.selected_tech);
         }
         else {
             data.projects_known_technologies = data.projects_known_technologies.concat(player_backgrounds[this.state.selected_background].start_tech);
+        }
+
+
+        switch (this.state.selected_background) {
+            case 'specialist':
+                player.items[this.state.selected_speciality].exp = true;
+                player.items[this.state.selected_speciality].flat = true;
+                break;
+
+            case 'coworker':
+                switch (this.state.selected_team) {
+                    case 'apprentice':
+                        data.helpers.hireEmployer(WorkerModel.generateWithStats(bulkStyler.partnerSpeciality(JSON.parse(JSON.stringify(stats)), 'apprentice')));
+                        break;
+                    case 'partner':
+                        data.helpers.hireEmployer(WorkerModel.generateWithStats(bulkStyler.partnerSpeciality(JSON.parse(JSON.stringify(stats)), 'partner')));
+                        break;
+                    case 'helpers':
+                        data.helpers.hireEmployer(WorkerModel.generateWithStats(bulkStyler.partnerSpeciality(JSON.parse(JSON.stringify(stats)), 'helper1')));
+                        data.helpers.hireEmployer(WorkerModel.generateWithStats(bulkStyler.partnerSpeciality(JSON.parse(JSON.stringify(stats)), 'helper2')));
+                        break;
+                    case 'full':
+                        data.helpers.hireEmployer(WorkerModel.generate(1));
+                        data.helpers.hireEmployer(WorkerModel.generate(1));
+                        data.helpers.hireEmployer(WorkerModel.generate(1));
+                        break;
+                    default:
+                        console.log('Wrong team?');
+                }
+                //   data.helpers.hireEmployer(WorkerModel.generate(8));
+                data.helpers.changeOffice(2); // data.office = new OfficeModel(2);
+                break;
+
+            case 'businessman':
+                switch (this.state.selected_biz) {
+                    case 'money':
+                        data.money += 5000;
+                        break;
+                    case 'btc':
+                        data.btc += 5000 / data.current_btc_price;
+                        break;
+                    case 'credit':
+                        data.early_payed_loans += 100;
+                        break;
+                    case 'office':
+                        data.helpers.changeOffice(3);
+                        data.office_things.coffeemaker = true;
+                        data.office_things.lunch = true;
+                        break;
+                    default:
+                        console.log('Wrong biz?');
+                }
+                break;
+
+            default:
+                console.log('Wrong background?');
         }
 
         // i must hard set :(
@@ -222,9 +233,9 @@ class Creation extends Component {
                                                         </div>
                                                     })}
                                                     </div>
-                                                    <p className="text-center">{technologies[this.state.selected_tech].description}</p>
+                                                        <p className="text-center">{technologies[this.state.selected_tech].description}</p>
                                                     </div>;
-                                                case "specialist":   return <div className="flex-container-row">
+                                                case "specialist":   return <div><div className="flex-container-row">
                                                     {Object.keys(selected_background.spices).map((speciality) => {
                                                         return <div key={speciality} className="flex-element">
                                                             <div className="radio">
@@ -241,6 +252,8 @@ class Creation extends Component {
                                                             </div>
                                                         </div>
                                                     })}
+                                                    </div>
+                                                        <p className="text-center">Start items: {workers_bonus_items[this.state.selected_speciality].exp.name} and {workers_bonus_items[this.state.selected_speciality].flat.name}</p>
                                                     </div>;
                                                 case "coworker": return <div><div className="flex-container-row">
                                                     {Object.keys(selected_background.spices).map((team) => {
