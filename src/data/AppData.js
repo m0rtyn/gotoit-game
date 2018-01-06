@@ -27,7 +27,7 @@ var app_state =
         money: 0,
         btc: 0,
         miner: 0,
-        current_btc_price: 0,
+        current_btc_price: 15000,
 
         taken_loans: [],
         old_loans: [],

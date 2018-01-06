@@ -248,12 +248,12 @@ class bulkStyler {
     }
 
     static styleBulk(stats_bulk, order) {
-        console.log(stats_bulk, order);
+    //    console.log(stats_bulk, order);
         stats_bulk[order[0]] *= 2;
         stats_bulk[order[1]] *= 1.3;
         stats_bulk[order[2]] *= 0.7;
         stats_bulk[order[3]] *= 0.5;
-        console.log(stats_bulk);
+    //    console.log(stats_bulk);
         return _.mapValues(stats_bulk, function (stat) { return Math.ceil(stat); });
     }
 

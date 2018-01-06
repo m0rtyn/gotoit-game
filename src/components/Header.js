@@ -17,7 +17,7 @@ class Header extends Component {
         return (
             <div>
                 <div>
-                    <p className="flex-container-row" style={{paddingLeft: 20}}>
+                    <span className="flex-container-row" style={{paddingLeft: 20}}>
                         <span className="flex-element">
 
                         </span>
@@ -71,13 +71,13 @@ class Header extends Component {
                             </span>
                         </span>
                         <span className="flex-element">
-                            <h5>Money {data.money}
+                            <div className="font-weight-bold">Money {data.money}
                             <label onClick={() => {
                                 data.helpers.addMoney(100000);
                             }}>$</label>
                                 <Loans data={data} />
                                 <Market data={data} />
-                            </h5>
+                            </div>
                         </span>
                         <span className="flex-element">
 
@@ -85,7 +85,7 @@ class Header extends Component {
                         <span className="flex-element">
 
                         </span>
-                    </p>
+                    </span>
                 </div>
             </div>
         );

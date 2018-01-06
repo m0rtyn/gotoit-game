@@ -82,6 +82,7 @@ class App extends Component {
         this.getTechnology = this.getTechnology.bind(this);
         this.changeTechnology = this.changeTechnology.bind(this);
 
+        this.changeOffice = this.changeOffice.bind(this);
         this.upOffice = this.upOffice.bind(this);
         this.downOffice = this.downOffice.bind(this);
         this.buyCoffeemaker = this.buyCoffeemaker.bind(this);
@@ -141,6 +142,7 @@ class App extends Component {
         app_state.data.helpers['getTechnology'] = this.getTechnology;
         app_state.data.helpers['changeTechnology'] = this.changeTechnology;
 
+        app_state.data.helpers['changeOffice'] = this.changeOffice;
         app_state.data.helpers['upOffice'] = this.upOffice;
         app_state.data.helpers['downOffice'] = this.downOffice;
         app_state.data.helpers['buyCoffeemaker'] = this.buyCoffeemaker;
