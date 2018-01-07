@@ -9,7 +9,7 @@ import bulkStyler from '../services/bulkStyler';
 import WorkerModel from '../models/WorkerModel';
 import ProjectModel from '../models/ProjectModel';
 
-import {player_backgrounds, workers_bonus_items, technologies, skills_1} from '../data/knowledge';
+import {player_backgrounds, technologies, skills_1} from '../data/knowledge';
 
 export var player = null;
 
@@ -18,19 +18,15 @@ class Creation extends Component {
         super(props);
 
         let back = _.sample(_.keys(player_backgrounds));
-        let tech = _.sample(_.keys(player_backgrounds['technologist'].spices));
-        let spec = _.sample(_.keys(player_backgrounds['specialist'].spices));
-        let team = _.sample(_.keys(player_backgrounds['coworker'].spices));
-        let biz = _.sample(_.keys(player_backgrounds['businessman'].spices));
 
         this.state = {
             step: 'welcome', // welcome, creation
             suggest_name: WorkerModel.genName(),
             selected_background: back, //'specialist',
-            selected_tech: tech, // start_tech_list: ['rad', 'creativity', 'tdd', 'refactoring']
-            selected_speciality: spec, //'design',
-            selected_team: team, //'partner',
-            selected_biz: biz, //'btc',
+            technologist: _.sample(_.keys(player_backgrounds['technologist'].spices)),
+            specialist: _.sample(_.keys(player_backgrounds['specialist'].spices)),
+            coworker: _.sample(_.keys(player_backgrounds['coworker'].spices)),
+            businessman: _.sample(_.keys(player_backgrounds['businessman'].spices)),
         };
 
 
@@ -43,7 +39,7 @@ class Creation extends Component {
         stats = bulkStyler.playerBackground(stats, this.state.selected_background);
 
         if (this.state.selected_background === 'specialist') {
-            stats = bulkStyler.playerSpeciality(stats, this.state.selected_speciality);
+            stats = bulkStyler.playerSpeciality(stats, this.state.specialist);
         }
 
         return stats;
@@ -67,7 +63,7 @@ class Creation extends Component {
 
 
         if (this.state.selected_background === 'technologist') {
-            data.projects_known_technologies = data.projects_known_technologies.concat(this.state.selected_tech);
+            data.projects_known_technologies = data.projects_known_technologies.concat(this.state.technologist);
         }
         else {
             data.projects_known_technologies = data.projects_known_technologies.concat(player_backgrounds[this.state.selected_background].start_tech);
@@ -76,12 +72,12 @@ class Creation extends Component {
 
         switch (this.state.selected_background) {
             case 'specialist':
-                player.items[this.state.selected_speciality].exp = true;
-                player.items[this.state.selected_speciality].flat = true;
+                player.items[this.state.technologist].exp = true;
+                player.items[this.state.technologist].flat = true;
                 break;
 
             case 'coworker':
-                switch (this.state.selected_team) {
+                switch (this.state.coworker) {
                     case 'apprentice':
                         data.helpers.hireEmployer(WorkerModel.generateWithStats(bulkStyler.partnerSpeciality(JSON.parse(JSON.stringify(stats)), 'apprentice')));
                         break;
@@ -102,7 +98,7 @@ class Creation extends Component {
                 break;
 
             case 'businessman':
-                switch (this.state.selected_biz) {
+                switch (this.state.businessman) {
                     case 'btc':
                         data.btc += 5000 / data.current_btc_price;
                         break;
@@ -182,8 +178,8 @@ class Creation extends Component {
                                                   }}
                                 /> Background
                                 </h3>
-                                <div className="panel panel-info">
-                                    <div className="flex-container-row">
+                                <div className="panel panel-info slim">
+                                    <div className="flex-container-row slim">
                                         {Object.keys(player_backgrounds).map((background) => {
                                             return <div key={background} className="flex-element slim">
                                                 <div className="radio text-center slim">
@@ -206,103 +202,41 @@ class Creation extends Component {
                                         <p className="text-center slim"> Start tech: {('technologist' === this.state.selected_background) ? "rad, creativity, tdd or refactoring" : technologies[player_backgrounds[this.state.selected_background].start_tech].name} </p>
                                     </div>
                                 </div>
-                                <div className="panel panel-success">
-                                        {(() => {
-                                            switch (this.state.selected_background) {
-                                                case "technologist":   return <div><div className="flex-container-row">
-                                                    {Object.keys(selected_background.spices).map((tech) => {
-                                                        return <div key={tech} className="flex-element">
-                                                            <div className="radio text-center">
-                                                                <label className="slim">
-                                                                    <h3 className="text-center">
-                                                                        <input type="radio" name="tech" value={tech}
-                                                                               checked={this.state.selected_tech === tech}
-                                                                               onChange={(event) => {
-                                                                                   this.setState({selected_tech: event.target.value});
-                                                                               }}/>
-                                                                        {selected_background.spices[tech].name}
-                                                                    </h3>
-                                                                </label>
-                                                            </div>
+                                    <div className="panel panel-success slim">
+                                        <div className="text-center slim">
+                                            <h4 className="text-center filament">Start {selected_background.might}:</h4>
+                                            <div className="flex-container-row slim">
+                                                {Object.keys(selected_background.spices).map((spice) => {
+                                                    return <div key={spice} className="flex-element slim">
+                                                        <div className="radio text-center slim">
+                                                            <label className="slim">
+                                                                <h3 className="text-center slim-top">
+                                                                    <input type="radio" name="spice" value={spice}
+                                                                           checked={this.state[this.state.selected_background] === spice}
+                                                                           onChange={(event) => {
+                                                                               const state = {};
+                                                                               state[this.state.selected_background] = event.target.value;
+                                                                               this.setState(state);
+                                                                           }}/>
+                                                                    {selected_background.spices[spice].name}
+                                                                </h3>
+                                                            </label>
                                                         </div>
-                                                    })}
                                                     </div>
-                                                        <p className="text-center">{technologies[this.state.selected_tech].description}</p>
-                                                    </div>;
-                                                case "specialist":   return <div><div className="flex-container-row">
-                                                    {Object.keys(selected_background.spices).map((speciality) => {
-                                                        return <div key={speciality} className="flex-element">
-                                                            <div className="radio text-center">
-                                                                <label className="slim">
-                                                                    <h3 className="text-center">
-                                                                        <input type="radio" name="speciality" value={speciality}
-                                                                               checked={this.state.selected_speciality === speciality}
-                                                                               onChange={(event) => {
-                                                                                   this.setState({selected_speciality: event.target.value});
-                                                                               }}/>
-                                                                        {selected_background.spices[speciality].name}
-                                                                    </h3>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    })}
-                                                    </div>
-                                                        <p className="text-center">Start items: {workers_bonus_items[this.state.selected_speciality].exp.name} and {workers_bonus_items[this.state.selected_speciality].flat.name}</p>
-                                                    </div>;
-                                                case "coworker": return <div><div className="flex-container-row">
-                                                    {Object.keys(selected_background.spices).map((team) => {
-                                                        return <div key={team} className="flex-element">
-                                                            <div className="radio text-center">
-                                                                <label className="slim">
-                                                                    <h3 className="text-center">
-                                                                        <input type="radio" name="team" value={team}
-                                                                               checked={this.state.selected_team === team}
-                                                                               onChange={(event) => {
-                                                                                   this.setState({selected_team: event.target.value});
-                                                                               }}/>
-                                                                        {selected_background.spices[team].name}
-                                                                    </h3>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    })}
-                                                </div>
-                                                    <p className="text-center">{selected_background.spices[this.state.selected_team].description}</p>
-                                                </div>;
-                                                case "businessman": return <div><div className="flex-container-row">
-                                                    {Object.keys(selected_background.spices).map((biz) => {
-                                                        return <div key={biz} className="flex-element">
-                                                            <div className="radio text-center">
-                                                                <label className="slim">
-                                                                    <h3 className="text-center">
-                                                                        <input type="radio" name="biz" value={biz}
-                                                                               checked={this.state.selected_biz === biz}
-                                                                               onChange={(event) => {
-                                                                                   this.setState({selected_biz: event.target.value});
-                                                                               }}/>
-                                                                        {selected_background.spices[biz].name}
-                                                                    </h3>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    })}
-                                                </div>
-                                                    <p className="text-center">{selected_background.spices[this.state.selected_biz].description}</p>
-                                                </div>;
-                                                case "businessman-old":  return <p className="panel">The credit account of a businessman is too good to be wasted. Just use these opportunities to hire and train workers from the very beginning.</p>;
-                                                default:      return "OOPSSS!";
-                                            }
-                                        })()}
-                                </div>
-                                <div className="panel panel-warning">
-                                    <h4 className="text-center fat">
-                                        <p className="fat">Your start skills:</p>
-                                        <StatsBar stats={stats_data} data={data}/>
-                                    </h4>
-                                </div>
-                                <div className="text-center">
-                                    <button className="big btn-success btn-lg" onClick={this.embark}>Embark</button>
-                                </div>
+                                                })}
+                                            </div>
+                                            <p className="text-center">{selected_background.spices[this.state[this.state.selected_background]].description}</p>
+                                        </div>
+                                    </div>
+                                    <div className="panel panel-warning slim">
+                                        <h4 className="text-center slim-top">
+                                            <p className="filament">Your start skills:</p>
+                                            <StatsBar stats={stats_data} data={data}/>
+                                        </h4>
+                                    </div>
+                                    <div className="text-center">
+                                        <button className="big btn-success btn-lg" onClick={this.embark}>Embark</button>
+                                    </div>
                                 </div>
                                 }
                             </SimpleModal>

@@ -6,7 +6,7 @@ import TeamDialog from './TeamDialog';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
 
-import {addAction} from '../components/ToastNest';
+//import {addAction} from '../components/ToastNest';
 
 import {skills_names, workers_bonus_items, roles, education} from '../data/knowledge';
 
@@ -20,10 +20,12 @@ class Worker extends Component {
     }
 
     componentDidMount() {
+        /*
         if (this.props.worker.is_player) {
             addAction('This is the management screen of your character. Here you can select their roles in the company. Review carefully information on this screen, then try a Training Project.', {timeOut: 10000, extendedTimeOut: 5000}, 'success');
         }
-        this.refs.manage.openPortal();
+        */
+        //this.refs.manage.openPortal();
     }
 
     manage(event) {

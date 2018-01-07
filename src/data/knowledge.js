@@ -14,42 +14,17 @@ export const roles = {
     manage: {name: 'Management', profession_name: 'Manager', description: 'Management'}
 };
 
-export const player_backgrounds = {
-    //  autodidact: {name: 'Autodidact', money: 1000, start_tech: ['creativity'], text: 'Inspired researcher, looking own way. Eclectic stats.'},
-    //  university: {name: 'Student', money: 5000, start_tech: ['tdd'], text: 'Fundamental education according to verified program. Flat stats.'},
-    technologist: {name: 'Technologist', money: 5000, start_tech: ['rad', 'creativity', 'tdd', 'refactoring'], text: 'Has a wide range of start technology.', spices: {
-        rad: {name: 'RAD'},
-        tdd: {name: 'TDD'},
-        refactoring: {name: 'Refactoring'}
-    }},
-    specialist: {name: 'Specialist', money: 5000, start_tech: ['agile'], text: 'Raised their professional skills to enormous heights and buy some professional stuff.', spices: {
-        design: {name: 'Designer'},
-        manage: {name: 'Manager'},
-        program: {name: 'Programmer'}
-    }},
-    coworker: {name: 'Teamplayer', money: 5000, start_tech: ['pair'], text: 'An experienced team player.', spices: {
-        apprentice: {name: 'Apprentice', description: 'Your partner is your follower and like you in skills.'},
-        helpers: {name: 'Two helpers', description: 'Your team is two reliable helpers that support your skills.'},
-        full: {name: 'Full team', description: 'Your team is three random employees.'}
-    }},
-    businessman: {name: 'Businessman', money: 5000, start_tech: ['micromanagement'], text: 'Made a fortune doing business.', spices: {
-        credit: {name: 'Credit Rating', description: 'Good credit story increase your credit rating and allow to take addition credit.'},
-        btc: {name: 'BTC savings', description: 'Once you bought some bitcoins. Now they are worth a lot.'},
-        office: {name: 'Dream office', description: 'You rented a spacious office and bought a coffeemake. What\'s next?'}
-    }}
-};
-
 export const technologies = {
     overtime: {name: 'Overtime Work', acronym: 'Over', price: 0, description: 'Overtime helps to finish project on time but exhausts team.'},
-    creativity: {name: 'Creativity boost', acronym: 'Free', price: 0, description: "Every fifth working hour is given to pet projects that boost experience."},
 
     rad: {name: 'Rapid Development', acronym: 'RAD', price: 10000, description: 'Faster Development at the cost of increasing complexity.'},
+    pair: {name: 'Pair Programming', acronym: 'Pair', price: 10000, description: 'Working in tandem allows us to solve complex problems and sharing experience.'},
+    micromanagement: {name: 'Micromanagement', acronym: 'Micro', price: 10000, description: 'Solid control is averaging performance and work visiting.'},
+
+    creativity: {name: 'Creativity boost', acronym: 'Free', price: 0, description: "Every fifth working hour is given to pet projects that boost experience."},
     tdd: {name: 'Test Driven Development', acronym: 'TDD', price: 10000, description: 'Developing tests that reduce the probability of errors.'},
     refactoring: {name: 'Non-stop refactoring', acronym: 'Ref', price: 10000, description: "The complexity of the code - it's just a task for refactoring."},
-
-    pair: {name: 'Pair Programming', acronym: 'Pair', price: 25000, description: 'Working in tandem allows us to solve complex problems and sharing experience.'},
-    micromanagement: {name: 'Micromanagement', acronym: 'Micro', price: 25000, description: 'Solid control is averaging performance and work visiting.'},
-    agile: {name: 'Agile Development', acronym: 'Agile', price: 25000, description: 'Focus on priority and lower the cost of the project by cutting out unnecessary tasks.'}
+    agile: {name: 'Agile Development', acronym: 'Agile', price: 10000, description: 'Focus on priority and lower the cost of the project by cutting out unnecessary tasks.'}
 };
 
 export const workers_bonus_items = {
@@ -68,6 +43,31 @@ export const workers_bonus_items = {
         flat: {name: 'Bug tracker', money: 2500, bonus: 1, description: 'add 10 to skill'},
         percent: {name: 'ERP System', money: 10000, bonus: 10, description: 'add 10% to skill'}
     }
+};
+
+export const player_backgrounds = {
+    //  autodidact: {name: 'Autodidact', money: 1000, start_tech: ['creativity'], text: 'Inspired researcher, looking own way. Eclectic stats.'},
+    //  university: {name: 'Student', money: 5000, start_tech: ['tdd'], text: 'Fundamental education according to verified program. Flat stats.'},
+    technologist: {name: 'Technologist', money: 5000, might: 'technology', start_tech: ['rad', 'creativity', 'tdd', 'refactoring'], text: 'Has a wide range of start technology.', spices: {
+        agile: {name: 'Agile Development', description: technologies.agile.description},
+        tdd: {name: 'TDD', description: technologies.tdd.description},
+        refactoring: {name: 'Refactoring', description: technologies.refactoring.description}
+    }},
+    specialist: {name: 'Specialist', money: 5000, might: 'skill', start_tech: ['rad'], text: 'Raised their professional skills to enormous heights and buy some professional stuff.', spices: {
+        design: {name: 'Designer', description: "Start items: "+workers_bonus_items.design.exp.name+" and "+workers_bonus_items.design.flat.name},
+        program: {name: 'Programmer', description: "Start items: "+workers_bonus_items.program.exp.name+" and "+workers_bonus_items.program.flat.name},
+        manage: {name: 'Manager', description: "Start items: "+workers_bonus_items.manage.exp.name+" and "+workers_bonus_items.manage.flat.name}
+    }},
+    coworker: {name: 'Teamplayer', money: 5000, might: 'team',  start_tech: ['pair'], text: 'An experienced team player.', spices: {
+        apprentice: {name: 'Apprentice', description: 'Your partner is your follower and like you in skills.'},
+        helpers: {name: 'Two helpers', description: 'Your team is two reliable helpers that support your skills.'},
+        full: {name: 'Full team', description: 'Your team is three random employees.'}
+    }},
+    businessman: {name: 'Businessman', money: 5000, might: 'investment',  start_tech: ['micromanagement'], text: 'Made a fortune doing business.', spices: {
+        credit: {name: 'Credit Rating', description: 'Good credit story increase your credit rating and allow to take addition credit.'},
+        btc: {name: 'BTC savings', description: 'Once you bought some bitcoins. Now they are worth a lot.'},
+        office: {name: 'Dream office', description: 'You rented a spacious office and bought a coffeemaker. What\'s next?'}
+    }}
 };
 
 export const offices = {
