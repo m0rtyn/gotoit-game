@@ -151,9 +151,13 @@ class WorkerModel {
 
     collectivePenalty() {
         let collective_sum = 0;
-        getData().workers.forEach((worker) => { collective_sum += worker.statsSum(); });
+        getData().workers.forEach((worker) => {
+            //console.log(collective_sum, worker.statsSum(), worker);
+            collective_sum += worker.statsSum();
+        });
         const collective_avg = collective_sum/getData().workers.length;
         const collective = 20 * (1-((10 + collective_avg)/(10 + this.statsSum())));
+        //console.log(collective_sum, getData().workers.length, collective_avg, this.statsSum(), collective);
         return Math.max(Math.min(Math.floor(collective), 20), -20);
     }
 
@@ -190,6 +194,12 @@ class WorkerModel {
        // console.log(Math.floor(this.getOverrate() / 10));
         //console.log(efficiency);
         //console.log(tasks_stream, tasks_difficulty, education_stream, collective);
+
+        if (isNaN(efficiency)) {
+            console.log(efficiency);
+            console.log(tasks_stream, tasks_difficulty, education_stream, collective);
+            console.log(this.getOverrate(), this.getMotivate(), getData().office_things.gadget);
+        }
 
         return Math.ceil(efficiency);
 
@@ -260,7 +270,7 @@ class WorkerModel {
     }
 
     static generate(quality=1) {
-        let stats_bulk = {design: this.genStat(quality), manage: this.genStat(quality), program: this.genStat(quality)};
+        let stats_bulk = {design: this.genStat(quality), program: this.genStat(quality), manage: this.genStat(quality)};
 
         let stats = bulkStyler.speciality(stats_bulk);
 

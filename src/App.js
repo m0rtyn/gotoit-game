@@ -6,8 +6,8 @@ import _ from 'lodash';
 
 //import $ from 'jquery'
 
-import './css/App.css';
 import './css/bootstrap-slider.css';
+import './css/App.css';
 
 import Layout from './components/Layout';
 import {addMessage, addAction} from './components/ToastNest';

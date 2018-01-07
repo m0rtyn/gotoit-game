@@ -14,7 +14,7 @@ class bulkStyler {
             case 'none':
                 stats_bulk[order[0]] *= 0.7;
                 stats_bulk[order[1]] *= 1;
-                stats_bulk[order[3]] *= 1.3;
+                stats_bulk[order[2]] *= 1.3;
                 break;
             case 'specialist':
                 stats_bulk[order[0]] *= 2;
@@ -164,15 +164,15 @@ class bulkStyler {
                 stats_bulk['design'] *= 2;
                 break;
             case 'browser':
-                stats_bulk[order[2]] *= 0.5;
-                stats_bulk[order[0]] *= 1.5;
-                stats_bulk[order[1]] *= 2;
+                stats_bulk[order[0]] *= 0.5;
+                stats_bulk[order[1]] *= 1.5;
+                stats_bulk[order[2]] *= 2;
                 stats_bulk['manage'] *= 2;
                 break;
             case 'desktop':
-                stats_bulk[order[1]] *= 2;
-                stats_bulk[order[2]] *= 0.5;
-                stats_bulk[order[0]] *= 1.5;
+                stats_bulk[order[0]] *= 2;
+                stats_bulk[order[1]] *= 0.5;
+                stats_bulk[order[2]] *= 1.5;
                 stats_bulk['program'] *= 2;
                 break;
             default:
