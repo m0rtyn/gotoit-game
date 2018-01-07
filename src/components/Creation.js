@@ -199,7 +199,7 @@ class Creation extends Component {
                                     </div>
                                     <div>
                                         <p className="text-center slim">{player_backgrounds[this.state.selected_background].text}</p>
-                                        <p className="text-center slim"> Start tech: {('technologist' === this.state.selected_background) ? "rad, creativity, tdd or refactoring" : technologies[player_backgrounds[this.state.selected_background].start_tech].name} </p>
+                                        <p className="text-center slim"> Start tech: {('technologist' === this.state.selected_background) ? "Agile, Test Drive Development or Refactoring" : technologies[player_backgrounds[this.state.selected_background].start_tech].name} </p>
                                     </div>
                                 </div>
                                     <div className="panel panel-success slim">
