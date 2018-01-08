@@ -112,10 +112,7 @@ class Worker extends Component {
 
                         <div className="panel panel-success text-center">
                             {worker.is_player ? '' : <span>Worker salary: ${worker.getSalary()}. Overrate bonus: {worker.getOverrate()}%.
-                            <button className="btn btn-danger btn-sm" onClick={() => { data.helpers.riseEmployer(worker.id)}}>Rise Salary</button></span>}
-                            {(worker.in_vacation || worker.to_vacation)
-                                ? worker.in_vacation ? 'Worker on vacation! ' : 'Going on vacation in ' + Math.floor(worker.to_vacation_ticker/24) + ' day. '
-                                : <button className="btn btn-danger btn-sm" onClick={() => { worker.proposeVacation()}}>Propose Vacation</button>}
+                            <button className="btn btn-danger btn-link" onClick={() => { data.helpers.riseEmployer(worker.id)}}>Rise Salary</button></span>}
                         </div>
 
                         <ul>
@@ -128,18 +125,33 @@ class Worker extends Component {
                             </p>
                         </ul>
 
-                        <div className="panel panel-success text-center">
-                            <div key="efficiency" className="row">
-                                <div className="col-md-2">Efficiency</div>
-                                <div className="col-md-9 progress">
+                        <div className="panel panel-success text-center filament">
+                            <div className="row filament">
+                                <div className="col-md-2">Happiness</div>
+                                <div className="col-md-9 progress slim">
                                     <div className={efficiency_bar_style} role="progressbar"
                                          style={{width: Math.min(100, worker.getEfficiency())+'%'}}>
-                                        <label>{worker.getEfficiency()}%</label>
+                                        <label className="text-sm">{worker.getEfficiency()}%</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row filament">
+                                <div className="col-md-2">Stamina</div>
+                                <div className="col-md-9 progress slim">
+                                    <div className={vacation_bar_style} role="progressbar"
+                                         style={{width: Math.min(100, worker.stamina/50)+'%'}}>
+                                        <label>{Math.floor(worker.stamina/50)}%</label>
                                     </div>
                                 </div>
                             </div>
                             <StatsBar stats={efficiency_data} data={this.props.data} />
-                            <h5>{worker.tellFeelings()}</h5>
+                            <p5>
+                                {worker.tellFeelings()}
+
+                                {(worker.in_vacation || worker.to_vacation)
+                                    ? worker.in_vacation ? ' Worker on vacation! ' : ' Going on vacation in ' + Math.floor(worker.to_vacation_ticker/24) + ' days. '
+                                    : <button className="btn btn-link" onClick={() => { worker.proposeVacation()}}>Propose Vacation</button>}
+                            </p5>
                         </div>
 
                         <div className="panel panel-success text-center">

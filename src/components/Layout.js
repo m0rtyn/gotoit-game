@@ -16,7 +16,7 @@ class Layout extends Component {
                     <div className="col-md-3 slim">
                         <People data={this.props.data}/>
                     </div>
-                    <div className="col-md-6 ">
+                    <div className="col-md-6 slim">
                         <Projects data={this.props.data} />
                     </div>
                     <div className="col-md-3 slim">

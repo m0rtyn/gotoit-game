@@ -114,7 +114,7 @@ class WorkerModel {
 
     efficiencyCheck(micromanagement) {
         return (
-            _.random(1, 100) <= (micromanagement
+            _.random(1, 200) <= Math.floor(this.stamina/50) + (micromanagement
                 ? Math.floor((this.getEfficiency() + 90) / 2)
                 : this.getEfficiency())
         );
@@ -202,7 +202,7 @@ class WorkerModel {
         const education_stream = this.educationPenalty();
         const collective = this.collectivePenalty();
 
-        let efficiency = 20 +
+        const happiness = 20 +
             + Math.floor(this.getOverrate() / 10)
             + this.getMotivate()
             + getData().office_things.gadget
@@ -213,16 +213,16 @@ class WorkerModel {
             + (20 - Math.abs(collective));
 
        // console.log(Math.floor(this.getOverrate() / 10));
-        //console.log(efficiency);
+        //console.log(happiness);
         //console.log(tasks_stream, tasks_difficulty, education_stream, collective);
 
-        if (isNaN(efficiency)) {
-            console.log(efficiency);
+        if (isNaN(happiness)) {
+            console.log(happiness);
             console.log(tasks_stream, tasks_difficulty, education_stream, collective);
             console.log(this.getOverrate(), this.getMotivate(), getData().office_things.gadget);
         }
 
-        return Math.ceil(efficiency);
+        return Math.ceil(happiness);
 
         //return 100;
     }
