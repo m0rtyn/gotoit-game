@@ -7,6 +7,8 @@ import {chatMessage} from "../components/Chat";
 import bulkStyler from '../services/bulkStyler';
 import {skills, workers_bonus_items} from '../data/knowledge';
 
+import {addAction} from '../components/ToastNest';
+
 import Narrator from '../services/Narrator';
 import ValueCache from '../services/ValueCache';
 
@@ -32,7 +34,7 @@ class WorkerModel {
 
         this.efficiency = new ValueCache(24, () => { return this.calcEfficiencyReal() });
 
-        this.stamina = 1000;
+        this.stamina = 5000;
         this.to_vacation_ticker = 0;
         this.to_vacation = false;
         this.in_vacation_ticker = 0;
@@ -58,7 +60,26 @@ class WorkerModel {
 
     drainStamina() {
         this.stamina--;
-     //   console.log(this.stamina);
+        //   console.log(this.stamina);
+    }
+
+    proposeVacation() {
+        this.to_vacation = true;
+        this.to_vacation_ticker = 24 * 7 * 2; // 2 weeks
+        addAction(this.name + ' leaves on vacation in two weeks', {
+            timeOut: 10000,
+            extendedTimeOut: 5000
+        }, 'error');
+    }
+
+    sendToVacation(long) {
+        this.to_vacation = false;
+        this.in_vacation = true;
+        this.in_vacation_ticker = 24 * 7 * long; // long weeks
+        addAction(this.name + ' leaves on a ' + long + ' week vacation now', {
+            timeOut: 15000,
+            extendedTimeOut: 8000
+        }, 'error');
     }
 
     tellFeelings() {

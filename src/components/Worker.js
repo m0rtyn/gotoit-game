@@ -87,6 +87,17 @@ class Worker extends Component {
             }
         }) ();
 
+        const vacation_bar_style = (() => {
+            let ratio = worker.stamina / 1000;
+            switch (true) {
+                case ratio <= 0.33: return 'progress-bar-danger';
+                case ratio <= 0.66: return 'progress-bar-warning';
+                case ratio <= 1: return 'progress-bar-success';
+                case ratio  > 1: return 'progress-bar-success'; // High bonus
+                default: //alert('broken ratio: '+ratio);
+            }
+        }) ();
+
         return (
             <div className="well well-sm fat">
                 {worker.name} {worker.is_player ? 'Player' : <span>{worker.getSalary()}$</span>}
@@ -99,10 +110,13 @@ class Worker extends Component {
                             {worker.in_vacation ? ' on vacation! ' : ''}
                         </h2>
 
-                        {worker.is_player ? '' : <div className="panel panel-success text-center">
-                            Worker salary: ${worker.getSalary()}. Overrate bonus: {worker.getOverrate()}%.
-                            <button className="btn btn-danger btn-sm" onClick={() => { data.helpers.riseEmployer(worker.id)}}>Rise Salary</button>
-                        </div>}
+                        <div className="panel panel-success text-center">
+                            {worker.is_player ? '' : <span>Worker salary: ${worker.getSalary()}. Overrate bonus: {worker.getOverrate()}%.
+                            <button className="btn btn-danger btn-sm" onClick={() => { data.helpers.riseEmployer(worker.id)}}>Rise Salary</button></span>}
+                            {(worker.in_vacation || worker.to_vacation)
+                                ? worker.in_vacation ? 'Worker on vacation! ' : 'Going on vacation in ' + Math.floor(worker.to_vacation_ticker/24) + ' day. '
+                                : <button className="btn btn-danger btn-sm" onClick={() => { worker.proposeVacation()}}>Propose Vacation</button>}
+                        </div>
 
                         <ul>
                             <p>Hired {Math.ceil((this.props.data.date.tick - worker.facts.tick_hired)/24)} days ago.
@@ -241,11 +255,17 @@ class Worker extends Component {
                     </TeamDialog>
                 </Portal>
 
-                <div className="progress slim">
+                <div className="progress filament">
                     {/* <div classNames('progress-bar', (100 / worker.getEfficiency() < 0.5 ? 'progress-bar-danger' : 'progress-bar-warning')) role="progressbar"  */}
                     <div className={efficiency_bar_style} role="progressbar"
                          style={{width: Math.min(100, worker.getEfficiency())+'%'}}>
-                        <label>{worker.getEfficiency()}%</label>
+                        <label>Happiness {worker.getEfficiency()}%</label>
+                    </div>
+                </div>
+                <div className="progress filament">
+                    <div className={vacation_bar_style} role="progressbar"
+                         style={{width: Math.min(100, worker.stamina/50)+'%'}}>
+                        <label>Stamina {Math.floor(worker.stamina/50)}%</label>
                     </div>
                 </div>
 

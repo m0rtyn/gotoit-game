@@ -71,9 +71,13 @@ class Creation extends Component {
 
 
         switch (this.state.selected_background) {
+            case 'technologist':
+                // do nothing
+                break;
             case 'specialist':
-                player.items[this.state.technologist].exp = true;
-                player.items[this.state.technologist].flat = true;
+                console.log(player.items, this.state.specialist);
+                player.items[this.state.specialist].exp = true;
+                player.items[this.state.specialist].flat = true;
                 break;
 
             case 'coworker':

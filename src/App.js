@@ -272,12 +272,12 @@ class App extends Component {
         //console.log(worker);
         worker.standing += 1000;
         worker.standing_after_salary_rising += 1000;
-        worker.morale += 10;
+        worker.morale += 25;
 
         worker.to_vacation = false;
         worker.to_vacation_ticker = 0;
         if (worker.stamina < 0) { worker.stamina = 0; }
-        worker.stamina += 250;
+        worker.stamina += 500;
 
         //console.log(worker);
 
@@ -1033,49 +1033,43 @@ class App extends Component {
                     }
                 }
 
-                // Vacation
-                if (!worker.to_vacation && !worker.in_vacation && worker.stamina <= 0) {
-                    worker.to_vacation = true;
-                    worker.to_vacation_ticker = 24 * 7 * 2; // 2 weeks
-                    addAction(worker.name + ' leaves on vacation in two weeks', {
-                        timeOut: 10000,
-                        extendedTimeOut: 5000
-                    }, 'error');
-                }
-                if (worker.to_vacation) {
-                    worker.to_vacation_ticker--;
-                    if (worker.to_vacation_ticker <= 0) {
-                        worker.to_vacation = false;
-                        worker.in_vacation = true;
-                        let long = _.random(2, 3);
-                        worker.in_vacation_ticker = 24 * 7 * long; // 2-3 weeks
-                        addAction(worker.name + ' leaves on a ' + long + ' week vacation now', {
-                            timeOut: 15000,
-                            extendedTimeOut: 8000
-                        }, 'error');
-                    }
-                }
-                if (worker.in_vacation) {
-                    //console.log('worker in vacation');
-                    worker.in_vacation_ticker--;
-                    if (worker.in_vacation_ticker === 0) {
-                        worker.in_vacation = false;
-                        worker.stamina = 1000;
-                        addAction(worker.name + ' comes back from vacation', {
-                            timeOut: 5000,
-                            extendedTimeOut: 3000
-                        }, 'success');
-                    }
-                    return false;
-                }
                 if (_.random(1, (1 + parseFloat(worker.getOverrate())).toFixed(0)) === 1) { // additional drain even worker do not work
                     worker.drainStamina();
                 }
+
                 if (worker.standing_after_salary_rising > 0) {
                     worker.standing_after_salary_rising--;
                 }
             }
 
+            // Vacation
+            if (!worker.to_vacation && !worker.in_vacation && worker.stamina <= 0) {
+                worker.proposeVacation();
+            }
+            if (worker.to_vacation) {
+                worker.to_vacation_ticker--;
+                if (worker.to_vacation_ticker <= 0) {
+                    worker.sendToVacation(_.random(1,4));
+                }
+            }
+            if (worker.in_vacation) {
+                //console.log('worker in vacation');
+                worker.in_vacation_ticker--;
+                worker.stamina += 5;
+                if (worker.in_vacation_ticker === 0) {
+                    worker.in_vacation = false;
+                    worker.stamina += 500;
+                    addAction(worker.name + ' comes back from vacation', {
+                        timeOut: 5000,
+                        extendedTimeOut: 3000
+                    }, 'success');
+                }
+                return false;
+            }
+
+             if (!worker.in_vacation) { // drain even worker do not work
+                worker.drainStamina();
+             }
 
             // hunger
             if (worker.fed_ticker > 0) worker.fed_ticker--;

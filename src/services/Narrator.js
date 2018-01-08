@@ -125,18 +125,18 @@ class Narrator {
         const aboutStamina = () => {
             let num = worker.stamina;
             switch (true) {
-                case num < 24: return ' Packed'+drawNum(num)+' up their suitcase.';
-                case num < 100: return ' Thoughts'+drawNum(num)+' are already on vacation.';
-                case num < 200: return ' Bought'+drawNum(num)+' plane tickets.';
-                case num < 300: return ' Selects'+drawNum(num)+' the travel route.';
-                case num < 400: return ' Planning'+drawNum(num)+' a trip.';
-                case num < 500: return ' Thinking'+drawNum(num)+' about vacation.';
-                case num < 600: return ' Dreaming'+drawNum(num)+' about vacation.';
-                case num < 700: return ' Encouraged'+drawNum(num)+' and ready to work.';
-                case num < 800: return ' Full'+drawNum(num)+' of energy.';
-                case num < 900: return ' Rested and full'+drawNum(num)+' of energy.';
-                case num < 1000: return ' Fresh'+drawNum(num)+' from holidays.';
-                case num >= 1000: return ' Can not even think '+drawNum(num)+' about rest.';
+                case num < 100: return ' Packed'+drawNum(num)+' up their suitcase.';
+                case num < 250: return ' Thoughts'+drawNum(num)+' are already on vacation.';
+                case num < 500: return ' Bought'+drawNum(num)+' plane tickets.';
+                case num < 1000: return ' Selects'+drawNum(num)+' the travel route.';
+                case num < 1500: return ' Planning'+drawNum(num)+' a trip.';
+                case num < 2000: return ' Thinking'+drawNum(num)+' about vacation.';
+                case num < 2500: return ' Dreaming'+drawNum(num)+' about vacation.';
+                case num < 3000: return ' Encouraged'+drawNum(num)+' and ready to work.';
+                case num < 3500: return ' Full'+drawNum(num)+' of energy.';
+                case num < 4000: return ' Rested and full'+drawNum(num)+' of energy.';
+                case num < 5000: return ' Fresh'+drawNum(num)+' from holidays.';
+                case num >= 5000: return ' Can not even think '+drawNum(num)+' about rest.';
                 default:
                     console.log('error case: ' + num);
             }
