@@ -17,7 +17,7 @@ class Projects extends Component {
     }
 
     render() {
-        const find_projects = <button className="btn btn-success">Find Projects</button>;
+        const find_projects = <button className="btn btn-success btn-sm">Find Projects</button>;
 
         let project_block_template = (candidate, type) => {
             return <ProjectOfferBlock key={candidate.id} candidate={candidate} data={this.props.data} type={type} />;

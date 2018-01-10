@@ -19,28 +19,6 @@ class Header extends Component {
                 <div>
                     <span className="flex-container-row" style={{paddingLeft: 20}}>
                         <span className="flex-element">
-
-                        </span>
-                        <span className="flex-element pull-right" onClick={() => {
-                            console.log(data);
-                        }}>
-                            {(date.is_working_time ?
-                                <label className="label-success">Working</label> :
-                                (date.day > 5) ?
-                                    <label className="label-default">Weekends</label> :
-                                    <label className="label-info">Sleeping</label>)}
-                        </span>
-                        <span className="flex-element">
-                            <FormattedDate
-                            value={game_date}
-                            weekday="short"
-                            day="numeric"
-                            month="short"
-                            year="numeric"
-                            hour="numeric"
-                                />
-                        </span>
-                        <span className="flex-element">
                             <span onClick={() => {
                                 if (data.game_paused) {
                                     data.helpers.playGame();
@@ -71,18 +49,34 @@ class Header extends Component {
                             </span>
                         </span>
                         <span className="flex-element">
-                            <div className="font-weight-bold">Money {data.money}
-                            <label onClick={() => {
-                                data.helpers.addMoney(100000);
-                            }}>$</label>
-                                <div>
-                                    <Loans data={data} />
-                                    <Market data={data} />
-                                </div>
-                            </div>
+                            <FormattedDate
+                                value={game_date}
+                                weekday="short"
+                                day="numeric"
+                                month="short"
+                                year="numeric"
+                                hour="numeric"
+                            />
+                        </span>
+                        <span className="flex-element" onClick={() => {
+                            console.log(data);
+                        }}>
+                            {(date.is_working_time ?
+                                <label className="label-success">Working</label> :
+                                (date.day > 5) ?
+                                    <label className="label-default">Weekends</label> :
+                                    <label className="label-info">Sleeping</label>)}
                         </span>
                         <span className="flex-element">
-
+                            <span className="font-weight-bold"> Money {data.money}
+                            <label onClick={() => {
+                                    data.helpers.addMoney(100000);
+                                    }}>$</label>
+                            </span>
+                            <span> <Loans data={data} /> </span>
+                            <span> <Market data={data} /> </span>
+                        </span>
+                        <span className="flex-element">
                         </span>
                         <span className="flex-element">
 
