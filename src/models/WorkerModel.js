@@ -5,7 +5,7 @@ import _ from 'lodash';
 import {chatMessage} from "../components/Chat";
 
 import bulkStyler from '../services/bulkStyler';
-import {skills, workers_bonus_items} from '../data/knowledge';
+import {skills, workers_bonus_items, meetings} from '../data/knowledge';
 
 import {addAction} from '../components/ToastNest';
 
@@ -52,6 +52,16 @@ class WorkerModel {
             tick_hired: 0, money_earned: 0,
             tasks_done: 0, training_tasks_done: 0, bugs_passed: 0,
             refactored: 0, tests_wrote: 0, retrospected: 0};
+
+        this.effects = {};
+    }
+
+    tick() {
+        // effects gone
+        _.each(this.effects, (effect_value, effect) => { if (this.effects[effect] > 0) this.effects[effect]--; })
+
+        // hunger
+        if (this.fed_ticker > 0) this.fed_ticker--;
     }
 
     statsSum() {
@@ -103,9 +113,9 @@ class WorkerModel {
         //let office_things_bonus = (office_things.coffeemaker ? 10 : 0) + (office_things.lanch ? 25 : 0 ) + office_things.gadget;
 
         let is_working_time = (
-            time.hour >= (office_things.coffeemaker ? -1 : 0)   + 9 + mod &&
-            time.hour <= (this.fed_ticker > 1 ? 2 : 0 )        + 17 + mod &&
-            ((time.day !== 6 && time.day !== 0) || _.random(1, (20-(this.temper.variability*3))) === 1) && // variability guys work on weekends more often
+            time.hour >= 9 + (office_things.coffeemaker ? -1 : 0) + mod &&
+            time.hour <= 17 + (this.fed_ticker > 1 ? 2 : 0 ) + (this.effects['status'] > 0 ? 3 : 0 ) + mod &&
+            ((time.day !== 6 && time.day !== 0) || _.random(1, (20-(this.temper.variability*3))) === 1 || _.random(1, this.effects['teambuilding']) > 100) && // variability guys work on weekends more often
             (_.random(1, 10 - (this.temper.variability * 0.5)) !==1) // variability guys eblanyat more often
         ) ? true : false;
 
@@ -187,7 +197,8 @@ class WorkerModel {
     }
 
     getMotivate() {
-        return Math.sqrt(this.standing_after_salary_rising)/Math.PI;
+        return Math.sqrt(this.standing_after_salary_rising)/Math.PI +
+        this.effects['teambuilding'] > 0 ? Math.floor(2 * Math.log(this.effects['teambuilding'])) : 0;
     }
 
     calcEfficiency() { // happiness
@@ -288,6 +299,16 @@ class WorkerModel {
                 }
             }
         });
+    }
+
+    gotoMeeting(meeting) {
+        if (!this.effects[meeting.meeting_type]) {
+            this.effects[meeting.meeting_type] = 0
+        }
+
+        if (this.effects[meeting.meeting_type] > meetings[meeting.meeting_type].max_bonus) return false;
+
+        this.effects[meeting.meeting_type] += Math.floor(meetings[meeting.meeting_type].max_bonus / meetings[meeting.meeting_type].deadline) ;
     }
 
     static generate(quality=1) {

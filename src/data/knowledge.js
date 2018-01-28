@@ -14,17 +14,30 @@ export const roles = {
     manage: {name: 'Management', profession_name: 'Manager', description: 'Management'}
 };
 
+export const meetings = {
+    fire: {name: 'Firefighting', deadline: 1, max_bonus: 4, description: 'Urgent overtime for several hours to solve a critical problem.'},
+    test: {name: 'Mass Test', deadline: 8, max_bonus: 168, description: 'Mass testing will help to write tests twice often.'},
+    review: {name: 'Code Review', deadline: 8, max_bonus: 168, description: 'Code Review will help to refactor twice often.'},
+    backlog: {name: 'Backlog Grooming', deadline: 8, max_bonus: 168, description: 'Backlog grooming will help to retrospective twice often.'},
+
+    training: {name: 'Internal Hakaton', deadline: 0, max_bonus: 0, description: 'An interesting educational project, tailored specifically for the development of your team\'s skills.'},
+    planing: {name: 'Planing', deadline: 8, max_bonus: 168*2, description: 'Deep planning improves the tasks/bugs ratio.'},
+    teambuilding: {name: 'Team Building', deadline: 8, max_bonus: 168*4, description: 'Team Building fills with the belief in the common cause and increases the motivation.'},
+    status: {name: 'Status', deadline: 1, max_bonus: 12, description: 'Strict discipline and status meetings extend the working day.'}
+};
+
 export const technologies = {
-    overtime: {name: 'Overtime Work', acronym: 'Over', price: 0, description: 'Overtime helps to finish project on time but exhausts team.'},
+    overtime: {name: 'Overtime Work', acronym: 'Over', price: 0, meeting: 'fire', description: 'Overtime helps to finish project on time but exhausts team.'},
 
-    rad: {name: 'Rapid Development', acronym: 'RAD', price: 10000, description: 'Faster Development at the cost of increasing complexity.'},
-    pair: {name: 'Pair Programming', acronym: 'Pair', price: 10000, description: 'Working in tandem allows us to solve complex problems and sharing experience.'},
-    micromanagement: {name: 'Micromanagement', acronym: 'Micro', price: 10000, description: 'Solid control is averaging performance and work visiting.'},
+    tdd: {name: 'Test Driven Development', acronym: 'TDD', price: 10000, meeting: 'test', description: 'Developing tests that reduce the probability of errors.'},
+    refactoring: {name: 'Non-stop refactoring', acronym: 'Ref', price: 10000, meeting: 'review', description: "The complexity of the code - it's just a task for refactoring."},
+    agile: {name: 'Agile Development', acronym: 'Agile', price: 10000, meeting: 'backlog', description: 'Focus on priority and lower the cost of the project by cutting out unnecessary tasks.'},
 
-    creativity: {name: 'Creativity boost', acronym: 'Free', price: 0, description: "Every fifth working hour is given to pet projects that boost experience."},
-    tdd: {name: 'Test Driven Development', acronym: 'TDD', price: 10000, description: 'Developing tests that reduce the probability of errors.'},
-    refactoring: {name: 'Non-stop refactoring', acronym: 'Ref', price: 10000, description: "The complexity of the code - it's just a task for refactoring."},
-    agile: {name: 'Agile Development', acronym: 'Agile', price: 10000, description: 'Focus on priority and lower the cost of the project by cutting out unnecessary tasks.'}
+    creativity: {name: 'Creativity boost', acronym: 'Free', price: 0, meeting: 'training', description: "Every fifth working hour is given to pet projects that boost experience."},
+
+    rad: {name: 'Rapid Development', acronym: 'RAD', price: 10000, meeting: 'planing', description: 'Faster Development at the cost of increasing complexity.'},
+    pair: {name: 'Pair Programming', acronym: 'Pair', price: 10000, meeting: 'teambuilding', description: 'Working in tandem allows us to solve complex problems and sharing experience.'},
+    micromanagement: {name: 'Micromanagement', acronym: 'Micro', price: 10000, meeting: 'status', description: 'Solid control is averaging performance and work visiting.'}
 };
 
 export const workers_bonus_items = {

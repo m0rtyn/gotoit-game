@@ -318,9 +318,9 @@ class Project extends Component {
                                                                         className={technologies[technology].price <= data.money ? "btn btn-success btn-xs" : "btn btn-default btn-xs disabled"}
                                                                         onClick={() => { if (technologies[technology].price <= data.money) data.helpers.unlockTechnology(technology); }}
                                                                     >
-                                                                        Unlock {technologies[technology].price}$
+                                                                        Unlock {technologies[technology].name} {technologies[technology].price}$
                                                                     </button>
-                                                                    {technologies[technology].name}
+
                                                                 </h5>
                                                                 <p className="small slim">{technologies[technology].description}</p>
                                                             </label> : ''}

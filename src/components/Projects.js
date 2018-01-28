@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import Portal from 'react-portal';
-
-import TeamDialog from './TeamDialog';
 import MarketTop from './MarketTop';
-import ProjectOfferBlock from './ProjectOfferBlock';
 
-import SalesAgency from './SalesAgency';
-import SalesDepartment from './SalesDepartment';
+import StartMeeting from './StartMeeting';
+import Meeting from './Meeting';
+import ProjectsFind from './ProjectsFind';
 import Project from './Project';
 import ProjectReport from './ProjectReport';
 
@@ -17,53 +14,33 @@ class Projects extends Component {
     }
 
     render() {
-        const find_projects = <button className="btn btn-success btn-sm">Find Projects</button>;
-
-        let project_block_template = (candidate, type) => {
-            return <ProjectOfferBlock key={candidate.id} candidate={candidate} data={this.props.data} type={type} />;
-        };
-
-        let offered = (candidate) => { return project_block_template(candidate); };
-       // let freelance_offered = (candidate) => { return project_block_template(candidate, 'freelance'); };
-       // let contract_offered  = (candidate) => { return project_block_template(candidate, 'contract'); };
-
         return (
             <div>
                 <div className="flex-container-row">
                     <h4 className="flex-element">Current Project</h4>
                     <span className="flex-element">
-                        <Portal closeOnEsc openByClickOn={find_projects}>
-                            <TeamDialog>
-                                <h3 className="text-center">
-                                    Find Projects
-                                </h3>
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <h4 className="text-center fat">Offered Projects
-                                            <SalesAgency data={this.props.data} /></h4>
-                                        {this.props.data.offered_projects.map(offered)}
-                                    </div>
-                                    <div className="col-md-6">
-                                        <h4 className="text-center slim-top">
-                                            Sales Department
-                                            <button className="btn btn-info hidden" onClick={this.props.data.helpers.contractSearch}>Search 1000$</button>
-                                        </h4>
-                                        <SalesDepartment data={this.props.data} />
-                                    </div>
-                                </div>
-                            </TeamDialog>
-                        </Portal>
+                        <StartMeeting data={this.props.data} />
+                        <ProjectsFind data={this.props.data} />
                     </span>
                     <span className="flex-element hidden"> <label> or </label> <button className="btn btn-info" onClick={this.props.data.helpers.draftProject}>Invent Startup</button></span>
                 </div>
                 <div>
                     {this.props.data.projects.length ?
                         <div>
-                            {this.props.data.projects.map((x, i) =>
-                                <Project key={x.id} project={x} data={this.props.data} />
+                            {this.props.data.projects.map((meeting, i) => meeting.type === 'meeting' ?
+                                <Meeting key={meeting.id} project={meeting} data={this.props.data} /> : ''
                             )}
                         </div>
-                    : <div className="text-center fat">You have no projects in progress.</div> }
+                        : '' }
+                </div>
+                <div>
+                    {this.props.data.projects.length ?
+                        <div>
+                            {this.props.data.projects.map((project, i) => project.type !== 'meeting' ?
+                                <Project key={project.id} project={project} data={this.props.data} /> : ''
+                            )}
+                        </div>
+                        : <div className="text-center fat">You have no projects in progress.</div> }
                 </div>
                 <div>
                     {this.props.data.projects_archive_reports.length > 0 ?

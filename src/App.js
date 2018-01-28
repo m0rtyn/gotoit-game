@@ -15,12 +15,13 @@ import {chatMessage} from "./components/Chat";
 
 import WorkerModel from './models/WorkerModel';
 import ProjectModel from './models/ProjectModel';
+import MeetingModel from './models/MeetingModel';
 import OfficeModel from './models/OfficeModel';
 import ProjectsTop from './services/ProjectsTop';
 
 import Lorer from './services/Lorer';
 
-import {skills_names, workers_bonus_items, technologies, skills_true} from './data/knowledge';
+import {skills_names, meetings, workers_bonus_items, technologies, skills_true} from './data/knowledge';
 
 import app_state from './data/AppData';
 
@@ -64,6 +65,8 @@ class App extends Component {
 
         this.salesDepartmentUp = this.salesDepartmentUp.bind(this);
         this.hrDepartmentUp = this.hrDepartmentUp.bind(this);
+
+        this.startMeeting = this.startMeeting.bind(this);
 
         this.contractSearch = this.contractSearch.bind(this);
         this.rejectOffered = this.rejectOffered.bind(this);
@@ -124,6 +127,8 @@ class App extends Component {
 
         app_state.data.helpers['salesDepartmentUp'] = this.salesDepartmentUp;
         app_state.data.helpers['hrDepartmentUp'] = this.hrDepartmentUp;
+
+        app_state.data.helpers['startMeeting'] = this.startMeeting;
 
         app_state.data.helpers['contractSearch'] = this.contractSearch;
         app_state.data.helpers['rejectOffered'] = this.rejectOffered;
@@ -188,11 +193,12 @@ class App extends Component {
         }
     }
 
-    modifyRelation(worker_id, project_id, value, role = null) {
+    modifyRelation(worker_id, project_id, value, role = null, team = null) {
       //  console.log(worker_id, project_id, value);
-        let data = this.state.data;
+        const data = this.state.data;
 
         let put = (worker_id, project_id) => {
+            if (team !== null && !_.find(team, (worker) => { return (worker_id === worker.id); })) return false;
             if (!(worker_id in data.relations)) data.relations[worker_id] = {};
             if (!(project_id in data.relations[worker_id])) data.relations[worker_id][project_id] = {}; //JSON.parse(JSON.stringify(data.workers_roles[worker_id]));
             if (role) {
@@ -225,7 +231,7 @@ class App extends Component {
     }
 
     changeRole(worker_id, role, value) {
-        let data = this.state.data;
+        const data = this.state.data;
         if (!(worker_id in data.workers_roles))  data.workers_roles[worker_id] = JSON.parse(JSON.stringify(skills_true));
         data.workers_roles[worker_id][role] = value;
         this.setState({data: data});
@@ -233,7 +239,7 @@ class App extends Component {
 
     agencySearch(agency_state, agency_reward) {
         //agency_generation_counter++;
-        let data = this.state.data;
+        const data = this.state.data;
         data.money -= agency_reward;
         let worker = WorkerModel.generateAgency(agency_state);
         data.hiring_agency_state = agency_state;
@@ -242,20 +248,20 @@ class App extends Component {
     }
 
     hireCandidate(id, type) {
-        let data = this.state.data;
+        const data = this.state.data;
         this.hireEmployer((_.remove(data.candidates[type], (candidate) => { return (candidate.id === id); }))[0]);
         this.setState({data: data});
     }
 
     rejectCandidate(id, type) {
-        let data = this.state.data;
+        const data = this.state.data;
         _.remove(data.candidates[type], (candidate) => { return (candidate.id === id); });
         this.setState({data: data});
     }
 
     hireEmployer(worker) {
         hired++;
-        let data = this.state.data;
+        const data = this.state.data;
         worker.facts.tick_hired = data.date.tick;
         data.workers.push(worker);
         //data.workers_roles[worker.id] = JSON.parse(JSON.stringify(skills_true));
@@ -265,7 +271,7 @@ class App extends Component {
     }
 
     riseEmployer(worker_id) {
-        let data = this.state.data;
+        const data = this.state.data;
      //   let worker = _.find(data.workers, (id) => { return (worker_id === id); });
         let worker = _.find(data.workers, (worker) => { return (worker_id === worker.id); });
         //console.log(worker_id, worker, data.workers);
@@ -287,13 +293,13 @@ class App extends Component {
 
     dismissEmployer(id) {
         hired--;
-        let data = this.state.data;
+        const data = this.state.data;
         _.remove(data.workers, (worker) => { return (worker.id === id); });
         this.setState({data: data});
     }
 
     buyItem(worker_id, skill, item_key) {
-        let data = this.state.data;
+        const data = this.state.data;
         let item = workers_bonus_items[skill][item_key];
 
         if (data.money >= item.money) {
@@ -308,7 +314,7 @@ class App extends Component {
     }
 
     salesDepartmentUp(action) {
-        let data = this.state.data;
+        const data = this.state.data;
 
         switch (action) {
             case 'cold':
@@ -340,7 +346,7 @@ class App extends Component {
     }
 
     hrDepartmentUp(action) {
-        let data = this.state.data;
+        const data = this.state.data;
 
         switch (action) {
             case 'looking':
@@ -371,8 +377,44 @@ class App extends Component {
         this.setState({data: data});
     }
 
+    startMeeting(meeting_name, selected_workers) {
+        const data = this.state.data;
+        const meeting_conf = meetings[meeting_name];
+
+        let team = [];
+
+        _.each(selected_workers, (state, worker_id) => {
+            console.log(state, worker_id);
+            if (state === true) {
+                let worker = _.find(data.workers, (worker) => { return (worker.id === worker_id); });
+                team.push(worker);
+            }
+        });
+
+        console.log(selected_workers, team);
+
+        const meeting = MeetingModel.generate(meeting_name, team);
+
+
+        data.projects.push(meeting);
+        _.each(team, (worker) => {this.modifyRelation(worker.id, meeting.id, true, 'meeting');});
+
+        addMessage('Start '+meeting_conf.name+' meeting', {timeOut: 5000, extendedTimeOut: 2000}, 'info');
+        this.setState({data: data});
+
+        _.each(team, (worker) => {
+            this.modifyRelation(worker.id, meeting.id, true, 'meeting');
+        });
+
+        if (meeting_name === 'training') {
+            this.modifyRelation(null, meeting.id, true, null, team);
+        }
+
+        console.log(meeting_name, meeting_conf, meeting);
+    }
+
     contractSearch(agency_state, agency_reward) {
-        let data = this.state.data;
+        const data = this.state.data;
         this.chargeMoney(agency_reward);
         let project = ProjectModel.generateAgency(agency_state);
         data.sales_agency_state = agency_state;
@@ -381,13 +423,13 @@ class App extends Component {
     }
 
     rejectOffered(id) { // rejectOffer
-        let data = this.state.data;
+        const data = this.state.data;
         _.remove(data.offered_projects, (candidate) => { return (candidate.id === id); });
         this.setState({data: data});
     }
 
     acceptOffered(id) {
-        let data = this.state.data;
+        const data = this.state.data;
         let project = (_.remove(data.offered_projects, (candidate) => { return (candidate.id === id); }))[0];
         project.hot = false;
         this.acceptAndMoveProject(project);
@@ -396,7 +438,7 @@ class App extends Component {
     }
 
     startOffered(id) {
-        let data = this.state.data;
+        const data = this.state.data;
         let project = (_.remove(data.offered_projects, (candidate) => { return (candidate.id === id); }))[0];
 
         if (!project) {
@@ -412,20 +454,22 @@ class App extends Component {
     }
 
     acceptAndMoveProject(project) {
-        let data = this.state.data;
+        const data = this.state.data;
         project.hot = false;
         data.projects.push(project);
-        Object.keys(data.projects_default_technologies).forEach((technology) => {
-            if (data.projects_default_technologies[technology]) {
-                this.changeTechnology(technology, project.id, true);
-            }
-        });
+        if (project.type !== 'meeting') {
+            Object.keys(data.projects_default_technologies).forEach((technology) => {
+                if (data.projects_default_technologies[technology]) {
+                    this.changeTechnology(technology, project.id, true);
+                }
+            });
+        }
         this.setState({data: data});
         this.modifyRelation(null, project.id, true);
     }
 
     trainingProject(worker, skill) {
-        let data = this.state.data;
+        const data = this.state.data;
         let project = ProjectModel.generateTraining(worker, skill);
         data.projects.push(project);
         Object.keys(data.projects_default_technologies).forEach((technology) => {
@@ -474,7 +518,7 @@ class App extends Component {
     }
 
     fixProject(id) {
-        let data = this.state.data;
+        const data = this.state.data;
         let project = _.find(data.projects, (project) => { return (project.id === id); });
         project.fix();
         addMessage(project.name+' project enters '+project.iteration+' iteration for fixing bugs.', 'error');
@@ -483,7 +527,7 @@ class App extends Component {
 
     finishProject(id) {
         projects_done++;
-        let data = this.state.data;
+        const data = this.state.data;
         let project = _.find(data.projects, (project) => { return (project.id === id); });
 
         data.workers.forEach((worker) => { worker.facts.project_finished++; });
@@ -508,8 +552,17 @@ class App extends Component {
         this.setState({data: data});
     }
 
+    finishMeeting(id) {
+        const data = this.state.data;
+        let project = _.remove(data.projects, (project) => { return (project.id === id); })[0];
+
+        addMessage(project.name+' meeting end', {timeOut: 10000, extendedTimeOut: 5000}, 'success');
+
+        this.setState({data: data});
+    }
+
     projectReporting(project_id, stage) {
-        let data = this.state.data;
+        const data = this.state.data;
         let project = _.remove(data.projects, (project) => { return (project.id === project_id); })[0];
 
         addMessage(project.name+' project '+stage, {timeOut: 10000, extendedTimeOut: 5000}, {finish: 'success', fail: 'error', close: 'error'}[stage]);
@@ -529,7 +582,7 @@ class App extends Component {
     }
 
     projectArchiving() {
-        let data = this.state.data;
+        const data = this.state.data;
         let projects = data.projects_end_reports.splice(0, 1); //_.remove(data.projects, (project) => { return (project.id === project_id); })[0];
         let project = projects[0]; //_.remove(data.projects, (project) => { return (project.id === project_id); })[0];
 
@@ -567,7 +620,7 @@ class App extends Component {
     }
 
     unlockTechnology(technology) {
-        let data = this.state.data;
+        const data = this.state.data;
         data.money -= technologies[technology].price;
         data.projects_known_technologies.push(technology);
         this.setState({data: data});
@@ -581,7 +634,7 @@ class App extends Component {
     }
 
     changeTechnology(technology, project_id, value) {
-        let data = this.state.data;
+        const data = this.state.data;
         if (!(project_id in data.projects_technologies)) data.projects_technologies[project_id] = {};
         data.projects_technologies[project_id][technology] = value;
         data.projects_default_technologies[technology] = value;
@@ -590,7 +643,7 @@ class App extends Component {
 
 
     addMoney(quantity) {
-        let data = this.state.data;
+        const data = this.state.data;
         data.money += quantity;
         addAction('Income to your wallet: '+quantity+'$', {timeOut: 5000, extendedTimeOut: 1000}, 'success');
         this.setState({data: data});
@@ -603,14 +656,14 @@ class App extends Component {
              */
             return false;
         }
-        let data = this.state.data;
+        const data = this.state.data;
         data.money -= quantity;
         if (!silent) addAction('Charge from your wallet: '+quantity+'$', {timeOut: 3000, extendedTimeOut: 2000}, 'warning');
         this.setState({data: data});
     }
 
     buyBTC(usd) {
-        let data = this.state.data;
+        const data = this.state.data;
         if (data.money >= usd) {
             this.chargeMoney(usd);
             data.btc += usd / data.current_btc_price;
@@ -622,7 +675,7 @@ class App extends Component {
     }
 
     sellBTC(usd) {
-        let data = this.state.data;
+        const data = this.state.data;
         let cost = usd / data.current_btc_price;
         if (data.btc >= cost) {
             data.btc -= cost;
@@ -635,7 +688,7 @@ class App extends Component {
     }
 
     buyMiner() {
-        let data = this.state.data;
+        const data = this.state.data;
         if (data.btc >= 0.1) {
             data.btc -= 0.1;
             data.miner++;
@@ -647,7 +700,7 @@ class App extends Component {
     }
 
     changeOffice(new_size) {
-        let data = this.state.data;
+        const data = this.state.data;
         data.office = new OfficeModel(new_size);
         addAction('You new apartments: '+data.office.name+'. Monthly price: '+data.office.price+'$', {timeOut: 10000, extendedTimeOut: 2000}, 'success');
         this.setState({data: data});
@@ -658,7 +711,7 @@ class App extends Component {
     }
 
     downOffice() {
-        let data = this.state.data;
+        const data = this.state.data;
         let new_size = data.office.size - 1;
 
         if (new_size < 4) { data.office_things.gadget = 0; }
@@ -669,7 +722,7 @@ class App extends Component {
     }
 
     buyCoffeemaker() {
-        let data = this.state.data;
+        const data = this.state.data;
 
         if (data.money >= 5000) {
             this.chargeMoney(5000);
@@ -682,13 +735,13 @@ class App extends Component {
     }
 
     lunchOff() {
-        let data = this.state.data;
+        const data = this.state.data;
         data.office_things.lunch = false;
         this.setState({data: data});
     }
 
     lunchOn() {
-        let data = this.state.data;
+        const data = this.state.data;
         data.office_things.lunch = true;
         this.setState({data: data});
     }
@@ -704,7 +757,7 @@ class App extends Component {
     }
 
     buyGadget() {
-        let data = this.state.data;
+        const data = this.state.data;
 
         if (data.money >= this.getGadgetCost()) {
             this.chargeMoney(this.getGadgetCost());
@@ -770,26 +823,41 @@ class App extends Component {
         data.projects.forEach((project) => {
             if (project.stage !== 'open' && project.stage !== 'paused') return false;
 
-            if (project.tasksQuantity() === 0 && project.bugsQuantity() === 0) {
-                this.finishProject(project.id);
-                return;
+            switch (project.type) {
+                case 'meeting':
+                    project.deadline--;
+                    if (project.deadline <= 0) {
+                        this.finishMeeting(project.id);
+                        return;
+                    }
+                    break;
+
+                case '':
+                    break;
+
+                default:
+                    if (project.tasksQuantity() === 0 && project.bugsQuantity() === 0) {
+                        this.finishProject(project.id);
+                        return;
+                    }
+                    project.deadline--;
+                    if (project.deadline <= 0 && project.type !== 'draft') {
+                        this.failProject(project.id);
+                        return;
+                    }
+                    if (project.tasksQuantity() === 0 && project.bugsQuantity() !== 0) {
+                        this.fixProject(project.id);
+                        return;
+                    }
             }
-            project.deadline--;
-            if (project.deadline <= 0 && project.type !== 'draft') {
-                this.failProject(project.id);
-                return;
-            }
-            if (project.tasksQuantity() === 0 && project.bugsQuantity() !== 0) {
-                this.fixProject(project.id);
-                return;
-            }
+
         });
 
         if (updating) this.setState({data: data});
     }
 
     nextDay() {
-        let data = this.state.data;
+        const data = this.state.data;
         let time = data.date;
         const date = data.date;
 
@@ -1017,6 +1085,7 @@ class App extends Component {
         const data = this.state.data;
 
         _.shuffle(data.workers).forEach((worker) => {
+            worker.tick();
 
             if (!worker.is_player) {
                 // worker quiting
@@ -1071,159 +1140,190 @@ class App extends Component {
                 worker.drainStamina();
              }
 
-            // hunger
-            if (worker.fed_ticker > 0) worker.fed_ticker--;
-
             // if you money end, your guys don't work
             if (!worker.is_player && (data.money - worker.getSalary()) < 0) return false;
 
-            let worker_projects = data.projects.filter((project) => {
-                return (project.isNeed(this.getRelation(worker.id, project.id)) && project.stage === 'open');
-            });
-       //     console.log(worker_projects);
-            // work on one of projects
-            if (worker_projects.length > 0) {
-                let skip_work = false;
-
-                let project = _.sample(worker_projects);
-                let worker_roles = this.getRelation(worker.id, project.id);
-                let focus_on = (this.getTechnology(project.id, 'agile'))
-                    ? _.maxBy(Object.keys(project.getNeeds(worker_roles)), function (o) { return project.needs[o]; })
-                    : _.sample(Object.keys(project.getNeeds(worker_roles)));
-                let rad = this.getTechnology(project.id, 'rad');
-                let micromanagement = this.getTechnology(project.id, 'micromanagement');
-                let creativity = this.getTechnology(project.id, 'creativity');
-                let overtime = this.getTechnology(project.id, 'overtime');
-                let overtimed = false;
-                let pair = this.getTechnology(project.id, 'pair');
-
-                const formName = () => {
-                    return worker.name + (overtimed ? ' in overtime' : '');
-                };
-
-                // Overtime
-                let is_working_time = worker.isWorkingTime(data.date, micromanagement, data.office_things);
-                if (!is_working_time) {
-                    if (overtime) {
-                        if (worker.morale > 0) {
-                            if (_.random(1, 3) === 1) {
-                                overtimed = true;
-                                //chatMessage(worker.name, 'I overtime today');
-                            //    console.log('overtime on '+worker.morale);
-                                worker.morale--;
-                            }
-                            else {
-                                //console.log('worker choose rest');
-                                return false;
-                            }
-                        }
-                        else {
-                            //console.log('worker morale too low');
-                            return false;
-                        }
+            let worker_meetings = data.projects.filter((project) => { return (project.isNeed(this.getRelation(worker.id, project.id)) && project.stage === 'open' && project.type === 'meeting');});
+            //console.log(worker_meetings, data.relations);
+            if (worker_meetings.length > 0) { // Meeting
+                let temp_meeting = _.sample(worker_meetings);;
+                if (temp_meeting.meeting_type === 'fire' || worker.isWorkingTime(data.date, false, data.office_things)) {
+                    let meeting = temp_meeting;
+                    // get Salary
+                    if (!worker.is_player) {
+                        let salary = worker.getSalary();
+                        this.chargeMoney(salary, true);
+                        worker.facts.money_earned += salary;
+                        meeting.facts.money_spent += salary;
                     }
-                    else{
-                        //console.log('not working time');
-                        return false;
-                    }
-                }
-
-
-                // get Salary
-                if (!worker.is_player) {
-                    let salary = worker.getSalary();
-                    this.chargeMoney(salary, true);
-                    worker.facts.money_earned += salary;
-                    project.facts.money_spent += salary;
-                }
-                worker.drainStamina();
-                if (project.type === 'hackathon') { // additional drain on Hackathons
                     worker.drainStamina();
-                    worker.drainStamina();
-                }
-
-
-                // Creativity
-                if (creativity && is_working_time && (_.random(1, 5) === 1)) {
-                    skip_work = true;
-                    worker.standing--;
-                    worker.facts.training_tasks_done += worker.getSideResource();
-                    chatMessage(formName(), 'I spent an hour to my pet-project.', 'warning');
-                }
-
-                // Agile
-                if (!skip_work && this.getTechnology(project.id, 'agile')
-                    && (_.min([project.planedTasksQuantity(), project.tasksQuantity()]) > _.random((Math.PI * Math.sqrt(project.originalyTasksQuantity())), project.originalyTasksQuantity()))
-                    && _.random(1, 3) === 1)
-                {
-                    let retrospected = worker.getSideResource();
-                    if (retrospected > 0) {
-                        var res = _.sample(Object.keys(project.getNeeds(worker_roles)));
-                        retrospected = Math.floor(_.min([project.needs[res], Math.sqrt(project.needs_max[res]), retrospected]));
-
-                        let cut = Math.floor(project.reward * (retrospected / (1+project.planedTasksQuantity())));
-                        worker.facts.retrospected += retrospected;
-                        project.facts.retrospected += retrospected;
-                        project.facts.cuted_cost += cut;
-                        project.needs[res] -= retrospected;
-                        project.needs_max[res] -= retrospected;
-                        project.reward -= cut;
-                        chatMessage(formName(), 'cut ' + retrospected + ' ' + res + ' tasks and ' + cut + '$', 'success');
-                        skip_work = true;
-                    }
-                }
-
-                // TDD
-                if (!skip_work && this.getTechnology(project.id, 'tdd') && project.tests < project.planedTasksQuantity() &&
-                    ((project.tests / project.planedTasksQuantity()) < (project.tasksQuantity() / project.planedTasksQuantity()))  &&
-                    _.random(1, 3) === 1)
-                {
-                    //console.log('writing tests!');
-                    let tests = Math.min(project.planedTasksQuantity() - project.tests, worker.getRareSideResource());
-                    worker.facts.tests_wrote += tests;
-                    project.facts.tests_wrote += tests;
-                    project.tests += tests;
-                    chatMessage(formName(), ' wrote '+tests+' tests!', 'success');
-                    skip_work = true;
-                }
-
-                // Refactoring
-                if (!skip_work && project.complexity > 0 && this.getTechnology(project.id, 'refactoring')) {
-                    if (project.complexity < (project.tasksQuantity() + project.bugsQuantity()) && ((
-                            _.random(1, project.complexity) >
-                            _.random(([0, 0.1, 1, 2, 3, 4][project.size]) * Math.sqrt(project.complexity), Math.sqrt(project.planedTasksQuantity())))
-                        )
-                    ) {
-                        //console.log('refactoring!');
-                        let refactoring = Math.min(project.complexity, worker.getRareSideResource());
-                        worker.facts.refactored += refactoring;
-                        project.facts.refactored += refactoring;
-                        project.complexity -= refactoring;
-                        chatMessage(formName(), ' refactored ' + refactoring + ' complexity!', 'success');
-                        skip_work = true;
-                    }
-                }
-
-                // Pair.
-                if (!skip_work && this.getTechnology(project.id, 'pair') && !project.supporter) {
-                    project.supporter = worker;
-                    skip_work = true;
-                }
-
-                // Work
-                if (!skip_work) {
-                    worker.addExperience(
-                        project.applyWork(
-                            worker.getResources(worker_roles, focus_on, micromanagement),
-                        worker, rad, creativity, pair, overtimed));
+                    worker.gotoMeeting(meeting);
                 }
             }
-            else {
-              //  console.log('worker have not projects');
-                //worker.goRest();
+            else { // Work
+                let worker_projects = data.projects.filter((project) => {
+                    return (project.isNeed(this.getRelation(worker.id, project.id)) && project.stage === 'open');
+                });
+                //     console.log(worker_projects);
+                // work on one of projects
+                if (worker_projects.length > 0) {
+                    this.work_on_project(worker, _.sample(worker_projects));
+                }
+                else {
+                    //  console.log('worker have not projects');
+                    return false;
+                }
             }
         });
     }
+
+    work_on_project(worker, project) {
+        const data = this.state.data;
+
+        let skip_work = false;
+        let overtimed = false;
+
+        let worker_roles = this.getRelation(worker.id, project.id);
+        let focus_on = (this.getTechnology(project.id, 'agile'))
+            ? _.maxBy(Object.keys(project.getNeeds(worker_roles)), function (o) {
+            return project.needs[o];
+        })
+            : _.sample(Object.keys(project.getNeeds(worker_roles)));
+        let rad = this.getTechnology(project.id, 'rad');
+        let micromanagement = this.getTechnology(project.id, 'micromanagement');
+        let creativity = this.getTechnology(project.id, 'creativity');
+        let overtime = this.getTechnology(project.id, 'overtime');
+        let pair = this.getTechnology(project.id, 'pair');
+
+        const formName = () => {
+            return worker.name + (overtimed ? ' in overtime' : '');
+        };
+
+        // Overtime
+        let is_working_time = worker.isWorkingTime(data.date, micromanagement, data.office_things);
+        if (worker.effects['fire'] > 0) {
+            worker.morale--;
+            overtimed = true;
+        }
+        else {
+            if (!is_working_time) {
+                if (overtime) {
+                    if (worker.morale > 0) {
+                        if (_.random(1, 3) === 1) {
+                            overtimed = true;
+                            //chatMessage(worker.name, 'I overtime today');
+                            //    console.log('overtime on '+worker.morale);
+                            worker.morale--;
+                        }
+                        else {
+                            //console.log('worker choose rest');
+                            return false;
+                        }
+                    }
+                    else {
+                        //console.log('worker morale too low');
+                        return false;
+                    }
+                }
+                else {
+                    //console.log('not working time');
+                    return false;
+                }
+            }
+        }
+
+
+        // get Salary
+        if (!worker.is_player) {
+            let salary = worker.getSalary();
+            this.chargeMoney(salary, true);
+            worker.facts.money_earned += salary;
+            project.facts.money_spent += salary;
+        }
+        worker.drainStamina();
+        if (project.type === 'hackathon') { // additional drain on Hackathons
+            worker.drainStamina();
+            worker.drainStamina();
+        }
+
+
+        // Creativity
+        if (creativity && is_working_time && (_.random(1, 5) === 1)) {
+            skip_work = true;
+            worker.standing--;
+            worker.facts.training_tasks_done += worker.getSideResource();
+            chatMessage(formName(), 'I spent an hour to my pet-project.', 'warning');
+        }
+
+        // Agile
+        if (!skip_work && this.getTechnology(project.id, 'agile')
+            && (_.min([project.planedTasksQuantity(), project.tasksQuantity()]) > _.random((Math.PI * Math.sqrt(project.originalyTasksQuantity())), project.originalyTasksQuantity()))
+            && _.random(1, worker.effects['backlog'] > 0 ? 2 : 4) === 1) {
+            let retrospected = worker.getSideResource();
+            if (retrospected > 0) {
+                var res = _.sample(Object.keys(project.getNeeds(worker_roles)));
+                retrospected = Math.floor(_.min([project.needs[res], Math.sqrt(project.needs_max[res]), retrospected]));
+
+                let cut = Math.floor(project.reward * (retrospected / (1 + project.planedTasksQuantity())));
+                worker.facts.retrospected += retrospected;
+                project.facts.retrospected += retrospected;
+                project.facts.cuted_cost += cut;
+                project.needs[res] -= retrospected;
+                project.needs_max[res] -= retrospected;
+                project.reward -= cut;
+                chatMessage(formName(), 'cut ' + retrospected + ' ' + res + ' tasks and ' + cut + '$', 'success');
+                skip_work = true;
+            }
+        }
+
+        // TDD
+        if (!skip_work && this.getTechnology(project.id, 'tdd') && project.tests < project.planedTasksQuantity() &&
+            ((project.tests / project.planedTasksQuantity()) < (project.tasksQuantity() / project.planedTasksQuantity())) &&
+            _.random(1, (worker.effects['test'] > 0 ? 2 : 4)) === 1) {
+            //console.log('writing tests!');
+            let tests = Math.min(project.planedTasksQuantity() - project.tests, worker.getRareSideResource());
+            worker.facts.tests_wrote += tests;
+            project.facts.tests_wrote += tests;
+            project.tests += tests;
+            chatMessage(formName(), ' wrote ' + tests + ' tests!', 'success');
+            skip_work = true;
+        }
+
+        // Refactoring
+        if (!skip_work && project.complexity > 0 && this.getTechnology(project.id, 'refactoring')) {
+            if (project.complexity < (project.tasksQuantity() + project.bugsQuantity()) && ((
+                    _.random(1, (worker.effects['review'] > 0 ? 2 : 0.5) * project.complexity) >
+                    _.random(([0, 0.1, 1, 2, 3, 4][project.size]) * Math.sqrt(project.complexity), Math.sqrt(project.planedTasksQuantity())))
+                )
+            ) {
+                //console.log('refactoring!');
+                let refactoring = Math.min(project.complexity, worker.getRareSideResource());
+                worker.facts.refactored += refactoring;
+                project.facts.refactored += refactoring;
+                project.complexity -= refactoring;
+                chatMessage(formName(), ' refactored ' + refactoring + ' complexity!', 'success');
+                skip_work = true;
+            }
+        }
+
+        // Pair.
+        if (!skip_work && this.getTechnology(project.id, 'pair') && !project.supporter) {
+            project.supporter = worker;
+            skip_work = true;
+        }
+
+        // Work
+        if (!skip_work) {
+            worker.addExperience(
+                project.applyWork(
+                    worker.getResources(worker_roles, focus_on, micromanagement),
+                    worker, rad, creativity, pair, overtimed));
+        }
+
+        return true;
+    }
+
+
 
     render() {
         return (

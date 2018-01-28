@@ -1,5 +1,3 @@
-//import App from '../App';
-
 import _ from 'lodash';
 
 import bulkStyler from '../services/bulkStyler';
@@ -11,7 +9,7 @@ import {skills, project_kinds, project_platforms, project_sizes} from '../data/k
 import {hired, projects_done} from '../App';
 
 export var projects_generated = 0;
-export function flush() { projects_generated = 0; };
+export function flush() { projects_generated = 0; }
 
 class ProjectModel {
     constructor(name, type, kind, platform, reward, penalty, start_needs, size, deadline, complexity = 0) {
@@ -68,6 +66,8 @@ class ProjectModel {
                 var support = ((this.supporter && this.supporter.id !== worker.id) ? this.supporter.stats[stat] : 0);
                 let all_work = _.random(1, (work[stat] + support + (rad ? worker.getSideResource() : 0))) + this.stored_wisdom[stat];
                 let complexity_penalty = Math.max(0, Math.floor(Math.sqrt(Math.max(0, this.complexity - _.random(0, this.errors[stat])))) - Math.pow(this.iteration, 2) + 1);
+                if (worker.effects['planing'] > 0) { complexity_penalty *= 0.5; }
+
                 let bugs = 0;
                 let tasks = 0;
                 if (complexity_penalty > all_work) {
@@ -320,6 +320,34 @@ class ProjectModel {
         let penalty = 0;
         let deadline = 0;
         return new ProjectModel(this.genName(), 'draft', kind, platform, reward, penalty, stats, 0, deadline);
+    }
+
+    static generateTrainingHackathon(team) {
+        let kind = _.sample(_.keys(project_kinds));
+        let platform = _.sample(_.keys(project_platforms));
+        let complexity_grows = 0;
+
+        let stats = JSON.parse(JSON.stringify(skills));
+
+        console.log(team);
+        _.each(team, (worker) => {
+            console.log(worker);
+            _.each(worker.stats, (value, stat) => {
+                stats[stat] += Math.floor(Math.pow(value, 1.5));
+            })
+        });
+        _.each(stats, (val, stat) => {
+            console.log(complexity_grows, stats[stat]);
+            complexity_grows += stats[stat];
+            stats[stat] = Math.floor(Math.pow(stats[stat], 1.5));
+        });
+
+        let reward = 0;
+        let penalty = 0;
+        let deadline = 24 * 5;
+        console.log(team.length, complexity_grows);
+        let complexity = 10 * team.length + Math.floor(complexity_grows * 0.1);
+        return new ProjectModel(this.genName(), 'hackathon', kind, platform, reward, penalty, stats, 6, deadline, complexity);
     }
 
     static generateHackathon(hackathons_generated) {
