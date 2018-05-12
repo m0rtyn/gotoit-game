@@ -6,6 +6,7 @@ import Projects from './Projects';
 import Chat from './Chat';
 import PopupsNest from './PopupsNest';
 import ToastNest from './ToastNest';
+import ProjectFind from './ProjectsFind';
 
 class Layout extends Component {
     render() {
@@ -17,10 +18,10 @@ class Layout extends Component {
                         <People data={this.props.data}/>
                     </div>
                     <div className="col-md-6 slim">
-                        <Projects data={this.props.data} />
+                        <div data={this.props.data} />
                     </div>
                     <div className="col-md-3 slim">
-                        <Chat data={this.props.data}/>
+                        <Projects data={this.props.data}/>
                     </div>
                 </div>
                 <PopupsNest data={this.props.data} />
