@@ -247,7 +247,7 @@ class Worker extends Component {
                                                             onChange={(event) => {
                                                                 data.helpers.modifyRelation(worker.id, event.target.id, event.target.checked, skill);
                                                             }}/>
-                                                        {project.needs[skill] +'/'+ project.needs_max[skill]}
+                                                        {project.needs(skill) +'/'+ project.estimate[skill]}
                                                     </label>
                                                 </div>};
                                         });

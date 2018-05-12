@@ -12,25 +12,7 @@ class StartMeeting extends Component {
     constructor(props) {
         super(props);
 
-        /*
-        const workers = _.map(this.props.workers, 'id');
-        const workers_true = _.mapValues(workers, () => { return true; });
-
-        console.log(workers, workers_true);
-
-        this.state = {selected_workers: workers_true};
-        */
         this.state = {selected_workers: {}};
-    }
-
-
-
-    componentDidMount() {
-    //    const workers = _.map(this.props.workers, 'id');
-    //    const workers_true = _.mapValues(workers, () => { return true; });
-
-    //    console.log(workers, workers_true);
-    //    this.setState({selected_workers: workers_true});
     }
 
     render() {
@@ -54,7 +36,7 @@ class StartMeeting extends Component {
                     </h3>
 
                     <div className="row filament">
-                        <div className="panel-info filament col-md-5">
+                        <div className="slim col-md-4">
                             {this.props.data.workers.map((worker) => {
                                 return <label key={worker.id} style={{width: '100%'}}>
                                     <h4>
@@ -72,7 +54,7 @@ class StartMeeting extends Component {
                             })}
                         </div>
 
-                        <div className="filament col-md-6">
+                        <div className="slim col-md-8">
                             {Object.keys(technologies).map(
                                 (technology, i) => {
                                     const meeting = meetings[technologies[technology].meeting];
@@ -80,7 +62,7 @@ class StartMeeting extends Component {
                                         {!data.projects_known_technologies.includes(technology)
                                             ?
                                             <div className={(tick > (24*30*3)) ? "" : "hidden"}>
-                                                <div className="panel-info">
+                                                <div className="panel panel-info">
                                                     <button
                                                         className="btn btn-default btn-xs disabled">{meeting.name}</button>
                                                     { " " }

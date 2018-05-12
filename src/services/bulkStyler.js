@@ -218,7 +218,7 @@ class bulkStyler {
 
         _.each(projects, (project) => {
             if (project.stage === 'finish') {
-                _.each(project.needs_original, (val, stat) => {
+                _.each(project.original_estimate, (val, stat) => {
                     stats[stat] += val;
                 })
             }

@@ -79,14 +79,14 @@ class Project extends Component {
             return {name: key, // _.capitalize(key[0]),
                 val:
                     <span>
-                        <span className="text-warning">{project.needs[key]}</span>
-                        {project.errors[key] > 0 ? <span className="text-danger">+{project.errors[key]}</span> : ''}
-                        /<span>{project.needs_max[key]}</span>
+                        <span className="text-warning">{project.needs(key)}</span>
+                        {project.bugs[key] > 0 ? <span className="text-danger">+{project.bugs[key]}</span> : ''}
+                        /<span>{project.estimate[key]}</span>
                     </span>
             };
         });
 
-        const manage_button = <button className="btn flex-element">Manage</button>;
+        const manage_button = <button className="btn btn-success flex-element">Manage</button>;
 
         let label = (id, text) => { return <span key={id}> <label className="label-default">{text}</label> </span>; };
 
@@ -119,11 +119,11 @@ class Project extends Component {
         const start_pause_button =
             <span>
                 {/*{project.stage}*/}
-                {(project.stage === 'paused')
+                {(project.is_paused)
                     ? <button className="btn btn-success" onClick={this.unpause}>Start</button> : ''}
                 {(project.stage === 'ready')
                     ? <button className="btn btn-success" onClick={this.open}>Start</button> : ''}
-                {project.stage === 'open'
+                {(project.stage === 'open' && !project.is_paused)
                     ? <button className="btn btn-warning" onClick={this.pause}>Pause</button> : ''}
             </span>;
 
@@ -132,6 +132,8 @@ class Project extends Component {
                 this.close();
             } }}>Reject</button>;
 
+        const release_button = project.doneQuantity() > 0 && project.type === 'own' && project.stage !== 'fixing' ? <button className="btn btn-success" onClick={() => {this.props.data.helpers.fixProject(project.id)}}>Release!</button> : '';
+
         return (
             <div className="well well-sm fat">
                 <div className="flex-container-row">
@@ -139,8 +141,8 @@ class Project extends Component {
                     <label className="flex-element"> Reward: {project.reward}$ </label>
                     {(project.penalty > 0 ? <label className="flex-element"> Penalty: {project.penalty}$ </label> : ' ')}
                     <div>
-                        {start_pause_button}
-                        {reject_button}
+                        {/*{start_pause_button}
+                        {reject_button}*/}
                         <Portal ref="manage" closeOnEsc openByClickOn={manage_button}>
                             <TeamDialog>
                                 <h4 className="flex-container-row">
@@ -149,12 +151,18 @@ class Project extends Component {
                                         Reward: {project.reward}$
                                         {(project.penalty > 0 ? <label className="flex-element"> Penalty: {project.penalty}$ </label> : ' ')}
                                     </label>
-                                    <div className="flex-element"> <label> {start_pause_button} {reject_button} </label> </div>
+                                    <div className="flex-element">
+                                        <label>
+                                            {start_pause_button}
+                                            {reject_button}
+                                            {release_button}
+                                        </label>
+                                    </div>
                                 </h4>
                                 <div className="row">
                                     <div className="col-md-8">
                                         <div>
-                                            {project.deadline > 0 ? <div key="deadline" className="row">
+                                            {project.deadline > 0 && project.deadline !== Number.POSITIVE_INFINITY ? <div key="deadline" className="row">
                                                 <div className="col-md-2">Deadline</div>
                                                 <div className="col-md-10 progress">
                                                     <div className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'progress-bar-danger' : 'progress-bar-warning'))} role="progressbar"
@@ -182,8 +190,8 @@ class Project extends Component {
                                                            <div className="col-md-10 ">
                                                            <ReactBootstrapSlider
                                                                scale='logarithmic'
-                                                               value={project.needs_max[skill]}
-                                                               change={(e) => { project.needs[skill] = e.target.value; project.needs_max[skill] = e.target.value; }}
+                                                               value={project.estimate[skill]}
+                                                               change={(e) => { project.estimate[skill] = e.target.value; project.original_estimate[skill] = e.target.value; }}
                                                                step={1}
                                                                max={100000}
                                                                min={0}/>
@@ -195,36 +203,46 @@ class Project extends Component {
                                                 {project.type === 'draft' && project.stage === 'ready'
                                                     ? ''
                                                     : skills_names.map((skill) => {
-                                                        let need = project.needs[skill];
-                                                        let errors = project.errors[skill];
-                                                        let needs_max = project.needs_max[skill];//+errors;
-                                                        let max_skill = _.maxBy(_.keys(project.needs_max), function (skill) {
-                                                            return Math.max(project.needs_max[skill], project.needs[skill]) + project.errors[skill];
+                                                   //     console.log(project);
+                                                        let tasks = project.needs(skill);
+                                                        if (tasks === Number.POSITIVE_INFINITY) { tasks = 0; }
+                                                        let bugs = project.bugs[skill];
+                                                        let done = project.done[skill];
+
+                                                        let max_skill = _.maxBy(_.keys(project.estimate), function (skill) {
+                                                            return Math.max((project.needs(skill) !== Number.POSITIVE_INFINITY) ? project.needs(skill) : 0, project.estimate[skill], project.done[skill]) + project.bugs[skill];
                                                         });
 
-                                                        let max = Math.max(project.needs_max[max_skill], project.needs[max_skill]) + project.errors[max_skill];
-                                                        let diff = needs_max - need;
-                                                        let tasks = need / max * 100;
-                                                        let bugs = errors / max * 100;
-                                                        let done = diff / max * 100;
+                                                        let max = Math.max(
+                                                            (project.needs(max_skill) !== Number.POSITIVE_INFINITY) ? project.needs(max_skill) : 0,
+                                                            (project.estimate[max_skill] !== Number.POSITIVE_INFINITY) ? project.estimate[max_skill] : 0,
+                                                                project.done[max_skill]) + project.bugs[max_skill];//, project.needs(max_skill)) + project.bugs[max_skill];
+
+                                                        if (max === 0) max = 1;
+
+                                                        let tasks_percent = tasks / max * 100;
+                                                        let bugs_percent = bugs / max * 100;
+                                                        let done_percent = done / max * 100;
+
+                                                 //   console.log(tasks_percent, bugs_percent, done_percent);
 
                                                         return <div key={skill} className="row">
                                                             <div className="col-md-2">{skill}</div>
                                                             <div className="col-md-10 progress">
                                                                 <div className="progress-bar progress-bar-warning"
                                                                      role="progressbar"
-                                                                     style={{width: tasks + '%'}}>
-                                                                    {need ? <label>{need} tasks</label> : ''}
+                                                                     style={{width: tasks_percent + '%'}}>
+                                                                    {tasks ? <label>{tasks} tasks</label> : ''}
                                                                 </div>
                                                                 <div className="progress-bar progress-bar-danger"
                                                                      role="progressbar"
-                                                                     style={{width: bugs + '%'}}>
-                                                                    {errors ? <label>{errors} bugs</label> : ''}
+                                                                     style={{width: bugs_percent + '%'}}>
+                                                                    {bugs ? <label>{bugs} bugs</label> : ''}
                                                                 </div>
                                                                 <div className="progress-bar progress-bar-success"
                                                                      role="progressbar"
-                                                                     style={{width: done + '%'}}>
-                                                                    {(diff) ? <label>{diff} done</label> : ''}
+                                                                     style={{width: done_percent + '%'}}>
+                                                                    {(done) ? <label>{done} done</label> : ''}
                                                                 </div>
                                                             </div>
                                                         </div>;
@@ -336,7 +354,7 @@ class Project extends Component {
                     </div>
                 </div>
 
-                {project.deadline > 0 ?
+                {project.deadline > 0 && project.deadline !== Number.POSITIVE_INFINITY ?
                     <div className="progress slim">
                         <div className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'progress-bar-danger' : 'progress-bar-warning'))} role="progressbar"
                              style={{width: (100-(project.deadline / project.deadline_max * 100))+'%'}}>

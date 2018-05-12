@@ -5,7 +5,7 @@ import bulkStyler from '../services/bulkStyler';
 import {chatMessage} from "../components/Chat";
 
 
-import {skills, project_kinds, project_platforms, project_sizes} from '../data/knowledge';
+import {skills, skills_inf, project_kinds, project_platforms, project_sizes} from '../data/knowledge';
 import {hired, projects_done} from '../App';
 
 export var projects_generated = 0;
@@ -14,19 +14,27 @@ export function flush() { projects_generated = 0; }
 class ProjectModel {
     constructor(name, type, kind, platform, reward, penalty, start_needs, size, deadline, complexity = 0) {
         this.stage = 'ready';
+        this.is_paused = false;
 
         this.id = _.uniqueId('project');
         this.name = name;
-        this.type = type; //  project, training, hackathon, draft
+        this.type = type; //  project, training, hackathon, draft, own
         this.hot = false;
         this.kind = kind;
         this.platform = platform;
         this.reward = reward;
         this.penalty = penalty;
-        this.needs = JSON.parse(JSON.stringify(start_needs));
-        this.errors = JSON.parse(JSON.stringify(skills));
-        this.needs_max = JSON.parse(JSON.stringify(start_needs));
-        this.needs_original = JSON.parse(JSON.stringify(start_needs));
+
+        this.estimate = JSON.parse(JSON.stringify(start_needs));
+        this.original_estimate = JSON.parse(JSON.stringify(start_needs));
+        this.done = JSON.parse(JSON.stringify(skills));
+        this.bugs = JSON.parse(JSON.stringify(skills));
+
+        //this.needs = JSON.parse(JSON.stringify(start_needs));
+        //this.errors = JSON.parse(JSON.stringify(skills));
+        //this.needs_max = JSON.parse(JSON.stringify(start_needs));
+        //this.needs_original = JSON.parse(JSON.stringify(start_needs));
+
         this.deadline = deadline;
         this.deadline_max = deadline;
         this.complexity = complexity;
@@ -49,11 +57,32 @@ class ProjectModel {
             refactored: 0, tests_wrote: 0, cuted_cost: 0, retrospected: 0};
     }
 
+    needs(role = null) {
+        if (this.type === 'own' && this.stage !== 'fixing') {
+            if (role === null) {
+                return JSON.parse(JSON.stringify(skills_inf));
+            }
+            else {
+                return Number.POSITIVE_INFINITY;
+            }
+        }
+        if (role === null) {
+            let needs = JSON.parse(JSON.stringify(skills));
+            _.each(skills, (val, skill) => {
+                needs[skill] = Math.max(0, this.estimate[skill] - this.done[skill]);
+            });
+            return needs;
+        }
+        else {
+            return Math.max(0, this.estimate[role] - this.done[role]);
+        }
+    }
+
     generateReport(is_player = true) {
         return {
             id: this.id, name: this.getName(), is_player: is_player, type: this.type,
             platform: this.platform, kind: this.kind, stage: this.stage,
-            design: this.needs_max.design, manage: this.needs_max.manage, program: this.needs_max.program,
+            design: this.estimate.design, manage: this.estimate.manage, program: this.estimate.program,
             total: this.totalScore()
         }
     }
@@ -62,10 +91,10 @@ class ProjectModel {
         var learned = JSON.parse(JSON.stringify(skills));
 
         Object.keys(work).forEach((stat) => {
-            if (this.needs[stat] > 0 && work[stat] > 0) {
+            if (this.needs(stat) > 0 && work[stat] > 0) {
                 var support = ((this.supporter && this.supporter.id !== worker.id) ? this.supporter.stats[stat] : 0);
                 let all_work = _.random(1, (work[stat] + support + (rad ? worker.getSideResource() : 0))) + this.stored_wisdom[stat];
-                let complexity_penalty = Math.max(0, Math.floor(Math.sqrt(Math.max(0, this.complexity - _.random(0, this.errors[stat])))) - Math.pow(this.iteration, 2) + 1);
+                let complexity_penalty = Math.max(0, Math.floor(Math.sqrt(Math.max(0, this.complexity - _.random(0, this.bugs[stat])))) - Math.pow(this.iteration, 2) + 1);
                 if (worker.effects['planing'] > 0) { complexity_penalty *= 0.5; }
 
                 let bugs = 0;
@@ -79,7 +108,7 @@ class ProjectModel {
                 }
 
                 if (tasks > 0) {
-                    tasks = Math.min(this.needs[stat], tasks);
+                    tasks = Math.min(this.needs(stat), tasks); // а может пусть делают побольше с разбега?) убрать ли?
                     this.stored_wisdom[stat] = 0;
                     this.complexity += (rad ? 4 : 1);
                     this.complexity_max += (rad ? 4 : 1);
@@ -99,7 +128,7 @@ class ProjectModel {
                         chatMessage(formName(), ' does '+tasks+' tasks and creates '+bugs+' bugs in '+stat+', but tests prevent '+prevented+' of them', 'warning');
                         bugs -= prevented;
                         tasks += prevented;
-                        tasks = Math.min(this.needs[stat], tasks);
+                        tasks = Math.min(this.needs(stat), tasks); // а может пусть делают побольше с разбега?) убрать ли?
                     }
                     else {
                         chatMessage(formName(), ' does '+tasks+' tasks and creates '+bugs+' bugs in '+stat, 'warning');
@@ -118,11 +147,11 @@ class ProjectModel {
                 }
                 worker.facts.tasks_done += tasks;
                 this.facts.tasks_done += tasks;
-                this.needs[stat] -= tasks;
+                this.done[stat] += tasks;
 
                 worker.facts.bugs_passed += bugs;
                 this.facts.bugs_passed += bugs;
-                this.errors[stat] += bugs;
+                this.bugs[stat] += bugs;
 
                 let learn = tasks + (bugs * 2);
                 learned[stat] +=
@@ -166,15 +195,19 @@ class ProjectModel {
     }
 
     tasksQuantity() {
-        return _.sum(_.values(this.needs));
+        return _.sum(_.values(this.needs()));
+    }
+
+    doneQuantity() {
+        return _.sum(_.values(this.done));
     }
 
     planedTasksQuantity() {
-        return _.sum(_.values(this.needs_max));
+        return _.sum(_.values(this.estimate));
     }
 
     originalyTasksQuantity() {
-        return _.sum(_.values(this.needs_original));
+        return _.sum(_.values(this.original_estimate));
     }
 
     isFinished() {
@@ -182,7 +215,7 @@ class ProjectModel {
     }
 
     bugsQuantity() {
-        return _.sum(_.values(this.errors));
+        return _.sum(_.values(this.bugs));
     }
 
     isFixed() {
@@ -191,9 +224,8 @@ class ProjectModel {
 
     isNeed(roles) {
         let needed = false;
-        //console.log(roles, this.needs);
-        Object.keys(this.needs).forEach((skill) => {
-            if (this.needs[skill] > 0 && roles[skill]) {
+        Object.keys(this.needs()).forEach((skill) => {
+            if (this.needs(skill) > 0 && roles[skill]) {
                 needed = true;
             }
         });
@@ -202,9 +234,8 @@ class ProjectModel {
 
     getNeeds(roles) {
         let needed = {};
-        //console.log(roles, this.needs);
-        Object.keys(this.needs).forEach((skill) => {
-            if (this.needs[skill] > 0 && roles[skill]) {
+        Object.keys(this.needs()).forEach((skill) => {
+            if (this.needs(skill) > 0 && roles[skill]) {
                 needed[skill] = roles[skill];
             }
         });
@@ -217,8 +248,19 @@ class ProjectModel {
 
     fix() {
         this.iteration++;
-        this.needs = JSON.parse(JSON.stringify(this.errors));
-        this.errors = JSON.parse(JSON.stringify(skills));
+        this.stage = 'fixing';
+
+        _.each(this.bugs, (count, skill) => {
+            if (this.estimate[skill] === Number.POSITIVE_INFINITY) this.estimate[skill] = 0;
+            this.estimate[skill] += count;
+            this.bugs[skill] = 0;
+        });
+
+
+       // this.needs = JSON.parse(JSON.stringify(this.errors));
+      //  this.estimate = JSON.parse(JSON.stringify(this.bugs));
+      //  this.bugs = JSON.parse(JSON.stringify(skills));
+        //this.errors = JSON.parse(JSON.stringify(skills));
         //this.complexity -= (_.sum(_.values(this.needs)));
     }
 
@@ -279,6 +321,20 @@ class ProjectModel {
         return new ProjectModel(this.genName(), 'project', kind, platform, reward, penalty, stats, size, deadline);
     }
 
+    static generateOwnProject(project_name, team, project_platform, project_kind) {
+        projects_generated++;
+
+        let stats_bulk = {
+            design: Number.POSITIVE_INFINITY,
+            program: Number.POSITIVE_INFINITY,
+            manage: Number.POSITIVE_INFINITY
+        };
+
+        let project = new ProjectModel(project_name, 'own', project_kind, project_platform, 0, 0, stats_bulk, 3, Number.POSITIVE_INFINITY);
+
+        return project;
+    }
+
     static generateStorylineProject(quality, size) {
         let bulk = this.generate(quality, size, 'team');
         bulk.is_storyline = true;
@@ -287,11 +343,11 @@ class ProjectModel {
     }
 
     static genReward(s, size) {
-        return 2000 + Math.ceil((_.max(s) + _.sum(s)) * 5 * size);
+        return 1000 + Math.ceil((_.max(s) + _.sum(s)) * 5 * size);
     }
 
     static genPenaltyDole(size) {
-        return [0, 0, 0, 0.5, 1, 0][size];
+        return [0, 0, 0.25, 0.5, 1, 0][size];
     }
 
     static genDeadline(s, size) {

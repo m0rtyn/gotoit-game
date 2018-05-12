@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MarketTop from './MarketTop';
 
+import StartProject from './StartProject';
 import StartMeeting from './StartMeeting';
 import Meeting from './Meeting';
 import ProjectsFind from './ProjectsFind';
@@ -17,9 +18,13 @@ class Projects extends Component {
         return (
             <div>
                 <div className="flex-container-row">
-                    <h4 className="flex-element">Current Project</h4>
+                    <span className="flex-element">
+                        <StartProject data={this.props.data} />
+                    </span>
                     <span className="flex-element">
                         <StartMeeting data={this.props.data} />
+                    </span>
+                    <span className="flex-element">
                         <ProjectsFind data={this.props.data} />
                     </span>
                     <span className="flex-element hidden"> <label> or </label> <button className="btn btn-info" onClick={this.props.data.helpers.draftProject}>Invent Startup</button></span>
