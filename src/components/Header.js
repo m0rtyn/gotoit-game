@@ -36,11 +36,13 @@ class Header extends Component {
                                     i++;
                                 }
                             }}>
-                                {[1, 3, 7].map((speed, index) => {
+                                {[1, 5].map((speed, index) => {
                                     return <span key={index}>
                                         {data.game_speed_multiplier === speed
-                                            ? <button className="" style={{width: 28, height: 28}}><u>{index+1}</u></button>
-                                            : <button className="" style={{width: 28, height: 28}} onClick={() => { data.helpers.setGameSpeed(speed); }}>{index+1}</button>}
+                                            ? <button className="" style={{width: 42, height: 28}}><u>{{0: 'slow',1: 'fast'}[index]}</u></button>
+                                            : <button className="" style={{width: 42, height: 28}} onClick={() => {
+                                                data.helpers.setGameSpeed(speed); }}>{{0: 'slow',1: 'fast',2: 'faster'}[index]}
+                                              </button>}
                                     </span>
                                 })}
 
@@ -66,17 +68,16 @@ class Header extends Component {
                                 (date.day > 5) ?
                                     <label className="label-default">Weekends</label> :
                                     <label className="label-info">Sleeping</label>)}
-                        </span>
-                        <span className="flex-element">
+
                             <span className="font-weight-bold"> Money {data.money}
                             <label onClick={() => {
                                     data.helpers.addMoney(100000);
                                     }}>$</label>
                             </span>
-                            <span> <Loans data={data} /> </span>
-                            <span> <Market data={data} /> </span>
                         </span>
                         <span className="flex-element">
+                            <span> <Loans data={data} /> </span>
+                            <span> <Market data={data} /> </span>
                         </span>
                         <span className="flex-element">
 

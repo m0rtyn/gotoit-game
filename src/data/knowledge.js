@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 export const skills = {design: 0, program: 0, manage: 0};
 export const skills_1 = _.mapValues(skills, () => { return 1; });
+export const skills_inf = _.mapValues(skills, () => { return Number.POSITIVE_INFINITY; });
 export const skills_true = _.mapValues(skills, () => { return true; });
 export const skills_false = _.mapValues(skills, () => { return false; });
 export const skills_names = _.keys(skills);
@@ -91,20 +92,20 @@ export const offices = {
 };
 
 export const project_platforms = {
-    crossplatform: {name: 'Cross-platform'},
-    mobile: {name: 'Mobile'},
-    browser: {name: 'Browser'},
-    desktop: {name: 'Desktop'}
+    crossplatform: {name: 'Cross-platform', description: 'Cross-platform applications should be balanced.'},
+    mobile: {name: 'Mobile', description: 'For Mobile applications, design is important.'},
+    browser: {name: 'Browser', description: 'For Browser applications, management is important.'},
+    desktop: {name: 'Desktop', description: 'For Desktop applications, programming is important.'}
 };
 
 export const project_kinds = {
-    application: {name: 'Application'},
-    game: {name: 'Game'},
-    site: {name: 'Site'},
-    editor: {name: 'Editor'},
-    magazine: {name: 'Magazine'},
-    service: {name: 'Service'},
-    database: {name: 'Database'}
+    application: {name: 'Application', description: 'General Applications should be balanced.'},
+    game: {name: 'Game', description: 'For Games, design is important, but do not forget about programming.'},
+    site: {name: 'Site', description: 'For Sites, design is important, but do not forget about management.'},
+    editor: {name: 'Editor', description: 'For Editors, programming is important, but do not forget about design.'},
+    magazine: {name: 'Magazine', description: 'For Magazines, management is important, but do not forget about design.'},
+    service: {name: 'Service', description: 'For Services, management is important, but do not forget about programming.'},
+    database: {name: 'Database', description: 'For Databases, programming is important, but do not forget about management.'}
 };
 
 export const project_sizes = {

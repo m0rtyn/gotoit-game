@@ -26,7 +26,7 @@ class ProjectOfferBlock extends Component {
         let type = this.props.type;
 
         const stats_data = _.mapValues(skills, (stat, key) => {
-            return {name: key, val: <span>{candidate.needs[key]}</span>};
+            return {name: key, val: <span>{candidate.needs(key)}</span>};
         });
 
         return <div key={candidate.id} className="panel panel-warning">

@@ -90,11 +90,11 @@ class Meeting extends Component {
         const start_pause_button =
             <span>
                 {/*{project.stage}*/}
-                {(project.stage === 'paused')
+                {(project.is_paused)
                     ? <button className="btn btn-success" onClick={this.unpause}>Start</button> : ''}
                 {(project.stage === 'ready')
                     ? <button className="btn btn-success" onClick={this.open}>Start</button> : ''}
-                {project.stage === 'open'
+                {(project.stage === 'open' && !project.is_paused)
                     ? <button className="btn btn-warning" onClick={this.pause}>Pause</button> : ''}
             </span>;
 

@@ -18,9 +18,9 @@ class Project extends Component {
             return {name: key, // _.capitalize(key[0]),
                 val:
                     <span>
-                        <span className="text-warning">{project.needs[key]}</span>
-                        {project.errors[key] > 0 ? <span className="text-danger">+{project.errors[key]}</span> : ''}
-                        /<span>{project.needs_max[key]}</span>
+                        <span className="text-warning">{project.needs(key)}</span>
+                        {project.bugs[key] > 0 ? <span className="text-danger">+{project.bugs[key]}</span> : ''}
+                        /<span>{project.estimate[key]}</span>
                     </span>
             };
         });

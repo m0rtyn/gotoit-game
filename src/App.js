@@ -13,6 +13,8 @@ import Layout from './components/Layout';
 import {addMessage, addAction} from './components/ToastNest';
 import {chatMessage} from "./components/Chat";
 
+import bulkStyler from './services/bulkStyler';
+
 import WorkerModel from './models/WorkerModel';
 import ProjectModel from './models/ProjectModel';
 import MeetingModel from './models/MeetingModel';
@@ -21,7 +23,7 @@ import ProjectsTop from './services/ProjectsTop';
 
 import Lorer from './services/Lorer';
 
-import {skills_names, meetings, workers_bonus_items, technologies, skills_true} from './data/knowledge';
+import {skills_names, project_platforms, project_kinds, meetings, workers_bonus_items, technologies, skills_true} from './data/knowledge';
 
 import app_state from './data/AppData';
 
@@ -66,6 +68,7 @@ class App extends Component {
         this.salesDepartmentUp = this.salesDepartmentUp.bind(this);
         this.hrDepartmentUp = this.hrDepartmentUp.bind(this);
 
+        this.startProject = this.startProject.bind(this);
         this.startMeeting = this.startMeeting.bind(this);
 
         this.contractSearch = this.contractSearch.bind(this);
@@ -128,6 +131,7 @@ class App extends Component {
         app_state.data.helpers['salesDepartmentUp'] = this.salesDepartmentUp;
         app_state.data.helpers['hrDepartmentUp'] = this.hrDepartmentUp;
 
+        app_state.data.helpers['startProject'] = this.startProject;
         app_state.data.helpers['startMeeting'] = this.startMeeting;
 
         app_state.data.helpers['contractSearch'] = this.contractSearch;
@@ -377,12 +381,9 @@ class App extends Component {
         this.setState({data: data});
     }
 
-    startMeeting(meeting_name, selected_workers) {
+    selectedWorkersToTeam(selected_workers) {
         const data = this.state.data;
-        const meeting_conf = meetings[meeting_name];
-
         let team = [];
-
         _.each(selected_workers, (state, worker_id) => {
             console.log(state, worker_id);
             if (state === true) {
@@ -390,11 +391,31 @@ class App extends Component {
                 team.push(worker);
             }
         });
+        return team;
+    }
 
-        console.log(selected_workers, team);
+    startProject(project_name, selected_workers, project_platform, project_kind) {
+        const data = this.state.data;
+        let team = this.selectedWorkersToTeam(selected_workers);
+
+        const project = ProjectModel.generateOwnProject(
+            project_name,
+            team,
+            _.keys(project_platforms)[project_platform],
+            _.keys(project_kinds)[project_kind]);
+        this.acceptAndMoveProject(project);
+
+        addMessage('Started '+project.name+' project', {timeOut: 5000, extendedTimeOut: 2000}, 'info');
+        this.setState({data: data});
+    }
+
+    startMeeting(meeting_name, selected_workers) {
+        const data = this.state.data;
+        const meeting_conf = meetings[meeting_name];
+
+        let team = this.selectedWorkersToTeam(selected_workers);
 
         const meeting = MeetingModel.generate(meeting_name, team);
-
 
         data.projects.push(meeting);
         _.each(team, (worker) => {this.modifyRelation(worker.id, meeting.id, true, 'meeting');});
@@ -497,13 +518,13 @@ class App extends Component {
 
     pauseProject(id) {
         let project = _.find(this.state.data.projects, (project) => { return (project.id === id); });
-        project.stage = 'paused';
+        project.is_paused = true;
         //this.checkState();
     }
 
     unpauseProject(id) {
         let project = _.find(this.state.data.projects, (project) => { return (project.id === id); });
-        project.stage = 'open';
+        project.is_paused = false;
         //this.checkState();
     }
 
@@ -541,10 +562,31 @@ class App extends Component {
         let platform_kind_top_handler = all_top_handler.filter('platform', project.platform).filter('kind', project.kind);
 
         const getBonus = (handler) => {
-            return Math.max(0, 11 - handler.getTopNumber(id));
+            const top = handler.getTopNumber(id);
+            if (top === 'out of top') {
+                console.log(top);
+                console.log(handler);
+                return 0;
+            }
+
+            const bonus = Math.max(0, 11 - top);
+            console.log(top);
+            console.log(handler);
+            console.log(bonus);
+            return bonus;
         };
 
         const bonus_points = getBonus(all_top_handler) * 3 + getBonus(platform_top_handler) * 2 + getBonus(kind_top_handler) * 2 + getBonus(platform_kind_top_handler) * 1 ;
+
+        if (project.type === 'own') {
+            //console.log(bonus_points);
+            //console.log(_.sum(_.values(bulkStyler.projectPlatform(bulkStyler.projectKind(project.done, project.kind), project.platform))));
+            //console.log(_.values(bulkStyler.projectPlatform(bulkStyler.projectKind(project.done, project.kind), project.platform)));
+            //console.log(bulkStyler.projectPlatform(bulkStyler.projectKind(project.done, project.kind), project.platform));
+            //console.log(bulkStyler.projectKind(project.done, project.kind));
+            //console.log(project.done);
+            project.reward = bonus_points * _.sum(_.values(bulkStyler.projectPlatform(bulkStyler.projectKind(project.done, project.kind), project.platform)));
+        }
 
         data.rumor += Math.floor(bonus_points / 10);
         data.reputation += bonus_points;
@@ -821,7 +863,19 @@ class App extends Component {
         this.work(); // now we can work on weekends and at night
 
         data.projects.forEach((project) => {
-            if (project.stage !== 'open' && project.stage !== 'paused') return false;
+            console.log(project.stage, project.type, project.is_paused);
+
+            if (project.is_paused) {
+                console.log('skip calculate paused project ' + project.name);
+                return false;
+            }
+
+            if (!(project.stage === 'open' || project.stage === 'fixing' )) {
+                console.log('skip calculate project ' + project.name);
+                return false;
+            }
+
+
 
             switch (project.type) {
                 case 'meeting':
@@ -829,6 +883,20 @@ class App extends Component {
                     if (project.deadline <= 0) {
                         this.finishMeeting(project.id);
                         return;
+                    }
+                    break;
+
+                case 'own':
+                    if (project.stage === 'fixing' && project.tasksQuantity() === 0) {
+                        if (project.bugsQuantity() !== 0) {
+                            this.fixProject(project.id);
+                            return;
+                        }
+
+                        if (project.bugsQuantity() === 0) {
+                            this.finishProject(project.id);
+                            return;
+                        }
                     }
                     break;
 
@@ -840,11 +908,13 @@ class App extends Component {
                         this.finishProject(project.id);
                         return;
                     }
+
                     project.deadline--;
                     if (project.deadline <= 0 && project.type !== 'draft') {
                         this.failProject(project.id);
                         return;
                     }
+
                     if (project.tasksQuantity() === 0 && project.bugsQuantity() !== 0) {
                         this.fixProject(project.id);
                         return;
@@ -1143,7 +1213,7 @@ class App extends Component {
             // if you money end, your guys don't work
             if (!worker.is_player && (data.money - worker.getSalary()) < 0) return false;
 
-            let worker_meetings = data.projects.filter((project) => { return (project.isNeed(this.getRelation(worker.id, project.id)) && project.stage === 'open' && project.type === 'meeting');});
+            let worker_meetings = data.projects.filter((project) => { return (project.isNeed(this.getRelation(worker.id, project.id)) && project.stage === 'open' && project.type === 'meeting' && !project.is_paused);});
             //console.log(worker_meetings, data.relations);
             if (worker_meetings.length > 0) { // Meeting
                 let temp_meeting = _.sample(worker_meetings);;
@@ -1162,7 +1232,8 @@ class App extends Component {
             }
             else { // Work
                 let worker_projects = data.projects.filter((project) => {
-                    return (project.isNeed(this.getRelation(worker.id, project.id)) && project.stage === 'open');
+                    return (project.isNeed(
+                        this.getRelation(worker.id, project.id)) && (project.stage === 'open' || project.stage === 'fixing') && !project.is_paused);
                 });
                 //     console.log(worker_projects);
                 // work on one of projects
@@ -1186,7 +1257,7 @@ class App extends Component {
         let worker_roles = this.getRelation(worker.id, project.id);
         let focus_on = (this.getTechnology(project.id, 'agile'))
             ? _.maxBy(Object.keys(project.getNeeds(worker_roles)), function (o) {
-            return project.needs[o];
+            return project.needs(o);
         })
             : _.sample(Object.keys(project.getNeeds(worker_roles)));
         let rad = this.getTechnology(project.id, 'rad');
@@ -1262,14 +1333,17 @@ class App extends Component {
             let retrospected = worker.getSideResource();
             if (retrospected > 0) {
                 var res = _.sample(Object.keys(project.getNeeds(worker_roles)));
-                retrospected = Math.floor(_.min([project.needs[res], Math.sqrt(project.needs_max[res]), retrospected]));
+                retrospected = Math.floor(_.min([project.needs(res), Math.sqrt(project.estimate[res]), retrospected]));
 
                 let cut = Math.floor(project.reward * (retrospected / (1 + project.planedTasksQuantity())));
                 worker.facts.retrospected += retrospected;
                 project.facts.retrospected += retrospected;
                 project.facts.cuted_cost += cut;
-                project.needs[res] -= retrospected;
-                project.needs_max[res] -= retrospected;
+
+                project.estimate[res] -= retrospected;
+
+                //project.needs[res] -= retrospected;
+                //project.needs_max[res] -= retrospected;
                 project.reward -= cut;
                 chatMessage(formName(), 'cut ' + retrospected + ' ' + res + ' tasks and ' + cut + '$', 'success');
                 skip_work = true;
