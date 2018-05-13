@@ -10,7 +10,7 @@ import SalesDepartment from './SalesDepartment';
 class ProjectsFind extends Component {
 
     render() {
-        const find_projects = <button className="btn btn-success btn-sm">Find Projects</button>;
+        const find_projects = <button className="btn btn-success btn-sm">Find Outsource Projects</button>;
 
         let offered = (candidate) => { return <ProjectOfferBlock key={candidate.id} candidate={candidate} data={this.props.data} /> };
 

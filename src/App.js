@@ -684,10 +684,21 @@ class App extends Component {
     }
 
 
-    addMoney(quantity) {
+    addMoney(quantity, currency = 'usd') {
         const data = this.state.data;
-        data.money += quantity;
-        addAction('Income to your wallet: '+quantity+'$', {timeOut: 5000, extendedTimeOut: 1000}, 'success');
+
+        switch (currency){
+            case "usd":
+                data.money += quantity;
+                break;
+            case "btc":
+                data.btc += quantity;
+                break;
+            default:
+                console.log("unknown currency " + currency);
+        }
+
+        addAction('Income to your wallet: '+quantity+ {usd: '$', btc: 'BTC'}[currency] , {timeOut: 5000, extendedTimeOut: 1000}, 'success');
         this.setState({data: data});
     }
 
@@ -948,14 +959,14 @@ class App extends Component {
                 if (worker.morale < 100 && _.random(1, 24)) worker.morale++;
 
                 if (!worker.is_player) {
-                    let dissatisfaction = Math.floor((10000 - Math.pow(worker.calcEfficiency() + 33, 2)) / 30);
+                    let dissatisfaction = Math.floor((10000 - Math.pow(worker.calcEfficiency() + 50, 2)) / 30);
                     let smoothing = 1 + (parseInt(worker.getOverrate(), 10) / 100);
-                    let breakpoint = _.random(1, 10000);
+                    let breakpoint = _.random(1, 20000);
                     //console.log(dissatisfaction, worker.calcEfficiency(), Math.floor(Math.pow(worker.calcEfficiency(), 2)), breakpoint);
                     if ((dissatisfaction / smoothing) > breakpoint) {
                         worker.to_leave = true;
                         worker.to_leave_ticker = 24 * 7 * 2; // 2 weeks
-                        addAction(worker.name + ' leaves your company in two weeks', {
+                        addAction(worker.name + ' decided to leave from your company in two weeks', {
                             timeOut: 20000,
                             extendedTimeOut: 10000
                         }, 'error');
@@ -1028,8 +1039,7 @@ class App extends Component {
                 break;
         }
 
-        const x = tick + 3000;
-
+        const x = tick + 2000;
         data.current_btc_price = Math.floor(Math.abs(Math.sin(x/19)) * x/3 + Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x * 2 + Math.abs(Math.sin(Math.sqrt(x/227))) * x + x);
 
         //data.current_btc_price = Math.abs(Math.sin(x/19)) * x + Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x + Math.abs(Math.sin(Math.sqrt(x/227))) * x + x;

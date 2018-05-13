@@ -411,11 +411,11 @@ class ProjectModel {
         let platform = _.sample(_.keys(project_platforms));
 
         let stats = _.mapValues(skills, () => {
-            return _.random(0, 100 * hackathons_generated);
+            return _.random(0, 10 * hackathons_generated);
         });
         stats = JSON.parse(JSON.stringify(stats));
 
-        let reward = hackathons_generated * 10000;
+        let reward = hackathons_generated * 1000;
         let penalty = 0;
         let deadline = 24 * 5;
         let complexity = hackathons_generated * 5;
