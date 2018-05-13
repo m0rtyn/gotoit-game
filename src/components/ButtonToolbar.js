@@ -8,7 +8,7 @@ import ProjectsFind from './ProjectsFind';
 import Loans from './Loans';
 import Market from './Market';
 
-class CentralContentContainer extends Component {
+class ButtonToolbar extends Component {
     constructor(props) {
         super(props);
         }
@@ -46,4 +46,4 @@ class CentralContentContainer extends Component {
     }
 }
 
-export default CentralContentContainer;
+export default ButtonToolbar;
