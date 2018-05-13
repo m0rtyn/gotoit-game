@@ -5,7 +5,7 @@ import _ from 'lodash';
 import {chatMessage} from "../components/Chat";
 
 import bulkStyler from '../services/bulkStyler';
-import {skills, workers_bonus_items, meetings} from '../data/knowledge';
+import {skills, workers_bonus_items, meetings, worker_character_types} from '../data/knowledge';
 
 import {addAction} from '../components/ToastNest';
 
@@ -29,6 +29,8 @@ class WorkerModel {
         this.temper = {
             earliness: _.random(0, 3), variability: _.random(0, 3)
         };
+
+        this.character = worker_character_types[_.random(0, 4)]
 
         this.feelings = new ValueCache(24, () => { return Narrator.workerFeelings(this); }); //{tick: 0, value: ''};
 
