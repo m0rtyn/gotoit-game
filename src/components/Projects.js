@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import MarketTop from './MarketTop';
 
 import Meeting from './Meeting';
 import Project from './Project';
-import ProjectReport from './ProjectReport';
 
 class Projects extends Component {
     constructor(props) {
@@ -32,28 +30,6 @@ class Projects extends Component {
                             )}
                         </div>
                         : <div className="text-center fat">You have no projects in progress.</div> }
-                </div>
-                <div>
-                    {this.props.data.projects_archive_reports.length > 0 ?
-                        <div key='projects_archive_reports'>
-                            <div className="flex-container-row">
-                                <h4 className="flex-element">Archived Projects</h4>
-                                <span className="flex-element">
-                                    <button className="btn btn-warning" onClick={() => {this.setState({show_archive: !this.state.show_archive});}}>
-                                        {this.state.show_archive ? 'Hide' : 'Show'} Archive
-                                    </button>
-                                </span>
-                                <span className="flex-element"><MarketTop data={this.props.data} /></span>
-                            </div>
-                            {this.state.show_archive ?
-                                <div key='archive_reports'>
-                                    {this.props.data.projects_archive_reports.map((x, i) =>
-                                        <ProjectReport key={x.id} project={x} data={this.props.data} />
-                                    )}
-                                </div>
-                            : ''}
-                        </div>
-                    : ''}
                 </div>
             </div>
         );

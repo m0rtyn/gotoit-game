@@ -46,6 +46,8 @@ class App extends Component {
         this.brutalGet = this.brutalGet.bind(this);
         this.checkState = this.checkState.bind(this);
 
+        this.changeContent = this.changeContent.bind(this);
+
         this.tick = this.tick.bind(this);
         this.addMoney = this.addMoney.bind(this);
         this.chargeMoney = this.chargeMoney.bind(this);
@@ -108,6 +110,8 @@ class App extends Component {
         app_state.data.helpers['brutalSet'] = this.brutalSet;
         app_state.data.helpers['brutalGet'] = this.brutalGet;
         app_state.data.helpers['checkState'] = this.checkState;
+
+        app_state.data.helpers['changeContent'] = this.changeContent;
 
         app_state.data.helpers['tick'] = this.tick;
         app_state.data.helpers['addMoney'] = this.addMoney;
@@ -240,6 +244,15 @@ class App extends Component {
         data.workers_roles[worker_id][role] = value;
         this.setState({data: data});
     }
+
+    changeContent(component, context = {}) {
+        console.log(component, context);
+        const data = this.state.data;
+        data.content = component;
+        data.context = context;
+        this.setState({data: data});
+    }
+
 
     agencySearch(agency_state, agency_reward) {
         //agency_generation_counter++;
@@ -1216,9 +1229,9 @@ class App extends Component {
                 return false;
             }
 
-             if (!worker.in_vacation) { // drain even worker do not work
+            if (!worker.in_vacation) { // drain even worker do not work
                 worker.drainStamina();
-             }
+            }
 
             // if you money end, your guys don't work
             if (!worker.is_player && (data.money - worker.getSalary()) < 0) return false;
