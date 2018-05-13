@@ -15,6 +15,8 @@ class Projects extends Component {
     }
 
     render() {
+        let data = this.props.data;
+
         return (
             <div>
                 <div className="flex-container-row">
@@ -22,7 +24,7 @@ class Projects extends Component {
                         <StartProject data={this.props.data} />
                     </span>
                     <span className="flex-element">
-                        <StartMeeting data={this.props.data} />
+                        {data.projects.length > 0 ? <StartMeeting data={this.props.data} /> : ''}
                     </span>
                     <span className="flex-element">
                         <ProjectsFind data={this.props.data} />

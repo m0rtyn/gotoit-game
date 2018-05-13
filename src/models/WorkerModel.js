@@ -161,7 +161,7 @@ class WorkerModel {
     }
 
     difficultyPenalty() {
-        let difficulty_ratio = (200+(this.facts.bugs_passed*3)) / (200+this.facts.tasks_done);
+        let difficulty_ratio = (200+(this.facts.bugs_passed*2)) / (200+this.facts.tasks_done);
         let thirst_for_difficulty = (100+_.max(_.values(this.stats))) / (100+(this.statsSum()/4));
         // console.log(difficulty_ratio, thirst_for_difficulty);
         const difficulty_stream = 20 * (1-(difficulty_ratio/thirst_for_difficulty));
@@ -173,7 +173,7 @@ class WorkerModel {
     }
 
     educationPenalty() {
-        let knowledge_ratio = (200+(this.facts.training_tasks_done*3)) / (200+this.facts.tasks_done);
+        let knowledge_ratio = (200+(this.facts.training_tasks_done*4)) / (200+this.facts.tasks_done);
         let thirst_for_knowledge = (100+(this.statsSum()/4)) / (100+_.max(_.values(this.stats)));
        // console.log(knowledge_ratio, thirst_for_knowledge);
         const education_stream = 20 * (1-(knowledge_ratio/thirst_for_knowledge));

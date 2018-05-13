@@ -26,7 +26,7 @@ class StartProject extends Component {
     render() {
         const data = this.props.data;
 
-        const start_project = <button className="btn btn-success btn-sm">Start Project</button>;
+        const start_project = <button className="btn btn-success btn-sm">Start Own Project</button>;
 
         return (
             <Portal closeOnEsc openByClickOn={start_project} onOpen={ () => {
