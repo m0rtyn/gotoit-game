@@ -24,6 +24,9 @@ var app_state =
             is_working_time: false
         },
 
+        content: 'Welcome',
+        context: {},
+
         money: 0,
         btc: 0,
         miner: 0,
