@@ -31,6 +31,7 @@ class WorkerModel {
         };
 
         this.character = worker_character_types[_.random(0, 4)]
+        this.salary_coefficient = this.character.name == 'Workaholic' ? -15 : this.character.name == 'Modest' ? 20 : 0
 
         this.feelings = new ValueCache(24, () => { return Narrator.workerFeelings(this); }); //{tick: 0, value: ''};
 
@@ -195,7 +196,7 @@ class WorkerModel {
     }
 
     getOverrate() {
-        return (((1 + (this.standing/(24*7*59.524)))*100)-100).toFixed(2);
+        return (((1 + (this.standing/(24*7*(59.524+this.salary_coefficient))))*100)-100).toFixed(2);
     }
 
     getMotivate() {
