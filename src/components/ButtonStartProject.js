@@ -11,7 +11,7 @@ import ProjectModel from '../models/ProjectModel';
 
 import {project_platforms, project_kinds} from '../data/knowledge';
 
-class StartProject extends Component {
+class ButtonStartProject extends Component {
     constructor(props) {
         super(props);
 
@@ -24,6 +24,8 @@ class StartProject extends Component {
     }
 
     render() {
+        return
+
         const data = this.props.data;
 
         const start_project = <button className="btn btn-success btn-sm">Start Own Project</button>;
