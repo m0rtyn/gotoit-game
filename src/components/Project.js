@@ -86,7 +86,8 @@ class Project extends Component {
             };
         });
 
-        const manage_button = <button className="btn btn-success flex-element">Manage</button>;
+        const manage_button = <button className="btn btn-sm btn-success flex-element" style={{margin: '5px 5px 5px 5px'}}>Manage</button>;
+
 
         let label = (id, text) => { return <span key={id}> <label className="label-default">{text}</label> </span>; };
 
@@ -120,14 +121,14 @@ class Project extends Component {
             <span>
                 {/*{project.stage}*/}
                 {(project.is_paused)
-                    ? <button className="btn btn-success" onClick={this.unpause}>Start</button> : ''}
+                    ? <button className="btn btn-xs btn-success" onClick={this.unpause}>Start</button> : ''}
                 {(project.stage === 'ready')
-                    ? <button className="btn btn-success" onClick={this.open}>Start</button> : ''}
+                    ? <button className="btn btn-xs btn-success" onClick={this.open}>Start</button> : ''}
                 {(project.stage === 'open' && !project.is_paused)
-                    ? <button className="btn btn-warning" onClick={this.pause}>Pause</button> : ''}
+                    ? <button className="btn btn-xs btn-warning" onClick={this.pause}>Pause</button> : ''}
             </span>;
 
-        const reject_button = <button className="btn btn-danger" onClick={() => {
+        const reject_button = <button className="btn btn-xs btn-danger" onClick={() => {
             if (confirm("Reject project "+project.name+'? (penalty: '+project.penalty+')')) {
                 this.close();
             } }}>Reject</button>;
@@ -136,14 +137,21 @@ class Project extends Component {
 
         return (
             <div className="well well-sm fat">
-                <div className="flex-container-row">
+                <div>
+                    <div className="flex-container-column">
                     <label className="flex-element"> <ProjectName project={project} /> </label>
                     <label className="flex-element"> Reward: {project.reward}$ </label>
                     {(project.penalty > 0 ? <label className="flex-element"> Penalty: {project.penalty}$ </label> : ' ')}
+                    </div>
                     <div>
-                        {/*{start_pause_button}
-                        {reject_button}*/}
-                        <Portal ref="manage" closeOnEsc openByClickOn={manage_button}>
+
+                        <div>
+                            <div>
+                        {/*start_pause_button*/}
+                        {/*reject_button*/}
+                            </div>
+
+                            <Portal ref="manage" closeOnEsc openByClickOn={manage_button}>
                             <TeamDialog>
                                 <h4 className="flex-container-row">
                                     <label className="flex-element"> <ProjectName project={project} /> </label>
@@ -351,6 +359,8 @@ class Project extends Component {
                                 </div>
                             </TeamDialog>
                         </Portal>
+
+                        </div>
                     </div>
                 </div>
 

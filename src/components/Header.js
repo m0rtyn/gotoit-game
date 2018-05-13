@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import {FormattedDate} from 'react-intl';
 import classNames from 'classnames';
 
-import Loans from './Loans';
-import Market from './Market';
-
 class Header extends Component {
     render() {
         const data = this.props.data;
@@ -84,10 +81,6 @@ class Header extends Component {
                                         }}> BTC </label>
                                 </span>
                             </span>
-                        </span>
-                        <span className="flex-element">
-                            <span> <Loans data={data} /> </span>
-                            <span> <Market data={data} /> </span>
                         </span>
                         <span className="flex-element">
 
