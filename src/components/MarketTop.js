@@ -55,7 +55,7 @@ class MarketTop extends Component {
 
         let no_data = false;
 
-        const top_button = <button className="btn btn-warning">Market Top</button>;
+        const top_button = <button className="btn btn-warning btn-sm">Market Top</button>;
 
         let platform_options = _.keys(project_platforms).map((platform) => {
             return { value: platform, label: project_platforms[platform].name };

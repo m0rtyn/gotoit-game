@@ -8,6 +8,8 @@ import PopupsNest from './PopupsNest';
 import ToastNest from './ToastNest';
 import ProjectFind from './ProjectsFind';
 
+import CentralContentContainer from './CentralContentContainer.js'
+
 class Layout extends Component {
     render() {
         return (
@@ -18,7 +20,7 @@ class Layout extends Component {
                         <People data={this.props.data}/>
                     </div>
                     <div className="col-md-6 slim">
-                        <div data={this.props.data} />
+                        <CentralContentContainer data={this.props.data} />
                     </div>
                     <div className="col-md-3 slim">
                         <Projects data={this.props.data}/>

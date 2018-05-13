@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import MarketTop from './MarketTop';
 
-import StartProject from './StartProject';
-import StartMeeting from './StartMeeting';
 import Meeting from './Meeting';
-import ProjectsFind from './ProjectsFind';
 import Project from './Project';
 import ProjectReport from './ProjectReport';
 
@@ -15,23 +12,10 @@ class Projects extends Component {
     }
 
     render() {
-        let data = this.props.data;
-
         return (
             <div>
-                <div className="flex-container-row">
-                    <span className="flex-element">
-                        <StartProject data={this.props.data} />
-                    </span>
-                    <span className="flex-element">
-                        {data.projects.length > 0 ? <StartMeeting data={this.props.data} /> : ''}
-                    </span>
-                    <span className="flex-element">
-                        <ProjectsFind data={this.props.data} />
-                    </span>
-                    <span className="flex-element hidden"> <label> or </label> <button className="btn btn-info" onClick={this.props.data.helpers.draftProject}>Invent Startup</button></span>
-                </div>
-                <div>
+                <h4 className="text-center slim-top"><label>Your Projects</label></h4>
+                    <div>
                     {this.props.data.projects.length ?
                         <div>
                             {this.props.data.projects.map((meeting, i) => meeting.type === 'meeting' ?

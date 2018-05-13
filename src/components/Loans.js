@@ -55,7 +55,7 @@ class Loans extends Component {
     render() {
         const data = this.props.data;
 
-        const open_button = <button className="btn btn-info btn-xs">Loans</button>;
+        const open_button = <button className="btn btn-info btn-sm">Loans</button>;
 
         return (
             <Portal ref="loans" closeOnEsc openByClickOn={open_button}>
