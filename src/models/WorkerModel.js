@@ -112,11 +112,12 @@ class WorkerModel {
     isWorkingTime(time, micromanagement, office_things) {
         let variability = _.random(-this.temper.variability, this.temper.variability);
         let mod = variability + this.temper.earliness;
+        let character_working_mod = this.character.name == 'Workaholic' ? -2 : this.character.name == 'Wonk' ? 2 : 0
 
         //let office_things_bonus = (office_things.coffeemaker ? 10 : 0) + (office_things.lanch ? 25 : 0 ) + office_things.gadget;
 
         let is_working_time = (
-            time.hour >= 9 + (office_things.coffeemaker ? -1 : 0) + mod &&
+            time.hour >= 9 + (office_things.coffeemaker ? -1 : 0) + mod + character_working_mod &&
             time.hour <= 17 + (this.fed_ticker > 1 ? 2 : 0 ) + (this.effects['status'] > 0 ? 3 : 0 ) + mod &&
             ((time.day !== 6 && time.day !== 0) || _.random(1, (20-(this.temper.variability*3))) === 1 || _.random(1, this.effects['teambuilding']) > 100) && // variability guys work on weekends more often
             (_.random(1, 10 - (this.temper.variability * 0.5)) !==1) // variability guys eblanyat more often
