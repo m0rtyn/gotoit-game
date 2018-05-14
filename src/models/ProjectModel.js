@@ -153,7 +153,9 @@ class ProjectModel {
                 this.facts.bugs_passed += bugs;
                 this.bugs[stat] += bugs;
 
-                let learn = tasks + (bugs * 2);
+                let boost_from_character = worker.character.name == 'Gifted' ? 2 : worker.character.name == 'Modest' ? 0.5 : 1
+
+                let learn = Math.floor((tasks + (bugs * 2)) * boost_from_character);
                 learned[stat] +=
                     (learn) *
                     (pair ? 1.25 : 1) *
