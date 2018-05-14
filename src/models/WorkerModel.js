@@ -5,7 +5,7 @@ import _ from 'lodash';
 import {chatMessage} from "../components/Chat";
 
 import bulkStyler from '../services/bulkStyler';
-import {skills, workers_bonus_items, meetings} from '../data/knowledge';
+import {skills, workers_bonus_items, meetings, worker_character_types} from '../data/knowledge';
 
 import {addAction} from '../components/ToastNest';
 
@@ -30,7 +30,12 @@ class WorkerModel {
             earliness: _.random(0, 3), variability: _.random(0, 3)
         };
 
-        this.feelings = new ValueCache(24, () => { return Narrator.workerFeelings(this); }); //{tick: 0, value: ''};
+        this.character = worker_character_types[_.random(0, 4)]
+        this.salary_coefficient = this.character.name == 'Workaholic' ? -15 : this.character.name == 'Modest' ? 20 : 0
+        this.thirst_to_knowledge_coefficient = this.character.name == 'Gifted' ? 0.75 : this.character.name == 'Wonk' ? 1.25 : 1
+
+
+      this.feelings = new ValueCache(24, () => { return Narrator.workerFeelings(this); }); //{tick: 0, value: ''};
 
         this.efficiency = new ValueCache(24, () => { return this.calcEfficiencyReal() });
 
@@ -109,11 +114,12 @@ class WorkerModel {
     isWorkingTime(time, micromanagement, office_things) {
         let variability = _.random(-this.temper.variability, this.temper.variability);
         let mod = variability + this.temper.earliness;
+        let character_working_mod = this.character.name == 'Workaholic' ? -2 : this.character.name == 'Wonk' ? 2 : 0
 
         //let office_things_bonus = (office_things.coffeemaker ? 10 : 0) + (office_things.lanch ? 25 : 0 ) + office_things.gadget;
 
         let is_working_time = (
-            time.hour >= 9 + (office_things.coffeemaker ? -1 : 0) + mod &&
+            time.hour >= 9 + (office_things.coffeemaker ? -1 : 0) + mod + character_working_mod &&
             time.hour <= 17 + (this.fed_ticker > 1 ? 2 : 0 ) + (this.effects['status'] > 0 ? 3 : 0 ) + mod &&
             ((time.day !== 6 && time.day !== 0) || _.random(1, (20-(this.temper.variability*3))) === 1 || _.random(1, this.effects['teambuilding']) > 100) && // variability guys work on weekends more often
             (_.random(1, 10 - (this.temper.variability * 0.5)) !==1) // variability guys eblanyat more often
@@ -174,7 +180,7 @@ class WorkerModel {
 
     educationPenalty() {
         let knowledge_ratio = (200+(this.facts.training_tasks_done*4)) / (200+this.facts.tasks_done);
-        let thirst_for_knowledge = (100+(this.statsSum()/4)) / (100+_.max(_.values(this.stats)));
+        let thirst_for_knowledge = (100+(this.statsSum()/4)) / (100+_.max(_.values(this.stats))) * this.thirst_to_knowledge_coefficient;
        // console.log(knowledge_ratio, thirst_for_knowledge);
         const education_stream = 20 * (1-(knowledge_ratio/thirst_for_knowledge));
         return Math.max(Math.min(Math.floor(education_stream), 20), -20);
@@ -193,7 +199,7 @@ class WorkerModel {
     }
 
     getOverrate() {
-        return (((1 + (this.standing/(24*7*59.524)))*100)-100).toFixed(2);
+        return (((1 + (this.standing/(24*7*(59.524+this.salary_coefficient))))*100)-100).toFixed(2);
     }
 
     getMotivate() {

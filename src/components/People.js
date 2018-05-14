@@ -39,6 +39,7 @@ class People extends Component {
             });
 
             return <div key={candidate.id} className="panel panel-info">{candidate.name} <span> {candidate.getSalary()}$</span>
+                <div>{`Character: ${candidate.character.name}. ${candidate.character.description}.`}</div>
                 <StatsBar stats={stats_data} data={data} />
                 <button className="btn btn-success" id={candidate.id} onClick={(e) => this.hire(e, type)}>Hire</button>
                 <button className="btn btn-danger" id={candidate.id} onClick={(e) => this.reject(e, type)}>Hide</button>

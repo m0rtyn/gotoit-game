@@ -145,6 +145,7 @@ class Worker extends Component {
                                 </div>
                             </div>
                             <StatsBar stats={efficiency_data} data={this.props.data} />
+                            <div>{`Character: ${worker.character.name}. ${worker.character.description}.`}</div>
                             <p5>
                                 {worker.tellFeelings()}
 
