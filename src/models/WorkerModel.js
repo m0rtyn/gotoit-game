@@ -32,8 +32,10 @@ class WorkerModel {
 
         this.character = worker_character_types[_.random(0, 4)]
         this.salary_coefficient = this.character.name == 'Workaholic' ? -15 : this.character.name == 'Modest' ? 20 : 0
+        this.thirst_to_knowledge_coefficient = this.character.name == 'Gifted' ? 0.75 : this.character.name == 'Wonk' ? 1.25 : 1
 
-        this.feelings = new ValueCache(24, () => { return Narrator.workerFeelings(this); }); //{tick: 0, value: ''};
+
+      this.feelings = new ValueCache(24, () => { return Narrator.workerFeelings(this); }); //{tick: 0, value: ''};
 
         this.efficiency = new ValueCache(24, () => { return this.calcEfficiencyReal() });
 
@@ -178,7 +180,7 @@ class WorkerModel {
 
     educationPenalty() {
         let knowledge_ratio = (200+(this.facts.training_tasks_done*4)) / (200+this.facts.tasks_done);
-        let thirst_for_knowledge = (100+(this.statsSum()/4)) / (100+_.max(_.values(this.stats)));
+        let thirst_for_knowledge = (100+(this.statsSum()/4)) / (100+_.max(_.values(this.stats))) * this.thirst_to_knowledge_coefficient;
        // console.log(knowledge_ratio, thirst_for_knowledge);
         const education_stream = 20 * (1-(knowledge_ratio/thirst_for_knowledge));
         return Math.max(Math.min(Math.floor(education_stream), 20), -20);
