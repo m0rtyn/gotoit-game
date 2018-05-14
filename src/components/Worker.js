@@ -99,7 +99,7 @@ class Worker extends Component {
         }) ();
 
         return (
-            <div className="well well-sm fat">
+            <div id={worker.id} className="well well-sm fat">
                 {worker.name} {worker.is_player ? 'Player' : <span>{worker.getSalary()}$</span>}
                 {worker.in_vacation ? ' on vacation! ' : ''}
 
