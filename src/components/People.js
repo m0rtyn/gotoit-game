@@ -2,13 +2,8 @@ import React, { Component } from 'react';
 import Portal from 'react-portal';
 import _ from 'lodash';
 
-import TeamDialog from './TeamDialog';
-import StatsBar from './StatsBar';
-
 import Worker from './Worker';
 
-import HiringAgency from './HiringAgency';
-import HrDepartment from './HrDepartment';
 import Office from './Office';
 
 import {skills, offices} from '../data/knowledge';
@@ -31,24 +26,9 @@ class People extends Component {
 
     render() {
         const data = this.props.data;
-        const hire_button = <button className="btn btn-success">Hire Worker</button>;
 
-        let unit_block_template = (candidate, type) => {
-            const stats_data = _.mapValues(skills, (val, key) => {
-                return { name: key, val: <span>{candidate.stats[key]}</span> };
-            });
 
-            return <div key={candidate.id} className="panel panel-info">{candidate.name} <span> {candidate.getSalary()}$</span>
-                <div>{`Character: ${candidate.character.name}. ${candidate.character.description}.`}</div>
-                <StatsBar stats={stats_data} data={data} />
-                <button className="btn btn-success" id={candidate.id} onClick={(e) => this.hire(e, type)}>Hire</button>
-                <button className="btn btn-danger" id={candidate.id} onClick={(e) => this.reject(e, type)}>Hide</button>
 
-            </div>
-        };
-
-        let resumes_candidate = (candidate) => { return unit_block_template(candidate, 'resumes'); };
-        let agency_candidate  = (candidate) => { return unit_block_template(candidate, 'agency'); };
 
         return (
             <div>
@@ -60,30 +40,7 @@ class People extends Component {
                 {(data.workers.length < data.office.space)
                     ?
                     <div className="panel panel-success">
-                        <Portal closeOnEsc openByClickOn={hire_button}>
-                            <TeamDialog>
-                                <h3 className="text-center">Hiring</h3>
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <h4 className="text-center fat">
-                                            Resume
-                                            <HiringAgency data={data} />
-                                        </h4>
-                                        {data.candidates.resumes.map(resumes_candidate)}
-                                    </div>
-                                    <div className="col-md-6">
-                                        <h4 className="text-center slim-top">
-                                            Hr Department
-                                            <button  className="btn btn-info hidden" onClick={data.helpers.agencySearch}>Search 1000$</button>
-                                        </h4>
-
-                                        <HrDepartment data={this.props.data} />
-
-                                        {data.candidates.agency.map(agency_candidate)}
-                                    </div>
-                                </div>
-                            </TeamDialog>
-                        </Portal>
+                        <button className="btn btn-success" onClick={() => { data.helpers.changeContent('HireWorkers')}}>Hire Worker</button>
 
                         <div className="panel panel-warning">
                             <span>
