@@ -76,8 +76,13 @@ var app_state =
 
         helpers: {},
 
-        achievements: []
-    }
+        achievements: [],
+
+        animation_items: [],
+
+
+    },
+    is_animation_fresh: false
 };
 
 _.keys(project_platforms).forEach((platform) => {
