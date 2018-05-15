@@ -3,15 +3,17 @@ import PropTypes from 'prop-types';
 import { Motion, spring } from 'react-motion';
 import SplashAnimated from "./SplashAnimated";
 
+
 class BubbleAnimated extends Component {
 
     render() {
         let { size, color, count } = this.props;
         let from, to;
-        if ( document.getElementById(this.props.from) !== null && document.getElementById(this.props.to) !== null){
+        if (document.getElementById(this.props.from) !== null && document.getElementById(this.props.to) !== null) {
             from = document.getElementById(this.props.from).getBoundingClientRect();
             to = document.getElementById(this.props.to).getBoundingClientRect();
-            to.x += 3; to.y += 3
+            to.x += 3;
+            to.y += 3
         } else {
             return null;
         }
@@ -21,33 +23,35 @@ class BubbleAnimated extends Component {
                 style={{x: spring(to.x), y: spring(to.y)}}
             >
                 {({x, y}) => {
-                    if(x===to.x && y===to.y) {
+                    if (x === to.x && y === to.y) {
 
-                        return(<SplashAnimated size={size} color={color} target={to} handleTransitionEnd={this.transitionEnd}/>)
+                        return (<SplashAnimated size={size} color={color} target={to}
+                                                handleTransitionEnd={this.transitionEnd}/>)
                     }
                     else
-                    return(
-                        <div style={{
-                            width: size,
-                            height: size,
-                            background: color,
-                            transform: `translate3d(${x}px, ${y}px, 0`,
-                            WebkitTransform: `translate3d(${x}px, ${y}px, 0`,
-                            borderRadius: '50%',
-                            position: 'absolute',
-                            textAlign: 'center',
-                            lineHeight: size,
-                            zIndex: 10
-                        }}>
-                            { count }
-                        </div>
-                    )
-                    }
+                        return (
+                            <div style={{
+                                width: size,
+                                height: size,
+                                background: color,
+                                transform: `translate3d(${x}px, ${y}px, 0`,
+                                WebkitTransform: `translate3d(${x}px, ${y}px, 0`,
+                                borderRadius: '50%',
+                                position: 'absolute',
+                                textAlign: 'center',
+                                lineHeight: size,
+                                zIndex: 10
+                            }}>
+                                {count}
+                            </div>
+                        )
+                }
                 }
             </Motion>
 
 
         );
+
     }
 }
 
