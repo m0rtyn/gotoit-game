@@ -13,7 +13,6 @@ class SplashAnimated extends Component {
             >
                 {({scale, opacity}) => {
                     if(scale===2) {
-
                         return null
                     } else
                     return(

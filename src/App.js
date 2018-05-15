@@ -1282,6 +1282,7 @@ class App extends Component {
         let overtimed = false;
 
         let worker_roles = this.getRelation(worker.id, project.id);
+
         let focus_on = (this.getTechnology(project.id, 'agile'))
             ? _.maxBy(Object.keys(project.getNeeds(worker_roles)), function (o) {
             return project.needs(o);
@@ -1351,8 +1352,9 @@ class App extends Component {
             skip_work = true;
             worker.standing--;
             worker.facts.training_tasks_done += worker.getSideResource();
-            this.animation.addBubbleAnimation('creativity', 0, worker.id, project.id);
-            chatMessage(formName(), 'I spent an hour to my pet-project.', 'warning');
+            console.log('creativityy')
+            this.animation.addBubbleAnimation('creativity', 0, worker.id, worker.id);
+            //chatMessage(formName(), 'I spent an hour to my pet-project.', 'warning');
         }
 
         // Agile
@@ -1422,9 +1424,10 @@ class App extends Component {
         // Work
         if (!skip_work) {
             worker.addExperience(
-                project.applyWork(
+                project.applyWork( //для анимации добавляю this.animation и focus_on в параметры applyWork
                     worker.getResources(worker_roles, focus_on, micromanagement),
-                    worker, project, this.animation, rad, creativity, pair, overtimed));
+                    worker, project, this.animation, focus_on, rad, creativity, pair, overtimed));
+
         }
 
         return true;

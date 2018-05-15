@@ -16,9 +16,17 @@ export const animation_data = {
         name: 'refactor',
         color: '#FFAB40'
     },
-    tasks: {
+    disign: {
+        name: 'design',
+        color: '#FF69B4'
+    },
+    program: {
         name: 'tasks',
         color: '#64DD17'
+    },
+    manage: {
+        name: 'manage',
+        color: '#FFD700'
     },
     bugs: {
         name: 'bugs',

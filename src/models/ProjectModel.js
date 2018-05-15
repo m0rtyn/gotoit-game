@@ -87,7 +87,7 @@ class ProjectModel {
         }
     }
 
-    applyWork(work, worker, project, animation, rad = false, creativity = false, pair = false, overtimed = false) {
+    applyWork(work, worker, project, animation, focus_on, rad = false, creativity = false, pair = false, overtimed = false) {
         var learned = JSON.parse(JSON.stringify(skills));
 
         Object.keys(work).forEach((stat) => {
@@ -126,10 +126,10 @@ class ProjectModel {
                     let prevented = this.runTests(bugs);
                     if (prevented) {
                         if ( tasks !== 0){
-                            animation.addBubbleAnimation('tasks', tasks, worker.id, project.id);
+                            animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id);
                         }
                         if ( bugs !== 0){
-                            animation.addBubbleAnimation('bugs', bugs, worker.id, project.id);
+                            animation.addBubbleAnimation(bugs, bugs, worker.id, project.id);
                         }
                         //chatMessage(formName(), ' does '+tasks+' tasks and creates '+bugs+' bugs in '+stat+', but tests prevent '+prevented+' of them', 'warning');
                         bugs -= prevented;
@@ -138,7 +138,7 @@ class ProjectModel {
                     }
                     else {
                         if ( tasks !== 0){
-                            animation.addBubbleAnimation('tasks', tasks, worker.id, project.id);
+                            animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id);
                         }
                         if ( bugs !== 0){
                             animation.addBubbleAnimation('bugs', bugs, worker.id, project.id);
@@ -148,7 +148,7 @@ class ProjectModel {
                 }
                 else {
                     if ( tasks !== 0){
-                        animation.addBubbleAnimation('tasks', tasks, worker.id, project.id);
+                        animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id);
                     }
                 }
 
