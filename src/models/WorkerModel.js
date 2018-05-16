@@ -35,11 +35,12 @@ class WorkerModel {
         this.thirst_to_knowledge_coefficient = this.character.name == 'Gifted' ? 0.75 : this.character.name == 'Wonk' ? 1.25 : 1
 
 
-      this.feelings = new ValueCache(24, () => { return Narrator.workerFeelings(this); }); //{tick: 0, value: ''};
+        this.feelings = new ValueCache(24, () => { return Narrator.workerFeelings(this); }); //{tick: 0, value: ''};
 
         this.efficiency = new ValueCache(24, () => { return this.calcEfficiencyReal() });
 
         this.stamina = 5000;
+        this.salary = this.getSalary()
         this.get_monthly_salary = true;
         this.to_vacation_ticker = 0;
         this.to_vacation = false;

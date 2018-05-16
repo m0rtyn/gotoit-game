@@ -14,6 +14,7 @@ import {addMessage, addAction} from './components/ToastNest';
 import {chatMessage} from "./components/Chat";
 
 import bulkStyler from './services/bulkStyler';
+import ValueCache from './services/ValueCache'
 
 import WorkerModel from './models/WorkerModel';
 import ProjectModel from './models/ProjectModel';
@@ -965,8 +966,14 @@ class App extends Component {
         time.hour = game_date.getHours();
 
         if (time.hour === 1 && time.date === 15 && game_date.getDate() === 15) {
+
             // get Salary
-            data.workers.forEach((worker) => {
+            // sorting workers from lowest to highest salary
+            let workers = data.workers.sort((worker1, worker2) => {
+                return worker1.salary - worker2.salary
+            })
+
+            workers.forEach((worker) => {
                 if (!worker.is_player) {
                     let salary = worker.getSalary();
 
@@ -976,6 +983,7 @@ class App extends Component {
                         worker.get_monthly_salary = true;
                     } else {
                         worker.get_monthly_salary = false;
+                        worker.efficiency = new ValueCache(24, () => {return worker.calcEfficiencyReal() / 2})
                     }
                 }
             })
@@ -1343,7 +1351,7 @@ class App extends Component {
             }
         }
 
-      
+
         if (!worker.is_player) {
             let salary = worker.getSalary() / 160;
             project.facts.money_spent += salary;
