@@ -40,6 +40,7 @@ class WorkerModel {
         this.efficiency = new ValueCache(24, () => { return this.calcEfficiencyReal() });
 
         this.stamina = 5000;
+        this.get_monthly_salary = true;
         this.to_vacation_ticker = 0;
         this.to_vacation = false;
         this.in_vacation_ticker = 0;
@@ -107,7 +108,7 @@ class WorkerModel {
         }
         else {
         //    console.log("standing " + this.standing + " means " + (1 + (this.standing/(12*4*7*8*Math.PI))));
-            return Math.floor((this.statsSum() + _.max(_.values(this.stats))) * (1+(this.getOverrate()/100)));
+            return Math.floor((this.statsSum() + _.max(_.values(this.stats))) * (1+(this.getOverrate()/100)) * 160);
         }
     }
 

@@ -964,6 +964,23 @@ class App extends Component {
         //time.hour++;
         time.hour = game_date.getHours();
 
+        if (time.hour === 1 && time.date === 15 && game_date.getDate() === 15) {
+            // get Salary
+            data.workers.forEach((worker) => {
+                if (!worker.is_player) {
+                    let salary = worker.getSalary();
+
+                    if ((data.money - salary) > 0) {
+                        this.chargeMoney(salary, true);
+                        worker.facts.money_earned += salary;
+                        worker.get_monthly_salary = true;
+                    } else {
+                        worker.get_monthly_salary = false;
+                    }
+                }
+            })
+        }
+
         if (time.hour === 0) {
             console.log('A new day');
             //time.hour = 1;
@@ -1233,8 +1250,8 @@ class App extends Component {
                 worker.drainStamina();
             }
 
-            // if you money end, your guys don't work
-            if (!worker.is_player && (data.money - worker.getSalary()) < 0) return false;
+            // if you don't pay, your guys don't work
+            if (!worker.is_player && !worker.get_monthly_salary) return false;
 
             let worker_meetings = data.projects.filter((project) => { return (project.isNeed(this.getRelation(worker.id, project.id)) && project.stage === 'open' && project.type === 'meeting' && !project.is_paused);});
             //console.log(worker_meetings, data.relations);
@@ -1326,12 +1343,9 @@ class App extends Component {
             }
         }
 
-
-        // get Salary
+      
         if (!worker.is_player) {
-            let salary = worker.getSalary();
-            this.chargeMoney(salary, true);
-            worker.facts.money_earned += salary;
+            let salary = worker.getSalary() / 160;
             project.facts.money_spent += salary;
         }
         worker.drainStamina();
