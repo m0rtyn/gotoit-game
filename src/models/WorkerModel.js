@@ -241,7 +241,7 @@ class WorkerModel {
             console.log(this.getOverrate(), this.getMotivate(), getData().office_things.gadget);
         }
 
-        return Math.ceil(happiness);
+        return this.get_monthly_salary === false ? Math.ceil(happiness / 2) : Math.ceil(happiness);
 
         //return 100;
     }

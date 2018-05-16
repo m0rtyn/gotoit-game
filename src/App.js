@@ -983,7 +983,6 @@ class App extends Component {
                         worker.get_monthly_salary = true;
                     } else {
                         worker.get_monthly_salary = false;
-                        worker.efficiency = new ValueCache(24, () => {return worker.calcEfficiencyReal() / 2});
                     }
                 }
             });
