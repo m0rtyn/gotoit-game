@@ -970,8 +970,8 @@ class App extends Component {
             // get Salary
             // sorting workers from lowest to highest salary
             let workers = data.workers.sort((worker1, worker2) => {
-                return worker1.salary - worker2.salary
-            })
+                return worker1.salary - worker2.salary;
+            });
 
             workers.forEach((worker) => {
                 if (!worker.is_player) {
@@ -983,10 +983,10 @@ class App extends Component {
                         worker.get_monthly_salary = true;
                     } else {
                         worker.get_monthly_salary = false;
-                        worker.efficiency = new ValueCache(24, () => {return worker.calcEfficiencyReal() / 2})
+                        worker.efficiency = new ValueCache(24, () => {return worker.calcEfficiencyReal() / 2});
                     }
                 }
-            })
+            });
         }
 
         if (time.hour === 0) {

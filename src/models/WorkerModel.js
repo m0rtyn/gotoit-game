@@ -40,7 +40,7 @@ class WorkerModel {
         this.efficiency = new ValueCache(24, () => { return this.calcEfficiencyReal() });
 
         this.stamina = 5000;
-        this.salary = this.getSalary()
+        this.salary = this.getSalary();
         this.get_monthly_salary = true;
         this.to_vacation_ticker = 0;
         this.to_vacation = false;
