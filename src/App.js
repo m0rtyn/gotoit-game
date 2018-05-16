@@ -14,7 +14,6 @@ import {addMessage, addAction} from './components/ToastNest';
 import {chatMessage} from "./components/Chat";
 
 import bulkStyler from './services/bulkStyler';
-import ValueCache from './services/ValueCache'
 
 import WorkerModel from './models/WorkerModel';
 import ProjectModel from './models/ProjectModel';
