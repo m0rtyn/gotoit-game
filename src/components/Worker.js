@@ -102,6 +102,7 @@ class Worker extends Component {
             <div className="well well-sm fat">
                 {worker.name} {worker.is_player ? 'Player' : <span>{worker.getSalary()}$</span>}
                 {worker.in_vacation ? ' on vacation! ' : ''}
+                {worker.get_monthly_salary ? '' : ' unpaid! '}
 
                 <Portal ref="manage" closeOnEsc closeOnOutsideClick openByClickOn={manage_button}>
                     <TeamDialog>
