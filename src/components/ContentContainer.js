@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
+import Advertising from './content/Advertising.js';
 import Archive from './content/Archive.js';
 import Exchange from './content/Exchange.js';
+import HireWorkers from './content/HireWorkers';
 import Loans from '../components/content/Loans.js';
 import MarketTop from '../components/content/MarketTop.js';
 import ProjectsFind from '../components/content/ProjectsFind.js';
@@ -10,8 +12,10 @@ import StartProject from '../components/content/StartProject.js';
 import Welcome from '../components/content/Welcome.js';
 
 const components = {
+    'Advertising': Advertising,
     'Archive': Archive,
     'Exchange': Exchange,
+    'HireWorkers': HireWorkers,
     'Loans': Loans,
     'MarketTop': MarketTop,
     'ProjectsFind': ProjectsFind,

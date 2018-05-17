@@ -375,7 +375,9 @@ class App extends Component {
             case 'vacancy':
                 if (data.money >= 100) {
                     this.chargeMoney(100);
-                    data.rumor += 10;
+                    let newRumor = data.rumor;
+                    data.rumor += Math.floor(Math.sqrt(newRumor)/data.rumor);
+                    console.log(data.rumor)
                 }
                 else {
                     console.log('not enough money');
