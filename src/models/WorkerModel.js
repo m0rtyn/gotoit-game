@@ -35,11 +35,13 @@ class WorkerModel {
         this.thirst_to_knowledge_coefficient = this.character.name == 'Gifted' ? 0.75 : this.character.name == 'Wonk' ? 1.25 : 1
 
 
-      this.feelings = new ValueCache(24, () => { return Narrator.workerFeelings(this); }); //{tick: 0, value: ''};
+        this.feelings = new ValueCache(24, () => { return Narrator.workerFeelings(this); }); //{tick: 0, value: ''};
 
         this.efficiency = new ValueCache(24, () => { return this.calcEfficiencyReal() });
 
         this.stamina = 5000;
+        this.salary = this.getSalary();
+        this.get_monthly_salary = true;
         this.to_vacation_ticker = 0;
         this.to_vacation = false;
         this.in_vacation_ticker = 0;
@@ -107,7 +109,7 @@ class WorkerModel {
         }
         else {
         //    console.log("standing " + this.standing + " means " + (1 + (this.standing/(12*4*7*8*Math.PI))));
-            return Math.floor((this.statsSum() + _.max(_.values(this.stats))) * (1+(this.getOverrate()/100)));
+            return Math.floor((this.statsSum() + _.max(_.values(this.stats))) * (1+(this.getOverrate()/100)) * 160);
         }
     }
 
@@ -239,7 +241,7 @@ class WorkerModel {
             console.log(this.getOverrate(), this.getMotivate(), getData().office_things.gadget);
         }
 
-        return Math.ceil(happiness);
+        return this.get_monthly_salary === false ? Math.ceil(happiness / 2) : Math.ceil(happiness);
 
         //return 100;
     }
