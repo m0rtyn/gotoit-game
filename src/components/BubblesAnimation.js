@@ -1,6 +1,7 @@
 import React from 'react'
 import BubbleAnimated from "./animation_content/BubbleAnimated";
 import {genAnimationData} from "../data/animation_data";
+import _ from 'lodash'
 
 let isFreshed = false;
 let timeoutID = null;
@@ -10,12 +11,12 @@ class BubblesAnimation extends React.Component {
         super(props);
         this.state = {
             items: [],
-            count: 0
+            length: 0
         }
 
         this.addBubbleAnimation = this.addBubbleAnimation.bind(this);
         this.trueAddBubbleAnimation = this.trueAddBubbleAnimation.bind(this);
-        this.clear = this.clear.bind(this);
+
     }
 
     componentDidMount() {
@@ -26,8 +27,8 @@ class BubblesAnimation extends React.Component {
     }
 
     trueAddBubbleAnimation(animation_data) {
-        let items = this.state.items.concat(animation_data)
-        this.setState({ items: items, count: this.state.count++ });
+        let items = this.state.items.concat({id: this.state.length, item: animation_data})
+        this.setState({ items: items, length: this.state.length + 1  });
     }
 
     addBubbleAnimation(name, count, workerId, projectId ){
@@ -46,22 +47,25 @@ class BubblesAnimation extends React.Component {
             }, 400)
         }
     }
+    removeItem = (id) => {
+        console.log(id)
+        let newItems = this.state.items.filter( i => i.id !== id)
+        // или delete this.state.items[id]
+        this.setState({items: newItems })
+    }
 
-    clear(){
-        this.setState( { items: []} );
+    renderItem = ({id, item}) => {
+
+        return (
+            <BubbleAnimated key={id} size={item.size}
+                            color={item.color} count={item.count}
+                            from={item.from} to={item.to}
+                            handleTransitionEnd={() => this.removeItem(id)}/>
+        )
     }
     render() {
-        const items = this.state.items.map((item) =>
-            <BubbleAnimated
-                size={item.size}
-                color={item.color}
-                count={item.count}
-                from={item.from}
-                to={item.to}
-            >
-            </BubbleAnimated>
-        )
-
+        const items = _.map(this.state.items, this.renderItem);
+        console.log(items)
         return (
             <div>
                 {items}

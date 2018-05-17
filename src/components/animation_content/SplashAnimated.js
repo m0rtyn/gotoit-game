@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import {Motion, spring} from 'react-motion';
 
 class SplashAnimated extends Component {
-
+    transitionEnd = () => {
+        this.props.handleTransitionEnd();
+    }
     render() {
         let { target, size, color } = this.props;
         return (
@@ -13,7 +15,10 @@ class SplashAnimated extends Component {
             >
                 {({scale, opacity}) => {
                     if(scale===2) {
-                        return null
+                        {
+                            this.transitionEnd();
+                            return null
+                        }
                     } else
                     return(
                         <div style={{
@@ -40,7 +45,7 @@ class SplashAnimated extends Component {
 }
 
 SplashAnimated.propTypes = {
-    size: PropTypes.number.isRequired,
+    size: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
 
     target: PropTypes.object.isRequired,
