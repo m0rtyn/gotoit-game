@@ -16,7 +16,7 @@ export const animation_data = {
         name: 'refactor',
         color: '#FFAB40'
     },
-    disign: {
+    design: {
         name: 'design',
         color: '#FF69B4'
     },

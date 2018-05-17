@@ -869,7 +869,7 @@ class App extends Component {
         data.game_paused = true;
         clearInterval(this.timerID);
         this.setState({data: data});
-        this.animation.clear();
+        //this.animation.clear();
     }
 
     setGameSpeed(speed) {

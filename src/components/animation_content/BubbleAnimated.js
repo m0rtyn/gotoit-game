@@ -5,7 +5,9 @@ import SplashAnimated from "./SplashAnimated";
 
 
 class BubbleAnimated extends Component {
-
+    transitionEnd = () => {
+        this.props.handleTransitionEnd();
+    }
     render() {
         let { size, color, count } = this.props;
         let from, to;
