@@ -87,7 +87,7 @@ class ProjectModel {
         }
     }
 
-    applyWork(work, worker, rad = false, creativity = false, pair = false, overtimed = false) {
+    applyWork(work, worker, project, animation, focus_on, rad = false, creativity = false, pair = false, overtimed = false) {
         var learned = JSON.parse(JSON.stringify(skills));
 
         Object.keys(work).forEach((stat) => {
@@ -125,17 +125,31 @@ class ProjectModel {
                     this.stored_wisdom[stat] += bugs;
                     let prevented = this.runTests(bugs);
                     if (prevented) {
-                        chatMessage(formName(), ' does '+tasks+' tasks and creates '+bugs+' bugs in '+stat+', but tests prevent '+prevented+' of them', 'warning');
+                        if ( tasks !== 0){
+                            animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id);
+                        }
+                        if ( bugs !== 0){
+                            animation.addBubbleAnimation(bugs, bugs, worker.id, project.id);
+                        }
+                        //chatMessage(formName(), ' does '+tasks+' tasks and creates '+bugs+' bugs in '+stat+', but tests prevent '+prevented+' of them', 'warning');
                         bugs -= prevented;
                         tasks += prevented;
                         tasks = Math.min(this.needs(stat), tasks); // а может пусть делают побольше с разбега?) убрать ли?
                     }
                     else {
-                        chatMessage(formName(), ' does '+tasks+' tasks and creates '+bugs+' bugs in '+stat, 'warning');
+                        if ( tasks !== 0){
+                            animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id);
+                        }
+                        if ( bugs !== 0){
+                            animation.addBubbleAnimation('bugs', bugs, worker.id, project.id);
+                        }
+                        //chatMessage(formName(), ' does '+tasks+' tasks and creates '+bugs+' bugs in '+stat, 'warning');
                     }
                 }
                 else {
-                    chatMessage(formName(), ' does '+tasks+' '+stat+' tasks', 'info');
+                    if ( tasks !== 0){
+                        animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id);
+                    }
                 }
 
                 if (support) this.supporter = null;
