@@ -4,7 +4,7 @@ import _ from 'lodash';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
 
-import {skills} from '../data/knowledge';
+import {skills} from '../game/knowledge';
 
 
 class ProjectOfferBlock extends Component {

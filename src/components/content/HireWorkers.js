@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import _ from 'lodash';
 import StatsBar from '../StatsBar';
 import HiringAgency from '../HiringAgency';
-import {skills} from "../../data/knowledge";
+import {skills} from "../../game/knowledge";
 
 class HireWorkers extends Component {
     constructor(props) {

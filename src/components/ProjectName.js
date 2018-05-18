@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-import {project_sizes} from '../data/knowledge';
+import {project_sizes} from '../game/knowledge';
 
 class ProjectName extends Component {
     render() {

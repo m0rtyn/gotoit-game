@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 import ProjectModel from '../../models/ProjectModel';
 
-import {project_platforms, project_kinds} from '../../data/knowledge';
+import {project_platforms, project_kinds} from '../../game/knowledge';
 
 class StartProject extends Component {
     constructor(props) {

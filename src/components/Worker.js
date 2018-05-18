@@ -8,7 +8,7 @@ import ProjectName from './ProjectName';
 
 //import {addAction} from '../components/ToastNest';
 
-import {skills_names, workers_bonus_items, roles, education} from '../data/knowledge';
+import {skills_names, workers_bonus_items, roles, education} from '../game/knowledge';
 
 class Worker extends Component {
     constructor(props) {

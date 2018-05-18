@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-//import {offices} from '../data/knowledge';
+//import {offices} from '../game/knowledge';
 
 class Office extends Component {
     render() {

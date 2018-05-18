@@ -9,7 +9,7 @@ import bulkStyler from '../services/bulkStyler';
 import WorkerModel from '../models/WorkerModel';
 import ProjectModel from '../models/ProjectModel';
 
-import {player_backgrounds, technologies, skills_1} from '../data/knowledge';
+import {player_backgrounds, technologies, skills_1} from '../game/knowledge';
 
 export var player = null;
 

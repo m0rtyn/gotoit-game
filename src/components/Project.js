@@ -12,7 +12,7 @@ import TeamDialog from './TeamDialog';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
 
-import {skills_names, skills, technologies} from '../data/knowledge';
+import {skills_names, skills, technologies} from '../game/knowledge';
 
 
 class Project extends Component {
