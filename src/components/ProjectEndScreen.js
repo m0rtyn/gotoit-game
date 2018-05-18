@@ -5,7 +5,7 @@ import SimpleModal from './SimpleModal';
 import ProjectReport from './ProjectReport';
 import ProjectsTop from '../services/ProjectsTop';
 
-import {skills_names, project_platforms, project_kinds} from '../data/knowledge';
+import {skills_names, project_platforms, project_kinds} from '../game/knowledge';
 
 
 class ProjectEndScreen extends Component {

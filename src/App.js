@@ -24,9 +24,9 @@ import ProjectsTop from './services/ProjectsTop';
 
 import Lorer from './services/Lorer';
 
-import {skills_names, project_platforms, project_kinds, meetings, workers_bonus_items, technologies, skills_true} from './data/knowledge';
+import {skills_names, project_platforms, project_kinds, meetings, workers_bonus_items, technologies, skills_true} from './game/knowledge';
 
-import app_state from './data/AppData';
+import app_state from './game/AppData';
 
 export var tick = 0;
 

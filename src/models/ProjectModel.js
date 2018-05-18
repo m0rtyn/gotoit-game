@@ -5,7 +5,7 @@ import bulkStyler from '../services/bulkStyler';
 import {chatMessage} from "../components/Chat";
 
 
-import {skills, skills_inf, project_kinds, project_platforms, project_sizes} from '../data/knowledge';
+import {skills, skills_inf, project_kinds, project_platforms, project_sizes} from '../game/knowledge';
 import {hired, projects_done} from '../App';
 
 export var projects_generated = 0;

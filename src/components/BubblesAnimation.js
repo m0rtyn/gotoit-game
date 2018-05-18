@@ -1,6 +1,6 @@
 import React from 'react'
 import BubbleAnimated from "./animation_content/BubbleAnimated";
-import {genAnimationData} from "../data/animation_data";
+import {genAnimationData} from "../game/animation_data";
 import _ from 'lodash'
 
 let isFreshed = false;

@@ -5,7 +5,7 @@ import _ from 'lodash';
 import {chatMessage} from "../components/Chat";
 
 import bulkStyler from '../services/bulkStyler';
-import {skills, workers_bonus_items, meetings, worker_character_types} from '../data/knowledge';
+import {skills, workers_bonus_items, meetings, worker_character_types} from '../game/knowledge';
 
 import {addAction} from '../components/ToastNest';
 

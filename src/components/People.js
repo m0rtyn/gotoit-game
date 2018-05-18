@@ -6,7 +6,7 @@ import Worker from './Worker';
 
 import Office from './Office';
 
-import {skills, offices} from '../data/knowledge';
+import {skills, offices} from '../game/knowledge';
 
 class People extends Component {
     constructor(props) {
