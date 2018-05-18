@@ -59,6 +59,14 @@ export const workers_bonus_items = {
     }
 };
 
+export const worker_character_types = [
+    {name: 'Normal', description: 'Balanced character without pronounced abilities'},
+    {name: 'Modest', description: 'Rarely requires a pay raise, but is slower to learn'},
+    {name: 'Workaholic', description: 'Spends more time on work, but more often requires an increase in earnings'},
+    {name: 'Wonk', description: 'Likes to learn, but is more often distracted by extraneous things'},
+    {name: 'Gifted', description: 'High learning rate, but does not like to study'}
+];
+
 export const player_backgrounds = {
     //  autodidact: {name: 'Autodidact', money: 1000, start_tech: ['creativity'], text: 'Inspired researcher, looking own way. Eclectic stats.'},
     //  university: {name: 'Student', money: 5000, start_tech: ['tdd'], text: 'Fundamental education according to verified program. Flat stats.'},

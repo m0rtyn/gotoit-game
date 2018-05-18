@@ -21,6 +21,9 @@ class ButtonToolbar extends Component {
                         <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('Loans'); }}>Loans</button>
                     </span>
                     <span className="flex-element">
+                        <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('Advertising'); }}>Advertising</button>
+                    </span>
+                    <span className="flex-element">
                         <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('Exchange'); }}>Exchange</button>
                     </span>
                     <span className="flex-element">

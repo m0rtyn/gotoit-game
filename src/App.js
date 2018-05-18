@@ -10,6 +10,7 @@ import './css/bootstrap-slider.css';
 import './css/App.css';
 
 import Layout from './components/Layout';
+import BubblesAnimation  from './components/BubblesAnimation'
 import {addMessage, addAction} from './components/ToastNest';
 import {chatMessage} from "./components/Chat";
 
@@ -101,6 +102,8 @@ class App extends Component {
         this.buyGadget = this.buyGadget.bind(this);
 
         this.howManyEmployers = this.howManyEmployers.bind(this);
+
+
 
 
         app_state.data.helpers['playGame'] = this.playGame;
@@ -372,7 +375,9 @@ class App extends Component {
             case 'vacancy':
                 if (data.money >= 100) {
                     this.chargeMoney(100);
-                    data.rumor += 10;
+                    let newRumor = data.rumor;
+                    data.rumor += Math.floor(Math.sqrt(newRumor)/data.rumor);
+                    console.log(data.rumor)
                 }
                 else {
                     console.log('not enough money');
@@ -866,6 +871,7 @@ class App extends Component {
         data.game_paused = true;
         clearInterval(this.timerID);
         this.setState({data: data});
+        //this.animation.clear();
     }
 
     setGameSpeed(speed) {
@@ -963,6 +969,29 @@ class App extends Component {
         tick = time.tick;
         //time.hour++;
         time.hour = game_date.getHours();
+
+        if (time.hour === 1 && time.date === 15 && game_date.getDate() === 15) {
+
+            // get Salary
+            // sorting workers from lowest to highest salary
+            let workers = data.workers.sort((worker1, worker2) => {
+                return worker1.salary - worker2.salary;
+            });
+
+            workers.forEach((worker) => {
+                if (!worker.is_player) {
+                    let salary = worker.getSalary();
+
+                    if ((data.money - salary) > 0) {
+                        this.chargeMoney(salary, true);
+                        worker.facts.money_earned += salary;
+                        worker.get_monthly_salary = true;
+                    } else {
+                        worker.get_monthly_salary = false;
+                    }
+                }
+            });
+        }
 
         if (time.hour === 0) {
             console.log('A new day');
@@ -1233,8 +1262,8 @@ class App extends Component {
                 worker.drainStamina();
             }
 
-            // if you money end, your guys don't work
-            if (!worker.is_player && (data.money - worker.getSalary()) < 0) return false;
+            // if you don't pay, your guys don't work
+            if (!worker.is_player && !worker.get_monthly_salary) return false;
 
             let worker_meetings = data.projects.filter((project) => { return (project.isNeed(this.getRelation(worker.id, project.id)) && project.stage === 'open' && project.type === 'meeting' && !project.is_paused);});
             //console.log(worker_meetings, data.relations);
@@ -1278,6 +1307,7 @@ class App extends Component {
         let overtimed = false;
 
         let worker_roles = this.getRelation(worker.id, project.id);
+
         let focus_on = (this.getTechnology(project.id, 'agile'))
             ? _.maxBy(Object.keys(project.getNeeds(worker_roles)), function (o) {
             return project.needs(o);
@@ -1327,11 +1357,8 @@ class App extends Component {
         }
 
 
-        // get Salary
         if (!worker.is_player) {
-            let salary = worker.getSalary();
-            this.chargeMoney(salary, true);
-            worker.facts.money_earned += salary;
+            let salary = worker.getSalary() / 160;
             project.facts.money_spent += salary;
         }
         worker.drainStamina();
@@ -1343,16 +1370,20 @@ class App extends Component {
 
         // Creativity
         if (creativity && is_working_time && (_.random(1, 5) === 1)) {
+
             skip_work = true;
             worker.standing--;
             worker.facts.training_tasks_done += worker.getSideResource();
-            chatMessage(formName(), 'I spent an hour to my pet-project.', 'warning');
+            console.log('creativityy')
+            this.animation.addBubbleAnimation('creativity', 0, worker.id, worker.id);
+            //chatMessage(formName(), 'I spent an hour to my pet-project.', 'warning');
         }
 
         // Agile
         if (!skip_work && this.getTechnology(project.id, 'agile')
             && (_.min([project.planedTasksQuantity(), project.tasksQuantity()]) > _.random((Math.PI * Math.sqrt(project.originalyTasksQuantity())), project.originalyTasksQuantity()))
             && _.random(1, worker.effects['backlog'] > 0 ? 2 : 4) === 1) {
+
             let retrospected = worker.getSideResource();
             if (retrospected > 0) {
                 var res = _.sample(Object.keys(project.getNeeds(worker_roles)));
@@ -1368,7 +1399,8 @@ class App extends Component {
                 //project.needs[res] -= retrospected;
                 //project.needs_max[res] -= retrospected;
                 project.reward -= cut;
-                chatMessage(formName(), 'cut ' + retrospected + ' ' + res + ' tasks and ' + cut + '$', 'success');
+                this.animation.addBubbleAnimation('agile', retrospected, worker.id, project.id);
+                //chatMessage(formName(), 'cut ' + retrospected + ' ' + res + ' tasks and ' + cut + '$', 'success');
                 skip_work = true;
             }
         }
@@ -1377,12 +1409,13 @@ class App extends Component {
         if (!skip_work && this.getTechnology(project.id, 'tdd') && project.tests < project.planedTasksQuantity() &&
             ((project.tests / project.planedTasksQuantity()) < (project.tasksQuantity() / project.planedTasksQuantity())) &&
             _.random(1, (worker.effects['test'] > 0 ? 2 : 4)) === 1) {
-            //console.log('writing tests!');
+
             let tests = Math.min(project.planedTasksQuantity() - project.tests, worker.getRareSideResource());
             worker.facts.tests_wrote += tests;
             project.facts.tests_wrote += tests;
             project.tests += tests;
-            chatMessage(formName(), ' wrote ' + tests + ' tests!', 'success');
+            this.animation.addBubbleAnimation('tdd', tests, worker.id, project.id);
+            //chatMessage(formName(), ' wrote ' + tests + ' tests!', 'success');
             skip_work = true;
         }
 
@@ -1393,12 +1426,13 @@ class App extends Component {
                     _.random(([0, 0.1, 1, 2, 3, 4][project.size]) * Math.sqrt(project.complexity), Math.sqrt(project.planedTasksQuantity())))
                 )
             ) {
-                //console.log('refactoring!');
+
                 let refactoring = Math.min(project.complexity, worker.getRareSideResource());
                 worker.facts.refactored += refactoring;
                 project.facts.refactored += refactoring;
                 project.complexity -= refactoring;
-                chatMessage(formName(), ' refactored ' + refactoring + ' complexity!', 'success');
+                this.animation.addBubbleAnimation('agile', refactoring, worker.id, project.id);
+                //chatMessage(formName(), ' refactored ' + refactoring + ' complexity!', 'success');
                 skip_work = true;
             }
         }
@@ -1412,9 +1446,10 @@ class App extends Component {
         // Work
         if (!skip_work) {
             worker.addExperience(
-                project.applyWork(
+                project.applyWork( //для анимации добавляю this.animation и focus_on в параметры applyWork
                     worker.getResources(worker_roles, focus_on, micromanagement),
-                    worker, rad, creativity, pair, overtimed));
+                    worker, project, this.animation, focus_on, rad, creativity, pair, overtimed));
+
         }
 
         return true;
@@ -1424,7 +1459,11 @@ class App extends Component {
 
     render() {
         return (
-            <Layout data={this.state.data}/>
+            <div>
+                <BubblesAnimation onRef={ref => (this.animation = ref)}/>
+                <Layout data={this.state.data}/>
+
+            </div>
         );
     }
 }

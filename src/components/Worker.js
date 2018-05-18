@@ -99,9 +99,10 @@ class Worker extends Component {
         }) ();
 
         return (
-            <div className="well well-sm fat">
+            <div id={worker.id} className="well well-sm fat">
                 {worker.name} {worker.is_player ? 'Player' : <span>{worker.getSalary()}$</span>}
                 {worker.in_vacation ? ' on vacation! ' : ''}
+                {worker.get_monthly_salary ? '' : ' unpaid! '}
 
                 <Portal ref="manage" closeOnEsc closeOnOutsideClick openByClickOn={manage_button}>
                     <TeamDialog>
@@ -145,6 +146,7 @@ class Worker extends Component {
                                 </div>
                             </div>
                             <StatsBar stats={efficiency_data} data={this.props.data} />
+                            <div>{`Character: ${worker.character.name}. ${worker.character.description}.`}</div>
                             <p5>
                                 {worker.tellFeelings()}
 

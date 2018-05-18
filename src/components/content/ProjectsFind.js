@@ -3,12 +3,11 @@ import React, { Component } from 'react';
 import ProjectOfferBlock from '../ProjectOfferBlock';
 
 import SalesAgency from '../SalesAgency';
-import SalesDepartment from '../SalesDepartment';
 
 class ProjectsFind extends Component {
 
     render() {
-
+        const data = this.props.data;
         let offered = (candidate) => { return <ProjectOfferBlock key={candidate.id} candidate={candidate} data={this.props.data} /> };
 
         return <div>
@@ -26,7 +25,17 @@ class ProjectsFind extends Component {
                             Sales Department
                             <button className="btn btn-info hidden" onClick={this.props.data.helpers.contractSearch}>Search 1000$</button>
                         </h4>
-                        <SalesDepartment data={this.props.data} />
+
+                        <div className="progress slim">
+                            <div className='progress-bar' role="progressbar"
+                                 style={{width: Math.min(100, data.reputation)+'%'}}>
+                                <label>{data.reputation}%</label>
+                            </div>
+                        </div>
+
+                        <span className="flex-element">
+                                <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('Advertising'); }}>Advertising</button>
+                        </span>
                     </div>
                 </div>
             </div>
