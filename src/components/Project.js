@@ -103,7 +103,7 @@ class Project extends Component {
         });
         let team = [];
         data.workers.forEach((worker) => {
-            if (worker.id in team_ids) { team.push(worker); }
+            if (worker.id in team_ids && worker.get_monthly_salary) { team.push(worker); }
         });
         const team_label = team.map((worker) => { return label(worker.id, worker.name); });
 

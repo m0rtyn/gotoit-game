@@ -18,6 +18,7 @@ class WorkerModel {
     constructor(name, stats, is_player = false) {
         this.id = is_player ? 'player' : _.uniqueId('worker');
         this.name = name;
+        this.gender = ['male', 'female'][_.random(0, 1)]
         this.stats = stats;
         this.is_player = is_player;
         this.expirience = JSON.parse(JSON.stringify(skills));
