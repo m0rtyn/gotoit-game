@@ -14,6 +14,9 @@ import ValueCache from '../services/ValueCache';
 
 import {getData, tick} from '../App';
 
+import maleAvatar from '../icons/male.png'
+import femaleAvatar from '../icons/female.png'
+
 class WorkerModel {
     constructor(name, stats, gender, is_player = false) {
         this.id = is_player ? 'player' : _.uniqueId('worker');
@@ -26,14 +29,15 @@ class WorkerModel {
         this.standing_after_salary_rising = 0;
         this.morale = 100;
         this.accept_default = true;
+        this.avatar = gender === 'male' ? maleAvatar : femaleAvatar;
 
         this.temper = {
             earliness: _.random(0, 3), variability: _.random(0, 3)
         };
 
         this.character = worker_character_types[_.random(0, 4)]
-        this.salary_coefficient = this.character.name == 'Workaholic' ? -15 : this.character.name == 'Modest' ? 20 : 0
-        this.thirst_to_knowledge_coefficient = this.character.name == 'Gifted' ? 0.75 : this.character.name == 'Wonk' ? 1.25 : 1
+        this.salary_coefficient = this.character.name === 'Workaholic' ? -15 : this.character.name === 'Modest' ? 20 : 0
+        this.thirst_to_knowledge_coefficient = this.character.name === 'Gifted' ? 0.75 : this.character.name === 'Wonk' ? 1.25 : 1
 
 
         this.feelings = new ValueCache(24, () => { return Narrator.workerFeelings(this); }); //{tick: 0, value: ''};
@@ -117,7 +121,7 @@ class WorkerModel {
     isWorkingTime(time, micromanagement, office_things) {
         let variability = _.random(-this.temper.variability, this.temper.variability);
         let mod = variability + this.temper.earliness;
-        let character_working_mod = this.character.name == 'Workaholic' ? -2 : this.character.name == 'Wonk' ? 2 : 0
+        let character_working_mod = this.character.name === 'Workaholic' ? -2 : this.character.name === 'Wonk' ? 2 : 0
 
         //let office_things_bonus = (office_things.coffeemaker ? 10 : 0) + (office_things.lanch ? 25 : 0 ) + office_things.gadget;
 
@@ -337,6 +341,17 @@ class WorkerModel {
         return new WorkerModel(this.genName(gender), stats, gender);
     }
 
+    static generatePlayer(gender) {
+        let name = '';//prompt('Type your name', this.genName());
+
+        return new WorkerModel(
+            name,
+            _.mapValues(skills, () => { return 1; }),// {design: 1, manage: 1, program: 1},
+            gender,
+            true
+        );
+    }
+
     static generateBlank() {
         return this.generateWithStats(JSON.parse(JSON.stringify(skills)));
     }
@@ -355,15 +370,6 @@ class WorkerModel {
         return worker;
     }
 
-    static generatePlayer() {
-        let name = '';//prompt('Type your name', this.genName());
-
-        return new WorkerModel(
-            name,
-            _.mapValues(skills, () => { return 1; }), // {design: 1, manage: 1, program: 1},
-            true
-        );
-    }
 
     static genName(gender) {
         if (gender === 'male') {
