@@ -3,7 +3,7 @@ import _ from 'lodash';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
-import {project_kinds, project_platforms} from '../../data/knowledge';
+import {project_kinds, project_platforms} from '../../game/knowledge';
 
 
 class MarketTop extends Component {

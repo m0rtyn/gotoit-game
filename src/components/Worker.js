@@ -8,7 +8,7 @@ import ProjectName from './ProjectName';
 
 //import {addAction} from '../components/ToastNest';
 
-import {skills_names, workers_bonus_items, roles, education} from '../data/knowledge';
+import {skills_names, workers_bonus_items, roles, education} from '../game/knowledge';
 
 class Worker extends Component {
     constructor(props) {
@@ -99,7 +99,7 @@ class Worker extends Component {
         }) ();
 
         return (
-            <div className="well well-sm fat">
+            <div id={worker.id} className="well well-sm fat">
                 {worker.name} {worker.is_player ? 'Player' : <span>{worker.getSalary()}$</span>}
                 {worker.in_vacation ? ' on vacation! ' : ''}
                 {worker.get_monthly_salary ? '' : ' unpaid! '}

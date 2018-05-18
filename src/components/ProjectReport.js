@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
 
-import {skills, technologies} from '../data/knowledge';
+import {skills, technologies} from '../game/knowledge';
 
 
 class Project extends Component {

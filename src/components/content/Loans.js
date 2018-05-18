@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {loans} from '../../data/knowledge';
+import {loans} from '../../game/knowledge';
 
 
 class Loans extends Component {

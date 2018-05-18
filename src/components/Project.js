@@ -12,7 +12,7 @@ import TeamDialog from './TeamDialog';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
 
-import {skills_names, skills, technologies} from '../data/knowledge';
+import {skills_names, skills, technologies} from '../game/knowledge';
 
 
 class Project extends Component {
@@ -136,7 +136,7 @@ class Project extends Component {
         const release_button = project.doneQuantity() > 0 && project.type === 'own' && project.stage !== 'fixing' ? <button className="btn btn-success" onClick={() => {this.props.data.helpers.fixProject(project.id)}}>Release!</button> : '';
 
         return (
-            <div className="well well-sm fat">
+            <div id={project.id} className="well well-sm fat">
                 <div>
                     <div className="flex-container-column">
                     <label className="flex-element"> <ProjectName project={project} /> </label>

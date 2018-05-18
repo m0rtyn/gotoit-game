@@ -6,7 +6,7 @@ import ReactBootstrapSlider from 'react-bootstrap-slider';
 
 import TeamDialog from './TeamDialog';
 
-import {skills_names, roles, skills, project_sizes} from '../data/knowledge';
+import {skills_names, roles, skills, project_sizes} from '../game/knowledge';
 
 
 class SalesAgency extends Component {
