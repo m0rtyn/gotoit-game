@@ -19,9 +19,11 @@ class Creation extends Component {
 
         let back = _.sample(_.keys(player_backgrounds));
 
+
         this.state = {
             step: 'welcome', // welcome, creation
-            suggest_name: WorkerModel.genName(),
+            gender: 'male',
+            suggest_name: WorkerModel.genName('male'),
             selected_background: back, //'specialist',
             technologist: _.sample(_.keys(player_backgrounds['technologist'].spices)),
             specialist: _.sample(_.keys(player_backgrounds['specialist'].spices)),
@@ -140,6 +142,13 @@ class Creation extends Component {
         this.refs.creation.openPortal();
     }
 
+    handleGenderChange = (changeEvent) => {
+        this.setState({
+            gender: changeEvent.target.value,
+            suggest_name: WorkerModel.genName(changeEvent.target.value)
+        })
+    }
+
     render() {
         const data = this.props.data;
         const selected_background = player_backgrounds[this.state.selected_background];
@@ -171,41 +180,58 @@ class Creation extends Component {
 
                                     :
                                     <div>
-                                <h3 className="text-center">
-                                    Choose <input type="text" name="background" className="form-inline"
-                                                  value={this.state.suggest_name}
-                                                  onChange={(event) => {
-                                                      this.setState({suggest_name: event.target.value})
-                                                  }}
-                                                  onKeyPress={(event) => {
-                                                      event.target.style.width = ((event.target.value.length + 2) * 14) + 'px';
-                                                  }}
-                                /> Background
-                                </h3>
-                                <div className="panel panel-info slim">
-                                    <div className="flex-container-row slim">
-                                        {Object.keys(player_backgrounds).map((background) => {
-                                            return <div key={background} className="flex-element slim">
-                                                <div className="radio text-center slim">
-                                                    <label className="slim">
-                                                        <h3 className="text-center">
-                                                            <input type="radio" name="background" value={background}
-                                                                   checked={this.state.selected_background === background}
-                                                                   onChange={(event) => {
-                                                                       this.setState({selected_background: event.target.value})
-                                                                   }}/>
-                                                            {player_backgrounds[background].name}
-                                                        </h3>
-                                                    </label>
+                                        <h3 className="text-center">
+                                            <span className="form-check">
+                                                <input className="form-check-input" type="radio"
+                                                       value="male" checked={this.state.gender === 'male'}
+                                                       onChange={this.handleGenderChange}
+                                                />
+                                                        Male
+                                            </span>
+                                            <span className="form-check">
+                                                <input className="form-check-input" type="radio" value="female"
+                                                       checked={this.state.gender === 'female'}
+                                                       onChange={this.handleGenderChange}
+
+                                                />
+                                                        Female
+                                            </span>
+                                        </h3>
+                                    <h3 className="text-center">
+                                        Choose name <input type="text" name="background" className="form-inline"
+                                                      value={this.state.suggest_name}
+                                                      onChange={(event) => {
+                                                          this.setState({suggest_name: event.target.value})
+                                                      }}
+                                                      onKeyPress={(event) => {
+                                                          event.target.style.width = ((event.target.value.length + 2) * 14) + 'px';
+                                                      }}
+                                    /> Background
+                                    </h3>
+                                    <div className="panel panel-info slim">
+                                        <div className="flex-container-row slim">
+                                            {Object.keys(player_backgrounds).map((background) => {
+                                                return <div key={background} className="flex-element slim">
+                                                    <div className="radio text-center slim">
+                                                        <label className="slim">
+                                                            <h3 className="text-center">
+                                                                <input type="radio" name="background" value={background}
+                                                                       checked={this.state.selected_background === background}
+                                                                       onChange={(event) => {
+                                                                           this.setState({selected_background: event.target.value})
+                                                                       }}/>
+                                                                {player_backgrounds[background].name}
+                                                            </h3>
+                                                        </label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        })}
+                                            })}
+                                        </div>
+                                        <div>
+                                            <p className="text-center slim">{player_backgrounds[this.state.selected_background].text}</p>
+                                            <p className="text-center slim"> Start tech: {('technologist' === this.state.selected_background) ? "Agile, Test Drive Development or Refactoring" : technologies[player_backgrounds[this.state.selected_background].start_tech].name} </p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p className="text-center slim">{player_backgrounds[this.state.selected_background].text}</p>
-                                        <p className="text-center slim"> Start tech: {('technologist' === this.state.selected_background) ? "Agile, Test Drive Development or Refactoring" : technologies[player_backgrounds[this.state.selected_background].start_tech].name} </p>
-                                    </div>
-                                </div>
                                     <div className="panel panel-success slim">
                                         <div className="text-center slim">
                                             <h4 className="text-center filament">Start {selected_background.might}:</h4>
