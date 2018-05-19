@@ -1,5 +1,5 @@
 
-import {tick} from '../App';
+import {current_tick} from '../App';
 
 class ValueCache {
     constructor(expire, sourceFunction) {
@@ -10,9 +10,9 @@ class ValueCache {
     }
 
     get() {
-        if (this.last_refresh === 0 || tick - this.last_refresh > this.expire) {
+        if (this.last_refresh === 0 || current_tick - this.last_refresh > this.expire) {
             this.stored_value = this.sourceFunction();
-            this.last_refresh = tick;
+            this.last_refresh = current_tick;
         }
         return this.stored_value;
     }

@@ -5,18 +5,18 @@ import _ from 'lodash';
 import {chatMessage} from "../components/Chat";
 
 import bulkStyler from '../services/bulkStyler';
-import {skills, workers_bonus_items, meetings, worker_character_types} from '../game/knowledge';
+import {skills, workers_bonus_items, meetings, worker_character_types, skills_1} from '../game/knowledge';
 
 import {addAction} from '../components/ToastNest';
 
 import Narrator from '../services/Narrator';
 import ValueCache from '../services/ValueCache';
 
-import {getData, tick} from '../App';
+import {getData, current_tick} from '../App';
 
 class WorkerModel {
-    constructor(name, stats, is_player = false) {
-        this.id = is_player ? 'player' : _.uniqueId('worker');
+    constructor(name = 'Default', stats = skills_1, is_player = false) {
+        this.id = is_player ? 'player' : _.uniqueId('worker') + '_' + _.random(100000000, 999999999);
         this.name = name;
         this.stats = stats;
         this.is_player = is_player;
@@ -31,11 +31,11 @@ class WorkerModel {
         };
 
         this.character = worker_character_types[_.random(0, 4)]
-        this.salary_coefficient = this.character.name == 'Workaholic' ? -15 : this.character.name == 'Modest' ? 20 : 0
-        this.thirst_to_knowledge_coefficient = this.character.name == 'Gifted' ? 0.75 : this.character.name == 'Wonk' ? 1.25 : 1
+        this.salary_coefficient = this.character.name === 'Workaholic' ? -15 : this.character.name === 'Modest' ? 20 : 0
+        this.thirst_to_knowledge_coefficient = this.character.name === 'Gifted' ? 0.75 : this.character.name === 'Wonk' ? 1.25 : 1
 
 
-        this.feelings = new ValueCache(24, () => { return Narrator.workerFeelings(this); }); //{tick: 0, value: ''};
+        this.feelings = new ValueCache(24, () => { return Narrator.workerFeelings(this); }); //{current_tick: 0, value: ''};
 
         this.efficiency = new ValueCache(24, () => { return this.calcEfficiencyReal() });
 
@@ -100,6 +100,7 @@ class WorkerModel {
     }
 
     tellFeelings() {
+        if (! this.feelings.get) this.feelings = new ValueCache(24, () => { return Narrator.workerFeelings(this); });
         return this.feelings.get();
     }
 
@@ -116,7 +117,7 @@ class WorkerModel {
     isWorkingTime(time, micromanagement, office_things) {
         let variability = _.random(-this.temper.variability, this.temper.variability);
         let mod = variability + this.temper.earliness;
-        let character_working_mod = this.character.name == 'Workaholic' ? -2 : this.character.name == 'Wonk' ? 2 : 0
+        let character_working_mod = this.character.name === 'Workaholic' ? -2 : this.character.name === 'Wonk' ? 2 : 0
 
         //let office_things_bonus = (office_things.coffeemaker ? 10 : 0) + (office_things.lanch ? 25 : 0 ) + office_things.gadget;
 
@@ -139,17 +140,17 @@ class WorkerModel {
     }
 
     getEfficiency() {
-     //   if (tick < 10) return 100;
+     //   if (current_tick < 10) return 100;
 
         let efficiency = this.calcEfficiency();
 
         /*
-        if (((tick - this.facts.tick_hired)/24) < 30) return 100;
-        if (((tick - this.facts.tick_hired)/24) < 100) return Math.floor((efficiency + 100) / 2);
+        if (((current_tick - this.facts.tick_hired)/24) < 30) return 100;
+        if (((current_tick - this.facts.tick_hired)/24) < 100) return Math.floor((efficiency + 100) / 2);
         */
 
         // smooth first 14 days
-     //   if (((tick - this.facts.tick_hired)/24) < 14) return Math.floor((efficiency + 100) / 2);
+     //   if (((current_tick - this.facts.tick_hired)/24) < 14) return Math.floor((efficiency + 100) / 2);
 
         return efficiency;
     }
@@ -160,7 +161,7 @@ class WorkerModel {
     }
 
     workloadPenalty() {
-        const task_preferred = (Math.ceil((tick - this.facts.tick_hired)/24) * 3);
+        const task_preferred = (Math.ceil((current_tick - this.facts.tick_hired)/24) * 3);
         const tasks_stream = Math.max(Math.min(Math.floor(20 * (1-((200+task_preferred) / ((200+(this.facts.tasks_done - this.facts.training_tasks_done)))))), 20), -20);
         const overloaded = Math.floor((100 - this.morale) / 5);
      //   console.log('Workload: ' + tasks_stream + ' ' + overloaded);
@@ -210,6 +211,7 @@ class WorkerModel {
     }
 
     calcEfficiency() { // happiness
+        if (! this.efficiency.get) this.efficiency = new ValueCache(24, () => { return this.calcEfficiencyReal() });
        // return this.calcEfficiencyReal();
         return this.efficiency.get();
     }
@@ -354,7 +356,7 @@ class WorkerModel {
 
         return new WorkerModel(
             name,
-            _.mapValues(skills, () => { return 1; }), // {design: 1, manage: 1, program: 1},
+            skills_1, // {design: 1, manage: 1, program: 1},
             true
         );
     }

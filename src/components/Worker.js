@@ -61,7 +61,7 @@ class Worker extends Component {
         const worker = this.props.worker;
 
         const manage_button = <button className="btn btn-success btn-sm" style={{margin: "5px 5px 5px 5px"}}>Manage</button>;
-
+        
         const stats_data = _.mapValues(worker.stats, (val, stat) => {
             return {
                 name: stat,
