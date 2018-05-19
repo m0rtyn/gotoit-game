@@ -327,7 +327,7 @@ class WorkerModel {
     }
 
     static generateGender() {
-        return ['male', 'female'][_.random(0, 1)];
+        return _.random(1, 100) > 70 ? 'famale' : 'male'
     }
 
     static generate(quality=1) {
