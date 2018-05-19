@@ -111,3 +111,12 @@ div {
 .form-check {
     padding: 5px;
 }
+.avatar {
+    width: 30%;
+    height: 100px;
+
+}
+.worker_stats {
+    width: 70%;
+    height: 100px;
+}

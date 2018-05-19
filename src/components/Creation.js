@@ -55,7 +55,7 @@ class Creation extends Component {
 
         let stats = this.getPlayerStats();
 
-        let tmp_player = WorkerModel.generatePlayer();
+        let tmp_player = WorkerModel.generatePlayer(this.state.gender);
 
         tmp_player.stats = stats;
         tmp_player.name = this.state.suggest_name;
@@ -192,13 +192,12 @@ class Creation extends Component {
                                                 <input className="form-check-input" type="radio" value="female"
                                                        checked={this.state.gender === 'female'}
                                                        onChange={this.handleGenderChange}
-
                                                 />
                                                         Female
                                             </span>
                                         </h3>
                                     <h3 className="text-center">
-                                        Choose name <input type="text" name="background" className="form-inline"
+                                        Choose <input type="text" name="background" className="form-inline"
                                                       value={this.state.suggest_name}
                                                       onChange={(event) => {
                                                           this.setState({suggest_name: event.target.value})
@@ -206,7 +205,7 @@ class Creation extends Component {
                                                       onKeyPress={(event) => {
                                                           event.target.style.width = ((event.target.value.length + 2) * 14) + 'px';
                                                       }}
-                                    /> Background
+                                    /> background
                                     </h3>
                                     <div className="panel panel-info slim">
                                         <div className="flex-container-row slim">
