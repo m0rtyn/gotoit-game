@@ -7,7 +7,7 @@ import ReactBootstrapSlider from 'react-bootstrap-slider';
 import _ from 'lodash';
 import classNames from 'classnames';
 
-import {tick} from '../App';
+import {current_tick} from '../App';
 import TeamDialog from './TeamDialog';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
@@ -334,7 +334,7 @@ class Project extends Component {
                                                         </div>
                                                     </div>
                                                 )}
-                                                {(tick > (24*30*3)) ? Object.keys(technologies).map(
+                                                {(current_tick > (24*30*3)) ? Object.keys(technologies).map(
                                                     (technology, i) => <div key={technology} className="row-md-1">
                                                         <div className="checkbox slim-margin small">
                                                             {!data.projects_known_technologies.includes(technology)

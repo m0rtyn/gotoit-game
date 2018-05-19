@@ -7,7 +7,7 @@ import OfficeModel from '../models/OfficeModel';
 
 import {project_platforms, project_kinds} from './knowledge';
 
-var app_state =
+var default_state =
 {
     data: {
         game_speed: 1000,
@@ -90,10 +90,14 @@ _.keys(project_platforms).forEach((platform) => {
         for (let top = 1; top <= 10; top++) {
             let q = (11-top)*2;
             let size = Math.ceil(q/5);
-            app_state.data.simplified_reports.push(ProjectModel.generate(q, size, false, kind, platform).generateReport(false));
+            default_state.data.simplified_reports.push(ProjectModel.generate(q, size, false, kind, platform).generateReport(false));
         }
     });
 });
 flush();
 
-export default app_state;
+export default default_state;
+
+export const getDefaultState = () => {
+    return _.cloneDeep(default_state);
+};

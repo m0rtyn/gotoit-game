@@ -48,7 +48,7 @@ class BubblesAnimation extends React.Component {
         }
     }
     removeItem = (id) => {
-        console.log(id)
+    //    console.log(id)
         let newItems = this.state.items.filter( i => i.id !== id)
         // или delete this.state.items[id]
         this.setState({items: newItems })
@@ -65,7 +65,7 @@ class BubblesAnimation extends React.Component {
     }
     render() {
         const items = _.map(this.state.items, this.renderItem);
-        console.log(items)
+     //   console.log(items)
         return (
             <div>
                 {items}
