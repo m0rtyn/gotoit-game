@@ -68,17 +68,19 @@ class Header extends Component {
                                     <label className="label-info">Sleeping</label>)}
                             </span>
                             <span className="flex-element">
-                                <label onClick={() => {
+                                {/*<label onClick={() => { CHEAT!
                                         data.helpers.addMoney(10000, 'usd');
-                                        }}>$</label>
+                                        }}>$</label>*/}
+                                <label>$</label>
                                 <span className="font-weight-bold"> {data.money}
                                 </span>
                             </span>
                             <span className="flex-element">
                                 <span className="font-weight-bold"> {data.btc.toFixed(4)}
-                                <label onClick={() => {
-                                        data.helpers.addMoney(1, 'btc');
-                                        }}> BTC </label>
+                                    {/*<label onClick={() => { CHEAT!
+                                            data.helpers.addMoney(1, 'btc');
+                                            }}> BTC </label>*/}
+                                    <label> BTC </label>
                                 </span>
                             </span>
                         </span>
