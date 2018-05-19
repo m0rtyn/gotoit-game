@@ -15,9 +15,10 @@ import ValueCache from '../services/ValueCache';
 import {getData, current_tick} from '../App';
 
 class WorkerModel {
-    constructor(name = 'Default', stats = skills_1, is_player = false) {
+    constructor(name = 'Default', stats = skills_1, gender = 'male', is_player = false) {
         this.id = is_player ? 'player' : _.uniqueId('worker') + '_' + _.random(100000000, 999999999);
         this.name = name;
+        this.gender = gender;
         this.stats = stats;
         this.is_player = is_player;
         this.expirience = JSON.parse(JSON.stringify(skills));
@@ -321,6 +322,10 @@ class WorkerModel {
         this.effects[meeting.meeting_type] += Math.floor(meetings[meeting.meeting_type].max_bonus / meetings[meeting.meeting_type].deadline) ;
     }
 
+    static generateGender() {
+        return ['male', 'female'][_.random(0, 1)];
+    }
+
     static generate(quality=1) {
         let stats_bulk = {design: this.genStat(quality), program: this.genStat(quality), manage: this.genStat(quality)};
 
@@ -330,7 +335,8 @@ class WorkerModel {
     }
 
     static generateWithStats(stats) {
-        return new WorkerModel(this.genName(), stats);
+        let gender = this.generateGender();
+        return new WorkerModel(this.genName(gender), stats, gender);
     }
 
     static generateBlank() {
@@ -361,9 +367,14 @@ class WorkerModel {
         );
     }
 
-    static genName() {
-        var first_names = ['Oleg', 'Igor', 'Jack', 'Kristofer', 'Mike', 'Micheal', 'Marlena', 'Loris', 'Breana', 'Gregorio', 'Freddy', 'Devin', 'Nicol', 'Alexey', 'Aleksandr', 'Peter'];
-        var second_names = ['Down', 'Kolpak', 'Vasilenko', 'Smith', 'Eisenhauer', 'Kirschbaum', 'Larose', 'Alvarado', 'Christon', 'Jaynes', 'Mcmillian', 'Radcliffe', 'Engelhard', 'Prambpharatha'];
+    static genName(gender) {
+        if (gender === 'male') {
+            var first_names = ['Oleg', 'Igor', 'Jack', 'Kristofer', 'Mike', 'Micheal', 'Marlena', 'Loris', 'Eugene', 'Gregorio', 'Freddy', 'Devin', 'Nicol', 'Alexey', 'Aleksandr', 'Peter'];
+
+        } else {
+            var first_names = ['Eve', 'Olga', 'Jenny', 'Olivia', 'Jane', 'Amelia', 'Emily', 'Mia', 'Madison', 'Grace', 'Sofia', 'Maya', 'Alice', 'Anna', 'Aurora', 'Audrey'];
+        }
+        var second_names = [ "Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Garcia", "Rodriguez", "Wilson", "Martinez", "Anderson", "Taylor", "Thomas", "Hernandez", "Moore", "Martin", "Jackson", "Thompson", "White", "Lopez", "Lee", "Gonzalez", "Harris", "Clark", "Lewis", "Robinson", "Walker", "Perez", "Hall", "Young", "Allen", "Sanchez", "Wright", "King", "Scott", "Green", "Baker", "Adams", "Nelson", "Hill", "Ramirez", "Campbell", "Mitchell", "Roberts", "Carter", "Phillips", "Evans", "Turner", "Torres", "Parker", "Collins", "Edwards", "Stewart", "Flores", "Morris", "Nguyen", "Murphy", "Rivera", "Cook", "Rogers", "Morgan", "Peterson", "Cooper", "Reed", "Bailey", "Bell", "Gomez", "Kelly", "Howard", "Ward", "Cox", "Diaz", "Richardson", "Wood", "Watson", "Brooks", "Bennett", "Gray", "James", "Reyes", "Cruz", "Hughes", "Price", "Myers", "Long", "Foster", "Sanders", "Ross", "Morales", "Powell", "Sullivan", "Russell", "Ortiz", "Jenkins", "Gutierrez", "Perry", "Butler", "Barnes", "Fisher", "Henderson", "Coleman", "Simmons", "Patterson", "Jordan", "Reynolds", "Hamilton", "Graham", "Kim", "Gonzales", "Alexander", "Ramos", "Wallace", "Griffin", "West", "Cole", "Hayes", "Chavez", "Gibson", "Bryant", "Ellis", "Stevens", "Murray", "Ford", "Marshall", "Owens", "Mcdonald", "Harrison", "Ruiz", "Kennedy", "Wells", "Alvarez", "Woods", "Mendoza", "Castillo", "Olson", "Webb", "Washington", "Tucker", "Freeman", "Burns", "Henry", "Vasquez", "Snyder", "Simpson", "Crawford", "Jimenez", "Porter", "Mason", "Shaw", "Gordon", "Wagner", "Hunter", "Romero", "Hicks", "Dixon", "Hunt", "Palmer", "Robertson", "Black", "Holmes", "Stone", "Meyer", "Boyd", "Mills", "Warren", "Fox", "Rose", "Rice", "Moreno", "Schmidt", "Patel", "Ferguson", "Nichols", "Herrera", "Medina", "Ryan", "Fernandez", "Weaver", "Daniels", "Stephens", "Gardner", "Payne", "Kelley", "Dunn", "Pierce", "Arnold", "Tran", "Spencer", "Peters", "Hawkins", "Grant", "Hansen", "Castro", "Hoffman", "Hart", "Elliott", "Cunningham", "Knight", "Bradley" ];
         return _.sample(first_names) + ' ' + _.sample(second_names);
     }
 
