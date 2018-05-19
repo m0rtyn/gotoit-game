@@ -129,7 +129,7 @@ class ProjectModel {
                             animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id);
                         }
                         if ( bugs !== 0){
-                            animation.addBubbleAnimation(bugs, bugs, worker.id, project.id);
+                            animation.addBubbleAnimation('bugs', bugs, worker.id, project.id);
                         }
                         //chatMessage(formName(), ' does '+tasks+' tasks and creates '+bugs+' bugs in '+stat+', but tests prevent '+prevented+' of them', 'warning');
                         bugs -= prevented;
