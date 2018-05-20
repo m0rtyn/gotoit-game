@@ -59,7 +59,6 @@ class App extends Component {
         this.chargeMoney = this.chargeMoney.bind(this);
         this.buyBTC = this.buyBTC.bind(this);
         this.sellBTC = this.sellBTC.bind(this);
-        this.buyMiner = this.buyMiner.bind(this);
 
         this.getRelation = this.getRelation.bind(this);
         this.modifyRelation = this.modifyRelation.bind(this);
@@ -128,7 +127,6 @@ class App extends Component {
         app_state.data.helpers['chargeMoney'] = this.chargeMoney;
         app_state.data.helpers['buyBTC'] = this.buyBTC;
         app_state.data.helpers['sellBTC'] = this.sellBTC;
-        app_state.data.helpers['buyMiner'] = this.buyMiner;
 
         app_state.data.helpers['modifyRelation'] = this.modifyRelation;
         app_state.data.helpers['getRelation'] = this.getRelation;
@@ -858,17 +856,6 @@ class App extends Component {
         this.setState({data: data});
     }
 
-    buyMiner() {
-        const data = this.state.data;
-        if (data.btc >= 0.1) {
-            data.btc -= 0.1;
-            data.miner++;
-        }
-        else {
-            console.log('not enough btc');
-        }
-        this.setState({data: data});
-    }
 
     changeOffice(new_size) {
         const data = this.state.data;

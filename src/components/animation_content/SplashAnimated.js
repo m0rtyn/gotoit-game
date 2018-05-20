@@ -47,7 +47,6 @@ class SplashAnimated extends Component {
 SplashAnimated.propTypes = {
     size: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
-
     target: PropTypes.object.isRequired,
     handleTransitionEnd: PropTypes.func.isRequired
 };
