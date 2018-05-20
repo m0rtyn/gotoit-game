@@ -1014,6 +1014,23 @@ class App extends Component {
         }
     }
 
+    paySalary(worker) {
+        if (worker.is_player) return;
+
+        let data = this.state.data;
+        let salary = worker.getSalary();
+
+        if ((data.money - salary) > 0) {
+            this.chargeMoney(salary, true);
+            worker.facts.money_earned += salary;
+            worker.get_monthly_salary = true;
+        } else {
+            worker.get_monthly_salary = false;
+        }
+
+        //worker.efficiency = worker.calcEfficiencyReal()
+    }
+
     nextDay() {
         const data = this.state.data;
         let time = data.date;
@@ -1037,17 +1054,7 @@ class App extends Component {
             });
 
             workers.forEach((worker) => {
-                if (!worker.is_player) {
-                    let salary = worker.getSalary();
-
-                    if ((data.money - salary) > 0) {
-                        this.chargeMoney(salary, true);
-                        worker.facts.money_earned += salary;
-                        worker.get_monthly_salary = true;
-                    } else {
-                        worker.get_monthly_salary = false;
-                    }
-                }
+                this.paySalary(worker)
             });
         }
 
