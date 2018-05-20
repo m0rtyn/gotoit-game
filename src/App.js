@@ -70,6 +70,7 @@ class App extends Component {
         this.hireEmployer = this.hireEmployer.bind(this);
         this.riseEmployer = this.riseEmployer.bind(this);
         this.dismissEmployer = this.dismissEmployer.bind(this);
+        this.paySalary = this.paySalary.bind(this);
         this.buyItem = this.buyItem.bind(this);
 
         this.salesDepartmentUp = this.salesDepartmentUp.bind(this);
@@ -138,6 +139,7 @@ class App extends Component {
         app_state.data.helpers['hireEmployer'] = this.hireEmployer;
         app_state.data.helpers['riseEmployer'] = this.riseEmployer;
         app_state.data.helpers['dismissEmployer'] = this.dismissEmployer;
+        app_state.data.helpers['paySalary'] = this.paySalary;
         app_state.data.helpers['buyItem'] = this.buyItem;
 
         app_state.data.helpers['salesDepartmentUp'] = this.salesDepartmentUp;
