@@ -9,7 +9,11 @@ import _ from 'lodash';
 import './css/bootstrap-slider.css';
 import './css/App.css';
 
+import {game_name} from './game/app_config';
+import {tick} from './game/tick';
+
 import Layout from './components/Layout';
+import Footer from './components/Footer.js'
 import BubblesAnimation  from './components/BubblesAnimation'
 import {addMessage, addAction} from './components/ToastNest';
 import {chatMessage} from "./components/Chat";
@@ -24,11 +28,11 @@ import ProjectsTop from './services/ProjectsTop';
 
 import Lorer from './services/Lorer';
 
-import {skills_names, project_platforms, project_kinds, meetings, workers_bonus_items, technologies, skills_true} from './data/knowledge';
+import {skills_names, project_platforms, project_kinds, meetings, workers_bonus_items, technologies, skills_true} from './game/knowledge';
 
-import app_state from './data/AppData';
+import {default_state, getDefaultState} from './game/default_state';
 
-export var tick = 0;
+export var current_tick = 0;
 
 export var hired = 1;
 export var projects_done = 0;
@@ -42,6 +46,7 @@ class App extends Component {
         this.playGame = this.playGame.bind(this);
         this.pauseGame = this.pauseGame.bind(this);
         this.setGameSpeed = this.setGameSpeed.bind(this);
+        this.newGame = this.newGame.bind(this);
 
         this.brutalSet = this.brutalSet.bind(this);
         this.brutalGet = this.brutalGet.bind(this);
@@ -54,7 +59,6 @@ class App extends Component {
         this.chargeMoney = this.chargeMoney.bind(this);
         this.buyBTC = this.buyBTC.bind(this);
         this.sellBTC = this.sellBTC.bind(this);
-        this.buyMiner = this.buyMiner.bind(this);
 
         this.getRelation = this.getRelation.bind(this);
         this.modifyRelation = this.modifyRelation.bind(this);
@@ -104,11 +108,13 @@ class App extends Component {
         this.howManyEmployers = this.howManyEmployers.bind(this);
 
 
+        let app_state = getDefaultState();
 
 
         app_state.data.helpers['playGame'] = this.playGame;
         app_state.data.helpers['pauseGame'] = this.pauseGame;
         app_state.data.helpers['setGameSpeed'] = this.setGameSpeed;
+        app_state.data.helpers['newGame'] = this.newGame;
 
         app_state.data.helpers['brutalSet'] = this.brutalSet;
         app_state.data.helpers['brutalGet'] = this.brutalGet;
@@ -121,7 +127,6 @@ class App extends Component {
         app_state.data.helpers['chargeMoney'] = this.chargeMoney;
         app_state.data.helpers['buyBTC'] = this.buyBTC;
         app_state.data.helpers['sellBTC'] = this.sellBTC;
-        app_state.data.helpers['buyMiner'] = this.buyMiner;
 
         app_state.data.helpers['modifyRelation'] = this.modifyRelation;
         app_state.data.helpers['getRelation'] = this.getRelation;
@@ -175,6 +180,56 @@ class App extends Component {
         };
     }
 
+    componentWillMount() {
+        let helpers = this.state.data.helpers;
+
+        let loaded_app_state = JSON.parse(localStorage.getItem(game_name+"_app_state"));
+
+        if (loaded_app_state) {
+            console.log(loaded_app_state.data);
+
+            _.each(loaded_app_state.data.workers, (worker, id) => {
+                loaded_app_state.data.workers[id] = _.create(WorkerModel.prototype, worker);
+            });
+
+            _.each(loaded_app_state.data.candidates.resumes, (worker, id) => {
+                loaded_app_state.data.candidates.resumes[id] = _.create(WorkerModel.prototype, worker);
+            });
+
+            _.each(loaded_app_state.data.candidates.agency, (worker, id) => {
+                loaded_app_state.data.candidates.agency[id] = _.create(WorkerModel.prototype, worker);
+            });
+
+            _.each(loaded_app_state.data.projects, (project, id) => {
+                loaded_app_state.data.projects[id] = _.create(ProjectModel.prototype, project);
+            });
+
+            _.each(loaded_app_state.data.offered_projects, (project, id) => {
+                loaded_app_state.data.offered_projects[id] = _.create(ProjectModel.prototype, project);
+            });
+
+            _.each(loaded_app_state.data.projects_end_reports, (project, id) => {
+                loaded_app_state.data.projects_end_reports[id] = _.create(ProjectModel.prototype, project);
+            });
+
+            loaded_app_state.data.helpers = helpers;
+
+            console.log(loaded_app_state.data);
+
+
+            console.log('App '+game_name+' componentDidMount with state', loaded_app_state);
+            this.setState(loaded_app_state);
+        }
+
+    }
+
+    componentDidMount() {
+        this.playGame();
+    }
+
+    componentWillUnmount() {
+        this.pauseGame();
+    }
 
     brutalGet() {
         return this.state;
@@ -186,6 +241,49 @@ class App extends Component {
 
     checkState() {
         this.setState({data: this.state.data});
+    }
+
+    playGame() {
+        clearInterval(this.timerID);
+        const data = this.state.data;
+        data.game_paused = false;
+        this.timerID = setInterval(
+            () => this.tick(true),
+            Math.floor(this.state.data.game_speed / this.state.data.game_speed_multiplier)
+        );
+        this.setState({data: data});
+    }
+
+    pauseGame() {
+        const data = this.state.data;
+        data.game_paused = true;
+        clearInterval(this.timerID);
+        this.setState({data: data});
+        //this.animation.clear();
+    }
+
+    setGameSpeed(speed) {
+        const data = this.state.data;
+        this.pauseGame();
+        data.game_speed_multiplier = speed;
+        this.playGame();
+        this.setState({data: data});
+    }
+
+    newGame() {
+        this.pauseGame();
+        if (!window.confirm('Are you ready to start a new game? Your progress will be lost.')) return false;
+        localStorage.setItem(game_name+"_app_state", null);
+
+        console.log(this);
+        console.log(this.state);
+
+        let helpers = this.state.data.helpers;
+        let new_state = getDefaultState();
+        new_state.data.helpers = helpers;
+        console.log(this.new_state);
+        this.setState(new_state);
+        //this.playGame();
     }
 
 
@@ -758,17 +856,6 @@ class App extends Component {
         this.setState({data: data});
     }
 
-    buyMiner() {
-        const data = this.state.data;
-        if (data.btc >= 0.1) {
-            data.btc -= 0.1;
-            data.miner++;
-        }
-        else {
-            console.log('not enough btc');
-        }
-        this.setState({data: data});
-    }
 
     changeOffice(new_size) {
         const data = this.state.data;
@@ -845,46 +932,13 @@ class App extends Component {
         return this.state.data.workers.length;
     }
 
-    componentWillMount(){
-    }
-
-    componentDidMount() {
-        //this.playGame();
-    }
-
-    componentWillUnmount() {
-        this.pauseGame();
-    }
-
-    playGame() {
-        const data = this.state.data;
-        data.game_paused = false;
-        this.timerID = setInterval(
-            () => this.tick(true),
-            Math.floor(this.state.data.game_speed / this.state.data.game_speed_multiplier)
-        );
-        this.setState({data: data});
-    }
-
-    pauseGame() {
-        const data = this.state.data;
-        data.game_paused = true;
-        clearInterval(this.timerID);
-        this.setState({data: data});
-        //this.animation.clear();
-    }
-
-    setGameSpeed(speed) {
-        const data = this.state.data;
-        this.pauseGame();
-        data.game_speed_multiplier = speed;
-        this.playGame();
-        this.setState({data: data});
-    }
-
 
     tick(updating = true) {
-        const data = this.state.data;
+        const state = tick(this.state);
+        const data = state.data;
+
+        //const state = this.state;
+        //const data = state.data;
 
         this.nextDay();
 
@@ -953,7 +1007,11 @@ class App extends Component {
 
         });
 
-        if (updating) this.setState({data: data});
+        state.data = data;
+        if (updating) {
+            localStorage.setItem(game_name+"_app_state", JSON.stringify(state));
+            this.setState(state);
+        }
     }
 
     nextDay() {
@@ -966,7 +1024,7 @@ class App extends Component {
         game_date.setDate(real_date.getDate()+(date.tick/24));
 
         time.tick++;
-        tick = time.tick;
+        current_tick = time.tick;
         //time.hour++;
         time.hour = game_date.getHours();
 
@@ -1067,7 +1125,7 @@ class App extends Component {
     rollTurn() {
         const data = this.state.data;
 
-        switch (tick) {
+        switch (current_tick) {
             case 5:
                 addAction('Hi there! Important messages will appear in this corner of the screen.', {timeOut: 15000, extendedTimeOut: 5000, closeButton: false}, 'success');
                 break;
@@ -1081,7 +1139,7 @@ class App extends Component {
                 break;
         }
 
-        const x = tick + 2000;
+        const x = current_tick + 2000;
         data.current_btc_price = Math.floor(Math.abs(Math.sin(x/19)) * x/3 + Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x * 2 + Math.abs(Math.sin(Math.sqrt(x/227))) * x + x);
 
         //data.current_btc_price = Math.abs(Math.sin(x/19)) * x + Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x + Math.abs(Math.sin(Math.sqrt(x/227))) * x + x;
@@ -1089,7 +1147,7 @@ class App extends Component {
         //data.current_btc_price = Math.floor(Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x + Math.abs(Math.sin(Math.sqrt(x/227))) * x);
 
         /*
-        if (tick < (24 * 7)) {
+        if (current_tick < (24 * 7)) {
             return false; // no generation first week
         }
         */
@@ -1137,7 +1195,7 @@ class App extends Component {
         }
         */
 
-        let spike = (tick > (24 * 30) & tick < (24 * 60)) ? 40 : 0;
+        let spike = (current_tick > (24 * 30) & current_tick < (24 * 60)) ? 40 : 0;
         if (Math.floor(_.random(1, 24 * (50 - Math.max(spike, Math.min(25, projects_done*0.2))))) === 1 && data.candidates.resumes.length < 5) {
             this.pushNewCandidate();
         }
@@ -1151,7 +1209,7 @@ class App extends Component {
             addAction('Excellent '+max_skill+' ninja '+worker.name+' looking for a job');
         }
 
-        if (tick < (24 * 30 * 12)) {
+        if (current_tick < (24 * 30 * 12)) {
             return false; // no additional generation first 12 month
         }
 
@@ -1167,7 +1225,7 @@ class App extends Component {
 
     pushNewProject() {
         const data = this.state.data;
-        let quality = Math.ceil(_.random(1, (tick / (24*30)) + (projects_done*0.1)));
+        let quality = Math.ceil(_.random(1, (current_tick / (24*30)) + (projects_done*0.1)));
         let size =
             (quality < 3) ? 1 : (
                 (quality < 5) ? _.random(1, _.random(1, 2)) : (
@@ -1198,7 +1256,7 @@ class App extends Component {
 
     pushNewCandidate() {
         const data = this.state.data;
-        let worker = WorkerModel.generate(_.random(1, Math.floor(3 + projects_done*0.1 + tick * 0.001)));
+        let worker = WorkerModel.generate(_.random(1, Math.floor(3 + projects_done*0.1 + current_tick * 0.001)));
         data.candidates.resumes.push(worker);
         addAction('New resume: ' + worker.name);
     }
@@ -1462,7 +1520,7 @@ class App extends Component {
             <div>
                 <BubblesAnimation onRef={ref => (this.animation = ref)}/>
                 <Layout data={this.state.data}/>
-
+                <Footer newGame={this.newGame}/>
             </div>
         );
     }

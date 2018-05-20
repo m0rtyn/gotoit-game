@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import Portal from 'react-portal';
 import _ from 'lodash';
-
 import TeamDialog from './TeamDialog';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
 
 //import {addAction} from '../components/ToastNest';
 
-import {skills_names, workers_bonus_items, roles, education} from '../data/knowledge';
+import {skills_names, workers_bonus_items, roles, education} from '../game/knowledge';
 
 class Worker extends Component {
     constructor(props) {
@@ -61,7 +60,7 @@ class Worker extends Component {
         const worker = this.props.worker;
 
         const manage_button = <button className="btn btn-success btn-sm" style={{margin: "5px 5px 5px 5px"}}>Manage</button>;
-
+        
         const stats_data = _.mapValues(worker.stats, (val, stat) => {
             return {
                 name: stat,
@@ -100,191 +99,202 @@ class Worker extends Component {
 
         return (
             <div id={worker.id} className="well well-sm fat">
-                {worker.name} {worker.is_player ? 'Player' : <span>{worker.getSalary()}$</span>}
-                {worker.in_vacation ? ' on vacation! ' : ''}
-                {worker.get_monthly_salary ? '' : ' unpaid! '}
-
-                <Portal ref="manage" closeOnEsc closeOnOutsideClick openByClickOn={manage_button}>
-                    <TeamDialog>
-                        <h2>
-                            {worker.name}
+                <div className='flex-container-column'>
+                    <div className='flex-container-row'>
+                        <div className='avatar'>
+                            <img src={worker.avatar} width='90' height='90'/>
+                        </div>
+                        <div className='worker_stats'>
+                            {worker.name} {worker.is_player ? 'Player' : <span>{worker.getSalary()}$</span>}
                             {worker.in_vacation ? ' on vacation! ' : ''}
-                        </h2>
+                            {worker.get_monthly_salary ? '' : ' unpaid! '}
 
-                        <div className="panel panel-success text-center">
-                            {worker.is_player ? '' : <span>Worker salary: ${worker.getSalary()}. Overrate bonus: {worker.getOverrate()}%.
-                            <button className="btn btn-danger btn-link" onClick={() => { data.helpers.riseEmployer(worker.id)}}>Rise Salary</button></span>}
-                        </div>
+                            <Portal ref="manage" closeOnEsc closeOnOutsideClick openByClickOn={manage_button}>
+                                <TeamDialog>
+                                    <h2>
+                                        <img width="100" height='100' src={worker.avatar} />
+                                        {worker.name}
+                                        {worker.in_vacation ? ' on vacation! ' : ''}
+                                    </h2>
 
-                        <ul>
-                            <p>Hired {Math.ceil((this.props.data.date.tick - worker.facts.tick_hired)/24)} days ago.
-                                {!worker.is_player ? <span>Got {worker.facts.money_earned}$ of salary.</span> : ''}
-                                Finished {worker.facts.project_finished} project.
-                                Did {worker.facts.tasks_done} of {worker.facts.tasks_done + worker.facts.bugs_passed} tasks.
-                                Passed {worker.facts.bugs_passed} bugs.
-                                Did {worker.facts.refactored} refactoring, wrote {worker.facts.tests_wrote} tests and retrospected {worker.facts.retrospected} tasks.
-                            </p>
-                        </ul>
-
-                        <div className="panel panel-success text-center filament">
-                            <div className="row filament">
-                                <div className="col-md-2">Happiness</div>
-                                <div className="col-md-9 progress slim">
-                                    <div className={efficiency_bar_style} role="progressbar"
-                                         style={{width: Math.min(100, worker.getEfficiency())+'%'}}>
-                                        <label className="text-sm">{worker.getEfficiency()}%</label>
+                                    <div className="panel panel-success text-center">
+                                        {worker.is_player ? '' : <span>Worker salary: ${worker.getSalary()}. Overrate bonus: {worker.getOverrate()}%.
+                                    <button className="btn btn-danger btn-link" onClick={() => { data.helpers.riseEmployer(worker.id)}}>Rise Salary</button></span>}
                                     </div>
-                                </div>
-                            </div>
-                            <div className="row filament">
-                                <div className="col-md-2">Stamina</div>
-                                <div className="col-md-9 progress slim">
-                                    <div className={vacation_bar_style} role="progressbar"
-                                         style={{width: Math.min(100, worker.stamina/50)+'%'}}>
-                                        <label>{Math.floor(worker.stamina/50)}%</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <StatsBar stats={efficiency_data} data={this.props.data} />
-                            <div>{`Character: ${worker.character.name}. ${worker.character.description}.`}</div>
-                            <p5>
-                                {worker.tellFeelings()}
 
-                                {(worker.in_vacation || worker.to_vacation)
-                                    ? worker.in_vacation ? ' Worker on vacation! ' : ' Going on vacation in ' + Math.floor(worker.to_vacation_ticker/24) + ' days. '
-                                    : <button className="btn btn-link" onClick={() => { worker.proposeVacation()}}>Propose Vacation</button>}
-                            </p5>
-                        </div>
+                                    <ul>
+                                        <p>Hired {Math.ceil((this.props.data.date.tick - worker.facts.tick_hired)/24)} days ago.
+                                            {!worker.is_player ? <span>Got {worker.facts.money_earned}$ of salary.</span> : ''}
+                                            Finished {worker.facts.project_finished} project.
+                                            Did {worker.facts.tasks_done} of {worker.facts.tasks_done + worker.facts.bugs_passed} tasks.
+                                            Passed {worker.facts.bugs_passed} bugs.
+                                            Did {worker.facts.refactored} refactoring, wrote {worker.facts.tests_wrote} tests and retrospected {worker.facts.retrospected} tasks.
+                                        </p>
+                                    </ul>
 
-                        <div className="panel panel-success text-center">
-                            <div className="checkbox-inline">
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        id={worker.id}
-                                        checked={worker.accept_default}
-                                        onChange={(e) => {
-                                            worker.accept_default = e.target.checked;
-                                            this.manageAll(e);
-                                        }}/>
-                                    Auto join to new projects
-                                </label>
-                            </div>
-                            <div className="flex-container-row slim">
-                                {skills_names.map((role, i) =>
-                                    <div key={role} className="checkbox flex-element slim">
-                                        <label>
-                                            <input
-                                                type="checkbox"
-                                                id={role}
-                                                checked={this.props.data.helpers.getRole(worker.id, role)}
-                                                onChange={this.changeRole}/>
-                                            <span>as {roles[role].profession_name} </span>
-                                        </label>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-
-                        <div className="panel panel-success text-center">
-                            <StatsBar stats={stats_data} data={this.props.data} />
-
-                            {/*    bonus items */}
-                            <div>
-                                <div className="flex-container-row">
-                                {skills_names.map((skill) => {
-                                    return <div className="flex-element flex-container-column" key={skill}>
-                                        {Object.keys(workers_bonus_items[skill]).map((item_key) => {
-                                            let item = workers_bonus_items[skill][item_key];
-                                            return worker.items[skill][item_key] === true
-                                                ? <div className="flex-element" key={item_key}>
-                                                        <label className='badge'>{item.name} {item.description}</label>
-                                                    </div>
-                                                : <div className="flex-element" key={item_key}>
-                                                    <button
-                                                        className={data.money >= item.money ? "btn btn-info btn-xs" : "btn btn-info btn-xs disabled"}
-                                                        title={item.description} id={item} onClick={() => {
-                                                        if (data.money >= item.money) {
-                                                            data.helpers.buyItem(worker, skill, item_key);
-                                                        }
-                                                    }}>Buy {item.name} ${item.money}</button>
+                                    <div className="panel panel-success text-center filament">
+                                        <div className="row filament">
+                                            <div className="col-md-2">Happiness</div>
+                                            <div className="col-md-9 progress slim">
+                                                <div className={efficiency_bar_style} role="progressbar"
+                                                     style={{width: Math.min(100, worker.getEfficiency())+'%'}}>
+                                                    <label className="text-sm">{worker.getEfficiency()}%</label>
                                                 </div>
-                                            })
-                                        }
-                                    </div>
-                                    })}
-                                </div>
-                            </div>
-                        </div>
+                                            </div>
+                                        </div>
+                                        <div className="row filament">
+                                            <div className="col-md-2">Stamina</div>
+                                            <div className="col-md-9 progress slim">
+                                                <div className={vacation_bar_style} role="progressbar"
+                                                     style={{width: Math.min(100, worker.stamina/50)+'%'}}>
+                                                    <label>{Math.floor(worker.stamina/50)}%</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <StatsBar stats={efficiency_data} data={this.props.data} />
+                                        <div>{`Character: ${worker.character.name}. ${worker.character.description}.`}</div>
+                                        <p5>
+                                            {worker.tellFeelings()}
 
-                        {/*    deprecated training project */}
-                        <div>
-                            <div className="panel panel-info text-center">
-                                {Object.keys(education).map((source) =>
-                                    ((!education[source].hide)
-                                        ? <div className="flex-container-row" key={source}>
-                                        {skills_names.map((skill) => {
-                                            return <div  className="flex-element" key={skill}>
-                                                <button className="btn btn-info" title={education[source].description} id={source} onClick={() => this.teach(skill, source)}>{education[source].name}</button>
-                                            </div>;
-                                        })}
+                                            {(worker.in_vacation || worker.to_vacation)
+                                                ? worker.in_vacation ? ' Worker on vacation! ' : ' Going on vacation in ' + Math.floor(worker.to_vacation_ticker/24) + ' days. '
+                                                : <button className="btn btn-link" onClick={() => { worker.proposeVacation()}}>Propose Vacation</button>}
+                                        </p5>
                                     </div>
-                                        : '')
-                                )}
-                            </div>
-                        </div>
 
-                        <div>
-                            {/*    Which projects {worker.name} has to work?   */}
-                            <div className="panel panel-info">
-                                {data.projects.map((project) => {
-                                        const stats_data = _.mapValues(project.needs, (val, skill) => {
-                                            return {name: skill,
-                                                val: <div key={worker.id + project.id} className="checkbox-inline">
-                                                    <label style={{width: '100%'}}>
+                                    <div className="panel panel-success text-center">
+                                        <div className="checkbox-inline">
+                                            <label>
+                                                <input
+                                                    type="checkbox"
+                                                    id={worker.id}
+                                                    checked={worker.accept_default}
+                                                    onChange={(e) => {
+                                                        worker.accept_default = e.target.checked;
+                                                        this.manageAll(e);
+                                                    }}/>
+                                                Auto join to new projects
+                                            </label>
+                                        </div>
+                                        <div className="flex-container-row slim">
+                                            {skills_names.map((role, i) =>
+                                                <div key={role} className="checkbox flex-element slim">
+                                                    <label>
                                                         <input
                                                             type="checkbox"
-                                                            id={project.id || ''}
-                                                            checked={data.helpers.getRelation(worker.id, project.id, skill)}
-                                                            onChange={(event) => {
-                                                                data.helpers.modifyRelation(worker.id, event.target.id, event.target.checked, skill);
-                                                            }}/>
-                                                        {project.needs(skill) +'/'+ project.estimate[skill]}
+                                                            id={role}
+                                                            checked={this.props.data.helpers.getRole(worker.id, role)}
+                                                            onChange={this.changeRole}/>
+                                                        <span>as {roles[role].profession_name} </span>
                                                     </label>
-                                                </div>};
-                                        });
-                                        return <div key={worker.id + project.id}>
-                                            <div><ProjectName project={project} /></div>
-                                            <StatsBar stats={stats_data} data={this.props.data} />
+                                                </div>
+                                            )}
                                         </div>
-                                    }
-                                )}
+                                    </div>
+
+                                    <div className="panel panel-success text-center">
+                                        <StatsBar stats={stats_data} data={this.props.data} />
+
+                                        {/*    bonus items */}
+                                        <div>
+                                            <div className="flex-container-row">
+                                                {skills_names.map((skill) => {
+                                                    return <div className="flex-element flex-container-column" key={skill}>
+                                                        {Object.keys(workers_bonus_items[skill]).map((item_key) => {
+                                                            let item = workers_bonus_items[skill][item_key];
+                                                            return worker.items[skill][item_key] === true
+                                                                ? <div className="flex-element" key={item_key}>
+                                                                    <label className='badge'>{item.name} {item.description}</label>
+                                                                </div>
+                                                                : <div className="flex-element" key={item_key}>
+                                                                    <button
+                                                                        className={data.money >= item.money ? "btn btn-info btn-xs" : "btn btn-info btn-xs disabled"}
+                                                                        title={item.description} id={item} onClick={() => {
+                                                                        if (data.money >= item.money) {
+                                                                            data.helpers.buyItem(worker, skill, item_key);
+                                                                        }
+                                                                    }}>Buy {item.name} ${item.money}</button>
+                                                                </div>
+                                                        })
+                                                        }
+                                                    </div>
+                                                })}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/*    deprecated training project */}
+                                    <div>
+                                        <div className="panel panel-info text-center">
+                                            {Object.keys(education).map((source) =>
+                                                ((!education[source].hide)
+                                                    ? <div className="flex-container-row" key={source}>
+                                                        {skills_names.map((skill) => {
+                                                            return <div  className="flex-element" key={skill}>
+                                                                <button className="btn btn-info" title={education[source].description} id={source} onClick={() => this.teach(skill, source)}>{education[source].name}</button>
+                                                            </div>;
+                                                        })}
+                                                    </div>
+                                                    : '')
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        {/*    Which projects {worker.name} has to work?   */}
+                                        <div className="panel panel-info">
+                                            {data.projects.map((project) => {
+                                                    const stats_data = _.mapValues(project.needs, (val, skill) => {
+                                                        return {name: skill,
+                                                            val: <div key={worker.id + project.id} className="checkbox-inline">
+                                                                <label style={{width: '100%'}}>
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        id={project.id || ''}
+                                                                        checked={data.helpers.getRelation(worker.id, project.id, skill)}
+                                                                        onChange={(event) => {
+                                                                            data.helpers.modifyRelation(worker.id, event.target.id, event.target.checked, skill);
+                                                                        }}/>
+                                                                    {project.needs(skill) +'/'+ project.estimate[skill]}
+                                                                </label>
+                                                            </div>};
+                                                    });
+                                                    return <div key={worker.id + project.id}>
+                                                        <div><ProjectName project={project} /></div>
+                                                        <StatsBar stats={stats_data} data={this.props.data} />
+                                                    </div>
+                                                }
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        {worker.is_player ? '' :
+                                            <button className="btn btn-danger btn-sm" onClick={this.dismiss}>Dismiss an
+                                                employee</button>}
+                                    </div>
+                                </TeamDialog>
+                            </Portal>
+
+                            <div className="progress filament">
+                                {/* <div classNames('progress-bar', (100 / worker.getEfficiency() < 0.5 ? 'progress-bar-danger' : 'progress-bar-warning')) role="progressbar"  */}
+                                <div className={efficiency_bar_style} role="progressbar"
+                                     style={{width: Math.min(100, worker.getEfficiency())+'%'}}>
+                                    <label>Happiness {worker.getEfficiency()}%</label>
+                                </div>
+                            </div>
+                            <div className="progress filament">
+                                <div className={vacation_bar_style} role="progressbar"
+                                     style={{width: Math.min(100, worker.stamina/50)+'%'}}>
+                                    <label>Stamina {Math.floor(worker.stamina/50)}%</label>
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            {worker.is_player ? '' :
-                                <button className="btn btn-danger btn-sm" onClick={this.dismiss}>Dismiss an
-                                    employee</button>}
-                        </div>
-                    </TeamDialog>
-                </Portal>
-
-                <div className="progress filament">
-                    {/* <div classNames('progress-bar', (100 / worker.getEfficiency() < 0.5 ? 'progress-bar-danger' : 'progress-bar-warning')) role="progressbar"  */}
-                    <div className={efficiency_bar_style} role="progressbar"
-                         style={{width: Math.min(100, worker.getEfficiency())+'%'}}>
-                        <label>Happiness {worker.getEfficiency()}%</label>
                     </div>
+                    <StatsBar stats={stats_data} data={this.props.data} />
                 </div>
-                <div className="progress filament">
-                    <div className={vacation_bar_style} role="progressbar"
-                         style={{width: Math.min(100, worker.stamina/50)+'%'}}>
-                        <label>Stamina {Math.floor(worker.stamina/50)}%</label>
-                    </div>
-                </div>
-
-                <StatsBar stats={stats_data} data={this.props.data} />
             </div>
+
+
         );
     }
 }

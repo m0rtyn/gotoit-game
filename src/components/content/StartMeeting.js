@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {tick} from '../../App';
+import {current_tick} from '../../App';
 
-import {meetings, technologies} from '../../data/knowledge';
+import {meetings, technologies} from '../../game/knowledge';
 
 class StartMeeting extends Component {
     constructor(props) {
@@ -45,7 +45,7 @@ class StartMeeting extends Component {
                                 return <div key={technology}>
                                     {!data.projects_known_technologies.includes(technology)
                                         ?
-                                        <div className={(tick > (24*30*3)) ? "" : "hidden"}>
+                                        <div className={(current_tick > (24*30*3)) ? "" : "hidden"}>
                                             <div className="panel panel-info">
                                                 <button
                                                     className="btn btn-default btn-xs disabled">{meeting.name}</button>

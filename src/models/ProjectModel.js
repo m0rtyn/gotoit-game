@@ -5,7 +5,7 @@ import bulkStyler from '../services/bulkStyler';
 import {chatMessage} from "../components/Chat";
 
 
-import {skills, skills_inf, project_kinds, project_platforms, project_sizes} from '../data/knowledge';
+import {skills, skills_inf, project_kinds, project_platforms, project_sizes} from '../game/knowledge';
 import {hired, projects_done} from '../App';
 
 export var projects_generated = 0;
@@ -16,7 +16,7 @@ class ProjectModel {
         this.stage = 'ready';
         this.is_paused = false;
 
-        this.id = _.uniqueId('project');
+        this.id = _.uniqueId('project') + '_' + _.random(100000000, 999999999);
         this.name = name;
         this.type = type; //  project, training, hackathon, draft, own
         this.hot = false;
@@ -167,7 +167,7 @@ class ProjectModel {
                 this.facts.bugs_passed += bugs;
                 this.bugs[stat] += bugs;
 
-                let boost_from_character = worker.character.name == 'Gifted' ? 2 : worker.character.name == 'Modest' ? 0.5 : 1
+                let boost_from_character = worker.character.name === 'Gifted' ? 2 : worker.character.name === 'Modest' ? 0.5 : 1
 
                 let learn = Math.floor((tasks + (bugs * 2)) * boost_from_character);
                 learned[stat] +=

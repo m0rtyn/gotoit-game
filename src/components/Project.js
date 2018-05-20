@@ -7,12 +7,12 @@ import ReactBootstrapSlider from 'react-bootstrap-slider';
 import _ from 'lodash';
 import classNames from 'classnames';
 
-import {tick} from '../App';
+import {current_tick} from '../App';
 import TeamDialog from './TeamDialog';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
 
-import {skills_names, skills, technologies} from '../data/knowledge';
+import {skills_names, skills, technologies} from '../game/knowledge';
 
 
 class Project extends Component {
@@ -103,7 +103,7 @@ class Project extends Component {
         });
         let team = [];
         data.workers.forEach((worker) => {
-            if (worker.id in team_ids) { team.push(worker); }
+            if (worker.id in team_ids && worker.get_monthly_salary) { team.push(worker); }
         });
         const team_label = team.map((worker) => { return label(worker.id, worker.name); });
 
@@ -334,7 +334,7 @@ class Project extends Component {
                                                         </div>
                                                     </div>
                                                 )}
-                                                {(tick > (24*30*3)) ? Object.keys(technologies).map(
+                                                {(current_tick > (24*30*3)) ? Object.keys(technologies).map(
                                                     (technology, i) => <div key={technology} className="row-md-1">
                                                         <div className="checkbox slim-margin small">
                                                             {!data.projects_known_technologies.includes(technology)

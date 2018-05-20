@@ -5,19 +5,23 @@ import _ from 'lodash';
 import {chatMessage} from "../components/Chat";
 
 import bulkStyler from '../services/bulkStyler';
-import {skills, workers_bonus_items, meetings, worker_character_types} from '../data/knowledge';
+import {skills, workers_bonus_items, meetings, worker_character_types, skills_1} from '../game/knowledge';
 
 import {addAction} from '../components/ToastNest';
 
 import Narrator from '../services/Narrator';
 import ValueCache from '../services/ValueCache';
 
-import {getData, tick} from '../App';
+import {getData, current_tick} from '../App';
+
+import maleAvatar from '../icons/male.png'
+import femaleAvatar from '../icons/female.png'
 
 class WorkerModel {
-    constructor(name, stats, is_player = false) {
-        this.id = is_player ? 'player' : _.uniqueId('worker');
+    constructor(name = 'Default', stats = skills_1, gender = 'male', is_player = false) {
+        this.id = is_player ? 'player' : _.uniqueId('worker') + '_' + _.random(100000000, 999999999);
         this.name = name;
+        this.gender = gender;
         this.stats = stats;
         this.is_player = is_player;
         this.expirience = JSON.parse(JSON.stringify(skills));
@@ -25,17 +29,18 @@ class WorkerModel {
         this.standing_after_salary_rising = 0;
         this.morale = 100;
         this.accept_default = true;
+        this.avatar = gender === 'male' ? maleAvatar : femaleAvatar;
 
         this.temper = {
             earliness: _.random(0, 3), variability: _.random(0, 3)
         };
 
         this.character = worker_character_types[_.random(0, 4)]
-        this.salary_coefficient = this.character.name == 'Workaholic' ? -15 : this.character.name == 'Modest' ? 20 : 0
-        this.thirst_to_knowledge_coefficient = this.character.name == 'Gifted' ? 0.75 : this.character.name == 'Wonk' ? 1.25 : 1
+        this.salary_coefficient = this.character.name === 'Workaholic' ? -15 : this.character.name === 'Modest' ? 20 : 0
+        this.thirst_to_knowledge_coefficient = this.character.name === 'Gifted' ? 0.75 : this.character.name === 'Wonk' ? 1.25 : 1
 
 
-        this.feelings = new ValueCache(24, () => { return Narrator.workerFeelings(this); }); //{tick: 0, value: ''};
+        this.feelings = new ValueCache(24, () => { return Narrator.workerFeelings(this); }); //{current_tick: 0, value: ''};
 
         this.efficiency = new ValueCache(24, () => { return this.calcEfficiencyReal() });
 
@@ -100,6 +105,7 @@ class WorkerModel {
     }
 
     tellFeelings() {
+        if (! this.feelings.get) this.feelings = new ValueCache(24, () => { return Narrator.workerFeelings(this); });
         return this.feelings.get();
     }
 
@@ -116,7 +122,7 @@ class WorkerModel {
     isWorkingTime(time, micromanagement, office_things) {
         let variability = _.random(-this.temper.variability, this.temper.variability);
         let mod = variability + this.temper.earliness;
-        let character_working_mod = this.character.name == 'Workaholic' ? -2 : this.character.name == 'Wonk' ? 2 : 0
+        let character_working_mod = this.character.name === 'Workaholic' ? -2 : this.character.name === 'Wonk' ? 2 : 0
 
         //let office_things_bonus = (office_things.coffeemaker ? 10 : 0) + (office_things.lanch ? 25 : 0 ) + office_things.gadget;
 
@@ -139,17 +145,17 @@ class WorkerModel {
     }
 
     getEfficiency() {
-     //   if (tick < 10) return 100;
+     //   if (current_tick < 10) return 100;
 
         let efficiency = this.calcEfficiency();
 
         /*
-        if (((tick - this.facts.tick_hired)/24) < 30) return 100;
-        if (((tick - this.facts.tick_hired)/24) < 100) return Math.floor((efficiency + 100) / 2);
+        if (((current_tick - this.facts.tick_hired)/24) < 30) return 100;
+        if (((current_tick - this.facts.tick_hired)/24) < 100) return Math.floor((efficiency + 100) / 2);
         */
 
         // smooth first 14 days
-     //   if (((tick - this.facts.tick_hired)/24) < 14) return Math.floor((efficiency + 100) / 2);
+     //   if (((current_tick - this.facts.tick_hired)/24) < 14) return Math.floor((efficiency + 100) / 2);
 
         return efficiency;
     }
@@ -160,7 +166,7 @@ class WorkerModel {
     }
 
     workloadPenalty() {
-        const task_preferred = (Math.ceil((tick - this.facts.tick_hired)/24) * 3);
+        const task_preferred = (Math.ceil((current_tick - this.facts.tick_hired)/24) * 3);
         const tasks_stream = Math.max(Math.min(Math.floor(20 * (1-((200+task_preferred) / ((200+(this.facts.tasks_done - this.facts.training_tasks_done)))))), 20), -20);
         const overloaded = Math.floor((100 - this.morale) / 5);
      //   console.log('Workload: ' + tasks_stream + ' ' + overloaded);
@@ -210,6 +216,7 @@ class WorkerModel {
     }
 
     calcEfficiency() { // happiness
+        if (! this.efficiency.get) this.efficiency = new ValueCache(24, () => { return this.calcEfficiencyReal() });
        // return this.calcEfficiencyReal();
         return this.efficiency.get();
     }
@@ -319,6 +326,10 @@ class WorkerModel {
         this.effects[meeting.meeting_type] += Math.floor(meetings[meeting.meeting_type].max_bonus / meetings[meeting.meeting_type].deadline) ;
     }
 
+    static generateGender() {
+        return ['male', 'female'][_.random(0, 1)];
+    }
+
     static generate(quality=1) {
         let stats_bulk = {design: this.genStat(quality), program: this.genStat(quality), manage: this.genStat(quality)};
 
@@ -328,7 +339,19 @@ class WorkerModel {
     }
 
     static generateWithStats(stats) {
-        return new WorkerModel(this.genName(), stats);
+        let gender = this.generateGender();
+        return new WorkerModel(this.genName(gender), stats, gender);
+    }
+
+    static generatePlayer(gender) {
+        let name = '';//prompt('Type your name', this.genName());
+
+        return new WorkerModel(
+            name,
+            _.mapValues(skills, () => { return 1; }),// {design: 1, manage: 1, program: 1},
+            gender,
+            true
+        );
     }
 
     static generateBlank() {
@@ -349,19 +372,14 @@ class WorkerModel {
         return worker;
     }
 
-    static generatePlayer() {
-        let name = '';//prompt('Type your name', this.genName());
+    static genName(gender) {
+        if (gender === 'male') {
+            var first_names = ['Oleg', 'Igor', 'Jack', 'Kristofer', 'Mike', 'Micheal', 'Marlena', 'Loris', 'Eugene', 'Gregorio', 'Freddy', 'Devin', 'Nicol', 'Alexey', 'Aleksandr', 'Peter'];
 
-        return new WorkerModel(
-            name,
-            _.mapValues(skills, () => { return 1; }), // {design: 1, manage: 1, program: 1},
-            true
-        );
-    }
-
-    static genName() {
-        var first_names = ['Oleg', 'Igor', 'Jack', 'Kristofer', 'Mike', 'Micheal', 'Marlena', 'Loris', 'Breana', 'Gregorio', 'Freddy', 'Devin', 'Nicol', 'Alexey', 'Aleksandr', 'Peter'];
-        var second_names = ['Down', 'Kolpak', 'Vasilenko', 'Smith', 'Eisenhauer', 'Kirschbaum', 'Larose', 'Alvarado', 'Christon', 'Jaynes', 'Mcmillian', 'Radcliffe', 'Engelhard', 'Prambpharatha'];
+        } else {
+            var first_names = ['Eve', 'Olga', 'Jenny', 'Olivia', 'Jane', 'Amelia', 'Emily', 'Mia', 'Madison', 'Grace', 'Sofia', 'Maya', 'Alice', 'Anna', 'Aurora', 'Audrey'];
+        }
+        var second_names = [ "Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Garcia", "Rodriguez", "Wilson", "Martinez", "Anderson", "Taylor", "Thomas", "Hernandez", "Moore", "Martin", "Jackson", "Thompson", "White", "Lopez", "Lee", "Gonzalez", "Harris", "Clark", "Lewis", "Robinson", "Walker", "Perez", "Hall", "Young", "Allen", "Sanchez", "Wright", "King", "Scott", "Green", "Baker", "Adams", "Nelson", "Hill", "Ramirez", "Campbell", "Mitchell", "Roberts", "Carter", "Phillips", "Evans", "Turner", "Torres", "Parker", "Collins", "Edwards", "Stewart", "Flores", "Morris", "Nguyen", "Murphy", "Rivera", "Cook", "Rogers", "Morgan", "Peterson", "Cooper", "Reed", "Bailey", "Bell", "Gomez", "Kelly", "Howard", "Ward", "Cox", "Diaz", "Richardson", "Wood", "Watson", "Brooks", "Bennett", "Gray", "James", "Reyes", "Cruz", "Hughes", "Price", "Myers", "Long", "Foster", "Sanders", "Ross", "Morales", "Powell", "Sullivan", "Russell", "Ortiz", "Jenkins", "Gutierrez", "Perry", "Butler", "Barnes", "Fisher", "Henderson", "Coleman", "Simmons", "Patterson", "Jordan", "Reynolds", "Hamilton", "Graham", "Kim", "Gonzales", "Alexander", "Ramos", "Wallace", "Griffin", "West", "Cole", "Hayes", "Chavez", "Gibson", "Bryant", "Ellis", "Stevens", "Murray", "Ford", "Marshall", "Owens", "Mcdonald", "Harrison", "Ruiz", "Kennedy", "Wells", "Alvarez", "Woods", "Mendoza", "Castillo", "Olson", "Webb", "Washington", "Tucker", "Freeman", "Burns", "Henry", "Vasquez", "Snyder", "Simpson", "Crawford", "Jimenez", "Porter", "Mason", "Shaw", "Gordon", "Wagner", "Hunter", "Romero", "Hicks", "Dixon", "Hunt", "Palmer", "Robertson", "Black", "Holmes", "Stone", "Meyer", "Boyd", "Mills", "Warren", "Fox", "Rose", "Rice", "Moreno", "Schmidt", "Patel", "Ferguson", "Nichols", "Herrera", "Medina", "Ryan", "Fernandez", "Weaver", "Daniels", "Stephens", "Gardner", "Payne", "Kelley", "Dunn", "Pierce", "Arnold", "Tran", "Spencer", "Peters", "Hawkins", "Grant", "Hansen", "Castro", "Hoffman", "Hart", "Elliott", "Cunningham", "Knight", "Bradley" ];
         return _.sample(first_names) + ' ' + _.sample(second_names);
     }
 
