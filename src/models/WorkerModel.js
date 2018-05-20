@@ -14,6 +14,9 @@ import ValueCache from '../services/ValueCache';
 
 import {getData, current_tick} from '../App';
 
+import maleAvatar from '../icons/male.png'
+import femaleAvatar from '../icons/female.png'
+
 class WorkerModel {
     constructor(name = 'Default', stats = skills_1, gender = 'male', is_player = false) {
         this.id = is_player ? 'player' : (_.uniqueId('worker') + '_' + _.random(100000000, 999999999));
@@ -26,6 +29,7 @@ class WorkerModel {
         this.standing_after_salary_rising = 0;
         this.morale = 100;
         this.accept_default = true;
+        this.avatar = gender === 'male' ? maleAvatar : femaleAvatar;
 
         this.temper = {
             earliness: _.random(0, 3), variability: _.random(0, 3)
@@ -337,6 +341,17 @@ class WorkerModel {
     static generateWithStats(stats) {
         let gender = this.generateGender();
         return new WorkerModel(this.genName(gender), stats, gender);
+    }
+
+    static generatePlayer(gender) {
+        let name = '';//prompt('Type your name', this.genName());
+
+        return new WorkerModel(
+            name,
+            _.mapValues(skills, () => { return 1; }),// {design: 1, manage: 1, program: 1},
+            gender,
+            true
+        );
     }
 
     static generateBlank() {
