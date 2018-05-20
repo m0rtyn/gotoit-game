@@ -33,6 +33,7 @@ import {skills_names, project_platforms, project_kinds, meetings, workers_bonus_
 import {default_state, getDefaultState} from './game/default_state';
 
 export var current_tick = 0;
+export const setCurrentTick = (tick) => { current_tick = tick; };
 
 export var hired = 1;
 export var projects_done = 0;
@@ -62,6 +63,7 @@ class App extends Component {
 
         this.getRelation = this.getRelation.bind(this);
         this.modifyRelation = this.modifyRelation.bind(this);
+        this.modifyRelationPure = this.modifyRelationPure.bind(this);
         this.getRole = this.getRole.bind(this);
         this.changeRole = this.changeRole.bind(this);
         this.hireCandidate = this.hireCandidate.bind(this);
@@ -130,6 +132,7 @@ class App extends Component {
         app_state.data.helpers['sellBTC'] = this.sellBTC;
 
         app_state.data.helpers['modifyRelation'] = this.modifyRelation;
+        app_state.data.helpers['modifyRelationPure'] = this.modifyRelationPure;
         app_state.data.helpers['getRelation'] = this.getRelation;
         app_state.data.helpers['getRole'] = this.getRole;
         app_state.data.helpers['changeRole'] = this.changeRole;
@@ -305,8 +308,13 @@ class App extends Component {
     }
 
     modifyRelation(worker_id, project_id, value, role = null, team = null) {
-      //  console.log(worker_id, project_id, value);
-        const data = this.state.data;
+        console.log(arguments);
+        this.setState(this.modifyRelationPure(this.state, worker_id, project_id, value, role, team));
+    }
+
+    modifyRelationPure(state, worker_id, project_id, value, role = null, team = null) {
+        console.log(arguments);
+        const data = state.data;
 
         let put = (worker_id, project_id) => {
             if (team !== null && !_.find(team, (worker) => { return (worker_id === worker.id); })) return false;
@@ -316,24 +324,26 @@ class App extends Component {
                 data.relations[worker_id][project_id][role] = value;
             }
             else {
-                data.relations[worker_id][project_id] = JSON.parse(JSON.stringify(data.workers_roles[worker_id]));
+                console.log(data, data.workers_roles, worker_id);
+                data.relations[worker_id][project_id] = _.clone(data.workers_roles[worker_id]); //JSON.parse(JSON.stringify());
                 //data.relations[worker_id][project_id] = value;
             }
         };
 
         if (worker_id === null) {
-            this.state.data.workers.forEach((worker) => {
+            state.data.workers.forEach((worker) => {
                 if (worker.accept_default) put(worker.id, project_id);
             });
         } else if (project_id === null) {
-            this.state.data.projects.forEach((project) => {
+            state.data.projects.forEach((project) => {
                 if (project.accept_default) put(worker_id, project.id);
             });
         } else {
             put(worker_id, project_id);
         }
 
-        this.setState({data: data});
+        state.data = data;
+        return state;
     }
 
     getRole(worker_id, role) {
@@ -936,7 +946,9 @@ class App extends Component {
 
 
     tick(updating = true) {
-        const state = tick(this.state);
+        const state = tick.call(this, this.state);
+
+        /*
         const data = state.data;
 
         //const state = this.state;
@@ -1010,6 +1022,9 @@ class App extends Component {
         });
 
         state.data = data;
+
+        */
+
         if (updating) {
             localStorage.setItem(game_name+"_app_state", JSON.stringify(state));
             this.setState(state);

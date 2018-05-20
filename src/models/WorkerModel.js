@@ -19,7 +19,7 @@ import femaleAvatar from '../icons/female.png'
 
 class WorkerModel {
     constructor(name = 'Default', stats = skills_1, gender = 'male', is_player = false) {
-        this.id = is_player ? 'player' : _.uniqueId('worker') + '_' + _.random(100000000, 999999999);
+        this.id = is_player ? 'player' : (_.uniqueId('worker') + '_' + _.random(100000000, 999999999));
         this.name = name;
         this.gender = gender;
         this.stats = stats;
@@ -370,6 +370,17 @@ class WorkerModel {
         worker.standing = Math.floor(_.random(agency_state.min_salary, agency_state.max_salary) * 26.888);
         //console.log(worker);
         return worker;
+    }
+
+    static generatePlayer() {
+        let name = '';//prompt('Type your name', this.genName());
+
+        return new WorkerModel(
+            name,
+            skills_1, // {design: 1, manage: 1, program: 1},
+            'male',
+            true
+        );
     }
 
     static genName(gender) {
