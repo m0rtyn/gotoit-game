@@ -1447,7 +1447,6 @@ class App extends Component {
             skip_work = true;
             worker.standing--;
             worker.facts.training_tasks_done += worker.getSideResource();
-            console.log('creativityy')
             this.animation.addBubbleAnimation('creativity', 0, worker.id, worker.id);
             //chatMessage(formName(), 'I spent an hour to my pet-project.', 'warning');
         }
