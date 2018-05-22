@@ -61,7 +61,7 @@ class WorkerModel {
 
         this.facts = {
             project_finished: 0,
-            tick_hired: 0, money_earned: 0,
+            tick_hired: 0, prev_salary_payment_tick: 0, money_earned: 0,
             tasks_done: 0, training_tasks_done: 0, bugs_passed: 0,
             refactored: 0, tests_wrote: 0, retrospected: 0};
 

@@ -393,6 +393,7 @@ class App extends Component {
         hired++;
         const data = this.state.data;
         worker.facts.tick_hired = data.date.tick;
+        worker.facts.prev_salary_payment_tick = data.date.tick;
         data.workers.push(worker);
         //data.workers_roles[worker.id] = JSON.parse(JSON.stringify(skills_true));
         skills_names.forEach((skill) => { this.changeRole(worker.id, skill, true); });
@@ -1031,11 +1032,20 @@ class App extends Component {
         }
     }
 
-    paySalary(worker) {
+    calcSalary(worker, current_tick) {
+        let daily_salary = Math.floor(worker.getSalary() / 160 * (160 / 30)); // (160 / 30) - working hours in one day
+        let last_month_worked_days = Math.floor((current_tick - worker.facts.prev_salary_payment_tick) / 24);
+
+        // if the employee worked full month he get fixed monthly salary,
+        // else salary calculating in depending on the days worked
+        return last_month_worked_days < 30 ? Math.floor(last_month_worked_days * daily_salary) : worker.getSalary();
+    }
+
+    paySalary(worker, current_tick) {
         if (worker.is_player) return;
 
         let data = this.state.data;
-        let salary = worker.getSalary();
+        let salary = this.calcSalary(worker, current_tick);
 
         if ((data.money - salary) > 0) {
             this.chargeMoney(salary, true);
@@ -1045,7 +1055,7 @@ class App extends Component {
             worker.get_monthly_salary = false;
         }
 
-        //worker.efficiency = worker.calcEfficiencyReal()
+        worker.facts.prev_salary_payment_tick = current_tick;
     }
 
     nextDay() {

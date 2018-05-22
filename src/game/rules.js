@@ -13,8 +13,9 @@ export const rules = {
     nextDay: {
         onTick: function(state) {
             const data = state.data;
-            let time = data.date;
             const date = data.date;
+            let time = data.date;
+            let current_tick = data.date.tick;
 
             var real_date = new Date();
             var game_date = new Date();
@@ -34,17 +35,7 @@ export const rules = {
                 });
 
                 workers.forEach((worker) => {
-                    if (!worker.is_player) {
-                        let salary = worker.getSalary();
-
-                        if ((data.money - salary) > 0) {
-                            this.chargeMoney(salary, true);
-                            worker.facts.money_earned += salary;
-                            worker.get_monthly_salary = true;
-                        } else {
-                            worker.get_monthly_salary = false;
-                        }
-                    }
+                    this.paySalary(worker, current_tick);
                 });
             }
 
