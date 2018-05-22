@@ -1033,7 +1033,7 @@ class App extends Component {
     }
 
     calcSalary(worker, current_tick) {
-        let daily_salary = Math.floor(worker.getSalary() / 160 * (160 / 30)); // (160 / 30) - working hours in one day
+        let daily_salary = Math.floor(worker.getSalary() / 160 * (160 / 30)); // (160 / 30) - working hours in a single day
         let last_month_worked_days = Math.floor((current_tick - worker.facts.prev_salary_payment_tick) / 24);
 
         // if the employee worked full month he get fixed monthly salary,
@@ -1363,13 +1363,6 @@ class App extends Component {
                 let temp_meeting = _.sample(worker_meetings);;
                 if (temp_meeting.meeting_type === 'fire' || worker.isWorkingTime(data.date, false, data.office_things)) {
                     let meeting = temp_meeting;
-                    // get Salary
-                    if (!worker.is_player) {
-                        let salary = worker.getSalary();
-                        this.chargeMoney(salary, true);
-                        worker.facts.money_earned += salary;
-                        meeting.facts.money_spent += salary;
-                    }
                     worker.drainStamina();
                     worker.gotoMeeting(meeting);
                 }
