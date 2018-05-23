@@ -31,6 +31,7 @@ class WorkerModel {
         this.accept_default = true;
         this.avatar = gender === 'male' ? maleAvatar : femaleAvatar;
 
+
         this.temper = {
             earliness: _.random(0, 3), variability: _.random(0, 3)
         };

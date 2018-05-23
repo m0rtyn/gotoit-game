@@ -1,5 +1,17 @@
 
 import _ from 'lodash';
+import applicationIcon from '../icons/gear.png';
+import gameIcon from '../icons/gamepad.svg';
+import siteIcon from '../icons/site.svg';
+import editorIcon from '../icons/pensil.svg';
+import magazineIcon from '../icons/magazine.svg';
+import serviceIcon from '../icons/information.svg';
+import databaseIcon from '../icons/database.svg';
+import crossplatformIcon from '../icons/crossplatfom.svg';
+import mobileIcon from '../icons/mobile.svg';
+import browserIcon from '../icons/browser.svg';
+import desktopIcon from '../icons/desktop.svg';
+
 
 export const skills = {design: 0, program: 0, manage: 0};
 export const skills_1 = _.mapValues(skills, () => { return 1; });
@@ -70,22 +82,22 @@ export const worker_character_types = [
 export const player_backgrounds = {
     //  autodidact: {name: 'Autodidact', money: 1000, start_tech: ['creativity'], text: 'Inspired researcher, looking own way. Eclectic stats.'},
     //  university: {name: 'Student', money: 5000, start_tech: ['tdd'], text: 'Fundamental education according to verified program. Flat stats.'},
-    technologist: {name: 'Technologist', money: 5000, might: 'technology', start_tech: [], text: 'Has a wide range of start technology.', spices: {
+    technologist: {name: 'Technologist', money: 10000, might: 'technology', start_tech: [], text: 'Has a wide range of start technology.', spices: {
         agile: {name: 'Agile Development', description: technologies.agile.description},
         tdd: {name: 'TDD', description: technologies.tdd.description},
         refactoring: {name: 'Refactoring', description: technologies.refactoring.description}
     }},
-    specialist: {name: 'Specialist', money: 5000, might: 'skill', start_tech: ['rad'], text: 'Raised their professional skills to enormous heights and buy some professional stuff.', spices: {
+    specialist: {name: 'Specialist', money: 10000, might: 'skill', start_tech: ['rad'], text: 'Raised their professional skills to enormous heights and buy some professional stuff.', spices: {
         design: {name: 'Designer', description: "Start items: "+workers_bonus_items.design.exp.name+" and "+workers_bonus_items.design.flat.name},
         program: {name: 'Programmer', description: "Start items: "+workers_bonus_items.program.exp.name+" and "+workers_bonus_items.program.flat.name},
         manage: {name: 'Manager', description: "Start items: "+workers_bonus_items.manage.exp.name+" and "+workers_bonus_items.manage.flat.name}
     }},
-    coworker: {name: 'Teamplayer', money: 5000, might: 'team',  start_tech: ['pair'], text: 'An experienced team player.', spices: {
+    coworker: {name: 'Teamplayer', money: 10000, might: 'team',  start_tech: ['pair'], text: 'An experienced team player.', spices: {
         apprentice: {name: 'Apprentice', description: 'Your partner is your follower and like you in skills.'},
         helpers: {name: 'Two helpers', description: 'Your team is two reliable helpers that support your skills.'},
         full: {name: 'Full team', description: 'Your team is three random employees.'}
     }},
-    businessman: {name: 'Businessman', money: 5000, might: 'investment',  start_tech: ['micromanagement'], text: 'Made a fortune doing business.', spices: {
+    businessman: {name: 'Businessman', money: 10000, might: 'investment',  start_tech: ['micromanagement'], text: 'Made a fortune doing business.', spices: {
         credit: {name: 'Credit Rating', description: 'Good credit story increase your credit rating and allow to take addition credit.'},
         btc: {name: 'BTC savings', description: 'Once you bought some bitcoins. Now they are worth a lot.'},
         office: {name: 'Dream office', description: 'You rented a spacious office and bought a coffeemaker. What\'s next?'}
@@ -100,20 +112,20 @@ export const offices = {
 };
 
 export const project_platforms = {
-    crossplatform: {name: 'Cross-platform', description: 'Cross-platform applications should be balanced.'},
-    mobile: {name: 'Mobile', description: 'For Mobile applications, design is important.'},
-    browser: {name: 'Browser', description: 'For Browser applications, management is important.'},
-    desktop: {name: 'Desktop', description: 'For Desktop applications, programming is important.'}
+    crossplatform: {name: 'Cross-platform', description: 'Cross-platform applications should be balanced.', icon: crossplatformIcon},
+    mobile: {name: 'Mobile', description: 'For Mobile applications, design is important.', icon: mobileIcon},
+    browser: {name: 'Browser', description: 'For Browser applications, management is important.', icon: browserIcon},
+    desktop: {name: 'Desktop', description: 'For Desktop applications, programming is important.', icon: desktopIcon}
 };
 
 export const project_kinds = {
-    application: {name: 'Application', description: 'General Applications should be balanced.'},
-    game: {name: 'Game', description: 'For Games, design is important, but do not forget about programming.'},
-    site: {name: 'Site', description: 'For Sites, design is important, but do not forget about management.'},
-    editor: {name: 'Editor', description: 'For Editors, programming is important, but do not forget about design.'},
-    magazine: {name: 'Magazine', description: 'For Magazines, management is important, but do not forget about design.'},
-    service: {name: 'Service', description: 'For Services, management is important, but do not forget about programming.'},
-    database: {name: 'Database', description: 'For Databases, programming is important, but do not forget about management.'}
+    application: {name: 'Application', description: 'General Applications should be balanced.', icon: applicationIcon},
+    game: {name: 'Game', description: 'For Games, design is important, but do not forget about programming.', icon: gameIcon},
+    site: {name: 'Site', description: 'For Sites, design is important, but do not forget about management.', icon: siteIcon},
+    editor: {name: 'Editor', description: 'For Editors, programming is important, but do not forget about design.', icon: editorIcon},
+    magazine: {name: 'Magazine', description: 'For Magazines, management is important, but do not forget about design.', icon: magazineIcon},
+    service: {name: 'Service', description: 'For Services, management is important, but do not forget about programming.', icon: serviceIcon},
+    database: {name: 'Database', description: 'For Databases, programming is important, but do not forget about management.', icon: databaseIcon}
 };
 
 export const project_sizes = {

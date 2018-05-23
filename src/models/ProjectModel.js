@@ -55,6 +55,8 @@ class ProjectModel {
             money_spent: 0,
             tasks_done: 0, bugs_passed: 0,
             refactored: 0, tests_wrote: 0, cuted_cost: 0, retrospected: 0};
+
+
     }
 
     needs(role = null) {
