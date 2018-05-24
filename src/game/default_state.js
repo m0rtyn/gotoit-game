@@ -75,7 +75,7 @@ var default_state =
 
         helpers: {},
 
-        achievements: [],
+        attainments: [],
 
         animation_items: [],
 
