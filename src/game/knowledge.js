@@ -1,16 +1,16 @@
 
 import _ from 'lodash';
-import applicationIcon from '../icons/gear.png';
-import gameIcon from '../icons/gamepad.svg';
-import siteIcon from '../icons/site.svg';
-import editorIcon from '../icons/pensil.svg';
-import magazineIcon from '../icons/magazine.svg';
-import serviceIcon from '../icons/information.svg';
-import databaseIcon from '../icons/database.svg';
-import crossplatformIcon from '../icons/crossplatfom.svg';
-import mobileIcon from '../icons/mobile.svg';
-import browserIcon from '../icons/browser.svg';
-import desktopIcon from '../icons/desktop.svg';
+import applicationIcon from '../icons/Application.svg';
+import gameIcon from '../icons/Game.svg';
+import siteIcon from '../icons/Site.svg';
+import editorIcon from '../icons/Editor.svg';
+import magazineIcon from '../icons/Shop.svg';
+import serviceIcon from '../icons/Service.svg';
+import databaseIcon from '../icons/Database.svg';
+import crossplatformIcon from '../icons/Cross-platform.svg';
+import mobileIcon from '../icons/Mobile.svg';
+import browserIcon from '../icons/Browser.svg';
+import desktopIcon from '../icons/Desktop.svg';
 
 
 export const skills = {design: 0, program: 0, manage: 0};

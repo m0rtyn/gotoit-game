@@ -14,8 +14,6 @@ import ProjectName from './ProjectName';
 
 import {skills_names, skills, technologies, project_kinds, project_platforms} from '../game/knowledge';
 
-import gameIcon from '../icons/game.png'
-
 
 class Project extends Component {
     constructor(props) {

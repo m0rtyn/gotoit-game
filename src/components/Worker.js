@@ -136,7 +136,7 @@ class Worker extends Component {
                                         <div className="row filament">
                                             <div className="col-md-2">Happiness</div>
                                             <div className="col-md-9 progress slim">
-                                                <div className={efficiency_bar_style} role="progressbar"
+                                                <div className={efficiency_bar_style} ronle="progressbar"
                                                      style={{width: Math.min(100, worker.getEfficiency())+'%'}}>
                                                     <label className="text-sm">{worker.getEfficiency()}%</label>
                                                 </div>
