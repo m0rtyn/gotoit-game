@@ -1546,7 +1546,7 @@ class App extends Component {
             <div>
                 <BubblesAnimation onRef={ref => (this.animation = ref)}/>
                 <Layout data={this.state.data}/>
-                <Footer newGame={this.newGame}/>
+                <Footer data={this.state.data} newGame={this.newGame}/>
             </div>
         );
     }

@@ -77,6 +77,8 @@ var default_state =
 
         attainments: [],
 
+        achieved: {},
+
         animation_items: [],
 
 
