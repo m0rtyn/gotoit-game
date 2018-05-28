@@ -766,25 +766,25 @@ class App extends Component {
 
         if (project.is_storyline || project.stage !== 'finish' ) return;
 
-        if (project.type === 'training' && !data.achievements.includes('FirstTraining')) {
+        if (project.type === 'training' && !data.attainments.includes('FirstTraining')) {
             data.offered_projects.push(Lorer.afterFirstTraining(project));
-            data.achievements.push('FirstTraining')
+            data.attainments.push('FirstTraining')
         }
-        if (project.size === 1 && !data.achievements.includes('FirstPart')) {
+        if (project.size === 1 && !data.attainments.includes('FirstPart')) {
             data.offered_projects.push(Lorer.afterFirstPart(project));
-            data.achievements.push('FirstPart')
+            data.attainments.push('FirstPart')
         }
-        if (project.size === 2 && !data.achievements.includes('FirstModule')) {
+        if (project.size === 2 && !data.attainments.includes('FirstModule')) {
             data.offered_projects.push(Lorer.afterFirstModule(project));
-            data.achievements.push('FirstModule')
+            data.attainments.push('FirstModule')
         }
-        if (project.size === 3 && !data.achievements.includes('FirstApplication')) {
+        if (project.size === 3 && !data.attainments.includes('FirstApplication')) {
             data.offered_projects.push(Lorer.afterFirstApplication(project));
-            data.achievements.push('FirstApplication')
+            data.attainments.push('FirstApplication')
         }
-        if (project.size === 4 && !data.achievements.includes('BigDeal')) {
+        if (project.size === 4 && !data.attainments.includes('BigDeal')) {
             data.offered_projects.push(Lorer.afterFirstBigDeal(project));
-            data.achievements.push('BigDeal')
+            data.attainments.push('BigDeal')
         }
 
         //this.checkState();
@@ -1546,7 +1546,7 @@ class App extends Component {
             <div>
                 <BubblesAnimation onRef={ref => (this.animation = ref)}/>
                 <Layout data={this.state.data}/>
-                <Footer newGame={this.newGame}/>
+                <Footer data={this.state.data} newGame={this.newGame}/>
             </div>
         );
     }
