@@ -114,8 +114,8 @@ export const offices = {
 export const project_platforms = {
     crossplatform: {name: 'Cross-platform', description: 'Cross-platform applications should be balanced.', icon: crossplatformIcon},
     mobile: {name: 'Mobile', description: 'For Mobile applications, design is important.', icon: mobileIcon},
+    desktop: {name: 'Desktop', description: 'For Desktop applications, programming is important.', icon: desktopIcon},
     browser: {name: 'Browser', description: 'For Browser applications, management is important.', icon: browserIcon},
-    desktop: {name: 'Desktop', description: 'For Desktop applications, programming is important.', icon: desktopIcon}
 };
 
 export const project_kinds = {
