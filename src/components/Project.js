@@ -134,7 +134,9 @@ class Project extends Component {
             } }}>Reject</button>;
 
         const release_button = project.doneQuantity() > 0 && project.type === 'own' && project.stage !== 'fixing' ? <button className="btn btn-success" onClick={() => {this.props.data.helpers.fixProject(project.id)}}>Release!</button> : '';
-        console.log(project_platforms[project.platform].icon)
+
+        //console.log(project_platforms[project.platform].icon)
+
         return (
             <div id={project.id} className="well well-sm fat">
                 <div>

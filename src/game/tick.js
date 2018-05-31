@@ -10,9 +10,9 @@ export function tick(state) {
     });
 
     _.each(achievements, (achievement, key) => {
-        if (state.data.achieved[key]) return
+        if (state.data.achieved[key] === true) return;
         if (achievement.rule(state)) state.data.achieved[key] = true
-    })
+    });
 
     return state;
 }
