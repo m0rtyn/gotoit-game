@@ -16,7 +16,6 @@ import Layout from './components/Layout';
 import Footer from './components/Footer.js'
 import BubblesAnimation  from './components/BubblesAnimation'
 import {addMessage, addAction} from './components/ToastNest';
-import {chatMessage} from "./components/Chat";
 
 import bulkStyler from './services/bulkStyler';
 
@@ -30,7 +29,7 @@ import Lorer from './services/Lorer';
 
 import {skills_names, project_platforms, project_kinds, meetings, workers_bonus_items, technologies, skills_true} from './game/knowledge';
 
-import {default_state, getDefaultState} from './game/default_state';
+import {getDefaultState} from './game/default_state';
 
 export var current_tick = 0;
 export const setCurrentTick = (tick) => { current_tick = tick; };
@@ -1403,10 +1402,6 @@ class App extends Component {
         let creativity = this.getTechnology(project.id, 'creativity');
         let overtime = this.getTechnology(project.id, 'overtime');
         let pair = this.getTechnology(project.id, 'pair');
-
-        const formName = () => {
-            return worker.name + (overtimed ? ' in overtime' : '');
-        };
 
         // Overtime
         let is_working_time = worker.isWorkingTime(data.date, micromanagement, data.office_things);
