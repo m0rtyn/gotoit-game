@@ -72,6 +72,7 @@ class App extends Component {
         this.hireEmployer = this.hireEmployer.bind(this);
         this.riseEmployer = this.riseEmployer.bind(this);
         this.dismissEmployer = this.dismissEmployer.bind(this);
+        this.paySalary = this.paySalary.bind(this);
         this.buyItem = this.buyItem.bind(this);
 
         this.salesDepartmentUp = this.salesDepartmentUp.bind(this);
@@ -141,6 +142,7 @@ class App extends Component {
         app_state.data.helpers['hireEmployer'] = this.hireEmployer;
         app_state.data.helpers['riseEmployer'] = this.riseEmployer;
         app_state.data.helpers['dismissEmployer'] = this.dismissEmployer;
+        app_state.data.helpers['paySalary'] = this.paySalary;
         app_state.data.helpers['buyItem'] = this.buyItem;
 
         app_state.data.helpers['salesDepartmentUp'] = this.salesDepartmentUp;
@@ -391,6 +393,7 @@ class App extends Component {
         hired++;
         const data = this.state.data;
         worker.facts.tick_hired = data.date.tick;
+        worker.facts.prev_salary_payment_tick = data.date.tick;
         data.workers.push(worker);
         //data.workers_roles[worker.id] = JSON.parse(JSON.stringify(skills_true));
         skills_names.forEach((skill) => { this.changeRole(worker.id, skill, true); });
@@ -763,25 +766,25 @@ class App extends Component {
 
         if (project.is_storyline || project.stage !== 'finish' ) return;
 
-        if (project.type === 'training' && !data.achievements.includes('FirstTraining')) {
+        if (project.type === 'training' && !data.attainments.includes('FirstTraining')) {
             data.offered_projects.push(Lorer.afterFirstTraining(project));
-            data.achievements.push('FirstTraining')
+            data.attainments.push('FirstTraining')
         }
-        if (project.size === 1 && !data.achievements.includes('FirstPart')) {
+        if (project.size === 1 && !data.attainments.includes('FirstPart')) {
             data.offered_projects.push(Lorer.afterFirstPart(project));
-            data.achievements.push('FirstPart')
+            data.attainments.push('FirstPart')
         }
-        if (project.size === 2 && !data.achievements.includes('FirstModule')) {
+        if (project.size === 2 && !data.attainments.includes('FirstModule')) {
             data.offered_projects.push(Lorer.afterFirstModule(project));
-            data.achievements.push('FirstModule')
+            data.attainments.push('FirstModule')
         }
-        if (project.size === 3 && !data.achievements.includes('FirstApplication')) {
+        if (project.size === 3 && !data.attainments.includes('FirstApplication')) {
             data.offered_projects.push(Lorer.afterFirstApplication(project));
-            data.achievements.push('FirstApplication')
+            data.attainments.push('FirstApplication')
         }
-        if (project.size === 4 && !data.achievements.includes('BigDeal')) {
+        if (project.size === 4 && !data.attainments.includes('BigDeal')) {
             data.offered_projects.push(Lorer.afterFirstBigDeal(project));
-            data.achievements.push('BigDeal')
+            data.attainments.push('BigDeal')
         }
 
         //this.checkState();
@@ -1029,6 +1032,32 @@ class App extends Component {
         }
     }
 
+    calcSalary(worker, current_tick) {
+        let daily_salary = Math.floor(worker.getSalary() / 160 * (160 / 30)); // (160 / 30) - working hours in a single day
+        let last_month_worked_days = Math.floor((current_tick - worker.facts.prev_salary_payment_tick) / 24);
+
+        // if the employee worked full month he get fixed monthly salary,
+        // else salary calculating in depending on the days worked
+        return last_month_worked_days < 30 ? Math.floor(last_month_worked_days * daily_salary) : worker.getSalary();
+    }
+
+    paySalary(worker, current_tick) {
+        if (worker.is_player) return;
+
+        let data = this.state.data;
+        let salary = this.calcSalary(worker, current_tick);
+
+        if ((data.money - salary) > 0) {
+            this.chargeMoney(salary, true);
+            worker.facts.money_earned += salary;
+            worker.get_monthly_salary = true;
+        } else {
+            worker.get_monthly_salary = false;
+        }
+
+        worker.facts.prev_salary_payment_tick = current_tick;
+    }
+
     nextDay() {
         const data = this.state.data;
         let time = data.date;
@@ -1052,17 +1081,7 @@ class App extends Component {
             });
 
             workers.forEach((worker) => {
-                if (!worker.is_player) {
-                    let salary = worker.getSalary();
-
-                    if ((data.money - salary) > 0) {
-                        this.chargeMoney(salary, true);
-                        worker.facts.money_earned += salary;
-                        worker.get_monthly_salary = true;
-                    } else {
-                        worker.get_monthly_salary = false;
-                    }
-                }
+                this.paySalary(worker)
             });
         }
 
@@ -1344,13 +1363,6 @@ class App extends Component {
                 let temp_meeting = _.sample(worker_meetings);;
                 if (temp_meeting.meeting_type === 'fire' || worker.isWorkingTime(data.date, false, data.office_things)) {
                     let meeting = temp_meeting;
-                    // get Salary
-                    if (!worker.is_player) {
-                        let salary = worker.getSalary();
-                        this.chargeMoney(salary, true);
-                        worker.facts.money_earned += salary;
-                        meeting.facts.money_spent += salary;
-                    }
                     worker.drainStamina();
                     worker.gotoMeeting(meeting);
                 }
@@ -1534,7 +1546,7 @@ class App extends Component {
             <div>
                 <BubblesAnimation onRef={ref => (this.animation = ref)}/>
                 <Layout data={this.state.data}/>
-                <Footer newGame={this.newGame}/>
+                <Footer data={this.state.data} newGame={this.newGame}/>
             </div>
         );
     }

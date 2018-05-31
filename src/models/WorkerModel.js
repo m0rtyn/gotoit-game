@@ -31,6 +31,7 @@ class WorkerModel {
         this.accept_default = true;
         this.avatar = gender === 'male' ? maleAvatar : femaleAvatar;
 
+
         this.temper = {
             earliness: _.random(0, 3), variability: _.random(0, 3)
         };
@@ -61,7 +62,7 @@ class WorkerModel {
 
         this.facts = {
             project_finished: 0,
-            tick_hired: 0, money_earned: 0,
+            tick_hired: 0, prev_salary_payment_tick: 0, money_earned: 0,
             tasks_done: 0, training_tasks_done: 0, bugs_passed: 0,
             refactored: 0, tests_wrote: 0, retrospected: 0};
 
@@ -327,7 +328,7 @@ class WorkerModel {
     }
 
     static generateGender() {
-        return ['male', 'female'][_.random(0, 1)];
+        return _.random(1, 100) > 70 ? 'famale' : 'male'
     }
 
     static generate(quality=1) {
