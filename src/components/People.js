@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import Portal from 'react-portal';
-import _ from 'lodash';
 
 import Worker from './Worker';
 
 import Office from './Office';
 
-import {skills, offices} from '../game/knowledge';
+import {offices} from '../game/knowledge';
 
 class People extends Component {
     constructor(props) {
