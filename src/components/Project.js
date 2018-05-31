@@ -144,11 +144,11 @@ class Project extends Component {
                         <div className="flex-container-row">
                             <div className='project_icon'>
                                 <div style={{ position: 'absolute' }}>
-                                    <img  src={project_platforms[project.platform].icon}
+                                    <img alt={project.name + ' avatar'} src={project_platforms[project.platform].icon}
                                          width={60} height={60}/>
                                 </div>
                                 <div style={{ position: 'absolute' }}>
-                                    <img src={project_kinds[project.kind].icon}
+                                    <img alt={project.name + ' avatar'} src={project_kinds[project.kind].icon}
                                         width={60} height={60}/>
                                 </div>
                             </div>

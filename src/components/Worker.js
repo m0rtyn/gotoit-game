@@ -102,7 +102,7 @@ class Worker extends Component {
                 <div className='flex-container-column'>
                     <div className='flex-container-row'>
                         <div className='avatar'>
-                            <img src={worker.avatar} width='90' height='90'/>
+                            <img alt={worker.name + ' avatar'} src={worker.avatar} width='90' height='90'/>
                         </div>
                         <div className='worker_stats'>
                             {worker.name} {worker.is_player ? 'Player' : <span>{worker.getSalary()}$</span>}
@@ -112,7 +112,7 @@ class Worker extends Component {
                             <Portal ref="manage" closeOnEsc closeOnOutsideClick openByClickOn={manage_button}>
                                 <TeamDialog>
                                     <h2>
-                                        <img width="100" height='100' src={worker.avatar} />
+                                        <img alt={worker.name + ' avatar'} width="100" height='100' src={worker.avatar} />
                                         {worker.name}
                                         {worker.in_vacation ? ' on vacation! ' : ''}
                                     </h2>
