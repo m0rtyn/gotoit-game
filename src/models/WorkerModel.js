@@ -344,17 +344,6 @@ class WorkerModel {
         return new WorkerModel(this.genName(gender), stats, gender);
     }
 
-    static generatePlayer(gender) {
-        let name = '';//prompt('Type your name', this.genName());
-
-        return new WorkerModel(
-            name,
-            _.mapValues(skills, () => { return 1; }),// {design: 1, manage: 1, program: 1},
-            gender,
-            true
-        );
-    }
-
     static generateBlank() {
         return this.generateWithStats(JSON.parse(JSON.stringify(skills)));
     }
@@ -373,25 +362,27 @@ class WorkerModel {
         return worker;
     }
 
-    static generatePlayer() {
+    static generatePlayer(gender) {
         let name = '';//prompt('Type your name', this.genName());
 
         return new WorkerModel(
             name,
             skills_1, // {design: 1, manage: 1, program: 1},
-            'male',
+            gender,
             true
         );
     }
 
     static genName(gender) {
+        let first_names = [];
+;
         if (gender === 'male') {
-            var first_names = ['Oleg', 'Elliott', 'Igor', 'Jack', 'Kristofer', 'Mike', 'Micheal', 'John', 'Loris', 'Eugene', 'Gregorio', 'Freddy', 'Devin', 'Nicol', 'Alexey', 'Aleksandr', 'Peter'];
+            first_names = ['Oleg', 'Elliott', 'Igor', 'Jack', 'Kristofer', 'Mike', 'Micheal', 'John', 'Loris', 'Eugene', 'Gregorio', 'Freddy', 'Devin', 'Nicol', 'Alexey', 'Aleksandr', 'Peter'];
 
         } else {
-            var first_names = ['Eve', 'Olga', 'Jenny', 'Olivia', 'Jane', 'Amelia', 'Emily', 'Mia', 'Madison', 'Grace', 'Sofia', 'Maya', 'Alice', 'Anna', 'Aurora', 'Audrey'];
+            first_names = ['Eve', 'Olga', 'Jenny', 'Olivia', 'Jane', 'Amelia', 'Emily', 'Mia', 'Madison', 'Grace', 'Sofia', 'Maya', 'Alice', 'Anna', 'Aurora', 'Audrey'];
         }
-        var second_names = [ "Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Garcia", "Rodriguez", "Wilson", "Martinez", "Anderson", "Taylor", "Thomas", "Hernandez", "Moore", "Martin", "Jackson", "Thompson", "White", "Lopez", "Lee", "Gonzalez", "Harris", "Clark", "Lewis", "Robinson", "Walker", "Perez", "Hall", "Young", "Allen", "Sanchez", "Wright", "King", "Scott", "Green", "Baker", "Adams", "Nelson", "Hill", "Ramirez", "Campbell", "Mitchell", "Roberts", "Carter", "Phillips", "Evans", "Turner", "Torres", "Parker", "Collins", "Edwards", "Stewart", "Flores", "Morris", "Nguyen", "Murphy", "Rivera", "Cook", "Rogers", "Morgan", "Peterson", "Cooper", "Reed", "Bailey", "Bell", "Gomez", "Kelly", "Howard", "Ward", "Cox", "Diaz", "Richardson", "Wood", "Watson", "Brooks", "Bennett", "Gray", "James", "Reyes", "Cruz", "Hughes", "Price", "Myers", "Long", "Foster", "Sanders", "Ross", "Morales", "Powell", "Sullivan", "Russell", "Ortiz", "Jenkins", "Gutierrez", "Perry", "Butler", "Barnes", "Fisher", "Henderson", "Coleman", "Simmons", "Patterson", "Jordan", "Reynolds", "Hamilton", "Graham", "Kim", "Gonzales", "Alexander", "Ramos", "Wallace", "Griffin", "West", "Cole", "Hayes", "Chavez", "Gibson", "Bryant", "Ellis", "Stevens", "Murray", "Ford", "Marshall", "Owens", "Mcdonald", "Harrison", "Ruiz", "Kennedy", "Wells", "Alvarez", "Woods", "Mendoza", "Castillo", "Olson", "Webb", "Washington", "Tucker", "Freeman", "Burns", "Henry", "Vasquez", "Snyder", "Simpson", "Crawford", "Jimenez", "Porter", "Mason", "Shaw", "Gordon", "Wagner", "Hunter", "Romero", "Hicks", "Dixon", "Hunt", "Palmer", "Robertson", "Black", "Holmes", "Stone", "Meyer", "Boyd", "Mills", "Warren", "Fox", "Rose", "Rice", "Moreno", "Schmidt", "Patel", "Ferguson", "Nichols", "Herrera", "Medina", "Ryan", "Fernandez", "Weaver", "Daniels", "Stephens", "Gardner", "Payne", "Kelley", "Dunn", "Pierce", "Arnold", "Tran", "Spencer", "Peters", "Hawkins", "Grant", "Hansen", "Castro", "Hoffman", "Hart", "Anderson", "Cunningham", "Knight", "Bradley" ];
+        const second_names = [ "Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Garcia", "Rodriguez", "Wilson", "Martinez", "Anderson", "Taylor", "Thomas", "Hernandez", "Moore", "Martin", "Jackson", "Thompson", "White", "Lopez", "Lee", "Gonzalez", "Harris", "Clark", "Lewis", "Robinson", "Walker", "Perez", "Hall", "Young", "Allen", "Sanchez", "Wright", "King", "Scott", "Green", "Baker", "Adams", "Nelson", "Hill", "Ramirez", "Campbell", "Mitchell", "Roberts", "Carter", "Phillips", "Evans", "Turner", "Torres", "Parker", "Collins", "Edwards", "Stewart", "Flores", "Morris", "Nguyen", "Murphy", "Rivera", "Cook", "Rogers", "Morgan", "Peterson", "Cooper", "Reed", "Bailey", "Bell", "Gomez", "Kelly", "Howard", "Ward", "Cox", "Diaz", "Richardson", "Wood", "Watson", "Brooks", "Bennett", "Gray", "James", "Reyes", "Cruz", "Hughes", "Price", "Myers", "Long", "Foster", "Sanders", "Ross", "Morales", "Powell", "Sullivan", "Russell", "Ortiz", "Jenkins", "Gutierrez", "Perry", "Butler", "Barnes", "Fisher", "Henderson", "Coleman", "Simmons", "Patterson", "Jordan", "Reynolds", "Hamilton", "Graham", "Kim", "Gonzales", "Alexander", "Ramos", "Wallace", "Griffin", "West", "Cole", "Hayes", "Chavez", "Gibson", "Bryant", "Ellis", "Stevens", "Murray", "Ford", "Marshall", "Owens", "Mcdonald", "Harrison", "Ruiz", "Kennedy", "Wells", "Alvarez", "Woods", "Mendoza", "Castillo", "Olson", "Webb", "Washington", "Tucker", "Freeman", "Burns", "Henry", "Vasquez", "Snyder", "Simpson", "Crawford", "Jimenez", "Porter", "Mason", "Shaw", "Gordon", "Wagner", "Hunter", "Romero", "Hicks", "Dixon", "Hunt", "Palmer", "Robertson", "Black", "Holmes", "Stone", "Meyer", "Boyd", "Mills", "Warren", "Fox", "Rose", "Rice", "Moreno", "Schmidt", "Patel", "Ferguson", "Nichols", "Herrera", "Medina", "Ryan", "Fernandez", "Weaver", "Daniels", "Stephens", "Gardner", "Payne", "Kelley", "Dunn", "Pierce", "Arnold", "Tran", "Spencer", "Peters", "Hawkins", "Grant", "Hansen", "Castro", "Hoffman", "Hart", "Anderson", "Cunningham", "Knight", "Bradley" ];
         return _.sample(first_names) + ' ' + _.sample(second_names);
     }
 
