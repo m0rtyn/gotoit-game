@@ -330,7 +330,8 @@ export const rules = {
                     return false;
                 }
 
-                if (!(project.stage === 'open' || project.stage === 'fixing' )) {
+                //if (!(project.stage === 'open' || project.stage === 'fixing' )) {
+                if (!project.stage === 'open') {
                     console.log('skip calculate project ' + project.name);
                     return false;
                 }

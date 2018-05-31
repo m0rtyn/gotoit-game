@@ -120,6 +120,10 @@ div {
     height: 100px;
 
 }
+.project_icon {
+    width: 70px;
+    height: 70px;
+}
 .worker_stats {
     width: 70%;
     height: 100px;
