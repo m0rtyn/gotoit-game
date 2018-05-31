@@ -10,6 +10,10 @@
     flex-direction: row;
 }
 
+.justity-content-around {
+    justify-content: space-around;
+}
+
 .flex-element {
     flex: 1;
 }
@@ -115,6 +119,10 @@ div {
     width: 30%;
     height: 100px;
 
+}
+.project_icon {
+    width: 70px;
+    height: 70px;
 }
 .worker_stats {
     width: 70%;
