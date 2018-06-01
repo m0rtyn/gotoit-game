@@ -11,6 +11,7 @@ import {current_tick} from '../App';
 import TeamDialog from './TeamDialog';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
+import ProjectProgressBar from './ProjectProgressBar';
 
 import {skills_names, skills, technologies, project_kinds, project_platforms} from '../game/knowledge';
 
@@ -74,7 +75,10 @@ class Project extends Component {
     render() {
         const data = this.props.data;
         const project = this.props.project;
-
+        console.log(project.estimate)
+        console.log(project.original_estimate)
+        console.log(project.done)
+        console.log(project.bugs)
         const stats_data = _.mapValues(skills, (stat, key) => {
             return {name: key, // _.capitalize(key[0]),
                 val:
@@ -382,10 +386,10 @@ class Project extends Component {
                         </div>
                     </div> : ''}
 
-                {(() => {
+                {/*{(() => {
                     let errors = project.bugsQuantity();
                     let need = project.tasksQuantity();
-                    var max = Math.max(project.planedTasksQuantity(), project.tasksQuantity());
+                    let max = Math.max(project.planedTasksQuantity(), project.tasksQuantity());
                     let diff = max - need;
 
                     let sum = max + errors;
@@ -394,21 +398,11 @@ class Project extends Component {
                     let bugs = errors / sum * 100;
                     let done = (diff / sum * 100)-0.1;
 
-                    return <div className="progress slim">
-                        <div className="progress-bar progress-bar-warning" role="progressbar"
-                             style={{width: tasks+'%'}}>
-                            {need ? <label>{need} tasks</label> : ''}
-                        </div>
-                        <div className="progress-bar progress-bar-danger" role="progressbar"
-                             style={{width: bugs+'%'}}>
-                            {errors ? <label>{errors} bugs</label> : ''}
-                        </div>
-                        <div className="progress-bar progress-bar-success" role="progressbar"
-                             style={{width: done+'%'}}>
-                            {(diff) ? <label>{diff} done</label> : ''}
-                        </div>
-                    </div>;
+
+                    return
                 })()}
+*/}
+                <ProjectProgressBar project={project}/>
 
                 <StatsBar stats={stats_data} data={this.props.data} />
 

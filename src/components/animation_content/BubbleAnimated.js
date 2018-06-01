@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Motion, spring } from 'react-motion';
 import SplashAnimated from "./SplashAnimated";
 
-const animation_parameters = { stiffness: 80, damping: 20 };
+const animation_parameters = { stiffness: 65, damping: 20 };
 class BubbleAnimated extends Component {
     transitionEnd = () => {
         this.props.handleTransitionEnd();

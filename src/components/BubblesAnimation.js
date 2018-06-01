@@ -1,6 +1,6 @@
 import React from 'react'
 import BubbleAnimated from "./animation_content/BubbleAnimated";
-import {genAnimationData} from "../game/animation_data";
+import {genAnimationData} from "../game/knowledge";
 import _ from 'lodash'
 
 var timeoutID = null;
@@ -30,8 +30,8 @@ class BubblesAnimation extends React.Component {
         this.setState({ items: items, length: this.state.length + 1  });
     }
 
-    addBubbleAnimation(name, count, workerId, projectId ){
-        let animation_data = genAnimationData(name, workerId, projectId, count);
+    addBubbleAnimation(name, count, workerId, projectId, isBug = false){
+        let animation_data = genAnimationData(name, workerId, projectId, count, isBug);
         if (this.state.items.length === 0){
             this.trueAddBubbleAnimation(animation_data)
         }
@@ -43,10 +43,9 @@ class BubblesAnimation extends React.Component {
     }
 
     removeItem = (id) => {
-    //    console.log(id)
-        let newItems = this.state.items.filter( i => i.id !== id)
-        // или delete this.state.items[id]
-        this.setState({items: newItems})
+        let newItems = this.state.items.filter( i => i.id !== id);
+
+        this.setState({items: newItems});
     }
 
     renderItem = ({id, item}) => {
