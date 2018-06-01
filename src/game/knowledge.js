@@ -152,4 +152,16 @@ export const education = { // hm...
     workshop: {name: 'Workshop', hide: true, description: ''}
 };
 
+export const achievements_descriptions = {
+    'Need help': 'Rent new offices and hire as many employees as they can accommodate: 3/6/9',
+    'Money maker': 'All you need to do is just make money: 20k/50k/100k',
+    'Diligent payer': 'Problems with money? Just take a loan and pay it on time: small/medium/big',
+    'Project destroyer': 'Run on 100 projects in each level of complexity: small/medium/big',
+    'Almost rich': 'You will have to use all your financial skills to earn the required amount of money: 200k/500k/1kk',
+    'T.B.D. user quests': 'Perform quests - get achievements',
+    'Solo player': 'Do you like to work alone? Then just make money without hiring employees: 200k/500k/1kk',
+    'Customers hater': 'Earn money by doing only your projects: 200k/500k/1kk',
+    'Lazy one': 'Do you like to shift work to others? Then do it and earn money: 200k/500k/1kk'
+};
+
 export default {};
