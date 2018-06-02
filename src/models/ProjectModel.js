@@ -2,9 +2,6 @@ import _ from 'lodash';
 
 import bulkStyler from '../services/bulkStyler';
 
-import {chatMessage} from "../components/Chat";
-
-
 import {skills, skills_inf, project_kinds, project_platforms, project_sizes} from '../game/knowledge';
 import {hired, projects_done} from '../App';
 
@@ -55,6 +52,8 @@ class ProjectModel {
             money_spent: 0,
             tasks_done: 0, bugs_passed: 0,
             refactored: 0, tests_wrote: 0, cuted_cost: 0, retrospected: 0};
+
+
     }
 
     needs(role = null) {
@@ -115,11 +114,13 @@ class ProjectModel {
                     if (this.is_supported) this.is_supported = false;
                 }
 
+                /*
                 const formName = () => {
                     return worker.name
                         + (overtimed ? ' in overtime' : '')
                         + (support ? ' with support of ' + this.supporter.name : '');
                 };
+               */
 
                 if (bugs > 0) {
                     this.stored_wisdom[stat] += bugs;
@@ -129,7 +130,7 @@ class ProjectModel {
                             animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id);
                         }
                         if ( bugs !== 0){
-                            animation.addBubbleAnimation(bugs, bugs, worker.id, project.id);
+                            animation.addBubbleAnimation('bugs', bugs, worker.id, project.id);
                         }
                         //chatMessage(formName(), ' does '+tasks+' tasks and creates '+bugs+' bugs in '+stat+', but tests prevent '+prevented+' of them', 'warning');
                         bugs -= prevented;

@@ -16,7 +16,6 @@ import Layout from './components/Layout';
 import Footer from './components/Footer.js'
 import BubblesAnimation  from './components/BubblesAnimation'
 import {addMessage, addAction} from './components/ToastNest';
-import {chatMessage} from "./components/Chat";
 
 import bulkStyler from './services/bulkStyler';
 
@@ -30,9 +29,10 @@ import Lorer from './services/Lorer';
 
 import {skills_names, project_platforms, project_kinds, meetings, workers_bonus_items, technologies, skills_true} from './game/knowledge';
 
-import {default_state, getDefaultState} from './game/default_state';
+import {getDefaultState} from './game/default_state';
 
 export var current_tick = 0;
+export const setCurrentTick = (tick) => { current_tick = tick; };
 
 export var hired = 1;
 export var projects_done = 0;
@@ -62,6 +62,7 @@ class App extends Component {
 
         this.getRelation = this.getRelation.bind(this);
         this.modifyRelation = this.modifyRelation.bind(this);
+        this.modifyRelationPure = this.modifyRelationPure.bind(this);
         this.getRole = this.getRole.bind(this);
         this.changeRole = this.changeRole.bind(this);
         this.hireCandidate = this.hireCandidate.bind(this);
@@ -70,6 +71,7 @@ class App extends Component {
         this.hireEmployer = this.hireEmployer.bind(this);
         this.riseEmployer = this.riseEmployer.bind(this);
         this.dismissEmployer = this.dismissEmployer.bind(this);
+        this.paySalary = this.paySalary.bind(this);
         this.buyItem = this.buyItem.bind(this);
 
         this.salesDepartmentUp = this.salesDepartmentUp.bind(this);
@@ -129,6 +131,7 @@ class App extends Component {
         app_state.data.helpers['sellBTC'] = this.sellBTC;
 
         app_state.data.helpers['modifyRelation'] = this.modifyRelation;
+        app_state.data.helpers['modifyRelationPure'] = this.modifyRelationPure;
         app_state.data.helpers['getRelation'] = this.getRelation;
         app_state.data.helpers['getRole'] = this.getRole;
         app_state.data.helpers['changeRole'] = this.changeRole;
@@ -138,6 +141,7 @@ class App extends Component {
         app_state.data.helpers['hireEmployer'] = this.hireEmployer;
         app_state.data.helpers['riseEmployer'] = this.riseEmployer;
         app_state.data.helpers['dismissEmployer'] = this.dismissEmployer;
+        app_state.data.helpers['paySalary'] = this.paySalary;
         app_state.data.helpers['buyItem'] = this.buyItem;
 
         app_state.data.helpers['salesDepartmentUp'] = this.salesDepartmentUp;
@@ -303,8 +307,13 @@ class App extends Component {
     }
 
     modifyRelation(worker_id, project_id, value, role = null, team = null) {
-      //  console.log(worker_id, project_id, value);
-        const data = this.state.data;
+        console.log(arguments);
+        this.setState(this.modifyRelationPure(this.state, worker_id, project_id, value, role, team));
+    }
+
+    modifyRelationPure(state, worker_id, project_id, value, role = null, team = null) {
+        console.log(arguments);
+        const data = state.data;
 
         let put = (worker_id, project_id) => {
             if (team !== null && !_.find(team, (worker) => { return (worker_id === worker.id); })) return false;
@@ -314,24 +323,26 @@ class App extends Component {
                 data.relations[worker_id][project_id][role] = value;
             }
             else {
-                data.relations[worker_id][project_id] = JSON.parse(JSON.stringify(data.workers_roles[worker_id]));
+                console.log(data, data.workers_roles, worker_id);
+                data.relations[worker_id][project_id] = _.clone(data.workers_roles[worker_id]); //JSON.parse(JSON.stringify());
                 //data.relations[worker_id][project_id] = value;
             }
         };
 
         if (worker_id === null) {
-            this.state.data.workers.forEach((worker) => {
+            state.data.workers.forEach((worker) => {
                 if (worker.accept_default) put(worker.id, project_id);
             });
         } else if (project_id === null) {
-            this.state.data.projects.forEach((project) => {
+            state.data.projects.forEach((project) => {
                 if (project.accept_default) put(worker_id, project.id);
             });
         } else {
             put(worker_id, project_id);
         }
 
-        this.setState({data: data});
+        state.data = data;
+        return state;
     }
 
     getRole(worker_id, role) {
@@ -381,6 +392,7 @@ class App extends Component {
         hired++;
         const data = this.state.data;
         worker.facts.tick_hired = data.date.tick;
+        worker.facts.prev_salary_payment_tick = data.date.tick;
         data.workers.push(worker);
         //data.workers_roles[worker.id] = JSON.parse(JSON.stringify(skills_true));
         skills_names.forEach((skill) => { this.changeRole(worker.id, skill, true); });
@@ -753,25 +765,25 @@ class App extends Component {
 
         if (project.is_storyline || project.stage !== 'finish' ) return;
 
-        if (project.type === 'training' && !data.achievements.includes('FirstTraining')) {
+        if (project.type === 'training' && !data.attainments.includes('FirstTraining')) {
             data.offered_projects.push(Lorer.afterFirstTraining(project));
-            data.achievements.push('FirstTraining')
+            data.attainments.push('FirstTraining')
         }
-        if (project.size === 1 && !data.achievements.includes('FirstPart')) {
+        if (project.size === 1 && !data.attainments.includes('FirstPart')) {
             data.offered_projects.push(Lorer.afterFirstPart(project));
-            data.achievements.push('FirstPart')
+            data.attainments.push('FirstPart')
         }
-        if (project.size === 2 && !data.achievements.includes('FirstModule')) {
+        if (project.size === 2 && !data.attainments.includes('FirstModule')) {
             data.offered_projects.push(Lorer.afterFirstModule(project));
-            data.achievements.push('FirstModule')
+            data.attainments.push('FirstModule')
         }
-        if (project.size === 3 && !data.achievements.includes('FirstApplication')) {
+        if (project.size === 3 && !data.attainments.includes('FirstApplication')) {
             data.offered_projects.push(Lorer.afterFirstApplication(project));
-            data.achievements.push('FirstApplication')
+            data.attainments.push('FirstApplication')
         }
-        if (project.size === 4 && !data.achievements.includes('BigDeal')) {
+        if (project.size === 4 && !data.attainments.includes('BigDeal')) {
             data.offered_projects.push(Lorer.afterFirstBigDeal(project));
-            data.achievements.push('BigDeal')
+            data.attainments.push('BigDeal')
         }
 
         //this.checkState();
@@ -934,7 +946,9 @@ class App extends Component {
 
 
     tick(updating = true) {
-        const state = tick(this.state);
+        const state = tick.call(this, this.state);
+
+        /*
         const data = state.data;
 
         //const state = this.state;
@@ -1008,10 +1022,39 @@ class App extends Component {
         });
 
         state.data = data;
+
+        */
+
         if (updating) {
             localStorage.setItem(game_name+"_app_state", JSON.stringify(state));
             this.setState(state);
         }
+    }
+
+    calcSalary(worker, current_tick) {
+        let daily_salary = Math.floor(worker.getSalary() / 160 * (160 / 30)); // (160 / 30) - working hours in a single day
+        let last_month_worked_days = Math.floor((current_tick - worker.facts.prev_salary_payment_tick) / 24);
+
+        // if the employee worked full month he get fixed monthly salary,
+        // else salary calculating in depending on the days worked
+        return last_month_worked_days < 30 ? Math.floor(last_month_worked_days * daily_salary) : worker.getSalary();
+    }
+
+    paySalary(worker, current_tick) {
+        if (worker.is_player) return;
+
+        let data = this.state.data;
+        let salary = this.calcSalary(worker, current_tick);
+
+        if ((data.money - salary) > 0) {
+            this.chargeMoney(salary, true);
+            worker.facts.money_earned += salary;
+            worker.get_monthly_salary = true;
+        } else {
+            worker.get_monthly_salary = false;
+        }
+
+        worker.facts.prev_salary_payment_tick = current_tick;
     }
 
     nextDay() {
@@ -1037,17 +1080,7 @@ class App extends Component {
             });
 
             workers.forEach((worker) => {
-                if (!worker.is_player) {
-                    let salary = worker.getSalary();
-
-                    if ((data.money - salary) > 0) {
-                        this.chargeMoney(salary, true);
-                        worker.facts.money_earned += salary;
-                        worker.get_monthly_salary = true;
-                    } else {
-                        worker.get_monthly_salary = false;
-                    }
-                }
+                this.paySalary(worker)
             });
         }
 
@@ -1329,13 +1362,6 @@ class App extends Component {
                 let temp_meeting = _.sample(worker_meetings);;
                 if (temp_meeting.meeting_type === 'fire' || worker.isWorkingTime(data.date, false, data.office_things)) {
                     let meeting = temp_meeting;
-                    // get Salary
-                    if (!worker.is_player) {
-                        let salary = worker.getSalary();
-                        this.chargeMoney(salary, true);
-                        worker.facts.money_earned += salary;
-                        meeting.facts.money_spent += salary;
-                    }
                     worker.drainStamina();
                     worker.gotoMeeting(meeting);
                 }
@@ -1376,10 +1402,6 @@ class App extends Component {
         let creativity = this.getTechnology(project.id, 'creativity');
         let overtime = this.getTechnology(project.id, 'overtime');
         let pair = this.getTechnology(project.id, 'pair');
-
-        const formName = () => {
-            return worker.name + (overtimed ? ' in overtime' : '');
-        };
 
         // Overtime
         let is_working_time = worker.isWorkingTime(data.date, micromanagement, data.office_things);
@@ -1432,7 +1454,6 @@ class App extends Component {
             skip_work = true;
             worker.standing--;
             worker.facts.training_tasks_done += worker.getSideResource();
-            console.log('creativityy')
             this.animation.addBubbleAnimation('creativity', 0, worker.id, worker.id);
             //chatMessage(formName(), 'I spent an hour to my pet-project.', 'warning');
         }
@@ -1520,7 +1541,7 @@ class App extends Component {
             <div>
                 <BubblesAnimation onRef={ref => (this.animation = ref)}/>
                 <Layout data={this.state.data}/>
-                <Footer newGame={this.newGame}/>
+                <Footer data={this.state.data} newGame={this.newGame}/>
             </div>
         );
     }

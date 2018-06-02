@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Achievements from './content/Achievements.js';
 import Advertising from './content/Advertising.js';
 import Archive from './content/Archive.js';
 import Exchange from './content/Exchange.js';
@@ -12,6 +13,7 @@ import StartProject from '../components/content/StartProject.js';
 import Welcome from '../components/content/Welcome.js';
 
 const components = {
+    'Achievements': Achievements,
     'Advertising': Advertising,
     'Archive': Archive,
     'Exchange': Exchange,
