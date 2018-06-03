@@ -6,6 +6,7 @@ import _ from 'lodash';
 import '../../css/achievements.css';
 
 const Achievements = (props) => {
+    console.log(achievements)
     let data = props.data;
     let achievements_list = {};
     let achievements_for_render = {
@@ -17,9 +18,9 @@ const Achievements = (props) => {
     _.each(achievements, (achievement, key) => {
         if (!achievements_list[achievement.name]) {
             achievements_list[achievement.name] = {
-                'bronze': false,
-                'silver': false,
-                'gold': false,
+                bronze: false,
+                silver: false,
+                gold: false,
                 type: achievement.type,
                 name: achievement.name
             }
@@ -48,21 +49,19 @@ const Achievements = (props) => {
                     <div className="flex-container-row justity-content-around">
                         {
                             achievements_for_render[key].map((achievement, i) => {
-                                return <OverlayTrigger delay={150} placement="top" key={i} overlay={tooltip(achievement, i)}>
-                                    <span className="achievement" key={i}>
-                                        <h4 className="text-center">{achievement.name}</h4>
-                                        <div className="achievement-icon">ICON</div>
-                                        <div>
-                                            {
-                                                <div className="flex-container-row justity-content-around medals-bar">
-                                                    <span className={`medal ${achievement.bronze === true ? 'bronze-medal-unlocked' : ''}`}></span>
-                                                    <span className={`medal ${achievement.silver === true ? 'silver-medal-unlocked' : ''}`}></span>
-                                                    <span className={`medal ${achievement.gold === true ? 'gold-medal-unlocked' : ''}`}></span>
-                                                </div>
-                                            }
-                                        </div>
-                                    </span>
-                                </OverlayTrigger>
+                                return <span className="achievement" key={i}>
+                                    <h4 className="text-center">{achievement.name}</h4>
+                                    <div className="achievement-icon">ICON</div>
+                                    <div>
+                                        {
+                                            <div className="flex-container-row justity-content-around medals-bar">
+                                                <span className={`medal ${achievement.bronze === true ? 'bronze-medal-unlocked' : ''}`}></span>
+                                                <span className={`medal ${achievement.silver === true ? 'silver-medal-unlocked' : ''}`}></span>
+                                                <span className={`medal ${achievement.gold === true ? 'gold-medal-unlocked' : ''}`}></span>
+                                            </div>
+                                        }
+                                    </div>
+                                </span>
                             })
                         }
                     </div>
