@@ -21,7 +21,7 @@ class Bar extends Component {
                              }}>
                             <label>{item.value}</label>
                         </div>
-                    </OverlayTrigger> }
+                    </OverlayTrigger> )}
             </div>
         );
     }
