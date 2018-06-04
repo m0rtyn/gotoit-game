@@ -1,14 +1,13 @@
 import React from 'react';
 import {achievements} from '../../game/achievements';
-import {achievements_descriptions} from '../../game/knowledge';
 import {Tooltip, OverlayTrigger} from 'react-bootstrap'
 import _ from 'lodash';
 import '../../css/achievements.css';
 
 const Achievements = (props) => {
-    console.log(achievements)
     let data = props.data;
     let achievements_list = {};
+    let achievements_descriptions = {};
     let achievements_for_render = {
         Breakthroughts: [],
         Conquest: [],
@@ -18,9 +17,9 @@ const Achievements = (props) => {
     _.each(achievements, (achievement, key) => {
         if (!achievements_list[achievement.name]) {
             achievements_list[achievement.name] = {
-                bronze: false,
-                silver: false,
-                gold: false,
+                'bronze': false,
+                'silver': false,
+                'gold': false,
                 type: achievement.type,
                 name: achievement.name
             }
@@ -35,10 +34,9 @@ const Achievements = (props) => {
         if (achievement.type === 'challenge') achievements_for_render.Challenges.push(achievement);
     });
 
-    let tooltip = (achievement, index) => {
-        return <Tooltip id={index}>{achievements_descriptions[achievement.name]}</Tooltip>
-    };
-
+    _.each(achievements, (achievement) => {
+        achievements_descriptions[`${achievement.name} ${achievement.rank}`] = achievement.text
+    });
 
 
     return <div className="row">
@@ -52,14 +50,18 @@ const Achievements = (props) => {
                                 return <span className="achievement" key={i}>
                                     <h4 className="text-center">{achievement.name}</h4>
                                     <div className="achievement-icon">ICON</div>
-                                    <div>
-                                        {
-                                            <div className="flex-container-row justity-content-around medals-bar">
-                                                <span className={`medal ${achievement.bronze === true ? 'bronze-medal-unlocked' : ''}`}></span>
-                                                <span className={`medal ${achievement.silver === true ? 'silver-medal-unlocked' : ''}`}></span>
-                                                <span className={`medal ${achievement.gold === true ? 'gold-medal-unlocked' : ''}`}></span>
-                                            </div>
-                                        }
+                                    <div className="flex-container-row justity-content-around medals-bar">
+                                        <OverlayTrigger delay={150} placement="top" overlay={<Tooltip id={i}>{achievements_descriptions[`${achievement.name} bronze`]}</Tooltip>}>
+                                            <span className={`medal ${achievement.bronze === true ? 'bronze-medal-unlocked' : 'bronze-medal-locked'}`}></span>
+                                        </OverlayTrigger>
+
+                                        <OverlayTrigger delay={150} placement="top" overlay={<Tooltip id={i}>{achievements_descriptions[`${achievement.name} silver`]}</Tooltip>}>
+                                            <span className={`medal ${achievement.silver === true ? 'bronze-medal-unlocked' : 'silver-medal-locked'}`}></span>
+                                        </OverlayTrigger>
+
+                                        <OverlayTrigger delay={150} placement="top" overlay={<Tooltip id={i}>{achievements_descriptions[`${achievement.name} gold`]}</Tooltip>}>
+                                            <span className={`medal ${achievement.gold === true ? 'bronze-medal-unlocked' : 'gold-medal-locked'}`}></span>
+                                        </OverlayTrigger>
                                     </div>
                                 </span>
                             })
