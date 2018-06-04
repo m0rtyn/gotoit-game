@@ -187,6 +187,11 @@ export const colors = {
         colorCompleted: '#57d9d1',
         colorBug: '#43918d'
     },
+    success: '#5cb85c',
+    warning: '#f0ad4e',
+    danger: '#d9534f'
+
+
 }
 
 export const genAnimationData = (name, from, to, count, isBug) => {
