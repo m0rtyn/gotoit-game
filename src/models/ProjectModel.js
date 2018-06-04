@@ -2,9 +2,6 @@ import _ from 'lodash';
 
 import bulkStyler from '../services/bulkStyler';
 
-import {chatMessage} from "../components/Chat";
-
-
 import {skills, skills_inf, project_kinds, project_platforms, project_sizes} from '../game/knowledge';
 import {hired, projects_done} from '../App';
 
@@ -115,12 +112,12 @@ class ProjectModel {
                     if (this.is_supported) this.is_supported = false;
                 }
 
+
                 const formName = () => {
                     return worker.name
                         + (overtimed ? ' in overtime' : '')
                         + (support ? ' with support of ' + this.supporter.name : '');
                 };
-                console.log(focus_on);
 
                 if (bugs > 0) {
                     this.stored_wisdom[stat] += bugs;
@@ -143,8 +140,6 @@ class ProjectModel {
                             animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id);
                         }
                         if ( bugs !== 0){
-                            console.log('bug!')
-
                             animation.addBubbleAnimation(focus_on, bugs, worker.id, project.id, true);
                         }
                         //chatMessage(formName(), ' does '+tasks+' tasks and creates '+bugs+' bugs in '+stat, 'warning');

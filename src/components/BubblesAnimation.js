@@ -3,7 +3,7 @@ import BubbleAnimated from "./animation_content/BubbleAnimated";
 import {genAnimationData} from "../game/knowledge";
 import _ from 'lodash'
 
-var timeoutID = null;
+//var timeoutID = null;
 
 class BubblesAnimation extends React.Component {
     constructor(props){

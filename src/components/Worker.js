@@ -102,7 +102,7 @@ class Worker extends Component {
                 <div className='flex-container-column'>
                     <div className='flex-container-row'>
                         <div className='avatar'>
-                            <img src={worker.avatar} width='90' height='90'/>
+                            <img alt={worker.name + ' avatar'} src={worker.avatar} width='90' height='90'/>
                         </div>
                         <div className='worker_stats'>
                             {worker.name} {worker.is_player ? 'Player' : <span>{worker.getSalary()}$</span>}
@@ -112,7 +112,7 @@ class Worker extends Component {
                             <Portal ref="manage" closeOnEsc closeOnOutsideClick openByClickOn={manage_button}>
                                 <TeamDialog>
                                     <h2>
-                                        <img width="100" height='100' src={worker.avatar} />
+                                        <img alt={worker.name + ' avatar'} width="100" height='100' src={worker.avatar} />
                                         {worker.name}
                                         {worker.in_vacation ? ' on vacation! ' : ''}
                                     </h2>
@@ -120,6 +120,7 @@ class Worker extends Component {
                                     <div className="panel panel-success text-center">
                                         {worker.is_player ? '' : <span>Worker salary: ${worker.getSalary()}. Overrate bonus: {worker.getOverrate()}%.
                                     <button className="btn btn-danger btn-link" onClick={() => { data.helpers.riseEmployer(worker.id)}}>Rise Salary</button></span>}
+                                        {worker.get_monthly_salary ? '' : <span><button className="btn btn-danger btn-link" onClick={() => {data.helpers.paySalary(worker)}}>Pay a debt</button></span>}
                                     </div>
 
                                     <ul>
@@ -136,7 +137,7 @@ class Worker extends Component {
                                         <div className="row filament">
                                             <div className="col-md-2">Happiness</div>
                                             <div className="col-md-9 progress slim">
-                                                <div className={efficiency_bar_style} ronle="progressbar"
+                                                <div className={efficiency_bar_style} role="progressbar"
                                                      style={{width: Math.min(100, worker.getEfficiency())+'%'}}>
                                                     <label className="text-sm">{worker.getEfficiency()}%</label>
                                                 </div>
