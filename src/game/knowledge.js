@@ -198,7 +198,25 @@ export const genAnimationData = (name, from, to, count, isBug) => {
     console.log(name);
     let data = colors[name];
     let color = isBug ? data.colorBug : data.colorCompleted;
-    return { size: `${30+Math.floor(Math.sqrt(count))}px`, color: color, from: from, to: to, count: count}
+    return { size: '20px', color: color, from: from, to: to, count: count}
+}
+
+export const project_bars_id = {
+    design: {
+        tasks: 'design_tasks',
+        bugs: 'design_bugs',
+        completed: 'design_completed'
+    },
+    program: {
+        tasks: 'program_tasks',
+        bugs: 'program_bugs',
+        completed: 'program_completed'
+    },
+    manage: {
+        tasks: 'manage_tasks',
+        bugs: 'manage_bugs',
+        completed: 'manage_completed'
+    },
 }
 
 export default {};

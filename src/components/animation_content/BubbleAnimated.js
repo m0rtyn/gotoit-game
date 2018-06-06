@@ -14,8 +14,7 @@ class BubbleAnimated extends Component {
         if (document.getElementById(this.props.from) !== null && document.getElementById(this.props.to) !== null) {
             from = document.getElementById(this.props.from).getBoundingClientRect();
             to = document.getElementById(this.props.to).getBoundingClientRect();
-            to.x += 25;
-            to.y += 25;
+            to.x += to.width/2;
             from.x += 50;
             from.y += 50;
         } else {

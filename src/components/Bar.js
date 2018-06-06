@@ -16,6 +16,7 @@ class Bar extends Component {
                             </Tooltip>
                         }>
                         <div className="progress-bar" role="progressbar"
+                             id={item.id}
                              style={{
                                  width: item.width +'%',
                                  backgroundColor: item.color

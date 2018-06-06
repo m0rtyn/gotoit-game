@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 import bulkStyler from '../services/bulkStyler';
 
-import {skills, skills_inf, project_kinds, project_platforms, project_sizes} from '../game/knowledge';
+import {skills, skills_inf, project_kinds, project_platforms, project_sizes, project_bars_id} from '../game/knowledge';
 import {hired, projects_done} from '../App';
 
 export var projects_generated = 0;
@@ -86,7 +86,8 @@ class ProjectModel {
 
     applyWork(work, worker, project, animation, focus_on, rad = false, creativity = false, pair = false, overtimed = false) {
         var learned = JSON.parse(JSON.stringify(skills));
-
+        let focus_on_id = project.id + project_bars_id[focus_on];
+        console.log(focus_on_id)
         Object.keys(work).forEach((stat) => {
             if (this.needs(stat) > 0 && work[stat] > 0) {
                 var support = ((this.supporter && this.supporter.id !== worker.id) ? this.supporter.stats[stat] : 0);
@@ -124,11 +125,11 @@ class ProjectModel {
                     let prevented = this.runTests(bugs);
                     if (prevented) {
                         if ( tasks !== 0){
-                            animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id);
+                            animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id + project_bars_id[focus_on].completed);
                         }
                         if ( bugs !== 0){
                             console.log('bug!')
-                            animation.addBubbleAnimation(focus_on, bugs, worker.id, project.id, true);
+                            animation.addBubbleAnimation(focus_on, bugs, worker.id, project.id + project_bars_id[focus_on].bugs, true);
                         }
                         //chatMessage(formName(), ' does '+tasks+' tasks and creates '+bugs+' bugs in '+stat+', but tests prevent '+prevented+' of them', 'warning');
                         bugs -= prevented;
@@ -137,17 +138,17 @@ class ProjectModel {
                     }
                     else {
                         if ( tasks !== 0){
-                            animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id);
+                            animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id + project_bars_id[focus_on].completed);
                         }
                         if ( bugs !== 0){
-                            animation.addBubbleAnimation(focus_on, bugs, worker.id, project.id, true);
+                            animation.addBubbleAnimation(focus_on, bugs, worker.id, project.id + project_bars_id[focus_on].bugs, true);
                         }
                         //chatMessage(formName(), ' does '+tasks+' tasks and creates '+bugs+' bugs in '+stat, 'warning');
                     }
                 }
                 else {
                     if ( tasks !== 0){
-                        animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id);
+                        animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id + project_bars_id[focus_on].completed);
                     }
                 }
 

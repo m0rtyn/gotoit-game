@@ -221,7 +221,6 @@ class WorkerModel {
        // return this.calcEfficiencyReal();
         return this.efficiency.get();
     }
-
     calcEfficiencyReal() { // happinessReal
       //  const stamina = this.staminaPenalty();
         const tasks_stream = this.workloadPenalty();
@@ -250,6 +249,59 @@ class WorkerModel {
         }
 
         return this.get_monthly_salary === false ? Math.ceil(happiness / 2) : Math.ceil(happiness);
+
+        //return 100;
+    }
+    getEfficiencyArray() { // happinessReal
+        let salary_mod = this.get_monthly_salary === false ? 0.5 : 1;
+
+
+        //  const stamina = this.staminaPenalty();
+        const tasks_stream = this.workloadPenalty();
+        const tasks_difficulty = this.difficultyPenalty();
+        const education_stream = this.educationPenalty();
+        const collective = this.collectivePenalty();
+
+
+        let happiness_array = {
+            happiness_const : {
+                name: 'Happiness const',
+                value: salary_mod * 20
+            },
+            overrate : {
+                name: 'Overrate',
+                value: salary_mod * Math.floor(this.getOverrate() / 10)
+            },
+             motivation : {
+                name: 'Motivation',
+                value: salary_mod * this.getMotivate()
+            },
+             gadgets : {
+                name: 'Gadgets',
+                value: salary_mod * getData().office_things.gadget
+            },
+             tasks_stream : {
+                name: 'Tasks stream',
+                value: salary_mod * 20 - Math.abs(tasks_stream)
+            },
+             tasks_difficulty : {
+                name: 'Tasks difficulty',
+                value: salary_mod * (20 - Math.abs(tasks_difficulty))
+            },
+             education_stream : {
+                name: 'Education_stream',
+                value: salary_mod * (20 - Math.abs(education_stream))
+            },
+
+             collective : {
+                name: 'Collective',
+                value: salary_mod * (20 - Math.abs(collective))
+            },
+        };
+        
+
+
+        return happiness_array;
 
         //return 100;
     }
