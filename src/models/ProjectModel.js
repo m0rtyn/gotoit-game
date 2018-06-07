@@ -129,7 +129,7 @@ class ProjectModel {
                         }
                         if ( bugs !== 0){
                             console.log('bug!')
-                            animation.addBubbleAnimation(focus_on, bugs, worker.id, project.id +  project_bars[`${focus_on}_bug`].id, true);
+                            animation.addBubbleAnimation(focus_on, bugs, worker.id, project.id +  project_bars[`${focus_on}_bugs`].id, true);
                         }
                         //chatMessage(formName(), ' does '+tasks+' tasks and creates '+bugs+' bugs in '+stat+', but tests prevent '+prevented+' of them', 'warning');
                         bugs -= prevented;
@@ -141,7 +141,7 @@ class ProjectModel {
                             animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id + project_bars[`${focus_on}_completed`].id);
                         }
                         if ( bugs !== 0){
-                            animation.addBubbleAnimation(focus_on, bugs, worker.id, project.id +   project_bars[`${focus_on}_bug`].id, true);
+                            animation.addBubbleAnimation(focus_on, bugs, worker.id, project.id +   project_bars[`${focus_on}_bugs`].id, true);
                         }
                         //chatMessage(formName(), ' does '+tasks+' tasks and creates '+bugs+' bugs in '+stat, 'warning');
                     }
