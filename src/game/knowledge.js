@@ -1,16 +1,6 @@
 
 import _ from 'lodash';
-import applicationIcon from '../icons/Application.svg';
-import gameIcon from '../icons/Game.svg';
-import siteIcon from '../icons/Site.svg';
-import editorIcon from '../icons/Editor.svg';
-import magazineIcon from '../icons/Shop.svg';
-import serviceIcon from '../icons/Service.svg';
-import databaseIcon from '../icons/Database.svg';
-import crossplatformIcon from '../icons/Cross-platform.svg';
-import mobileIcon from '../icons/Mobile.svg';
-import browserIcon from '../icons/Browser.svg';
-import desktopIcon from '../icons/Desktop.svg';
+
 
 
 export const skills = {design: 0, program: 0, manage: 0};
@@ -112,20 +102,20 @@ export const offices = {
 };
 
 export const project_platforms = {
-    crossplatform: {name: 'Cross-platform', description: 'Cross-platform applications should be balanced.', icon: crossplatformIcon},
-    mobile: {name: 'Mobile', description: 'For Mobile applications, design is important.', icon: mobileIcon},
-    desktop: {name: 'Desktop', description: 'For Desktop applications, programming is important.', icon: desktopIcon},
-    browser: {name: 'Browser', description: 'For Browser applications, management is important.', icon: browserIcon},
+    crossplatform: {name: 'Cross-platform', description: 'Cross-platform applications should be balanced.'},
+    mobile: {name: 'Mobile', description: 'For Mobile applications, design is important.'},
+    desktop: {name: 'Desktop', description: 'For Desktop applications, programming is important.'},
+    browser: {name: 'Browser', description: 'For Browser applications, management is important.'},
 };
 
 export const project_kinds = {
-    application: {name: 'Application', description: 'General Applications should be balanced.', icon: applicationIcon},
-    game: {name: 'Game', description: 'For Games, design is important, but do not forget about programming.', icon: gameIcon},
-    site: {name: 'Site', description: 'For Sites, design is important, but do not forget about management.', icon: siteIcon},
-    editor: {name: 'Editor', description: 'For Editors, programming is important, but do not forget about design.', icon: editorIcon},
-    magazine: {name: 'Magazine', description: 'For Magazines, management is important, but do not forget about design.', icon: magazineIcon},
-    service: {name: 'Service', description: 'For Services, management is important, but do not forget about programming.', icon: serviceIcon},
-    database: {name: 'Database', description: 'For Databases, programming is important, but do not forget about management.', icon: databaseIcon}
+    application: {name: 'Application', description: 'General Applications should be balanced.'},
+    game: {name: 'Game', description: 'For Games, design is important, but do not forget about programming.'},
+    site: {name: 'Site', description: 'For Sites, design is important, but do not forget about management.'},
+    editor: {name: 'Editor', description: 'For Editors, programming is important, but do not forget about design.'},
+    magazine: {name: 'Magazine', description: 'For Magazines, management is important, but do not forget about design.'},
+    service: {name: 'Service', description: 'For Services, management is important, but do not forget about programming.'},
+    database: {name: 'Database', description: 'For Databases, programming is important, but do not forget about management.'}
 };
 
 export const project_sizes = {

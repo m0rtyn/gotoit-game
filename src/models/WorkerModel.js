@@ -14,8 +14,8 @@ import ValueCache from '../services/ValueCache';
 
 import {getData, current_tick} from '../App';
 
-import maleAvatar from '../icons/male.png'
-import femaleAvatar from '../icons/female.png'
+import maleAvatar from '../../public/male.png'
+import femaleAvatar from '../../public/female.png'
 
 class WorkerModel {
     constructor(name = 'Default', stats = skills_1, gender = 'male', is_player = false) {
