@@ -272,28 +272,27 @@ class WorkerModel {
                 name: 'Overrate',
                 value: salary_mod * Math.floor(this.getOverrate() / 10)
             },
-             motivation : {
+            motivation : {
                 name: 'Motivation',
                 value: salary_mod * this.getMotivate()
             },
-             gadgets : {
+            gadgets : {
                 name: 'Gadgets',
                 value: salary_mod * getData().office_things.gadget
             },
-             tasks_stream : {
+            tasks_stream : {
                 name: 'Tasks stream',
                 value: salary_mod * 20 - Math.abs(tasks_stream)
             },
-             tasks_difficulty : {
+            tasks_difficulty : {
                 name: 'Tasks difficulty',
                 value: salary_mod * (20 - Math.abs(tasks_difficulty))
             },
-             education_stream : {
+            education_stream : {
                 name: 'Education_stream',
                 value: salary_mod * (20 - Math.abs(education_stream))
             },
-
-             collective : {
+            collective : {
                 name: 'Collective',
                 value: salary_mod * (20 - Math.abs(collective))
             },

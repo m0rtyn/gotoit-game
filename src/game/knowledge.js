@@ -201,22 +201,44 @@ export const genAnimationData = (name, from, to, count, isBug) => {
     return { size: '20px', color: color, from: from, to: to, count: count}
 }
 
-export const project_bars_id = {
-    design: {
-        tasks: 'design_tasks',
-        bugs: 'design_bugs',
-        completed: 'design_completed'
+export const project_bars = {
+    design_tasks: {
+        id: 'design_tasks',
+        color: colors.design.tasks
     },
-    program: {
-        tasks: 'program_tasks',
-        bugs: 'program_bugs',
-        completed: 'program_completed'
+    design_bugs: {
+        id: 'design_bugs',
+        color: colors.design.colorBug
     },
-    manage: {
-        tasks: 'manage_tasks',
-        bugs: 'manage_bugs',
-        completed: 'manage_completed'
+    design_completed: {
+        id: 'design_completed',
+        color: colors.design.colorCompleted
+    },
+    program_tasks: {
+        id: 'program_tasks',
+        color: colors.program.tasks
+    },
+    program_bugs: {
+        id: 'program_bugs',
+        color: colors.program.colorBug
+    },
+    program_completed: {
+        id: 'program_completed',
+        color: colors.program.colorCompleted
+    },
+    manage_tasks: {
+        id: 'manage_tasks',
+        color: colors.manage.tasks
+    },
+    manage_bugs: {
+        id: 'manage_bugs',
+        color: colors.manage.colorBug
+    },
+    manage_completed: {
+        id: 'manage_completed',
+        color: colors.manage.colorCompleted
     },
 }
+
 
 export default {};
