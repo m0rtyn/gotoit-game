@@ -1538,7 +1538,7 @@ class App extends Component {
 
     render() {
         return (
-            <div>
+            <div className="app">
                 <BubblesAnimation onRef={ref => (this.animation = ref)}/>
                 <Layout data={this.state.data}/>
                 <Footer data={this.state.data} newGame={this.newGame}/>
