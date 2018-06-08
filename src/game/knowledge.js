@@ -189,10 +189,24 @@ export const colors = {
     },
     success: '#5cb85c',
     warning: '#f0ad4e',
-    danger: '#d9534f'
+    danger: '#d9534f',
+
+    backgrounds: {
+        Achievements: '#FFFFFF',
+        Advertising: '#FFFFFF',
+        Archive: '#C0E5ED',
+        Exchange: '#C0E5ED',
+        HireWorkers: '#C0E5ED',
+        Loans: '#C0E5ED',
+        MarketTop: '#C0E5ED',
+        ProjectsFind: '#FFFFFF',
+        StartMeeting: '#F47B68',
+        StartProject: '#C0E5ED',
+        Welcome: '#B6D2DE',
+    }
 
 
-}
+};
 
 export const genAnimationData = (name, from, to, count, isBug) => {
     console.log(name);
