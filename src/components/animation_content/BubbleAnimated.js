@@ -40,7 +40,7 @@ class BubbleAnimated extends Component {
                                 transform: `translate3d(${x}px, ${y}px, 0`,
                                 WebkitTransform: `translate3d(${x}px, ${y}px, 0`,
                                 borderRadius: '50%',
-                                position: 'absolute',
+                                position: 'fixed',
                                 textAlign: 'center',
                                 lineHeight: size,
                                 zIndex: 10
