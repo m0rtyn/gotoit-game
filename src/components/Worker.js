@@ -8,6 +8,8 @@ import ProjectName from './ProjectName';
 //import {addAction} from '../components/ToastNest';
 
 import {skills_names, workers_bonus_items, roles, education} from '../game/knowledge';
+import WorkerHappinessBar from "./WorkerHappinessBar";
+import WorkerStaminaBar from "./WorkerStaminaBar";
 
 class Worker extends Component {
     constructor(props) {
@@ -75,27 +77,7 @@ class Worker extends Component {
             collective: {name: 'Collective', val: worker.collectivePenalty()}
         };
 
-        const efficiency_bar_style = (() => {
-            let ratio = worker.getEfficiency() / 100;
-            switch (true) {
-                case ratio <= 0.5: return 'progress-bar-danger';
-                case ratio <= 0.75: return 'progress-bar-warning';
-                case ratio <= 1: return 'progress-bar-success';
-                case ratio  > 1: return 'progress-bar-success'; // High bonus
-                default: //alert('broken ratio: '+ratio);
-            }
-        }) ();
 
-        const vacation_bar_style = (() => {
-            let ratio = worker.stamina / 1000;
-            switch (true) {
-                case ratio <= 0.33: return 'progress-bar-danger';
-                case ratio <= 0.66: return 'progress-bar-warning';
-                case ratio <= 1: return 'progress-bar-success';
-                case ratio  > 1: return 'progress-bar-success'; // High bonus
-                default: //alert('broken ratio: '+ratio);
-            }
-        }) ();
 
         return (
             <div id={worker.id} className="well well-sm fat">
@@ -135,22 +117,10 @@ class Worker extends Component {
 
                                     <div className="panel panel-success text-center filament">
                                         <div className="row filament">
-                                            <div className="col-md-2">Happiness</div>
-                                            <div className="col-md-9 progress slim">
-                                                <div className={efficiency_bar_style} role="progressbar"
-                                                     style={{width: Math.min(100, worker.getEfficiency())+'%'}}>
-                                                    <label className="text-sm">{worker.getEfficiency()}%</label>
-                                                </div>
-                                            </div>
+                                            <WorkerHappinessBar worker={worker}/>
                                         </div>
                                         <div className="row filament">
-                                            <div className="col-md-2">Stamina</div>
-                                            <div className="col-md-9 progress slim">
-                                                <div className={vacation_bar_style} role="progressbar"
-                                                     style={{width: Math.min(100, worker.stamina/50)+'%'}}>
-                                                    <label>{Math.floor(worker.stamina/50)}%</label>
-                                                </div>
-                                            </div>
+                                            <WorkerStaminaBar worker={worker} />
                                         </div>
                                         <StatsBar stats={efficiency_data} data={this.props.data} />
                                         <div>{`Character: ${worker.character.name}. ${worker.character.description}.`}</div>
@@ -278,16 +248,10 @@ class Worker extends Component {
 
                             <div className="progress filament">
                                 {/* <div classNames('progress-bar', (100 / worker.getEfficiency() < 0.5 ? 'progress-bar-danger' : 'progress-bar-warning')) role="progressbar"  */}
-                                <div className={efficiency_bar_style} role="progressbar"
-                                     style={{width: Math.min(100, worker.getEfficiency())+'%'}}>
-                                    <label>Happiness {worker.getEfficiency()}%</label>
-                                </div>
+                                <WorkerHappinessBar worker={worker}/>
                             </div>
                             <div className="progress filament">
-                                <div className={vacation_bar_style} role="progressbar"
-                                     style={{width: Math.min(100, worker.stamina/50)+'%'}}>
-                                    <label>Stamina {Math.floor(worker.stamina/50)}%</label>
-                                </div>
+                                <WorkerStaminaBar worker={worker}/>
                             </div>
                         </div>
                     </div>

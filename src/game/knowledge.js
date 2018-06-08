@@ -152,4 +152,93 @@ export const education = { // hm...
     workshop: {name: 'Workshop', hide: true, description: ''}
 };
 
+export const colors = {
+    creativity: {
+        name: 'creativity',
+        colorCompleted: '#EA80FC'
+    },
+    agile: {
+        name: 'agile',
+        colorCompleted: '#1DE9B6'
+    },
+    tdd: {
+        name: 'tdd',
+        colorCompleted: '#1E90FF'
+    },
+    refactor: {
+        name: 'refactor',
+        colorCompleted: '#FFAB40'
+    },
+    design: {
+        name: 'design',
+        colorEstimate: '#ffc299',
+        colorCompleted: '#ff954d',
+        colorBug: '#c47640'
+    },
+    program: {
+        name: 'program',
+        colorEstimate: '#ffb2f2',
+        colorCompleted: '#cc6cbc',
+        colorBug: '#99518d'
+    },
+    manage: {
+        name: 'manage',
+        colorEstimate: '#a9f2ee',
+        colorCompleted: '#57d9d1',
+        colorBug: '#43918d'
+    },
+    success: '#5cb85c',
+    warning: '#f0ad4e',
+    danger: '#d9534f'
+
+
+}
+
+export const genAnimationData = (name, from, to, count, isBug) => {
+    console.log(name);
+    let data = colors[name];
+    let color = isBug ? data.colorBug : data.colorCompleted;
+    return { size: '20px', color: color, from: from, to: to, count: count}
+}
+
+export const project_bars = {
+    design_tasks: {
+        id: 'design_tasks',
+        color: colors.design.tasks
+    },
+    design_bugs: {
+        id: 'design_bugs',
+        color: colors.design.colorBug
+    },
+    design_completed: {
+        id: 'design_completed',
+        color: colors.design.colorCompleted
+    },
+    program_tasks: {
+        id: 'program_tasks',
+        color: colors.program.tasks
+    },
+    program_bugs: {
+        id: 'program_bugs',
+        color: colors.program.colorBug
+    },
+    program_completed: {
+        id: 'program_completed',
+        color: colors.program.colorCompleted
+    },
+    manage_tasks: {
+        id: 'manage_tasks',
+        color: colors.manage.tasks
+    },
+    manage_bugs: {
+        id: 'manage_bugs',
+        color: colors.manage.colorBug
+    },
+    manage_completed: {
+        id: 'manage_completed',
+        color: colors.manage.colorCompleted
+    },
+}
+
+
 export default {};
