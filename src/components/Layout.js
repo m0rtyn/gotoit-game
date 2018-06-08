@@ -12,7 +12,8 @@ import ContentContainer from './ContentContainer.js'
 class Layout extends Component {
     render() {
         return (
-            <div>
+            <div className="page-layout">
+                <div className="background-image" style={{backgroundImage: 'url(backgrounds/'+this.props.data.content+'.png)'}}></div>
                 <Office data={this.props.data} />
                 <div className="App row slim-top">
                     <div className="col-md-3 slim">
