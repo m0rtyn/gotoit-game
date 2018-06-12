@@ -68,6 +68,7 @@ var default_state =
         projects_known_technologies: ['overtime', 'creativity'],
         projects_technologies: [],
         projects_default_technologies: [],
+        project_team_selector: null,
 
         wasRecentlyHackathon: false,
 

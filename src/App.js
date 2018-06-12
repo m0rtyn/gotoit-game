@@ -93,7 +93,9 @@ class App extends Component {
         this.unpauseProject = this.unpauseProject.bind(this);
         this.closeProject = this.closeProject.bind(this);
         this.trainingProject = this.trainingProject.bind(this);
+        this.changeTeamSelector = this.changeTeamSelector.bind(this);
         this.draftProject = this.draftProject.bind(this);
+        this.kickWorker = this.kickWorker.bind(this);
         this.unlockTechnology = this.unlockTechnology.bind(this);
         this.getTechnology = this.getTechnology.bind(this);
         this.changeTechnology = this.changeTechnology.bind(this);
@@ -163,7 +165,9 @@ class App extends Component {
         app_state.data.helpers['unpauseProject'] = this.unpauseProject;
         app_state.data.helpers['closeProject'] = this.closeProject;
         app_state.data.helpers['trainingProject'] = this.trainingProject;
+        app_state.data.helpers['changeTeamSelector'] = this.changeTeamSelector;
         app_state.data.helpers['draftProject'] = this.draftProject;
+        app_state.data.helpers['kickWorker'] = this.kickWorker;
         app_state.data.helpers['unlockTechnology'] = this.unlockTechnology;
         app_state.data.helpers['getTechnology'] = this.getTechnology;
         app_state.data.helpers['changeTechnology'] = this.changeTechnology;
@@ -343,6 +347,18 @@ class App extends Component {
 
         state.data = data;
         return state;
+    }
+
+    changeTeamSelector(project = null) {
+        const data = this.state.data;
+        data.project_team_selector = project === null ? null : project.id;
+        this.setState({data: data})
+    }
+
+    kickWorker(worker, project) {
+      _.mapValues(worker.stats, (val, skill) => {
+        this.modifyRelation(worker.id, project.id, false, skill);
+      })
     }
 
     getRole(worker_id, role) {

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Portal from 'react-portal';
 
+import Select from 'react-select';
+import {Button, Glyphicon} from 'react-bootstrap';
 import ReactBootstrapSlider from 'react-bootstrap-slider';
 // import '../../node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css';
 
@@ -88,8 +90,27 @@ class Project extends Component {
 
         const manage_button = <button className="btn btn-sm btn-success flex-element" style={{margin: '5px 5px 5px 5px'}}>Manage</button>;
 
+        let checkRelations = (worker, project) => {
+            return Object.keys(data.relations[worker.id][project.id]).some((skill) => {
+              return data.helpers.getRelation(worker.id, project.id, skill) === true
+            })
+        };
 
-        let label = (id, text) => { return <span key={id}> <label className="label-default">{text}</label> </span>; };
+        let onSelectCahnge = (e) => {
+          data.helpers.changeTeamSelector()
+          data.helpers.modifyRelation(e.value.id, project.id)
+        };
+
+        //let unoccupied_workers = data.workers.filter((worker) => {return checkRelations(worker, project)})
+
+        let label = (worker) => {
+            return <span key={worker.id}>
+                <label className="label-default">{worker.name}</label>
+                <Button onClick={() => data.helpers.kickWorker(worker, project)} bsSize="xsmall"><Glyphicon glyph="glyphicon glyphicon-remove"/></Button>
+            </span>;
+        };
+
+        console.log(data.relations)
 
         let team_ids = {};
         _.keys(data.relations).forEach((worker_id) => {
@@ -103,9 +124,9 @@ class Project extends Component {
         });
         let team = [];
         data.workers.forEach((worker) => {
-            if (worker.id in team_ids && worker.get_monthly_salary) { team.push(worker); }
+            if (worker.id in team_ids && worker.get_monthly_salary && checkRelations(worker, project)) { team.push(worker); }
         });
-        const team_label = team.map((worker) => { return label(worker.id, worker.name); });
+        const team_label = team.map((worker) => { return label(worker); });
 
         let tech = [];
         if (project.id in data.projects_technologies) {
@@ -422,7 +443,16 @@ class Project extends Component {
                 </div>
 
                 <div className="small slim">
-                    <p className="small slim">Team: {team_label}</p>
+                    <p className="small slim">Team: {team_label}
+                        <Button className={data.project_team_selector == project.id ? 'active' : ''}
+                                onClick={() => data.helpers.changeTeamSelector(project)}
+                                bsSize="xsmall">Add</Button>
+                    </p>
+                    {data.project_team_selector == project.id ? <div>
+                        <Select onChange={(e) => onSelectCahnge(e)}
+                                options={data.workers.map((worker) => {return {value: worker, label: worker.name}})}
+                                value={null}/>
+                    </div> : null}
                     {tech.length ? <p className="small slim">Tech: {tech_label}</p> : ''}
                 </div>
             </div>
