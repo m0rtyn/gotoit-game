@@ -56,3 +56,7 @@ fabric.properties
 
 # yarn stuff
 yarn.lock
+
+
+.history
+theme
