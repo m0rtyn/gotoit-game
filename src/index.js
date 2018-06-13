@@ -9,9 +9,15 @@ import {IntlProvider} from 'react-intl';
 import App from './App';
 import './css/index.css';
 
+// theAdmin theme =============================
+import './theme/src/assets/css/style.min.css';
+import './theme/src/assets/css/core.min.css';
+import './theme/src/assets/css/app.min.css';
+// ============================================
+
 ReactDOM.render(
-    <IntlProvider locale="en">
-        <App />
-    </IntlProvider>,
+  <IntlProvider locale="en">
+    <App />
+  </IntlProvider>,
   document.getElementById('root')
 );
