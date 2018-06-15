@@ -69,6 +69,8 @@ var default_state =
         projects_technologies: [],
         projects_default_technologies: [],
         project_team_selector: null,
+        hovered_projects_id: [],
+        hovered_workers_id: [],
 
         wasRecentlyHackathon: false,
 

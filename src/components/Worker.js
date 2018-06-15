@@ -98,7 +98,11 @@ class Worker extends Component {
         }) ();
 
         return (
-            <div id={worker.id} className="well well-sm fat">
+            <div onMouseOver={() => {data.helpers.modifyHoveredObjects(data.projects.filter((project) => {return data.helpers.deepCheckRelation(worker, project)}), [worker])}}
+                 onMouseOut={() => {data.helpers.modifyHoveredObjects()}}
+                 className={`well well-sm fat ${data.hovered_workers_id.includes(worker.id) ? 'hovered' : ''}`}
+                 id={worker.id}
+            >
                 <div className='flex-container-column'>
                     <div className='flex-container-row'>
                         <div className='avatar'>
