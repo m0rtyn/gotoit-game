@@ -5,7 +5,7 @@ class SalesDepartment extends Component {
         const data = this.props.data;
 
         return (
-            <div className="panel panel-success text-center">
+            <div className="card border text-center">
                 <h5>Reputation</h5>
 
                 <div className="progress slim">

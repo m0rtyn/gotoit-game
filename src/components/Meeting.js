@@ -136,9 +136,9 @@ class Meeting extends Component {
                                             </div> : ''}
 
                                         </div>
-                                        <div className="panel panel-success">
+                                        <div className="card border">
                                             {this.props.data.workers.map((worker) => {
-                                                return <div key={worker.id + project.id} className="panel filament">
+                                                return <div key={worker.id + project.id} className="card filament">
                                                     <label className="checkbox-inline" style={{width: '100%'}}>
                                                         <input
                                                             type="checkbox"

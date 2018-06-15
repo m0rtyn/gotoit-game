@@ -27,7 +27,7 @@ class HireWorkers extends Component {
                 return { name: key, val: <span>{candidate.stats[key]}</span> };
             });
 
-            return <div key={candidate.id} className="panel panel-info">{candidate.name} <span> {candidate.getSalary()}$</span>
+            return <div key={candidate.id} className="card panel-info">{candidate.name} <span> {candidate.getSalary()}$</span>
                 <div>{`Character: ${candidate.character.name}. ${candidate.character.description}.`}</div>
                 <StatsBar stats={stats_data} data={data} />
                 <button className="btn btn-success" id={candidate.id} onClick={(e) => this.hire(e, type)}>Hire</button>
@@ -57,7 +57,7 @@ class HireWorkers extends Component {
                             <button  className="btn btn-info hidden" onClick={data.helpers.agencySearch}>Search 1000$</button>
                         </h4>
 
-                        <div className="panel panel-success text-center">
+                        <div className="card border text-center">
                             <div className="progress slim">
                                 <div className='progress-bar' role="progressbar"
                                      style={{width: Math.min(100, data.rumor)+'%'}}>

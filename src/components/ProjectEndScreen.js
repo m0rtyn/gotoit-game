@@ -43,7 +43,7 @@ class ProjectEndScreen extends Component {
                         </div>
                         <div className="text-center">
                             <ProjectReport key={project.id} project={project} data={this.props.data} />
-                            <div className="panel panel-success text-center">
+                            <div className="card border text-center">
                                 <h3>Project Top Score</h3>
                                 <h2>All Project Top: {all_top_handler.getTopNumber(project.id)}</h2>
                                 <div className="flex-container-row">

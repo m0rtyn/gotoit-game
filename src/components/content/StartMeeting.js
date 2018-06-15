@@ -46,7 +46,7 @@ class StartMeeting extends Component {
                                     {!data.projects_known_technologies.includes(technology)
                                         ?
                                         <div className={(current_tick > (24*30*3)) ? "" : "hidden"}>
-                                            <div className="panel panel-info">
+                                            <div className="card panel-info">
                                                 <button
                                                     className="btn btn-default btn-xs disabled">{meeting.name}</button>
                                                 { " " }

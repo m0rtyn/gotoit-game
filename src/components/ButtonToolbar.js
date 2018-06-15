@@ -6,7 +6,7 @@ class ButtonToolbar extends Component {
         let data = this.props.data;
 
         return (
-            <div className="panel panel-success">
+            <div className="card border">
                 <div className="flex-container-row" style={{margin: '5px 0px 5px 0px'}}>
                     <span className="flex-element">
                         <button className="btn btn-primary btn-sm" onClick={() => { data.helpers.changeContent('StartProject'); }}>Startup</button>

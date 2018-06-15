@@ -99,7 +99,7 @@ class Worker extends Component {
                                         {worker.in_vacation ? ' on vacation! ' : ''}
                                     </h2>
 
-                                    <div className="panel panel-success text-center">
+                                    <div className="card border text-center">
                                         {worker.is_player ? '' : <span>Worker salary: ${worker.getSalary()}. Overrate bonus: {worker.getOverrate()}%.
                                     <button className="btn btn-danger btn-link" onClick={() => { data.helpers.riseEmployer(worker.id)}}>Rise Salary</button></span>}
                                         {worker.get_monthly_salary ? '' : <span><button className="btn btn-danger btn-link" onClick={() => {data.helpers.paySalary(worker)}}>Pay a debt</button></span>}
@@ -115,7 +115,7 @@ class Worker extends Component {
                                         </p>
                                     </ul>
 
-                                    <div className="panel panel-success text-center filament">
+                                    <div className="card border text-center filament">
                                         <div className="row filament">
                                             <WorkerHappinessBar worker={worker}/>
                                         </div>
@@ -133,7 +133,7 @@ class Worker extends Component {
                                         </p5>
                                     </div>
 
-                                    <div className="panel panel-success text-center">
+                                    <div className="card border text-center">
                                         <div className="checkbox-inline">
                                             <label>
                                                 <input
@@ -163,7 +163,7 @@ class Worker extends Component {
                                         </div>
                                     </div>
 
-                                    <div className="panel panel-success text-center">
+                                    <div className="card border text-center">
                                         <StatsBar stats={stats_data} data={this.props.data} />
 
                                         {/*    bonus items */}
@@ -196,7 +196,7 @@ class Worker extends Component {
 
                                     {/*    deprecated training project */}
                                     <div>
-                                        <div className="panel panel-info text-center">
+                                        <div className="card panel-info text-center">
                                             {Object.keys(education).map((source) =>
                                                 ((!education[source].hide)
                                                     ? <div className="flex-container-row" key={source}>
@@ -213,7 +213,7 @@ class Worker extends Component {
 
                                     <div>
                                         {/*    Which projects {worker.name} has to work?   */}
-                                        <div className="panel panel-info">
+                                        <div className="card panel-info">
                                             {data.projects.map((project) => {
                                                     const stats_data = _.mapValues(project.needs, (val, skill) => {
                                                         return {name: skill,

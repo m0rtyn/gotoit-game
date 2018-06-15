@@ -298,7 +298,7 @@ class Project extends Component {
                                                     </div> : ''}
 
                                                 </div>
-                                                <div className="panel panel-success">
+                                                <div className="card border">
                                                     <div>
                                                         {this.props.data.workers.map((worker) => {
                                                             const stats_data = _.mapValues(worker.stats, (val, skill) => {
@@ -325,7 +325,7 @@ class Project extends Component {
                                                 </div>
                                             </div>
                                             <div className="col-md-4">
-                                                <div className="panel panel-success slim-left">
+                                                <div className="card border slim-left">
                                                     <div className="col slim-left">
                                                         {data.projects_known_technologies.map(
                                                             (technology, i) => <div key={technology} className="row-md-1">

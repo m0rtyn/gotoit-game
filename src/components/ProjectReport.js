@@ -55,7 +55,7 @@ class Project extends Component {
 
 
         return (
-            <div className="panel panel-success">
+            <div className="card border">
                 <ProjectName project={project} /> ({project.reward}$)
 
                 {project.deadline_max > 0 ?

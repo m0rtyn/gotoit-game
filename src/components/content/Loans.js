@@ -77,7 +77,7 @@ class Loans extends Component {
                     {data.taken_loans.map((loan, i) => {
                         let paid_percent = Math.ceil((loan.time - loan.timer) / loan.time * 100);
 
-                        return <div className="panel panel-success" key={i}>
+                        return <div className="card border" key={i}>
                             <div className="flex-container-row">
                                 <h4 className="flex-element"> {loan.name} </h4>
                                 <label className="flex-element"> Money: {loan.money}$ </label>
