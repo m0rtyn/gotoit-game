@@ -28,6 +28,8 @@ div {
 }
 
 .modal-dialog {
+    max-height: 85%;
+    overflow-y: scroll;
     width: 800px;
 }
 .slim {
@@ -66,7 +68,7 @@ div {
     margin: 6px;
 }
 .moat {
-    padding: 30px 100px;
+    /* padding: 30px 100px; */
     margin: 30px 100px;
 }
 /*
