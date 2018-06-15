@@ -128,3 +128,7 @@ div {
     width: 70%;
     height: 100px;
 }
+
+.hovered {
+    background-color: #ccc;
+}

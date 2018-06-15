@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Portal from 'react-portal';
 
+import Select from 'react-select';
+import {Button, Glyphicon} from 'react-bootstrap';
 import ReactBootstrapSlider from 'react-bootstrap-slider';
 // import '../../node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css';
 
@@ -93,8 +95,22 @@ class Project extends Component {
 
         const manage_button = <button className="btn btn-sm btn-success flex-element" style={{margin: '5px 5px 5px 5px'}}>Manage</button>;
 
+        let onSelectChange = (e) => {
+          data.helpers.changeTeamSelector();
+          data.helpers.modifyRelation(e.value.id, project.id);
+          data.helpers.modifyHoveredProjects();
+        };
 
-        let label = (id, text) => { return <span key={id}> <label className="label-default">{text}</label> </span>; };
+        //let unoccupied_workers = data.workers.filter((worker) => {return data.helpers.deepCheckRelation(worker, project)});
+
+        let label = (worker) => {
+            return <span key={worker.id}>
+                <label className="label-default">{worker.name}</label>
+                <Button onClick={() => data.helpers.kickWorker(worker, project)} bsSize="xsmall">
+                    <Glyphicon glyph="glyphicon glyphicon-remove"/>
+                </Button>
+            </span>;
+        };
 
         let team_ids = {};
         _.keys(data.relations).forEach((worker_id) => {
@@ -106,11 +122,15 @@ class Project extends Component {
                 }
             })
         });
+
         let team = [];
         data.workers.forEach((worker) => {
-            if (worker.id in team_ids && worker.get_monthly_salary) { team.push(worker); }
+            if (worker.id in team_ids && worker.get_monthly_salary && data.helpers.deepCheckRelation(worker, project)) {
+                team.push(worker);
+            }
         });
-        const team_label = team.map((worker) => { return label(worker.id, worker.name); });
+
+        const team_label = team.map((worker) => { return label(worker); });
 
         let tech = [];
         if (project.id in data.projects_technologies) {
@@ -120,6 +140,7 @@ class Project extends Component {
                 }
             });
         }
+
         const tech_label = tech.map((tech_name) => { return label(tech_name, technologies[tech_name].acronym); });
 
         const start_pause_button =
@@ -143,7 +164,11 @@ class Project extends Component {
         //console.log(project_platforms[project.platform].icon)
 
         return (
-            <div id={project.id} className="well well-sm fat">
+            <div onMouseOver={() => {data.helpers.modifyHoveredObjects([project], team)}}
+                 onMouseOut={() => {data.helpers.modifyHoveredObjects()}}
+                 className={`well well-sm fat ${data.hovered_projects_id.includes(project.id) ? 'hovered' : ''}`}
+                 id={project.id}
+            >
                 <div>
                     <div className="flex-container-column">
                         <div className="flex-container-row">
@@ -399,7 +424,16 @@ class Project extends Component {
                 </div>
 
                 <div className="small slim">
-                    <p className="small slim">Team: {team_label}</p>
+                    <p className="small slim">Team: {team_label}
+                        <Button className={data.project_team_selector == project.id ? 'active' : ''}
+                                onClick={() => data.helpers.changeTeamSelector(project)}
+                                bsSize="xsmall">Add</Button>
+                    </p>
+                    {data.project_team_selector == project.id ? <div>
+                        <Select onChange={(e) => onSelectChange(e)}
+                                options={data.workers.map((worker) => {return {value: worker, label: worker.name}})}
+                                value={null}/>
+                    </div> : null}
                     {tech.length ? <p className="small slim">Tech: {tech_label}</p> : ''}
                 </div>
             </div>
