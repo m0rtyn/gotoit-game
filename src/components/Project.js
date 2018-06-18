@@ -19,6 +19,8 @@ import ProjectDeadlineBar from './ProjectDeadlineBar';
 import {skills_names, skills, technologies, project_kinds, project_platforms} from '../game/knowledge';
 
 
+
+
 class Project extends Component {
     constructor(props) {
         super(props);
@@ -174,11 +176,11 @@ class Project extends Component {
                         <div className="flex-container-row">
                             <div className='project_icon'>
                                 <div style={{ position: 'absolute' }}>
-                                    <img alt={project.name + ' avatar'} src={project_platforms[project.platform].icon}
+                                    <img alt={project.name + ' avatar'} src={require(`../../public/${project_platforms[project.platform].name}.svg`)}
                                          width={60} height={60}/>
                                 </div>
                                 <div style={{ position: 'absolute' }}>
-                                    <img alt={project.name + ' avatar'} src={project_kinds[project.kind].icon}
+                                    <img alt={project.name + ' avatar'} src={require(`../../public/${project_kinds[project.kind].name}.svg`)}
                                         width={60} height={60}/>
                                 </div>
                             </div>

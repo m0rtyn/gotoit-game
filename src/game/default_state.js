@@ -84,6 +84,9 @@ var default_state =
 
         animation_items: [],
 
+        timelineScale: [],
+        timelineEvents: []
+
 
     },
     is_animation_fresh: false
