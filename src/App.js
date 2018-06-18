@@ -72,6 +72,7 @@ class App extends Component {
         this.getRelation = this.getRelation.bind(this);
         this.modifyRelation = this.modifyRelation.bind(this);
         this.modifyRelationPure = this.modifyRelationPure.bind(this);
+        this.deepCheckRelation = this.deepCheckRelation.bind(this);
         this.getRole = this.getRole.bind(this);
         this.changeRole = this.changeRole.bind(this);
         this.hireCandidate = this.hireCandidate.bind(this);
@@ -102,7 +103,9 @@ class App extends Component {
         this.unpauseProject = this.unpauseProject.bind(this);
         this.closeProject = this.closeProject.bind(this);
         this.trainingProject = this.trainingProject.bind(this);
+        this.changeTeamSelector = this.changeTeamSelector.bind(this);
         this.draftProject = this.draftProject.bind(this);
+        this.kickWorker = this.kickWorker.bind(this);
         this.unlockTechnology = this.unlockTechnology.bind(this);
         this.getTechnology = this.getTechnology.bind(this);
         this.changeTechnology = this.changeTechnology.bind(this);
@@ -115,6 +118,8 @@ class App extends Component {
         this.lunchOn = this.lunchOn.bind(this);
         this.getGadgetCost = this.getGadgetCost.bind(this);
         this.buyGadget = this.buyGadget.bind(this);
+
+        this.modifyHoveredObjects = this.modifyHoveredObjects.bind(this);
 
         this.howManyEmployers = this.howManyEmployers.bind(this);
 
@@ -145,6 +150,7 @@ class App extends Component {
         app_state.data.helpers['modifyRelation'] = this.modifyRelation;
         app_state.data.helpers['modifyRelationPure'] = this.modifyRelationPure;
         app_state.data.helpers['getRelation'] = this.getRelation;
+        app_state.data.helpers['deepCheckRelation'] = this.deepCheckRelation;
         app_state.data.helpers['getRole'] = this.getRole;
         app_state.data.helpers['changeRole'] = this.changeRole;
         app_state.data.helpers['hireCandidate'] = this.hireCandidate;
@@ -175,7 +181,9 @@ class App extends Component {
         app_state.data.helpers['unpauseProject'] = this.unpauseProject;
         app_state.data.helpers['closeProject'] = this.closeProject;
         app_state.data.helpers['trainingProject'] = this.trainingProject;
+        app_state.data.helpers['changeTeamSelector'] = this.changeTeamSelector;
         app_state.data.helpers['draftProject'] = this.draftProject;
+        app_state.data.helpers['kickWorker'] = this.kickWorker;
         app_state.data.helpers['unlockTechnology'] = this.unlockTechnology;
         app_state.data.helpers['getTechnology'] = this.getTechnology;
         app_state.data.helpers['changeTechnology'] = this.changeTechnology;
@@ -188,9 +196,10 @@ class App extends Component {
         app_state.data.helpers['lunchOn'] = this.lunchOn;
         app_state.data.helpers['getGadgetCost'] = this.getGadgetCost;
         app_state.data.helpers['buyGadget'] = this.buyGadget;
-
         app_state.data.helpers['setTimelineScale'] = this.setTimelineScale;
         app_state.data.helpers['addTimelineEvent'] = this.addTimelineEvent;
+        app_state.data.helpers['modifyHoveredObjects'] = this.modifyHoveredObjects;
+
 
         this.state = app_state;
 
@@ -402,6 +411,38 @@ class App extends Component {
         console.log(this.state.data.relations)
 
         return state;
+    }
+
+    deepCheckRelation(worker, project) {
+        let data = this.state.data;
+        return Object.keys(data.relations[worker.id][project.id]).some((skill) => {
+            return this.getRelation(worker.id, project.id, skill) === true
+        });
+    }
+
+    kickWorker(worker, project) {
+        _.mapValues(worker.stats, (val, skill) => {
+            this.modifyRelation(worker.id, project.id, false, skill);
+        });
+    }
+
+    changeTeamSelector(project = null) {
+        const data = this.state.data;
+        data.project_team_selector = project === null ? null : project.id;
+        this.setState({data: data});
+    }
+
+    modifyHoveredObjects(projects = [], workers = []) {
+        const data = this.state.data;
+        if (projects.length || workers.length) {
+            projects.forEach((project) => data.hovered_projects_id.push(project.id));
+            workers.forEach((worker) => data.hovered_workers_id.push(worker.id));
+        } else {
+            data.hovered_projects_id = [];
+            data.hovered_workers_id = [];
+        }
+
+        this.setState({data: data});
     }
 
     getRole(worker_id, role) {
@@ -1611,7 +1652,7 @@ class App extends Component {
 
     render() {
         return (
-            <div>
+            <div className="app">
                 <BubblesAnimation onRef={ref => (this.animation = ref)}/>
                 <Layout data={this.state.data}/>
                 <Footer data={this.state.data} newGame={this.newGame}/>
