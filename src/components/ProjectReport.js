@@ -60,11 +60,11 @@ class Project extends Component {
 
                 {project.deadline_max > 0 ?
                     <div className="progress">
-                        <div className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'progress-bar-danger' : 'progress-bar-warning'))} role="progressbar"
+                        <div className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'bg-danger' : 'bg-warning'))} role="progressbar"
                              style={{width: (100-(project.deadline / project.deadline_max * 100))+'%'}}>
                             <label>{project.deadline_max - project.deadline} gone</label>
                         </div>
-                        <div className="progress-bar progress-bar-success" role="progressbar"
+                        <div className="progress-bar bg-success" role="progressbar"
                              style={{width: (project.deadline / project.deadline_max * 100)+'%'}}>
                             <label>{project.deadline} to deadline</label>
                         </div>

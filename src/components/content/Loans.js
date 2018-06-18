@@ -73,7 +73,7 @@ class Loans extends Component {
                     })}
 
                 </div>
-                <div className="panel">
+                <div className="card">
                     {data.taken_loans.map((loan, i) => {
                         let paid_percent = Math.ceil((loan.time - loan.timer) / loan.time * 100);
 
@@ -94,13 +94,13 @@ class Loans extends Component {
                             </div>
                             <div className="filament">
                                 <div className="progress">
-                                    <div className='progress-bar progress-bar-warning' role="progressbar"
-                                         style={{width: (100 - paid_percent) + '%'}}>
-                                        <label>debt</label>
+                                    <div className='progress-bar bg-warning' role="progressbar" 
+                                        style={{width: (100 - paid_percent) + '%'}}>
+                                        debt
                                     </div>
-                                    <div className='progress-bar progress-bar-success' role="progressbar"
-                                         style={{width: paid_percent + '%'}}>
-                                        <label>paid</label>
+                                    <div className='progress-bar bg-success' role="progressbar" 
+                                        style={{width: paid_percent + '%'}}>
+                                        paid
                                     </div>
                                 </div>
                             </div>

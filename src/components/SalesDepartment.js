@@ -8,7 +8,7 @@ class SalesDepartment extends Component {
             <div className="card border text-center">
                 <h5>Reputation</h5>
 
-                <div className="progress slim">
+                <div className="progress">
                     <div className='progress-bar' role="progressbar"
                          style={{width: Math.min(100, data.reputation)+'%'}}>
                         <label>{data.reputation}%</label>
