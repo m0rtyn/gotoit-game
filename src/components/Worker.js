@@ -80,7 +80,7 @@ class Worker extends Component {
 
 
         return (
-            <div id={worker.id} className="well well-sm fat">
+            <div id={worker.id} className="card fat">
                 <div className='flex-container-column'>
                     <div className='flex-container-row'>
                         <div className='avatar'>
@@ -134,7 +134,7 @@ class Worker extends Component {
                                     </div>
 
                                     <div className="card border text-center">
-                                        <div className="checkbox-inline">
+                                        <div className="">
                                             <label>
                                                 <input
                                                     type="checkbox"
@@ -149,7 +149,7 @@ class Worker extends Component {
                                         </div>
                                         <div className="flex-container-row slim">
                                             {skills_names.map((role, i) =>
-                                                <div key={role} className="checkbox flex-element slim">
+                                                <div key={role} className="form-check-checkbox flex-element slim">
                                                     <label>
                                                         <input
                                                             type="checkbox"
@@ -179,7 +179,7 @@ class Worker extends Component {
                                                                 </div>
                                                                 : <div className="flex-element" key={item_key}>
                                                                     <button
-                                                                        className={data.money >= item.money ? "btn btn-info btn-xs" : "btn btn-info btn-xs disabled"}
+                                                                        className={data.money >= item.money ? "btn btn-info btn-sm" : "btn btn-info btn-sm disabled"}
                                                                         title={item.description} id={item} onClick={() => {
                                                                         if (data.money >= item.money) {
                                                                             data.helpers.buyItem(worker, skill, item_key);
@@ -196,7 +196,7 @@ class Worker extends Component {
 
                                     {/*    deprecated training project */}
                                     <div>
-                                        <div className="card panel-info text-center">
+                                        <div className="card text-center">
                                             {Object.keys(education).map((source) =>
                                                 ((!education[source].hide)
                                                     ? <div className="flex-container-row" key={source}>
@@ -213,11 +213,11 @@ class Worker extends Component {
 
                                     <div>
                                         {/*    Which projects {worker.name} has to work?   */}
-                                        <div className="card panel-info">
+                                        <div className="card">
                                             {data.projects.map((project) => {
                                                     const stats_data = _.mapValues(project.needs, (val, skill) => {
                                                         return {name: skill,
-                                                            val: <div key={worker.id + project.id} className="checkbox-inline">
+                                                            val: <div key={worker.id + project.id} className="">
                                                                 <label style={{width: '100%'}}>
                                                                     <input
                                                                         type="checkbox"
@@ -246,11 +246,11 @@ class Worker extends Component {
                                 </TeamDialog>
                             </Portal>
 
-                            <div className="progress filament">
-                                {/* <div classNames('progress-bar', (100 / worker.getEfficiency() < 0.5 ? 'progress-bar-danger' : 'progress-bar-warning')) role="progressbar"  */}
+                            <div className="filament">
+                                {/* <div classNames('progress-bar', (100 / worker.getEfficiency() < 0.5 ? 'bg-danger' : 'bg-warning')) role="progressbar"  */}
                                 <WorkerHappinessBar worker={worker}/>
                             </div>
-                            <div className="progress filament">
+                            <div className="filament">
                                 <WorkerStaminaBar worker={worker}/>
                             </div>
                         </div>

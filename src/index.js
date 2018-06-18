@@ -6,8 +6,6 @@ import {IntlProvider} from 'react-intl';
 //window.jQuery = jQuery = window.$ = $;
 //console.log($);
 
-// import './libraries/bootstrap/css/bootstrap.min.css'; //TODO: bug - не могу пока полностью отключить, ломается позиционирование попапов
-
 // theAdmin theme =============================
 import './libraries/theme/src/assets/css/core.min.css';
 import './libraries/theme/src/assets/css/app.min.css';

@@ -27,7 +27,7 @@ class HireWorkers extends Component {
                 return { name: key, val: <span>{candidate.stats[key]}</span> };
             });
 
-            return <div key={candidate.id} className="card panel-info">{candidate.name} <span> {candidate.getSalary()}$</span>
+            return <div key={candidate.id} className="card">{candidate.name} <span> {candidate.getSalary()}$</span>
                 <div>{`Character: ${candidate.character.name}. ${candidate.character.description}.`}</div>
                 <StatsBar stats={stats_data} data={data} />
                 <button className="btn btn-success" id={candidate.id} onClick={(e) => this.hire(e, type)}>Hire</button>
@@ -58,15 +58,15 @@ class HireWorkers extends Component {
                         </h4>
 
                         <div className="card border text-center">
-                            <div className="progress slim">
-                                <div className='progress-bar' role="progressbar"
-                                     style={{width: Math.min(100, data.rumor)+'%'}}>
-                                    <label>{data.rumor}%</label>
+                            <div className="progress">
+                                <div className='progress-bar' role="progressbar" 
+                                    style={{width: Math.min(100, data.rumor)+'%'}}>
+                                    {data.rumor}%
                                 </div>
                             </div>
                             <span className="flex-element">
                                 <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('Advertising'); }}>Advertising</button>
-                             </span>
+                            </span>
                         </div>
 
 

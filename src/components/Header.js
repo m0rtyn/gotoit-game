@@ -12,7 +12,7 @@ class Header extends Component {
         game_date.setDate(real_date.getDate()+(date.tick/24));
 
         return (
-            <header className="topbar" style={{borderBottom: '1px solid black'}}>
+            <header className="topbar" style={{}}>
                 <div className="topbar-left">
                     <a className="topbar-btn" onClick={() => {
                         if (data.game_paused) {
