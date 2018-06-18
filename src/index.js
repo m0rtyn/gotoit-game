@@ -9,9 +9,9 @@ import {IntlProvider} from 'react-intl';
 // import './libraries/bootstrap/css/bootstrap.min.css'; //TODO: bug - не могу пока полностью отключить, ломается позиционирование попапов
 
 // theAdmin theme =============================
-import './libraries/theme/src/assets/css/style.min.css';
 import './libraries/theme/src/assets/css/core.min.css';
 import './libraries/theme/src/assets/css/app.min.css';
+import './libraries/theme/src/assets/css/style.min.css';
 // ============================================
 
 import './libraries/toastr/toastr.css';
