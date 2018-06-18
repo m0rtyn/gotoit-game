@@ -12,7 +12,7 @@ import {addAction} from '../components/ToastNest';
 import Narrator from '../services/Narrator';
 import ValueCache from '../services/ValueCache';
 
-import {getData, current_tick} from '../App';
+import {getData, current_tick, addTimelineEvent} from '../App';
 
 import maleAvatar from '../../public/male.png'
 import femaleAvatar from '../../public/female.png'
@@ -71,7 +71,7 @@ class WorkerModel {
 
     tick() {
         // effects gone
-        _.each(this.effects, (effect_value, effect) => { if (this.effects[effect] > 0) this.effects[effect]--; })
+        _.each(this.effects, (effect_value, effect) => { if (this.effects[effect] > 0) this.effects[effect]--; });
 
         // hunger
         if (this.fed_ticker > 0) this.fed_ticker--;
@@ -86,6 +86,7 @@ class WorkerModel {
         //   console.log(this.stamina);
     }
 
+
     proposeVacation() {
         this.to_vacation = true;
         this.to_vacation_ticker = 24 * 7 * 2; // 2 weeks
@@ -93,6 +94,7 @@ class WorkerModel {
             timeOut: 10000,
             extendedTimeOut: 5000
         }, 'error');
+
     }
 
     sendToVacation(long) {
@@ -103,6 +105,7 @@ class WorkerModel {
             timeOut: 15000,
             extendedTimeOut: 8000
         }, 'error');
+
     }
 
     tellFeelings() {

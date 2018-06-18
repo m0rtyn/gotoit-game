@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {FormattedDate} from 'react-intl';
 import classNames from 'classnames';
+import Timeline from './Timeline'
 
 class Header extends Component {
     render() {
@@ -57,6 +58,9 @@ class Header extends Component {
                                 hour="numeric"
                             />
                         </span>
+
+                        <Timeline data={data}/>
+
                         <span className="flex-element flex-container-row" onClick={() => {
                             console.log(data);
                         }}>

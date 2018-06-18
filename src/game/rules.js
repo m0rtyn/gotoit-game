@@ -1,7 +1,12 @@
 
 import _ from 'lodash';
 
-import {current_tick, setCurrentTick, projects_done} from '../App';
+import {
+    current_tick,
+    setCurrentTick,
+    projects_done,
+    setGameDate,
+} from '../App';
 import {addAction} from '../components/ToastNest';
 import Lorer from '../services/Lorer';
 import WorkerModel from '../models/WorkerModel';
@@ -16,6 +21,7 @@ export const rules = {
             const date = data.date;
             let time = data.date;
             let current_tick = data.date.tick;
+            console.log(time)
 
             var real_date = new Date();
             var game_date = new Date();
@@ -23,6 +29,9 @@ export const rules = {
 
             time.tick++;
             setCurrentTick(time.tick);
+            setGameDate(game_date);
+            data.helpers.setTimelineScale();
+
             //time.hour++;
             time.hour = game_date.getHours();
 
@@ -41,6 +50,7 @@ export const rules = {
 
             if (time.hour === 0) {
                 console.log('A new day');
+
                 //time.hour = 1;
                 data.workers.forEach((worker) => {
                     // console.log('worker '+worker.id+' morale '+worker.morale);
@@ -54,6 +64,7 @@ export const rules = {
                         if ((dissatisfaction / smoothing) > breakpoint) {
                             worker.to_leave = true;
                             worker.to_leave_ticker = 24 * 7 * 2; // 2 weeks
+                            data.helpers.addTimelineEvent('leave', 'Leaving from company', worker, 24*7*2); // 14 days
                             addAction(worker.name + ' decided to leave from your company in two weeks', {
                                 timeOut: 20000,
                                 extendedTimeOut: 10000
@@ -252,11 +263,15 @@ export const rules = {
                 // Vacation
                 if (!worker.to_vacation && !worker.in_vacation && worker.stamina <= 0) {
                     worker.proposeVacation();
+                    state.data.helpers.addTimelineEvent('vacation','Going to vacation', worker, 7 * 2) //14 days
                 }
                 if (worker.to_vacation) {
                     worker.to_vacation_ticker--;
                     if (worker.to_vacation_ticker <= 0) {
-                        worker.sendToVacation(_.random(1,4));
+                        let weeks = _.random(1,4)
+                        worker.sendToVacation(weeks);
+                        state.data.helpers.
+                        lineEvent('vacation','Going to vacation', worker, 7 * weeks)
                     }
                 }
                 if (worker.in_vacation) {
