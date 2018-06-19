@@ -25,7 +25,7 @@ class Project extends Component {
             };
         });
 
-        let label = (id, text) => { return <span key={id}> <label className="label-info small"> {text}</label></span>; };
+        let label = (id, text) => { return <span key={id}> <label className="text-info small"> {text}</label></span>; };
 
         let team_ids = {};
         _.keys(data.relations).forEach((worker_id) => {

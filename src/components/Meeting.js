@@ -69,7 +69,7 @@ class Meeting extends Component {
 
         const manage_button = <button className="btn flex-element">Manage</button>;
 
-        let label = (id, text) => { return <span key={id}> <label className="label-default">{text}</label> </span>; };
+        let label = (id, text) => { return <span key={id}> <label className="text-primary">{text}</label> </span>; };
 
         let team_ids = {};
         _.keys(data.relations).forEach((worker_id) => {

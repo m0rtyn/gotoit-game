@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {FormattedDate} from 'react-intl';
 import classNames from 'classnames';
+import Timeline from './Timeline'
 
 class Header extends Component {
     render() {
@@ -63,14 +64,17 @@ class Header extends Component {
                             year="numeric"
                             hour="numeric"
                             />
-                    </p>
-                    <p>
+                        
                         {(date.is_working_time ?
-                            <label className="label-success">Working</label> :
+                            <span className="text-success"> Working</span> :
                             (date.day > 5) ?
-                                <label className="label-default">Weekends</label> :
-                                <label className="label-info">Sleeping</label>)}
+                                <span  className="text-primary"> Weekends</span> :
+                                <span  className="text-info"> Sleeping</span>)}
                     </p>
+
+                    
+
+                    <Timeline data={data}/>
                 </div>
 
                 <div className="topbar-right" onClick={() => {
@@ -79,19 +83,19 @@ class Header extends Component {
                     <span className="topbar-btn font-weight-bold">
                         <i className="fa fa-dollar"></i>
                          {data.money}
-                        {/*<label onClick={() => { CHEAT!
+                        {/*<span onClick={() => { CHEAT!
                                 data.helpers.addMoney(10000, 'usd');
-                                }}>$</label>*/}
+                                }}> $ </span>*/}
                     </span>
                     
                     <div className="topbar-divider"></div>
 
                     <span className="topbar-btn font-weight-bold">
                         <i className="fa fa-bitcoin"></i>
-                         {data.btc.toFixed(2)}
-                        {/*<label onClick={() => { CHEAT!
+                        {data.btc.toFixed(2)}
+                        {/*<span onClick={() => { CHEAT!
                                 data.helpers.addMoney(1, 'btc');
-                                }}> BTC </label>*/}
+                                }}> BTC </span>*/}
                     </span>
                 </div>
             </header>

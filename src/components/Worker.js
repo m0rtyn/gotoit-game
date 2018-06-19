@@ -46,7 +46,7 @@ class Worker extends Component {
     }
 
     teach(skill, source) {
-      //  console.log(skill, source);
+        //  console.log(skill, source);
 
         switch (source) {
             case 'training':
@@ -80,7 +80,12 @@ class Worker extends Component {
 
 
         return (
-            <div id={worker.id} className="card fat">
+
+            <div onMouseOver={() => {data.helpers.modifyHoveredObjects(data.projects.filter((project) => {return data.helpers.deepCheckRelation(worker, project)}), [worker])}} 
+                onMouseOut={() => {data.helpers.modifyHoveredObjects()}} 
+                className={`card fat ${data.hovered_workers_id.includes(worker.id) ? 'hovered' : ''}`}
+                id={worker.id}
+            >
                 <div className='flex-container-column'>
                     <div className='flex-container-row'>
                         <div className='avatar'>
