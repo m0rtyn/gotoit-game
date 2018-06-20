@@ -69,7 +69,7 @@ class Meeting extends Component {
 
         const manage_button = <button className="btn flex-element">Manage</button>;
 
-        let label = (id, text) => { return <span key={id}> <label className="label-default">{text}</label> </span>; };
+        let label = (id, text) => { return <span key={id}> <label className="text-primary">{text}</label> </span>; };
 
         let team_ids = {};
         _.keys(data.relations).forEach((worker_id) => {
@@ -104,7 +104,7 @@ class Meeting extends Component {
             } }}>Reject</button>;
 
         return (
-            <div className="well well-sm fat">
+            <div className="card fat">
                 <div className="flex-container-row">
                     <label className="flex-element"> {project.name} </label>
                     <label className="flex-element"> Reward: {project.reward}$ </label>
@@ -124,11 +124,11 @@ class Meeting extends Component {
                                             {project.deadline > 0 ? <div key="deadline" className="row">
                                                 <div className="col-md-2">Deadline</div>
                                                 <div className="col-md-10 progress">
-                                                    <div className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'progress-bar-danger' : 'progress-bar-warning'))} role="progressbar"
+                                                    <div className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'bg-danger' : 'bg-warning'))} role="progressbar"
                                                          style={{width: (100-(project.deadline / project.deadline_max * 100))+'%'}}>
                                                         <label>{project.deadline_max - project.deadline} hours</label>
                                                     </div>
-                                                    <div className="progress-bar progress-bar-success" role="progressbar"
+                                                    <div className="progress-bar bg-success" role="progressbar"
                                                          style={{width: (project.deadline / project.deadline_max * 100)+'%'}}>
                                                         <label>{project.deadline} hours</label>
                                                     </div>
@@ -136,10 +136,10 @@ class Meeting extends Component {
                                             </div> : ''}
 
                                         </div>
-                                        <div className="panel panel-success">
+                                        <div className="card border">
                                             {this.props.data.workers.map((worker) => {
-                                                return <div key={worker.id + project.id} className="panel filament">
-                                                    <label className="checkbox-inline" style={{width: '100%'}}>
+                                                return <div key={worker.id + project.id} className="card filament">
+                                                    <label className="" style={{width: '100%'}}>
                                                         <input
                                                             type="checkbox"
                                                             id={worker.id}
@@ -160,12 +160,12 @@ class Meeting extends Component {
                 </div>
 
                 {project.deadline > 0 ?
-                    <div className="progress slim">
-                        <div className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'progress-bar-danger' : 'progress-bar-warning'))} role="progressbar"
+                    <div className="progress">
+                        <div className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'bg-danger' : 'bg-warning'))} role="progressbar"
                              style={{width: (100-(project.deadline / project.deadline_max * 100))+'%'}}>
                             <label>{project.deadline_max - project.deadline} gone</label>
                         </div>
-                        <div className="progress-bar progress-bar-success" role="progressbar"
+                        <div className="progress-bar bg-success" role="progressbar"
                              style={{width: (project.deadline / project.deadline_max * 100)+'%'}}>
                             <label>{project.deadline} to deadline</label>
                         </div>
