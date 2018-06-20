@@ -46,13 +46,13 @@ class StartMeeting extends Component {
                                     {!data.projects_known_technologies.includes(technology)
                                         ?
                                         <div className={(current_tick > (24*30*3)) ? "" : "hidden"}>
-                                            <div className="panel panel-info">
+                                            <div className="card">
                                                 <button
-                                                    className="btn btn-default btn-xs disabled">{meeting.name}</button>
+                                                    className="btn btn-secondary btn-sm disabled">{meeting.name}</button>
                                                 { " " }
                                                 <span>
                                                     <button
-                                                        className={technologies[technology].price <= data.money ? "btn btn-success btn-xs" : "btn btn-default btn-xs disabled"}
+                                                        className={technologies[technology].price <= data.money ? "btn btn-success btn-sm" : "btn btn-secondary btn-sm disabled"}
                                                         onClick={() => {
                                                             if (technologies[technology].price <= data.money) data.helpers.unlockTechnology(technology);
                                                         }}
@@ -66,7 +66,7 @@ class StartMeeting extends Component {
                                         :
                                         <div>
                                             <div>
-                                                <button className="btn btn-primary btn-xs" onClick={() => {
+                                                <button className="btn btn-primary btn-sm" onClick={() => {
                                                     data.helpers.startMeeting(technologies[technology].meeting, this.state.selected_workers);
                                                 }}>{meeting.name}</button>
                                                 { " " }

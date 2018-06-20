@@ -1,16 +1,6 @@
 
 import _ from 'lodash';
-import applicationIcon from '../icons/Application.svg';
-import gameIcon from '../icons/Game.svg';
-import siteIcon from '../icons/Site.svg';
-import editorIcon from '../icons/Editor.svg';
-import magazineIcon from '../icons/Shop.svg';
-import serviceIcon from '../icons/Service.svg';
-import databaseIcon from '../icons/Database.svg';
-import crossplatformIcon from '../icons/Cross-platform.svg';
-import mobileIcon from '../icons/Mobile.svg';
-import browserIcon from '../icons/Browser.svg';
-import desktopIcon from '../icons/Desktop.svg';
+
 
 
 export const skills = {design: 0, program: 0, manage: 0};
@@ -112,20 +102,20 @@ export const offices = {
 };
 
 export const project_platforms = {
-    crossplatform: {name: 'Cross-platform', description: 'Cross-platform applications should be balanced.', icon: crossplatformIcon},
-    mobile: {name: 'Mobile', description: 'For Mobile applications, design is important.', icon: mobileIcon},
-    desktop: {name: 'Desktop', description: 'For Desktop applications, programming is important.', icon: desktopIcon},
-    browser: {name: 'Browser', description: 'For Browser applications, management is important.', icon: browserIcon},
+    crossplatform: {name: 'Cross-platform', description: 'Cross-platform applications should be balanced.'},
+    mobile: {name: 'Mobile', description: 'For Mobile applications, design is important.'},
+    desktop: {name: 'Desktop', description: 'For Desktop applications, programming is important.'},
+    browser: {name: 'Browser', description: 'For Browser applications, management is important.'},
 };
 
 export const project_kinds = {
-    application: {name: 'Application', description: 'General Applications should be balanced.', icon: applicationIcon},
-    game: {name: 'Game', description: 'For Games, design is important, but do not forget about programming.', icon: gameIcon},
-    site: {name: 'Site', description: 'For Sites, design is important, but do not forget about management.', icon: siteIcon},
-    editor: {name: 'Editor', description: 'For Editors, programming is important, but do not forget about design.', icon: editorIcon},
-    magazine: {name: 'Magazine', description: 'For Magazines, management is important, but do not forget about design.', icon: magazineIcon},
-    service: {name: 'Service', description: 'For Services, management is important, but do not forget about programming.', icon: serviceIcon},
-    database: {name: 'Database', description: 'For Databases, programming is important, but do not forget about management.', icon: databaseIcon}
+    application: {name: 'Application', description: 'General Applications should be balanced.'},
+    game: {name: 'Game', description: 'For Games, design is important, but do not forget about programming.'},
+    site: {name: 'Site', description: 'For Sites, design is important, but do not forget about management.'},
+    editor: {name: 'Editor', description: 'For Editors, programming is important, but do not forget about design.'},
+    magazine: {name: 'Magazine', description: 'For Magazines, management is important, but do not forget about design.'},
+    service: {name: 'Service', description: 'For Services, management is important, but do not forget about programming.'},
+    database: {name: 'Database', description: 'For Databases, programming is important, but do not forget about management.'}
 };
 
 export const project_sizes = {
@@ -151,5 +141,108 @@ export const education = { // hm...
     university: {name: 'University', hide: true, description: ''},
     workshop: {name: 'Workshop', hide: true, description: ''}
 };
+
+export const colors = {
+    creativity: {
+        name: 'creativity',
+        colorCompleted: '#EA80FC'
+    },
+    agile: {
+        name: 'agile',
+        colorCompleted: '#1DE9B6'
+    },
+    tdd: {
+        name: 'tdd',
+        colorCompleted: '#1E90FF'
+    },
+    refactor: {
+        name: 'refactor',
+        colorCompleted: '#FFAB40'
+    },
+    design: {
+        name: 'design',
+        colorEstimate: '#ffc299',
+        colorCompleted: '#ff954d',
+        colorBug: '#c47640'
+    },
+    program: {
+        name: 'program',
+        colorEstimate: '#ffb2f2',
+        colorCompleted: '#cc6cbc',
+        colorBug: '#99518d'
+    },
+    manage: {
+        name: 'manage',
+        colorEstimate: '#a9f2ee',
+        colorCompleted: '#57d9d1',
+        colorBug: '#43918d'
+    },
+    success: '#5cb85c',
+    warning: '#f0ad4e',
+    danger: '#d9534f',
+
+    backgrounds: {
+        Achievements: '#FFFFFF',
+        Advertising: '#FFFFFF',
+        Archive: '#C0E5ED',
+        Exchange: '#C0E5ED',
+        HireWorkers: '#C0E5ED',
+        Loans: '#C0E5ED',
+        MarketTop: '#C0E5ED',
+        ProjectsFind: '#FFFFFF',
+        StartMeeting: '#F47B68',
+        StartProject: '#C0E5ED',
+        Welcome: '#B6D2DE',
+    }
+
+
+};
+
+export const genAnimationData = (name, from, to, count, isBug) => {
+    console.log(name);
+    let data = colors[name];
+    let color = isBug ? data.colorBug : data.colorCompleted;
+    return { size: '20px', color: color, from: from, to: to, count: count}
+}
+
+export const project_bars = {
+    design_tasks: {
+        id: 'design_tasks',
+        color: colors.design.tasks
+    },
+    design_bugs: {
+        id: 'design_bugs',
+        color: colors.design.colorBug
+    },
+    design_completed: {
+        id: 'design_completed',
+        color: colors.design.colorCompleted
+    },
+    program_tasks: {
+        id: 'program_tasks',
+        color: colors.program.tasks
+    },
+    program_bugs: {
+        id: 'program_bugs',
+        color: colors.program.colorBug
+    },
+    program_completed: {
+        id: 'program_completed',
+        color: colors.program.colorCompleted
+    },
+    manage_tasks: {
+        id: 'manage_tasks',
+        color: colors.manage.tasks
+    },
+    manage_bugs: {
+        id: 'manage_bugs',
+        color: colors.manage.colorBug
+    },
+    manage_completed: {
+        id: 'manage_completed',
+        color: colors.manage.colorCompleted
+    },
+}
+
 
 export default {};

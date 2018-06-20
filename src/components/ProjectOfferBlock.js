@@ -29,7 +29,7 @@ class ProjectOfferBlock extends Component {
             return {name: key, val: <span>{candidate.needs(key)}</span>};
         });
 
-        return <div key={candidate.id} className="panel panel-warning">
+        return <div key={candidate.id} className="card">
             <ProjectName project={candidate}/>
             <div>
                 <label>Deadline: {candidate.getDeadlineText()}</label>&nbsp;

@@ -8,6 +8,8 @@ import ProjectName from './ProjectName';
 //import {addAction} from '../components/ToastNest';
 
 import {skills_names, workers_bonus_items, roles, education} from '../game/knowledge';
+import WorkerHappinessBar from "./WorkerHappinessBar";
+import WorkerStaminaBar from "./WorkerStaminaBar";
 
 class Worker extends Component {
     constructor(props) {
@@ -44,7 +46,7 @@ class Worker extends Component {
     }
 
     teach(skill, source) {
-      //  console.log(skill, source);
+        //  console.log(skill, source);
 
         switch (source) {
             case 'training':
@@ -75,30 +77,15 @@ class Worker extends Component {
             collective: {name: 'Collective', val: worker.collectivePenalty()}
         };
 
-        const efficiency_bar_style = (() => {
-            let ratio = worker.getEfficiency() / 100;
-            switch (true) {
-                case ratio <= 0.5: return 'progress-bar-danger';
-                case ratio <= 0.75: return 'progress-bar-warning';
-                case ratio <= 1: return 'progress-bar-success';
-                case ratio  > 1: return 'progress-bar-success'; // High bonus
-                default: //alert('broken ratio: '+ratio);
-            }
-        }) ();
 
-        const vacation_bar_style = (() => {
-            let ratio = worker.stamina / 1000;
-            switch (true) {
-                case ratio <= 0.33: return 'progress-bar-danger';
-                case ratio <= 0.66: return 'progress-bar-warning';
-                case ratio <= 1: return 'progress-bar-success';
-                case ratio  > 1: return 'progress-bar-success'; // High bonus
-                default: //alert('broken ratio: '+ratio);
-            }
-        }) ();
 
         return (
-            <div id={worker.id} className="well well-sm fat">
+
+            <div onMouseOver={() => {data.helpers.modifyHoveredObjects(data.projects.filter((project) => {return data.helpers.deepCheckRelation(worker, project)}), [worker])}} 
+                onMouseOut={() => {data.helpers.modifyHoveredObjects()}} 
+                className={`card border fat ${data.hovered_workers_id.includes(worker.id) ? 'hovered' : ''}`}
+                id={worker.id}
+            >
                 <div className='flex-container-column'>
                     <div className='flex-container-row'>
                         <div className='avatar'>
@@ -117,7 +104,7 @@ class Worker extends Component {
                                         {worker.in_vacation ? ' on vacation! ' : ''}
                                     </h2>
 
-                                    <div className="panel panel-success text-center">
+                                    <div className="card border text-center">
                                         {worker.is_player ? '' : <span>Worker salary: ${worker.getSalary()}. Overrate bonus: {worker.getOverrate()}%.
                                     <button className="btn btn-danger btn-link" onClick={() => { data.helpers.riseEmployer(worker.id)}}>Rise Salary</button></span>}
                                         {worker.get_monthly_salary ? '' : <span><button className="btn btn-danger btn-link" onClick={() => {data.helpers.paySalary(worker)}}>Pay a debt</button></span>}
@@ -133,24 +120,12 @@ class Worker extends Component {
                                         </p>
                                     </ul>
 
-                                    <div className="panel panel-success text-center filament">
+                                    <div className="card border text-center filament">
                                         <div className="row filament">
-                                            <div className="col-md-2">Happiness</div>
-                                            <div className="col-md-9 progress slim">
-                                                <div className={efficiency_bar_style} role="progressbar"
-                                                     style={{width: Math.min(100, worker.getEfficiency())+'%'}}>
-                                                    <label className="text-sm">{worker.getEfficiency()}%</label>
-                                                </div>
-                                            </div>
+                                            <WorkerHappinessBar worker={worker}/>
                                         </div>
                                         <div className="row filament">
-                                            <div className="col-md-2">Stamina</div>
-                                            <div className="col-md-9 progress slim">
-                                                <div className={vacation_bar_style} role="progressbar"
-                                                     style={{width: Math.min(100, worker.stamina/50)+'%'}}>
-                                                    <label>{Math.floor(worker.stamina/50)}%</label>
-                                                </div>
-                                            </div>
+                                            <WorkerStaminaBar worker={worker} />
                                         </div>
                                         <StatsBar stats={efficiency_data} data={this.props.data} />
                                         <div>{`Character: ${worker.character.name}. ${worker.character.description}.`}</div>
@@ -163,8 +138,8 @@ class Worker extends Component {
                                         </p5>
                                     </div>
 
-                                    <div className="panel panel-success text-center">
-                                        <div className="checkbox-inline">
+                                    <div className="card border text-center">
+                                        <div className="">
                                             <label>
                                                 <input
                                                     type="checkbox"
@@ -179,7 +154,7 @@ class Worker extends Component {
                                         </div>
                                         <div className="flex-container-row slim">
                                             {skills_names.map((role, i) =>
-                                                <div key={role} className="checkbox flex-element slim">
+                                                <div key={role} className="form-check-checkbox flex-element slim">
                                                     <label>
                                                         <input
                                                             type="checkbox"
@@ -193,7 +168,7 @@ class Worker extends Component {
                                         </div>
                                     </div>
 
-                                    <div className="panel panel-success text-center">
+                                    <div className="card border text-center">
                                         <StatsBar stats={stats_data} data={this.props.data} />
 
                                         {/*    bonus items */}
@@ -209,7 +184,7 @@ class Worker extends Component {
                                                                 </div>
                                                                 : <div className="flex-element" key={item_key}>
                                                                     <button
-                                                                        className={data.money >= item.money ? "btn btn-info btn-xs" : "btn btn-info btn-xs disabled"}
+                                                                        className={data.money >= item.money ? "btn btn-info btn-sm" : "btn btn-info btn-sm disabled"}
                                                                         title={item.description} id={item} onClick={() => {
                                                                         if (data.money >= item.money) {
                                                                             data.helpers.buyItem(worker, skill, item_key);
@@ -226,7 +201,7 @@ class Worker extends Component {
 
                                     {/*    deprecated training project */}
                                     <div>
-                                        <div className="panel panel-info text-center">
+                                        <div className="card text-center">
                                             {Object.keys(education).map((source) =>
                                                 ((!education[source].hide)
                                                     ? <div className="flex-container-row" key={source}>
@@ -243,11 +218,11 @@ class Worker extends Component {
 
                                     <div>
                                         {/*    Which projects {worker.name} has to work?   */}
-                                        <div className="panel panel-info">
+                                        <div className="card">
                                             {data.projects.map((project) => {
                                                     const stats_data = _.mapValues(project.needs, (val, skill) => {
                                                         return {name: skill,
-                                                            val: <div key={worker.id + project.id} className="checkbox-inline">
+                                                            val: <div key={worker.id + project.id} className="">
                                                                 <label style={{width: '100%'}}>
                                                                     <input
                                                                         type="checkbox"
@@ -276,18 +251,12 @@ class Worker extends Component {
                                 </TeamDialog>
                             </Portal>
 
-                            <div className="progress filament">
-                                {/* <div classNames('progress-bar', (100 / worker.getEfficiency() < 0.5 ? 'progress-bar-danger' : 'progress-bar-warning')) role="progressbar"  */}
-                                <div className={efficiency_bar_style} role="progressbar"
-                                     style={{width: Math.min(100, worker.getEfficiency())+'%'}}>
-                                    <label>Happiness {worker.getEfficiency()}%</label>
-                                </div>
+                            <div className="filament">
+                                {/* <div classNames('progress-bar', (100 / worker.getEfficiency() < 0.5 ? 'bg-danger' : 'bg-warning')) role="progressbar"  */}
+                                <WorkerHappinessBar worker={worker}/>
                             </div>
-                            <div className="progress filament">
-                                <div className={vacation_bar_style} role="progressbar"
-                                     style={{width: Math.min(100, worker.stamina/50)+'%'}}>
-                                    <label>Stamina {Math.floor(worker.stamina/50)}%</label>
-                                </div>
+                            <div className="filament">
+                                <WorkerStaminaBar worker={worker}/>
                             </div>
                         </div>
                     </div>

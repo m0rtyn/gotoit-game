@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 
-class Market extends Component {
+class Exchange extends Component {
     render() {
         const data = this.props.data;
 
@@ -40,4 +40,4 @@ class Market extends Component {
     }
 }
 
-export default Market;
+export default Exchange;

@@ -12,10 +12,10 @@ import {addAction} from '../components/ToastNest';
 import Narrator from '../services/Narrator';
 import ValueCache from '../services/ValueCache';
 
-import {getData, current_tick} from '../App';
+import {getData, current_tick, addTimelineEvent} from '../App';
 
-import maleAvatar from '../icons/male.png'
-import femaleAvatar from '../icons/female.png'
+import maleAvatar from '../../public/male.png'
+import femaleAvatar from '../../public/female.png'
 
 class WorkerModel {
     constructor(name = 'Default', stats = skills_1, gender = 'male', is_player = false) {
@@ -71,7 +71,7 @@ class WorkerModel {
 
     tick() {
         // effects gone
-        _.each(this.effects, (effect_value, effect) => { if (this.effects[effect] > 0) this.effects[effect]--; })
+        _.each(this.effects, (effect_value, effect) => { if (this.effects[effect] > 0) this.effects[effect]--; });
 
         // hunger
         if (this.fed_ticker > 0) this.fed_ticker--;
@@ -86,6 +86,7 @@ class WorkerModel {
         //   console.log(this.stamina);
     }
 
+
     proposeVacation() {
         this.to_vacation = true;
         this.to_vacation_ticker = 24 * 7 * 2; // 2 weeks
@@ -93,6 +94,7 @@ class WorkerModel {
             timeOut: 10000,
             extendedTimeOut: 5000
         }, 'error');
+
     }
 
     sendToVacation(long) {
@@ -103,6 +105,7 @@ class WorkerModel {
             timeOut: 15000,
             extendedTimeOut: 8000
         }, 'error');
+
     }
 
     tellFeelings() {
@@ -221,7 +224,6 @@ class WorkerModel {
        // return this.calcEfficiencyReal();
         return this.efficiency.get();
     }
-
     calcEfficiencyReal() { // happinessReal
       //  const stamina = this.staminaPenalty();
         const tasks_stream = this.workloadPenalty();
@@ -250,6 +252,58 @@ class WorkerModel {
         }
 
         return this.get_monthly_salary === false ? Math.ceil(happiness / 2) : Math.ceil(happiness);
+
+        //return 100;
+    }
+    getEfficiencyArray() { // happinessReal
+        let salary_mod = this.get_monthly_salary === false ? 0.5 : 1;
+
+
+        //  const stamina = this.staminaPenalty();
+        const tasks_stream = this.workloadPenalty();
+        const tasks_difficulty = this.difficultyPenalty();
+        const education_stream = this.educationPenalty();
+        const collective = this.collectivePenalty();
+
+
+        let happiness_array = {
+            happiness_const : {
+                name: 'Happiness const',
+                value: salary_mod * 20
+            },
+            overrate : {
+                name: 'Overrate',
+                value: salary_mod * Math.floor(this.getOverrate() / 10)
+            },
+            motivation : {
+                name: 'Motivation',
+                value: salary_mod * this.getMotivate()
+            },
+            gadgets : {
+                name: 'Gadgets',
+                value: salary_mod * getData().office_things.gadget
+            },
+            tasks_stream : {
+                name: 'Tasks stream',
+                value: salary_mod * 20 - Math.abs(tasks_stream)
+            },
+            tasks_difficulty : {
+                name: 'Tasks difficulty',
+                value: salary_mod * (20 - Math.abs(tasks_difficulty))
+            },
+            education_stream : {
+                name: 'Education_stream',
+                value: salary_mod * (20 - Math.abs(education_stream))
+            },
+            collective : {
+                name: 'Collective',
+                value: salary_mod * (20 - Math.abs(collective))
+            },
+        };
+        
+
+
+        return happiness_array;
 
         //return 100;
     }
