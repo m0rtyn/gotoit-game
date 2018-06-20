@@ -5,7 +5,7 @@ class Bar extends Component {
     render() {
         let { bar_data } = this.props;
         return (
-            <div className="progress slim">
+            <div className="progress">
                 { bar_data.map( (item, i) =>
                     <OverlayTrigger key={i} delay={150} placement="bottom"
                         overlay={
@@ -15,13 +15,13 @@ class Bar extends Component {
                                 </div>
                             </Tooltip>
                         }>
-                        <div className="progress-bar" role="progressbar"
-                             id={item.id}
-                             style={{
-                                 width: item.width +'%',
-                                 backgroundColor: item.color
-                             }}>
-                            <label> { ' '+item.value} { item.showName ? item.name : null }</label>
+                        <div className="progress-bar" role="progressbar" 
+                            id={item.id} 
+                            style={{
+                                width: item.width +'%', 
+                                backgroundColor: item.color
+                            }}>
+                            { ' '+item.value} { item.showName ? item.name : null }
                         </div>
                     </OverlayTrigger>)}
             </div>
