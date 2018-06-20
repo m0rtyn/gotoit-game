@@ -37,10 +37,10 @@ class People extends Component {
                 )}
                 {(data.workers.length < data.office.space)
                     ?
-                    <div className="panel panel-success">
+                    <div className="card border">
                         <button className="btn btn-success" onClick={() => { data.helpers.changeContent('HireWorkers')}}>Hire Worker</button>
 
-                        <div className="panel panel-warning">
+                        <div className="card">
                             <span>
                                 {(data.office.size > 1 && offices[data.office.size-1].space >= data.workers.length)
                                     ? ((data.office.size === 2)
@@ -54,7 +54,7 @@ class People extends Component {
                         </div>
                     </div>
                     :
-                    <div className="panel panel-warning">
+                    <div className="card">
                         <span>
                             {(data.office.size === 1)
                                 ? <button onClick={() => {data.helpers.upOffice();}} className="btn btn-warning">Rent a Office</button>

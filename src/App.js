@@ -6,9 +6,6 @@ import _ from 'lodash';
 
 //import $ from 'jquery'
 
-import './css/bootstrap-slider.css';
-import './css/App.css';
-
 import {game_name} from './game/app_config';
 import {tick} from './game/tick';
 
@@ -33,6 +30,15 @@ import {getDefaultState} from './game/default_state';
 
 export var current_tick = 0;
 export const setCurrentTick = (tick) => { current_tick = tick; };
+export var current_game_date;
+export const setGameDate = (game_date) => { current_game_date = game_date}
+
+export const addDaysToDate = (date, days) => {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+}
+
 
 export var hired = 1;
 export var projects_done = 0;
@@ -63,6 +69,7 @@ class App extends Component {
         this.getRelation = this.getRelation.bind(this);
         this.modifyRelation = this.modifyRelation.bind(this);
         this.modifyRelationPure = this.modifyRelationPure.bind(this);
+        this.deepCheckRelation = this.deepCheckRelation.bind(this);
         this.getRole = this.getRole.bind(this);
         this.changeRole = this.changeRole.bind(this);
         this.hireCandidate = this.hireCandidate.bind(this);
@@ -93,7 +100,9 @@ class App extends Component {
         this.unpauseProject = this.unpauseProject.bind(this);
         this.closeProject = this.closeProject.bind(this);
         this.trainingProject = this.trainingProject.bind(this);
+        this.changeTeamSelector = this.changeTeamSelector.bind(this);
         this.draftProject = this.draftProject.bind(this);
+        this.kickWorker = this.kickWorker.bind(this);
         this.unlockTechnology = this.unlockTechnology.bind(this);
         this.getTechnology = this.getTechnology.bind(this);
         this.changeTechnology = this.changeTechnology.bind(this);
@@ -107,7 +116,12 @@ class App extends Component {
         this.getGadgetCost = this.getGadgetCost.bind(this);
         this.buyGadget = this.buyGadget.bind(this);
 
+        this.modifyHoveredObjects = this.modifyHoveredObjects.bind(this);
+
         this.howManyEmployers = this.howManyEmployers.bind(this);
+
+        this.setTimelineScale = this.setTimelineScale.bind(this);
+        this.addTimelineEvent = this.addTimelineEvent.bind(this);
 
 
         let app_state = getDefaultState();
@@ -133,6 +147,7 @@ class App extends Component {
         app_state.data.helpers['modifyRelation'] = this.modifyRelation;
         app_state.data.helpers['modifyRelationPure'] = this.modifyRelationPure;
         app_state.data.helpers['getRelation'] = this.getRelation;
+        app_state.data.helpers['deepCheckRelation'] = this.deepCheckRelation;
         app_state.data.helpers['getRole'] = this.getRole;
         app_state.data.helpers['changeRole'] = this.changeRole;
         app_state.data.helpers['hireCandidate'] = this.hireCandidate;
@@ -163,7 +178,9 @@ class App extends Component {
         app_state.data.helpers['unpauseProject'] = this.unpauseProject;
         app_state.data.helpers['closeProject'] = this.closeProject;
         app_state.data.helpers['trainingProject'] = this.trainingProject;
+        app_state.data.helpers['changeTeamSelector'] = this.changeTeamSelector;
         app_state.data.helpers['draftProject'] = this.draftProject;
+        app_state.data.helpers['kickWorker'] = this.kickWorker;
         app_state.data.helpers['unlockTechnology'] = this.unlockTechnology;
         app_state.data.helpers['getTechnology'] = this.getTechnology;
         app_state.data.helpers['changeTechnology'] = this.changeTechnology;
@@ -176,6 +193,10 @@ class App extends Component {
         app_state.data.helpers['lunchOn'] = this.lunchOn;
         app_state.data.helpers['getGadgetCost'] = this.getGadgetCost;
         app_state.data.helpers['buyGadget'] = this.buyGadget;
+        app_state.data.helpers['setTimelineScale'] = this.setTimelineScale;
+        app_state.data.helpers['addTimelineEvent'] = this.addTimelineEvent;
+        app_state.data.helpers['modifyHoveredObjects'] = this.modifyHoveredObjects;
+
 
         this.state = app_state;
 
@@ -216,10 +237,34 @@ class App extends Component {
                 loaded_app_state.data.projects_end_reports[id] = _.create(ProjectModel.prototype, project);
             });
 
+            _.each(loaded_app_state.data.timelineScale, (time, id) => { //2018-06-17T02:29:38.299Z
+                loaded_app_state.data.timelineScale[id] = (() => {
+                    var year = time.substring(0, 4);
+                    let month = time.substring(5,7);
+                    let number = time.substring(8,10);
+                    let hours = time.substring(11, 13);
+                    let minutes = time.substring(14, 16);
+                    let seconds = time.substring(17, 19);
+                    var date = new Date(year, month, number, hours, minutes, seconds);//string instead number but works
+                    return date
+                })()
+            });
+
+            _.each(loaded_app_state.data.timelineEvents, (item, id) => {
+                loaded_app_state.data.timelineEvents[id].time = (() => {
+                    var time = item.time;
+                    var year = time.substring(0, 4);
+                    let month = time.substring(5,7);
+                    let number = time.substring(8,10);
+                    let hours = time.substring(11, 13);
+                    let minutes = time.substring(14, 16);
+                    let seconds = time.substring(17, 19);
+                    var date = new Date(year, month, number, hours, minutes, seconds);//string instead number but works
+                    return date
+                })()
+            })
+
             loaded_app_state.data.helpers = helpers;
-
-            console.log(loaded_app_state.data);
-
 
             console.log('App '+game_name+' componentDidMount with state', loaded_app_state);
             this.setState(loaded_app_state);
@@ -274,6 +319,23 @@ class App extends Component {
         this.setState({data: data});
     }
 
+    setTimelineScale(){
+        const data = this.state.data;
+        let days = [];
+        for (let i = -15; i < 16; i++) {
+            days.push(addDaysToDate(current_game_date, i))
+        }
+        data.timelineScale = days;
+        this.setState({data: data});
+    }
+    addTimelineEvent(type, info, object, inTime){
+        this.state.data.timelineEvents.push({
+            type: type,
+            info: info,
+            object: object,
+            time: addDaysToDate(current_game_date, inTime)
+        })
+    }
     newGame() {
         this.pauseGame();
         if (!window.confirm('Are you ready to start a new game? Your progress will be lost.')) return false;
@@ -342,7 +404,42 @@ class App extends Component {
         }
 
         state.data = data;
+        console.log('relation')
+        console.log(this.state.data.relations)
+
         return state;
+    }
+
+    deepCheckRelation(worker, project) {
+        let data = this.state.data;
+        return Object.keys(data.relations[worker.id][project.id]).some((skill) => {
+            return this.getRelation(worker.id, project.id, skill) === true
+        });
+    }
+
+    kickWorker(worker, project) {
+        _.mapValues(worker.stats, (val, skill) => {
+            this.modifyRelation(worker.id, project.id, false, skill);
+        });
+    }
+
+    changeTeamSelector(project = null) {
+        const data = this.state.data;
+        data.project_team_selector = project === null ? null : project.id;
+        this.setState({data: data});
+    }
+
+    modifyHoveredObjects(projects = [], workers = []) {
+        const data = this.state.data;
+        if (projects.length || workers.length) {
+            projects.forEach((project) => data.hovered_projects_id.push(project.id));
+            workers.forEach((worker) => data.hovered_workers_id.push(worker.id));
+        } else {
+            data.hovered_projects_id = [];
+            data.hovered_workers_id = [];
+        }
+
+        this.setState({data: data});
     }
 
     getRole(worker_id, role) {
@@ -532,6 +629,8 @@ class App extends Component {
             _.keys(project_platforms)[project_platform],
             _.keys(project_kinds)[project_kind]);
         this.acceptAndMoveProject(project);
+        console.log('start project')
+        this.addTimelineEvent('deadline', 'Deadline', project, project.deadline)
 
         addMessage('Started '+project.name+' project', {timeOut: 5000, extendedTimeOut: 2000}, 'info');
         this.setState({data: data});
@@ -600,6 +699,9 @@ class App extends Component {
         this.acceptAndMoveProject(project);
         this.openProject(id);
         this.setState({data: data});
+
+        data.helpers.addTimelineEvent('deadline','Deadline', project, project.deadline_max / 24);
+        console.log('start')
     }
 
     acceptAndMoveProject(project) {
@@ -647,12 +749,16 @@ class App extends Component {
     pauseProject(id) {
         let project = _.find(this.state.data.projects, (project) => { return (project.id === id); });
         project.is_paused = true;
+        console.log('pause')
+        let newTimelineEvents = this.state.data.timelineEvents.filter( i => i.object.name !== project.name);
+        this.state.data.timelineEvents = newTimelineEvents;
         //this.checkState();
     }
 
     unpauseProject(id) {
         let project = _.find(this.state.data.projects, (project) => { return (project.id === id); });
         project.is_paused = false;
+        this.state.data.helpers.addTimelineEvent('deadline', 'Deadline', project, project.deadline / 24);
         //this.checkState();
     }
 
@@ -664,6 +770,7 @@ class App extends Component {
     failProject(id) {
         this.projectReporting(id, 'fail');
         this.checkState();
+
     }
 
     fixProject(id) {
@@ -739,10 +846,14 @@ class App extends Component {
 
         if (['fail', 'close'].includes(stage) && project.penalty !== 0) {
             this.chargeMoney(project.penalty);
+            let newTimelineEvents = data.timelineEvents.filter( i => i.object.name !== project.name);
+            data.timelineEvents = newTimelineEvents;
         }
 
         if (stage === 'finish') {
             data.simplified_reports.push(project.generateReport(true));
+            let newTimelineEvents = data.timelineEvents.filter( i => i.object.name !== project.name);
+            data.timelineEvents = newTimelineEvents;
         }
 
         project.stage = stage;

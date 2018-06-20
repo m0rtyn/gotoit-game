@@ -48,6 +48,7 @@ class ProjectModel {
         this.stored_wisdom = JSON.parse(JSON.stringify(skills));
         this.supporter = null;
 
+
         this.facts = {
             money_spent: 0,
             tasks_done: 0, bugs_passed: 0,

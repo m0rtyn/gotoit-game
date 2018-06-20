@@ -10,10 +10,8 @@ body {
   right: 0;
   bottom: 0;
   z-index: -2;
-
   display: block;
   background-size: cover;
-
   height: 100vh;
 }
 
@@ -24,14 +22,17 @@ body {
   right: 0;
   bottom: 0;
   z-index: -1;
-
   display: block;
   background-size: cover;
-
   height: 260px;
 }
 
 
+/* MRTNSN changes */
+:root {
+  width: 100%;
+  overflow-x: hidden;
+}
 
 
 
