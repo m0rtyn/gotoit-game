@@ -58,6 +58,18 @@ fabric.properties
 yarn.lock
 
 
+
+
+!src/libraries/theme/
+src/libraries/theme/*
+!src/libraries/theme/src/
+src/libraries/theme/src/*
+!src/libraries/theme/src/assets/
+src/libraries/theme/src/assets/*
+!src/libraries/theme/src/assets/css/
+src/libraries/theme/src/assets/css/*
+!src/libraries/theme/src/assets/css/*.css
+
 .history
-theme
 .vscode
+build/
