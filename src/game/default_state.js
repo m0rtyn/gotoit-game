@@ -85,7 +85,14 @@ var default_state =
         animation_items: [],
 
         timelineScale: [],
-        timelineEvents: []
+        timelineEvents: [],
+
+        statistics: {
+            money_spent: {
+                buffer: 0,
+                values: []
+            }
+        }
 
 
     },
