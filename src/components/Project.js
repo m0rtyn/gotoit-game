@@ -97,17 +97,17 @@ class Project extends Component {
 
         const manage_button = <button className="btn btn-sm btn-success flex-element" style={{margin: '5px 5px 5px 5px'}}>Manage</button>;
 
-        let onSelectChange = (e) => {
-          data.helpers.changeTeamSelector();
-          data.helpers.modifyRelation(e.value.id, project.id);
-          data.helpers.modifyHoveredProjects();
+        let onSelectChange = (e) => { 
+        data.helpers.changeTeamSelector(); 
+        data.helpers.modifyRelation(e.value.id, project.id); 
+        data.helpers.modifyHoveredProjects();
         };
 
         //let unoccupied_workers = data.workers.filter((worker) => {return data.helpers.deepCheckRelation(worker, project)});
 
         let label = (worker) => {
             return <span key={worker.id}>
-                <label className="label-default">{worker.name}</label>
+                <label className="text-primary">{worker.name}</label>
                 <Button onClick={() => data.helpers.kickWorker(worker, project)} bsSize="xsmall">
                     <Glyphicon glyph="glyphicon glyphicon-remove"/>
                 </Button>
@@ -149,14 +149,14 @@ class Project extends Component {
             <span>
                 {/*{project.stage}*/}
                 {(project.is_paused)
-                    ? <button className="btn btn-xs btn-success" onClick={this.unpause}>Start</button> : ''}
+                    ? <button className="btn btn-sm btn-success" onClick={this.unpause}>Start</button> : ''}
                 {(project.stage === 'ready')
-                    ? <button className="btn btn-xs btn-success" onClick={this.open}>Start</button> : ''}
+                    ? <button className="btn btn-sm btn-success" onClick={this.open}>Start</button> : ''}
                 {(project.stage === 'open' && !project.is_paused)
-                    ? <button className="btn btn-xs btn-warning" onClick={this.pause}>Pause</button> : ''}
+                    ? <button className="btn btn-sm btn-warning" onClick={this.pause}>Pause</button> : ''}
             </span>;
 
-        const reject_button = <button className="btn btn-xs btn-danger" onClick={() => {
+        const reject_button = <button className="btn btn-sm btn-danger" onClick={() => {
             if (confirm("Reject project "+project.name+'? (penalty: '+project.penalty+')')) {
                 this.close();
             } }}>Reject</button>;
@@ -166,18 +166,18 @@ class Project extends Component {
         //console.log(project_platforms[project.platform].icon)
 
         return (
-            <div onMouseOver={() => {data.helpers.modifyHoveredObjects([project], team)}}
-                 onMouseOut={() => {data.helpers.modifyHoveredObjects()}}
-                 className={`well well-sm fat ${data.hovered_projects_id.includes(project.id) ? 'hovered' : ''}`}
-                 id={project.id}
+            <div onMouseOver={() => {data.helpers.modifyHoveredObjects([project], team)}} 
+                onMouseOut={() => {data.helpers.modifyHoveredObjects()}} 
+                className={`card border fat ${data.hovered_projects_id.includes(project.id) ? 'hovered' : ''}`} 
+                id={project.id}
             >
                 <div>
                     <div className="flex-container-column">
                         <div className="flex-container-row">
                             <div className='project_icon'>
                                 <div style={{ position: 'absolute' }}>
-                                    <img alt={project.name + ' avatar'} src={require(`../../public/${project_platforms[project.platform].name}.svg`)}
-                                         width={60} height={60}/>
+                                    <img alt={project.name + ' avatar'} src={require(`../../public/${project_platforms[project.platform].name}.svg`)} 
+                                        width={60} height={60}/>
                                 </div>
                                 <div style={{ position: 'absolute' }}>
                                     <img alt={project.name + ' avatar'} src={require(`../../public/${project_kinds[project.kind].name}.svg`)}
@@ -210,11 +210,11 @@ class Project extends Component {
                                                     {project.deadline > 0 && project.deadline !== Number.POSITIVE_INFINITY ? <div key="deadline" className="row">
                                                         <div className="col-md-2">Deadline</div>
                                                         <div className="col-md-10 progress">
-                                                            <div className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'progress-bar-danger' : 'progress-bar-warning'))} role="progressbar"
+                                                            <div className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'bg-danger' : 'bg-warning'))} role="progressbar"
                                                                  style={{width: (100-(project.deadline / project.deadline_max * 100))+'%'}}>
                                                                 <label>{project.deadline_max - project.deadline} hours</label>
                                                             </div>
-                                                            <div className="progress-bar progress-bar-success" role="progressbar"
+                                                            <div className="progress-bar bg-success" role="progressbar"
                                                                  style={{width: (project.deadline / project.deadline_max * 100)+'%'}}>
                                                                 <label>{project.deadline} hours</label>
                                                             </div>
@@ -274,20 +274,20 @@ class Project extends Component {
                                                                 return <div key={skill} className="row">
                                                                     <div className="col-md-2">{skill}</div>
                                                                     <div className="col-md-10 progress">
-                                                                        <div className="progress-bar progress-bar-warning"
-                                                                             role="progressbar"
-                                                                             style={{width: tasks_percent + '%'}}>
+                                                                        <div className="progress-bar bg-warning" 
+                                                                            role="progressbar" 
+                                                                            style={{width: tasks_percent + '%'}}> 
                                                                             {tasks ? <label>{tasks} tasks</label> : ''}
                                                                         </div>
-                                                                        <div className="progress-bar progress-bar-danger"
-                                                                             role="progressbar"
-                                                                             style={{width: bugs_percent + '%'}}>
-                                                                            {bugs ? <label>{bugs} bugs</label> : ''}
+                                                                        <div className="progress-bar bg-danger" 
+                                                                            role="progressbar" 
+                                                                            style={{width: bugs_percent + '%'}}>
+                                                                                {bugs ? <label>{bugs} bugs</label> : ''}
                                                                         </div>
-                                                                        <div className="progress-bar progress-bar-success"
-                                                                             role="progressbar"
-                                                                             style={{width: done_percent + '%'}}>
-                                                                            {(done) ? <label>{done} done</label> : ''}
+                                                                        <div className="progress-bar bg-success" 
+                                                                            role="progressbar" 
+                                                                            style={{width: done_percent + '%'}}>
+                                                                                {(done) ? <label>{done} done</label> : ''}
                                                                         </div>
                                                                     </div>
                                                                 </div>;
@@ -298,11 +298,11 @@ class Project extends Component {
                                                     {data.helpers.getTechnology(project.id, 'refactoring') ? <div key="refactoring" className="row">
                                                         <div className="col-md-2">Refactoring</div>
                                                         <div className="col-md-10 progress">
-                                                            <div className="progress-bar progress-bar-warning" role="progressbar"
+                                                            <div className="progress-bar bg-warning" role="progressbar"
                                                                  style={{width: (project.complexity / project.complexity_max * 100)+'%'}}>
                                                                 <label>{project.complexity} complexity</label>
                                                             </div>
-                                                            <div className="progress-bar progress-bar-success" role="progressbar"
+                                                            <div className="progress-bar bg-success" role="progressbar"
                                                                  style={{width: (100-(project.complexity / project.complexity_max * 100))+'%'}}>
                                                                 {(project.complexity_max - project.complexity > 0) ?
                                                                     <label>{project.complexity_max - project.complexity} refactored</label> : ''}
@@ -313,11 +313,11 @@ class Project extends Component {
                                                     {project.tests > 0 ? <div key="tests" className="row">
                                                         <div className="col-md-2">Tests</div>
                                                         <div className="col-md-10 progress">
-                                                            <div className="progress-bar progress-bar-warning" role="progressbar"
+                                                            <div className="progress-bar bg-warning" role="progressbar"
                                                                  style={{width: (100-(project.tests / project.planedTasksQuantity() * 100))+'%'}}>
                                                                 <label>{project.planedTasksQuantity()-project.tests} tasks</label>
                                                             </div>
-                                                            <div className="progress-bar progress-bar-success" role="progressbar"
+                                                            <div className="progress-bar bg-success" role="progressbar"
                                                                  style={{width: (project.tests / project.planedTasksQuantity() * 100)+'%'}}>
                                                                 {(project.tests) ?<label>{project.tests} done</label> : ''}
                                                             </div>
@@ -325,12 +325,12 @@ class Project extends Component {
                                                     </div> : ''}
 
                                                 </div>
-                                                <div className="panel panel-success">
+                                                <div className="card border">
                                                     <div>
                                                         {this.props.data.workers.map((worker) => {
                                                             const stats_data = _.mapValues(worker.stats, (val, skill) => {
                                                                 return {name: skill,
-                                                                    val: <div key={worker.id + project.id} className="checkbox-inline">
+                                                                    val: <div key={worker.id + project.id} className="">
                                                                         <label style={{width: '100%'}}>
                                                                             <input
                                                                                 type="checkbox"
@@ -352,11 +352,11 @@ class Project extends Component {
                                                 </div>
                                             </div>
                                             <div className="col-md-4">
-                                                <div className="panel panel-success slim-left">
+                                                <div className="card border slim-left">
                                                     <div className="col slim-left">
                                                         {data.projects_known_technologies.map(
                                                             (technology, i) => <div key={technology} className="row-md-1">
-                                                                <div className="checkbox slim-margin">
+                                                                <div className="form-check-checkbox slim-margin">
                                                                     <label>
                                                                         <h5 className="text-center slim">
                                                                             <input
@@ -373,12 +373,12 @@ class Project extends Component {
                                                         )}
                                                         {(current_tick > (24*30*3)) ? Object.keys(technologies).map(
                                                             (technology, i) => <div key={technology} className="row-md-1">
-                                                                <div className="checkbox slim-margin small">
+                                                                <div className="form-check-checkbox slim-margin small">
                                                                     {!data.projects_known_technologies.includes(technology)
                                                                         ? <label>
                                                                             <h5 className="text-center slim">
                                                                                 <button
-                                                                                    className={technologies[technology].price <= data.money ? "btn btn-success btn-xs" : "btn btn-default btn-xs disabled"}
+                                                                                    className={technologies[technology].price <= data.money ? "btn btn-success btn-sm" : "btn btn-secondary btn-sm disabled"}
                                                                                     onClick={() => { if (technologies[technology].price <= data.money) data.helpers.unlockTechnology(technology); }}
                                                                                 >
                                                                                     Unlock {technologies[technology].name} {technologies[technology].price}$
@@ -403,12 +403,12 @@ class Project extends Component {
                 </div>
 
                 {/*{project.deadline > 0 && project.deadline !== Number.POSITIVE_INFINITY ?
-                    <div className="progress slim">
-                        <div className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'progress-bar-danger' : 'progress-bar-warning'))} role="progressbar"
+                    <div className="progress">
+                        <div className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'bg-danger' : 'bg-warning'))} role="progressbar"
                              style={{width: (100-(project.deadline / project.deadline_max * 100))+'%'}}>
                             <label>{project.deadline_max - project.deadline} gone</label>
                         </div>
-                        <div className="progress-bar progress-bar-success" role="progressbar"
+                        <div className="progress-bar bg-success" role="progressbar"
                              style={{width: (project.deadline / project.deadline_max * 100)+'%'}}>
                             <label>{project.deadline} to deadline</label>
                         </div>

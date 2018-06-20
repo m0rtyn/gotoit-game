@@ -36,14 +36,14 @@ class ProjectEndScreen extends Component {
                 <Portal closeOnEsc ref="end_screen" onClose={data.helpers.projectArchiving}>
                     <SimpleModal>
                         <div>
-                            <p><button className="btn btn-warning pull-right" onClick={() => {
+                            <p><button className="btn btn-warning float-right" onClick={() => {
                                 //data.helpers.projectArchiving();
                                 this.refs.end_screen.closePortal();
                             }}>Archive</button></p>
                         </div>
                         <div className="text-center">
                             <ProjectReport key={project.id} project={project} data={this.props.data} />
-                            <div className="panel panel-success text-center">
+                            <div className="card border text-center">
                                 <h3>Project Top Score</h3>
                                 <h2>All Project Top: {all_top_handler.getTopNumber(project.id)}</h2>
                                 <div className="flex-container-row">

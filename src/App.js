@@ -6,9 +6,6 @@ import _ from 'lodash';
 
 //import $ from 'jquery'
 
-import './css/bootstrap-slider.css';
-import './css/App.css';
-
 import {game_name} from './game/app_config';
 import {tick} from './game/tick';
 

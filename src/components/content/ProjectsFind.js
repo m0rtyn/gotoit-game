@@ -26,10 +26,10 @@ class ProjectsFind extends Component {
                             <button className="btn btn-info hidden" onClick={this.props.data.helpers.contractSearch}>Search 1000$</button>
                         </h4>
 
-                        <div className="progress slim">
-                            <div className='progress-bar' role="progressbar"
-                                 style={{width: Math.min(100, data.reputation)+'%'}}>
-                                <label>{data.reputation}%</label>
+                        <div className="progress">
+                            <div className='progress-bar' role="progressbar" 
+                                style={{width: Math.min(100, data.reputation)+'%'}}>
+                                {data.reputation}%
                             </div>
                         </div>
 
