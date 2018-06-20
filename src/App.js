@@ -187,7 +187,6 @@ class App extends Component {
         app_state.data.helpers['unlockTechnology'] = this.unlockTechnology;
         app_state.data.helpers['getTechnology'] = this.getTechnology;
         app_state.data.helpers['changeTechnology'] = this.changeTechnology;
-
         app_state.data.helpers['changeOffice'] = this.changeOffice;
         app_state.data.helpers['upOffice'] = this.upOffice;
         app_state.data.helpers['downOffice'] = this.downOffice;
@@ -1141,6 +1140,9 @@ class App extends Component {
 
         if (updating) {
             localStorage.setItem(game_name+"_app_state", JSON.stringify(state));
+            console.log('dare')
+            console.log(this.state)
+            console.log(JSON.stringify(this.state.relations));
             this.setState(state);
         }
     }
