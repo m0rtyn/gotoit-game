@@ -16,8 +16,6 @@ import './libraries/toastr/toastr.css';
 import './libraries/animate/animate.css';
 import './libraries/bootstrap-slider.css';
 
-import './css/App.css';
-
 import App from './App';
 import './css/index.css';
 
