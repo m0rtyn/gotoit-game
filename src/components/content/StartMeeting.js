@@ -33,7 +33,7 @@ class StartMeeting extends Component {
                                             state.selected_workers[worker.id] = event.target.checked;
                                             this.setState(state);
                                         }}/> {worker.name}
-                                 </h4>
+                                </h4>
                             </label>
                         })}
                     </div>
