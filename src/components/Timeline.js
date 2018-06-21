@@ -60,11 +60,11 @@ class Timeline extends Component {
                                                             <div style={{ position: 'relative', bottom: '18px' }}>
                                                                 <div style={{border: '1px solid red', position: 'absolute'}}>
                                                                     <img alt={item.object.name + ' platform'} src={require(`../../public/${project_platforms[item.object.platform].name}.svg`)}
-                                                                         width={20} height={20}/>
+                                                                        width={20} height={20}/>
                                                                 </div>
                                                                 <div style={{ position: 'absolute' }}>
                                                                     <img alt={item.object.name + ' kind'} src={require(`../../public/${project_kinds[item.object.kind].name}.svg`)}
-                                                                         width={20} height={20}/>
+                                                                        width={20} height={20}/>
                                                                 </div>
                                                             </div>
                                                         </OverlayTrigger>
@@ -81,7 +81,7 @@ class Timeline extends Component {
                                                                 </Tooltip>
                                                             }
                                                         >
-                                                            <img style={{
+                                                            <img className='worker-portrait' style={{
                                                                     border: '1px solid red',
                                                                     width: 20,
                                                                     height: 20

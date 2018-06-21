@@ -1,13 +1,18 @@
+
 .timeline {
+    transform: scale(0.5);
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 10px;
-
 }
-.line {
 
+.line {
     width: 600px;
     height: 3px;
     background: black;
+}
+
+.worker-portrait {
+    max-width: none !important;
 }
