@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Office from './Header';
 import People from './People';
+// import Timeline from './Timeline'
 import Projects from './Projects';
 import PopupsNest from './PopupsNest';
 import ToastNest from './ToastNest';
@@ -18,9 +19,9 @@ class Layout extends Component {
                 <div className="background-color" style={{backgroundColor: colors.backgrounds[this.props.data.content]}}></div>
                 <div className="background-image" style={{backgroundImage: 'url(backgrounds/'+this.props.data.content+'.png)'}}></div>
 
-                <Office data={this.props.data} />
+                <Office data={this.props.data} newGame={this.props.newGame}/>
 
-                <div className="main-container app">
+                <div className="main-container">
                     <div className="row">
                         <div className="col-3 people-column">
                             <People data={this.props.data}/>

@@ -1,14 +1,21 @@
 
-.timeline {
-    transform: scale(0.5);
+.gti-timeline-wrapper {
+    background-color: rgba(0, 0, 0, 0.4);
+    width: calc(100% + 36px);
+    margin: 0 -18px;
+    height: 50px;
+}
+
+.gti-timeline {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 28px;
+
 }
 
 .line {
-    width: 600px;
+    width: 100%;
     height: 3px;
     background: black;
 }
