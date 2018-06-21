@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Portal from 'react-portal';
 
 import Select from 'react-select';
-import {Button, Glyphicon} from 'react-bootstrap';
 import ReactBootstrapSlider from 'react-bootstrap-slider';
 // import '../../node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css';
 
@@ -107,9 +106,9 @@ class Project extends Component {
 
         let label = (worker) => {
             return <span key={worker.id}>
-                <label className="text-primary">{worker.name}</label>
+                <span className="text-primary">{worker.name}</span>
                 <Button onClick={() => data.helpers.kickWorker(worker, project)} bsSize="xsmall">
-                    <Glyphicon glyph="glyphicon glyphicon-remove"/>
+                    <i className="fa fa-remove"></i>
                 </Button>
             </span>;
         };
