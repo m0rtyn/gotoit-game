@@ -60,19 +60,18 @@ yarn.lock
 
 
 
-!src/libraries/theme/
-src/libraries/theme/*
-!src/libraries/theme/src/
-src/libraries/theme/src/*
-!src/libraries/theme/src/assets/
-src/libraries/theme/src/assets/*
+!src/
+src/*
+!src/src/
+src/src/*
+!src/src/assets/
+src/src/assets/*
+!src/src/assets/js/
+!src/src/assets/fonts/
+!src/src/assets/css/
+src/src/assets/css/*
+!src/src/assets/css/*.css
 
-!src/libraries/theme/src/assets/js/
-!src/libraries/theme/src/assets/fonts/
-!src/libraries/theme/src/assets/css/
-src/libraries/theme/src/assets/css/*
-!src/libraries/theme/src/assets/css/*.css
-
-.history
-.vscode
-build/
+/.history
+/.vscode
+/build

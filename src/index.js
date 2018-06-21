@@ -7,17 +7,19 @@ import {IntlProvider} from 'react-intl';
 //console.log($);
 
 // theAdmin theme =============================
-import './libraries/theme/src/assets/css/core.min.css';
-import './libraries/theme/src/assets/css/app.min.css';
-import './libraries/theme/src/assets/css/style.min.css';
+import './assets/css/core.min.css';
+import './assets/css/app.min.css';
+import './assets/css/style.min.css';
+// import './assets/js/core.min.js';
+// import './assets/js/app.min.js';
+// import './assets/js/script.min.js';
 // ============================================
 
-import './libraries/toastr/toastr.css';
-import './libraries/animate/animate.css';
-import './libraries/bootstrap-slider.css';
+import './assets/vendor/toastr/toastr.css';
+import './assets/vendor/animate/animate.css';
+import './assets/vendor/bootstrap-slider/bootstrap-slider.css';
 
 import App from './App';
-import './css/index.css';
 
 
 ReactDOM.render(
