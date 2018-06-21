@@ -10,7 +10,6 @@ import {game_name} from './game/app_config';
 import {tick} from './game/tick';
 
 import Layout from './components/Layout';
-import Footer from './components/Footer.js'
 import BubblesAnimation  from './components/BubblesAnimation'
 import {addMessage, addAction} from './components/ToastNest';
 
@@ -1652,7 +1651,6 @@ class App extends Component {
             <div>
                 <BubblesAnimation onRef={ref => (this.animation = ref)}/>
                 <Layout data={this.state.data} newGame={this.newGame}/>
-                {/* <Footer data={this.state.data} newGame={this.newGame}/> */}
             </div>
         );
     }
