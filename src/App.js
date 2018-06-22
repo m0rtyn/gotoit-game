@@ -414,6 +414,8 @@ class App extends Component {
     }
 
     deepCheckRelation(worker, project) {
+        if (!worker || !project) return false;
+
         let data = this.state.data;
         return Object.keys(data.relations[worker.id][project.id]).some((skill) => {
             return this.getRelation(worker.id, project.id, skill) === true
@@ -434,6 +436,7 @@ class App extends Component {
 
     modifyHoveredObjects(projects = [], workers = []) {
         const data = this.state.data;
+        
         if (projects.length || workers.length) {
             projects.forEach((project) => data.hovered_projects_id.push(project.id));
             workers.forEach((worker) => data.hovered_workers_id.push(worker.id));
