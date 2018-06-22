@@ -72,6 +72,11 @@ export const rules = {
                         }
                     }
                 });
+
+
+               _.mapValues(data.statistics, (stats, key) => {
+                    stats.values.push(stats.buffer)
+                })
             }
 
             if (time.hour === 14 && data.office_things.lunch) { // lunch time!

@@ -142,6 +142,10 @@ export const education = { // hm...
     workshop: {name: 'Workshop', hide: true, description: ''}
 };
 
+export const charts_parameters = {
+    money_spent: {label: 'Money spent', color: '#3e95cd'}
+};
+
 export const colors = {
     creativity: {
         name: 'creativity',
@@ -205,7 +209,7 @@ export const genAnimationData = (name, from, to, count, isBug) => {
     let data = colors[name];
     let color = isBug ? data.colorBug : data.colorCompleted;
     return { size: '20px', color: color, from: from, to: to, count: count}
-}
+};
 
 export const project_bars = {
     design_tasks: {

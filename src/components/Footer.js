@@ -9,8 +9,10 @@ class Footer extends Component {
         let data = this.props.data
         return (
             <div className="footer">
-                <span className="float-left"><a href="#" onClick={this.props.newGame} title='Hard Reset For Developers'>New game</a></span>
-                <span className="float-left achievements-button"><a onClick={() => {data.helpers.changeContent('Achievements')}} href="#" title='Achievements bar'>Achievements</a></span>
+                <span className="pull-left"><a href="#" onClick={this.props.newGame} title='Hard Reset For Developers'>New game</a></span>
+                <span className="pull-left achievements-button"><a onClick={() => {data.helpers.changeContent('Achievements')}} href="#" title='Achievements bar'>Achievements</a></span>
+                <span><a onClick={() => data.helpers.changeContent('Charts')} href="#" title="Charts bar">Charts</a></span>
+
 
                 &nbsp;
                 <a target="_blank" rel="noopener noreferrer" href={social_links.telegram}>

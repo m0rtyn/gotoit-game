@@ -945,6 +945,7 @@ class App extends Component {
         }
         const data = this.state.data;
         data.money -= quantity;
+        data.statistics.money_spent.buffer += quantity;
         if (!silent) addAction('Charge from your wallet: '+quantity+'$', {timeOut: 3000, extendedTimeOut: 2000}, 'warning');
         this.setState({data: data});
     }
