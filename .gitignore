@@ -71,6 +71,7 @@ src/src/assets/*
 !src/src/assets/css/
 src/src/assets/css/*
 !src/src/assets/css/*.css
+!src/src/assets/css/style.scss
 
 /.history
 /.vscode
