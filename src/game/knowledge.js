@@ -268,7 +268,7 @@ export const public_relations = {
         }
     },
     search_specialist: {
-        name: 'Search market for a specialist $250',
+        name: 'Search market for a specialist ($250)',
         long: 24 * 7,
         tooltip: 'Duration: 1 week. Spend some money preaching and advertising your company at the most popular hiring web sites there are in the Internet. Rather later than sooner but you`ll definitely find someone willing to take the offer.',
         onClick: (state) => {
@@ -287,7 +287,7 @@ export const public_relations = {
         }
     },
     search_job: {
-        name: 'Search market for a specialist $100',
+        name: 'Search market for a specialist ($100)',
         long: 24 * 7,
         tooltip: 'Duration: 1 week. Spend some money preaching and advertising your company at the most popular hiring web sites there are in the Internet. Rather later than sooner but you`ll definitely find someone willing to take the offer.',
         onClick: (state) => {
@@ -306,7 +306,7 @@ export const public_relations = {
         }
     },
     big_event: {
-        name: 'Attend big IT event $1000',
+        name: 'Attend big IT event ($1000)',
         long: 24 * 7 * 2,
         tooltip: 'Duration: 2 weeks. Lots of money and time spend. Lots of media coverage afterwards. ',
         onClick: (state) => {
@@ -318,8 +318,8 @@ export const public_relations = {
         },
         onTickByDelta: (state, delta) => {
             let customDelta = delta * 0.03;
-            state.reputation += (1+Math.sin(customDelta-Math.PI/2)) / 5 // + 71.08263950306524;
-            state.rumor += (1+Math.sin(customDelta-Math.PI/2)) / 5 // + 71.08263950306524;
+            state.reputation += (1+Math.sin(customDelta-Math.PI/2)) / 5; // + 71.08263950306524;
+            state.rumor += (1+Math.sin(customDelta-Math.PI/2)) / 5; // + 71.08263950306524;
         }
     },
 

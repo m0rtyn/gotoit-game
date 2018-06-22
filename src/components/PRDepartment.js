@@ -3,6 +3,13 @@ import {colors, project_bars, public_relations} from "../game/knowledge";
 import Bar from './Bar';
 
 class PRDepartment extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            next_click_will_able_at: 0
+        }
+    }
+
     render() {
         const data = this.props.data;
         const rumor_bar = [
@@ -23,6 +30,7 @@ class PRDepartment extends Component {
                 id: 'reputation'
             }
         ];
+
 
         return (
             <div className="card border text-center">
@@ -56,8 +64,11 @@ class PRDepartment extends Component {
                         }>{public_relations['search_job'].name}</button>
                     </div>
                     <div>
-                        <button className={1000 <= data.money ? "btn btn-info pr-button" : "btn btn-info disabled pr-button"} onClick={
-                            () => {public_relations['big_event'].onClick(data)}
+                        <button className={((1000 <= data.money) && (this.state.next_click_will_able_at < data.date.tick)) ? "btn btn-info pr-button" : "btn btn-info disabled pr-button"} onClick={
+                            () => {
+                                public_relations['big_event'].onClick(data);
+                                this.setState({next_click_will_able_at: data.date.tick+24}); //only one click at day
+                            }
                         }>{public_relations['big_event'].name}</button>
                     </div>
 
