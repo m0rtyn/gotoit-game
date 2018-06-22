@@ -135,6 +135,7 @@ class Header extends Component {
                         &nbsp;
                         Reddit
                     </a> */}
+
                     <Timeline data={this.props.data}/>
                 </div>
 

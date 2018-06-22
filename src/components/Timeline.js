@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
-import '../css/Timeline.css';
+// import '../assets/css/Timeline.css';
 import {project_kinds, project_platforms} from "../game/knowledge";
 
 const timelineWidth = 1280; //TODO: переделать, нужен гибкий метод определения ширины вьюпорта
@@ -33,12 +33,7 @@ class Timeline extends Component {
                                     });
                                     return (
                                         <div style={{
-                                            marginLeft: timelineWidth/(timelineScale.length-1) * index+ 'px',
-                                            display: 'inline-block',
-                                            position: 'absolute',
-                                            height: 6,
-                                            width: 2,
-                                            background: 'black'
+                                            marginLeft: timelineWidth/(timelineScale.length-1) * index+ 'px'
                                         }}>
                                             <div style={{ position: 'absolute'}}>
                                                 {day.getDate()}
