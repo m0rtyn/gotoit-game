@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Office from './Header';
+import Header from './Header';
 import People from './People';
 // import Timeline from './Timeline'
 import Projects from './Projects';
@@ -19,7 +19,7 @@ class Layout extends Component {
                 <div className="background-color" style={{backgroundColor: colors.backgrounds[this.props.data.content]}}></div>
                 <div className="background-image" style={{backgroundImage: 'url(backgrounds/'+this.props.data.content+'.png)'}}></div>
 
-                <Office data={this.props.data} newGame={this.props.newGame}/>
+                <Header data={this.props.data} newGame={this.props.newGame}/>
 
                 <div className="main-container">
                     <div className="row">
