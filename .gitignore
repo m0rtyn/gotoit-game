@@ -62,16 +62,16 @@ yarn.lock
 
 !src/
 src/*
-!src/src/
-src/src/*
-!src/src/assets/
-src/src/assets/*
-!src/src/assets/js/
-!src/src/assets/fonts/
-!src/src/assets/css/
-src/src/assets/css/*
-!src/src/assets/css/*.css
-!src/src/assets/css/style.scss
+!src/
+src/*
+!src/assets/
+src/assets/*
+!src/assets/js/
+!src/assets/fonts/
+!src/assets/css/
+src/assets/css/*
+!src/assets/css/*.css
+!src/assets/css/*.scss
 
 /.history
 /.vscode
