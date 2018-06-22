@@ -81,8 +81,6 @@ class App extends Component {
         this.paySalary = this.paySalary.bind(this);
         this.buyItem = this.buyItem.bind(this);
 
-        this.salesDepartmentUp = this.salesDepartmentUp.bind(this);
-        this.hrDepartmentUp = this.hrDepartmentUp.bind(this);
 
         this.startProject = this.startProject.bind(this);
         this.startMeeting = this.startMeeting.bind(this);
@@ -159,8 +157,6 @@ class App extends Component {
         app_state.data.helpers['paySalary'] = this.paySalary;
         app_state.data.helpers['buyItem'] = this.buyItem;
 
-        app_state.data.helpers['salesDepartmentUp'] = this.salesDepartmentUp;
-        app_state.data.helpers['hrDepartmentUp'] = this.hrDepartmentUp;
 
         app_state.data.helpers['startProject'] = this.startProject;
         app_state.data.helpers['startMeeting'] = this.startMeeting;
@@ -539,7 +535,7 @@ class App extends Component {
         }
     }
 
-    salesDepartmentUp(action) {
+    /*salesDepartmentUp(action) {
         const data = this.state.data;
 
         switch (action) {
@@ -603,7 +599,7 @@ class App extends Component {
         }
 
         this.setState({data: data});
-    }
+    }*/
 
     selectedWorkersToTeam(selected_workers) {
         const data = this.state.data;

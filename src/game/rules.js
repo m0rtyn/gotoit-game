@@ -10,6 +10,7 @@ import {
 import {addAction} from '../components/ToastNest';
 import Lorer from '../services/Lorer';
 import WorkerModel from '../models/WorkerModel';
+import { public_relations } from "./knowledge";
 
 
 export const rules = {
@@ -21,7 +22,6 @@ export const rules = {
             const date = data.date;
             let time = data.date;
             let current_tick = data.date.tick;
-            console.log(time)
 
             var real_date = new Date();
             var game_date = new Date();
@@ -119,6 +119,24 @@ export const rules = {
 
             data.date = time;
             state.data = data;
+
+            console.log(data.on_tick_effects)
+
+            let click_count = {};
+
+            data.on_tick_effects = _.filter(data.on_tick_effects, (effect) => {
+                var same = _.filter(data.on_tick_effects, (effect2) => {
+                    return effect.name === effect2.name
+                });
+                effect.click_count = same.length;
+                return public_relations[effect.type].long > data.date.tick - effect.start_tick;
+            });
+
+            console.log(data.on_tick_effects)
+            _.each(data.on_tick_effects, (effect) => {
+                public_relations[effect.type].onTickByDelta(data, data.date.tick - effect.start_tick, effect.click_count);
+
+            } );
 
             return state;
         }

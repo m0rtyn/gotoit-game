@@ -134,3 +134,8 @@ div {
 .hovered {
     background-color: #ccc;
 }
+
+.pr-button {
+    width: 300px;
+    margin-top: 5px;
+}

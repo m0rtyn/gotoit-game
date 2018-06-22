@@ -85,7 +85,9 @@ var default_state =
         animation_items: [],
 
         timelineScale: [],
-        timelineEvents: []
+        timelineEvents: [],
+
+        on_tick_effects: []
 
 
     },
