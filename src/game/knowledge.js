@@ -143,7 +143,8 @@ export const education = { // hm...
 };
 
 export const charts_parameters = {
-    money_spent: {label: 'Money spent', color: '#3e95cd'}
+    money_spent: {label: 'Money spent', color: '#3e95cd'},
+    projects_done: {label: 'Projects done', color: '#EA80FC'}
 };
 
 export const colors = {

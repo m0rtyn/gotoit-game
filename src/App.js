@@ -874,8 +874,14 @@ class App extends Component {
 
         //data.projects_end_reports.unshift(project);
         data.projects_archive_reports.unshift(project);
+
+        //projects done statistics
+        data.statistics.projects_done.buffer = data.projects_archive_reports.filter((project) => {
+            return project.stage === 'finish'
+        }).length;
+
         //console.log('archiving', data.projects_end_reports, data.projects_archive_reports, projects, project);
-     //  //this.setState({data: data});
+        //  //this.setState({data: data});
 
         if (project.is_storyline || project.stage !== 'finish' ) return;
 

@@ -91,6 +91,10 @@ var default_state =
             money_spent: {
                 buffer: 0,
                 values: []
+            },
+            projects_done: {
+                buffer: 0,
+                values: []
             }
         }
 
