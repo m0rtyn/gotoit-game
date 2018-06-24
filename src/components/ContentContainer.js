@@ -35,7 +35,7 @@ class ContentContainer extends Component {
         const ContentComponent = components[this.props.data.content];
 
         return (
-            <div className="panel panel-success">
+            <div className="card border">
                 <ContentComponent data={this.props.data} />
             </div>
         );

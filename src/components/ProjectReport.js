@@ -25,7 +25,7 @@ class Project extends Component {
             };
         });
 
-        let label = (id, text) => { return <span key={id}> <label className="label-info small"> {text}</label></span>; };
+        let label = (id, text) => { return <span key={id}> <label className="text-info small"> {text}</label></span>; };
 
         let team_ids = {};
         _.keys(data.relations).forEach((worker_id) => {
@@ -55,16 +55,16 @@ class Project extends Component {
 
 
         return (
-            <div className="panel panel-success">
+            <div className="card border">
                 <ProjectName project={project} /> ({project.reward}$)
 
                 {project.deadline_max > 0 ?
                     <div className="progress">
-                        <div className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'progress-bar-danger' : 'progress-bar-warning'))} role="progressbar"
+                        <div className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'bg-danger' : 'bg-warning'))} role="progressbar"
                              style={{width: (100-(project.deadline / project.deadline_max * 100))+'%'}}>
                             <label>{project.deadline_max - project.deadline} gone</label>
                         </div>
-                        <div className="progress-bar progress-bar-success" role="progressbar"
+                        <div className="progress-bar bg-success" role="progressbar"
                              style={{width: (project.deadline / project.deadline_max * 100)+'%'}}>
                             <label>{project.deadline} to deadline</label>
                         </div>
