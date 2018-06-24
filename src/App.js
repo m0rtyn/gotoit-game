@@ -939,6 +939,7 @@ class App extends Component {
         switch (currency){
             case "usd":
                 data.money += quantity;
+                data.statistics.money_received.buffer += quantity;
                 break;
             case "btc":
                 data.btc += quantity;
@@ -982,7 +983,7 @@ class App extends Component {
         let cost = usd / data.current_btc_price;
         if (data.btc >= cost) {
             data.btc -= cost;
-            data.money += usd;
+            this.addMoney(usd);
         }
         else {
             console.log('not enough btc');

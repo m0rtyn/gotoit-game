@@ -21,7 +21,6 @@ export const rules = {
             const date = data.date;
             let time = data.date;
             let current_tick = data.date.tick;
-            console.log(time)
 
             var real_date = new Date();
             var game_date = new Date();

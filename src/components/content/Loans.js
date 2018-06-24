@@ -17,7 +17,7 @@ class Loans extends Component {
 
         let loan = JSON.parse(JSON.stringify(loans[size]));
 
-        data.money += loan.money;
+        data.helpers.addMoney(loan.money);
         loan.timer = loan.time;
         data.taken_loans.push(loan);
 

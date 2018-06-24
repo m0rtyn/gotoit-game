@@ -80,10 +80,10 @@ class Project extends Component {
     render() {
         const data = this.props.data;
         const project = this.props.project;
-        console.log(project.estimate)
+        /*console.log(project.estimate)
         console.log(project.original_estimate)
         console.log(project.done)
-        console.log(project.bugs)
+        console.log(project.bugs)*/
         const stats_data = _.mapValues(skills, (stat, key) => {
             return {name: key, // _.capitalize(key[0]),
                 val:
