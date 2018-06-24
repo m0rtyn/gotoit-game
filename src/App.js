@@ -961,7 +961,7 @@ class App extends Component {
         }
         const data = this.state.data;
         data.money -= quantity;
-        data.statistics.money_spent.buffer += quantity;
+        data.statistics.money_spent.buffer += +quantity;
         if (!silent) addAction('Charge from your wallet: '+quantity+'$', {timeOut: 3000, extendedTimeOut: 2000}, 'warning');
         this.setState({data: data});
     }
@@ -1171,6 +1171,7 @@ class App extends Component {
 
         if ((data.money - salary) > 0) {
             this.chargeMoney(salary, true);
+            data.statistics.salary_costs.buffer += +salary;
             worker.facts.money_earned += salary;
             worker.get_monthly_salary = true;
         } else {
