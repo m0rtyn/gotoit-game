@@ -436,7 +436,7 @@ class App extends Component {
 
     modifyHoveredObjects(projects = [], workers = []) {
         const data = this.state.data;
-        
+
         if (projects.length || workers.length) {
             projects.forEach((project) => data.hovered_projects_id.push(project.id));
             workers.forEach((worker) => data.hovered_workers_id.push(worker.id));
@@ -500,6 +500,7 @@ class App extends Component {
         //data.workers_roles[worker.id] = JSON.parse(JSON.stringify(skills_true));
         skills_names.forEach((skill) => { this.changeRole(worker.id, skill, true); });
         this.modifyRelation(worker.id, null, true);
+        data.statistics.workers_hired.buffer = data.workers.length - 1;
         this.setState({data: data});
     }
 

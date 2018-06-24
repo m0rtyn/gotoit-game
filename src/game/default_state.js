@@ -95,6 +95,10 @@ var default_state =
             projects_done: {
                 buffer: 0,
                 values: []
+            },
+            workers_hired: {
+                buffer: 0,
+                values: []
             }
         }
 
