@@ -31,6 +31,7 @@
     "time-grunt": "^1.4.0"
   },
   "dependencies": {
+    "animate.css": "^3.6.1",
     "bootstrap": "^3.3.7",
     "chart.js": "^2.7.2",
     "jquery": "^3.2.1",
@@ -47,7 +48,8 @@
     "react-portal": "^3.0.0",
     "react-select": "^1.0.0-rc.2",
     "react-toastr": "^2.8.2",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "toastr": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start & grunt start",

@@ -15,9 +15,9 @@ import './assets/css/style.min.css';
 // import './assets/js/script.min.js';
 // ============================================
 
-import './assets/vendor/toastr/toastr.css';
-import './assets/vendor/animate/animate.css';
-import './assets/vendor/bootstrap-slider/bootstrap-slider.css';
+import '../node_modules/toastr/build/toastr.min.css';
+import '../node_modules/animate.css';
+// import '';
 
 import App from './App';
 
