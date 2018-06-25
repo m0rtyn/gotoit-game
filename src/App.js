@@ -10,7 +10,6 @@ import {game_name} from './game/app_config';
 import {tick} from './game/tick';
 
 import Layout from './components/Layout';
-import Footer from './components/Footer.js'
 import BubblesAnimation  from './components/BubblesAnimation'
 import {addMessage, addAction} from './components/ToastNest';
 
@@ -81,6 +80,8 @@ class App extends Component {
         this.paySalary = this.paySalary.bind(this);
         this.buyItem = this.buyItem.bind(this);
 
+        this.salesDepartmentUp = this.salesDepartmentUp.bind(this);
+        this.hrDepartmentUp = this.hrDepartmentUp.bind(this);
 
         this.startProject = this.startProject.bind(this);
         this.startMeeting = this.startMeeting.bind(this);
@@ -157,6 +158,8 @@ class App extends Component {
         app_state.data.helpers['paySalary'] = this.paySalary;
         app_state.data.helpers['buyItem'] = this.buyItem;
 
+        app_state.data.helpers['salesDepartmentUp'] = this.salesDepartmentUp;
+        app_state.data.helpers['hrDepartmentUp'] = this.hrDepartmentUp;
 
         app_state.data.helpers['startProject'] = this.startProject;
         app_state.data.helpers['startMeeting'] = this.startMeeting;
@@ -180,6 +183,7 @@ class App extends Component {
         app_state.data.helpers['unlockTechnology'] = this.unlockTechnology;
         app_state.data.helpers['getTechnology'] = this.getTechnology;
         app_state.data.helpers['changeTechnology'] = this.changeTechnology;
+
         app_state.data.helpers['changeOffice'] = this.changeOffice;
         app_state.data.helpers['upOffice'] = this.upOffice;
         app_state.data.helpers['downOffice'] = this.downOffice;
@@ -494,7 +498,7 @@ class App extends Component {
 
     riseEmployer(worker_id) {
         const data = this.state.data;
-     //   let worker = _.find(data.workers, (id) => { return (worker_id === id); });
+    //   let worker = _.find(data.workers, (id) => { return (worker_id === id); });
         let worker = _.find(data.workers, (worker) => { return (worker_id === worker.id); });
         //console.log(worker_id, worker, data.workers);
         //console.log(worker);
@@ -535,7 +539,7 @@ class App extends Component {
         }
     }
 
-    /*salesDepartmentUp(action) {
+    salesDepartmentUp(action) {
         const data = this.state.data;
 
         switch (action) {
@@ -599,7 +603,7 @@ class App extends Component {
         }
 
         this.setState({data: data});
-    }*/
+    }
 
     selectedWorkersToTeam(selected_workers) {
         const data = this.state.data;
@@ -867,7 +871,7 @@ class App extends Component {
         //data.projects_end_reports.unshift(project);
         data.projects_archive_reports.unshift(project);
         //console.log('archiving', data.projects_end_reports, data.projects_archive_reports, projects, project);
-     //  //this.setState({data: data});
+    //  //this.setState({data: data});
 
         if (project.is_storyline || project.stage !== 'finish' ) return;
 
@@ -945,7 +949,6 @@ class App extends Component {
         }
         const data = this.state.data;
         data.money -= quantity;
-        data.statistics.money_spent.buffer += quantity;
         if (!silent) addAction('Charge from your wallet: '+quantity+'$', {timeOut: 3000, extendedTimeOut: 2000}, 'warning');
         this.setState({data: data});
     }
@@ -1134,9 +1137,6 @@ class App extends Component {
 
         if (updating) {
             localStorage.setItem(game_name+"_app_state", JSON.stringify(state));
-            console.log('dare')
-            console.log(this.state)
-            console.log(JSON.stringify(this.state.relations));
             this.setState(state);
         }
     }
@@ -1276,7 +1276,7 @@ class App extends Component {
                 addAction('First of all, choose the origin and formation of your character.', {timeOut: 15000, extendedTimeOut: 5000, closeButton: false}, 'success');
                 break;
             case 10:
-             //   addAction('Then find your first project.', {timeOut: 15000, extendedTimeOut: 5000}, 'success');
+            //   addAction('Then find your first project.', {timeOut: 15000, extendedTimeOut: 5000}, 'success');
                 break;
             default:
                 break;
@@ -1648,10 +1648,9 @@ class App extends Component {
 
     render() {
         return (
-            <div className="app">
+            <div>
                 <BubblesAnimation onRef={ref => (this.animation = ref)}/>
-                <Layout data={this.state.data}/>
-                <Footer data={this.state.data} newGame={this.newGame}/>
+                <Layout data={this.state.data} newGame={this.newGame}/>
             </div>
         );
     }
