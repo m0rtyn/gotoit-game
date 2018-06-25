@@ -2,7 +2,7 @@ import React from 'react';
 import {achievements} from '../../game/achievements';
 import {Tooltip, OverlayTrigger} from 'react-bootstrap'
 import _ from 'lodash';
-import '../../css/achievements.css';
+// import '../../css/achievements.css';
 
 const Achievements = (props) => {
     let data = props.data;
