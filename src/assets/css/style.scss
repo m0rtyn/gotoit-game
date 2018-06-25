@@ -35,6 +35,15 @@ body {
 
 
 
+//HEADER=================================================================================
+.logo {
+  font-family: 'Comic Sans MS';
+  color: deeppink !important;
+  text-shadow: 3px 3px 3px #B0BF1A;
+}
+
+
+
 //TIMELINE===============================================================================
 
 .gti-timeline-wrapper {
@@ -94,87 +103,75 @@ body {
 
 
 
-//UNSORTED===========================================================================
+//WORKER===========================================================================
+.worker {
 
-.main-container {
-  min-height: auto !important;
-  padding: 16px 0;
-  margin-top: 80px;
-  max-height: calc(100vh - 80px);
-}
+  &.card {
+    margin-bottom: 6px;
+    display: flex;
+    flex-flow: row nowrap;
+    border-radius: 6px;
+  }
 
-.app {
-  padding: 20px;
-  padding-top: 70px;
-  text-align: center;
-  max-height: 100vh;
-}
+  .card-header {
+    padding: 3px 6px;
+    border-bottom: none;
 
-.progress-bar {
-  height: 16px;
-}
+    .btn {
+      margin: 0;
+      height: 20px;
+      padding: 0 8px;
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+  }
 
-.modal-dialog {
-  height: 85vh;
-  overflow-y: auto;
+  .card-body {
+    padding: 3px 6px;
 
-  @media (min-width: 576px) {
-    max-width: 800px;
+  }
+
+  .vacation {
+    //in-progress
+  }
+
+  .worker-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+  }
+  
+  .worker-stats {
   }
 }
-
-.topbar {
-  height: 30px;
-  flex-wrap: wrap;
-  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.8) 100%);
-}
-
-.topbar-btn {
-  line-height: 30px;
-  background-color: transparent;
-  color: #333333;
-}
-
-
-
 
 //LAYOUT===================================================================================================
 
 .people-column, .projects-column, .main-column {
-// overflow-y: auto;
+  // overflow-y: auto;
 }
 
 .people-column {
-background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
-background-clip: content-box;
-border-radius: 5px;
-overflow-x: hidden; 
-overflow-y: auto;
-margin: 8px;
-height: 100%;
-
-  // > div {
-  //   // width: 100%;
-  //   overflow-x: hidden; 
-  //   overflow-y: auto;
-  //   margin: 8px;
-  //   height: 100%;
-  // }
-}
-
-.worker-avatar {
-  width: 50px;
-  height: 50px;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
+  background-clip: padding-box !important;
+  padding: 6px;
+  padding-bottom: 6px;
+  background-clip: content-box;
   border-radius: 5px;
+  overflow-x: hidden; 
+  overflow-y: auto;
+  margin: 6px;
+  height: 100%;
 }
 
 .projects-column {
-
+  
 }
 
 .main-column {
-
+  
 }
+
 
 
 //ACHIEVEMENTS
@@ -232,6 +229,48 @@ height: 100%;
   opacity: .4;
 }
 
+
+
+//UNSORTED===========================================================================
+
+.main-container {
+  min-height: auto !important;
+  padding: 16px 0;
+  margin-top: 80px;
+  max-height: calc(100vh - 80px);
+}
+
+.app {
+  padding: 20px;
+  padding-top: 70px;
+  text-align: center;
+  max-height: 100vh;
+}
+
+.progress-bar {
+  height: 10px;
+}
+
+.modal-dialog {
+  height: 85vh;
+  overflow-y: auto;
+
+  @media (min-width: 576px) {
+    max-width: 800px;
+  }
+}
+
+.topbar {
+  height: 30px;
+  flex-wrap: wrap;
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.8) 100%);
+}
+
+.topbar-btn {
+  line-height: 30px;
+  background-color: transparent;
+  color: #333333;
+}
 
 
 //Old "App.css" ========================================================================
@@ -335,10 +374,6 @@ height: 100%;
 .project_icon {
   width: 70px;
   height: 70px;
-}
-.worker_stats {
-  width: 70%;
-  height: 100px;
 }
 
 .hovered {

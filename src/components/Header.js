@@ -17,6 +17,7 @@ class Header extends Component {
             <header>
                 <div className="topbar">
                     <div className="topbar-left">
+                        <button className="topbar-btn logo">ГоуТуАйТи:))))))</button>
                         <button className="topbar-btn" href="#" onClick={this.props.newGame} title='Hard Reset For Developers'>
                             New game
                         </button>
