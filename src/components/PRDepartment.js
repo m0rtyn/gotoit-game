@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {colors, public_relations} from "../../game/knowledge";
-import Bar from '../Bar';
+import {colors, project_bars, public_relations} from "../game/knowledge";
+import Bar from './Bar';
 
-class Advertising extends Component {
+class PRDepartment extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -35,12 +35,13 @@ class Advertising extends Component {
         return (
             <div className="card border text-center">
                 <div className='flex-container-row'>
-                    <div style={{ width: '47%', float: 'left', margin: '5px'}}>
+                    <div style={{ width: '50%', float: 'left', margin: '5px'}}>
                         <h5>Rumor</h5>
                         <Bar bar_data={rumor_bar} />
                     </div>
-                    <div style={{ width: '47%', float: 'right', margin: '5px'}}>
+                    <div style={{ width: '50%', float: 'right', margin: '5px'}}>
                         <h5>Reputation</h5>
+
                         <Bar bar_data={reputation_bar} />
                     </div>
                 </div>
@@ -77,4 +78,4 @@ class Advertising extends Component {
     }
 }
 
-export default Advertising;
+export default PRDepartment;

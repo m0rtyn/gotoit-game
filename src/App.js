@@ -81,8 +81,6 @@ class App extends Component {
         this.paySalary = this.paySalary.bind(this);
         this.buyItem = this.buyItem.bind(this);
 
-        this.salesDepartmentUp = this.salesDepartmentUp.bind(this);
-        this.hrDepartmentUp = this.hrDepartmentUp.bind(this);
 
         this.startProject = this.startProject.bind(this);
         this.startMeeting = this.startMeeting.bind(this);
@@ -159,8 +157,6 @@ class App extends Component {
         app_state.data.helpers['paySalary'] = this.paySalary;
         app_state.data.helpers['buyItem'] = this.buyItem;
 
-        app_state.data.helpers['salesDepartmentUp'] = this.salesDepartmentUp;
-        app_state.data.helpers['hrDepartmentUp'] = this.hrDepartmentUp;
 
         app_state.data.helpers['startProject'] = this.startProject;
         app_state.data.helpers['startMeeting'] = this.startMeeting;
@@ -184,7 +180,6 @@ class App extends Component {
         app_state.data.helpers['unlockTechnology'] = this.unlockTechnology;
         app_state.data.helpers['getTechnology'] = this.getTechnology;
         app_state.data.helpers['changeTechnology'] = this.changeTechnology;
-
         app_state.data.helpers['changeOffice'] = this.changeOffice;
         app_state.data.helpers['upOffice'] = this.upOffice;
         app_state.data.helpers['downOffice'] = this.downOffice;
@@ -540,7 +535,7 @@ class App extends Component {
         }
     }
 
-    salesDepartmentUp(action) {
+    /*salesDepartmentUp(action) {
         const data = this.state.data;
 
         switch (action) {
@@ -604,7 +599,7 @@ class App extends Component {
         }
 
         this.setState({data: data});
-    }
+    }*/
 
     selectedWorkersToTeam(selected_workers) {
         const data = this.state.data;
@@ -1139,6 +1134,9 @@ class App extends Component {
 
         if (updating) {
             localStorage.setItem(game_name+"_app_state", JSON.stringify(state));
+            console.log('dare')
+            console.log(this.state)
+            console.log(JSON.stringify(this.state.relations));
             this.setState(state);
         }
     }

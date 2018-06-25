@@ -87,13 +87,14 @@ var default_state =
         timelineScale: [],
         timelineEvents: [],
 
+        on_tick_effects: [],
+
         statistics: {
             money_spent: {
                 buffer: 0,
                 values: []
             }
         }
-
 
     },
     is_animation_fresh: false
