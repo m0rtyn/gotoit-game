@@ -1,14 +1,5 @@
 
 
-.flex-container-column {
-    display: flex;
-    flex-direction: column;
-}
-
-.flex-container-row {
-    display: flex;
-    flex-direction: row;
-}
 
 .justity-content-around {
     justify-content: space-around;
