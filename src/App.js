@@ -535,6 +535,7 @@ class App extends Component {
 
         if (data.money >= item.money) {
             this.chargeMoney(item.money);
+            data.statistics.environment_costs.buffer += item.money;
             let worker = _.find(data.workers, (id) => { return (worker_id === id); });
             worker.items[skill][item_key] = true;
             this.setState({data: data});
