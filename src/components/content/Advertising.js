@@ -35,11 +35,11 @@ class Advertising extends Component {
         return (
             <div className="card border text-center">
                 <div className='flex-container-row'>
-                    <div style={{ width: '50%', float: 'left', margin: '5px'}}>
+                    <div style={{ width: '47%', float: 'left', margin: '5px'}}>
                         <h5>Rumor</h5>
                         <Bar bar_data={rumor_bar} />
                     </div>
-                    <div style={{ width: '50%', float: 'right', margin: '5px'}}>
+                    <div style={{ width: '47%', float: 'right', margin: '5px'}}>
                         <h5>Reputation</h5>
                         <Bar bar_data={reputation_bar} />
                     </div>
