@@ -1020,6 +1020,7 @@ class App extends Component {
         if (data.money >= 5000) {
             this.chargeMoney(5000);
             data.office_things.coffeemaker = true;
+            data.statistics.office_costs.buffer += 5000;
             this.setState({data: data});
         }
         else {

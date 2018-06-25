@@ -96,6 +96,7 @@ export const rules = {
                 // first day
                 if (data.office.size > 1) {
                     this.chargeMoney(data.office.price);
+                    data.statistics.office_costs.buffer += data.office.price;
                 }
 
                 // allow hackathon this month

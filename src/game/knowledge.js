@@ -147,7 +147,8 @@ export const charts_parameters = {
     money_received: {label: 'Money received', color: '#FFAB40'},
     projects_done: {label: 'Projects done', color: '#EA80FC'},
     workers_hired: {label: 'Workers hired', color: '#1DE9B6'},
-    salary_costs: {label: 'Salary costs', color: '#5cb85c'}
+    salary_costs: {label: 'Salary costs', color: '#5cb85c'},
+    office_costs: {label: 'Office costs', color: '#d9534f'}
 };
 
 export const colors = {
