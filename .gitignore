@@ -60,19 +60,20 @@ yarn.lock
 
 
 
-!src/
-src/*
-!src/
-src/*
-!src/assets/
+# !src/
+# src/*
+# !src/
+# src/*
+# !src/assets/
 src/assets/*
-!src/assets/js/
+# !src/assets/js/
+!src/assets/js/*.min.js
 !src/assets/fonts/
-!src/assets/css/
-src/assets/css/*
-!src/assets/css/*.css
-!src/assets/css/*.scss
+# !src/assets/css/
+# src/assets/css/*
+!src/assets/css/*.min.css
 
-/.history
-/.vscode
-/build
+.history
+.vscode
+build/asset-manifest.json
+build/static/media/**
