@@ -1,10 +1,16 @@
 
 import _ from 'lodash';
 
-import {current_tick, setCurrentTick, projects_done} from '../App';
+import {
+    current_tick,
+    setCurrentTick,
+    projects_done,
+    setGameDate,
+} from '../App';
 import {addAction} from '../components/ToastNest';
 import Lorer from '../services/Lorer';
 import WorkerModel from '../models/WorkerModel';
+import { public_relations } from "./knowledge";
 
 
 export const rules = {
@@ -23,6 +29,9 @@ export const rules = {
 
             time.tick++;
             setCurrentTick(time.tick);
+            setGameDate(game_date);
+            data.helpers.setTimelineScale();
+
             //time.hour++;
             time.hour = game_date.getHours();
 
@@ -41,6 +50,7 @@ export const rules = {
 
             if (time.hour === 0) {
                 console.log('A new day');
+
                 //time.hour = 1;
                 data.workers.forEach((worker) => {
                     // console.log('worker '+worker.id+' morale '+worker.morale);
@@ -54,6 +64,7 @@ export const rules = {
                         if ((dissatisfaction / smoothing) > breakpoint) {
                             worker.to_leave = true;
                             worker.to_leave_ticker = 24 * 7 * 2; // 2 weeks
+                            data.helpers.addTimelineEvent('leave', 'Leaving from company', worker, 24*7*2); // 14 days
                             addAction(worker.name + ' decided to leave from your company in two weeks', {
                                 timeOut: 20000,
                                 extendedTimeOut: 10000
@@ -61,6 +72,11 @@ export const rules = {
                         }
                     }
                 });
+
+
+               _.mapValues(data.statistics, (stats, key) => {
+                    stats.values.push(stats.buffer)
+                })
             }
 
             if (time.hour === 14 && data.office_things.lunch) { // lunch time!
@@ -108,6 +124,24 @@ export const rules = {
 
             data.date = time;
             state.data = data;
+
+            console.log(data.on_tick_effects)
+
+            let click_count = {};
+
+            data.on_tick_effects = _.filter(data.on_tick_effects, (effect) => {
+                var same = _.filter(data.on_tick_effects, (effect2) => {
+                    return effect.name === effect2.name
+                });
+                effect.click_count = same.length;
+                return public_relations[effect.type].long > data.date.tick - effect.start_tick;
+            });
+
+            console.log(data.on_tick_effects)
+            _.each(data.on_tick_effects, (effect) => {
+                public_relations[effect.type].onTickByDelta(data, data.date.tick - effect.start_tick, effect.click_count);
+
+            } );
 
             return state;
         }
@@ -252,11 +286,15 @@ export const rules = {
                 // Vacation
                 if (!worker.to_vacation && !worker.in_vacation && worker.stamina <= 0) {
                     worker.proposeVacation();
+                    state.data.helpers.addTimelineEvent('vacation','Going to vacation', worker, 7 * 2) //14 days
                 }
                 if (worker.to_vacation) {
                     worker.to_vacation_ticker--;
                     if (worker.to_vacation_ticker <= 0) {
-                        worker.sendToVacation(_.random(1,4));
+                        let weeks = _.random(1,4)
+                        worker.sendToVacation(weeks);
+                        state.data.helpers.
+                        lineEvent('vacation','Going to vacation', worker, 7 * weeks)
                     }
                 }
                 if (worker.in_vacation) {

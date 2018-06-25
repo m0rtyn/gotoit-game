@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {FormattedDate} from 'react-intl';
 import classNames from 'classnames';
+import Timeline from './Timeline'
 
 class Header extends Component {
     render() {
@@ -12,84 +13,92 @@ class Header extends Component {
         game_date.setDate(real_date.getDate()+(date.tick/24));
 
         return (
-            <div>
-                <div>
-                    <span className="flex-container-row" style={{paddingLeft: 20}}>
-                        <span className="flex-element">
-                            <span onClick={() => {
-                                if (data.game_paused) {
-                                    data.helpers.playGame();
-                                } else {
-                                    data.helpers.pauseGame();
-                                }
-                            }}>
-                                <span className={classNames('glyphicon', (data.game_paused ? 'glyphicon-play' : 'glyphicon-pause'))} style={{width: 28, height: 28}}></span>
-                            </span>
-                            <span onClick={() => {
-                                let i = 1;
-                                let n = 24;
-                                while (i <= n) {
-                                    data.helpers.tick((i === n));
-                                    i++;
-                                }
-                            }}>
-                                {[1, 3].map((speed, index) => {
-                                    return <span key={index}>
-                                        {data.game_speed_multiplier === speed
-                                            ? <button className="" style={{width: 42, height: 28}}><u>{{0: 'slow',1: 'fast'}[index]}</u></button>
-                                            : <button className="" style={{width: 42, height: 28}} onClick={() => {
-                                                data.helpers.setGameSpeed(speed); }}>{{0: 'slow',1: 'fast',2: 'faster'}[index]}
-                                              </button>}
+            <header className="topbar" style={{}}>
+                <div className="topbar-left">
+                    <a className="topbar-btn" onClick={() => {
+                        if (data.game_paused) {
+                            data.helpers.playGame();
+                        } else {
+                            data.helpers.pauseGame();
+                        }
+                    }}>
+                        <i className={classNames('fa', (data.game_paused ? 'fa-play' : 'fa-pause'))}></i>
+                    </a>
+
+                    <span onClick={() => {
+                        let i = 1;
+                        let n = 24;
+                        while (i <= n) {
+                            data.helpers.tick((i === n));
+                            i++;
+                        }
+                    }}>
+
+                        {[1, 3].map((speed, index) => {
+                            return <a className="topbar-btn" key={index}>
+                                {data.game_speed_multiplier === speed
+                                    ? <span className="">
+                                        {{0: 'slow',1: 'fast'}[index]}
                                     </span>
-                                })}
-
-                                <img src={"24-hours-icon.png"} alt={"Next Day"} title={"Next Day"}
-                                     className="img" style={{width: 28, height: 28}}/>
-                            </span>
-                        </span>
-                        <span className="flex-element">
-                            <FormattedDate
-                                value={game_date}
-                                weekday="short"
-                                day="numeric"
-                                month="short"
-                                year="numeric"
-                                hour="numeric"
-                            />
-                        </span>
-                        <span className="flex-element flex-container-row" onClick={() => {
-                            console.log(data);
-                        }}>
-                            <span className="flex-element">
-                            {(date.is_working_time ?
-                                <label className="label-success">Working</label> :
-                                (date.day > 5) ?
-                                    <label className="label-default">Weekends</label> :
-                                    <label className="label-info">Sleeping</label>)}
-                            </span>
-                            <span className="flex-element">
-                                {/*<label onClick={() => { CHEAT!
-                                        data.helpers.addMoney(10000, 'usd');
-                                        }}>$</label>*/}
-                                <label>$</label>
-                                <span className="font-weight-bold"> {data.money}
-                                </span>
-                            </span>
-                            <span className="flex-element">
-                                <span className="font-weight-bold"> {data.btc.toFixed(4)}
-                                    {/*<label onClick={() => { CHEAT!
-                                            data.helpers.addMoney(1, 'btc');
-                                            }}> BTC </label>*/}
-                                    <label> BTC </label>
-                                </span>
-                            </span>
-                        </span>
-                        <span className="flex-element">
-
-                        </span>
+                                    : <span className="" onClick={() => {
+                                        data.helpers.setGameSpeed(speed); }}>
+                                        {{0: 'slow',1: 'fast',2: 'faster'}[index]}
+                                    </span>}
+                            </a>
+                        })}
+                        
+                        <a className="topbar-btn">
+                            <img src={"day-forward.svg"} alt={"Next Day"} title={"Next Day"}
+                                    className="img"/>
+                        </a>
                     </span>
                 </div>
-            </div>
+
+                <div className="topbar-center">
+                    <p>
+                        <FormattedDate
+                            value={game_date}
+                            weekday="short"
+                            day="numeric"
+                            month="short"
+                            year="numeric"
+                            hour="numeric"
+                            />
+                        
+                        {(date.is_working_time ?
+                            <span className="text-success"> Working</span> :
+                            (date.day > 5) ?
+                                <span  className="text-primary"> Weekends</span> :
+                                <span  className="text-info"> Sleeping</span>)}
+                    </p>
+
+                    
+
+                    <Timeline data={data}/>
+                </div>
+
+                <div className="topbar-right" onClick={() => {
+                    console.log(data);
+                }}>
+                    <span className="topbar-btn font-weight-bold">
+                        <i className="fa fa-dollar"></i>
+                         {data.money}
+                        {/*<span onClick={() => { CHEAT!
+                                data.helpers.addMoney(10000, 'usd');
+                                }}> $ </span>*/}
+                    </span>
+                    
+                    <div className="topbar-divider"></div>
+
+                    <span className="topbar-btn font-weight-bold">
+                        <i className="fa fa-bitcoin"></i>
+                        {data.btc.toFixed(2)}
+                        {/*<span onClick={() => { CHEAT!
+                                data.helpers.addMoney(1, 'btc');
+                                }}> BTC </span>*/}
+                    </span>
+                </div>
+            </header>
         );
     }
 }

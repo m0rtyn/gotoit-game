@@ -68,6 +68,9 @@ var default_state =
         projects_known_technologies: ['overtime', 'creativity'],
         projects_technologies: [],
         projects_default_technologies: [],
+        project_team_selector: null,
+        hovered_projects_id: [],
+        hovered_workers_id: [],
 
         wasRecentlyHackathon: false,
 
@@ -81,6 +84,17 @@ var default_state =
 
         animation_items: [],
 
+        timelineScale: [],
+        timelineEvents: [],
+
+        on_tick_effects: [],
+
+        statistics: {
+            money_spent: {
+                buffer: 0,
+                values: []
+            }
+        }
 
     },
     is_animation_fresh: false

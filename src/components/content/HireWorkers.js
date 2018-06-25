@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import _ from 'lodash';
 import StatsBar from '../StatsBar';
 import HiringAgency from '../HiringAgency';
-import {skills} from "../../game/knowledge";
+import Bar from '../Bar';
+import {colors, skills} from "../../game/knowledge";
 
 class HireWorkers extends Component {
     constructor(props) {
@@ -27,7 +28,7 @@ class HireWorkers extends Component {
                 return { name: key, val: <span>{candidate.stats[key]}</span> };
             });
 
-            return <div key={candidate.id} className="panel panel-info">{candidate.name} <span> {candidate.getSalary()}$</span>
+            return <div key={candidate.id} className="card">{candidate.name} <span> {candidate.getSalary()}$</span>
                 <div>{`Character: ${candidate.character.name}. ${candidate.character.description}.`}</div>
                 <StatsBar stats={stats_data} data={data} />
                 <button className="btn btn-success" id={candidate.id} onClick={(e) => this.hire(e, type)}>Hire</button>
@@ -38,6 +39,16 @@ class HireWorkers extends Component {
 
         let resumes_candidate = (candidate) => { return unit_block_template(candidate, 'resumes'); };
         let agency_candidate  = (candidate) => { return unit_block_template(candidate, 'agency'); };
+
+        const rumor_bar = [
+            {
+                name : 'Rumor',
+                width : Math.min(100, data.rumor),
+                color : colors.blue,
+                value : Math.ceil((data.rumor)*100)/100,
+                id: 'rumor'
+            }
+        ];
 
 
         return (
@@ -53,27 +64,20 @@ class HireWorkers extends Component {
                     </div>
                     <div className="col-md-6">
                         <h4 className="text-center fat slim-top">
-                            Hr Department
-                            <button  className="btn btn-info hidden" onClick={data.helpers.agencySearch}>Search 1000$</button>
+                            Rumor
                         </h4>
+                        <Bar bar_data={rumor_bar} />
 
-                        <div className="panel panel-success text-center">
-                            <div className="progress slim">
-                                <div className='progress-bar' role="progressbar"
-                                     style={{width: Math.min(100, data.rumor)+'%'}}>
-                                    <label>{data.rumor}%</label>
-                                </div>
-                            </div>
-                            <span className="flex-element">
-                                <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('Advertising'); }}>Advertising</button>
-                             </span>
-                        </div>
-
-
-                        {data.candidates.agency.map(agency_candidate)}
+                        <span className="flex-element">
+                            <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('Advertising'); }}>Advertising</button>
+                        </span>
                     </div>
+
+
+                    {data.candidates.agency.map(agency_candidate)}
                 </div>
             </div>
+
 
         )
     }

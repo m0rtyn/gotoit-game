@@ -71,7 +71,7 @@ class StartProject extends Component {
                                 this.setState({project_name: event.target.value})
                             }}/>
                     </h4>
-                    <div className="panel panel-success text-center">
+                    <div className="card border text-center">
                         <h4 className="text-center">Project platform</h4>
                         <ReactBootstrapSlider
                             value={this.state.project_platform}
@@ -87,7 +87,7 @@ class StartProject extends Component {
                         />
                         <p className="filament">{project_platforms[_.keys(project_platforms)[this.state.project_platform]].description}</p>
                     </div>
-                    <div className="panel panel-success text-center">
+                    <div className="card border text-center">
                         <h4 className="text-center">Project kind</h4>
                         <ReactBootstrapSlider
                             value={this.state.project_kind}

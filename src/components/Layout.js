@@ -6,13 +6,17 @@ import Projects from './Projects';
 import PopupsNest from './PopupsNest';
 import ToastNest from './ToastNest';
 
-import ButtonToolbar from './ButtonToolbar.js'
-import ContentContainer from './ContentContainer.js'
+import ButtonToolbar from './ButtonToolbar.js';
+import ContentContainer from './ContentContainer.js';
+
+import {colors} from '../game/knowledge.js';
 
 class Layout extends Component {
     render() {
         return (
-            <div>
+            <div className="page-layout">
+                <div className="background-color" style={{backgroundColor: colors.backgrounds[this.props.data.content]}}></div>
+                <div className="background-image" style={{backgroundImage: 'url(backgrounds/'+this.props.data.content+'.png)'}}></div>
                 <Office data={this.props.data} />
                 <div className="App row slim-top">
                     <div className="col-md-3 slim">

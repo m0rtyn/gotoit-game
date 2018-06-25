@@ -169,7 +169,7 @@ class Creation extends Component {
                                     <div>
                                         <h3 className="text-center">Go To IT</h3>
                                         <h4 className="text-center">Game About Software Development</h4>
-                                        <div className="panel panel-info">
+                                        <div className="card">
                                             <p>This game is about software development and the rise of your company to the heights.</p>
                                             <p>Start with small contracts, save up some money, hire a couple of assistants and try to create something really cool!</p>
                                         </div>
@@ -207,7 +207,7 @@ class Creation extends Component {
                                                       }}
                                     /> background
                                     </h3>
-                                    <div className="panel panel-info slim">
+                                    <div className="card slim">
                                         <div className="flex-container-row slim">
                                             {Object.keys(player_backgrounds).map((background) => {
                                                 return <div key={background} className="flex-element slim">
@@ -231,7 +231,7 @@ class Creation extends Component {
                                             <p className="text-center slim"> Start tech: {('technologist' === this.state.selected_background) ? "Agile, Test Drive Development or Refactoring" : technologies[player_backgrounds[this.state.selected_background].start_tech].name} </p>
                                         </div>
                                     </div>
-                                    <div className="panel panel-success slim">
+                                    <div className="card border slim">
                                         <div className="text-center slim">
                                             <h4 className="text-center filament">Start {selected_background.might}:</h4>
                                             <div className="flex-container-row slim">
@@ -257,7 +257,7 @@ class Creation extends Component {
                                             <p className="text-center">{selected_background.spices[this.state[this.state.selected_background]].description}</p>
                                         </div>
                                     </div>
-                                    <div className="panel panel-warning slim">
+                                    <div className="card slim">
                                         <h4 className="text-center slim-top">
                                             <p className="filament">Your start skills:</p>
                                             <StatsBar stats={stats_data} data={data}/>

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Achievements from './content/Achievements.js';
 import Advertising from './content/Advertising.js';
 import Archive from './content/Archive.js';
+import Charts from './content/Charts';
 import Exchange from './content/Exchange.js';
 import HireWorkers from './content/HireWorkers';
 import Loans from '../components/content/Loans.js';
@@ -16,6 +17,7 @@ const components = {
     'Achievements': Achievements,
     'Advertising': Advertising,
     'Archive': Archive,
+    'Charts': Charts,
     'Exchange': Exchange,
     'HireWorkers': HireWorkers,
     'Loans': Loans,
@@ -33,7 +35,7 @@ class ContentContainer extends Component {
         const ContentComponent = components[this.props.data.content];
 
         return (
-            <div className="panel panel-success">
+            <div className="card border">
                 <ContentComponent data={this.props.data} />
             </div>
         );
