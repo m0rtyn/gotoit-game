@@ -126,13 +126,12 @@ export const rules = {
             data.date = time;
             state.data = data;
 
-            console.log(data.on_tick_effects)
 
             let click_count = {};
 
             data.on_tick_effects = _.filter(data.on_tick_effects, (effect) => {
-                var same = _.filter(data.on_tick_effects, (effect2) => {
-                    return effect.name === effect2.name
+                let same = _.filter(data.on_tick_effects, (effect2) => {
+                    return effect.type === effect2.type
                 });
                 effect.click_count = same.length;
                 return public_relations[effect.type].long > data.date.tick - effect.start_tick;
