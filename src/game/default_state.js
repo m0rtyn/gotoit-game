@@ -90,7 +90,8 @@ var default_state =
         statistics: _.mapValues(charts_parameters, () => {
             return {buffer: 0, values: [0]}
         })
-
+      
+        on_tick_effects: []
     },
 
     is_animation_fresh: false

@@ -10,7 +10,6 @@ import {game_name} from './game/app_config';
 import {tick} from './game/tick';
 
 import Layout from './components/Layout';
-import Footer from './components/Footer.js'
 import BubblesAnimation  from './components/BubblesAnimation'
 import {addMessage, addAction} from './components/ToastNest';
 
@@ -503,7 +502,7 @@ class App extends Component {
 
     riseEmployer(worker_id) {
         const data = this.state.data;
-     //   let worker = _.find(data.workers, (id) => { return (worker_id === id); });
+    //   let worker = _.find(data.workers, (id) => { return (worker_id === id); });
         let worker = _.find(data.workers, (worker) => { return (worker_id === worker.id); });
         //console.log(worker_id, worker, data.workers);
         //console.log(worker);
@@ -883,6 +882,7 @@ class App extends Component {
         }).length;
 
         //console.log('archiving', data.projects_end_reports, data.projects_archive_reports, projects, project);
+        
         //  //this.setState({data: data});
 
         if (project.is_storyline || project.stage !== 'finish' ) return;
@@ -1292,7 +1292,7 @@ class App extends Component {
                 addAction('First of all, choose the origin and formation of your character.', {timeOut: 15000, extendedTimeOut: 5000, closeButton: false}, 'success');
                 break;
             case 10:
-             //   addAction('Then find your first project.', {timeOut: 15000, extendedTimeOut: 5000}, 'success');
+            //   addAction('Then find your first project.', {timeOut: 15000, extendedTimeOut: 5000}, 'success');
                 break;
             default:
                 break;
@@ -1664,10 +1664,9 @@ class App extends Component {
 
     render() {
         return (
-            <div className="app">
+            <div>
                 <BubblesAnimation onRef={ref => (this.animation = ref)}/>
-                <Layout data={this.state.data}/>
-                <Footer data={this.state.data} newGame={this.newGame}/>
+                <Layout data={this.state.data} newGame={this.newGame}/>
             </div>
         );
     }
