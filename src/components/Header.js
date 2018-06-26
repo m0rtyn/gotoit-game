@@ -24,6 +24,9 @@ class Header extends Component {
                         <button className="topbar-btn" onClick={() => {data.helpers.changeContent('Achievements')}} href="#" title='Achievements bar'>
                             Achievements
                         </button>
+                        <button className="topbar-btn" onClick={() => {data.helpers.changeContent('Charts')}} href="#" title='Statistics'>
+                            Charts
+                        </button>
                         <button className="topbar-btn" rel="noopener noreferrer" href={support.show}>
                             Support
                         </button>

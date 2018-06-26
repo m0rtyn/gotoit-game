@@ -107,9 +107,9 @@ class Project extends Component {
         let label = (worker) => {
             return <span key={worker.id}>
                 <span className="text-primary">{worker.name}</span>
-                <Button onClick={() => data.helpers.kickWorker(worker, project)} bsSize="xsmall">
+                <button className="btn btn-info pr-button" onClick={() => data.helpers.kickWorker(worker, project)}>
                     <i className="fa fa-remove"></i>
-                </Button>
+                </button>
             </span>;
         };
 
@@ -426,11 +426,11 @@ class Project extends Component {
 
                 <div className="small slim">
                     <p className="small slim">Team: {team_label}
-                        <Button className={data.project_team_selector == project.id ? 'active' : ''}
+                        <button className={'btn btn-info pr-button'+ data.project_team_selector === project.id ? 'active ' : ''}
                                 onClick={() => data.helpers.changeTeamSelector(project)}
-                                bsSize="xsmall">Add</Button>
+                                >Add</button>
                     </p>
-                    {data.project_team_selector == project.id ? <div>
+                    {data.project_team_selector === project.id ? <div>
                         <Select onChange={(e) => onSelectChange(e)}
                                 options={data.workers.map((worker) => {return {value: worker, label: worker.name}})}
                                 value={null}/>
