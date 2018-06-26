@@ -5,7 +5,7 @@ import WorkerModel from '../models/WorkerModel';
 import ProjectModel, {flush} from '../models/ProjectModel';
 import OfficeModel from '../models/OfficeModel';
 
-import {project_platforms, project_kinds} from './knowledge';
+import {project_platforms, project_kinds, charts_parameters} from './knowledge';
 
 var default_state =
 {
@@ -87,16 +87,13 @@ var default_state =
         timelineScale: [],
         timelineEvents: [],
 
-        on_tick_effects: [],
-
-        statistics: {
-            money_spent: {
-                buffer: 0,
-                values: []
-            }
-        }
-
+        statistics: _.mapValues(charts_parameters, () => {
+            return {buffer: 0, values: [0]}
+        }),
+      
+        on_tick_effects: []
     },
+
     is_animation_fresh: false
 };
 
