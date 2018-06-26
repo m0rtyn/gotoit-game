@@ -25,14 +25,14 @@ class Advertising extends Component {
         const reputation_bar = [
             {
                 name : 'Reputation',
-                width : Math.min(100, data.rumor),
+                width : Math.min(100, data.reputation),
                 color : colors.orange,
                 value : Math.ceil((data.reputation)*100)/100,
                 id: 'reputation'
             }
         ];
 
-        console.log(data.on_tick_effects)
+        console.log(data.reputation)
         return (
             <div className="card border text-center">
                 <div className='flex-container-row'>
@@ -53,8 +53,7 @@ class Advertising extends Component {
                             () => { public_relations['forum_thread'].onClick(data) }
                         } >{public_relations['forum_thread'].name + ' ' + (()=>{
                             let effect = _.find(data.on_tick_effects, (effect) => { return effect.type === 'forum_thread'});
-                            if (effect) return effect.click_count;
-                            else return 0
+                            return effect ? effect.click_count : 0;
                         })() }</button>
 
                     </div>
@@ -63,8 +62,7 @@ class Advertising extends Component {
                             () => {public_relations['search_specialist'].onClick(data)}
                         }>{public_relations['search_specialist'].name + ' ' + (()=>{
                             let effect = _.find(data.on_tick_effects, (effect) => { return effect.type === 'search_specialist'});
-                            if (effect) return effect.click_count;
-                            else return 0
+                            return effect ? effect.click_count : 0;
                         })()}</button>
                     </div>
                     <div>
@@ -72,8 +70,7 @@ class Advertising extends Component {
                             () => {public_relations['search_job'].onClick(data)}
                         }>{public_relations['search_job'].name + ' ' + (()=>{
                             let effect = _.find(data.on_tick_effects, (effect) => { return effect.type === 'search_job'});
-                            if (effect) return effect.click_count;
-                            else return 0
+                            return effect ? effect.click_count : 0;
                         })()}</button>
                     </div>
                     <div>
@@ -84,8 +81,7 @@ class Advertising extends Component {
                             }
                         }>{public_relations['big_event'].name + ' ' + (()=>{
                             let effect = _.find(data.on_tick_effects, (effect) => { return effect.type === 'big_event'});
-                            if (effect) return effect.click_count;
-                            else return 0
+                            return effect ? effect.click_count : 0;
                         })()}</button>
                     </div>
 
