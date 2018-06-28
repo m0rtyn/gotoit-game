@@ -152,6 +152,8 @@ export const charts_parameters = {
     environment_costs: {label: 'Environment costs', color: '#8B0000'},
 };
 
+export const btc_chart_parameters = { label: 'Bitcoin', color: '#f7931a' };
+
 export const colors = {
     creativity: {
         name: 'creativity',

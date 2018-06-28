@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import Portal from 'react-portal';
 import _ from 'lodash';
 import TeamDialog from './TeamDialog';
+import StatsProgressBar from './StatsProgressBar';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
 
 //import {addAction} from '../components/ToastNest';
 
-import {skills_names, workers_bonus_items, roles, education} from '../game/knowledge';
+import {skills_names, workers_bonus_items, roles, education, colors} from '../game/knowledge';
 import WorkerHappinessBar from "./WorkerHappinessBar";
 import WorkerStaminaBar from "./WorkerStaminaBar";
 
@@ -17,9 +18,15 @@ class Worker extends Component {
         this.manage = this.manage.bind(this);
         this.manageAll = this.manageAll.bind(this);
         this.dismiss = this.dismiss.bind(this);
-        this.changeRole = this.changeRole.bind(this);
     }
-
+    componentWillMount(){
+        let data = this.props.data;
+        data.workers.forEach((worker) => {
+            if (worker.stats.design > data.max_stat) data.max_stat = worker.stats.design;
+            if (worker.stats.program > data.max_stat) data.max_stat= worker.stats.program;
+            if (worker.stats.manage > data.max_stat) data.max_stat = worker.stats.manage;
+        });
+    }
     componentDidMount() {
         /*
         if (this.props.worker.is_player) {
@@ -41,9 +48,7 @@ class Worker extends Component {
         this.props.data.helpers.dismissEmployer(this.props.worker.id);
     }
 
-    changeRole(event) {
-        this.props.data.helpers.changeRole(this.props.worker.id, event.target.id, event.target.checked);
-    }
+
 
     teach(skill, source) {
         //  console.log(skill, source);
@@ -62,7 +67,16 @@ class Worker extends Component {
         const worker = this.props.worker;
 
         const manage_button = <button className="btn btn-success btn-sm" style={{margin: "5px 5px 5px 5px"}}>Manage</button>;
-        
+        console.log('dsd')
+        console.log(worker.stats);
+        const stats_progressbar_data = _.mapValues(worker.stats, (val, stat) => {
+
+            return {
+                name: stat,
+                value: worker.getStatsData(stat),
+                color: colors[stat].colorCompleted
+            };
+        });
         const stats_data = _.mapValues(worker.stats, (val, stat) => {
             return {
                 name: stat,
@@ -154,35 +168,6 @@ class Worker extends Component {
                                     </p5>
                                 </div>
 
-                                <div className="card border text-center">
-                                    <div className="">
-                                        <label>
-                                            <input
-                                                type="checkbox"
-                                                id={worker.id}
-                                                checked={worker.accept_default}
-                                                onChange={(e) => {
-                                                    worker.accept_default = e.target.checked;
-                                                    this.manageAll(e);
-                                                }}/>
-                                            Auto join to new projects
-                                        </label>
-                                    </div>
-                                    <div className="flex-container-row slim">
-                                        {skills_names.map((role, i) =>
-                                            <div key={role} className="form-check-checkbox flex-element slim">
-                                                <label>
-                                                    <input
-                                                        type="checkbox"
-                                                        id={role}
-                                                        checked={this.props.data.helpers.getRole(worker.id, role)}
-                                                        onChange={this.changeRole}/>
-                                                    <span>as {roles[role].profession_name} </span>
-                                                </label>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
 
                                 <div className="card border text-center">
                                     <StatsBar stats={stats_data} data={this.props.data} />
@@ -277,8 +262,9 @@ class Worker extends Component {
                             <WorkerHappinessBar worker={worker}/>
                             <WorkerStaminaBar worker={worker}/>
                         </div>
-
-                        <StatsBar stats={stats_data} data={this.props.data} />
+                        <StatsProgressBar type={'design'} stats={stats_progressbar_data} worker={worker} data={data} />
+                        <StatsProgressBar type={'program'} stats={stats_progressbar_data} worker={worker} data={data} />
+                        <StatsProgressBar type={'manage'} stats={stats_progressbar_data} worker={worker} data={data} />
                     </div>
                 </div>
             </div>
