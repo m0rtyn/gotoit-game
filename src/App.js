@@ -10,7 +10,6 @@ import {game_name} from './game/app_config';
 import {tick} from './game/tick';
 
 import Layout from './components/Layout';
-import Footer from './components/Footer.js'
 import BubblesAnimation  from './components/BubblesAnimation'
 import {addMessage, addAction} from './components/ToastNest';
 
@@ -411,6 +410,8 @@ class App extends Component {
     }
 
     deepCheckRelation(worker, project) {
+        if (!worker || !project) return false;
+
         let data = this.state.data;
         return Object.keys(data.relations[worker.id][project.id]).some((skill) => {
             return this.getRelation(worker.id, project.id, skill) === true
@@ -431,6 +432,7 @@ class App extends Component {
 
     modifyHoveredObjects(projects = [], workers = []) {
         const data = this.state.data;
+
         if (projects.length || workers.length) {
             projects.forEach((project) => data.hovered_projects_id.push(project.id));
             workers.forEach((worker) => data.hovered_workers_id.push(worker.id));
@@ -494,12 +496,13 @@ class App extends Component {
         //data.workers_roles[worker.id] = JSON.parse(JSON.stringify(skills_true));
         skills_names.forEach((skill) => { this.changeRole(worker.id, skill, true); });
         this.modifyRelation(worker.id, null, true);
+        data.statistics.workers_hired.buffer = data.workers.length - 1;
         this.setState({data: data});
     }
 
     riseEmployer(worker_id) {
         const data = this.state.data;
-     //   let worker = _.find(data.workers, (id) => { return (worker_id === id); });
+    //   let worker = _.find(data.workers, (id) => { return (worker_id === id); });
         let worker = _.find(data.workers, (worker) => { return (worker_id === worker.id); });
         //console.log(worker_id, worker, data.workers);
         //console.log(worker);
@@ -531,6 +534,7 @@ class App extends Component {
 
         if (data.money >= item.money) {
             this.chargeMoney(item.money);
+            data.statistics.environment_costs.buffer += item.money;
             let worker = _.find(data.workers, (id) => { return (worker_id === id); });
             worker.items[skill][item_key] = true;
             this.setState({data: data});
@@ -871,8 +875,15 @@ class App extends Component {
 
         //data.projects_end_reports.unshift(project);
         data.projects_archive_reports.unshift(project);
+
+        //projects done statistics
+        data.statistics.projects_done.buffer = data.projects_archive_reports.filter((project) => {
+            return project.stage === 'finish'
+        }).length;
+
         //console.log('archiving', data.projects_end_reports, data.projects_archive_reports, projects, project);
-     //  //this.setState({data: data});
+        
+        //  //this.setState({data: data});
 
         if (project.is_storyline || project.stage !== 'finish' ) return;
 
@@ -929,6 +940,7 @@ class App extends Component {
         switch (currency){
             case "usd":
                 data.money += quantity;
+                data.statistics.money_received.buffer += quantity;
                 break;
             case "btc":
                 data.btc += quantity;
@@ -950,6 +962,7 @@ class App extends Component {
         }
         const data = this.state.data;
         data.money -= quantity;
+        data.statistics.money_spent.buffer += +quantity;
         if (!silent) addAction('Charge from your wallet: '+quantity+'$', {timeOut: 3000, extendedTimeOut: 2000}, 'warning');
         this.setState({data: data});
     }
@@ -971,7 +984,7 @@ class App extends Component {
         let cost = usd / data.current_btc_price;
         if (data.btc >= cost) {
             data.btc -= cost;
-            data.money += usd;
+            this.addMoney(usd);
         }
         else {
             console.log('not enough btc');
@@ -1008,6 +1021,7 @@ class App extends Component {
         if (data.money >= 5000) {
             this.chargeMoney(5000);
             data.office_things.coffeemaker = true;
+            data.statistics.office_costs.buffer += 5000;
             this.setState({data: data});
         }
         else {
@@ -1159,6 +1173,7 @@ class App extends Component {
 
         if ((data.money - salary) > 0) {
             this.chargeMoney(salary, true);
+            data.statistics.salary_costs.buffer += +salary;
             worker.facts.money_earned += salary;
             worker.get_monthly_salary = true;
         } else {
@@ -1277,7 +1292,7 @@ class App extends Component {
                 addAction('First of all, choose the origin and formation of your character.', {timeOut: 15000, extendedTimeOut: 5000, closeButton: false}, 'success');
                 break;
             case 10:
-             //   addAction('Then find your first project.', {timeOut: 15000, extendedTimeOut: 5000}, 'success');
+            //   addAction('Then find your first project.', {timeOut: 15000, extendedTimeOut: 5000}, 'success');
                 break;
             default:
                 break;
@@ -1649,10 +1664,9 @@ class App extends Component {
 
     render() {
         return (
-            <div className="app">
+            <div>
                 <BubblesAnimation onRef={ref => (this.animation = ref)}/>
-                <Layout data={this.state.data}/>
-                <Footer data={this.state.data} newGame={this.newGame}/>
+                <Layout data={this.state.data} newGame={this.newGame}/>
             </div>
         );
     }

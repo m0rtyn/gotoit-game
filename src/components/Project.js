@@ -1,8 +1,8 @@
+
 import React, { Component } from 'react';
 import Portal from 'react-portal';
 
 import Select from 'react-select';
-import {Button, Glyphicon} from 'react-bootstrap';
 import ReactBootstrapSlider from 'react-bootstrap-slider';
 // import '../../node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css';
 
@@ -107,10 +107,10 @@ class Project extends Component {
 
         let label = (worker) => {
             return <span key={worker.id}>
-                <label className="text-primary">{worker.name}</label>
-                <Button onClick={() => data.helpers.kickWorker(worker, project)} bsSize="xsmall">
-                    <Glyphicon glyph="glyphicon glyphicon-remove"/>
-                </Button>
+                <span className="text-primary">{worker.name}</span>
+                <button className="btn btn-info pr-button" onClick={() => data.helpers.kickWorker(worker, project)}>
+                    <i className="fa fa-remove"></i>
+                </button>
             </span>;
         };
 
@@ -427,11 +427,11 @@ class Project extends Component {
 
                 <div className="small slim">
                     <p className="small slim">Team: {team_label}
-                        <Button className={data.project_team_selector == project.id ? 'active' : ''}
+                        <button className={'btn btn-info pr-button'+ data.project_team_selector === project.id ? 'active ' : ''}
                                 onClick={() => data.helpers.changeTeamSelector(project)}
-                                bsSize="xsmall">Add</Button>
+                                >Add</button>
                     </p>
-                    {data.project_team_selector == project.id ? <div>
+                    {data.project_team_selector === project.id ? <div>
                         <Select onChange={(e) => onSelectChange(e)}
                                 options={data.workers.map((worker) => {return {value: worker, label: worker.name}})}
                                 value={null}/>

@@ -142,6 +142,16 @@ export const education = { // hm...
     workshop: {name: 'Workshop', hide: true, description: ''}
 };
 
+export const charts_parameters = {
+    money_spent: {label: 'Money spent', color: '#3e95cd'},
+    money_received: {label: 'Money received', color: '#FFAB40'},
+    projects_done: {label: 'Projects done', color: '#EA80FC'},
+    workers_hired: {label: 'Workers hired', color: '#1DE9B6'},
+    salary_costs: {label: 'Salary costs', color: '#5cb85c'},
+    office_costs: {label: 'Office costs', color: '#d9534f'},
+    environment_costs: {label: 'Environment costs', color: '#8B0000'},
+};
+
 export const colors = {
     creativity: {
         name: 'creativity',
@@ -180,6 +190,8 @@ export const colors = {
     success: '#5cb85c',
     warning: '#f0ad4e',
     danger: '#d9534f',
+    blue: '#33cabb',
+    orange: '#fbb264',
 
     backgrounds: {
         Achievements: '#FFFFFF',
@@ -203,7 +215,7 @@ export const genAnimationData = (name, from, to, count, isBug) => {
     let data = colors[name];
     let color = isBug ? data.colorBug : data.colorCompleted;
     return { size: '20px', color: color, from: from, to: to, count: count}
-}
+};
 
 export const project_bars = {
     design_tasks: {
@@ -242,6 +254,83 @@ export const project_bars = {
         id: 'manage_completed',
         color: colors.manage.colorCompleted
     },
+};
+
+export const public_relations = {
+    forum_thread: {
+        name: 'Start a forum thread (Free)',
+        long: 24,
+        tooltip: 'Duration: 1 day. Tell the whole Internet about your company and projects. Who knows? Maybe it`ll help, but not for long that’s for sure',
+        onClick: (state) => {
+            state.on_tick_effects.push({
+                type: 'forum_thread',
+                start_tick: state.date.tick
+            });
+        },
+        onTickByDelta: (state, delta, n) => {
+            state.reputation += Math.cbrt(delta)/delta * (2/n); // + 12.291089555089949
+            state.rumor += Math.cbrt(delta)/delta * (2/n); // + 12.291089555089949
+
+        }
+    },
+    search_specialist: {
+        name: 'Search market for a specialist ($250)',
+        long: 24 * 7,
+        tooltip: 'Duration: 1 week. Spend some money preaching and advertising your company at the most popular hiring web sites there are in the Internet. Rather later than sooner but you`ll definitely find someone willing to take the offer.',
+        onClick: (state) => {
+            state.money -= 250;
+            state.on_tick_effects.push({
+                type: 'search_specialist',
+                start_tick: state.date.tick
+            });
+        },
+        onTickByDelta: (state, delta, n) => {
+            let customDelta = delta * 0.03;
+            state.rumor += (1+Math.sin(customDelta-Math.PI/2)) / 10 * (2/n); //+ 39.84379662621998
+            if (delta < 24){
+                state.reputation += (Math.cbrt(delta)/delta)* (2/n); //+ 12.291089555089949
+            }
+        }
+    },
+    search_job: {
+        name: 'Search market for a specialist ($100)',
+        long: 24 * 7,
+        tooltip: 'Duration: 1 week. Spend some money preaching and advertising your company at the most popular hiring web sites there are in the Internet. Rather later than sooner but you`ll definitely find someone willing to take the offer.',
+        onClick: (state) => {
+            state.money -= 100;
+            state.on_tick_effects.push({
+                type: 'search_job',
+                start_tick: state.date.tick
+            });
+        },
+        onTickByDelta: (state, delta, n) => {
+            let customDelta = delta * 0.03;
+            state.reputation += (1+Math.sin(customDelta-Math.PI/2)) / 10 * (2/n);//+ 39.84379662621998
+            if (delta < 24){
+                state.rumor += (Math.cbrt(delta)/delta)*  (2/n);  //+ 12.291089555089949
+            }
+        }
+    },
+    big_event: {
+        name: 'Attend big IT event ($1000)',
+        long: 24 * 7 * 2,
+        tooltip: 'Duration: 2 weeks. Lots of money and time spend. Lots of media coverage afterwards. ',
+        onClick: (state) => {
+            state.money -= 1000;
+            state.on_tick_effects.push({
+                type: 'big_event',
+                start_tick: state.date.tick
+            });
+        },
+        onTickByDelta: (state, delta) => {
+            let customDelta = delta * 0.03;
+            state.reputation += (1+Math.sin(customDelta-Math.PI/2)) / 5; // + 71.08263950306524;
+            state.rumor += (1+Math.sin(customDelta-Math.PI/2)) / 5; // + 71.08263950306524;
+        }
+    },
+
+
+
 }
 
 
