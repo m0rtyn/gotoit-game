@@ -107,10 +107,13 @@ class Project extends Component {
 
         let label = (worker) => {
             return <span key={worker.id}>
-                <span className="text-primary">{worker.name}</span>
-                <button className="btn btn-info pr-button" onClick={() => data.helpers.kickWorker(worker, project)}>
-                    <i className="fa fa-remove"></i>
-                </button>
+                        <span className="text-primary">{worker.name}</span>
+
+                        <button style={{margin: '5px 5px 5px 5px', width: '5%', lineHeight: '50%'}} className="btn btn-xs btn-info pr-button" onClick={() => data.helpers.kickWorker(worker, project)}>
+                        <span style={{ display:'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center'}} aria-hidden="true">&times;</span>
+                        </button>
             </span>;
         };
 
