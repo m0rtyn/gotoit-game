@@ -103,7 +103,11 @@ class Header extends Component {
                         <div className="topbar-divider"></div>
 
                         <div className="topbar-right">
-                            <span className="topbar-btn font-weight-bold">
+                            <span className="topbar-btn font-weight-bold"
+                                  onClick={() => {
+                                      data.helpers.changeContent('Exchange');
+                                  }}
+                            >
                                 <i className="fa fa-bitcoin"></i>
                                  {data.btc.toFixed(2)}
                                 {/*<span onClick={() => { CHEAT!

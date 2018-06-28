@@ -1,5 +1,7 @@
 
 import React, { Component } from 'react';
+import ChartsController from "./ChartsController";
+import btc_icon from '../../../public/btc_logo.png'
 
 class Exchange extends Component {
     render() {
@@ -7,8 +9,17 @@ class Exchange extends Component {
 
         return (
             <div className="text-center">
-                <h3 className="text-center">Market</h3>
+                <h1 className="text-center">
+                    <img style={{marginLeft: '3px'}} width={40} height={40} src={btc_icon} />
+                    {' '}Bitcoin Exchange</h1>
                 <h4>Current BTC Price: ${data.current_btc_price} per 1 BTC</h4>
+                {   ChartsController({
+                        chart: {type: 'BTC'},
+                        data: data
+                    })
+                }
+                {/*<ChartsController chart={ {type: 'BTC'} }/>*/}
+
                 <div className="flex-container-row">
                     <h5 className="flex-element">Your USD: {data.money}</h5>
                     <h5 className="flex-element">Your BTC: {data.btc}</h5>
