@@ -121,7 +121,7 @@ class Project extends Component {
                         <span style={{
                             lineHeight: '10px',
                             position: 'absolute',
-                            top: 'calc(50% - 4px)',
+                            top: 'calc(50% - 5px)',
                             left: 'calc(50% - 3px)'
                         }} aria-hidden="true">&times;</span>
                         </button>
