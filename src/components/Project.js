@@ -106,13 +106,24 @@ class Project extends Component {
         //let unoccupied_workers = data.workers.filter((worker) => {return data.helpers.deepCheckRelation(worker, project)});
 
         let label = (worker) => {
+            //TODO move to a element specific style sheet
             return <span key={worker.id}>
                         <span className="text-primary">{worker.name}</span>
 
-                        <button style={{margin: '5px 5px 5px 5px', width: '5%', lineHeight: '50%'}} className="btn btn-xs btn-info pr-button" onClick={() => data.helpers.kickWorker(worker, project)}>
-                        <span style={{ display:'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center'}} aria-hidden="true">&times;</span>
+                        <button style={{
+                            margin: '0 5px',
+                            maxWidth: '5%',
+                            height: '10px',
+                            padding: '0 8px',
+                            position: 'relative'
+                        }} className="btn btn-xs btn-info pr-button"
+                                onClick={() => data.helpers.kickWorker(worker, project)}>
+                        <span style={{
+                            lineHeight: '10px',
+                            position: 'absolute',
+                            top: 'calc(50% - 4px)',
+                            left: 'calc(50% - 3px)'
+                        }} aria-hidden="true">&times;</span>
                         </button>
             </span>;
         };
