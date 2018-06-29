@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../css/footer.css';
+// import '../css/footer.css';
 import {social_links, support} from '../game/app_config';
 
 
