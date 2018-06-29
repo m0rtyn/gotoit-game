@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
-// import '../assets/css/Timeline.css';
 import {project_kinds, project_platforms} from "../game/knowledge";
 
 const timelineWidth = window.innerWidth;

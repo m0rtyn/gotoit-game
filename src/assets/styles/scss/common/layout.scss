@@ -1,0 +1,34 @@
+:root {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.app {
+  padding: 20px;
+  padding-top: 70px;
+  text-align: center;
+  max-height: 100vh;
+}
+
+.people-column, .projects-column, .main-column {
+  // overflow-y: auto;
+}
+
+.people-column {
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
+  background-clip: padding-box !important;
+  padding: 6px;
+  padding-bottom: 6px;
+  background-clip: content-box;
+  border-radius: 5px;
+  overflow-x: hidden; 
+  overflow-y: auto;
+}
+
+.projects-column {
+  
+}
+
+.main-column {
+  
+}
