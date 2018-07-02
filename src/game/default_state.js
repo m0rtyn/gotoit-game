@@ -92,7 +92,7 @@ var default_state =
         }),
       
         on_tick_effects: [],
-        btc_statistic: { buffer: 0, values: [0] },
+        btc_statistic: { buffer: 0, values: [] },
         max_stat: 1
 
     },
