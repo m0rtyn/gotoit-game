@@ -1,0 +1,14 @@
+.activity-column {
+  & > div {
+    background-color: white;
+  }
+
+  .topbar {
+    position: static;
+
+    .menu {
+      margin-left: 0;
+    }
+  
+  }
+}

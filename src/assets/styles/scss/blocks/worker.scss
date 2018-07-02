@@ -1,14 +1,14 @@
 .worker {
 
   &.card {
-    margin-bottom: 6px;
+    margin-bottom: $main-size;
     display: flex;
     flex-flow: row nowrap;
     border-radius: 6px;
   }
 
   .card-header {
-    padding: 3px 6px;
+    padding: $half-size $main-size;
     border-bottom: none;
 
     .btn {
@@ -16,12 +16,12 @@
       height: 20px;
       padding: 0 8px;
       font-size: 10px;
-      text-transform: uppercase;
+      // text-transform: uppercase;
     }
   }
 
   .card-body {
-    padding: 3px 6px;
+    padding: $half-size $main-size;
 
   }
 

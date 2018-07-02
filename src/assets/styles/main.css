@@ -10,76 +10,28 @@
   max-height: 100vh;
 }
 
-.people-column {
-  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
-  background-clip: padding-box !important;
-  padding: 6px;
-  padding-bottom: 6px;
-  background-clip: content-box;
-  border-radius: 5px;
-  overflow-x: hidden;
+.people-column > div, .projects-column > div, .activity-column > div {
+  height: 100%;
+  padding: 8px;
   overflow-y: auto;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 4px;
+  overflow-x: hidden;
 }
 
-.flex-container-column {
-  display: flex;
-  flex-direction: column;
+.people-column > div::-webkit-scrollbar, .projects-column > div::-webkit-scrollbar, .activity-column > div::-webkit-scrollbar {
+  background-color: transparent;
+  padding: 8px;
+  width: 8px;
 }
 
-.flex-container-row {
-  display: flex;
-  flex-direction: row;
-}
-
-.flex-element {
-  flex: 1;
+.people-column > div::-webkit-scrollbar-thumb, .projects-column > div::-webkit-scrollbar-thumb, .activity-column > div::-webkit-scrollbar-thumb {
+  background-color: lightblue;
+  border-radius: 8px;
 }
 
 .team-dialog {
   display: block;
-}
-
-.slim {
-  padding: 0px;
-  margin: 0px;
-}
-
-.slim-top {
-  padding-top: 0px;
-  margin-top: 0px;
-}
-
-.slim-bottom {
-  padding-bottom: 0px;
-  margin-bottom: 0px;
-}
-
-.slim-left {
-  padding-left: 0px;
-  margin-left: 0px;
-}
-
-.slim-right {
-  padding-right: 0px;
-  margin-right: 0px;
-}
-
-.slim-margin {
-  margin: 0px;
-}
-
-.slim-padding {
-  padding: 0px;
-}
-
-.filament {
-  padding: 2px;
-  margin: 2px;
-}
-
-.fat {
-  padding: 6px;
-  margin: 6px;
 }
 
 .moat {
@@ -98,10 +50,6 @@
 
 .table-success {
   background-color: #dff0d8;
-}
-
-.panel {
-  margin-bottom: 4px;
 }
 
 .chat-window {
@@ -125,15 +73,11 @@
 }
 
 .hovered {
-  background-color: #ccc;
+  background-color: #DDD;
 }
 
 .justity-content-around {
   justify-content: space-around;
-}
-
-div {
-  /*    border: solid 1px; */
 }
 
 .modal-dialog {
@@ -163,9 +107,15 @@ div {
   margin-top: 5px;
 }
 
+.container-fluid {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
 .main-container {
   min-height: auto !important;
-  padding: 6px 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
   margin-top: 80px;
   height: calc(100vh - 80px);
 }
@@ -195,6 +145,10 @@ div {
   line-height: 30px;
   background-color: transparent;
   color: #333333;
+}
+
+.activity-column .topbar {
+  position: static;
 }
 
 .background-color {
@@ -328,14 +282,14 @@ div {
 }
 
 .worker.card {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   display: flex;
   flex-flow: row nowrap;
   border-radius: 6px;
 }
 
 .worker .card-header {
-  padding: 3px 6px;
+  padding: calc($main-size/2) 8px;
   border-bottom: none;
 }
 
@@ -348,7 +302,7 @@ div {
 }
 
 .worker .card-body {
-  padding: 3px 6px;
+  padding: calc($main-size/2) 8px;
 }
 
 .worker .worker-avatar {

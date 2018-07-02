@@ -17,7 +17,6 @@ import './assets/styles/main.min.css';
 
 import '../node_modules/toastr/build/toastr.min.css';
 import '../node_modules/animate.css';
-// import '';
 
 import App from './App';
 

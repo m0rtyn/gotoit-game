@@ -166,10 +166,11 @@ class Project extends Component {
         //console.log(project_platforms[project.platform].icon)
 
         return (
-            <div onMouseOver={() => {data.helpers.modifyHoveredObjects([project], team)}} 
-                onMouseOut={() => {data.helpers.modifyHoveredObjects()}} 
-                className={`card border fat ${data.hovered_projects_id.includes(project.id) ? 'hovered' : ''}`} 
-                id={project.id}
+            <div 
+            onMouseOver={() => {data.helpers.modifyHoveredObjects([project], team)}} 
+            onMouseOut={() => {data.helpers.modifyHoveredObjects()}} 
+            className={`card border fat ${data.hovered_projects_id.includes(project.id) ? 'hovered' : ''}`} 
+            id={project.id}
             >
                 <div>
                     <div className="flex-container-column">
