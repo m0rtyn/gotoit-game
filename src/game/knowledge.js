@@ -152,6 +152,13 @@ export const charts_parameters = {
     environment_costs: {label: 'Environment costs', color: '#8B0000'},
 };
 
+export const archive_chats_parameters = {
+    deadlines: {label: 'Deadlines summary', color: '#8B0000'},
+    resolving_time: {label: 'Resolving time', color: '#5cb85c'},
+    reward: {label: 'Reward', color: '#f7931a'},
+    resolving_time_percents: {label: 'Resolving time percents', color: '#3e95cd'}
+};
+
 export const btc_chart_parameters = { label: 'Bitcoin', color: '#f7931a' };
 
 export const colors = {

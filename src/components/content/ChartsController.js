@@ -1,6 +1,6 @@
 import React from 'react'
 import Chart from '../Chart'
-import {charts_parameters, btc_chart_parameters} from '../../game/knowledge'
+import {charts_parameters, btc_chart_parameters, archive_chats_parameters} from '../../game/knowledge'
 import _ from 'lodash'
 
 let ChartsController = (props) => {
@@ -14,14 +14,18 @@ let ChartsController = (props) => {
 
     switch(type) {
         case 'BTC':
+
           const btc_statistic = props.data.btc_statistic;
+
           labels = Object.keys(props.data.btc_statistic.values);
+
           datasets.push({
               data: btc_statistic.values,
               label: btc_chart_parameters.label,
               borderColor: btc_chart_parameters.color,
               fill: false
           });
+
           options = {
               legend: {
                   display: false
@@ -29,13 +33,48 @@ let ChartsController = (props) => {
               tooltips: {
                   enabled: false
               }
-          }
+          };
+
           break;
 
-        case 'Archive': /*
-            projects archive logic
+      case 'Archive':
+
+            const archive = {
+                deadlines: [],
+                resolving_time: [],
+                reward: [],
+                resolving_time_percents: []
+            };
+
+            // reverse() becouse in data.project_archive_reports chunks is added by unshift() method
+            // becouse the last project may be on top position in archive
+            // but in chart last project may be on last poition
+            let archive_reports = props.data.projects_archive_reports.reverse();
+
+            let projects = archive_reports.filter((project) => {
+                return project.stage === 'finish'
+            });
+
+            labels = projects.map((project) => {return project.name});
+
+            projects.forEach((project) => {
+              archive.deadlines.push(project.deadline_max);
+              archive.resolving_time.push(project.deadline_max - project.deadline);
+              archive.reward.push(project.reward);
+              archive.resolving_time_percents.push(Math.round((archive.resolving_time[archive.resolving_time.length - 1] / archive.deadlines[archive.deadlines.length - 1]) * 100))
+            });
+
+            _.mapValues(archive, (value, key) => {
+                datasets.push({
+                    data: value,
+                    label: archive_chats_parameters[key].label,
+                    borderColor: archive_chats_parameters[key].color,
+                    fill: false
+                })
+            });
+
             break;
-        */
+
 
         case 'Market': /*
             some market logic
@@ -43,6 +82,7 @@ let ChartsController = (props) => {
         */
 
         default:
+
           options = {
               elements: {
                   point: {
@@ -53,8 +93,10 @@ let ChartsController = (props) => {
                   display: true,
                   text: props.data.text
               }
-          }
+          };
+
           labels = Object.keys(props.data.statistics.money_spent.values);
+
           _.mapValues(props.data.statistics, (stats, key) => {
             datasets.push({
               data: stats.values,
@@ -70,7 +112,7 @@ let ChartsController = (props) => {
       datasets: datasets,
       text: text,
       options: options
-  }
+  };
 
   return <Chart data={data}/>
 
