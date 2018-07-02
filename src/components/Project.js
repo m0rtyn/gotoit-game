@@ -163,6 +163,212 @@ class Project extends Component {
 
         const release_button = project.doneQuantity() > 0 && project.type === 'own' && project.stage !== 'fixing' ? <button className="btn btn-success" onClick={() => {this.props.data.helpers.fixProject(project.id)}}>Release!</button> : '';
 
+        const modal = <div>
+            <h4 className="flex-container-row">
+                <label className="flex-element"> <ProjectName project={project} /> </label>
+                <label className="flex-element">
+                    Reward: {project.reward}$
+                    {(project.penalty > 0 ? <label className="flex-element"> Penalty: {project.penalty}$ </label> : ' ')}
+                </label>
+                <div className="flex-element">
+                    <label>
+                        {start_pause_button}
+                        {reject_button}
+                        {release_button}
+                    </label>
+                </div>
+            </h4>
+            <div className="row">
+                <div className="col-md-8">
+                    <div>
+                        {project.deadline > 0 && project.deadline !== Number.POSITIVE_INFINITY ? <div key="deadline" className="row">
+                            <div className="col-md-2">Deadline</div>
+                            <div className="col-md-10 progress">
+                                <div className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'bg-danger' : 'bg-warning'))} role="progressbar"
+                                     style={{width: (100-(project.deadline / project.deadline_max * 100))+'%'}}>
+                                    <label>{project.deadline_max - project.deadline} hours</label>
+                                </div>
+                                <div className="progress-bar bg-success" role="progressbar"
+                                     style={{width: (project.deadline / project.deadline_max * 100)+'%'}}>
+                                    <label>{project.deadline} hours</label>
+                                </div>
+                            </div>
+                        </div> : ''}
+                        <div className="flex-container-row">
+                            <div className="flex-element"> Iteration: {project.iteration} </div>
+                            <div className="flex-element"> Tasks: {project.tasksQuantity()}/{project.planedTasksQuantity()} </div>
+                            <div className="flex-element"> Bugs: <label className="text-danger">{project.bugsQuantity()}</label></div>
+                            <div className="flex-element"> Complexity: {project.complexity} </div>
+                        </div>
+
+                        <div>
+                            {project.type === 'draft' && project.stage === 'ready'
+                                ? skills_names.map((skill) => {
+                                    return <div key={skill} className="row">
+                                        <div className="col-md-2">{skill}</div>
+                                        <div className="col-md-10 ">
+                                            <ReactBootstrapSlider
+                                                scale='logarithmic'
+                                                value={project.estimate[skill]}
+                                                change={(e) => { project.estimate[skill] = e.target.value; project.original_estimate[skill] = e.target.value; }}
+                                                step={1}
+                                                max={100000}
+                                                min={0}/>
+                                        </div>
+                                    </div>;
+                                }) : ''}
+                        </div>
+                        <div>
+                            {project.type === 'draft' && project.stage === 'ready'
+                                ? ''
+                                : skills_names.map((skill) => {
+                                    //     console.log(project);
+                                    let tasks = project.needs(skill);
+                                    if (tasks === Number.POSITIVE_INFINITY) { tasks = 0; }
+                                    let bugs = project.bugs[skill];
+                                    let done = project.done[skill];
+
+                                    let max_skill = _.maxBy(_.keys(project.estimate), function (skill) {
+                                        return Math.max((project.needs(skill) !== Number.POSITIVE_INFINITY) ? project.needs(skill) : 0, project.estimate[skill], project.done[skill]) + project.bugs[skill];
+                                    });
+
+                                    let max = Math.max(
+                                        (project.needs(max_skill) !== Number.POSITIVE_INFINITY) ? project.needs(max_skill) : 0,
+                                        (project.estimate[max_skill] !== Number.POSITIVE_INFINITY) ? project.estimate[max_skill] : 0,
+                                        project.done[max_skill]) + project.bugs[max_skill];//, project.needs(max_skill)) + project.bugs[max_skill];
+
+                                    if (max === 0) max = 1;
+
+                                    let tasks_percent = tasks / max * 100;
+                                    let bugs_percent = bugs / max * 100;
+                                    let done_percent = done / max * 100;
+
+                                    //   console.log(tasks_percent, bugs_percent, done_percent);
+
+                                    return <div key={skill} className="row">
+                                        <div className="col-md-2">{skill}</div>
+                                        <div className="col-md-10 progress">
+                                            <div className="progress-bar bg-warning"
+                                                 role="progressbar"
+                                                 style={{width: tasks_percent + '%'}}>
+                                                {tasks ? <label>{tasks} tasks</label> : ''}
+                                            </div>
+                                            <div className="progress-bar bg-danger"
+                                                 role="progressbar"
+                                                 style={{width: bugs_percent + '%'}}>
+                                                {bugs ? <label>{bugs} bugs</label> : ''}
+                                            </div>
+                                            <div className="progress-bar bg-success"
+                                                 role="progressbar"
+                                                 style={{width: done_percent + '%'}}>
+                                                {(done) ? <label>{done} done</label> : ''}
+                                            </div>
+                                        </div>
+                                    </div>;
+                                })
+                            }
+                        </div>
+
+                        {data.helpers.getTechnology(project.id, 'refactoring') ? <div key="refactoring" className="row">
+                            <div className="col-md-2">Refactoring</div>
+                            <div className="col-md-10 progress">
+                                <div className="progress-bar bg-warning" role="progressbar"
+                                     style={{width: (project.complexity / project.complexity_max * 100)+'%'}}>
+                                    <label>{project.complexity} complexity</label>
+                                </div>
+                                <div className="progress-bar bg-success" role="progressbar"
+                                     style={{width: (100-(project.complexity / project.complexity_max * 100))+'%'}}>
+                                    {(project.complexity_max - project.complexity > 0) ?
+                                        <label>{project.complexity_max - project.complexity} refactored</label> : ''}
+                                </div>
+                            </div>
+                        </div> : ''}
+
+                        {project.tests > 0 ? <div key="tests" className="row">
+                            <div className="col-md-2">Tests</div>
+                            <div className="col-md-10 progress">
+                                <div className="progress-bar bg-warning" role="progressbar"
+                                     style={{width: (100-(project.tests / project.planedTasksQuantity() * 100))+'%'}}>
+                                    <label>{project.planedTasksQuantity()-project.tests} tasks</label>
+                                </div>
+                                <div className="progress-bar bg-success" role="progressbar"
+                                     style={{width: (project.tests / project.planedTasksQuantity() * 100)+'%'}}>
+                                    {(project.tests) ?<label>{project.tests} done</label> : ''}
+                                </div>
+                            </div>
+                        </div> : ''}
+
+                    </div>
+                    <div className="card border">
+                        <div>
+                            {this.props.data.workers.map((worker) => {
+                                const stats_data = _.mapValues(worker.stats, (val, skill) => {
+                                    return {name: skill,
+                                        val: <div key={worker.id + project.id} className="">
+                                            <label style={{width: '100%'}}>
+                                                <input
+                                                    type="checkbox"
+                                                    id={worker.id || ''}
+                                                    checked={data.helpers.getRelation(worker.id, project.id, skill)}
+                                                    onChange={(event) => {
+                                                        data.helpers.modifyRelation(event.target.id, project.id, event.target.checked, skill);
+                                                    }}/>
+                                                {worker.getStatsData(skill)}
+                                            </label>
+                                        </div>};
+                                });
+                                return <div key={worker.id + project.id}>
+                                    <div>{worker.name}</div>
+                                    <StatsBar stats={stats_data} data={this.props.data} />
+                                </div>
+                            })}
+                        </div>
+                    </div>
+                </div>
+                <div className="col-md-4">
+                    <div className="card border slim-left">
+                        <div className="col slim-left">
+                            {data.projects_known_technologies.map(
+                                (technology, i) => <div key={technology} className="row-md-1">
+                                    <div className="form-check-checkbox slim-margin">
+                                        <label>
+                                            <h5 className="text-center slim">
+                                                <input
+                                                    type="checkbox"
+                                                    id={technology}
+                                                    checked={data.helpers.getTechnology(project.id, technology)}
+                                                    onChange={this.changeTechnology}/>
+                                                {technologies[technology].name}
+                                            </h5>
+                                            <p className="small slim">{technologies[technology].description}</p>
+                                        </label>
+                                    </div>
+                                </div>
+                            )}
+                            {(current_tick > (24*30*3)) ? Object.keys(technologies).map(
+                                (technology, i) => <div key={technology} className="row-md-1">
+                                    <div className="form-check-checkbox slim-margin small">
+                                        {!data.projects_known_technologies.includes(technology)
+                                            ? <label>
+                                                <h5 className="text-center slim">
+                                                    <button
+                                                        className={technologies[technology].price <= data.money ? "btn btn-success btn-sm" : "btn btn-secondary btn-sm disabled"}
+                                                        onClick={() => { if (technologies[technology].price <= data.money) data.helpers.unlockTechnology(technology); }}
+                                                    >
+                                                        Unlock {technologies[technology].name} {technologies[technology].price}$
+                                                    </button>
+
+                                                </h5>
+                                                <p className="small slim">{technologies[technology].description}</p>
+                                            </label> : ''}
+                                    </div>
+                                </div>
+                            ) : ''}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         //console.log(project_platforms[project.platform].icon)
 
         return (
@@ -188,214 +394,10 @@ class Project extends Component {
                                 <label className="flex-element"> <ProjectName project={project} /> </label>
                                 <label className="flex-element" style={{marginRight: '5px'}}> Reward: {project.reward}$ </label>
                                 {(project.penalty > 0 ? <label className="flex-element"> Penalty: {project.penalty}$ </label> : ' ')}
-                                <Portal ref="manage" closeOnEsc openByClickOn={manage_button}>
-                                    <TeamDialog>
-                                        <h4 className="flex-container-row">
-                                            <label className="flex-element"> <ProjectName project={project} /> </label>
-                                            <label className="flex-element">
-                                                Reward: {project.reward}$
-                                                {(project.penalty > 0 ? <label className="flex-element"> Penalty: {project.penalty}$ </label> : ' ')}
-                                            </label>
-                                            <div className="flex-element">
-                                                <label>
-                                                    {start_pause_button}
-                                                    {reject_button}
-                                                    {release_button}
-                                                </label>
-                                            </div>
-                                        </h4>
-                                        <div className="row">
-                                            <div className="col-md-8">
-                                                <div>
-                                                    {project.deadline > 0 && project.deadline !== Number.POSITIVE_INFINITY ? <div key="deadline" className="row">
-                                                        <div className="col-md-2">Deadline</div>
-                                                        <div className="col-md-10 progress">
-                                                            <div className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'bg-danger' : 'bg-warning'))} role="progressbar"
-                                                                 style={{width: (100-(project.deadline / project.deadline_max * 100))+'%'}}>
-                                                                <label>{project.deadline_max - project.deadline} hours</label>
-                                                            </div>
-                                                            <div className="progress-bar bg-success" role="progressbar"
-                                                                 style={{width: (project.deadline / project.deadline_max * 100)+'%'}}>
-                                                                <label>{project.deadline} hours</label>
-                                                            </div>
-                                                        </div>
-                                                    </div> : ''}
-                                                    <div className="flex-container-row">
-                                                        <div className="flex-element"> Iteration: {project.iteration} </div>
-                                                        <div className="flex-element"> Tasks: {project.tasksQuantity()}/{project.planedTasksQuantity()} </div>
-                                                        <div className="flex-element"> Bugs: <label className="text-danger">{project.bugsQuantity()}</label></div>
-                                                        <div className="flex-element"> Complexity: {project.complexity} </div>
-                                                    </div>
+                                <button className='btn btn-success'
+                                        onClick={() => data.helpers.createPopup('Manage project', modal )}
+                                >MANAGE</button>
 
-                                                    <div>
-                                                        {project.type === 'draft' && project.stage === 'ready'
-                                                            ? skills_names.map((skill) => {
-                                                                return <div key={skill} className="row">
-                                                                    <div className="col-md-2">{skill}</div>
-                                                                    <div className="col-md-10 ">
-                                                                        <ReactBootstrapSlider
-                                                                            scale='logarithmic'
-                                                                            value={project.estimate[skill]}
-                                                                            change={(e) => { project.estimate[skill] = e.target.value; project.original_estimate[skill] = e.target.value; }}
-                                                                            step={1}
-                                                                            max={100000}
-                                                                            min={0}/>
-                                                                    </div>
-                                                                </div>;
-                                                            }) : ''}
-                                                    </div>
-                                                    <div>
-                                                        {project.type === 'draft' && project.stage === 'ready'
-                                                            ? ''
-                                                            : skills_names.map((skill) => {
-                                                                //     console.log(project);
-                                                                let tasks = project.needs(skill);
-                                                                if (tasks === Number.POSITIVE_INFINITY) { tasks = 0; }
-                                                                let bugs = project.bugs[skill];
-                                                                let done = project.done[skill];
-
-                                                                let max_skill = _.maxBy(_.keys(project.estimate), function (skill) {
-                                                                    return Math.max((project.needs(skill) !== Number.POSITIVE_INFINITY) ? project.needs(skill) : 0, project.estimate[skill], project.done[skill]) + project.bugs[skill];
-                                                                });
-
-                                                                let max = Math.max(
-                                                                    (project.needs(max_skill) !== Number.POSITIVE_INFINITY) ? project.needs(max_skill) : 0,
-                                                                    (project.estimate[max_skill] !== Number.POSITIVE_INFINITY) ? project.estimate[max_skill] : 0,
-                                                                    project.done[max_skill]) + project.bugs[max_skill];//, project.needs(max_skill)) + project.bugs[max_skill];
-
-                                                                if (max === 0) max = 1;
-
-                                                                let tasks_percent = tasks / max * 100;
-                                                                let bugs_percent = bugs / max * 100;
-                                                                let done_percent = done / max * 100;
-
-                                                                //   console.log(tasks_percent, bugs_percent, done_percent);
-
-                                                                return <div key={skill} className="row">
-                                                                    <div className="col-md-2">{skill}</div>
-                                                                    <div className="col-md-10 progress">
-                                                                        <div className="progress-bar bg-warning" 
-                                                                            role="progressbar" 
-                                                                            style={{width: tasks_percent + '%'}}> 
-                                                                            {tasks ? <label>{tasks} tasks</label> : ''}
-                                                                        </div>
-                                                                        <div className="progress-bar bg-danger" 
-                                                                            role="progressbar" 
-                                                                            style={{width: bugs_percent + '%'}}>
-                                                                                {bugs ? <label>{bugs} bugs</label> : ''}
-                                                                        </div>
-                                                                        <div className="progress-bar bg-success" 
-                                                                            role="progressbar" 
-                                                                            style={{width: done_percent + '%'}}>
-                                                                                {(done) ? <label>{done} done</label> : ''}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>;
-                                                            })
-                                                        }
-                                                    </div>
-
-                                                    {data.helpers.getTechnology(project.id, 'refactoring') ? <div key="refactoring" className="row">
-                                                        <div className="col-md-2">Refactoring</div>
-                                                        <div className="col-md-10 progress">
-                                                            <div className="progress-bar bg-warning" role="progressbar"
-                                                                 style={{width: (project.complexity / project.complexity_max * 100)+'%'}}>
-                                                                <label>{project.complexity} complexity</label>
-                                                            </div>
-                                                            <div className="progress-bar bg-success" role="progressbar"
-                                                                 style={{width: (100-(project.complexity / project.complexity_max * 100))+'%'}}>
-                                                                {(project.complexity_max - project.complexity > 0) ?
-                                                                    <label>{project.complexity_max - project.complexity} refactored</label> : ''}
-                                                            </div>
-                                                        </div>
-                                                    </div> : ''}
-
-                                                    {project.tests > 0 ? <div key="tests" className="row">
-                                                        <div className="col-md-2">Tests</div>
-                                                        <div className="col-md-10 progress">
-                                                            <div className="progress-bar bg-warning" role="progressbar"
-                                                                 style={{width: (100-(project.tests / project.planedTasksQuantity() * 100))+'%'}}>
-                                                                <label>{project.planedTasksQuantity()-project.tests} tasks</label>
-                                                            </div>
-                                                            <div className="progress-bar bg-success" role="progressbar"
-                                                                 style={{width: (project.tests / project.planedTasksQuantity() * 100)+'%'}}>
-                                                                {(project.tests) ?<label>{project.tests} done</label> : ''}
-                                                            </div>
-                                                        </div>
-                                                    </div> : ''}
-
-                                                </div>
-                                                <div className="card border">
-                                                    <div>
-                                                        {this.props.data.workers.map((worker) => {
-                                                            const stats_data = _.mapValues(worker.stats, (val, skill) => {
-                                                                return {name: skill,
-                                                                    val: <div key={worker.id + project.id} className="">
-                                                                        <label style={{width: '100%'}}>
-                                                                            <input
-                                                                                type="checkbox"
-                                                                                id={worker.id || ''}
-                                                                                checked={data.helpers.getRelation(worker.id, project.id, skill)}
-                                                                                onChange={(event) => {
-                                                                                    data.helpers.modifyRelation(event.target.id, project.id, event.target.checked, skill);
-                                                                                }}/>
-                                                                            {worker.getStatsData(skill)}
-                                                                        </label>
-                                                                    </div>};
-                                                            });
-                                                            return <div key={worker.id + project.id}>
-                                                                <div>{worker.name}</div>
-                                                                <StatsBar stats={stats_data} data={this.props.data} />
-                                                            </div>
-                                                        })}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-4">
-                                                <div className="card border slim-left">
-                                                    <div className="col slim-left">
-                                                        {data.projects_known_technologies.map(
-                                                            (technology, i) => <div key={technology} className="row-md-1">
-                                                                <div className="form-check-checkbox slim-margin">
-                                                                    <label>
-                                                                        <h5 className="text-center slim">
-                                                                            <input
-                                                                                type="checkbox"
-                                                                                id={technology}
-                                                                                checked={data.helpers.getTechnology(project.id, technology)}
-                                                                                onChange={this.changeTechnology}/>
-                                                                            {technologies[technology].name}
-                                                                        </h5>
-                                                                        <p className="small slim">{technologies[technology].description}</p>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        )}
-                                                        {(current_tick > (24*30*3)) ? Object.keys(technologies).map(
-                                                            (technology, i) => <div key={technology} className="row-md-1">
-                                                                <div className="form-check-checkbox slim-margin small">
-                                                                    {!data.projects_known_technologies.includes(technology)
-                                                                        ? <label>
-                                                                            <h5 className="text-center slim">
-                                                                                <button
-                                                                                    className={technologies[technology].price <= data.money ? "btn btn-success btn-sm" : "btn btn-secondary btn-sm disabled"}
-                                                                                    onClick={() => { if (technologies[technology].price <= data.money) data.helpers.unlockTechnology(technology); }}
-                                                                                >
-                                                                                    Unlock {technologies[technology].name} {technologies[technology].price}$
-                                                                                </button>
-
-                                                                            </h5>
-                                                                            <p className="small slim">{technologies[technology].description}</p>
-                                                                        </label> : ''}
-                                                                </div>
-                                                            </div>
-                                                        ) : ''}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </TeamDialog>
-                                </Portal>
                             </div>
                             </div>
                         </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import './popup.css'
+import {ScrollBox, ScrollAxes, FastTrack} from 'react-scroll-box';
 
 export default class Popup extends React.Component {
 
@@ -38,19 +39,27 @@ export default class Popup extends React.Component {
   composePopups(popupsData) {
     return popupsData.map((popupData, index) => {
       return (
-        <div className={'popup'} key={index} style={{'zIndex': index}}>
-          <div className={'popup-header'}>
-            <div>{popupData.name}</div>
-            <div className={'popup-close-button'} onClick={this.closeUpperPopup}>
-              <button className={'btn'}>
-                close
-              </button>
+            <div className={'popup'} key={index} style={{'zIndex': index}}>
+                { popupData.name === 'none' ?
+                  ''
+                    : <div className={'popup-header'}>
+                        <div>{popupData.name}</div>
+                        <div className={'popup-close-button'} onClick={this.closeUpperPopup}>
+                            <button className={'btn btn-danger'}>
+                                close
+                            </button>
+                        </div>
+                    </div>
+                }
+
+              <div className='popup-content'>
+                    {popupData.content}
+              </div>
+
+
             </div>
-          </div>
-          {popupData.content}
-        </div>
       )
-    });
+    })[0];
   }
 
 
