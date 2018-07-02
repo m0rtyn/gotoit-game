@@ -15,13 +15,13 @@ class ButtonToolbar extends Component {
                         <button className="btn btn-primary btn-sm" onClick={() => { data.helpers.changeContent('ProjectsFind'); }}>Freelance</button>
                     </span>
                     <span className="flex-element">
-                        {data.projects.length > 0 ? <button className="btn btn-info btn-sm" onClick={() => { data.helpers.changeContent('StartMeeting'); }}>Start Meeting</button> : ''}
+                        {data.projects.length > 0 ? <button className="btn btn-info btn-sm" onClick={() => { data.helpers.changeContent('StartMeeting'); }}>Meeting</button> : ''}
                     </span>
                     <span className="flex-element">
                         {data.projects_archive_reports.length > 0 ? <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('Archive'); }}>Archive</button> : ''}
                     </span>
                     <span className="flex-element">
-                        <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('MarketTop'); }}>Market Analysis</button>
+                        <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('MarketTop'); }}>Market</button>
                     </span>
                     <span className="flex-element">
                         <button className="btn btn-warning btn-sm" onClick={() => { data.helpers.changeContent('Advertising'); }}>Advertising</button>
@@ -32,6 +32,9 @@ class ButtonToolbar extends Component {
                     <span className="flex-element">
                         <button className="btn btn-warning btn-sm" onClick={() => { data.helpers.changeContent('Exchange'); }}>Exchange</button>
                     </span>
+                    {/*<span className="flex-element">
+                        <button className="btn btn-warning btn-sm" onClick={() => { data.helpers.changeContent('Mail'); }}>Mail</button>
+                    </span>*/}
                 </div>
             </div>
         );

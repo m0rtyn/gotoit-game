@@ -6,6 +6,8 @@ import StatsProgressBar from './StatsProgressBar';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
 
+
+
 //import {addAction} from '../components/ToastNest';
 
 import {skills_names, workers_bonus_items, roles, education, colors} from '../game/knowledge';
@@ -170,13 +172,14 @@ class Worker extends Component {
 
 
                                 <div className="card border text-center">
-                                    <StatsBar stats={stats_data} data={this.props.data} />
 
                                     {/*    bonus items */}
                                     <div>
                                         <div className="flex-container-row">
                                             {skills_names.map((skill) => {
+
                                                 return <div className="flex-element flex-container-column" key={skill}>
+                                                    <StatsProgressBar type={skill} stats={stats_progressbar_data} worker={worker} data={data} />
                                                     {Object.keys(workers_bonus_items[skill]).map((item_key) => {
                                                         let item = workers_bonus_items[skill][item_key];
                                                         return worker.items[skill][item_key] === true

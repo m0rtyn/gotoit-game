@@ -34,6 +34,7 @@ class Timeline extends Component {
                                         } else return false
                                     });
 
+
                                     return (
                                         <div 
                                         className='step'
