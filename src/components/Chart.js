@@ -8,18 +8,7 @@ const Chart = (props) => {
         datasets: props.data.datasets
     };
 
-    let options = {
-        elements: {
-            point: {
-            radius: 0
-            }
-        },
-        title: {
-            display: true,
-            text: props.data.text
-            }
-        };
-
+    let options = props.options;
 
     return <div>
         <Line data={data} options={options}/>

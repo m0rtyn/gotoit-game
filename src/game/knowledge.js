@@ -152,6 +152,15 @@ export const charts_parameters = {
     environment_costs: {label: 'Environment costs', color: '#8B0000'},
 };
 
+export const archive_chats_parameters = {
+    deadlines: {label: 'Deadlines summary', color: '#8B0000'},
+    resolving_time: {label: 'Resolving time', color: '#5cb85c'},
+    reward: {label: 'Reward', color: '#f7931a'},
+    resolving_time_percents: {label: 'Resolving time percents', color: '#3e95cd'}
+};
+
+export const btc_chart_parameters = { label: 'Bitcoin', color: '#f7931a' };
+
 export const colors = {
     creativity: {
         name: 'creativity',
@@ -268,17 +277,17 @@ export const public_relations = {
             });
         },
         onTickByDelta: (state, delta, n) => {
-            state.reputation += Math.cbrt(delta)/delta * (2/n); // + 12.291089555089949
-            state.rumor += Math.cbrt(delta)/delta * (2/n); // + 12.291089555089949
+            state.reputation += Math.cbrt(delta)/delta * 2 * (2/n); // + 12.3
+            state.rumor += Math.cbrt(delta)/delta * (2/n); // + 24.59
 
         }
     },
     search_specialist: {
-        name: 'Search market for a specialist ($250)',
+        name: 'Search market for a specialist ($1000)',
         long: 24 * 7,
         tooltip: 'Duration: 1 week. Spend some money preaching and advertising your company at the most popular hiring web sites there are in the Internet. Rather later than sooner but you`ll definitely find someone willing to take the offer.',
         onClick: (state) => {
-            state.money -= 250;
+            state.money -= 1000;
             state.on_tick_effects.push({
                 type: 'search_specialist',
                 start_tick: state.date.tick
@@ -286,18 +295,18 @@ export const public_relations = {
         },
         onTickByDelta: (state, delta, n) => {
             let customDelta = delta * 0.03;
-            state.rumor += (1+Math.sin(customDelta-Math.PI/2)) / 10 * (2/n); //+ 39.84379662621998
+            state.rumor += (1+Math.sin(customDelta-Math.PI/2)) / 2 * (2/n); //+ 199.2
             if (delta < 24){
-                state.reputation += (Math.cbrt(delta)/delta)* (2/n); //+ 12.291089555089949
+                state.reputation += (Math.cbrt(delta)/delta)* 2 *(2/n); //+ 24.5
             }
         }
     },
     search_job: {
-        name: 'Search market for a specialist ($100)',
+        name: 'Search market for a job ($500)',
         long: 24 * 7,
         tooltip: 'Duration: 1 week. Spend some money preaching and advertising your company at the most popular hiring web sites there are in the Internet. Rather later than sooner but you`ll definitely find someone willing to take the offer.',
         onClick: (state) => {
-            state.money -= 100;
+            state.money -= 500;
             state.on_tick_effects.push({
                 type: 'search_job',
                 start_tick: state.date.tick
@@ -305,27 +314,27 @@ export const public_relations = {
         },
         onTickByDelta: (state, delta, n) => {
             let customDelta = delta * 0.03;
-            state.reputation += (1+Math.sin(customDelta-Math.PI/2)) / 10 * (2/n);//+ 39.84379662621998
+            state.reputation += (1+Math.sin(customDelta-Math.PI/2)) / 2 * (2/n); //+ 199.2
             if (delta < 24){
-                state.rumor += (Math.cbrt(delta)/delta)*  (2/n);  //+ 12.291089555089949
+                state.rumor += (Math.cbrt(delta)/delta)* 2 * (2/n);  //+ 24.5
             }
         }
     },
     big_event: {
-        name: 'Attend big IT event ($1000)',
+        name: 'Attend big IT event ($2500)',
         long: 24 * 7 * 2,
         tooltip: 'Duration: 2 weeks. Lots of money and time spend. Lots of media coverage afterwards. ',
         onClick: (state) => {
-            state.money -= 1000;
+            state.money -= 2500;
             state.on_tick_effects.push({
                 type: 'big_event',
                 start_tick: state.date.tick
             });
         },
-        onTickByDelta: (state, delta) => {
+        onTickByDelta: (state, delta, n) => {
             let customDelta = delta * 0.03;
-            state.reputation += (1+Math.sin(customDelta-Math.PI/2)) / 5; // + 71.08263950306524;
-            state.rumor += (1+Math.sin(customDelta-Math.PI/2)) / 5; // + 71.08263950306524;
+            state.reputation += (1+Math.sin(customDelta-Math.PI/2)) * 2; 
+            state.rumor += (1+Math.sin(customDelta-Math.PI/2)) / n;
         }
     },
 

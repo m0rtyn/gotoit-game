@@ -91,7 +91,10 @@ var default_state =
             return {buffer: 0, values: [0]}
         }),
       
-        on_tick_effects: []
+        on_tick_effects: [],
+        btc_statistic: { buffer: 0, values: [] },
+        max_stat: 1
+
     },
 
     is_animation_fresh: false

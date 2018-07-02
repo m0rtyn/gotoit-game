@@ -77,7 +77,18 @@ export const rules = {
                _.mapValues(data.statistics, (stats, key) => {
                     stats.values.push(stats.buffer)
                 })
+
+                data.btc_statistic.values.push(data.current_btc_price);
+
+
+
             }
+
+            data.workers.forEach((worker) => {
+                if (worker.stats.design > data.max_stat) data.max_stat = worker.stats.design;
+                if (worker.stats.program > data.max_stat) data.max_stat = worker.stats.program;
+                if (worker.stats.manage > data.max_stat) data.max_stat = worker.stats.manage;
+            });
 
             if (time.hour === 14 && data.office_things.lunch) { // lunch time!
                 if ((data.workers.length * 25) <= data.money) {
@@ -255,6 +266,9 @@ export const rules = {
     work: {
         onTick: function(state) {
             const data = state.data;
+
+            //set maximum current skill
+
 
             _.shuffle(data.workers).forEach((worker) => {
                 worker.tick();
