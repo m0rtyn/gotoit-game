@@ -62,13 +62,18 @@ yarn.lock
 
 !src/
 src/*
+
 !src/assets/
 src/assets/*
 !src/assets/js/
 !src/assets/js/*.min.js
 !src/assets/fonts/
+
 !src/assets/styles/
-!src/assets/styles/*.min.js
+src/assets/styles/*
+!src/assets/styles/main.min.css
+!src/assets/styles/main.scss
+
 !src/assets/styles/scss/
 !src/assets/styles/scss/**
 
