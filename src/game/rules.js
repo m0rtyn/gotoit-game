@@ -10,6 +10,7 @@ import {
 import {addAction} from '../components/ToastNest';
 import Lorer from '../services/Lorer';
 import WorkerModel from '../models/WorkerModel';
+import { public_relations } from "./knowledge";
 
 
 export const rules = {
@@ -21,7 +22,6 @@ export const rules = {
             const date = data.date;
             let time = data.date;
             let current_tick = data.date.tick;
-            console.log(time)
 
             var real_date = new Date();
             var game_date = new Date();
@@ -72,7 +72,23 @@ export const rules = {
                         }
                     }
                 });
+
+
+               _.mapValues(data.statistics, (stats, key) => {
+                    stats.values.push(stats.buffer)
+                })
+
+                data.btc_statistic.values.push(data.current_btc_price);
+
+
+
             }
+
+            data.workers.forEach((worker) => {
+                if (worker.stats.design > data.max_stat) data.max_stat = worker.stats.design;
+                if (worker.stats.program > data.max_stat) data.max_stat = worker.stats.program;
+                if (worker.stats.manage > data.max_stat) data.max_stat = worker.stats.manage;
+            });
 
             if (time.hour === 14 && data.office_things.lunch) { // lunch time!
                 if ((data.workers.length * 25) <= data.money) {
@@ -92,6 +108,7 @@ export const rules = {
                 // first day
                 if (data.office.size > 1) {
                     this.chargeMoney(data.office.price);
+                    data.statistics.office_costs.buffer += data.office.price;
                 }
 
                 // allow hackathon this month
@@ -119,6 +136,23 @@ export const rules = {
 
             data.date = time;
             state.data = data;
+
+
+            let click_count = {};
+
+            data.on_tick_effects = _.filter(data.on_tick_effects, (effect) => {
+                let same = _.filter(data.on_tick_effects, (effect2) => {
+                    return effect.type === effect2.type
+                });
+                effect.click_count = same.length;
+                return public_relations[effect.type].long > data.date.tick - effect.start_tick;
+            });
+
+            console.log(data.on_tick_effects)
+            _.each(data.on_tick_effects, (effect) => {
+                public_relations[effect.type].onTickByDelta(data, data.date.tick - effect.start_tick, effect.click_count);
+
+            } );
 
             return state;
         }
@@ -232,6 +266,9 @@ export const rules = {
     work: {
         onTick: function(state) {
             const data = state.data;
+
+            //set maximum current skill
+
 
             _.shuffle(data.workers).forEach((worker) => {
                 worker.tick();

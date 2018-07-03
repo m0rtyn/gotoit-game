@@ -3,12 +3,24 @@ import React, { Component } from 'react';
 import ProjectOfferBlock from '../ProjectOfferBlock';
 
 import SalesAgency from '../SalesAgency';
+import Bar from '../Bar';
+import {colors} from "../../game/knowledge";
 
 class ProjectsFind extends Component {
 
     render() {
         const data = this.props.data;
         let offered = (candidate) => { return <ProjectOfferBlock key={candidate.id} candidate={candidate} data={this.props.data} /> };
+        const reputation_bar = [
+            {
+                name : 'Reputation',
+                width : Math.min(100, data.rumor),
+                color : colors.orange,
+                value : Math.ceil((data.reputation)*100)/100,
+                id: 'reputation'
+            }
+        ];
+
 
         return <div>
                 <h3 className="text-center">
@@ -22,16 +34,9 @@ class ProjectsFind extends Component {
                     </div>
                     <div className="col-md-6">
                         <h4 className="text-center slim-top">
-                            Sales Department
-                            <button className="btn btn-info hidden" onClick={this.props.data.helpers.contractSearch}>Search 1000$</button>
+                            Reputation
                         </h4>
-
-                        <div className="progress">
-                            <div className='progress-bar' role="progressbar" 
-                                style={{width: Math.min(100, data.reputation)+'%'}}>
-                                {data.reputation}%
-                            </div>
-                        </div>
+                        <Bar bar_data={reputation_bar} />
 
                         <span className="flex-element">
                                 <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('Advertising'); }}>Advertising</button>

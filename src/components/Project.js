@@ -1,8 +1,8 @@
+
 import React, { Component } from 'react';
 import Portal from 'react-portal';
 
 import Select from 'react-select';
-import {Button, Glyphicon} from 'react-bootstrap';
 import ReactBootstrapSlider from 'react-bootstrap-slider';
 // import '../../node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css';
 
@@ -106,11 +106,25 @@ class Project extends Component {
         //let unoccupied_workers = data.workers.filter((worker) => {return data.helpers.deepCheckRelation(worker, project)});
 
         let label = (worker) => {
+            //TODO move to a element specific style sheet
             return <span key={worker.id}>
-                <label className="text-primary">{worker.name}</label>
-                <Button onClick={() => data.helpers.kickWorker(worker, project)} bsSize="xsmall">
-                    <Glyphicon glyph="glyphicon glyphicon-remove"/>
-                </Button>
+                        <span className="text-primary">{worker.name}</span>
+
+                        <button style={{
+                            margin: '0 5px',
+                            maxWidth: '5%',
+                            height: '10px',
+                            padding: '0 8px',
+                            position: 'relative'
+                        }} className="btn btn-xs btn-info pr-button"
+                                onClick={() => data.helpers.kickWorker(worker, project)}>
+                        <span style={{
+                            lineHeight: '10px',
+                            position: 'absolute',
+                            top: 'calc(50% - 5px)',
+                            left: 'calc(50% - 3px)'
+                        }} aria-hidden="true">&times;</span>
+                        </button>
             </span>;
         };
 
@@ -166,10 +180,11 @@ class Project extends Component {
         //console.log(project_platforms[project.platform].icon)
 
         return (
-            <div onMouseOver={() => {data.helpers.modifyHoveredObjects([project], team)}} 
-                onMouseOut={() => {data.helpers.modifyHoveredObjects()}} 
-                className={`card border fat ${data.hovered_projects_id.includes(project.id) ? 'hovered' : ''}`} 
-                id={project.id}
+            <div 
+            onMouseOver={() => {data.helpers.modifyHoveredObjects([project], team)}} 
+            onMouseOut={() => {data.helpers.modifyHoveredObjects()}} 
+            className={`card border fat ${data.hovered_projects_id.includes(project.id) ? 'hovered' : ''}`} 
+            id={project.id}
             >
                 <div>
                     <div className="flex-container-column">
@@ -427,11 +442,11 @@ class Project extends Component {
 
                 <div className="small slim">
                     <p className="small slim">Team: {team_label}
-                        <Button className={data.project_team_selector == project.id ? 'active' : ''}
+                        <button className={'btn btn-info pr-button'+ data.project_team_selector === project.id ? 'active ' : ''}
                                 onClick={() => data.helpers.changeTeamSelector(project)}
-                                bsSize="xsmall">Add</Button>
+                                >Add</button>
                     </p>
-                    {data.project_team_selector == project.id ? <div>
+                    {data.project_team_selector === project.id ? <div>
                         <Select onChange={(e) => onSelectChange(e)}
                                 options={data.workers.map((worker) => {return {value: worker, label: worker.name}})}
                                 value={null}/>
