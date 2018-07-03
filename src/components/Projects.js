@@ -10,17 +10,32 @@ class Projects extends Component {
     }
 
     render() {
+        let data = this.props.data;
+
         return (
             <div>
-                <h4 className="text-center slim-top"><label>Your Projects</label></h4>
-                    <div>
+                <button
+                className="btn btn-xs btn-w-lg btn-info"
+                onClick={() => { data.helpers.changeContent('ProjectsFind'); }}
+                >
+                    Freelance
+                </button>
+
+                <button
+                className="btn btn-xs btn-w-lg btn-success"
+                onClick={() => { data.helpers.changeContent('StartProject'); }}
+                >
+                    Start new project
+                </button>
+                <div>
                     {this.props.data.projects.length ?
                         <div>
                             {this.props.data.projects.map((meeting, i) => meeting.type === 'meeting' ?
                                 <Meeting key={meeting.id} project={meeting} data={this.props.data} /> : ''
                             )}
                         </div>
-                        : '' }
+                        : '' 
+                    }
                 </div>
                 <div>
                     {this.props.data.projects.length ?

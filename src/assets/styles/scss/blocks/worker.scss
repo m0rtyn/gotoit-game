@@ -1,0 +1,55 @@
+.worker {
+
+  &.card {
+    margin-bottom: $main-size;
+    display: flex;
+    flex-flow: row nowrap;
+    border-radius: 6px;
+    padding: $main-size;
+
+    & > div {
+      width: calc(100% - 60px); // 60px - avatar width
+    }
+  }
+
+  .card-header {
+    padding: $half-size $main-size;
+    border-bottom: none;
+
+    .btn {
+      margin: 0;
+      height: 20px;
+      padding: 0 8px;
+      font-size: 10px;
+      // text-transform: uppercase;
+    }
+  }
+
+  .card-body {
+    padding: $half-size $main-size;
+
+  }
+
+  .vacation {
+    //in-progress
+  }
+
+  .worker-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+  }
+
+  .worker-skills {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
+  .stats-progress-bar {
+    display: flex;
+
+    .progress {
+      border-radius: 6px;
+    }
+  }
+}

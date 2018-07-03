@@ -6,37 +6,68 @@ class ButtonToolbar extends Component {
         let data = this.props.data;
 
         return (
-            <div className="card border">
-                <div className="flex-container-row" style={{margin: '5px 0px 5px 0px'}}>
-                    <span className="flex-element">
-                        <button className="btn btn-primary btn-sm" onClick={() => { data.helpers.changeContent('StartProject'); }}>Startup</button>
-                    </span>
-                    <span className="flex-element">
-                        <button className="btn btn-primary btn-sm" onClick={() => { data.helpers.changeContent('ProjectsFind'); }}>Freelance</button>
-                    </span>
-                    <span className="flex-element">
-                        {data.projects.length > 0 ? <button className="btn btn-info btn-sm" onClick={() => { data.helpers.changeContent('StartMeeting'); }}>Meeting</button> : ''}
-                    </span>
-                    <span className="flex-element">
-                        {data.projects_archive_reports.length > 0 ? <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('Archive'); }}>Archive</button> : ''}
-                    </span>
-                    <span className="flex-element">
-                        <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('MarketTop'); }}>Market</button>
-                    </span>
-                    <span className="flex-element">
-                        <button className="btn btn-warning btn-sm" onClick={() => { data.helpers.changeContent('Advertising'); }}>Advertising</button>
-                    </span>
-                    <span className="flex-element">
-                        <button className="btn btn-warning btn-sm" onClick={() => { data.helpers.changeContent('Loans'); }}>Loans</button>
-                    </span>
-                    <span className="flex-element">
-                        <button className="btn btn-warning btn-sm" onClick={() => { data.helpers.changeContent('Exchange'); }}>Exchange</button>
-                    </span>
-                    {/*<span className="flex-element">
-                        <button className="btn btn-warning btn-sm" onClick={() => { data.helpers.changeContent('Mail'); }}>Mail</button>
-                    </span>*/}
-                </div>
-            </div>
+            <ul className="nav nav-tabs">
+                <li className="nav-item">
+                    {data.projects.length > 0 ? 
+                        <a 
+                        className="nav-link" 
+                        onClick={() => { data.helpers.changeContent('StartMeeting'); }}
+                        >
+                            Start Meeting
+                        </a> : ''
+                    }
+                </li>
+                <li className="nav-item">
+                    {data.projects_archive_reports.length > 0 ? 
+                        <a 
+                        className="nav-link" 
+                        onClick={() => { data.helpers.changeContent('Archive'); }}
+                        >
+                            Archive
+                        </a> : ''
+                    }
+                </li>
+                <li className="nav-item">
+                    <a
+                    className="nav-link"
+                    onClick={() => { data.helpers.changeContent('MarketTop'); }}
+                    >
+                        Market Analysis
+                    </a>
+                </li>
+                <li className="nav-item">
+                    <a
+                    className="nav-link"
+                    onClick={() => { data.helpers.changeContent('Advertising'); }}
+                    >
+                        Advertising
+                    </a>
+                </li>
+                <li className="nav-item">
+                    <a
+                    className="nav-link"
+                    onClick={() => { data.helpers.changeContent('Loans'); }}
+                    >
+                        Loans
+                    </a>
+                </li>
+                <li className="nav-item">
+                    <a
+                    className="nav-link"
+                    onClick={() => { data.helpers.changeContent('Exchange'); }}
+                    >
+                        Exchange
+                    </a>
+                </li>
+                <li className="nav-item">
+                    <a 
+                    className="nav-link" 
+                    onClick={() => { data.helpers.changeContent('Mail'); }}
+                    >
+                        Mail
+                    </a>
+                </li>
+            </ul>
         );
     }
 }
