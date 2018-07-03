@@ -54,16 +54,13 @@ class StatsProgressBar extends Component {
         }
 
         return (
-            <div>
-                <div className="form-check-checkbox flex-element slim">
-                    <label>
-                        <input
-                            type="checkbox"
-                            id={stat}
-                            checked={this.props.data.helpers.getRole(worker.id, stat)}
-                            onChange={this.changeRole}/>
-                    </label>
-                </div>
+            <div className="stats-progress-bar">
+                <input
+                type="checkbox"
+                id={stat}
+                checked={this.props.data.helpers.getRole(worker.id, stat)}
+                onChange={this.changeRole}
+                />
                 <Bar bar_data={[bar_data]} />
             </div>
         );
