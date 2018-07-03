@@ -59,6 +59,14 @@ class ButtonToolbar extends Component {
                         Exchange
                     </a>
                 </li>
+                <li className="nav-item">
+                    <a 
+                    className="nav-link" 
+                    onClick={() => { data.helpers.changeContent('Mail'); }}
+                    >
+                        Mail
+                    </a>
+                </li>
             </ul>
         );
     }

@@ -38,10 +38,13 @@ class Advertising extends Component {
                 <div className='flex-container-row'>
                     <div style={{ width: '47%', float: 'left', margin: '5px'}}>
                         <h5>Rumor</h5>
+                        <p>attracts new candidates to you </p>
                         <Bar bar_data={rumor_bar} />
+
                     </div>
                     <div style={{ width: '47%', float: 'right', margin: '5px'}}>
                         <h5>Reputation</h5>
+                        <p>attracts new projects to you</p>
                         <Bar bar_data={reputation_bar} />
                     </div>
                 </div>
