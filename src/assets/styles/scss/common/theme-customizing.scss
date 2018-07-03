@@ -12,7 +12,11 @@
 }
 
 .progress-bar {
-  height: 10px;
+  height: $main-size * 2.5;
+}
+
+.progress {
+  margin-bottom: $main-size;
 }
 
 .modal-dialog {

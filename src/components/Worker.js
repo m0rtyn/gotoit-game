@@ -252,7 +252,7 @@ class Worker extends Component {
                     <header className="card-header">
 
                         <span> {worker.name} </span>
-                        <button className='btn btn-success'
+                        <button className='btn btn-xs btn-success'
                             onClick={() => data.helpers.createPopup('Manage', manage )}
                         >MANAGE</button>
 

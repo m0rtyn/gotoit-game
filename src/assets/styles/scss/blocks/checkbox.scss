@@ -1,0 +1,28 @@
+input[type='checkbox'].radial-checkbox {
+  margin: -3px $double-size 0 $half-size;
+  text-rendering: optimizeSpeed;
+  width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor:pointer;
+}
+
+input[type='checkbox'].radial-checkbox:after {
+  
+  content:"";
+  position: absolute;
+  cursor: pointer;
+  height: $main-size * 3;
+  width: $main-size * 3;
+  background-color: #e5e5e5;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type='checkbox'].radial-checkbox:checked:after {
+  background-color: #15c377;
+}
