@@ -10,6 +10,7 @@ import {game_name} from './game/app_config';
 import {tick} from './game/tick';
 
 import Layout from './components/Layout';
+import Popup from './components/Popup/Popup'
 import BubblesAnimation  from './components/BubblesAnimation'
 import {addMessage, addAction} from './components/ToastNest';
 
@@ -122,6 +123,8 @@ class App extends Component {
         this.setTimelineScale = this.setTimelineScale.bind(this);
         this.addTimelineEvent = this.addTimelineEvent.bind(this);
 
+        this.createPopup = this.createPopup.bind(this);
+
 
         let app_state = getDefaultState();
 
@@ -195,6 +198,8 @@ class App extends Component {
         app_state.data.helpers['setTimelineScale'] = this.setTimelineScale;
         app_state.data.helpers['addTimelineEvent'] = this.addTimelineEvent;
         app_state.data.helpers['modifyHoveredObjects'] = this.modifyHoveredObjects;
+
+        app_state.data.helpers['createPopup'] = this.createPopup;
 
 
         this.state = app_state;
@@ -1660,12 +1665,15 @@ class App extends Component {
         return true;
     }
 
-
+    createPopup(name, content) {
+        this.popupHandler.createPopup(name, content);
+    }
 
     render() {
         return (
             <div>
                 <BubblesAnimation onRef={ref => (this.animation = ref)}/>
+                <Popup ref={(p) => this.popupHandler = p} />
                 <Layout data={this.state.data} newGame={this.newGame}/>
             </div>
         );
