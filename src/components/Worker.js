@@ -6,8 +6,6 @@ import StatsProgressBar from './StatsProgressBar';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
 
-
-
 //import {addAction} from '../components/ToastNest';
 
 import {skills_names, workers_bonus_items, roles, education, colors} from '../game/knowledge';
@@ -108,11 +106,11 @@ class Worker extends Component {
             id={worker.id}
             >
 
-            <img
-            className='worker-avatar'
-            alt={worker.name + ' avatar'}
-            src={worker.avatar}
-            />
+                <img
+                className='worker-avatar'
+                alt={worker.name + ' avatar'}
+                src={worker.avatar}
+                />
 
                 <div>
                     <header className="card-header">
@@ -172,14 +170,13 @@ class Worker extends Component {
 
 
                                 <div className="card border text-center">
+                                    <StatsBar stats={stats_data} data={this.props.data} />
 
                                     {/*    bonus items */}
                                     <div>
                                         <div className="flex-container-row">
                                             {skills_names.map((skill) => {
-
                                                 return <div className="flex-element flex-container-column" key={skill}>
-                                                    <StatsProgressBar type={skill} stats={stats_progressbar_data} worker={worker} data={data} />
                                                     {Object.keys(workers_bonus_items[skill]).map((item_key) => {
                                                         let item = workers_bonus_items[skill][item_key];
                                                         return worker.items[skill][item_key] === true
@@ -264,10 +261,12 @@ class Worker extends Component {
                             
                             <WorkerHappinessBar worker={worker}/>
                             <WorkerStaminaBar worker={worker}/>
+                            <div className="worker-skills">
+                                <StatsProgressBar type={'design'} stats={stats_progressbar_data} worker={worker} data={data} />
+                                <StatsProgressBar type={'program'} stats={stats_progressbar_data} worker={worker} data={data} />
+                                <StatsProgressBar type={'manage'} stats={stats_progressbar_data} worker={worker} data={data} />
+                            </div>
                         </div>
-                        <StatsProgressBar type={'design'} stats={stats_progressbar_data} worker={worker} data={data} />
-                        <StatsProgressBar type={'program'} stats={stats_progressbar_data} worker={worker} data={data} />
-                        <StatsProgressBar type={'manage'} stats={stats_progressbar_data} worker={worker} data={data} />
                     </div>
                 </div>
             </div>

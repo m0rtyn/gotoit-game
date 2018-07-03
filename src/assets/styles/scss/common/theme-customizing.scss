@@ -1,6 +1,12 @@
+.container-fluid {
+  padding-right: $main-size;
+  padding-left: $main-size;
+}
+
 .main-container {
   min-height: auto !important;
-  padding: 6px 0;
+  padding-top: $main-size;
+  padding-bottom: $main-size;
   margin-top: 80px;
   height: calc(100vh - 80px);
 }
@@ -28,4 +34,8 @@
   line-height: 30px;
   background-color: transparent;
   color: #333333;
+}
+
+.btn {
+  text-transform: uppercase;
 }

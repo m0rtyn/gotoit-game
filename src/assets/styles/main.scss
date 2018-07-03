@@ -3,13 +3,14 @@
 
 
 //====COMMON====//
+@import 'scss/common/variables.scss';
 @import 'scss/common/layout.scss';
 @import 'scss/common/old-custom.scss';
 @import 'scss/common/theme-customizing.scss';
-@import 'scss/common/variables.scss';
 
 
 //====BLOCKS====//
+@import 'scss/blocks/activity-column.scss';
 @import 'scss/blocks/background.scss';
 @import 'scss/blocks/achievements.scss';
 @import 'scss/blocks/header.scss';
