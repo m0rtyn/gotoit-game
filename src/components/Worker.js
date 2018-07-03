@@ -106,11 +106,11 @@ class Worker extends Component {
             id={worker.id}
             >
 
-            <img
-            className='worker-avatar'
-            alt={worker.name + ' avatar'}
-            src={worker.avatar}
-            />
+                <img
+                className='worker-avatar'
+                alt={worker.name + ' avatar'}
+                src={worker.avatar}
+                />
 
                 <div>
                     <header className="card-header">
@@ -261,10 +261,12 @@ class Worker extends Component {
                             
                             <WorkerHappinessBar worker={worker}/>
                             <WorkerStaminaBar worker={worker}/>
+                            <div className="worker-skills">
+                                <StatsProgressBar type={'design'} stats={stats_progressbar_data} worker={worker} data={data} />
+                                <StatsProgressBar type={'program'} stats={stats_progressbar_data} worker={worker} data={data} />
+                                <StatsProgressBar type={'manage'} stats={stats_progressbar_data} worker={worker} data={data} />
+                            </div>
                         </div>
-                        <StatsProgressBar type={'design'} stats={stats_progressbar_data} worker={worker} data={data} />
-                        <StatsProgressBar type={'program'} stats={stats_progressbar_data} worker={worker} data={data} />
-                        <StatsProgressBar type={'manage'} stats={stats_progressbar_data} worker={worker} data={data} />
                     </div>
                 </div>
             </div>

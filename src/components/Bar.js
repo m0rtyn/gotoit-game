@@ -8,15 +8,15 @@ class Bar extends Component {
         return (
             <div className="progress">
                 { _.map(bar_data, (item, i) =>
-                        <div className="progress-bar" role="progressbar"
-                            id={item.id}
-                            style={{
-                                width: item.width +'%',
-                                backgroundColor: item.color
-                            }}>
-                            { item.showName ? item.name : null }{ ' ' + item.value}
-                        </div>
-                    )}
+                    <div className="progress-bar" role="progressbar"
+                    id={item.id}
+                    style={{
+                        width: item.width +'%',
+                        backgroundColor: item.color
+                    }}>
+                    { item.showName ? item.name : null }{ ' ' + item.value}
+                    </div>
+                )}
             </div>
         );
     }
