@@ -51,6 +51,7 @@
     "react-modal": "^1.6.4",
     "react-motion": "^0.5.2",
     "react-portal": "^3.0.0",
+    "react-scroll-box": "^0.3.5",
     "react-select": "^1.0.0-rc.2",
     "react-toastr": "^2.8.2",
     "redux": "^3.6.0",
