@@ -59,7 +59,7 @@ export default class Popup extends React.Component {
 
             </div>
       )
-    })[0];
+    });
   }
 
 
@@ -71,6 +71,6 @@ export default class Popup extends React.Component {
     }
 
 
-    return this.composePopups(popupsData)
+      return <div>{this.composePopups(popupsData)}</div>
   }
 }
