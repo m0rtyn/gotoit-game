@@ -56,6 +56,7 @@ class StatsProgressBar extends Component {
         return (
             <div className="stats-progress-bar">
                 <input
+                className="radial-checkbox"
                 type="checkbox"
                 id={stat}
                 checked={this.props.data.helpers.getRole(worker.id, stat)}
