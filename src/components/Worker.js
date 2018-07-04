@@ -238,7 +238,7 @@ class Worker extends Component {
                 }), [worker])
             }}
             onMouseOut={ () => {data.helpers.modifyHoveredObjects()} } 
-            className={`card worker ${data.hovered_workers_id.includes(worker.id) ? 'hovered' : ''}`}
+            className={`card worker ${data.hovered_workers_id.includes(worker.id) ? 'hovered' : ''} ${worker.in_vacation ? 'vacation' : ''}`}
             id={worker.id}
             >
 
@@ -251,28 +251,24 @@ class Worker extends Component {
                 <div>
                     <header className="card-header">
 
-                        <span> {worker.name} </span>
-                        <button className='btn btn-success'
+                        <h3 className="worker-name"> {worker.name} </h3>
+                        <button className='btn btn-xs btn-success'
                             onClick={() => data.helpers.createPopup('Manage', manage )}
                         >MANAGE</button>
 
                     </header>
-                    <div className="card-body">
 
+                    <div className="card-body worker-stats">
+                        {/* {worker.is_player ? 'Player' : <span>{worker.getSalary()}$</span>} */}
+                        {/* {worker.get_monthly_salary ? '' : ' unpaid! '} */}
+                        {/* <div classNames('progress-bar', (100 / worker.getEfficiency() < 0.5 ? 'bg-danger' : 'bg-warning')) role="progressbar"  */}
 
-
-                        <div className={`worker-stats ${worker.in_vacation ? 'vacation' : ''}`}>
-                            {/* {worker.is_player ? 'Player' : <span>{worker.getSalary()}$</span>} */}
-                            {/* {worker.get_monthly_salary ? '' : ' unpaid! '} */}
-                            {/* <div classNames('progress-bar', (100 / worker.getEfficiency() < 0.5 ? 'bg-danger' : 'bg-warning')) role="progressbar"  */}
-
-                            <WorkerHappinessBar worker={worker}/>
-                            <WorkerStaminaBar worker={worker}/>
-                            <div className="worker-skills">
-                                <StatsProgressBar type={'design'} stats={stats_progressbar_data} worker={worker} data={data} />
-                                <StatsProgressBar type={'program'} stats={stats_progressbar_data} worker={worker} data={data} />
-                                <StatsProgressBar type={'manage'} stats={stats_progressbar_data} worker={worker} data={data} />
-                            </div>
+                        <WorkerHappinessBar worker={worker}/>
+                        <WorkerStaminaBar worker={worker}/>
+                        <div className="worker-skills">
+                            <StatsProgressBar type={'design'} stats={stats_progressbar_data} worker={worker} data={data} />
+                            <StatsProgressBar type={'program'} stats={stats_progressbar_data} worker={worker} data={data} />
+                            <StatsProgressBar type={'manage'} stats={stats_progressbar_data} worker={worker} data={data} />
                         </div>
                     </div>
                 </div>

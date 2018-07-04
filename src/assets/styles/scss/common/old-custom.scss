@@ -60,8 +60,7 @@
 }
 
 .dialog-backdrop {
-  background-color: rgba(10, 186, 181, 0.66);
-/*  pointer-events: none;  */
+  background-color: rgba(0, 0, 0, 0.66);
 }
 
 .slider.slider-horizontal {
@@ -94,18 +93,8 @@
   height: 70px;
 }
 
-.hovered {
-  background-color: #DDD;
-}
-
 .justity-content-around {
   justify-content: space-around;
-}
-
-.modal-dialog {
-  max-height: 85%;
-  overflow-y: scroll;
-  width: 800px;
 }
 
 .App {

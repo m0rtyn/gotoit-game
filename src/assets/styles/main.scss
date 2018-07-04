@@ -4,9 +4,9 @@
 
 //====COMMON====//
 @import 'scss/common/variables.scss';
-@import 'scss/common/layout.scss';
-@import 'scss/common/old-custom.scss';
 @import 'scss/common/theme-customizing.scss';
+@import 'scss/common/old-custom.scss';
+@import 'scss/common/layout.scss';
 
 
 //====BLOCKS====//
@@ -16,4 +16,5 @@
 @import 'scss/blocks/header.scss';
 @import 'scss/blocks/timeline.scss';
 @import 'scss/blocks/worker.scss';
+@import 'scss/blocks/checkbox.scss';
 
