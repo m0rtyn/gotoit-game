@@ -23,23 +23,21 @@ class HotOffer extends Component {
         const data = this.props.data;
         let project = this.props.project;
 
+        const modal = <div>
+            <div className="moat">
+                <h3>{project.lore.name}</h3>
+                <p>
+                    {project.lore.text}
+                </p>
+            </div>
+            <div className="moat slim_top">
+                <ProjectOfferBlock candidate={project} data={data} type='hot' />
+            </div>
+        </div>
+
         return (
             <div>
-                <Portal closeOnEsc ref="hot_offer">
-                    <SimpleModal>
-                        <div>
-                            <div className="moat">
-                                <h3>{project.lore.name}</h3>
-                                <p>
-                                    {project.lore.text}
-                                </p>
-                            </div>
-                            <div className="moat slim_top">
-                                <ProjectOfferBlock candidate={project} data={data} type='hot' />
-                            </div>
-                        </div>
-                    </SimpleModal>
-                </Portal>
+
             </div>
         );
     }

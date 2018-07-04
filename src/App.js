@@ -27,6 +27,7 @@ import Lorer from './services/Lorer';
 import {skills_names, project_platforms, project_kinds, meetings, workers_bonus_items, technologies, skills_true} from './game/knowledge';
 
 import {getDefaultState} from './game/default_state';
+import ReactDOM from "react-dom";
 
 export var current_tick = 0;
 export const setCurrentTick = (tick) => { current_tick = tick; };
@@ -272,6 +273,7 @@ class App extends Component {
 
             console.log('App '+game_name+' componentDidMount with state', loaded_app_state);
             this.setState(loaded_app_state);
+
         }
 
     }
@@ -1666,12 +1668,16 @@ class App extends Component {
     }
 
     createPopup(name, content) {
+        console.log('createPopup');
+        console.log(this)
+        console.log(this.popupHandler)
         this.popupHandler.createPopup(name, content);
     }
 
     render() {
+        console.log(this.state.data.projects_end_reports)
         return (
-            <div>
+            <div id="app">
                 <BubblesAnimation onRef={ref => (this.animation = ref)}/>
                 <Popup ref={(p) => this.popupHandler = p} />
                 <Layout data={this.state.data} newGame={this.newGame}/>
