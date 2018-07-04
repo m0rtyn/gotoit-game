@@ -16,7 +16,7 @@ input[type='checkbox'].radial-checkbox:after {
   cursor: pointer;
   height: $main-size * 3;
   width: $main-size * 3;
-  background-color: #e5e5e5;
+  background-color: $light-gray;
   border-radius: 50%;
   display: flex;
   justify-content: center;
