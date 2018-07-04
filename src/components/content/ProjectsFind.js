@@ -14,7 +14,7 @@ class ProjectsFind extends Component {
         const reputation_bar = [
             {
                 name : 'Reputation',
-                width : Math.min(100, data.rumor),
+                width : Math.min(100, data.reputation),
                 color : colors.orange,
                 value : Math.ceil((data.reputation)*100)/100,
                 id: 'reputation'
