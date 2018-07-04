@@ -1,28 +1,52 @@
 .worker {
+  margin: $main-size;
+  margin-bottom: $double-size;
+  display: flex;
+  flex-flow: row nowrap;
+  border-radius: $main-size;
+  padding: $main-size;
+  transition: background-color 0.33s ease-out;
+  position: relative;
 
-  &.card {
-    margin-bottom: $main-size;
-    display: flex;
-    flex-flow: row nowrap;
-    border-radius: 6px;
-    padding: $main-size;
+  &.vacation {
+    
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-radius: $main-size;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(to right, #FFFFFF 0%, transparent 100%)
+    }
 
-    & > div {
-      width: calc(100% - 60px); // 60px - avatar width
+    &::after {
+      position: absolute;
+      content: "vacation";
+      text-transform: uppercase;
+      font-size: $main-size * 4;
+      color: #2E99E5;
+      font-weight: 900;
+      transform: rotate(-45deg);
+      top: 30px;
     }
   }
+
+  & > div {
+    width: calc(100% - 60px); // 60px - avatar width
+  }
+
 
   .card-header {
     padding: $half-size $main-size;
     border-bottom: none;
+  }
 
-    .btn {
-      margin: 0;
-      height: 20px;
-      padding: 0 8px;
-      font-size: 10px;
-      // text-transform: uppercase;
-    }
+  .worker-name {
+    font-family: 'Roboto Condensed', Arial, Helvetica, sans-serif;
+    font-size: $main-size * 3;
+    margin: 0;
   }
 
   .card-body {
@@ -30,26 +54,33 @@
 
   }
 
-  .vacation {
-    //in-progress
+  .worker-avatar {
+    width: $main-size * 16;
+    height: $main-size * 16;
+    border-radius: 5px;
+    margin: $main-size;
   }
 
-  .worker-avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 5px;
+  .worker-stats {
+
   }
 
   .worker-skills {
     display: flex;
     flex-flow: row nowrap;
+    justify-content: space-between;
+    padding-top: $main-size;
   }
 
   .stats-progress-bar {
     display: flex;
+    padding-left: $main-size;
 
     .progress {
       border-radius: 6px;
+      width: $main-size * 14;
+      height: $main-size * 2;
+      font-size: 0;
     }
   }
 }
