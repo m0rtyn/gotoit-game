@@ -159,6 +159,13 @@ export const archive_chats_parameters = {
     resolving_time_percents: {label: 'Resolving time percents', color: '#3e95cd'}
 };
 
+export const market_chart_parameters = {
+    design: {label: 'Design', color: '#8B0000'},
+    manage: {label: 'Manage', color: '#5cb85c'},
+    program: {label: 'Program', color: '#3e95cd'},
+    total: {label: 'Total', color: '#f7931a'}
+};
+
 export const btc_chart_parameters = { label: 'Bitcoin', color: '#f7931a' };
 
 export const colors = {
