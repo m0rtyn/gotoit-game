@@ -13,10 +13,9 @@
   background-color: #fcfcfc;
   border-radius: 2px;
   box-shadow: 0 24px 24px rgba(0, 0, 0, 0.3), 0 0 24px rgba(0, 0, 0, 0.22);
-}
-.popup-content{
-  overflow: scroll;
-  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 85vh;
 }
 
 .popup-header {
