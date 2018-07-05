@@ -34,6 +34,13 @@ div {
   // }
 }
 
+.main-container {
+
+  & > .row {
+    height: 100%;
+  }
+}
+
 .app {
   padding: 20px;
   padding-top: 70px;
@@ -43,15 +50,33 @@ div {
 
 .people-column, .projects-column, .activity-column {
   
-  &>div {
+  & > div {
     height: 100%;
     padding: $main-size;
     overflow-y: auto;
-    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
+    background-image: linear-gradient(180deg, 
+      rgba(255, 255, 255, 0.6) 0%, 
+      rgba(255, 255, 255, 0.6) 33%, 
+      transparent 100%);
     border-radius: 4px;
     overflow-x: hidden;
   }
-  
+}
+
+.column-buttons {
+
+  & > button {
+    // width: 50% - $main-size;
+    margin: 0 $main-size;
+  }
+}
+
+.activity-column {
+
+  & > div {
+    height: auto;
+    max-height: 100%;
+  }
 }
 
 .people-column {

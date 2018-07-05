@@ -55,7 +55,7 @@ class Project extends Component {
 
 
         return (
-            <div className="card border">
+            <div className="card">
                 <ProjectName project={project} /> ({project.reward}$)
 
                 {project.deadline_max > 0 ?
@@ -82,11 +82,11 @@ class Project extends Component {
 
                 <StatsBar stats={stats_data} data={this.props.data} />
 
-                <div className="flex-container-row">
-                    <div className="flex-element"> Tasks: {project.tasksQuantity()}/{project.planedTasksQuantity()} </div>
-                    <div className="flex-element"> Bugs: <label className="text-danger">{project.bugsQuantity()}</label> </div>
-                    <div className="flex-element"> Complexity: {project.complexity} </div>
-                    <div className="flex-element"> Iteration: {project.iteration} </div>
+                <div className="">
+                    <div className=""> Tasks: {project.tasksQuantity()}/{project.planedTasksQuantity()} </div>
+                    <div className=""> Bugs: <label className="text-danger">{project.bugsQuantity()}</label> </div>
+                    <div className=""> Complexity: {project.complexity} </div>
+                    <div className=""> Iteration: {project.iteration} </div>
                 </div>
 
             </div>

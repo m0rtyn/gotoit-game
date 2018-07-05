@@ -8,9 +8,9 @@ class ProjectName extends Component {
         const project = this.props.project;
         //console.log(project);
         return (
-            <span>
+            <h3 className="project-name">
                 {project_sizes[project.size].name} {project.platform} {project.kind} {project.name}
-            </span>
+            </h3>
         );
     }
 }

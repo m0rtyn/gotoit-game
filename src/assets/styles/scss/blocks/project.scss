@@ -1,0 +1,68 @@
+.project {
+  margin: $main-size;
+  margin-bottom: $double-size;
+  display: flex;
+  flex-flow: column nowrap;
+  border-radius: $main-size;
+  padding: $main-size;
+  transition: background-color 0.33s ease-out;
+  position: relative;
+
+  .card-header {
+    align-items: start;
+    padding: $half-size $main-size;
+    border-bottom: none;
+  }
+
+  // .project_icon {
+  //   width: 70px;
+  //   height: 70px;
+  // }
+
+  .project-avatar {
+    width: $main-size * 16;
+    height: $main-size * 16;
+
+    & > img {
+      position: absolute;
+    }
+  }
+
+  .project-money {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  .card-body {
+    padding: $half-size $main-size;
+  }
+
+  .project-name {
+    font-family: 'Roboto Condensed', Arial, Helvetica, sans-serif;
+    font-size: $main-size * 3;
+  }
+
+  .project-reward {
+
+  }
+
+  .project-penalty {
+
+  }
+
+  .team-remove-worker {
+    padding: 0 $main-size;
+    margin: 0 $main-size;
+    color: $primary-color;
+
+    &:hover {
+      background-color: $danger-color;
+      color: white;
+    }
+  }
+
+  .team-add-worker {
+    padding: 0 $main-size * 4;
+    margin: 0 $main-size;
+  }
+}
