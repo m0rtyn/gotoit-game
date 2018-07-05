@@ -12,6 +12,7 @@ import ProjectsFind from '../components/content/ProjectsFind.js';
 import StartMeeting from '../components/content/StartMeeting.js';
 import StartProject from '../components/content/StartProject.js';
 import Welcome from '../components/content/Welcome.js';
+import Mail from '../components/content/Mail.js';
 
 const components = {
     'Achievements': Achievements,
@@ -26,6 +27,7 @@ const components = {
     'StartMeeting': StartMeeting,
     'StartProject': StartProject,
     'Welcome': Welcome,
+    'Mail': Mail
 };
 
 
