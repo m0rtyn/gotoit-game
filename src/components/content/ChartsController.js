@@ -79,13 +79,11 @@ let ChartsController = (props) => {
         case 'Market':
 
             const market_stats = {
-                design: [0],
-                manage: [0],
-                program: [0],
-                total: [0]
+                design: [],
+                manage: [],
+                program: [],
+                total: []
             };
-
-            labels = [0];
 
             props.chart.table_data.forEach((row, i) => {
                 market_stats.design.push(row.design);
