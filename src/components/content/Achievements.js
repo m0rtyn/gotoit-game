@@ -43,13 +43,13 @@ const Achievements = (props) => {
             Object.keys(achievements_for_render).map((key, id) => {
                 return <div key={id} className="row">
                     <div><h3 className="text-center">{key}</h3></div>
-                    <div className="flex-container-row justity-content-around">
+                    <div className=" justity-content-around">
                         {
                             achievements_for_render[key].map((achievement, i) => {
                                 return <span className="achievement" key={i}>
                                     <h4 className="text-center">{achievement.name}</h4>
                                     <div className="achievement-icon">ICON</div>
-                                    <div className="flex-container-row justity-content-around medals-bar">
+                                    <div className=" justity-content-around medals-bar">
                                         <OverlayTrigger delay={150} placement="top" overlay={<Tooltip id={i}>{achievements_descriptions[`${achievement.name} bronze`]}</Tooltip>}>
                                             <span className={`medal ${achievement.bronze === true ? 'bronze-medal-unlocked' : 'bronze-medal-locked'}`}></span>
                                         </OverlayTrigger>

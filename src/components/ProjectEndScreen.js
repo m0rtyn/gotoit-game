@@ -43,29 +43,29 @@ class ProjectEndScreen extends Component {
                         </div>
                         <div className="text-center">
                             <ProjectReport key={project.id} project={project} data={this.props.data} />
-                            <div className="card border text-center">
+                            <div className="card text-center">
                                 <h3>Project Top Score</h3>
                                 <h2>All Project Top: {all_top_handler.getTopNumber(project.id)}</h2>
-                                <div className="flex-container-row">
-                                    {skills_names.map((skill) => <div key={skill} className="flex-element">
+                                <div className="">
+                                    {skills_names.map((skill) => <div key={skill} className="">
                                         {skill} top: {all_top_handler.getTopNumber(project.id, skill)}
                                     </div>)}
                                 </div>
                                 <h3>{project_platforms[project.platform].name} Top: {platform_top_handler.getTopNumber(project.id)}</h3>
-                                <div className="flex-container-row">
-                                    {skills_names.map((skill) => <div key={skill} className="flex-element">
+                                <div className="">
+                                    {skills_names.map((skill) => <div key={skill} className="">
                                         {skill} top: {platform_top_handler.getTopNumber(project.id, skill)}
                                     </div>)}
                                 </div>
                                 <h3>{project_kinds[project.kind].name} Top: {kind_top_handler.getTopNumber(project.id)}</h3>
-                                <div className="flex-container-row">
-                                    {skills_names.map((skill) => <div key={skill} className="flex-element">
+                                <div className="">
+                                    {skills_names.map((skill) => <div key={skill} className="">
                                         {skill} top: {kind_top_handler.getTopNumber(project.id, skill)}
                                     </div>)}
                                 </div>
                                 <h3>{project_platforms[project.platform].name} {project_kinds[project.kind].name} Top: {platform_kind_top_handler.getTopNumber(project.id)}</h3>
-                                <div className="flex-container-row">
-                                    {skills_names.map((skill) => <div key={skill} className="flex-element">
+                                <div className="">
+                                    {skills_names.map((skill) => <div key={skill} className="">
                                         {skill} top: {platform_kind_top_handler.getTopNumber(project.id, skill)}
                                     </div>)}
                                 </div>

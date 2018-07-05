@@ -66,8 +66,8 @@ class MarketTop extends Component {
 
         return (
             <div>
-                <div className="flex-container-row">
-                    <span className="flex-element">
+                <div className="">
+                    <span className="">
                         <Select
                             name="form-field-name"
                             value={this.state.selected_platform}
@@ -75,7 +75,7 @@ class MarketTop extends Component {
                             onChange={(e) => { this.setState({selected_platform: e.value}); }}
                         />
                     </span>
-                    <span className="flex-element">
+                    <span className="">
                         <Select
                             name="form-field-name"
                             value={this.state.selected_kind}
@@ -83,7 +83,7 @@ class MarketTop extends Component {
                             onChange={(e) => { this.setState({selected_kind: e.value}); }}
                         />
                     </span>
-                    <span className="flex-element">
+                    <span className="">
                         Project in category: {category_count}
                     </span>
                 </div>

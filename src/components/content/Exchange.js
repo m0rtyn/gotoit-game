@@ -20,12 +20,12 @@ class Exchange extends Component {
                 }
                 {/*<ChartsController chart={ {type: 'BTC'} }/>*/}
 
-                <div className="flex-container-row">
-                    <h5 className="flex-element">Your USD: {data.money}</h5>
-                    <h5 className="flex-element">Your BTC: {data.btc}</h5>
+                <div className="">
+                    <h5 className="">Your USD: {data.money}</h5>
+                    <h5 className="">Your BTC: {data.btc}</h5>
                 </div>
-                <div className="flex-container-row">
-                    <label className="flex-element">
+                <div className="">
+                    <label className="">
                         Buy BTC for
                         <div>
                             <button className={data.money >= 1 ? "btn btn-info" : "btn btn-info disabled"} onClick={() => data.helpers.buyBTC(1)}>$1</button>
@@ -35,7 +35,7 @@ class Exchange extends Component {
                             <button className={data.money >= 10000 ? "btn btn-info" : "btn btn-info disabled"} onClick={() => data.helpers.buyBTC(10000)}>$10000</button>
                         </div>
                     </label>
-                    <label className="flex-element">
+                    <label className="">
                         Sell BTC for
                         <div>
                             <button className={data.btc >= (1 / data.current_btc_price) ? "btn btn-info" : "btn btn-info disabled"} onClick={() => data.helpers.sellBTC(1)}>$1</button>
