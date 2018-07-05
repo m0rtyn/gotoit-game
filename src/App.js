@@ -10,6 +10,7 @@ import {game_name} from './game/app_config';
 import {tick} from './game/tick';
 
 import Layout from './components/Layout';
+import Popup from './components/Popup/Popup'
 import BubblesAnimation  from './components/BubblesAnimation'
 import {addMessage, addAction} from './components/ToastNest';
 
@@ -26,6 +27,7 @@ import Lorer from './services/Lorer';
 import {skills_names, project_platforms, project_kinds, meetings, workers_bonus_items, technologies, skills_true} from './game/knowledge';
 
 import {getDefaultState} from './game/default_state';
+import ReactDOM from "react-dom";
 
 export var current_tick = 0;
 export const setCurrentTick = (tick) => { current_tick = tick; };
@@ -122,6 +124,8 @@ class App extends Component {
         this.setTimelineScale = this.setTimelineScale.bind(this);
         this.addTimelineEvent = this.addTimelineEvent.bind(this);
 
+        this.createPopup = this.createPopup.bind(this);
+
 
         let app_state = getDefaultState();
 
@@ -196,6 +200,8 @@ class App extends Component {
         app_state.data.helpers['addTimelineEvent'] = this.addTimelineEvent;
         app_state.data.helpers['modifyHoveredObjects'] = this.modifyHoveredObjects;
 
+        app_state.data.helpers['createPopup'] = this.createPopup;
+
 
         this.state = app_state;
 
@@ -267,6 +273,7 @@ class App extends Component {
 
             console.log('App '+game_name+' componentDidMount with state', loaded_app_state);
             this.setState(loaded_app_state);
+
         }
 
     }
@@ -1660,12 +1667,19 @@ class App extends Component {
         return true;
     }
 
-
+    createPopup(name, content) {
+        console.log('createPopup');
+        console.log(this)
+        console.log(this.popupHandler)
+        this.popupHandler.createPopup(name, content);
+    }
 
     render() {
+        console.log(this.state.data.projects_end_reports)
         return (
-            <div>
+            <div id="app">
                 <BubblesAnimation onRef={ref => (this.animation = ref)}/>
+                <Popup ref={(p) => this.popupHandler = p} />
                 <Layout data={this.state.data} newGame={this.newGame}/>
             </div>
         );

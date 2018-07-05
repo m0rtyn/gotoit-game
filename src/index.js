@@ -7,9 +7,9 @@ import {IntlProvider} from 'react-intl';
 //console.log($);
 
 // theAdmin theme =============================
-import './assets/css/core.min.css';
-import './assets/css/app.min.css';
-import './assets/css/style.min.css';
+import './assets/styles/core.min.css';
+import './assets/styles/app.min.css';
+import './assets/styles/main.min.css';
 // import './assets/js/core.min.js';
 // import './assets/js/app.min.js';
 // import './assets/js/script.min.js';
@@ -17,7 +17,6 @@ import './assets/css/style.min.css';
 
 import '../node_modules/toastr/build/toastr.min.css';
 import '../node_modules/animate.css';
-// import '';
 
 import App from './App';
 

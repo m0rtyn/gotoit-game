@@ -97,10 +97,10 @@ class Project extends Component {
 
         const manage_button = <button className="btn btn-sm btn-success flex-element" style={{margin: '5px 5px 5px 5px'}}>Manage</button>;
 
-        let onSelectChange = (e) => { 
-        data.helpers.changeTeamSelector(); 
-        data.helpers.modifyRelation(e.value.id, project.id); 
-        data.helpers.modifyHoveredProjects();
+        let onSelectChange = (e) => {
+            data.helpers.changeTeamSelector();
+            data.helpers.modifyRelation(e.value.id, project.id);
+            data.helpers.modifyHoveredProjects();
         };
 
         //let unoccupied_workers = data.workers.filter((worker) => {return data.helpers.deepCheckRelation(worker, project)});
@@ -166,22 +166,22 @@ class Project extends Component {
         //console.log(project_platforms[project.platform].icon)
 
         return (
-            <div onMouseOver={() => {data.helpers.modifyHoveredObjects([project], team)}} 
-                onMouseOut={() => {data.helpers.modifyHoveredObjects()}} 
-                className={`card border fat ${data.hovered_projects_id.includes(project.id) ? 'hovered' : ''}`} 
-                id={project.id}
+            <div onMouseOver={() => {data.helpers.modifyHoveredObjects([project], team)}}
+                 onMouseOut={() => {data.helpers.modifyHoveredObjects()}}
+                 className={`card border fat ${data.hovered_projects_id.includes(project.id) ? 'hovered' : ''}`}
+                 id={project.id}
             >
                 <div>
                     <div className="flex-container-column">
                         <div className="flex-container-row">
                             <div className='project_icon'>
                                 <div style={{ position: 'absolute' }}>
-                                    <img alt={project.name + ' avatar'} src={require(`../../public/${project_platforms[project.platform].name}.svg`)} 
-                                        width={60} height={60}/>
+                                    <img alt={project.name + ' avatar'} src={require(`../../public/${project_platforms[project.platform].name}.svg`)}
+                                         width={60} height={60}/>
                                 </div>
                                 <div style={{ position: 'absolute' }}>
                                     <img alt={project.name + ' avatar'} src={require(`../../public/${project_kinds[project.kind].name}.svg`)}
-                                        width={60} height={60}/>
+                                         width={60} height={60}/>
                                 </div>
                             </div>
                             <div className='flex-element'>
@@ -274,20 +274,20 @@ class Project extends Component {
                                                                 return <div key={skill} className="row">
                                                                     <div className="col-md-2">{skill}</div>
                                                                     <div className="col-md-10 progress">
-                                                                        <div className="progress-bar bg-warning" 
-                                                                            role="progressbar" 
-                                                                            style={{width: tasks_percent + '%'}}> 
+                                                                        <div className="progress-bar bg-warning"
+                                                                             role="progressbar"
+                                                                             style={{width: tasks_percent + '%'}}>
                                                                             {tasks ? <label>{tasks} tasks</label> : ''}
                                                                         </div>
-                                                                        <div className="progress-bar bg-danger" 
-                                                                            role="progressbar" 
-                                                                            style={{width: bugs_percent + '%'}}>
-                                                                                {bugs ? <label>{bugs} bugs</label> : ''}
+                                                                        <div className="progress-bar bg-danger"
+                                                                             role="progressbar"
+                                                                             style={{width: bugs_percent + '%'}}>
+                                                                            {bugs ? <label>{bugs} bugs</label> : ''}
                                                                         </div>
-                                                                        <div className="progress-bar bg-success" 
-                                                                            role="progressbar" 
-                                                                            style={{width: done_percent + '%'}}>
-                                                                                {(done) ? <label>{done} done</label> : ''}
+                                                                        <div className="progress-bar bg-success"
+                                                                             role="progressbar"
+                                                                             style={{width: done_percent + '%'}}>
+                                                                            {(done) ? <label>{done} done</label> : ''}
                                                                         </div>
                                                                     </div>
                                                                 </div>;
@@ -397,8 +397,8 @@ class Project extends Component {
                                     </TeamDialog>
                                 </Portal>
                             </div>
-                            </div>
                         </div>
+                    </div>
 
                 </div>
 
@@ -429,7 +429,7 @@ class Project extends Component {
                     <p className="small slim">Team: {team_label}
                         <button className={'btn btn-info pr-button'+ data.project_team_selector === project.id ? 'active ' : ''}
                                 onClick={() => data.helpers.changeTeamSelector(project)}
-                                >Add</button>
+                        >Add</button>
                     </p>
                     {data.project_team_selector === project.id ? <div>
                         <Select onChange={(e) => onSelectChange(e)}

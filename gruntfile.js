@@ -35,7 +35,7 @@ module.exports = function(grunt) {
           outputStyle: 'expanded'
         },
         files: {
-          'src/assets/css/style.css': 'src/assets/css/style.scss'
+          'src/assets/styles/main.css': 'src/assets/styles/main.scss'
         }
       },
 
@@ -45,7 +45,7 @@ module.exports = function(grunt) {
           outputStyle: 'compressed'
         },
         files: {
-          'src/assets/css/style.min.css': 'src/assets/css/style.scss'
+          'src/assets/styles/main.min.css': 'src/assets/styles/main.scss'
         }
       }
 
@@ -57,11 +57,11 @@ module.exports = function(grunt) {
     //
     watch: {
       sass: {
-        files: ['src/assets/css/**/*.scss'],
+        files: ['src/assets/styles/**/*.scss'],
         tasks: ['sass:compressed']
       },
       css: {
-        files: ['src/assets/css/*.css', '!src/assets/css/*.min.css'],
+        files: ['src/assets/styles/*.css', '!src/assets/styles/*.min.css'],
         tasks: ['css']
       },
       // js: {
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
       dev: {
         bsFiles: {
           src : [
-            'src/assets/css/*.min.css',
+            'src/assets/styles/*.min.css',
             // 'src/assets/js/*.min.js',
             'src/**/*.html'
           ]
@@ -104,13 +104,13 @@ module.exports = function(grunt) {
     //   dist: ['dist'],
 
     //   dist_copied: [
-    //     'dist/assets/css/*',
-    //     'dist/assets/css/scss/',
-    //     'dist/assets/css/sass/',
+    //     'dist/assets/styles/*',
+    //     'dist/assets/styles/scss/',
+    //     'dist/assets/styles/sass/',
     //     'dist/assets/scss/',
     //     'dist/assets/sass/',
     //     'dist/assets/js/*',
-    //     '!dist/assets/css/*.min.css',
+    //     '!dist/assets/styles/*.min.css',
     //     '!dist/assets/js/*.min.js',
     //   ]
     // },
@@ -179,7 +179,7 @@ module.exports = function(grunt) {
         ]
       },
       style: {
-        src: 'src/assets/css/style.min.css'
+        src: 'src/assets/styles/main.min.css'
       },
     },
 
@@ -195,8 +195,8 @@ module.exports = function(grunt) {
         advanced:  false
       },
       core: {
-        src:  'src/assets/css/style.css',
-        dest: 'src/assets/css/style.min.css'
+        src:  'src/assets/styles/main.css',
+        dest: 'src/assets/styles/main.min.css'
       }
     },
 
