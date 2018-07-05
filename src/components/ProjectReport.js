@@ -56,7 +56,7 @@ class Project extends Component {
 
         return (
             <div className="card border">
-                <ProjectName project={project} /> ({project.reward}$)
+                <ProjectName project={project} />
 
                 {project.deadline_max > 0 ?
                     <div className="progress">
@@ -75,9 +75,15 @@ class Project extends Component {
                     Project is <strong>{project.stage}ed</strong>.
                 </h4>
                 <p className="small">
-                    With team {team_label}{tech.length ? <span className="small"> and tech {tech_label}</span> : ''}. Spent {project.facts.money_spent}$ for salary.
-                    Did {project.facts.tasks_done} tasks. Passed {project.facts.bugs_passed} bugs.
-                    Did {project.facts.refactored} refactoring, wrote {project.facts.tests_wrote} tests and retrospected {project.facts.retrospected} tasks which cost {project.facts.cuted_cost}$ totally.
+                    /*rendering values != 0 only help us save space in archive */
+                    With team {team_label}.
+                    {tech.length ? <span className="small"> and tech {tech_label}.</span> : ' '}
+                    {project.facts.money_spent ? `Spent ${project.facts.money_spent}$ for salary. ` : ''}
+                    {project.facts.tasks_done ? `Did ${project.facts.tasks_done} tasks. ` : ''}
+                    {project.facts.bugs_passed ? `Passed ${project.facts.bugs_passed} bugs. ` : ''}
+                    {project.facts.refactored ? `Did ${project.facts.refactored} refactoring. ` : ''}
+                    {project.facts.tests_wrote ? `Wrote ${project.facts.tests_wrote} tests. ` : ''}
+                    {project.facts.refactored ? `And retrospected ${project.facts.retrospected} tasks which cost ${project.facts.cuted_cost}$ totally.`: ''}
                 </p>
 
                 <StatsBar stats={stats_data} data={this.props.data} />

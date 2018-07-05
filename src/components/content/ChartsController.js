@@ -1,6 +1,6 @@
 import React from 'react'
 import Chart from '../Chart'
-import {charts_parameters, btc_chart_parameters, archive_chats_parameters} from '../../game/knowledge'
+import {charts_parameters, btc_chart_parameters, archive_chats_parameters, market_chart_parameters} from '../../game/knowledge'
 import _ from 'lodash'
 
 let ChartsController = (props) => {
@@ -76,10 +76,34 @@ let ChartsController = (props) => {
             break;
 
 
-        case 'Market': /*
-            some market logic
+        case 'Market':
+
+            const market_stats = {
+                design: [],
+                manage: [],
+                program: [],
+                total: []
+            };
+
+            props.chart.table_data.forEach((row, i) => {
+                market_stats.design.push(row.design);
+                market_stats.manage.push(row.manage);
+                market_stats.program.push(row.program);
+                market_stats.total.push(row.total);
+                labels.push(`top ${i + 1}`);
+            });
+
+
+            _.mapValues(market_stats, (value, key) => {
+                datasets.push({
+                    data: value,
+                    label: market_chart_parameters[key].label,
+                    borderColor: market_chart_parameters[key].color,
+                    fill: false
+                })
+            });
+
             break;
-        */
 
         default:
 
