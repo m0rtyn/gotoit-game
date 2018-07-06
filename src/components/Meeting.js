@@ -67,7 +67,7 @@ class Meeting extends Component {
         const data = this.props.data;
         const project = this.props.project;
 
-        const manage_button = <button className="btn flex-element">Manage</button>;
+        const manage_button = <button className="btn ">Manage</button>;
 
         let label = (id, text) => { return <span key={id}> <label className="text-primary">{text}</label> </span>; };
 
@@ -105,18 +105,18 @@ class Meeting extends Component {
 
         return (
             <div className="card fat">
-                <div className="flex-container-row">
-                    <label className="flex-element"> {project.name} </label>
-                    <label className="flex-element"> Reward: {project.reward}$ </label>
-                    {(project.penalty > 0 ? <label className="flex-element"> Penalty: {project.penalty}$ </label> : ' ')}
+                <div className="">
+                    <label className=""> {project.name} </label>
+                    <label className=""> Reward: {project.reward}$ </label>
+                    {(project.penalty > 0 ? <label className=""> Penalty: {project.penalty}$ </label> : ' ')}
                     <div>
                         {start_pause_button}
                         {reject_button}
                         <Portal ref="manage" closeOnEsc openByClickOn={manage_button}>
                             <TeamDialog>
-                                <h4 className="flex-container-row">
-                                    <label className="flex-element"> {project.name} </label>
-                                    <div className="flex-element"> <label> {start_pause_button} {reject_button} </label> </div>
+                                <h4 className="">
+                                    <label className=""> {project.name} </label>
+                                    <div className=""> <label> {start_pause_button} {reject_button} </label> </div>
                                 </h4>
                                 <div className="row">
                                     <div className="col-md-8">
@@ -136,7 +136,7 @@ class Meeting extends Component {
                                             </div> : ''}
 
                                         </div>
-                                        <div className="card border">
+                                        <div className="card">
                                             {this.props.data.workers.map((worker) => {
                                                 return <div key={worker.id + project.id} className="card filament">
                                                     <label className="" style={{width: '100%'}}>

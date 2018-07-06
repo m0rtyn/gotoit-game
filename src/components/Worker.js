@@ -68,8 +68,7 @@ class Worker extends Component {
         const data = this.props.data;
         const worker = this.props.worker;
 
-        const manage_button = <button className="btn btn-success btn-sm"
-                                      style={{margin: "5px 5px 5px 5px"}}>Manage</button>;
+        const manage_button = <button className="btn btn-success btn-xs">Manage</button>;
         console.log('dsd')
         console.log(worker.stats);
         const stats_progressbar_data = _.mapValues(worker.stats, (val, stat) => {
@@ -152,7 +151,7 @@ class Worker extends Component {
                                     </p>
                                 </ul>
 
-                                <div className="card border text-center filament">
+                                <div className="card text-center filament">
                                     <div className="row filament">
                                         <WorkerHappinessBar worker={worker}/>
                                     </div>
@@ -171,22 +170,22 @@ class Worker extends Component {
                                 </div>
 
 
-                                <div className="card border text-center">
+                                <div className="card text-center">
 
                                     bonus items
                                     <div>
-                                        <div className="flex-container-row">
+                                        <div className="">
                                             {skills_names.map((skill) => {
 
-                                                return <div className="flex-element flex-container-column" key={skill}>
+                                                return <div className=" flex-container-column" key={skill}>
                                                     <StatsProgressBar type={skill} stats={stats_progressbar_data} worker={worker} data={data} />
                                                     {Object.keys(workers_bonus_items[skill]).map((item_key) => {
                                                         let item = workers_bonus_items[skill][item_key];
                                                         return worker.items[skill][item_key] === true
-                                                            ? <div className="flex-element" key={item_key}>
+                                                            ? <div className="" key={item_key}>
                                                                 <label className='badge'>{item.name} {item.description}</label>
                                                             </div>
-                                                            : <div className="flex-element" key={item_key}>
+                                                            : <div className="" key={item_key}>
                                                                 <button
                                                                     className={data.money >= item.money ? "btn btn-info btn-sm" : "btn btn-info btn-sm disabled"}
                                                                     title={item.description} id={item} onClick={() => {
@@ -208,9 +207,9 @@ class Worker extends Component {
                                     <div className="card text-center">
                                         {Object.keys(education).map((source) =>
                                             ((!education[source].hide)
-                                                ? <div className="flex-container-row" key={source}>
+                                                ? <div className="" key={source}>
                                                     {skills_names.map((skill) => {
-                                                        return <div  className="flex-element" key={skill}>
+                                                        return <div  className="" key={skill}>
                                                             <button className="btn btn-info" title={education[source].description} id={source} onClick={() => this.teach(skill, source)}>{education[source].name}</button>
                                                         </div>;
                                                     })}

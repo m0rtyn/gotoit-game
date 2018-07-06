@@ -34,8 +34,8 @@ class Advertising extends Component {
 
         console.log(data.reputation)
         return (
-            <div className="card border text-center">
-                <div className='flex-container-row'>
+            <div className="card text-center">
+                <div className=''>
                     <div style={{ width: '47%', float: 'left', margin: '5px'}}>
                         <h5>Rumor</h5>
                         <p>attracts new candidates to you </p>

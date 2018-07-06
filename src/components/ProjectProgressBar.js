@@ -83,11 +83,7 @@ class ProjectProgressBar extends Component {
         ]
         return (
             <div>
-                <div className="progress">
-
-                    <Bar bar_data={bar_data} />
-
-                </div>
+                <Bar bar_data={bar_data} />
             </div>
         );
     }
