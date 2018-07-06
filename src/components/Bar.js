@@ -14,8 +14,7 @@ class Bar extends Component {
                         width: item.width +'%',
                         backgroundColor: item.color
                     }}>
-                    {/* { item.showName ? item.name : null }{ ' ' + item.value} */}
-                    {/* TODO: ^ design temporary cleaning */}
+                    { item.showName ? item.name : null }{ ' ' + item.value} */}
                     </div>
                 )}
             </div>
