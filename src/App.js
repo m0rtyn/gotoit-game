@@ -27,7 +27,6 @@ import Lorer from './services/Lorer';
 import {skills_names, project_platforms, project_kinds, meetings, workers_bonus_items, technologies, skills_true} from './game/knowledge';
 
 import {getDefaultState} from './game/default_state';
-import ReactDOM from "react-dom";
 
 export var current_tick = 0;
 export const setCurrentTick = (tick) => { current_tick = tick; };

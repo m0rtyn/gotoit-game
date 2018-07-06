@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import _ from 'lodash'
 
 class Bar extends Component {
@@ -8,7 +7,7 @@ class Bar extends Component {
         return (
             <div className="progress">
                 { _.map(bar_data, (item, i) =>
-                    <div className="progress-bar" role="progressbar"
+                    <div key={i} className="progress-bar" role="progressbar"
                     id={item.id}
                     style={{
                         width: item.width +'%',

@@ -35,7 +35,8 @@ class Timeline extends Component {
 
 
                                     return (
-                                        <div 
+                                        <div
+                                        key={index}
                                         className='step'
                                         style={{ marginLeft: timelineWidth / (timelineScale.length - 1) * index + 'px' }}
                                         >
