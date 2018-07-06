@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ChartsController from './ChartsController'
 import _ from 'lodash';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
@@ -87,6 +88,7 @@ class MarketTop extends Component {
                         Project in category: {category_count}
                     </span>
                 </div>
+                <ChartsController chart={{name: 'Market statistics', type: 'Market', table_data: table_data}}/>
                 <div className="text-center">
                     {no_data
                         ? <div style={{padding: 100}}><h2>Such programs have not yet been written.</h2></div>
