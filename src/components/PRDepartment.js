@@ -33,8 +33,8 @@ class PRDepartment extends Component {
 
 
         return (
-            <div className="card border text-center">
-                <div className='flex-container-row'>
+            <div className="card text-center">
+                <div className=''>
                     <div style={{ width: '50%', float: 'left', margin: '5px'}}>
                         <h5>Rumor</h5>
                         <Bar bar_data={rumor_bar} />

@@ -37,7 +37,7 @@ class Office extends Component {
             {data.office_things.gadget} <button onClick={() => {data.helpers.buyGadget();}} className={data.money >= data.helpers.getGadgetCost() ? "btn btn-info" : "btn btn-info disabled"}>Buy Gadget ${data.helpers.getGadgetCost()}</button></div>;
 
         if (data.office.size > 1 ) {
-            return <div className="card border">
+            return <div className="card">
             {data.office.size > 1 ? coffeemaker : ''}
             {data.office.size > 2 ? lunch : ''}
             {data.office.size > 3 ? gadget : ''}
