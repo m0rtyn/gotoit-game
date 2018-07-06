@@ -9,7 +9,7 @@ class ProjectName extends Component {
         //console.log(project);
         return (
             <h3 className="project-name">
-                {project_sizes[project.size].name} {project.platform} {project.kind} {project.name} {`($${project.reward})`}
+                {project_sizes[project.size].name} {project.platform} {project.kind} {project.name}
             </h3>
         );
     }

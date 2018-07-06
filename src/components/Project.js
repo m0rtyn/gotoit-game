@@ -439,14 +439,14 @@ class Project extends Component {
                     <ProjectDeadlineBar project={project}/>
                     <ProjectProgressBar project={project}/>
 
-                    <StatsBar stats={stats_data} data={this.props.data} />
-
-                    <div>
+                    {/* <StatsBar stats={stats_data} data={this.props.data} /> */}
+                    {/* <div className="project-details">
                         <div > Tasks: {project.tasksQuantity()}/{project.planedTasksQuantity()} </div>
                         <div > Bugs: <span className="text-danger">{project.bugsQuantity()}</span> </div>
                         <div > Complexity: {project.complexity} </div>
                         <div > Iteration: {project.iteration} </div>
-                    </div>
+                    </div> */}
+                    {/* TODO: ^ DESIGN TEMPORARY CLEANING */}
 
                     <div className="project-team">
                         <p>Team: {team_label}

@@ -1,6 +1,7 @@
 :root {
   width: 100%;
   overflow-x: hidden;
+  // filter: grayscale(100%) contrast(110%);
 }
 
 div {
@@ -64,10 +65,11 @@ div {
 }
 
 .column-buttons {
+  display: flex;
 
   & > button {
-    // width: 50% - $main-size;
-    margin: 0 $main-size;
+    flex: 1 1 50%;
+    margin: $main-size;
   }
 }
 
