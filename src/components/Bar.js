@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import _ from 'lodash'
 
 class Bar extends Component {
@@ -14,7 +13,7 @@ class Bar extends Component {
                         width: item.width +'%',
                         backgroundColor: item.color
                     }}>
-                    { item.showName ? item.name : null }{ ' ' + item.value} */}
+                        { item.showName ? item.name : null }{ ' ' + item.value}
                     </div>
                 )}
             </div>
