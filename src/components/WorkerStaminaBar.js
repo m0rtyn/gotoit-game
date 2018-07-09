@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import {colors} from "../game/knowledge";
 import Bar from "./Bar";
 
@@ -14,7 +14,7 @@ class WorkerStaminaBar extends Component {
                 case ratio <= 0.75: return colors.warning;
                 case ratio <= 1: return colors.success;
                 case ratio  > 1: return colors.success; // High bonus
-
+                default: break;
             }
         }) ();
 

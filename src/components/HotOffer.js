@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import Portal from 'react-portal';
-
-import SimpleModal from './SimpleModal';
-import ProjectOfferBlock from './ProjectOfferBlock';
+//import ProjectOfferBlock from './ProjectOfferBlock';
 
 
 class HotOffer extends Component {
@@ -20,7 +17,7 @@ class HotOffer extends Component {
     }
 
     render() {
-        const data = this.props.data;
+        /*const data = this.props.data;
         let project = this.props.project;
 
         const modal = <div>
@@ -33,7 +30,7 @@ class HotOffer extends Component {
             <div className="moat slim_top">
                 <ProjectOfferBlock candidate={project} data={data} type='hot' />
             </div>
-        </div>
+        </div>;*/
 
         return (
             <div>

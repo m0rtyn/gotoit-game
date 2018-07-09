@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import {project_kinds, project_platforms} from "../game/knowledge";
@@ -8,9 +7,6 @@ const timelineWidth = window.innerWidth;
 
 
 class Timeline extends Component {
-    constructor(props){
-        super(props);
-    }
 
     render() {
         let { timelineEvents, timelineScale } = this.props.data;
@@ -95,6 +91,7 @@ class Timeline extends Component {
                                                                 <img 
                                                                 className='worker-portrait'
                                                                 src={item.object.avatar}
+                                                                role="presentation"
                                                                 />
 
                                                             </OverlayTrigger>

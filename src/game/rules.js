@@ -138,8 +138,6 @@ export const rules = {
             state.data = data;
 
 
-            let click_count = {};
-
             data.on_tick_effects = _.filter(data.on_tick_effects, (effect) => {
                 let same = _.filter(data.on_tick_effects, (effect2) => {
                     return effect.type === effect2.type
@@ -148,7 +146,6 @@ export const rules = {
                 return public_relations[effect.type].long > data.date.tick - effect.start_tick;
             });
 
-            console.log(data.on_tick_effects)
             _.each(data.on_tick_effects, (effect) => {
                 public_relations[effect.type].onTickByDelta(data, data.date.tick - effect.start_tick, effect.click_count);
 
@@ -307,8 +304,7 @@ export const rules = {
                     if (worker.to_vacation_ticker <= 0) {
                         let weeks = _.random(1,4)
                         worker.sendToVacation(weeks);
-                        state.data.helpers.
-                        lineEvent('vacation','Going to vacation', worker, 7 * weeks)
+                        state.data.helpers.lineEvent('vacation','Going to vacation', worker, 7 * weeks)
                     }
                 }
                 if (worker.in_vacation) {
@@ -375,7 +371,6 @@ export const rules = {
     projects: {
         onTick: function(state) {
             state.data.projects.forEach((project) => {
-                console.log(project.stage, project.type, project.is_paused);
 
                 if (project.is_paused) {
                     console.log('skip calculate paused project ' + project.name);

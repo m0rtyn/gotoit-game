@@ -16,7 +16,7 @@ import ProjectName from './ProjectName';
 import ProjectProgressBar from './ProjectProgressBar';
 import ProjectDeadlineBar from './ProjectDeadlineBar';
 
-import {skills_names, skills, technologies, project_kinds, project_platforms} from '../game/knowledge';
+import {skills_names, technologies, project_kinds, project_platforms} from '../game/knowledge';
 
 
 
@@ -80,11 +80,7 @@ class Project extends Component {
     render() {
         const data = this.props.data;
         const project = this.props.project;
-        console.log(project.estimate)
-        console.log(project.original_estimate)
-        console.log(project.done)
-        console.log(project.bugs)
-        const stats_data = _.mapValues(skills, (stat, key) => {
+        /*const stats_data = _.mapValues(skills, (stat, key) => {
             return {name: key, // _.capitalize(key[0]),
                 val:
                     <span>
@@ -98,7 +94,7 @@ class Project extends Component {
                         /<span>{project.estimate[key]}</span>
                     </span>
             };
-        });
+        });*/
 
         const manage_button = <button className="btn btn-xs btn-success">Manage</button>;
 

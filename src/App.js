@@ -1667,14 +1667,10 @@ class App extends Component {
     }
 
     createPopup(name, content) {
-        console.log('createPopup');
-        console.log(this)
-        console.log(this.popupHandler)
         this.popupHandler.createPopup(name, content);
     }
 
     render() {
-        console.log(this.state.data.projects_end_reports)
         return (
             <div id="app">
                 <BubblesAnimation onRef={ref => (this.animation = ref)}/>
