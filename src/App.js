@@ -346,8 +346,8 @@ class App extends Component {
         if (!window.confirm('Are you ready to start a new game? Your progress will be lost.')) return false;
         localStorage.setItem(game_name+"_app_state", null);
 
-        console.log(this);
-        console.log(this.state);
+        //console.log(this);
+        //console.log(this.state);
 
         let helpers = this.state.data.helpers;
         let new_state = getDefaultState();
@@ -374,12 +374,12 @@ class App extends Component {
     }
 
     modifyRelation(worker_id, project_id, value, role = null, team = null) {
-        console.log(arguments);
+        //console.log(arguments);
         this.setState(this.modifyRelationPure(this.state, worker_id, project_id, value, role, team));
     }
 
     modifyRelationPure(state, worker_id, project_id, value, role = null, team = null) {
-        console.log(arguments);
+        //console.log(arguments);
         const data = state.data;
 
         let put = (worker_id, project_id) => {
@@ -390,7 +390,7 @@ class App extends Component {
                 data.relations[worker_id][project_id][role] = value;
             }
             else {
-                console.log(data, data.workers_roles, worker_id);
+                //console.log(data, data.workers_roles, worker_id);
                 data.relations[worker_id][project_id] = _.clone(data.workers_roles[worker_id]); //JSON.parse(JSON.stringify());
                 //data.relations[worker_id][project_id] = value;
             }
@@ -811,15 +811,10 @@ class App extends Component {
         const getBonus = (handler) => {
             const top = handler.getTopNumber(id);
             if (top === 'out of top') {
-                console.log(top);
-                console.log(handler);
                 return 0;
             }
 
             const bonus = Math.max(0, 11 - top);
-            console.log(top);
-            console.log(handler);
-            console.log(bonus);
             return bonus;
         };
 
