@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import Portal from 'react-portal';
 
 import Select from 'react-select';
+
 import ReactBootstrapSlider from 'react-bootstrap-slider';
-// import '../../node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css';
+import '../../node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css';
 
 import _ from 'lodash';
 import classNames from 'classnames';
