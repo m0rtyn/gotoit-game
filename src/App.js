@@ -757,11 +757,13 @@ class App extends Component {
     }
 
     pauseProject(id) {
+        let data = this.state.data;
         let project = _.find(this.state.data.projects, (project) => { return (project.id === id); });
         project.is_paused = true;
         console.log('pause')
         let newTimelineEvents = this.state.data.timelineEvents.filter( i => i.object.name !== project.name);
-        this.state.data.timelineEvents = newTimelineEvents;
+        data.timelineEvents = newTimelineEvents;
+        this.setState({data})
         //this.checkState();
     }
 
