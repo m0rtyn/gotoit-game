@@ -38,9 +38,9 @@ class ButtonToolbar extends Component {
                 <li className="nav-item">
                     <a
                     className="nav-link"
-                    onClick={() => { data.helpers.changeContent('Advertising'); }}
+                    onClick={() => { data.helpers.changeContent('PublicRelations'); }}
                     >
-                        Advertising
+                        Public Relations
                     </a>
                 </li>
                 <li className="nav-item">

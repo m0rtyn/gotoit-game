@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ChartsController from './ChartsController'
 import _ from 'lodash';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
@@ -66,8 +67,8 @@ class MarketTop extends Component {
 
         return (
             <div>
-                <div className="flex-container-row">
-                    <span className="flex-element">
+                <div className="">
+                    <span className="">
                         <Select
                             name="form-field-name"
                             value={this.state.selected_platform}
@@ -75,7 +76,7 @@ class MarketTop extends Component {
                             onChange={(e) => { this.setState({selected_platform: e.value}); }}
                         />
                     </span>
-                    <span className="flex-element">
+                    <span className="">
                         <Select
                             name="form-field-name"
                             value={this.state.selected_kind}
@@ -83,10 +84,11 @@ class MarketTop extends Component {
                             onChange={(e) => { this.setState({selected_kind: e.value}); }}
                         />
                     </span>
-                    <span className="flex-element">
+                    <span className="">
                         Project in category: {category_count}
                     </span>
                 </div>
+                <ChartsController chart={{name: 'Market statistics', type: 'Market', table_data: table_data}}/>
                 <div className="text-center">
                     {no_data
                         ? <div style={{padding: 100}}><h2>Such programs have not yet been written.</h2></div>

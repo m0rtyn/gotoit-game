@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Achievements from './content/Achievements.js';
-import Advertising from './content/Advertising.js';
+import PublicRelations from './content/PublicRelations.js';
 import Archive from './content/Archive.js';
 import ChartsController from './content/ChartsController';
 import Exchange from './content/Exchange.js';
@@ -16,7 +16,7 @@ import Mail from '../components/content/Mail.js';
 
 const components = {
     'Achievements': Achievements,
-    'Advertising': Advertising,
+    'PublicRelations': PublicRelations,
     'Archive': Archive,
     'ChartsController': ChartsController,
     'Exchange': Exchange,
@@ -37,7 +37,7 @@ class ContentContainer extends Component {
         const ContentComponent = components[this.props.data.content];
 
         return (
-            <div className="card border">
+            <div className="card">
                 <ContentComponent data={this.props.data} />
             </div>
         );

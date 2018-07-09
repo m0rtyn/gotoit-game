@@ -27,7 +27,7 @@ class People extends Component {
             <div>
                 
                 {(data.workers.length < data.office.space)
-                    ? <div>
+                    ? <div className="column-buttons">
 
                         <button 
                             className="btn btn-success btn-xs" 
@@ -68,7 +68,6 @@ class People extends Component {
                             </button>
                             : ''
                     ))
-
                 }
                 
                 {data.workers.map((x, i) =>

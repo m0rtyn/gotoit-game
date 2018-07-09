@@ -159,6 +159,13 @@ export const archive_chats_parameters = {
     resolving_time_percents: {label: 'Resolving time percents', color: '#3e95cd'}
 };
 
+export const market_chart_parameters = {
+    design: {label: 'Design', color: '#8B0000'},
+    manage: {label: 'Manage', color: '#5cb85c'},
+    program: {label: 'Program', color: '#3e95cd'},
+    total: {label: 'Total', color: '#f7931a'}
+};
+
 export const btc_chart_parameters = { label: 'Bitcoin', color: '#f7931a' };
 
 export const colors = {
@@ -203,17 +210,17 @@ export const colors = {
     orange: '#fbb264',
 
     backgrounds: {
-        Achievements: '#FFFFFF',
-        Advertising: '#FFFFFF',
+        Achievements: '#C0E5ED',
+        PublicRelations: '#C0E5ED',
         Archive: '#C0E5ED',
         Exchange: '#C0E5ED',
         HireWorkers: '#C0E5ED',
         Loans: '#C0E5ED',
         MarketTop: '#C0E5ED',
-        ProjectsFind: '#FFFFFF',
-        StartMeeting: '#F47B68',
+        ProjectsFind: '#C0E5ED',
+        StartMeeting: '#C0E5ED',
         StartProject: '#C0E5ED',
-        Welcome: '#B6D2DE',
+        Welcome: '#C0E5ED',
     }
 
 

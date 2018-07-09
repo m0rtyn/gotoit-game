@@ -68,8 +68,8 @@ class HireWorkers extends Component {
                         </h4>
                         <Bar bar_data={rumor_bar} />
 
-                        <span className="flex-element">
-                            <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('Advertising'); }}>Advertising</button>
+                        <span className="">
+                            <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('PublicRelations'); }}>PublicRelations</button>
                         </span>
                     </div>
 

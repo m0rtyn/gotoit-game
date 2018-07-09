@@ -201,9 +201,9 @@ class Creation extends Component {
                 /> background
                 </h3>
                 <div className="card slim">
-                    <div className="flex-container-row slim">
+                    <div className=" slim">
                         {Object.keys(player_backgrounds).map((background) => {
-                            return <div key={background} className="flex-element slim">
+                            return <div key={background} className=" slim">
                                 <div className="radio text-center slim">
                                     <label className="slim">
                                         <h3 className="text-center">
@@ -224,12 +224,12 @@ class Creation extends Component {
                         <p className="text-center slim"> Start tech: {('technologist' === this.state.selected_background) ? "Agile, Test Drive Development or Refactoring" : technologies[player_backgrounds[this.state.selected_background].start_tech].name} </p>
                     </div>
                 </div>
-                <div className="card border slim">
+                <div className="card slim">
                     <div className="text-center slim">
                         <h4 className="text-center filament">Start {selected_background.might}:</h4>
-                        <div className="flex-container-row slim">
+                        <div className=" slim">
                             {Object.keys(selected_background.spices).map((spice) => {
-                                return <div key={spice} className="flex-element slim">
+                                return <div key={spice} className=" slim">
                                     <div className="radio text-center slim">
                                         <label className="slim">
                                             <h3 className="text-center slim-top">
@@ -312,9 +312,9 @@ class Creation extends Component {
                                     /> background
                                     </h3>
                                     <div className="card slim">
-                                        <div className="flex-container-row slim">
+                                        <div className=" slim">
                                             {Object.keys(player_backgrounds).map((background) => {
-                                                return <div key={background} className="flex-element slim">
+                                                return <div key={background} className=" slim">
                                                     <div className="radio text-center slim">
                                                         <label className="slim">
                                                             <h3 className="text-center">
@@ -335,12 +335,12 @@ class Creation extends Component {
                                             <p className="text-center slim"> Start tech: {('technologist' === this.state.selected_background) ? "Agile, Test Drive Development or Refactoring" : technologies[player_backgrounds[this.state.selected_background].start_tech].name} </p>
                                         </div>
                                     </div>
-                                    <div className="card border slim">
+                                    <div className="card slim">
                                         <div className="text-center slim">
                                             <h4 className="text-center filament">Start {selected_background.might}:</h4>
-                                            <div className="flex-container-row slim">
+                                            <div className=" slim">
                                                 {Object.keys(selected_background.spices).map((spice) => {
-                                                    return <div key={spice} className="flex-element slim">
+                                                    return <div key={spice} className=" slim">
                                                         <div className="radio text-center slim">
                                                             <label className="slim">
                                                                 <h3 className="text-center slim-top">
