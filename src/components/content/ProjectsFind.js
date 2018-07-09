@@ -39,7 +39,7 @@ class ProjectsFind extends Component {
                         <Bar bar_data={reputation_bar} />
 
                         <span className="">
-                                <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('Advertising'); }}>Advertising</button>
+                                <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('PublicRelations'); }}>PublicRelations</button>
                         </span>
                     </div>
                 </div>

@@ -210,17 +210,17 @@ export const colors = {
     orange: '#fbb264',
 
     backgrounds: {
-        Achievements: '#FFFFFF',
-        Advertising: '#FFFFFF',
+        Achievements: '#C0E5ED',
+        PublicRelations: '#C0E5ED',
         Archive: '#C0E5ED',
         Exchange: '#C0E5ED',
         HireWorkers: '#C0E5ED',
         Loans: '#C0E5ED',
         MarketTop: '#C0E5ED',
-        ProjectsFind: '#FFFFFF',
-        StartMeeting: '#F47B68',
+        ProjectsFind: '#C0E5ED',
+        StartMeeting: '#C0E5ED',
         StartProject: '#C0E5ED',
-        Welcome: '#B6D2DE',
+        Welcome: '#C0E5ED',
     }
 
 

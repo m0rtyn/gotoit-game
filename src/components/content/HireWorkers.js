@@ -69,7 +69,7 @@ class HireWorkers extends Component {
                         <Bar bar_data={rumor_bar} />
 
                         <span className="">
-                            <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('Advertising'); }}>Advertising</button>
+                            <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('PublicRelations'); }}>PublicRelations</button>
                         </span>
                     </div>
 
