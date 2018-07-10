@@ -73,10 +73,14 @@ export const rules = {
                     }
                 });
 
+                data.statistics.money_current_value.buffer = data.money;
+                data.statistics.btc_current_value.buffer = data.btc;
+                data.statistics.candidates_resumes.buffer = data.candidates.resumes.length;
+                data.statistics.projects_in_process.buffer = data.projects.length;
 
                _.mapValues(data.statistics, (stats, key) => {
                     stats.values.push(stats.buffer)
-                })
+                });
 
                 data.btc_statistic.values.push(data.current_btc_price);
 

@@ -531,6 +531,7 @@ class App extends Component {
         hired--;
         const data = this.state.data;
         _.remove(data.workers, (worker) => { return (worker.id === id); });
+        data.statistics.workers_hired.buffer = data.workers.length - 1;
         this.setState({data: data});
     }
 
@@ -718,6 +719,7 @@ class App extends Component {
         const data = this.state.data;
         project.hot = false;
         data.projects.push(project);
+        data.statistics.projects_accepted.buffer += 1;
         if (project.type !== 'meeting') {
             Object.keys(data.projects_default_technologies).forEach((technology) => {
                 if (data.projects_default_technologies[technology]) {
@@ -943,10 +945,11 @@ class App extends Component {
         switch (currency){
             case "usd":
                 data.money += quantity;
-                data.statistics.money_received.buffer += quantity;
+                data.statistics.money_summary.buffer += quantity;
                 break;
             case "btc":
                 data.btc += quantity;
+                data.statistics.btc_summary.buffer += quantity;
                 break;
             default:
                 console.log("unknown currency " + currency);
@@ -974,7 +977,9 @@ class App extends Component {
         const data = this.state.data;
         if (data.money >= usd) {
             this.chargeMoney(usd);
-            data.btc += usd / data.current_btc_price;
+            let btcAmount = usd / data.current_btc_price;
+            data.btc += btcAmount;
+            data.statistics.btc_summary.buffer += btcAmount;
         }
         else {
             console.log('not enough money');
