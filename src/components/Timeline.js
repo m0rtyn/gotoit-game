@@ -65,13 +65,13 @@ class Timeline extends Component {
                                                                     <div style={{ position: 'absolute' }}>
                                                                         <img 
                                                                         alt={item.object.name + ' platform'} 
-                                                                        src={require(`../../public/${project_platforms[item.object.platform].name}.svg`)}
+                                                                        src={item.object.avatar.platform}
                                                                         width={20} 
                                                                         height={20}
                                                                         />
                                                                     </div>
                                                                     <div style={{ position: 'absolute' }}>
-                                                                        <img alt={item.object.name + ' kind'} src={require(`../../public/${project_kinds[item.object.kind].name}.svg`)}
+                                                                        <img alt={item.object.name + ' kind'} src={item.object.avatar.kind}
                                                                             width={20} height={20}/>
                                                                     </div>
                                                                 </div>

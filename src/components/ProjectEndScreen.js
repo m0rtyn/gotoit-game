@@ -18,10 +18,6 @@ class ProjectEndScreen extends Component {
 
     }
 
-    componentDidMount() {
-        this.refs.end_screen.openPortal();
-    }
-
     render() {
         const data = this.props.data;
         let project = this.props.project;
@@ -32,49 +28,49 @@ class ProjectEndScreen extends Component {
         let platform_kind_top_handler = all_top_handler.filter('platform', project.platform).filter('kind', project.kind);
 
         return (
-            <div>
-                <Portal closeOnEsc ref="end_screen" onClose={data.helpers.projectArchiving}>
-                    <SimpleModal>
-                        <div>
-                            <p><button className="btn btn-warning float-right" onClick={() => {
-                                //data.helpers.projectArchiving();
-                                this.refs.end_screen.closePortal();
-                            }}>Archive</button></p>
+            <div className='flex-container-column'>
+                <div>
+                    <p><button className="btn btn-warning float-right" onClick={() => {
+                        //data.helpers.projectArchiving();
+                        this.props.closePopup();
+                    }}>Close</button></p>
+                </div>
+                <div className="text-center">
+                    <ProjectReport key={project.id} project={project} data={this.props.data} />
+                    <div className="card border text-center">
+                        <h3>Project Top Score</h3>
+                        <h2>All Project Top: {all_top_handler.getTopNumber(project.id)}</h2>
+                        <div className="flex-container-row">
+                            {skills_names.map((skill) => <div key={skill} className="flex-element">
+                                {skill} top: {all_top_handler.getTopNumber(project.id, skill)}
+                            </div>)}
                         </div>
-                        <div className="text-center">
-                            <ProjectReport key={project.id} project={project} data={this.props.data} />
-                            <div className="card border text-center">
-                                <h3>Project Top Score</h3>
-                                <h2>All Project Top: {all_top_handler.getTopNumber(project.id)}</h2>
-                                <div className="flex-container-row">
-                                    {skills_names.map((skill) => <div key={skill} className="flex-element">
-                                        {skill} top: {all_top_handler.getTopNumber(project.id, skill)}
-                                    </div>)}
-                                </div>
-                                <h3>{project_platforms[project.platform].name} Top: {platform_top_handler.getTopNumber(project.id)}</h3>
-                                <div className="flex-container-row">
-                                    {skills_names.map((skill) => <div key={skill} className="flex-element">
-                                        {skill} top: {platform_top_handler.getTopNumber(project.id, skill)}
-                                    </div>)}
-                                </div>
-                                <h3>{project_kinds[project.kind].name} Top: {kind_top_handler.getTopNumber(project.id)}</h3>
-                                <div className="flex-container-row">
-                                    {skills_names.map((skill) => <div key={skill} className="flex-element">
-                                        {skill} top: {kind_top_handler.getTopNumber(project.id, skill)}
-                                    </div>)}
-                                </div>
-                                <h3>{project_platforms[project.platform].name} {project_kinds[project.kind].name} Top: {platform_kind_top_handler.getTopNumber(project.id)}</h3>
-                                <div className="flex-container-row">
-                                    {skills_names.map((skill) => <div key={skill} className="flex-element">
-                                        {skill} top: {platform_kind_top_handler.getTopNumber(project.id, skill)}
-                                    </div>)}
-                                </div>
-                            </div>
+                        <h3>{project_platforms[project.platform].name} Top: {platform_top_handler.getTopNumber(project.id)}</h3>
+                        <div className="flex-container-row">
+                            {skills_names.map((skill) => <div key={skill} className="flex-element">
+                                {skill} top: {platform_top_handler.getTopNumber(project.id, skill)}
+                            </div>)}
                         </div>
-                    </SimpleModal>
-                </Portal>
+                        <h3>{project_kinds[project.kind].name} Top: {kind_top_handler.getTopNumber(project.id)}</h3>
+                        <div className="flex-container-row">
+                            {skills_names.map((skill) => <div key={skill} className="flex-element">
+                                {skill} top: {kind_top_handler.getTopNumber(project.id, skill)}
+                            </div>)}
+                        </div>
+                        <h3>{project_platforms[project.platform].name} {project_kinds[project.kind].name} Top: {platform_kind_top_handler.getTopNumber(project.id)}</h3>
+                        <div className="flex-container-row">
+                            {skills_names.map((skill) => <div key={skill} className="flex-element">
+                                {skill} top: {platform_kind_top_handler.getTopNumber(project.id, skill)}
+                            </div>)}
+                        </div>
+                    </div>
+                </div>
             </div>
-        );
+        )
+
+
+
+
     }
 }
 

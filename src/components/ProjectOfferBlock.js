@@ -9,16 +9,16 @@ import {skills} from '../game/knowledge';
 
 class ProjectOfferBlock extends Component {
 
-    acceptOffered(event, type) {
-        this.props.data.helpers.acceptOffered(event.target.id, type);
+    acceptOffered(event) {
+        this.props.data.helpers.acceptOffered(event.target.id);
     }
 
-    startOffered(event, type) {
-        this.props.data.helpers.startOffered(event.target.id, type);
+    startOffered(event) {
+        this.props.data.helpers.startOffered(event.target.id);
     }
 
-    reject(event, type) {
-        this.props.data.helpers.rejectOffered(event.target.id, type);
+    reject(event) {
+        this.props.data.helpers.rejectOffered(event.target.id);
     }
 
     render() {
@@ -37,17 +37,22 @@ class ProjectOfferBlock extends Component {
                 {candidate.penalty > 0 ? <label>Penalty: {candidate.penalty}$</label> : ''}
             </div>
             <StatsBar stats={stats_data} data={this.props.data}/>
-            <div className="btn-group">
-                <button className="btn btn-success" id={candidate.id} onClick={(e) => this.acceptOffered(e, type)}>
-                    Accept
-                </button>
-                &nbsp;
-                <button className="btn btn-warning" id={candidate.id} onClick={(e) => this.startOffered(e, type)}>
-                    Start
-                </button>
-                &nbsp;
-                <button className="btn btn-danger" id={candidate.id} onClick={(e) => this.reject(e, type)}>Hide</button>
-            </div>
+            {
+                candidate.stage === 'ready' ?
+                    <div className="btn-group">
+                        <button className="btn btn-success" id={candidate.id} onClick={(e) => this.acceptOffered(e)}>
+                            Accept
+                        </button>
+                        &nbsp;
+                        <button className="btn btn-warning" id={candidate.id} onClick={(e) => this.startOffered(e)}>
+                            Start
+                        </button>
+                        &nbsp;
+                        <button className="btn btn-danger" id={candidate.id} onClick={(e) => this.reject(e)}>Hide</button>
+                    </div>
+                : ''
+            }
+
         </div>;
     }
 }

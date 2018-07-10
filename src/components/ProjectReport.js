@@ -8,7 +8,7 @@ import ProjectName from './ProjectName';
 import {skills, technologies} from '../game/knowledge';
 
 
-class Project extends Component {
+class ProjectReport extends Component {
 
     render() {
         const data = this.props.data;
@@ -94,4 +94,4 @@ class Project extends Component {
     }
 }
 
-export default Project;
+export default ProjectReport;

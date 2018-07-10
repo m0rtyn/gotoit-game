@@ -267,7 +267,13 @@ class App extends Component {
                     var date = new Date(year, month, number, hours, minutes, seconds);//string instead number but works
                     return date
                 })()
-            })
+            });
+
+            _.each(loaded_app_state.data.mailbox, (item, id) => {
+                item.type === 'Resume'
+                ?   loaded_app_state.data.mailbox[id].content = _.create(WorkerModel.prototype, item.content)
+                :   loaded_app_state.data.mailbox[id].content = _.create(ProjectModel.prototype, item.content)
+            });
 
             loaded_app_state.data.helpers = helpers;
 
@@ -497,6 +503,7 @@ class App extends Component {
     hireEmployer(worker) {
         hired++;
         const data = this.state.data;
+        worker.hired = true;
         worker.facts.tick_hired = data.date.tick;
         worker.facts.prev_salary_payment_tick = data.date.tick;
         data.workers.push(worker);
@@ -688,6 +695,7 @@ class App extends Component {
     }
 
     acceptOffered(id) {
+        console.log('accept');
         const data = this.state.data;
         let project = (_.remove(data.offered_projects, (candidate) => { return (candidate.id === id); }))[0];
         project.hot = false;
@@ -697,6 +705,7 @@ class App extends Component {
     }
 
     startOffered(id) {
+        console.log('START')
         const data = this.state.data;
         let project = (_.remove(data.offered_projects, (candidate) => { return (candidate.id === id); }))[0];
 
@@ -868,6 +877,11 @@ class App extends Component {
         }
 
         project.stage = stage;
+        data.mailbox.push({
+            type: 'Project report',
+            content: _.create(ProjectModel.prototype, project)
+        });
+
         data.projects_end_reports.push(project);
         //data.projects_archive_reports.unshift(project);
         this.setState({data: data});
@@ -895,23 +909,48 @@ class App extends Component {
         if (project.is_storyline || project.stage !== 'finish' ) return;
 
         if (project.type === 'training' && !data.attainments.includes('FirstTraining')) {
-            data.offered_projects.push(Lorer.afterFirstTraining(project));
+            let this_project = Lorer.afterFirstTraining(project);
+            data.offered_projects.push(this_project);
+            data.mailbox.push({
+                type: 'Hot offer',
+                content: this_project
+            });
             data.attainments.push('FirstTraining')
         }
         if (project.size === 1 && !data.attainments.includes('FirstPart')) {
-            data.offered_projects.push(Lorer.afterFirstPart(project));
+            let this_project = Lorer.afterFirstPart(project);
+            data.offered_projects.push(this_project);
+            data.mailbox.push({
+                type: 'Hot offer',
+                content: this_project
+            });
             data.attainments.push('FirstPart')
         }
         if (project.size === 2 && !data.attainments.includes('FirstModule')) {
-            data.offered_projects.push(Lorer.afterFirstModule(project));
+            let this_project = Lorer.afterFirstModule(project);
+            data.offered_projects.push(this_project);
+            data.mailbox.push({
+                type: 'Hot offer',
+                content: this_project
+            });
             data.attainments.push('FirstModule')
         }
         if (project.size === 3 && !data.attainments.includes('FirstApplication')) {
-            data.offered_projects.push(Lorer.afterFirstApplication(project));
+            let this_project = Lorer.afterFirstApplication(project);
+            data.offered_projects.push(this_project);
+            data.mailbox.push({
+                type: 'Hot offer',
+                content: this_project
+            });
             data.attainments.push('FirstApplication')
         }
         if (project.size === 4 && !data.attainments.includes('BigDeal')) {
-            data.offered_projects.push(Lorer.afterFirstBigDeal(project));
+            let this_project = Lorer.afterFirstBigDeal(project);
+            data.offered_projects.push(this_project);
+            data.mailbox.push({
+                type: 'Hot offer',
+                content: this_project
+            });
             data.attainments.push('BigDeal')
         }
 
@@ -1392,6 +1431,7 @@ class App extends Component {
     pushNewProject() {
         const data = this.state.data;
         let quality = Math.ceil(_.random(1, (current_tick / (24*30)) + (projects_done*0.1)));
+        let this_project = ProjectModel.generate(quality, size, 'history');
         let size =
             (quality < 3) ? 1 : (
                 (quality < 5) ? _.random(1, _.random(1, 2)) : (
@@ -1416,7 +1456,11 @@ class App extends Component {
             );
 
         //console.log('probability: ' + probability.toFixed(2) + ' quality: ' + quality + ' size: ' + size);
-        data.offered_projects.push(ProjectModel.generate(quality, size, 'history'));
+        data.offered_projects.push();
+        data.mailbox.push({
+            type: 'Offer',
+            content: this_project
+        });
         addAction('New job!', {timeOut: 3000, extendedTimeOut: 1000});
     }
 
@@ -1424,6 +1468,12 @@ class App extends Component {
         const data = this.state.data;
         let worker = WorkerModel.generate(_.random(1, Math.floor(3 + projects_done*0.1 + current_tick * 0.001)));
         data.candidates.resumes.push(worker);
+        console.log('new candidate');
+        console.log(worker)
+        data.mailbox.push({
+            type: 'Resume',
+            content: worker
+        });
         addAction('New resume: ' + worker.name);
     }
 
@@ -1668,9 +1718,6 @@ class App extends Component {
     }
 
     createPopup(name, content) {
-        console.log('createPopup');
-        console.log(this)
-        console.log(this.popupHandler)
         this.popupHandler.createPopup(name, content);
     }
 

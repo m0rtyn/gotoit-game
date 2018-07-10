@@ -80,10 +80,6 @@ class Project extends Component {
     render() {
         const data = this.props.data;
         const project = this.props.project;
-        console.log(project.estimate)
-        console.log(project.original_estimate)
-        console.log(project.done)
-        console.log(project.bugs)
         const stats_data = _.mapValues(skills, (stat, key) => {
             return {name: key, // _.capitalize(key[0]),
                 val:
@@ -176,11 +172,11 @@ class Project extends Component {
                         <div className="flex-container-row">
                             <div className='project_icon'>
                                 <div style={{ position: 'absolute' }}>
-                                    <img alt={project.name + ' avatar'} src={require(`../../public/${project_platforms[project.platform].name}.svg`)}
+                                    <img alt={project.name + ' avatar'} src={project.avatar.platform}
                                          width={60} height={60}/>
                                 </div>
                                 <div style={{ position: 'absolute' }}>
-                                    <img alt={project.name + ' avatar'} src={require(`../../public/${project_kinds[project.kind].name}.svg`)}
+                                    <img alt={project.name + ' avatar'} src={project.avatar.kind}
                                          width={60} height={60}/>
                                 </div>
                             </div>
