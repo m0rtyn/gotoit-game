@@ -3,6 +3,7 @@ import Portal from 'react-portal';
 import _ from 'lodash';
 
 import ReactBootstrapSlider from 'react-bootstrap-slider';
+import '../../node_modules/react-bootstrap-slider/src/css/bootstrap-slider.min.css';
 
 import TeamDialog from './TeamDialog';
 

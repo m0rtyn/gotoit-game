@@ -25,7 +25,7 @@ class Exchange extends Component {
                     <h5 className="">Your BTC: {data.btc}</h5>
                 </div>
                 <div className="">
-                    <label className="">
+                    <div className="">
                         Buy BTC for
                         <div>
                             <button className={data.money >= 1 ? "btn btn-info" : "btn btn-info disabled"} onClick={() => data.helpers.buyBTC(1)}>$1</button>
@@ -34,8 +34,8 @@ class Exchange extends Component {
                             <button className={data.money >= 1000 ? "btn btn-info" : "btn btn-info disabled"} onClick={() => data.helpers.buyBTC(1000)}>$1000</button>
                             <button className={data.money >= 10000 ? "btn btn-info" : "btn btn-info disabled"} onClick={() => data.helpers.buyBTC(10000)}>$10000</button>
                         </div>
-                    </label>
-                    <label className="">
+                    </div>
+                    <div className="">
                         Sell BTC for
                         <div>
                             <button className={data.btc >= (1 / data.current_btc_price) ? "btn btn-info" : "btn btn-info disabled"} onClick={() => data.helpers.sellBTC(1)}>$1</button>
@@ -44,7 +44,7 @@ class Exchange extends Component {
                             <button className={data.btc >= (1000 / data.current_btc_price) ? "btn btn-info" : "btn btn-info disabled"} onClick={() => data.helpers.sellBTC(1000)}>$1000</button>
                             <button className={data.btc >= (10000 / data.current_btc_price) ? "btn btn-info" : "btn btn-info disabled"} onClick={() => data.helpers.sellBTC(10000)}>$10000</button>
                         </div>
-                    </label>
+                    </div>
                 </div>
             </div>
         );

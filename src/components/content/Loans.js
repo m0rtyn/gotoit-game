@@ -64,11 +64,11 @@ class Loans extends Component {
                                     ? <button className="btn btn-success btn-sm" onClick={() => this.take(size)}>take</button>
                                     : <button className="btn btn-success btn-sm disabled">need {loan.min_credit_score} score</button>
                                 }
-                                <label> {loan.name} </label>
+                                <span> {loan.name} </span>
                             </h4>
-                            <label className=""> Money: {loan.money}$ </label>
-                            <label className=""> Time: {loan.time} month </label>
-                            <label className=""> Interest: {loan.interest}% </label>
+                            <span className=""> Money: {loan.money}$ </span>
+                            <span className=""> Time: {loan.time} month </span>
+                            <span className=""> Interest: {loan.interest}% </span>
                         </div>
                     })}
 
@@ -80,17 +80,17 @@ class Loans extends Component {
                         return <div className="card" key={i}>
                             <div className="">
                                 <h4 className=""> {loan.name} </h4>
-                                <label className=""> Money: {loan.money}$ </label>
-                                <label className=""> Time: {loan.time} month </label>
-                                <label className=""> Interest: {loan.interest}% </label>
-                                <label className={paid_percent ? "" : " hidden"}>
+                                <span className=""> Money: {loan.money}$ </span>
+                                <span className=""> Time: {loan.time} month </span>
+                                <span className=""> Interest: {loan.interest}% </span>
+                                <span className={paid_percent ? "" : " hidden"}>
                                     <button
                                         className={this.getEarlyCost(loan) <= data.money ? "btn btn-success btn-sm" : "btn btn-success btn-sm disabled"}
                                         onClick={() => { if (this.getEarlyCost(loan) <= data.money) this.earlyRepayment(i); }}
                                     >
                                         early repayment {this.getEarlyCost(loan)}$
                                     </button>
-                                </label>
+                                </span>
                             </div>
                             <div className="filament">
                                 <div className="progress">

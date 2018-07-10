@@ -69,7 +69,7 @@ class Meeting extends Component {
 
         const manage_button = <button className="btn ">Manage</button>;
 
-        let label = (id, text) => { return <span key={id}> <label className="text-primary">{text}</label> </span>; };
+        let label = (id, text) => { return <span key={id} className="text-primary"> {text} </span>; };
 
         let team_ids = {};
         _.keys(data.relations).forEach((worker_id) => {
@@ -106,17 +106,17 @@ class Meeting extends Component {
         return (
             <div className="card fat">
                 <div className="">
-                    <label className=""> {project.name} </label>
-                    <label className=""> Reward: {project.reward}$ </label>
-                    {(project.penalty > 0 ? <label className=""> Penalty: {project.penalty}$ </label> : ' ')}
+                    <span className=""> {project.name} </span>
+                    <span className=""> Reward: {project.reward}$ </span>
+                    {(project.penalty > 0 ? <span className=""> Penalty: {project.penalty}$ </span> : ' ')}
                     <div>
                         {start_pause_button}
                         {reject_button}
                         <Portal ref="manage" closeOnEsc openByClickOn={manage_button}>
                             <TeamDialog>
                                 <h4 className="">
-                                    <label className=""> {project.name} </label>
-                                    <div className=""> <label> {start_pause_button} {reject_button} </label> </div>
+                                    <span className=""> {project.name} </span>
+                                    <div className=""> {start_pause_button} {reject_button} </div>
                                 </h4>
                                 <div className="row">
                                     <div className="col-md-8">
@@ -124,13 +124,17 @@ class Meeting extends Component {
                                             {project.deadline > 0 ? <div key="deadline" className="row">
                                                 <div className="col-md-2">Deadline</div>
                                                 <div className="col-md-10 progress">
-                                                    <div className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'bg-danger' : 'bg-warning'))} role="progressbar"
-                                                         style={{width: (100-(project.deadline / project.deadline_max * 100))+'%'}}>
-                                                        <label>{project.deadline_max - project.deadline} hours</label>
+                                                    <div 
+                                                    className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'bg-danger' : 'bg-warning'))} role="progressbar"
+                                                    style={{width: (100-(project.deadline / project.deadline_max * 100))+'%'}}
+                                                    >
+                                                        {project.deadline_max - project.deadline} hours
                                                     </div>
-                                                    <div className="progress-bar bg-success" role="progressbar"
-                                                         style={{width: (project.deadline / project.deadline_max * 100)+'%'}}>
-                                                        <label>{project.deadline} hours</label>
+                                                    <div 
+                                                    className="progress-bar bg-success" role="progressbar"
+                                                    style={{width: (project.deadline / project.deadline_max * 100)+'%'}}
+                                                    >
+                                                        {project.deadline} hours
                                                     </div>
                                                 </div>
                                             </div> : ''}
@@ -139,7 +143,7 @@ class Meeting extends Component {
                                         <div className="card">
                                             {this.props.data.workers.map((worker) => {
                                                 return <div key={worker.id + project.id} className="card filament">
-                                                    <label className="" style={{width: '100%'}}>
+                                                    <div className="" style={{width: '100%'}}>
                                                         <input
                                                             type="checkbox"
                                                             id={worker.id}
@@ -148,7 +152,7 @@ class Meeting extends Component {
                                                                 data.helpers.modifyRelation(event.target.id, project.id, event.target.checked, 'meeting');
                                                             }}/>
                                                         <h4>{worker.name}</h4>
-                                                    </label>
+                                                    </div>
                                                 </div>
                                             })}
                                         </div>
@@ -161,13 +165,17 @@ class Meeting extends Component {
 
                 {project.deadline > 0 ?
                     <div className="progress">
-                        <div className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'bg-danger' : 'bg-warning'))} role="progressbar"
-                             style={{width: (100-(project.deadline / project.deadline_max * 100))+'%'}}>
-                            <label>{project.deadline_max - project.deadline} gone</label>
+                        <div 
+                        className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'bg-danger' : 'bg-warning'))} role="progressbar"
+                        style={{width: (100-(project.deadline / project.deadline_max * 100))+'%'}}
+                        >
+                            {project.deadline_max - project.deadline} gone
                         </div>
-                        <div className="progress-bar bg-success" role="progressbar"
-                             style={{width: (project.deadline / project.deadline_max * 100)+'%'}}>
-                            <label>{project.deadline} to deadline</label>
+                        <div 
+                        className="progress-bar bg-success" role="progressbar"
+                        style={{width: (project.deadline / project.deadline_max * 100)+'%'}}
+                        >
+                            {project.deadline} to deadline
                         </div>
                     </div> : ''
                 }

@@ -32,9 +32,11 @@ class ProjectOfferBlock extends Component {
         return <div key={candidate.id} className="card">
             <ProjectName project={candidate}/>
             <div>
-                <label>Deadline: {candidate.getDeadlineText()}</label>&nbsp;
-                <label>Reward: {candidate.reward}$</label>&nbsp;
-                {candidate.penalty > 0 ? <label>Penalty: {candidate.penalty}$</label> : ''}
+                Deadline: {candidate.getDeadlineText()}
+                &nbsp;
+                Reward: {candidate.reward}$
+                &nbsp;
+                {candidate.penalty > 0 ? <span>Penalty: {candidate.penalty}$</span> : ''}
             </div>
             <StatsBar stats={stats_data} data={this.props.data}/>
             {
