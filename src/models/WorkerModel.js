@@ -30,10 +30,11 @@ class WorkerModel {
         this.morale = 100;
         this.accept_default = true;
         this.avatar = gender === 'male' ? maleAvatar : femaleAvatar;
+        this.hired = false;
 
 
         this.temper = {
-            earliness: _.random(0, 3), variability: _.random(0, 3)
+            earliness: _.random(0, 4), variability: _.random(0, 4)
         };
 
         this.character = worker_character_types[_.random(0, 4)]

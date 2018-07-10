@@ -88,6 +88,7 @@ export const rules = {
 
             }
 
+
             data.workers.forEach((worker) => {
                 if (worker.stats.design > data.max_stat) data.max_stat = worker.stats.design;
                 if (worker.stats.program > data.max_stat) data.max_stat = worker.stats.program;

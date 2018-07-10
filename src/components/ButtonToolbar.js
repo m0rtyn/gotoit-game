@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Lorer from "../services/Lorer";
+import ProjectModel from "../models/ProjectModel";
 
 class ButtonToolbar extends Component {
 
@@ -65,6 +67,20 @@ class ButtonToolbar extends Component {
                     onClick={() => { data.helpers.changeContent('Mail'); }}
                     >
                         Mail
+                    </a>
+                </li>
+                <li className="nav-item">
+                    <a
+                        className="nav-link"
+                        onClick={() => { let this_project = Lorer.afterFirstModule(ProjectModel.generate(1, 1, 'player'));
+                            data.offered_projects.push(this_project);
+                            data.mailbox.push({
+                                type: 'Hot offer',
+                                content: this_project
+                            });
+                            data.attainments.push('FirstModule') }}
+                    >
+                        Create hot offer
                     </a>
                 </li>
             </ul>

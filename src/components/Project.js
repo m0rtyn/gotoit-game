@@ -80,7 +80,9 @@ class Project extends Component {
     render() {
         const data = this.props.data;
         const project = this.props.project;
+
         /*const stats_data = _.mapValues(skills, (stat, key) => {
+
             return {name: key, // _.capitalize(key[0]),
                 val:
                     <span>
@@ -175,18 +177,19 @@ class Project extends Component {
             onMouseOut={() => {data.helpers.modifyHoveredObjects()}}
             id={project.id}
             >
+
                 <div className="card-header">
                     <div className="card-header">
                         <div className='project-avatar'>
                             <img 
                             className='project-avatar'
-                            alt={project.name + ' avatar'} 
-                            src={require(`../../public/${project_platforms[project.platform].name}.svg`)}
+                            alt={project.name + ' avatar'}
+                            src={project.avatar.platform}
                             />
                             <img 
                             className='project-avatar'
-                            alt={project.name + ' avatar'} 
-                            src={require(`../../public/${project_kinds[project.kind].name}.svg`)}
+                            alt={project.name + ' avatar'}
+                            src={project.avatar.kind}
                             />
                         </div>
 
