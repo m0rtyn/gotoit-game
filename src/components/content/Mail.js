@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import _ from 'lodash'
 import ProjectEndScreen from '../ProjectEndScreen';
 import HotOffer from "../HotOffer";

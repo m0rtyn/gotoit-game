@@ -27,7 +27,6 @@ import Lorer from './services/Lorer';
 import {skills_names, project_platforms, project_kinds, meetings, workers_bonus_items, technologies, skills_true} from './game/knowledge';
 
 import {getDefaultState} from './game/default_state';
-import ReactDOM from "react-dom";
 
 export var current_tick = 0;
 export const setCurrentTick = (tick) => { current_tick = tick; };
@@ -353,8 +352,8 @@ class App extends Component {
         if (!window.confirm('Are you ready to start a new game? Your progress will be lost.')) return false;
         localStorage.setItem(game_name+"_app_state", null);
 
-        console.log(this);
-        console.log(this.state);
+        //console.log(this);
+        //console.log(this.state);
 
         let helpers = this.state.data.helpers;
         let new_state = getDefaultState();
@@ -381,12 +380,12 @@ class App extends Component {
     }
 
     modifyRelation(worker_id, project_id, value, role = null, team = null) {
-        console.log(arguments);
+        //console.log(arguments);
         this.setState(this.modifyRelationPure(this.state, worker_id, project_id, value, role, team));
     }
 
     modifyRelationPure(state, worker_id, project_id, value, role = null, team = null) {
-        console.log(arguments);
+        //console.log(arguments);
         const data = state.data;
 
         let put = (worker_id, project_id) => {
@@ -397,7 +396,7 @@ class App extends Component {
                 data.relations[worker_id][project_id][role] = value;
             }
             else {
-                console.log(data, data.workers_roles, worker_id);
+                //console.log(data, data.workers_roles, worker_id);
                 data.relations[worker_id][project_id] = _.clone(data.workers_roles[worker_id]); //JSON.parse(JSON.stringify());
                 //data.relations[worker_id][project_id] = value;
             }
@@ -539,6 +538,7 @@ class App extends Component {
         hired--;
         const data = this.state.data;
         _.remove(data.workers, (worker) => { return (worker.id === id); });
+        data.statistics.workers_hired.buffer = data.workers.length - 1;
         this.setState({data: data});
     }
 
@@ -728,6 +728,7 @@ class App extends Component {
         const data = this.state.data;
         project.hot = false;
         data.projects.push(project);
+        data.statistics.projects_accepted.buffer += 1;
         if (project.type !== 'meeting') {
             Object.keys(data.projects_default_technologies).forEach((technology) => {
                 if (data.projects_default_technologies[technology]) {
@@ -767,11 +768,13 @@ class App extends Component {
     }
 
     pauseProject(id) {
+        let data = this.state.data;
         let project = _.find(this.state.data.projects, (project) => { return (project.id === id); });
         project.is_paused = true;
         console.log('pause')
         let newTimelineEvents = this.state.data.timelineEvents.filter( i => i.object.name !== project.name);
-        this.state.data.timelineEvents = newTimelineEvents;
+        data.timelineEvents = newTimelineEvents;
+        this.setState({data})
         //this.checkState();
     }
 
@@ -819,15 +822,10 @@ class App extends Component {
         const getBonus = (handler) => {
             const top = handler.getTopNumber(id);
             if (top === 'out of top') {
-                console.log(top);
-                console.log(handler);
                 return 0;
             }
 
             const bonus = Math.max(0, 11 - top);
-            console.log(top);
-            console.log(handler);
-            console.log(bonus);
             return bonus;
         };
 
@@ -986,10 +984,11 @@ class App extends Component {
         switch (currency){
             case "usd":
                 data.money += quantity;
-                data.statistics.money_received.buffer += quantity;
+                data.statistics.money_summary.buffer += quantity;
                 break;
             case "btc":
                 data.btc += quantity;
+                data.statistics.btc_summary.buffer += quantity;
                 break;
             default:
                 console.log("unknown currency " + currency);
@@ -1017,7 +1016,9 @@ class App extends Component {
         const data = this.state.data;
         if (data.money >= usd) {
             this.chargeMoney(usd);
-            data.btc += usd / data.current_btc_price;
+            let btcAmount = usd / data.current_btc_price;
+            data.btc += btcAmount;
+            data.statistics.btc_summary.buffer += btcAmount;
         }
         else {
             console.log('not enough money');
@@ -1722,7 +1723,6 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.state.data.projects_end_reports)
         return (
             <div id="app">
                 <BubblesAnimation onRef={ref => (this.animation = ref)}/>

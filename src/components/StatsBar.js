@@ -17,6 +17,7 @@ class StatsBar extends Component {
                     return <span key={stat}>
                         {stats[stat].name}: <span>{stats[stat].val}{'  '}</span>
                     </span>
+
                 })}
                 </div>
         );

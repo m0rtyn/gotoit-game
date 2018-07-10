@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import Bar from './Bar'
-import PropTypes from 'prop-types';
-import _ from "lodash";
-import {roles, skills_names} from "../game/knowledge";
+//import PropTypes from 'prop-types';
+//import _ from "lodash";
+//import {roles, skills_names} from "../game/knowledge";
 
 class StatsProgressBar extends Component {
     constructor(props){
@@ -25,8 +25,8 @@ class StatsProgressBar extends Component {
                 stat = 'design';
                 bar_data = {
                     name: stat,
-                    value: parseInt(stats[stat].value),
-                    width: (parseInt(stats[stat].value) / data.max_stat) * 100,
+                    value: parseInt(stats[stat].value, 10),
+                    width: (parseInt(stats[stat].value, 10) / data.max_stat) * 100,
                     color: stats[stat].color,
                     showName: true
                 };
@@ -35,8 +35,8 @@ class StatsProgressBar extends Component {
                 stat = 'program';
                 bar_data = {
                     name: stat,
-                    value: parseInt(stats[stat].value),
-                    width: (parseInt(stats[stat].value) / data.max_stat) * 100,
+                    value: parseInt(stats[stat].value, 10),
+                    width: (parseInt(stats[stat].value, 10) / data.max_stat) * 100,
                     color: stats[stat].color,
                     showName: true
                 };
@@ -45,12 +45,14 @@ class StatsProgressBar extends Component {
                 stat = 'manage';
                 bar_data = {
                     name: stat,
-                    value: parseInt(stats[stat].value),
-                    width: (parseInt(stats[stat].value) / data.max_stat) * 100,
+                    value: parseInt(stats[stat].value, 10),
+                    width: (parseInt(stats[stat].value, 10) / data.max_stat) * 100,
                     color: stats[stat].color,
                     showName: true
                 };
                 break;
+
+            default: break;
         }
 
         return (

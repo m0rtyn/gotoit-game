@@ -3,7 +3,7 @@ import {colors, public_relations} from "../../game/knowledge";
 import Bar from '../Bar';
 import _ from 'lodash'
 
-class Advertising extends Component {
+class PublicRelations extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -94,4 +94,4 @@ class Advertising extends Component {
     }
 }
 
-export default Advertising;
+export default PublicRelations;

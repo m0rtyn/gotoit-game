@@ -55,20 +55,20 @@ class Loans extends Component {
             <div className="text-center">
                 <h3 className="text-center">Loans</h3>
                 Your credit score: {this.calcCreditScore()}
-                <div className="flex-container-row">
+                <div className="">
                     {Object.keys(loans).map((size) => {
                         let loan = loans[size];
-                        return <div className="flex-element flex-container-column" key={size}>
-                            <h4 className="flex-element">
+                        return <div className=" flex-container-column" key={size}>
+                            <h4 className="">
                                 {loan.min_credit_score <= this.calcCreditScore()
                                     ? <button className="btn btn-success btn-sm" onClick={() => this.take(size)}>take</button>
                                     : <button className="btn btn-success btn-sm disabled">need {loan.min_credit_score} score</button>
                                 }
                                 <label> {loan.name} </label>
                             </h4>
-                            <label className="flex-element"> Money: {loan.money}$ </label>
-                            <label className="flex-element"> Time: {loan.time} month </label>
-                            <label className="flex-element"> Interest: {loan.interest}% </label>
+                            <label className=""> Money: {loan.money}$ </label>
+                            <label className=""> Time: {loan.time} month </label>
+                            <label className=""> Interest: {loan.interest}% </label>
                         </div>
                     })}
 
@@ -77,13 +77,13 @@ class Loans extends Component {
                     {data.taken_loans.map((loan, i) => {
                         let paid_percent = Math.ceil((loan.time - loan.timer) / loan.time * 100);
 
-                        return <div className="card border" key={i}>
-                            <div className="flex-container-row">
-                                <h4 className="flex-element"> {loan.name} </h4>
-                                <label className="flex-element"> Money: {loan.money}$ </label>
-                                <label className="flex-element"> Time: {loan.time} month </label>
-                                <label className="flex-element"> Interest: {loan.interest}% </label>
-                                <label className={paid_percent ? "flex-element" : "flex-element hidden"}>
+                        return <div className="card" key={i}>
+                            <div className="">
+                                <h4 className=""> {loan.name} </h4>
+                                <label className=""> Money: {loan.money}$ </label>
+                                <label className=""> Time: {loan.time} month </label>
+                                <label className=""> Interest: {loan.interest}% </label>
+                                <label className={paid_percent ? "" : " hidden"}>
                                     <button
                                         className={this.getEarlyCost(loan) <= data.money ? "btn btn-success btn-sm" : "btn btn-success btn-sm disabled"}
                                         onClick={() => { if (this.getEarlyCost(loan) <= data.money) this.earlyRepayment(i); }}

@@ -12,7 +12,7 @@ import {addAction} from '../components/ToastNest';
 import Narrator from '../services/Narrator';
 import ValueCache from '../services/ValueCache';
 
-import {getData, current_tick, addTimelineEvent} from '../App';
+import {getData, current_tick} from '../App';
 
 import maleAvatar from '../../public/male.png'
 import femaleAvatar from '../../public/female.png'

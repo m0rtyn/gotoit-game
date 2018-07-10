@@ -55,7 +55,7 @@ class ProjectReport extends Component {
 
 
         return (
-            <div className="card border">
+            <div className="card">
                 <ProjectName project={project} /> ({project.reward}$)
 
                 {project.deadline_max > 0 ?
@@ -75,18 +75,23 @@ class ProjectReport extends Component {
                     Project is <strong>{project.stage}ed</strong>.
                 </h4>
                 <p className="small">
-                    With team {team_label}{tech.length ? <span className="small"> and tech {tech_label}</span> : ''}. Spent {project.facts.money_spent}$ for salary.
-                    Did {project.facts.tasks_done} tasks. Passed {project.facts.bugs_passed} bugs.
-                    Did {project.facts.refactored} refactoring, wrote {project.facts.tests_wrote} tests and retrospected {project.facts.retrospected} tasks which cost {project.facts.cuted_cost}$ totally.
+                    With team {team_label}.
+                    {tech.length ? <span className="small"> and tech {tech_label}.</span> : ' '}
+                    {project.facts.money_spent ? `Spent ${project.facts.money_spent}$ for salary. ` : ''}
+                    {project.facts.tasks_done ? `Did ${project.facts.tasks_done} tasks. ` : ''}
+                    {project.facts.bugs_passed ? `Passed ${project.facts.bugs_passed} bugs. ` : ''}
+                    {project.facts.refactored ? `Did ${project.facts.refactored} refactoring. ` : ''}
+                    {project.facts.tests_wrote ? `Wrote ${project.facts.tests_wrote} tests. ` : ''}
+                    {project.facts.refactored ? `And retrospected ${project.facts.retrospected} tasks which cost ${project.facts.cuted_cost}$ totally.`: ''}
                 </p>
 
                 <StatsBar stats={stats_data} data={this.props.data} />
 
-                <div className="flex-container-row">
-                    <div className="flex-element"> Tasks: {project.tasksQuantity()}/{project.planedTasksQuantity()} </div>
-                    <div className="flex-element"> Bugs: <label className="text-danger">{project.bugsQuantity()}</label> </div>
-                    <div className="flex-element"> Complexity: {project.complexity} </div>
-                    <div className="flex-element"> Iteration: {project.iteration} </div>
+                <div className="">
+                    <div className=""> Tasks: {project.tasksQuantity()}/{project.planedTasksQuantity()} </div>
+                    <div className=""> Bugs: <label className="text-danger">{project.bugsQuantity()}</label> </div>
+                    <div className=""> Complexity: {project.complexity} </div>
+                    <div className=""> Iteration: {project.iteration} </div>
                 </div>
 
             </div>

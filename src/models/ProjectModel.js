@@ -124,11 +124,11 @@ class ProjectModel {
                 }
 
 
-                const formName = () => {
+                /*const formName = () => {
                     return worker.name
                         + (overtimed ? ' in overtime' : '')
                         + (support ? ' with support of ' + this.supporter.name : '');
-                };
+                };*/
 
                 if (bugs > 0) {
                     this.stored_wisdom[stat] += bugs;

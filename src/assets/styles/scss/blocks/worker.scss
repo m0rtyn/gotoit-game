@@ -51,7 +51,6 @@
 
   .card-body {
     padding: $half-size $main-size;
-
   }
 
   .worker-avatar {
@@ -73,12 +72,13 @@
   }
 
   .stats-progress-bar {
+    width: 30%;
     display: flex;
     padding-left: $main-size;
 
     .progress {
+      width: 100%;
       border-radius: 6px;
-      width: $main-size * 14;
       height: $main-size * 2;
       font-size: 0;
     }
