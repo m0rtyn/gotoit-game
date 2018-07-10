@@ -10,7 +10,7 @@ class Exchange extends Component {
         return (
             <div className="text-center">
                 <h1 className="text-center">
-                    <img style={{marginLeft: '3px'}} width={40} height={40} src={btc_icon} />
+                    <img style={{marginLeft: '3px'}} width={40} height={40} src={btc_icon} role="presentation" />
                     {' '}Bitcoin Exchange</h1>
                 <h4>Current BTC Price: ${data.current_btc_price} per 1 BTC</h4>
                 {   ChartsController({

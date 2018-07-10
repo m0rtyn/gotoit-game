@@ -61,7 +61,6 @@ yarn.lock
 
 
 !src/
-src/*
 
 !src/assets/
 src/assets/*

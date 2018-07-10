@@ -144,12 +144,18 @@ export const education = { // hm...
 
 export const charts_parameters = {
     money_spent: {label: 'Money spent', color: '#3e95cd'},
-    money_received: {label: 'Money received', color: '#FFAB40'},
+    money_summary: {label: 'Money summary', color: '#FFAB40'},
+    money_current_value: {label: 'Current money', color: '#32CD32'},
+    btc_summary: {label: 'Btc summary', color: '#6B8E23'},
+    btc_current_value: {label: 'Current btc', color: '#4B0082'},
     projects_done: {label: 'Projects done', color: '#EA80FC'},
-    workers_hired: {label: 'Workers hired', color: '#1DE9B6'},
+    workers_hired: {label: 'Workers in team', color: '#1DE9B6'},
     salary_costs: {label: 'Salary costs', color: '#5cb85c'},
     office_costs: {label: 'Office costs', color: '#d9534f'},
     environment_costs: {label: 'Environment costs', color: '#8B0000'},
+    candidates_resumes: {label: 'Candidates resumes', color: '#000080'},
+    projects_in_process: {label: 'Current projects', color: '#CD5C5C'},
+    projects_accepted: {label: 'Projects accepted', color: '#FFFF00'}
 };
 
 export const archive_chats_parameters = {

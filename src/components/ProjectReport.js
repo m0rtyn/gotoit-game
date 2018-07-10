@@ -75,7 +75,6 @@ class Project extends Component {
                     Project is <strong>{project.stage}ed</strong>.
                 </h4>
                 <p className="small">
-                    /*rendering values != 0 only help us save space in archive */
                     With team {team_label}.
                     {tech.length ? <span className="small"> and tech {tech_label}.</span> : ' '}
                     {project.facts.money_spent ? `Spent ${project.facts.money_spent}$ for salary. ` : ''}
