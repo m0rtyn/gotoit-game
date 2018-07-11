@@ -40,14 +40,6 @@ class ButtonToolbar extends Component {
                 <li className="nav-item">
                     <a
                     className="nav-link"
-                    onClick={() => { data.helpers.changeContent('PublicRelations'); }}
-                    >
-                        Public Relations
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <a
-                    className="nav-link"
                     onClick={() => { data.helpers.changeContent('Loans'); }}
                     >
                         Loans
