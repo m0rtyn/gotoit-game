@@ -78,7 +78,7 @@ export const achievements = {
     text: 'Accomplish 100 small projects.',
     rule: (state) => {
       let projects_counter = 0
-      state.data.projects_archive_reports.map((project) => {
+      state.data.projects_archive_reports.forEach((project) => {
         if (project.stage === 'finish' && project.size === 1) projects_counter++
       });
       return projects_counter >= 100
@@ -91,7 +91,7 @@ export const achievements = {
     text: 'Accomplish 100 medium projects.',
     rule: (state) => {
       let projects_counter = 0
-      state.data.projects_archive_reports.map((project) => {
+      state.data.projects_archive_reports.forEach((project) => {
         if (project.stage === 'finish' && project.size === 2) projects_counter++
       });
       return projects_counter >= 100
@@ -104,7 +104,7 @@ export const achievements = {
     text: 'Accomplish 100 big projects.',
     rule: (state) => {
       let projects_counter = 0
-      state.data.projects_archive_reports.map((project) => {
+      state.data.projects_archive_reports.forEach((project) => {
         if (project.stage === 'finish' && (project.size === 3 || project.size === 4)) projects_counter++
       });
       return projects_counter >= 100

@@ -10,7 +10,7 @@ import ProjectName from './ProjectName';
 
 //import {addAction} from '../components/ToastNest';
 
-import {skills_names, workers_bonus_items, roles, education, colors} from '../game/knowledge';
+import {skills_names, workers_bonus_items, education, colors} from '../game/knowledge';
 import WorkerHappinessBar from "./WorkerHappinessBar";
 import WorkerStaminaBar from "./WorkerStaminaBar";
 
@@ -69,8 +69,7 @@ class Worker extends Component {
         const worker = this.props.worker;
 
         const manage_button = <button className="btn btn-success btn-xs">Manage</button>;
-        console.log('dsd')
-        console.log(worker.stats);
+
         const stats_progressbar_data = _.mapValues(worker.stats, (val, stat) => {
 
             return {
@@ -79,12 +78,13 @@ class Worker extends Component {
                 color: colors[stat].colorCompleted
             };
         });
-        const stats_data = _.mapValues(worker.stats, (val, stat) => {
+
+        /*const stats_data = _.mapValues(worker.stats, (val, stat) => {
             return {
                 name: stat,
                 val: worker.getStatsData(stat)
             };
-        });
+        });*/
 
         const efficiency_data = {
             work_load: {name: 'Work Load', val: worker.workloadPenalty()},

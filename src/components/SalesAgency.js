@@ -143,6 +143,9 @@ class SalesAgency extends Component {
                             Search {this.calcCost()}$
                         </button>
                     </div>
+                    <div data-provide="slider" data-value={30} data-step={10}
+                         className="noUi-target noUi-ltr noUi-horizontal">
+                    </div>
                 </TeamDialog>
             </Portal>
         );

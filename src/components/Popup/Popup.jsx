@@ -1,6 +1,6 @@
 import React from 'react';
 import './popup.css'
-import {ScrollBox, ScrollAxes, FastTrack} from 'react-scroll-box';
+//import {ScrollBox, ScrollAxes, FastTrack} from 'react-scroll-box';
 
 export default class Popup extends React.Component {
 
@@ -65,7 +65,6 @@ export default class Popup extends React.Component {
 
   render() {
     const {popupsData} = this.state;
-    console.log(popupsData);
     if (popupsData.length === 0) {
       return null;
     }

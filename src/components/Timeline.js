@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import {project_kinds, project_platforms} from "../game/knowledge";
@@ -8,9 +7,6 @@ const timelineWidth = window.innerWidth;
 
 
 class Timeline extends Component {
-    constructor(props){
-        super(props);
-    }
 
     render() {
         let { timelineEvents, timelineScale } = this.props.data;
@@ -35,7 +31,8 @@ class Timeline extends Component {
 
 
                                     return (
-                                        <div 
+                                        <div
+                                        key={index}
                                         className='step'
                                         style={{ marginLeft: timelineWidth / (timelineScale.length - 1) * index + 'px' }}
                                         >
@@ -65,13 +62,13 @@ class Timeline extends Component {
                                                                     <div style={{ position: 'absolute' }}>
                                                                         <img 
                                                                         alt={item.object.name + ' platform'} 
-                                                                        src={require(`../../public/${project_platforms[item.object.platform].name}.svg`)}
+                                                                        src={item.object.avatar.platform}
                                                                         width={20} 
                                                                         height={20}
                                                                         />
                                                                     </div>
                                                                     <div style={{ position: 'absolute' }}>
-                                                                        <img alt={item.object.name + ' kind'} src={require(`../../public/${project_kinds[item.object.kind].name}.svg`)}
+                                                                        <img alt={item.object.name + ' kind'} src={item.object.avatar.kind}
                                                                             width={20} height={20}/>
                                                                     </div>
                                                                 </div>
@@ -94,6 +91,7 @@ class Timeline extends Component {
                                                                 <img 
                                                                 className='worker-portrait'
                                                                 src={item.object.avatar}
+                                                                role="presentation"
                                                                 />
 
                                                             </OverlayTrigger>

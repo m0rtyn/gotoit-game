@@ -12,11 +12,12 @@ class StatsBar extends Component {
         //console.log(stats);
 
         return (
-                <div className="stats-bar">
+                <div className="flexbox text-center">
                 {Object.keys(stats).map((stat) => {
-                    return <div className='' key={stat}>
-                        {stats[stat].name}: <span>{stats[stat].val}</span>
-                    </div>
+                    return <span key={stat}>
+                        {stats[stat].name}: <span>{stats[stat].val}{'  '}</span>
+                    </span>
+
                 })}
                 </div>
         );

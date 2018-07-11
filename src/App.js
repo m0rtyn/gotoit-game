@@ -27,7 +27,6 @@ import Lorer from './services/Lorer';
 import {skills_names, project_platforms, project_kinds, meetings, workers_bonus_items, technologies, skills_true} from './game/knowledge';
 
 import {getDefaultState} from './game/default_state';
-import ReactDOM from "react-dom";
 
 export var current_tick = 0;
 export const setCurrentTick = (tick) => { current_tick = tick; };
@@ -267,7 +266,13 @@ class App extends Component {
                     var date = new Date(year, month, number, hours, minutes, seconds);//string instead number but works
                     return date
                 })()
-            })
+            });
+
+            _.each(loaded_app_state.data.mailbox, (item, id) => {
+                item.type === 'Resume'
+                ?   loaded_app_state.data.mailbox[id].content = _.create(WorkerModel.prototype, item.content)
+                :   loaded_app_state.data.mailbox[id].content = _.create(ProjectModel.prototype, item.content)
+            });
 
             loaded_app_state.data.helpers = helpers;
 
@@ -347,8 +352,8 @@ class App extends Component {
         if (!window.confirm('Are you ready to start a new game? Your progress will be lost.')) return false;
         localStorage.setItem(game_name+"_app_state", null);
 
-        console.log(this);
-        console.log(this.state);
+        //console.log(this);
+        //console.log(this.state);
 
         let helpers = this.state.data.helpers;
         let new_state = getDefaultState();
@@ -375,12 +380,12 @@ class App extends Component {
     }
 
     modifyRelation(worker_id, project_id, value, role = null, team = null) {
-        console.log(arguments);
+        //console.log(arguments);
         this.setState(this.modifyRelationPure(this.state, worker_id, project_id, value, role, team));
     }
 
     modifyRelationPure(state, worker_id, project_id, value, role = null, team = null) {
-        console.log(arguments);
+        //console.log(arguments);
         const data = state.data;
 
         let put = (worker_id, project_id) => {
@@ -391,7 +396,7 @@ class App extends Component {
                 data.relations[worker_id][project_id][role] = value;
             }
             else {
-                console.log(data, data.workers_roles, worker_id);
+                //console.log(data, data.workers_roles, worker_id);
                 data.relations[worker_id][project_id] = _.clone(data.workers_roles[worker_id]); //JSON.parse(JSON.stringify());
                 //data.relations[worker_id][project_id] = value;
             }
@@ -497,6 +502,7 @@ class App extends Component {
     hireEmployer(worker) {
         hired++;
         const data = this.state.data;
+        worker.hired = true;
         worker.facts.tick_hired = data.date.tick;
         worker.facts.prev_salary_payment_tick = data.date.tick;
         data.workers.push(worker);
@@ -532,6 +538,7 @@ class App extends Component {
         hired--;
         const data = this.state.data;
         _.remove(data.workers, (worker) => { return (worker.id === id); });
+        data.statistics.workers_hired.buffer = data.workers.length - 1;
         this.setState({data: data});
     }
 
@@ -688,6 +695,7 @@ class App extends Component {
     }
 
     acceptOffered(id) {
+        console.log('accept');
         const data = this.state.data;
         let project = (_.remove(data.offered_projects, (candidate) => { return (candidate.id === id); }))[0];
         project.hot = false;
@@ -697,6 +705,7 @@ class App extends Component {
     }
 
     startOffered(id) {
+        console.log('START')
         const data = this.state.data;
         let project = (_.remove(data.offered_projects, (candidate) => { return (candidate.id === id); }))[0];
 
@@ -719,6 +728,7 @@ class App extends Component {
         const data = this.state.data;
         project.hot = false;
         data.projects.push(project);
+        data.statistics.projects_accepted.buffer += 1;
         if (project.type !== 'meeting') {
             Object.keys(data.projects_default_technologies).forEach((technology) => {
                 if (data.projects_default_technologies[technology]) {
@@ -758,11 +768,13 @@ class App extends Component {
     }
 
     pauseProject(id) {
+        let data = this.state.data;
         let project = _.find(this.state.data.projects, (project) => { return (project.id === id); });
         project.is_paused = true;
         console.log('pause')
         let newTimelineEvents = this.state.data.timelineEvents.filter( i => i.object.name !== project.name);
-        this.state.data.timelineEvents = newTimelineEvents;
+        data.timelineEvents = newTimelineEvents;
+        this.setState({data})
         //this.checkState();
     }
 
@@ -810,15 +822,10 @@ class App extends Component {
         const getBonus = (handler) => {
             const top = handler.getTopNumber(id);
             if (top === 'out of top') {
-                console.log(top);
-                console.log(handler);
                 return 0;
             }
 
             const bonus = Math.max(0, 11 - top);
-            console.log(top);
-            console.log(handler);
-            console.log(bonus);
             return bonus;
         };
 
@@ -868,6 +875,11 @@ class App extends Component {
         }
 
         project.stage = stage;
+        data.mailbox.push({
+            type: 'Project report',
+            content: _.create(ProjectModel.prototype, project)
+        });
+
         data.projects_end_reports.push(project);
         //data.projects_archive_reports.unshift(project);
         this.setState({data: data});
@@ -895,23 +907,48 @@ class App extends Component {
         if (project.is_storyline || project.stage !== 'finish' ) return;
 
         if (project.type === 'training' && !data.attainments.includes('FirstTraining')) {
-            data.offered_projects.push(Lorer.afterFirstTraining(project));
+            let this_project = Lorer.afterFirstTraining(project);
+            data.offered_projects.push(this_project);
+            data.mailbox.push({
+                type: 'Hot offer',
+                content: this_project
+            });
             data.attainments.push('FirstTraining')
         }
         if (project.size === 1 && !data.attainments.includes('FirstPart')) {
-            data.offered_projects.push(Lorer.afterFirstPart(project));
+            let this_project = Lorer.afterFirstPart(project);
+            data.offered_projects.push(this_project);
+            data.mailbox.push({
+                type: 'Hot offer',
+                content: this_project
+            });
             data.attainments.push('FirstPart')
         }
         if (project.size === 2 && !data.attainments.includes('FirstModule')) {
-            data.offered_projects.push(Lorer.afterFirstModule(project));
+            let this_project = Lorer.afterFirstModule(project);
+            data.offered_projects.push(this_project);
+            data.mailbox.push({
+                type: 'Hot offer',
+                content: this_project
+            });
             data.attainments.push('FirstModule')
         }
         if (project.size === 3 && !data.attainments.includes('FirstApplication')) {
-            data.offered_projects.push(Lorer.afterFirstApplication(project));
+            let this_project = Lorer.afterFirstApplication(project);
+            data.offered_projects.push(this_project);
+            data.mailbox.push({
+                type: 'Hot offer',
+                content: this_project
+            });
             data.attainments.push('FirstApplication')
         }
         if (project.size === 4 && !data.attainments.includes('BigDeal')) {
-            data.offered_projects.push(Lorer.afterFirstBigDeal(project));
+            let this_project = Lorer.afterFirstBigDeal(project);
+            data.offered_projects.push(this_project);
+            data.mailbox.push({
+                type: 'Hot offer',
+                content: this_project
+            });
             data.attainments.push('BigDeal')
         }
 
@@ -947,10 +984,11 @@ class App extends Component {
         switch (currency){
             case "usd":
                 data.money += quantity;
-                data.statistics.money_received.buffer += quantity;
+                data.statistics.money_summary.buffer += quantity;
                 break;
             case "btc":
                 data.btc += quantity;
+                data.statistics.btc_summary.buffer += quantity;
                 break;
             default:
                 console.log("unknown currency " + currency);
@@ -978,7 +1016,9 @@ class App extends Component {
         const data = this.state.data;
         if (data.money >= usd) {
             this.chargeMoney(usd);
-            data.btc += usd / data.current_btc_price;
+            let btcAmount = usd / data.current_btc_price;
+            data.btc += btcAmount;
+            data.statistics.btc_summary.buffer += btcAmount;
         }
         else {
             console.log('not enough money');
@@ -1392,6 +1432,7 @@ class App extends Component {
     pushNewProject() {
         const data = this.state.data;
         let quality = Math.ceil(_.random(1, (current_tick / (24*30)) + (projects_done*0.1)));
+        let this_project = ProjectModel.generate(quality, size, 'history');
         let size =
             (quality < 3) ? 1 : (
                 (quality < 5) ? _.random(1, _.random(1, 2)) : (
@@ -1416,7 +1457,11 @@ class App extends Component {
             );
 
         //console.log('probability: ' + probability.toFixed(2) + ' quality: ' + quality + ' size: ' + size);
-        data.offered_projects.push(ProjectModel.generate(quality, size, 'history'));
+        data.offered_projects.push();
+        data.mailbox.push({
+            type: 'Offer',
+            content: this_project
+        });
         addAction('New job!', {timeOut: 3000, extendedTimeOut: 1000});
     }
 
@@ -1424,6 +1469,12 @@ class App extends Component {
         const data = this.state.data;
         let worker = WorkerModel.generate(_.random(1, Math.floor(3 + projects_done*0.1 + current_tick * 0.001)));
         data.candidates.resumes.push(worker);
+        console.log('new candidate');
+        console.log(worker)
+        data.mailbox.push({
+            type: 'Resume',
+            content: worker
+        });
         addAction('New resume: ' + worker.name);
     }
 
@@ -1668,14 +1719,10 @@ class App extends Component {
     }
 
     createPopup(name, content) {
-        console.log('createPopup');
-        console.log(this)
-        console.log(this.popupHandler)
         this.popupHandler.createPopup(name, content);
     }
 
     render() {
-        console.log(this.state.data.projects_end_reports)
         return (
             <div id="app">
                 <BubblesAnimation onRef={ref => (this.animation = ref)}/>
