@@ -67,16 +67,15 @@
   background-color: #dff0d8;
 }
 
-.chat-window{
-  bottom:0;
-  position:fixed;
-  float:left;
-  margin-right:10px;
-
+.chat-window {
+  bottom: 0;
+  position: fixed;
+  float: left;
+  margin-right: 10px;
   overflow: auto;
   max-height: 100vh;
 
- /* overflow-y: scroll;
+  /* overflow-y: scroll;
   overflow-x:hidden; */
 }
 
