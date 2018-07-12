@@ -16,7 +16,7 @@ import Mail from '../components/content/Mail.js';
 
 const components = {
     'Achievements': Achievements,
-    'PublicRelations': PublicRelations,
+    'PublicRelations': PublicRelations, //перенести отдельный попап
     'Archive': Archive,
     'ChartsController': ChartsController,
     'Exchange': Exchange,
@@ -37,7 +37,7 @@ class ContentContainer extends Component {
         const ContentComponent = components[this.props.data.content];
 
         return (
-            <div className="card">
+            <div>
                 <ContentComponent data={this.props.data} />
             </div>
         );

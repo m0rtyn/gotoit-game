@@ -1,17 +1,23 @@
 .project-find {
 
   .reputation {
-    flex-flow: column nowrap;
-    justify-content: start;
-    align-items: start;
+
   }
 
   .reputation-bar {
-    width: 30%;
-    margin-bottom: 0;
+    width: 100%;
+    margin: 0;
+  }
+
+  h4 .btn {
+    margin: 0 $double-size;
   }
 
   .offered-project {
     margin: $main-size;
+  }
+
+  .project-name {
+    margin: 0;
   }
 }

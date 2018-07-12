@@ -26,8 +26,8 @@ class Layout extends Component {
                         <div className="col-3 people-column">
                             <People data={this.props.data}/>
                         </div>
-                        <div className="col-6 activity-column">
-                            <div>
+                        <div className="col-6 activity-column card">
+                            <div className="card-body">
                                 <ButtonToolbar data={this.props.data} />
                                 <ContentContainer data={this.props.data} />
                             </div>
