@@ -35,20 +35,20 @@ class ProjectOfferBlock extends Component {
 
             <div className="card-header">
 
-                {/* <div className='project-avatar'>
+                <div className='project-avatar'>
                     <img 
                     className='project-avatar'
                     // alt={project.name + ' avatar'} 
                     // src={require(`../../public/${project_platforms[project.platform].name}.svg`)}
-                    src={ProjectModel.avatar.platform}
+                    src={candidate.avatar.platform}
                     />
                     <img 
                     className='project-avatar'
                     // alt={project.name + ' avatar'} 
                     // src={require(`../../public/${project_kinds[project.kind].name}.svg`)}
-                    src={ProjectModel.avatar.kind}
+                    src={candidate.avatar.kind}
                     />
-                </div> */}
+                </div>
             
                 <ProjectName project={candidate}/>
 
