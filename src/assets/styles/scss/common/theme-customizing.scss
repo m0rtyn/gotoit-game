@@ -16,13 +16,26 @@
   border-radius: $border-radius;
 }
 
+.card-body, .card-header {
+  padding: $main-size * 4;
+}
+
 .progress {
-  height: $main-size * 2.5;
+  height: $main-size * 3;
   margin-bottom: $main-size;
   background-color: $light-gray;
   box-shadow: 
     inset 0 3px 3px 0 rgba(255, 255, 255, 0.25),
     inset 0 -3px 3px 0 rgba(0, 0, 0, 0.08);
+  border-radius: $border-radius;
+
+  &.progress-sm {
+    height: $main-size * 2;
+  }
+
+  &.progress-lg {
+    height: $main-size * 4;
+  }
 }
 
 .progress-bar {

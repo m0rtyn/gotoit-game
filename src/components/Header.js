@@ -44,7 +44,7 @@ class Header extends Component {
                                     data.helpers.pauseGame();
                                 }
                             }}>
-                                <i className={classNames('fa', (data.game_paused ? 'fa-play' : 'fa-pause'))}></i>
+                                <i classNames="material-icons">{data.game_paused ? 'home' : 'fa-pause'}</i>
                             </button>
 
                             <div onClick={ () => {
