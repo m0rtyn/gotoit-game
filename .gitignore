@@ -70,6 +70,7 @@ src/assets/*
 
 !src/assets/styles/
 src/assets/styles/*
+!src/assets/styles/main.min.css
 !src/assets/styles/main.scss
 
 !src/assets/styles/scss/
