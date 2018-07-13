@@ -6,12 +6,11 @@ input[type='checkbox'].radial-checkbox {
   justify-content: center;
   align-items: center;
   position: relative;
-  cursor:pointer;
+  cursor: pointer;
 }
 
-input[type='checkbox'].radial-checkbox:after {
-  
-  content:"";
+input[type='checkbox'].radial-checkbox::after {
+  content: "";
   position: absolute;
   cursor: pointer;
   height: $main-size * 3;
@@ -23,6 +22,6 @@ input[type='checkbox'].radial-checkbox:after {
   align-items: center;
 }
 
-input[type='checkbox'].radial-checkbox:checked:after {
+input[type='checkbox'].radial-checkbox:checked::after {
   background-color: #15c377;
 }

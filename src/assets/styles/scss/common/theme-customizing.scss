@@ -11,20 +11,39 @@
   height: calc(100vh - 80px);
 }
 
+.card {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  border-radius: $border-radius;
+}
+
+.card-body,
+.card-header {
+  padding: $main-size * 4;
+}
+
 .progress {
-  height: $main-size * 2.5;
+  height: $main-size * 3;
   margin-bottom: $main-size;
   background-color: $light-gray;
-  box-shadow: 
+  box-shadow:
     inset 0 3px 3px 0 rgba(255, 255, 255, 0.25),
     inset 0 -3px 3px 0 rgba(0, 0, 0, 0.08);
+  border-radius: $border-radius;
+
+  &.progress-sm {
+    height: $main-size * 2;
+  }
+
+  &.progress-lg {
+    height: $main-size * 4;
+  }
 }
 
 .progress-bar {
   height: 100%;
-  box-shadow: 
-  inset 0 3px 3px 0 rgba(255, 255, 255, 0.25),
-  inset 0 -3px 3px 0 rgba(0, 0, 0, 0.08);
+  box-shadow:
+    inset 0 3px 3px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -3px 3px 0 rgba(0, 0, 0, 0.08);
 }
 
 .modal-dialog {
@@ -40,13 +59,13 @@
 .topbar {
   height: 30px;
   flex-wrap: wrap;
-  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.8) 100%);
+  background: linear-gradient(180deg, #FFF, rgba(255, 255, 255, 0.8));
 }
 
 .topbar-btn {
   line-height: 30px;
   background-color: transparent;
-  color: #333333;
+  color: #333;
 }
 
 .btn {
@@ -60,3 +79,13 @@
 .fa-plus {
   vertical-align: middle;
 }
+
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.66);
+}
+
+.modal {
+  display: block;
+}
+
+//experimental==============================================

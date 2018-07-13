@@ -36,7 +36,6 @@ div {
 }
 
 .main-container {
-
   & > .row {
     height: 100%;
   }
@@ -49,16 +48,20 @@ div {
   max-height: 100vh;
 }
 
-.people-column, .projects-column, .activity-column {
-  
+.people-column,
+.projects-column,
+.activity-column {
   & > div {
     height: 100%;
     padding: $main-size;
     overflow-y: auto;
-    background-image: linear-gradient(180deg, 
-      rgba(255, 255, 255, 0.6) 0%, 
-      rgba(255, 255, 255, 0.6) 33%, 
-      transparent 100%);
+    background-image:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.6) 0%,
+        rgba(255, 255, 255, 0.6) 33%,
+        transparent 100%
+      );
     border-radius: 4px;
     overflow-x: hidden;
   }
@@ -74,22 +77,10 @@ div {
 }
 
 .activity-column {
-
   & > div {
     height: auto;
     max-height: 100%;
   }
-}
-
-.people-column {
-}
-
-.projects-column {
-  
-}
-
-.activity-column {
-  
 }
 
 .hovered {
