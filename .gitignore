@@ -80,3 +80,4 @@ src/assets/styles/*
 .vscode
 build
 build/
+*.todo
