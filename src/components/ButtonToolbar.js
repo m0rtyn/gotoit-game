@@ -8,7 +8,7 @@ class ButtonToolbar extends Component {
         let data = this.props.data;
 
         return (
-            <ul className="nav nav-tabs">
+            <ul className="nav nav-tabs nav-tabs-light-mode">
                 <li className="nav-item">
                     {data.projects.length > 0 ? 
                         <a 

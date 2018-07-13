@@ -17,7 +17,7 @@ class Header extends Component {
             <header>
                 <div className="topbar">
                     <div className="topbar-left">
-                        <button className="topbar-btn logo">ГоуТуАйТи:))))))</button>
+                        <a className="topbar-btn logo">Go to IT</a>
                         <button className="topbar-btn" href="#" onClick={this.props.newGame} title='Hard Reset For Developers'>
                             New game
                         </button>
@@ -44,7 +44,7 @@ class Header extends Component {
                                     data.helpers.pauseGame();
                                 }
                             }}>
-                                <i classNames="material-icons">{data.game_paused ? 'home' : 'fa-pause'}</i>
+                                <i classNames="material-icons">{data.game_paused ? 'play-arrow' : 'pause'}</i>
                             </button>
 
                             <div onClick={ () => {

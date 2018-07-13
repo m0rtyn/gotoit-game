@@ -37,7 +37,7 @@ class ContentContainer extends Component {
         const ContentComponent = components[this.props.data.content];
 
         return (
-            <div>
+            <div className="tab-content">
                 <ContentComponent data={this.props.data} />
             </div>
         );

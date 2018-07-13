@@ -1,9 +1,4 @@
 .project-find {
-
-  .reputation {
-
-  }
-
   .reputation-bar {
     width: 100%;
     margin: 0;
@@ -19,5 +14,14 @@
 
   .project-name {
     margin: 0;
+  }
+
+  .project-avatar {
+    width: $main-size * 16;
+    height: $main-size * 16;
+
+    & > img {
+      position: absolute;
+    }
   }
 }
