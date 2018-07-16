@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Portal from 'react-portal';
 import _ from 'lodash';
 import TeamDialog from './TeamDialog';
-import StatsProgressBar from './StatsProgressBar';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
+import StatsProgressBar from './StatsProgressBar';
 
 
 

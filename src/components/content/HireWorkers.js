@@ -5,6 +5,9 @@ import HiringAgency from '../HiringAgency';
 import Bar from '../Bar';
 import {colors, skills} from "../../game/knowledge";
 
+import StatsProgressBar from '../StatsProgressBar';
+
+
 class HireWorkers extends Component {
     constructor(props) {
         super(props);
@@ -23,14 +26,26 @@ class HireWorkers extends Component {
 
     render() {
         const data = this.props.data;
+
+
         let unit_block_template = (candidate, type) => {
-            const stats_data = _.mapValues(skills, (val, key) => {
-                return { name: key, val: <span>{candidate.stats[key]}</span> };
+
+            const stats_progressbar_data = _.mapValues(candidate.stats, (val, stat) => {
+
+                return {
+                    name: stat,
+                    value: candidate.getStatsData(stat),
+                    color: colors[stat].colorCompleted
+                };
             });
 
             return <div key={candidate.id} className="card">{candidate.name} <span> {candidate.getSalary()}$</span>
                 <div>{`Character: ${candidate.character.name}. ${candidate.character.description}.`}</div>
-                <StatsBar stats={stats_data} data={data} />
+                <div className="worker-skills">
+                    <StatsProgressBar type={'design'} stats={stats_progressbar_data} worker={candidate} data={data}/>
+                    <StatsProgressBar type={'program'} stats={stats_progressbar_data} worker={candidate} data={data}/>
+                    <StatsProgressBar type={'manage'} stats={stats_progressbar_data} worker={candidate} data={data}/>
+                </div>
                 <button className="btn btn-success" id={candidate.id} onClick={(e) => this.hire(e, type)}>Hire</button>
                 <button className="btn btn-danger" id={candidate.id} onClick={(e) => this.reject(e, type)}>Hide</button>
 
@@ -49,7 +64,6 @@ class HireWorkers extends Component {
                 id: 'rumor'
             }
         ];
-
 
         return (
             <div>

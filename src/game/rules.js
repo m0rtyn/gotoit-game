@@ -30,6 +30,7 @@ export const rules = {
             time.tick++;
             setCurrentTick(time.tick);
             setGameDate(game_date);
+            console.log(game_date)
             data.helpers.setTimelineScale();
 
             //time.hour++;

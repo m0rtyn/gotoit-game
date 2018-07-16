@@ -18,6 +18,8 @@ class StatsProgressBar extends Component {
         const data = this.props.data;
         const worker = this.props.worker;
         const type = this.props.type;
+        const isCandidate = this.props.isCandidate;//to switch relation
+        const max_stat = isCandidate ? data.max_candidates_stat : data.max_stat;
         let bar_data = {};
         let stat = 'default';
         switch(type){
@@ -26,7 +28,7 @@ class StatsProgressBar extends Component {
                 bar_data = {
                     name: stat,
                     value: parseInt(stats[stat].value, 10),
-                    width: (parseInt(stats[stat].value, 10) / data.max_stat) * 100,
+                    width: (parseInt(stats[stat].value, 10) / max_stat) * 100,
                     color: stats[stat].color,
                     showName: true
                 };
@@ -36,7 +38,7 @@ class StatsProgressBar extends Component {
                 bar_data = {
                     name: stat,
                     value: parseInt(stats[stat].value, 10),
-                    width: (parseInt(stats[stat].value, 10) / data.max_stat) * 100,
+                    width: (parseInt(stats[stat].value, 10) / max_stat) * 100,
                     color: stats[stat].color,
                     showName: true
                 };
@@ -46,7 +48,7 @@ class StatsProgressBar extends Component {
                 bar_data = {
                     name: stat,
                     value: parseInt(stats[stat].value, 10),
-                    width: (parseInt(stats[stat].value, 10) / data.max_stat) * 100,
+                    width: (parseInt(stats[stat].value, 10) / max_stat) * 100,
                     color: stats[stat].color,
                     showName: true
                 };
@@ -54,7 +56,8 @@ class StatsProgressBar extends Component {
 
             default: break;
         }
-
+        console.log('worker')
+        console.log(worker)
         return (
             <div className="stats-progress-bar">
                 <input

@@ -36,6 +36,7 @@ class ProjectOfferBlock extends Component {
                 <label>Reward: {candidate.reward}$</label>&nbsp;
                 {candidate.penalty > 0 ? <label>Penalty: {candidate.penalty}$</label> : ''}
             </div>
+
             <StatsBar stats={stats_data} data={this.props.data}/>
             {
                 candidate.stage === 'ready' ?
