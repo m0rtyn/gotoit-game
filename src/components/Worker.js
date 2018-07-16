@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Portal from 'react-portal';
 import _ from 'lodash';
 import TeamDialog from './TeamDialog';
-import StatsProgressBar from './StatsProgressBar';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
+import StatsProgressBar from './StatsProgressBar';
 
 
 
@@ -264,9 +264,9 @@ class Worker extends Component {
                     <WorkerHappinessBar worker={worker}/>
                     <WorkerStaminaBar worker={worker}/>
                     <div className="worker-skills">
-                        <StatsProgressBar type={'design'} stats={stats_progressbar_data} worker={worker} data={data}/>
-                        <StatsProgressBar type={'program'} stats={stats_progressbar_data} worker={worker} data={data}/>
-                        <StatsProgressBar type={'manage'} stats={stats_progressbar_data} worker={worker} data={data}/>
+                        <StatsProgressBar type={'design'} max_stat={data.max_stat} stats={stats_progressbar_data} worker={worker} data={data}/>
+                        <StatsProgressBar type={'program'} max_stat={data.max_stat} stats={stats_progressbar_data} worker={worker} data={data}/>
+                        <StatsProgressBar type={'manage'} max_stat={data.max_stat} stats={stats_progressbar_data} worker={worker} data={data}/>
                     </div>
                 </div>
             </div>

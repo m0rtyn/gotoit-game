@@ -18,17 +18,17 @@ class HotOffer extends Component {
         };
 
     }
-    acceptOffered(event, type) {
+    acceptOffered(event) {
         this.props.data.helpers.acceptOffered(event.target.id);
         this.props.closePopup();
     }
 
-    startOffered(event, type) {
+    startOffered(event) {
         this.props.data.helpers.startOffered(event.target.id);
         this.props.closePopup();
     }
 
-    reject(event, type) {
+    reject(event) {
         this.props.data.helpers.rejectOffered(event.target.id);
         this.props.closePopup();
     }
@@ -50,19 +50,42 @@ class HotOffer extends Component {
                     }}>Close</button>
                 </div>
                 <div>
-                    <div className="moat">
-                        <h3>{project.lore.name}</h3>
-                        <p>
-                            {project.lore.text}
-                        </p>
+                    <div className="flexbox">
+                        <span style={{position: 'relative', width: '200px', height: '200px'}}>
+                            <img
+                                style={{ position: 'absolute'}}
+                                width={200}
+                                height={200}
+                                alt={project.name + ' avatar'}
+                                src={project.avatar.platform}
+                            />
+                            <img
+                                style={{ position: 'absolute'}}
+                                width={200}
+                                height={200}
+                                alt={project.name + ' avatar'}
+                                src={project.avatar.kind}
+                            />
+                        </span>
+                        <span className="moat flex-grow">
+                            <h3>{project.lore.name}</h3>
+                            <p>
+                                {project.lore.text}
+                            </p>
+                        </span>
                     </div>
+
                     <div className="moat slim_top">
                         <div key={project.id} className="card">
                             <ProjectName project={project}/>
                             <div>
-                                <label>Deadline: {project.getDeadlineText()}</label>&nbsp;
-                                <label>Reward: {project.reward}$</label>&nbsp;
-                                {project.penalty > 0 ? <label>Penalty: {project.penalty}$</label> : ''}
+                                <span>
+                                    <h4 className="project-reward text-success"> Reward: ${project.reward}</h4>
+                                </span>
+                                {(project.penalty > 0
+                                        ? <span> <h4 className="project-penalty text-warning">Penalty : ${project.penalty}</h4> </span>
+                                        : ' '
+                                )}
                             </div>
                             <StatsBar stats={stats_data} data={this.props.data}/>
                             {

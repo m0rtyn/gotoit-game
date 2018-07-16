@@ -12,6 +12,7 @@ class Header extends Component {
         var real_date = new Date();
         var game_date = new Date();
         game_date.setDate(real_date.getDate()+(date.tick/24));
+        console.log(game_date)
 
         return (
             <header>
