@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import _ from 'lodash';
 import StatsBar from '../StatsBar';
+import PublicRelations from './PublicRelations';
 import HiringAgency from '../HiringAgency';
 import Bar from '../Bar';
 import {colors, skills} from "../../game/knowledge";
@@ -23,6 +24,7 @@ class HireWorkers extends Component {
 
     render() {
         const data = this.props.data;
+
         let unit_block_template = (candidate, type) => {
             const stats_data = _.mapValues(skills, (val, key) => {
                 return { name: key, val: <span>{candidate.stats[key]}</span> };
@@ -33,7 +35,6 @@ class HireWorkers extends Component {
                 <StatsBar stats={stats_data} data={data} />
                 <button className="btn btn-success" id={candidate.id} onClick={(e) => this.hire(e, type)}>Hire</button>
                 <button className="btn btn-danger" id={candidate.id} onClick={(e) => this.reject(e, type)}>Hide</button>
-
             </div>
         };
 
@@ -60,25 +61,21 @@ class HireWorkers extends Component {
                             Resume
                             <HiringAgency data={data} />
                         </h4>
+
                         {data.candidates.resumes.map(resumes_candidate)}
                     </div>
                     <div className="col-md-6">
                         <h4 className="text-center fat slim-top">
                             Rumor
+                            <PublicRelations data={data}/>
                         </h4>
                         <Bar bar_data={rumor_bar} />
-
-                        <span className="">
-                            <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('PublicRelations'); }}>PublicRelations</button>
-                        </span>
                     </div>
 
 
                     {data.candidates.agency.map(agency_candidate)}
                 </div>
             </div>
-
-
         )
     }
 }

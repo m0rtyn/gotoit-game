@@ -10,16 +10,17 @@ import TeamDialog from './TeamDialog';
 import {skills_names, roles, skills, project_sizes} from '../game/knowledge';
 
 
-
 class SalesAgency extends Component {
     constructor(props) {
         super(props);
 
         let min = JSON.parse(JSON.stringify(skills));
+        let max = JSON.parse(JSON.stringify(skills));
+
         _.keys(min).forEach((skill) => {
             min[skill] = 0;
         });
-        let max = JSON.parse(JSON.stringify(skills));
+
         _.keys(max).forEach((skill) => {
             max[skill] = 100;
         });
@@ -42,6 +43,7 @@ class SalesAgency extends Component {
             //return _.sum([sum, val*3]);
             return _.sum([sum, Math.pow(val, 1.3)]);
         }, 0));
+
         let max_sum_factor = Math.floor(_.values(s.max_stats).reduce((sum, val) => {
             //return _.sum([sum, val*2]);
             return _.sum([sum, Math.pow(val, 1.2)]);
@@ -55,6 +57,7 @@ class SalesAgency extends Component {
         skills_names.forEach((skill) => {
             sum_control_factor += s.max_stats[skill] - s.min_stats[skill];
         });
+
         sum_control_factor = Math.floor(sum_control_factor / 10);
 
         // console.log(min_sum_factor, max_sum_factor, pike_factor1, pike_factor2, '/', sum_control_factor);
@@ -73,7 +76,7 @@ class SalesAgency extends Component {
     render() {
         const data = this.props.data;
 
-        const search_button = <button className="btn btn-info btn-xs hidden">Sales Agency</button>;
+        const search_button = <button className="btn btn-info hidden">Sales Agency</button>;
 
         const draw_row = (name, child) => {
             return <div key={name} className="row">
@@ -113,7 +116,6 @@ class SalesAgency extends Component {
                                     //new_state.min_stats[skill] = Math.min(project_sizes[e.target.value].agency_max, state.max_stats[skill]);
                                 });
 
-                            //    console.log(e, new_state);
                                 this.setState(new_state);
                             }}
                             tooltip='hide'
