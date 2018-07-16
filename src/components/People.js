@@ -38,19 +38,22 @@ class People extends Component {
                         {(data.office.size > 1 && offices[data.office.size-1].space >= data.workers.length)
                             ? ((data.office.size === 2)
                             ? <button 
-                                onClick={() => {data.helpers.downOffice();}} 
-                                className="btn btn-warning btn-xs">
-                                    Cancel the Office
-                                </button>
+                            onClick={() => {data.helpers.downOffice();}} 
+                            className="btn btn-warning btn-xs">
+                                Cancel the Office
+                            </button>
                             : <button 
-                                onClick={() => {data.helpers.downOffice();}} 
-                                className="btn btn-warning btn-xs">
-                                    Downgrade the Office
+                            onClick={() => {data.helpers.downOffice();}} 
+                            className="btn btn-warning btn-xs">
+                                Downgrade the Office
                             </button>)
                             : ''}
 
                         {data.office.size < 4
-                            ? <button onClick={() => {data.helpers.upOffice();}} className="btn btn-warning btn-xs">Extend the Office</button>
+                            ? <button onClick={() => {data.helpers.upOffice();}} 
+                            className="btn btn-warning btn-xs">
+                                Extend the Office
+                            </button>
                             : ''}
 
                     </div>

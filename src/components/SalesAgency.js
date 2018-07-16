@@ -73,7 +73,7 @@ class SalesAgency extends Component {
     render() {
         const data = this.props.data;
 
-        const search_button = <button className="btn btn-info hidden">Sales Agency</button>;
+        const search_button = <button className="btn btn-info btn-xs hidden">Sales Agency</button>;
 
         const draw_row = (name, child) => {
             return <div key={name} className="row">
