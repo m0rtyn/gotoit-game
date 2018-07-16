@@ -15,7 +15,7 @@ class ButtonToolbar extends Component {
             return count;
         })()
         return (
-            <ul className="nav nav-tabs">
+            <ul className="nav nav-tabs nav-tabs-light-mode">
                 <li className="nav-item">
                     {data.projects.length > 0 ? 
                         <a 
@@ -42,14 +42,6 @@ class ButtonToolbar extends Component {
                     onClick={() => { data.helpers.changeContent('MarketTop'); }}
                     >
                         Market Analysis
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <a
-                    className="nav-link"
-                    onClick={() => { data.helpers.changeContent('PublicRelations'); }}
-                    >
-                        Public Relations
                     </a>
                 </li>
                 <li className="nav-item">

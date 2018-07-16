@@ -183,7 +183,7 @@ class Worker extends Component {
                                                         let item = workers_bonus_items[skill][item_key];
                                                         return worker.items[skill][item_key] === true
                                                             ? <div className="" key={item_key}>
-                                                                <label className='badge'>{item.name} {item.description}</label>
+                                                                <span className='badge'>{item.name} {item.description}</span>
                                                             </div>
                                                             : <div className="" key={item_key}>
                                                                 <button
@@ -226,16 +226,16 @@ class Worker extends Component {
                                                 const stats_data = _.mapValues(project.needs, (val, skill) => {
                                                     return {name: skill,
                                                         val: <div key={worker.id + project.id} className="">
-                                                            <label style={{width: '100%'}}>
+                                                            <div style={{width: '100%'}}>
                                                                 <input
-                                                                    type="checkbox"
-                                                                    id={project.id || ''}
-                                                                    checked={data.helpers.getRelation(worker.id, project.id, skill)}
-                                                                    onChange={(event) => {
-                                                                        data.helpers.modifyRelation(worker.id, event.target.id, event.target.checked, skill);
-                                                                    }}/>
+                                                                type="checkbox"
+                                                                id={project.id || ''}
+                                                                checked={data.helpers.getRelation(worker.id, project.id, skill)}
+                                                                onChange={(event) => {
+                                                                    data.helpers.modifyRelation(worker.id, event.target.id, event.target.checked, skill);
+                                                                }}/>
                                                                 {project.needs(skill) +'/'+ project.estimate[skill]}
-                                                            </label>
+                                                            </div>
                                                         </div>};
                                                 });
                                                 return <div key={worker.id + project.id}>
@@ -264,9 +264,9 @@ class Worker extends Component {
                     <WorkerHappinessBar worker={worker}/>
                     <WorkerStaminaBar worker={worker}/>
                     <div className="worker-skills">
-                        <StatsProgressBar type={'design'} stats={stats_progressbar_data} worker={worker} data={data}/>
-                        <StatsProgressBar type={'program'} stats={stats_progressbar_data} worker={worker} data={data}/>
-                        <StatsProgressBar type={'manage'} stats={stats_progressbar_data} worker={worker} data={data}/>
+                        <StatsProgressBar type={'design'} max_stat={data.max_stat} stats={stats_progressbar_data} worker={worker} data={data}/>
+                        <StatsProgressBar type={'program'} max_stat={data.max_stat} stats={stats_progressbar_data} worker={worker} data={data}/>
+                        <StatsProgressBar type={'manage'} max_stat={data.max_stat} stats={stats_progressbar_data} worker={worker} data={data}/>
                     </div>
                 </div>
             </div>

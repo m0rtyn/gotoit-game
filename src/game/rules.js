@@ -89,12 +89,28 @@ export const rules = {
 
             }
 
-
+            //MAX STATS UPDATE
+            //workers hired
             data.workers.forEach((worker) => {
                 if (worker.stats.design > data.max_stat) data.max_stat = worker.stats.design;
                 if (worker.stats.program > data.max_stat) data.max_stat = worker.stats.program;
                 if (worker.stats.manage > data.max_stat) data.max_stat = worker.stats.manage;
             });
+            //candidates for hiring
+            data.candidates.resumes.forEach((candidate) => {
+                if (candidate.stats.design > data.max_candidates_stat) data.max_candidates_stat = candidate.stats.design;
+                if (candidate.stats.program > data.max_candidates_stat) data.max_candidates_stat = candidate.stats.program;
+                if (candidate.stats.manage > data.max_candidates_stat) data.max_candidates_stat = candidate.stats.manage;
+            });
+            //offered_projects
+            data.offered_projects.forEach((project) => {
+                if (project.estimate.design > data.max_stats_projects_offered) data.max_stats_projects_offered = project.estimate.design;
+                if (project.estimate.program > data.max_stats_projects_offered) data.max_stats_projects_offered = project.estimate.program;
+                if (project.estimate.manage > data.max_stats_projects_offered) data.max_stats_projects_offered = project.estimate.manage;
+            });
+
+
+
 
             if (time.hour === 14 && data.office_things.lunch) { // lunch time!
                 if ((data.workers.length * 25) <= data.money) {

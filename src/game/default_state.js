@@ -95,6 +95,7 @@ var default_state =
         btc_statistic: { buffer: 0, values: [] },
         max_stat: 1,
         max_candidates_stat: 1,
+        max_stats_projects_offered: 1,
         mailbox: []
 
     },

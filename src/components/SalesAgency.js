@@ -3,10 +3,12 @@ import Portal from 'react-portal';
 import _ from 'lodash';
 
 import ReactBootstrapSlider from 'react-bootstrap-slider';
+import '../../node_modules/react-bootstrap-slider/src/css/bootstrap-slider.min.css';
 
 import TeamDialog from './TeamDialog';
 
 import {skills_names, roles, skills, project_sizes} from '../game/knowledge';
+
 
 
 class SalesAgency extends Component {
@@ -55,7 +57,7 @@ class SalesAgency extends Component {
         });
         sum_control_factor = Math.floor(sum_control_factor / 10);
 
-       // console.log(min_sum_factor, max_sum_factor, pike_factor1, pike_factor2, '/', sum_control_factor);
+        // console.log(min_sum_factor, max_sum_factor, pike_factor1, pike_factor2, '/', sum_control_factor);
 
         return 420 + Math.floor((Math.pow(s.size, 1.615) * (1 + (s.deal_counter/10)) * (50 + min_sum_factor + max_sum_factor + pike_factor1 + pike_factor2))
             / (0.03 * (100 + sum_control_factor)));
@@ -71,7 +73,7 @@ class SalesAgency extends Component {
     render() {
         const data = this.props.data;
 
-        const search_button = <button className="btn btn-info hidden">Sales Agency</button>;
+        const search_button = <button className="btn btn-info btn-xs hidden">Sales Agency</button>;
 
         const draw_row = (name, child) => {
             return <div key={name} className="row">

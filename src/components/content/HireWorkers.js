@@ -42,9 +42,9 @@ class HireWorkers extends Component {
             return <div key={candidate.id} className="card">{candidate.name} <span> {candidate.getSalary()}$</span>
                 <div>{`Character: ${candidate.character.name}. ${candidate.character.description}.`}</div>
                 <div className="worker-skills">
-                    <StatsProgressBar type={'design'} stats={stats_progressbar_data} worker={candidate} data={data}/>
-                    <StatsProgressBar type={'program'} stats={stats_progressbar_data} worker={candidate} data={data}/>
-                    <StatsProgressBar type={'manage'} stats={stats_progressbar_data} worker={candidate} data={data}/>
+                    <StatsProgressBar hideCheckbox={true} type={'design'} max_stat={data.max_candidates_stat} stats={stats_progressbar_data} worker={candidate} data={data}/>
+                    <StatsProgressBar hideCheckbox={true} type={'program'} max_stat={data.max_candidates_stat} stats={stats_progressbar_data} worker={candidate} data={data}/>
+                    <StatsProgressBar hideCheckbox={true} type={'manage'} max_stat={data.max_candidates_stat} stats={stats_progressbar_data} worker={candidate} data={data}/>
                 </div>
                 <button className="btn btn-success" id={candidate.id} onClick={(e) => this.hire(e, type)}>Hire</button>
                 <button className="btn btn-danger" id={candidate.id} onClick={(e) => this.reject(e, type)}>Hide</button>

@@ -18,8 +18,8 @@ class StatsProgressBar extends Component {
         const data = this.props.data;
         const worker = this.props.worker;
         const type = this.props.type;
-        const isCandidate = this.props.isCandidate;//to switch relation
-        const max_stat = isCandidate ? data.max_candidates_stat : data.max_stat;
+        const hideCheckbox = this.props.hideCheckbox;
+        const max_stat = this.props.max_stat;
         let bar_data = {};
         let stat = 'default';
         switch(type){
@@ -56,17 +56,21 @@ class StatsProgressBar extends Component {
 
             default: break;
         }
-        console.log('worker')
-        console.log(worker)
+
         return (
             <div className="stats-progress-bar">
-                <input
-                className="radial-checkbox"
-                type="checkbox"
-                id={stat}
-                checked={this.props.data.helpers.getRole(worker.id, stat)}
-                onChange={this.changeRole}
-                />
+                {
+                    hideCheckbox
+                    ? ''
+                    : <input
+                            className="radial-checkbox"
+                            type="checkbox"
+                            id={stat}
+                            checked={this.props.data.helpers.getRole(worker.id, stat)}
+                            onChange={this.changeRole}
+                        />
+                }
+
                 <Bar bar_data={[bar_data]} />
             </div>
         );

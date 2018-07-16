@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
+import ProjectModel from '../models/ProjectModel';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
+import StatsProgressBar from './StatsProgressBar';
 
-import {skills} from '../game/knowledge';
+import {colors, skills} from '../game/knowledge';
+// import Project from './Project';
 
 
 class ProjectOfferBlock extends Component {
@@ -24,36 +27,68 @@ class ProjectOfferBlock extends Component {
     render() {
         let candidate = this.props.candidate;
         let type = this.props.type;
+        let data = this.props.data;
 
         const stats_data = _.mapValues(skills, (stat, key) => {
             return {name: key, val: <span>{candidate.needs(key)}</span>};
         });
+       const stats_progressbar_data = _.mapValues(candidate.estimate, (val, stat) => {
+            return {
+                name: stat,
+                value: candidate.originalyTasksQuantity(),
+                color: colors[stat].colorCompleted
+            };
+        });
+        console.log(data.max_stats_projects_offered)
+        return <div key={candidate.id} className="card offered-project">
 
-        return <div key={candidate.id} className="card">
-            <ProjectName project={candidate}/>
-            <div>
-                <label>Deadline: {candidate.getDeadlineText()}</label>&nbsp;
-                <label>Reward: {candidate.reward}$</label>&nbsp;
-                {candidate.penalty > 0 ? <label>Penalty: {candidate.penalty}$</label> : ''}
+            <div className="card-header">
+
+                <div className='project-avatar'>
+                    <img 
+                    className='project-avatar'
+                    // alt={project.name + ' avatar'} 
+                    // src={require(`../../public/${project_platforms[project.platform].name}.svg`)}
+                    src={candidate.avatar.platform}
+                    />
+                    <img 
+                    className='project-avatar'
+                    // alt={project.name + ' avatar'} 
+                    // src={require(`../../public/${project_kinds[project.kind].name}.svg`)}
+                    src={candidate.avatar.kind}
+                    />
+                </div>
+            
+                <ProjectName project={candidate}/>
+
+                <div className="btn-group btn-group-xs">
+                    <button 
+                    className="btn btn-success btn-outline" 
+                    id={candidate.id} 
+                    onClick={(e) => this.acceptOffered(e, type)}>
+                        Accept
+                    </button>
+                    <button 
+                    className="btn btn-warning btn-outline" 
+                    id={candidate.id} 
+                    onClick={(e) => this.startOffered(e, type)}>
+                        Start
+                    </button>
+                    <button 
+                    className="btn btn-danger btn-outline" 
+                    id={candidate.id} 
+                    onClick={(e) => this.reject(e, type)}>
+                        Hide
+                    </button>
+                </div>
+                
             </div>
+            <div className="card-body" >
+                <StatsProgressBar type={'design'} hideCheckbox={true} max_stat={data.max_stats_projects_offered} stats={stats_progressbar_data} worker={candidate} data={data}/>
+                <StatsProgressBar type={'program'} hideCheckbox={true} max_stat={data.max_stats_projects_offered} stats={stats_progressbar_data} worker={candidate} data={data}/>
+                <StatsProgressBar type={'manage'} hideCheckbox={true} max_stat={data.max_stats_projects_offered} stats={stats_progressbar_data} worker={candidate} data={data}/>
 
-            <StatsBar stats={stats_data} data={this.props.data}/>
-            {
-                candidate.stage === 'ready' ?
-                    <div className="btn-group">
-                        <button className="btn btn-success" id={candidate.id} onClick={(e) => this.acceptOffered(e)}>
-                            Accept
-                        </button>
-                        &nbsp;
-                        <button className="btn btn-warning" id={candidate.id} onClick={(e) => this.startOffered(e)}>
-                            Start
-                        </button>
-                        &nbsp;
-                        <button className="btn btn-danger" id={candidate.id} onClick={(e) => this.reject(e)}>Hide</button>
-                    </div>
-                : ''
-            }
-
+            </div>
         </div>;
     }
 }

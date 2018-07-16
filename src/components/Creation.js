@@ -205,7 +205,7 @@ class Creation extends Component {
                         {Object.keys(player_backgrounds).map((background) => {
                             return <div key={background} className=" slim">
                                 <div className="radio text-center slim">
-                                    <label className="slim">
+                                    <span className="slim">
                                         <h3 className="text-center">
                                             <input type="radio" name="background" value={background}
                                                    checked={this.state.selected_background === background}
@@ -214,7 +214,7 @@ class Creation extends Component {
                                                    }}/>
                                             {player_backgrounds[background].name}
                                         </h3>
-                                    </label>
+                                    </span>
                                 </div>
                             </div>
                         })}
@@ -231,7 +231,7 @@ class Creation extends Component {
                             {Object.keys(selected_background.spices).map((spice) => {
                                 return <div key={spice} className=" slim">
                                     <div className="radio text-center slim">
-                                        <label className="slim">
+                                        <span className="slim">
                                             <h3 className="text-center slim-top">
                                                 <input type="radio" name="spice" value={spice}
                                                        checked={this.state[this.state.selected_background] === spice}
@@ -242,7 +242,7 @@ class Creation extends Component {
                                                        }}/>
                                                 {selected_background.spices[spice].name}
                                             </h3>
-                                        </label>
+                                        </span>
                                     </div>
                                 </div>
                             })}
@@ -301,31 +301,38 @@ class Creation extends Component {
                                             </span>
                                         </h3>
                                     <h3 className="text-center">
-                                        Choose <input type="text" name="background" className="form-inline"
-                                                      value={this.state.suggest_name}
-                                                      onChange={(event) => {
-                                                          this.setState({suggest_name: event.target.value})
-                                                      }}
-                                                      onKeyPress={(event) => {
-                                                          event.target.style.width = ((event.target.value.length + 2) * 14) + 'px';
-                                                      }}
-                                    /> background
+                                        Choose background
+                                        <input 
+                                        type="text" 
+                                        name="background" 
+                                        className="form-inline"
+                                        value={this.state.suggest_name}
+                                        onChange={(event) => {
+                                            this.setState({suggest_name: event.target.value})
+                                        }}
+                                        onKeyPress={(event) => {
+                                            event.target.style.width = ((event.target.value.length + 2) * 14) + 'px';
+                                        }}
+                                        />
                                     </h3>
                                     <div className="card slim">
                                         <div className=" slim">
                                             {Object.keys(player_backgrounds).map((background) => {
                                                 return <div key={background} className=" slim">
                                                     <div className="radio text-center slim">
-                                                        <label className="slim">
+                                                        <div className="slim">
                                                             <h3 className="text-center">
-                                                                <input type="radio" name="background" value={background}
-                                                                       checked={this.state.selected_background === background}
-                                                                       onChange={(event) => {
-                                                                           this.setState({selected_background: event.target.value})
-                                                                       }}/>
+                                                                <input 
+                                                                type="radio" 
+                                                                name="background" 
+                                                                value={background}
+                                                                checked={this.state.selected_background === background}
+                                                                onChange={(event) => {
+                                                                    this.setState({selected_background: event.target.value})
+                                                                }}/>
                                                                 {player_backgrounds[background].name}
                                                             </h3>
-                                                        </label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             })}
@@ -342,18 +349,21 @@ class Creation extends Component {
                                                 {Object.keys(selected_background.spices).map((spice) => {
                                                     return <div key={spice} className=" slim">
                                                         <div className="radio text-center slim">
-                                                            <label className="slim">
+                                                            <div className="slim">
                                                                 <h3 className="text-center slim-top">
-                                                                    <input type="radio" name="spice" value={spice}
-                                                                           checked={this.state[this.state.selected_background] === spice}
-                                                                           onChange={(event) => {
-                                                                               const state = {};
-                                                                               state[this.state.selected_background] = event.target.value;
-                                                                               this.setState(state);
-                                                                           }}/>
+                                                                    <input 
+                                                                    type="radio" 
+                                                                    name="spice" 
+                                                                    value={spice}
+                                                                    checked={this.state[this.state.selected_background] === spice}
+                                                                    onChange={(event) => {
+                                                                        const state = {};
+                                                                        state[this.state.selected_background] = event.target.value;
+                                                                        this.setState(state);
+                                                                    }}/>
                                                                     {selected_background.spices[spice].name}
                                                                 </h3>
-                                                            </label>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 })}
