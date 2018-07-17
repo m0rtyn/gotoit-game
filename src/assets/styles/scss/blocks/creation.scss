@@ -1,3 +1,34 @@
 .creation {
+  input[type="radio"] {
+    width: $main-size * 4;
+    height: $main-size * 4;
 
+  }
+
+  .creation-gender-select,
+  .creation-background-select,
+  .creation-might-select {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    // padding: $main-size * 4 0;
+  }
+
+  .modal-title {
+    width: 100%;
+    margin-bottom: $double-size;
+  }
+
+  .creation-player-name {
+    display: flex;
+    justify-content: center;
+
+    input {
+      flex: 0 1 30%;
+    }
+  }
+
+  .creation-background-description {
+    width: 100%;
+  }
 }

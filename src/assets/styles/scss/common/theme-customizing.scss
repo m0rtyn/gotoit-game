@@ -17,7 +17,9 @@
 }
 
 .card-body,
-.card-header {
+.card-header,
+.modal-body,
+.modal-header {
   padding: $main-size * 4;
 }
 
