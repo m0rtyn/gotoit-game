@@ -18,6 +18,8 @@ class StatsProgressBar extends Component {
         const data = this.props.data;
         const worker = this.props.worker;
         const type = this.props.type;
+        const hideCheckbox = this.props.hideCheckbox;
+        const max_stat = this.props.max_stat;
         let bar_data = {};
         let stat = 'default';
         switch(type){
@@ -26,7 +28,7 @@ class StatsProgressBar extends Component {
                 bar_data = {
                     name: stat,
                     value: parseInt(stats[stat].value, 10),
-                    width: (parseInt(stats[stat].value, 10) / data.max_stat) * 100,
+                    width: (parseInt(stats[stat].value, 10) / max_stat) * 100,
                     color: stats[stat].color,
                     showName: true
                 };
@@ -36,7 +38,7 @@ class StatsProgressBar extends Component {
                 bar_data = {
                     name: stat,
                     value: parseInt(stats[stat].value, 10),
-                    width: (parseInt(stats[stat].value, 10) / data.max_stat) * 100,
+                    width: (parseInt(stats[stat].value, 10) / max_stat) * 100,
                     color: stats[stat].color,
                     showName: true
                 };
@@ -46,7 +48,7 @@ class StatsProgressBar extends Component {
                 bar_data = {
                     name: stat,
                     value: parseInt(stats[stat].value, 10),
-                    width: (parseInt(stats[stat].value, 10) / data.max_stat) * 100,
+                    width: (parseInt(stats[stat].value, 10) / max_stat) * 100,
                     color: stats[stat].color,
                     showName: true
                 };
@@ -57,13 +59,18 @@ class StatsProgressBar extends Component {
 
         return (
             <div className="stats-progress-bar">
-                <input
-                className="radial-checkbox"
-                type="checkbox"
-                id={stat}
-                checked={this.props.data.helpers.getRole(worker.id, stat)}
-                onChange={this.changeRole}
-                />
+                {
+                    hideCheckbox
+                    ? ''
+                    : <input
+                            className="radial-checkbox"
+                            type="checkbox"
+                            id={stat}
+                            checked={this.props.data.helpers.getRole(worker.id, stat)}
+                            onChange={this.changeRole}
+                        />
+                }
+
                 <Bar bar_data={[bar_data]} />
             </div>
         );

@@ -10,7 +10,7 @@ export function flush() { projects_generated = 0; }
 
 class ProjectModel {
     constructor(name, type, kind, platform, reward, penalty, start_needs, size, deadline, complexity = 0) {
-        console.log('here')
+        console.log('here');
         console.log(kind, platform)
         this.stage = 'ready';
         this.is_paused = false;
@@ -26,7 +26,7 @@ class ProjectModel {
         this.avatar = {
             platform: require(`../../public/${platform}.svg`),
             kind: require(`../../public/${kind}.svg`)
-        }
+        };
 
 
 

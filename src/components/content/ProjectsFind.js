@@ -21,7 +21,7 @@ class ProjectsFind extends Component {
                 id: 'reputation'
             }
         ];
-
+        console.log(this.props.data.offered_projects)
 
         return <div className="project-find">
             <h3 className="text-center">Find Projects</h3>
