@@ -104,7 +104,7 @@ class Project extends Component {
         let onSelectChange = (e) => {
             data.helpers.changeTeamSelector();
             data.helpers.modifyRelation(e.value.id, project.id);
-            data.helpers.modifyHoveredProjects();
+            data.helpers.modifyHoveredObjects();
         };
 
         //let unoccupied_workers = data.workers.filter((worker) => {return data.helpers.deepCheckRelation(worker, project)});

@@ -155,7 +155,8 @@ export const charts_parameters = {
     environment_costs: {label: 'Environment costs', color: '#8B0000'},
     candidates_resumes: {label: 'Candidates resumes', color: '#000080'},
     projects_in_process: {label: 'Current projects', color: '#CD5C5C'},
-    projects_accepted: {label: 'Projects accepted', color: '#FFFF00'}
+    projects_accepted: {label: 'Projects accepted', color: '#FFFF00'},
+    public_relations_costs: {label: 'Public relation costs', color: '#975334'}
 };
 
 export const archive_chats_parameters = {
@@ -301,6 +302,7 @@ export const public_relations = {
         tooltip: 'Duration: 1 week. Spend some money preaching and advertising your company at the most popular hiring web sites there are in the Internet. Rather later than sooner but you`ll definitely find someone willing to take the offer.',
         onClick: (state) => {
             state.money -= 1000;
+            state.statistics.public_relations_costs.buffer += 1000;
             state.on_tick_effects.push({
                 type: 'search_specialist',
                 start_tick: state.date.tick
@@ -320,6 +322,7 @@ export const public_relations = {
         tooltip: 'Duration: 1 week. Spend some money preaching and advertising your company at the most popular hiring web sites there are in the Internet. Rather later than sooner but you`ll definitely find someone willing to take the offer.',
         onClick: (state) => {
             state.money -= 500;
+          state.statistics.public_relations_costs.buffer += 500;
             state.on_tick_effects.push({
                 type: 'search_job',
                 start_tick: state.date.tick
@@ -339,6 +342,7 @@ export const public_relations = {
         tooltip: 'Duration: 2 weeks. Lots of money and time spend. Lots of media coverage afterwards. ',
         onClick: (state) => {
             state.money -= 2500;
+          state.statistics.public_relations_costs.buffer += 2500;
             state.on_tick_effects.push({
                 type: 'big_event',
                 start_tick: state.date.tick
