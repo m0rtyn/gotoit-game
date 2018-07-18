@@ -83,7 +83,10 @@ export const rules = {
                     stats.values.push(stats.buffer)
                 });
 
-                data.btc_statistic.values.push(data.current_btc_price);
+                data.exchange_statistics.btc.values.push(data.current_btc_price);
+                data.exchange_statistics.share0.values.push(data.current_share0_price);
+                data.exchange_statistics.share1.values.push(data.current_share1_price);
+                data.exchange_statistics.share2.values.push(data.current_share2_price);
 
 
 
@@ -198,6 +201,12 @@ export const rules = {
 
             const x = current_tick + 2000;
             data.current_btc_price = Math.floor(Math.abs(Math.sin(x/19)) * x/3 + Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x * 2 + Math.abs(Math.sin(Math.sqrt(x/227))) * x + x);
+
+            data.current_share0_price = Math.floor(Math.abs(Math.sin(x/19)) * x/3 + Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x * 2 + Math.abs(Math.sin(Math.sqrt(x/227))) * x + x);
+            data.current_share1_price = Math.floor(Math.abs(Math.sin(x/19)) * x/3 + Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x * 2 + Math.abs(Math.sin(Math.sqrt(x/227))) * x + x);
+            data.current_share2_price = Math.floor(Math.abs(Math.sin(x/19)) * x/3 + Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x * 2 + Math.abs(Math.sin(Math.sqrt(x/227))) * x + x);
+
+
 
             //data.current_btc_price = Math.abs(Math.sin(x/19)) * x + Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x + Math.abs(Math.sin(Math.sqrt(x/227))) * x + x;
 
