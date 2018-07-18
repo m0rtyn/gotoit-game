@@ -82,7 +82,7 @@ var default_state =
 
         wasRecentlyHackathon: false,
 
-        relations: [],
+        relations: {},
 
         helpers: {},
 
