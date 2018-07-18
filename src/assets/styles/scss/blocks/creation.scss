@@ -1,3 +1,46 @@
 .creation {
+  input[type="radio"] {
+    width: 0;
+    height: 0;
 
+    &:checked + label {
+      background-color: $success-color;
+      border-color: $success-color;
+      color: #fff;
+    }
+  }
+
+  .creation-person {
+    & > .card-body {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .creation-gender-select,
+  .creation-background-select,
+  .creation-might-select {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  .btn {
+    margin: 0 $main-size;
+  }
+
+  .modal-title {
+    width: 100%;
+    margin-bottom: $double-size;
+  }
+
+  .creation-player-name {
+    display: flex;
+    justify-content: center;
+  }
+
+  .creation-description {
+    margin-top: $double-size;
+    width: 100%;
+  }
 }

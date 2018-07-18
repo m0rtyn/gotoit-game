@@ -1,11 +1,10 @@
 .project-find {
-  .reputation-bar {
-    width: 100%;
-    margin: 0;
-  }
-
   h4 .btn {
     margin: 0 $double-size;
+  }
+
+  .card-header {
+    align-items: flex-start;
   }
 
   .offered-project {
@@ -18,7 +17,7 @@
 
   .project-avatar {
     width: $main-size * 16;
-    height: $main-size * 16;
+    // height: $main-size * 16;
 
     & > img {
       position: absolute;
