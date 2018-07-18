@@ -67,10 +67,10 @@ class Header extends Component {
                                 }
                             }}>
 
-                                {[1, 2, 3].map((speed, index) => {
+                                {[1, 3, 5].map((speed, index) => {
                                     return (
                                         <button className="topbar-btn" key={index}>
-<<<<<<< HEAD
+
                                             {data.game_speed_multiplier === speed ? 
                                                 <span className="">
                                                     {{0: '►', 1: '►►', 2: '►►►'}[index]}
@@ -78,17 +78,6 @@ class Header extends Component {
                                                 <span className="" onClick={() => {
                                                     data.helpers.setGameSpeed(speed); }}>
                                                     {{0: '►', 1: '►►', 2: '►►►'}[index]}
-=======
-                                            {data.game_speed_multiplier === speed
-                                                ? <span>
-                                                    {{0: '►',1: '►►'}[index]}
-                                                </span>
-                                                : <span
-                                                onClick={() => {
-                                                    data.helpers.setGameSpeed(speed); 
-                                                }}>
-                                                    {{0: '►',1: '►►',2: '►►►'}[index]}
->>>>>>> upstream/master
                                                 </span>}
                                         </button>
                                     )
