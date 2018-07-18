@@ -36,18 +36,8 @@ class ProjectOfferBlock extends Component {
             <div className="card-header">
 
                 <div className='project-avatar'>
-                    <img 
-                    className='project-avatar'
-                    // alt={project.name + ' avatar'} 
-                    // src={require(`../../public/${project_platforms[project.platform].name}.svg`)}
-                    src={candidate.avatar.platform}
-                    />
-                    <img 
-                    className='project-avatar'
-                    // alt={project.name + ' avatar'} 
-                    // src={require(`../../public/${project_kinds[project.kind].name}.svg`)}
-                    src={candidate.avatar.kind}
-                    />
+                    <img src={candidate.avatar.platform}/>
+                    <img src={candidate.avatar.kind}/>
                 </div>
             
                 <ProjectName project={candidate}/>
@@ -75,7 +65,10 @@ class ProjectOfferBlock extends Component {
                 
             </div>
             <div className="card-body">
-                <StatsBar stats={stats_data} data={this.props.data}/>
+                <StatsBar
+                stats={stats_data}
+                data={this.props.data}
+                />
             </div>
         </div>;
     }

@@ -38,10 +38,7 @@ class ProjectsFind extends Component {
                 <div className="card-body">
                     
                     <Bar className="reputation-bar progress-lg" bar_data={reputation_bar} />
-
-                    <div>
-
-                    </div>
+                    
                 </div>
             </div>
 
