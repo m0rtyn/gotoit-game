@@ -1,0 +1,18 @@
+.hire-workers {
+  h4 .btn {
+    margin: 0 $double-size;
+  }
+
+  .card-header {
+    align-items: flex-start;
+  }
+
+  .offered-worker {
+    margin: $main-size;
+  }
+
+  .worker-avatar {
+    width: $main-size * 10;
+    border-radius: $border-radius;
+  }
+}
