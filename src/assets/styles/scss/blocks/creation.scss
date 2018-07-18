@@ -10,13 +10,19 @@
     }
   }
 
+  .creation-person {
+    & > .card-body {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
   .creation-gender-select,
   .creation-background-select,
   .creation-might-select {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    // padding: $main-size * 4 0;
   }
 
   .btn {
@@ -31,13 +37,10 @@
   .creation-player-name {
     display: flex;
     justify-content: center;
-
-    input {
-      flex: 0 1 30%;
-    }
   }
 
-  .creation-background-description {
+  .creation-description {
+    margin-top: $double-size;
     width: 100%;
   }
 }
