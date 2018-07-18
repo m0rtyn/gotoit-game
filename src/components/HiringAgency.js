@@ -79,7 +79,7 @@ class HiringAgency extends Component {
     render() {
         const data = this.props.data;
 
-        const search_button = <button className="btn btn-info hidden">Hiring Agency</button>;
+        const search_button = <button className="btn btn-xs btn-info hidden">Hiring Agency</button>;
 
         const draw_row = (name, child) => {
             return <div key={name} className="row">
@@ -126,7 +126,12 @@ class HiringAgency extends Component {
                             step={1}
                             max={100}
                             min={1}/>)}
-                        <button className={this.calcCost() <= data.money ? "btn btn-success" : "btn btn-success disabled"} onClick={() => { if (this.calcCost() <= data.money) { this.search() } }}>Search {this.calcCost()}</button>
+                        <button
+                        className={this.calcCost() <= data.money ? "btn btn-xs btn-success" : "btn btn-success btn-xs disabled"} 
+                        onClick={() => { if (this.calcCost() <= data.money) { this.search() }
+                        }}>
+                            Search {this.calcCost()}
+                        </button>
                     </div>
                 </TeamDialog>
             </Portal>

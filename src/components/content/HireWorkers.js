@@ -28,12 +28,48 @@ class HireWorkers extends Component {
                 return { name: key, val: <span>{candidate.stats[key]}</span> };
             });
 
-            return <div key={candidate.id} className="card">{candidate.name} <span> {candidate.getSalary()}$</span>
-                <div>{`Character: ${candidate.character.name}. ${candidate.character.description}.`}</div>
-                <StatsBar stats={stats_data} data={data} />
-                <button className="btn btn-success" id={candidate.id} onClick={(e) => this.hire(e, type)}>Hire</button>
-                <button className="btn btn-danger" id={candidate.id} onClick={(e) => this.reject(e, type)}>Hide</button>
+            return <div key={candidate.id} className="card offered-worker">
 
+                <div className="card-header">
+                    <img
+                    className="worker-avatar"
+                    src={candidate.avatar}
+                    />
+
+                    <h4 className="flex-grow">
+                        {candidate.name}
+                        <span className="text-warning">
+                            {candidate.getSalary()}$
+                        </span>
+                    </h4>
+
+                    <div className="btn-group btn-group-xs">
+                        <button
+                        className="btn btn-success btn-outline"
+                        id={candidate.id}
+                        onClick={(e) => this.hire(e, type)}
+                        >
+                            Hire
+                        </button>
+                        <button
+                        className="btn btn-danger btn-outline"
+                        id={candidate.id}
+                        onClick={(e) => this.reject(e, type)}
+                        >
+                            Hide
+                        </button>
+                    </div>
+                </div>
+                <div className="card-body">
+                    <span className="lead">
+                        {`Character: ${candidate.character.name}. ${candidate.character.description}.`}
+                    </span>
+
+                    <StatsBar
+                    stats={stats_data}
+                    data={data}
+                    />
+                </div>
             </div>
         };
 
@@ -52,30 +88,36 @@ class HireWorkers extends Component {
 
 
         return (
-            <div>
+            <div className="hire-workers">
                 <h3 className="text-center">Hiring</h3>
-                <div className="row">
-                    <div className="col-md-6">
-                        <h4 className="text-center fat">
-                            Resume
-                            <HiringAgency data={data} />
-                        </h4>
-                        {data.candidates.resumes.map(resumes_candidate)}
+
+
+                <h4>
+                    Rumor
+                    <button
+                    className="btn btn-info btn-xs"
+                    onClick={ () => { 
+                        data.helpers.changeContent('PublicRelations');
+                    }}>
+                        Public Relations
+                    </button>
+                </h4>
+
+                <div className="rumor card flexbox">
+                    <div className="card-body">
+
+                        <Bar className="rumor-bar progress-lg" bar_data={rumor_bar} />
+
                     </div>
-                    <div className="col-md-6">
-                        <h4 className="text-center fat slim-top">
-                            Rumor
-                        </h4>
-                        <Bar bar_data={rumor_bar} />
-
-                        <span className="">
-                            <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('PublicRelations'); }}>PublicRelations</button>
-                        </span>
-                    </div>
-
-
-                    {data.candidates.agency.map(agency_candidate)}
                 </div>
+
+                <h4>
+                    Resume
+                    <HiringAgency data={data} />
+                </h4>
+
+                {data.candidates.resumes.map(resumes_candidate)}
+                {data.candidates.agency.map(agency_candidate)}
             </div>
 
 
