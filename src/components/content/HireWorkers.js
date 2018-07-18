@@ -1,9 +1,13 @@
 import React, {Component} from "react";
 import _ from 'lodash';
 import StatsBar from '../StatsBar';
+import PublicRelations from './PublicRelations';
 import HiringAgency from '../HiringAgency';
 import Bar from '../Bar';
 import {colors, skills} from "../../game/knowledge";
+
+import StatsProgressBar from '../StatsProgressBar';
+
 
 class HireWorkers extends Component {
     constructor(props) {
@@ -23,9 +27,16 @@ class HireWorkers extends Component {
 
     render() {
         const data = this.props.data;
+
         let unit_block_template = (candidate, type) => {
-            const stats_data = _.mapValues(skills, (val, key) => {
-                return { name: key, val: <span>{candidate.stats[key]}</span> };
+
+            const stats_progressbar_data = _.mapValues(candidate.stats, (val, stat) => {
+
+                return {
+                    name: stat,
+                    value: candidate.getStatsData(stat),
+                    color: colors[stat].colorCompleted
+                };
             });
 
             return <div key={candidate.id} className="card offered-worker">
@@ -65,10 +76,15 @@ class HireWorkers extends Component {
                         {`Character: ${candidate.character.name}. ${candidate.character.description}.`}
                     </span>
 
-                    <StatsBar
+                    {/* <StatsBar
                     stats={stats_data}
                     data={data}
-                    />
+                    /> */}
+                    <div className="worker-skills">
+                        <StatsProgressBar hideCheckbox={true} type={'design'} max_stat={data.max_candidates_stat} stats={stats_progressbar_data} worker={candidate} data={data}/>
+                        <StatsProgressBar hideCheckbox={true} type={'program'} max_stat={data.max_candidates_stat} stats={stats_progressbar_data} worker={candidate} data={data}/>
+                        <StatsProgressBar hideCheckbox={true} type={'manage'} max_stat={data.max_candidates_stat} stats={stats_progressbar_data} worker={candidate} data={data}/>
+                    </div>
                 </div>
             </div>
         };
@@ -86,11 +102,9 @@ class HireWorkers extends Component {
             }
         ];
 
-
         return (
             <div className="hire-workers">
                 <h3 className="text-center">Hiring</h3>
-
 
                 <h4>
                     Rumor
@@ -119,8 +133,6 @@ class HireWorkers extends Component {
                 {data.candidates.resumes.map(resumes_candidate)}
                 {data.candidates.agency.map(agency_candidate)}
             </div>
-
-
         )
     }
 }

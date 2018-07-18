@@ -4,8 +4,9 @@ import _ from 'lodash';
 import ProjectModel from '../models/ProjectModel';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
+import StatsProgressBar from './StatsProgressBar';
 
-import {skills} from '../game/knowledge';
+import {colors, skills} from '../game/knowledge';
 // import Project from './Project';
 
 
@@ -26,11 +27,19 @@ class ProjectOfferBlock extends Component {
     render() {
         let candidate = this.props.candidate;
         let type = this.props.type;
+        let data = this.props.data;
 
         const stats_data = _.mapValues(skills, (stat, key) => {
             return {name: key, val: <span>{candidate.needs(key)}</span>};
         });
-
+       const stats_progressbar_data = _.mapValues(candidate.estimate, (val, stat) => {
+            return {
+                name: stat,
+                value: candidate.originalyTasksQuantity(),
+                color: colors[stat].colorCompleted
+            };
+        });
+        console.log(data.max_stats_projects_offered)
         return <div key={candidate.id} className="card offered-project">
 
             <div className="card-header">
@@ -64,11 +73,11 @@ class ProjectOfferBlock extends Component {
                 </div>
                 
             </div>
-            <div className="card-body">
-                <StatsBar
-                stats={stats_data}
-                data={this.props.data}
-                />
+            <div className="card-body" >
+                <StatsProgressBar type={'design'} hideCheckbox={true} max_stat={data.max_stats_projects_offered} stats={stats_progressbar_data} worker={candidate} data={data}/>
+                <StatsProgressBar type={'program'} hideCheckbox={true} max_stat={data.max_stats_projects_offered} stats={stats_progressbar_data} worker={candidate} data={data}/>
+                <StatsProgressBar type={'manage'} hideCheckbox={true} max_stat={data.max_stats_projects_offered} stats={stats_progressbar_data} worker={candidate} data={data}/>
+
             </div>
         </div>;
     }

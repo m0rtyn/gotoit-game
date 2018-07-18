@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {colors, public_relations} from "../../game/knowledge";
 import Bar from '../Bar';
-import _ from 'lodash'
+import _ from 'lodash';
+import Portal from "react-portal";
+import TeamDialog from "../TeamDialog";
 
 class PublicRelations extends Component {
     constructor(props) {
@@ -32,64 +34,69 @@ class PublicRelations extends Component {
             }
         ];
 
-        console.log(data.reputation)
+        const public_relations_button = <button className="btn btn-info hidden">
+            Public Relations
+        </button>;
+
         return (
-            <div className="card border text-center">
-                <div className='flex-container-row'>
-                    <div style={{ width: '47%', float: 'left', margin: '5px'}}>
-                        <h5>Rumor</h5>
-                        <p>attracts new candidates to you </p>
-                        <Bar bar_data={rumor_bar} />
+            <Portal ref="relations" closeOnEsc closeOnOutsideClick openByClickOn={public_relations_button}>
+                <TeamDialog>
+                    <div className="card border text-center">
+                        <h3>Public Relations</h3>
+                        <div className='flex-container-row'>
+                            <div style={{ width: '47%', float: 'left', margin: '5px'}}>
+                                <h5>Rumor</h5>
+                                <p>attracts new candidates to you </p>
+                                <Bar bar_data={rumor_bar} />
 
-                    </div>
-                    <div style={{ width: '47%', float: 'right', margin: '5px'}}>
-                        <h5>Reputation</h5>
-                        <p>attracts new projects to you</p>
-                        <Bar bar_data={reputation_bar} />
+                            </div>
+                            <div style={{ width: '47%', float: 'right', margin: '5px'}}>
+                                <h5>Reputation</h5>
+                                <p>attracts new projects to you</p>
+                                <Bar bar_data={reputation_bar} />
+                            </div>
+                        </div>
+
+                    <div>
+                        <div>
+                            <button className="btn btn-info pr-button" onClick={
+                                () => { public_relations['forum_thread'].onClick(data) }
+                            } >{public_relations['forum_thread'].name + ' ' + (()=>{
+                                let effect = _.find(data.on_tick_effects, (effect) => { return effect.type === 'forum_thread'});
+                                return effect ? effect.click_count : 0;
+                            })() }</button>
+                        </div>
+                        <div>
+                            <button className={250 <= data.money ? "btn btn-info pr-button" : "btn btn-info disabled pr-button"} onClick={
+                                () => {public_relations['search_specialist'].onClick(data)}
+                            }>{public_relations['search_specialist'].name + ' ' + (()=>{
+                                let effect = _.find(data.on_tick_effects, (effect) => { return effect.type === 'search_specialist'});
+                                return effect ? effect.click_count : 0;
+                            })()}</button>
+                        </div>
+                        <div>
+                            <button className={100 <= data.money ? "btn btn-info pr-button" : "btn btn-info disabled pr-button"} onClick={
+                                () => {public_relations['search_job'].onClick(data)}
+                            }>{public_relations['search_job'].name + ' ' + (()=>{
+                                let effect = _.find(data.on_tick_effects, (effect) => { return effect.type === 'search_job'});
+                                return effect ? effect.click_count : 0;
+                            })()}</button>
+                        </div>
+                        <div>
+                            <button className={((1000 <= data.money) && (this.state.next_click_will_able_at < data.date.tick)) ? "btn btn-info pr-button" : "btn btn-info disabled pr-button"} onClick={
+                                () => {
+                                    public_relations['big_event'].onClick(data);
+                                    this.setState({next_click_will_able_at: data.date.tick+24}); //only one click at day
+                                }
+                            }>{public_relations['big_event'].name + ' ' + (()=>{
+                                let effect = _.find(data.on_tick_effects, (effect) => { return effect.type === 'big_event'});
+                                return effect ? effect.click_count : 0;
+                            })()}</button>
+                        </div>
                     </div>
                 </div>
-
-
-                <div>
-                    <div>
-                        <button className="btn btn-info pr-button" onClick={
-                            () => { public_relations['forum_thread'].onClick(data) }
-                        } >{public_relations['forum_thread'].name + ' ' + (()=>{
-                            let effect = _.find(data.on_tick_effects, (effect) => { return effect.type === 'forum_thread'});
-                            return effect ? effect.click_count : 0;
-                        })() }</button>
-
-                    </div>
-                    <div>
-                        <button className={250 <= data.money ? "btn btn-info pr-button" : "btn btn-info disabled pr-button"} onClick={
-                            () => {public_relations['search_specialist'].onClick(data)}
-                        }>{public_relations['search_specialist'].name + ' ' + (()=>{
-                            let effect = _.find(data.on_tick_effects, (effect) => { return effect.type === 'search_specialist'});
-                            return effect ? effect.click_count : 0;
-                        })()}</button>
-                    </div>
-                    <div>
-                        <button className={100 <= data.money ? "btn btn-info pr-button" : "btn btn-info disabled pr-button"} onClick={
-                            () => {public_relations['search_job'].onClick(data)}
-                        }>{public_relations['search_job'].name + ' ' + (()=>{
-                            let effect = _.find(data.on_tick_effects, (effect) => { return effect.type === 'search_job'});
-                            return effect ? effect.click_count : 0;
-                        })()}</button>
-                    </div>
-                    <div>
-                        <button className={((1000 <= data.money) && (this.state.next_click_will_able_at < data.date.tick)) ? "btn btn-info pr-button" : "btn btn-info disabled pr-button"} onClick={
-                            () => {
-                                public_relations['big_event'].onClick(data);
-                                this.setState({next_click_will_able_at: data.date.tick+24}); //only one click at day
-                            }
-                        }>{public_relations['big_event'].name + ' ' + (()=>{
-                            let effect = _.find(data.on_tick_effects, (effect) => { return effect.type === 'big_event'});
-                            return effect ? effect.click_count : 0;
-                        })()}</button>
-                    </div>
-
-                </div>
-            </div>
+            </TeamDialog>
+        </Portal>
         );
     }
 }

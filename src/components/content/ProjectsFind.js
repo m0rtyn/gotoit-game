@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import ProjectOfferBlock from '../ProjectOfferBlock';
 
+import PublicRelations from '../content/PublicRelations';
 import SalesAgency from '../SalesAgency';
 import Bar from '../Bar';
 import {colors} from "../../game/knowledge";
@@ -20,25 +21,19 @@ class ProjectsFind extends Component {
                 id: 'reputation'
             }
         ];
-
+        console.log(this.props.data.offered_projects)
 
         return <div className="project-find">
             <h3 className="text-center">Find Projects</h3>
 
             <h4>
                 Reputation
-                <button 
-                className="btn btn-info btn-xs" 
-                onClick={() => { data.helpers.changeContent('PublicRelations'); }}
-                >
-                    Public relations
-                </button>
+                <PublicRelations data={this.props.data}/>
             </h4>
+
             <div className="reputation card flexbox">
                 <div className="card-body">
-                    
                     <Bar className="reputation-bar progress-lg" bar_data={reputation_bar} />
-                    
                 </div>
             </div>
 

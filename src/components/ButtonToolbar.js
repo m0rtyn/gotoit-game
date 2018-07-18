@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import Lorer from "../services/Lorer";
 import ProjectModel from "../models/ProjectModel";
+import _ from 'lodash';
 
 class ButtonToolbar extends Component {
 
     render() {
         let data = this.props.data;
-
+        let unread_messages_count = (()=>{
+            let count = 0;
+            _.map(data.mailbox, letter => {
+                if (!letter.isRead) count++;
+            });
+            return count;
+        })()
         return (
             <ul className="nav nav-tabs nav-tabs-light-mode">
                 <li className="nav-item">
@@ -55,26 +62,26 @@ class ButtonToolbar extends Component {
                 </li>
                 <li className="nav-item">
                     <a 
-                    className="nav-link" 
+                    className="nav-link flexbox"
                     onClick={() => { data.helpers.changeContent('Mail'); }}
                     >
-                        Mail
+
+                        <span><i className='fa fa-envelope'></i>&nbsp;</span>
+                        <span>Mail&nbsp;</span>
+                        {
+                            unread_messages_count !== 0
+                                ? <span className='mail-counter'>
+                                    {
+                                        unread_messages_count
+                                    }
+                                </span>
+                                : ''
+                        }
+
+
                     </a>
                 </li>
-                <li className="nav-item">
-                    <a
-                        className="nav-link"
-                        onClick={() => { let this_project = Lorer.afterFirstModule(ProjectModel.generate(1, 1, 'player'));
-                            data.offered_projects.push(this_project);
-                            data.mailbox.push({
-                                type: 'Hot offer',
-                                content: this_project
-                            });
-                            data.attainments.push('FirstModule') }}
-                    >
-                        Create hot offer
-                    </a>
-                </li>
+
             </ul>
         );
     }
