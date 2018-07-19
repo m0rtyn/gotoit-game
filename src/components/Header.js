@@ -44,7 +44,7 @@ class Header extends Component {
 
                     <div className="topbar-right" onClick={() => {
                         console.log(data);
-                    }}> 
+                    }}>
 
                         <div className="topbar-left">
                             <button className="topbar-btn" onClick={() => {
@@ -70,8 +70,7 @@ class Header extends Component {
                                 {[1, 3, 5].map((speed, index) => {
                                     return (
                                         <button className="topbar-btn" key={index}>
-
-                                            {data.game_speed_multiplier === speed ? 
+                                            {data.game_speed_multiplier === speed ?
                                                 <span className="">
                                                     {{0: '►', 1: '►►', 2: '►►►'}[index]}
                                                 </span> : 
