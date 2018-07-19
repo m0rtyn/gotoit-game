@@ -108,13 +108,7 @@ class HireWorkers extends Component {
 
                 <h4>
                     Rumor
-                    <button
-                    className="btn btn-info btn-xs"
-                    onClick={ () => { 
-                        data.helpers.changeContent('PublicRelations');
-                    }}>
-                        Public Relations
-                    </button>
+                    <PublicRelations data={data}/>
                 </h4>
 
                 <div className="rumor card flexbox">
