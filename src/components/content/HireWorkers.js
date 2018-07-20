@@ -76,10 +76,6 @@ class HireWorkers extends Component {
                         {`Character: ${candidate.character.name}. ${candidate.character.description}.`}
                     </span>
 
-                    {/* <StatsBar
-                    stats={stats_data}
-                    data={data}
-                    /> */}
                     <div className="worker-skills">
                         <StatsProgressBar hideCheckbox={true} type={'design'} max_stat={data.max_candidates_stat} stats={stats_progressbar_data} worker={candidate} data={data}/>
                         <StatsProgressBar hideCheckbox={true} type={'program'} max_stat={data.max_candidates_stat} stats={stats_progressbar_data} worker={candidate} data={data}/>
