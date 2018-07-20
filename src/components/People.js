@@ -22,65 +22,75 @@ class People extends Component {
     render() {
         const data = this.props.data;
 
-
-        return (
-            <div>
-                
-                {(data.workers.length < data.office.space)
+        return <div>
+            {
+                (data.workers.length < data.office.space)
                     ? <div className="column-buttons">
-
-                        <button 
-                            className="btn btn-success btn-xs" 
+                        <button
+                            className="btn btn-success btn-xs"
                             onClick={() => { data.helpers.changeContent('HireWorkers')}}>
-                                Hire Worker
+                            Hire Worker
                         </button>
 
-                        {(data.office.size > 1 && offices[data.office.size-1].space >= data.workers.length)
-                            ? ((data.office.size === 2)
-                            ? <button 
-                            onClick={() => {data.helpers.downOffice();}} 
-                            className="btn btn-warning btn-xs">
-                                Cancel the Office
-                            </button>
-                            : <button 
-                            onClick={() => {data.helpers.downOffice();}} 
-                            className="btn btn-warning btn-xs">
-                                Downgrade the Office
-                            </button>)
-                            : ''}
+                        {
+                            (data.office.size > 1 && offices[data.office.size-1].space >= data.workers.length)
+                                ? ((data.office.size === 2)
+                                    ? <button
+                                        onClick={() => {data.helpers.downOffice();}}
+                                        className="btn btn-warning btn-xs">
+                                        Cancel the Office
+                                    </button>
+                                    : <button
+                                        onClick={() => {data.helpers.downOffice();}}
+                                        className="btn btn-warning btn-xs">
+                                        Downgrade the Office
+                                    </button>)
+                                : ''
+                        }
 
-                        {data.office.size < 4
-                            ? <button onClick={() => {data.helpers.upOffice();}} 
-                            className="btn btn-warning btn-xs">
-                                Extend the Office
-                            </button>
-                            : ''}
+                        {
+                            (data.office.size < 4 && data.workers.length === data.office.space)
+                                ? <button
+                                    onClick={() => {data.helpers.upOffice();}}
+                                    className="btn btn-warning btn-xs">
+                                    Extend the Office
+                                </button>
+                                : ''
+                        }
 
                     </div>
+
                     : ((data.office.size === 1)
-                        ? <button 
-                            onClick={() => {data.helpers.upOffice();}} 
-                            className="btn btn-warning btn-xs">
-                                Rent a Office
-                        </button>
-                        : ((data.office.size < 4)
-                            ? <button 
-                                onClick={() => {data.helpers.upOffice();}} 
+                        ? <div className="column-buttons">
+                            <button
+                                onClick={() => {data.helpers.upOffice();}}
                                 className="btn btn-warning btn-xs">
-                                    Extend the Office
+                                Rent a Office
                             </button>
+                        </div>
+
+                        : ((data.office.size < 4 && data.workers.length === data.office.space)
+                            ? <div className="column-buttons">
+                                <button
+                                    onClick={() => {data.helpers.upOffice();}}
+                                    className="btn btn-warning btn-xs">
+                                    Extend the Office
+                                </button>
+                            </div>
                             : ''
-                    ))
-                }
+                        )
+                    )
+            }
                 
-                {data.workers.map((x, i) =>
+            {
+                data.workers.map((x, i) =>
                     <Worker key={x.id} worker={x} data={data} />
-                )}
+                )
+            }
 
-                <Office data={this.props.data}/>
+            <Office data={this.props.data}/>
 
-            </div>
-        );
+        </div>
     }
 }
 

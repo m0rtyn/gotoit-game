@@ -173,7 +173,12 @@ export const market_chart_parameters = {
     total: {label: 'Total', color: '#f7931a'}
 };
 
-export const btc_chart_parameters = { label: 'Bitcoin', color: '#f7931a' };
+export const exchange_charts_parameters = {
+    btc: { label: 'Bitcoin', color: '#f7931a' },
+    share0: { label: 'Future Sight', color: '#f7931a' },
+    share1: { label: 'L-Ri', color: '#f7931a' },
+    share2: { label: 'Murum', color: '#f7931a' }
+}
 
 export const colors = {
     creativity: {

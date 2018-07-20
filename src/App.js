@@ -65,6 +65,13 @@ class App extends Component {
         this.chargeMoney = this.chargeMoney.bind(this);
         this.buyBTC = this.buyBTC.bind(this);
         this.sellBTC = this.sellBTC.bind(this);
+        
+        this.buyShare0 = this.buyShare0.bind(this);
+        this.sellShare0 = this.sellShare0.bind(this);
+        this.buyShare1 = this.buyShare1.bind(this);
+        this.sellShare1 = this.sellShare1.bind(this);
+        this.buyShare2 = this.buyShare2.bind(this);
+        this.sellShare2 = this.sellShare2.bind(this);
 
         this.getRelation = this.getRelation.bind(this);
         this.modifyRelation = this.modifyRelation.bind(this);
@@ -145,6 +152,13 @@ class App extends Component {
         app_state.data.helpers['chargeMoney'] = this.chargeMoney;
         app_state.data.helpers['buyBTC'] = this.buyBTC;
         app_state.data.helpers['sellBTC'] = this.sellBTC;
+
+        app_state.data.helpers['buyShare0'] = this.buyShare0;
+        app_state.data.helpers['sellShare0'] = this.sellShare2;
+        app_state.data.helpers['buyShare1'] = this.buyShare1;
+        app_state.data.helpers['sellShare1'] = this.sellShare1;
+        app_state.data.helpers['buyShare2'] = this.buyShare2;
+        app_state.data.helpers['sellShare2'] = this.sellShare2;
 
         app_state.data.helpers['modifyRelation'] = this.modifyRelation;
         app_state.data.helpers['modifyRelationPure'] = this.modifyRelationPure;
@@ -1047,6 +1061,84 @@ class App extends Component {
         }
         else {
             console.log('not enough btc');
+        }
+        this.setState({data: data});
+    }
+    buyShare0(usd) {
+        const data = this.state.data;
+        if (data.money >= usd) {
+            this.chargeMoney(usd);
+            let share0Amount = usd / data.current_share0_price;
+            data.share0 += share0Amount;
+            //data.statistics.share0_summary.buffer += share0Amount;
+        }
+        else {
+            console.log('not enough money');
+        }
+        this.setState({data: data});
+    }
+
+    sellShare0(usd) {
+        const data = this.state.data;
+        let cost = usd / data.current_share0_price;
+        if (data.share0 >= cost) {
+            data.share0 -= cost;
+            this.addMoney(usd);
+        }
+        else {
+            console.log('not enough share0');
+        }
+        this.setState({data: data});
+    }
+    buyShare1(usd) {
+        const data = this.state.data;
+        if (data.money >= usd) {
+            this.chargeMoney(usd);
+            let share1Amount = usd / data.current_share1_price;
+            data.share1 += share1Amount;
+            //data.statistics.share1_summary.buffer += share1Amount;
+        }
+        else {
+            console.log('not enough money');
+        }
+        this.setState({data: data});
+    }
+
+    sellShare1(usd) {
+        const data = this.state.data;
+        let cost = usd / data.current_share1_price;
+        if (data.share1 >= cost) {
+            data.share1 -= cost;
+            this.addMoney(usd);
+        }
+        else {
+            console.log('not enough share1');
+        }
+        this.setState({data: data});
+    }
+    buyShare2(usd) {
+        const data = this.state.data;
+        if (data.money >= usd) {
+            this.chargeMoney(usd);
+            let share2Amount = usd / data.current_share2_price;
+            data.share2 += share2Amount;
+            //data.statistics.share2_summary.buffer += share2Amount;
+        }
+        else {
+            console.log('not enough money');
+        }
+        this.setState({data: data});
+    }
+
+    sellShare2(usd) {
+        const data = this.state.data;
+        let cost = usd / data.current_share2_price;
+        if (data.share2 >= cost) {
+            data.share2 -= cost;
+            this.addMoney(usd);
+        }
+        else {
+            console.log('not enough share2');
         }
         this.setState({data: data});
     }
