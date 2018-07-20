@@ -1,5 +1,10 @@
 .logo {
-  // font-family: 'Comic Sans MS';
-  // color: deeppink !important;
-  // text-shadow: 3px 3px 3px #B0BF1A;
+  font-weight: 900;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: $double-size;
+  }
 }

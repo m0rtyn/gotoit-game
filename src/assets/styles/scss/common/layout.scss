@@ -18,21 +18,6 @@ div {
     background-color: lightblue;
     border-radius: $double-size;
   }
-  // &::-webkit-scrollbar-button {
-  //   background-color: black;
-  // }
-  // &::-webkit-scrollbar-track {
-  //   background-color: black;
-  // }
-  // &::-webkit-scrollbar-track-piece {
-  //   background-color: black;
-  // }
-  // &::-webkit-scrollbar-corner {
-  //   background-color: black;
-  // }
-  // &::-webkit-resizer {
-  //   background-color: black;
-  // }
 }
 
 .main-container {
@@ -84,5 +69,5 @@ div {
 }
 
 .hovered {
-  background-color: rgba($yellow, 0.13);
+  box-shadow: inset 0 0 0 $main-size rgba($success-color, 0.5);
 }
