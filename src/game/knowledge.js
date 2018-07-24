@@ -106,6 +106,7 @@ export const project_platforms = {
     mobile: {name: 'Mobile', description: 'For Mobile applications, design is important.'},
     desktop: {name: 'Desktop', description: 'For Desktop applications, programming is important.'},
     browser: {name: 'Browser', description: 'For Browser applications, management is important.'},
+    VR: {name: 'VR', description: 'Virtual Reality applications should be balanced.'}
 };
 
 export const project_kinds = {
@@ -156,7 +157,8 @@ export const charts_parameters = {
     candidates_resumes: {label: 'Candidates resumes', color: '#000080'},
     projects_in_process: {label: 'Current projects', color: '#CD5C5C'},
     projects_accepted: {label: 'Projects accepted', color: '#FFFF00'},
-    public_relations_costs: {label: 'Public relation costs', color: '#975334'}
+    public_relations_costs: {label: 'Public relation costs', color: '#975334'},
+    offered_projects: {label: 'Offered projects', color: '#8A2BE2'}
 };
 
 export const archive_chats_parameters = {
