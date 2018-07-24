@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {FormattedDate} from 'react-intl';
 import {support} from '../game/app_config';
 import classNames from 'classnames';
-import Timeline from './Timeline'
+import Timeline from './Timeline';
+import Icon from './Icon';
 
 class Header extends Component {
     render() {
@@ -15,11 +16,12 @@ class Header extends Component {
         console.log(game_date)
 
         return (
-            <header>
+            <header className="header topbar">
                 <div className="topbar">
                     <div className="topbar-left">
 
                         <div className="logo">
+                            {/* <Icon name="logo" />  TODO: commented until webpack.config appears*/}
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
                                 <use xlinkHref="#icon-logo"></use>
                             </svg>
@@ -67,15 +69,22 @@ class Header extends Component {
 
                                 {[1, 3, 5].map((speed, index) => {
                                     return (
-                                        <button className="topbar-btn" key={index}>
-                                            {data.game_speed_multiplier === speed ?
-                                                <span className="">
+                                        <button className="topbar-btn" >
+                                            {data.game_speed_multiplier === speed 
+                                                ? <span 
+                                                className="speed-control"
+                                                key={index}>
                                                     {{0: '►', 1: '►►', 2: '►►►'}[index]}
-                                                </span> : 
-                                                <span className="" onClick={() => {
-                                                    data.helpers.setGameSpeed(speed); }}>
+                                                </span>
+                                                : <span
+                                                className="speed-control"
+                                                key={index}
+                                                onClick={() => {
+                                                    data.helpers.setGameSpeed(speed); 
+                                                }}>
                                                     {{0: '►', 1: '►►', 2: '►►►'}[index]}
-                                                </span>}
+                                                </span>
+                                            }
                                         </button>
                                     )
                                 })}
@@ -86,9 +95,13 @@ class Header extends Component {
                             </div>
                         </div>
 
-                        <div className="topbar-divider"></div>
-                            
-                        <div className="topbar-center">
+                        <div className="topbar-center game-time">
+                            {(date.is_working_time ?
+                                <span> Working </span> :
+                                (date.day > 5) ?
+                                <span> Weekends </span> :
+                                <span> Sleeping </span>
+                            )}
                             <FormattedDate 
                                 value={game_date} 
                                 weekday="short" 
@@ -97,18 +110,7 @@ class Header extends Component {
                                 year="numeric" 
                                 hour="numeric" 
                             />
-
-                            {/* <Timeline data={data}/> */}
-
-                            {(date.is_working_time ?
-                                <span className="text-success"> Working </span> :
-                                (date.day > 5) ?
-                                <span  className="text-primary"> Weekends </span> :
-                                <span  className="text-info"> Sleeping </span>)}
                         </div>
-
-
-                        <div className="topbar-divider"></div>
 
                         <div className="topbar-right">
                             <span 
@@ -152,11 +154,10 @@ class Header extends Component {
                         &nbsp;
                         Reddit
                     </a> */}
-
-                    <Timeline data={this.props.data}/>
                 </div>
 
-
+                <Timeline data={this.props.data}/>
+                
             </header>
         );
     }
