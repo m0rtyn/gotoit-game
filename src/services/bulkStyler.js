@@ -157,6 +157,8 @@ class bulkStyler {
         switch (platform) {
             case 'crossplatform':
                 return stats_bulk;
+            case 'VR':
+                return stats_bulk;
             case 'mobile':
                 stats_bulk[order[0]] *= 1.5;
                 stats_bulk[order[1]] *= 2;

@@ -106,6 +106,7 @@ export const project_platforms = {
     mobile: {name: 'Mobile', description: 'For Mobile applications, design is important.'},
     desktop: {name: 'Desktop', description: 'For Desktop applications, programming is important.'},
     browser: {name: 'Browser', description: 'For Browser applications, management is important.'},
+    VR: {name: 'VR', description: 'Virtual Reality applications should be balanced.'}
 };
 
 export const project_kinds = {
