@@ -1,23 +1,18 @@
-//SIZES
-$main-size: 4px;
-$half-size: $main-size/2;
-$double-size: $main-size*2;
-
-//COLORS
+//====COLORS=========================//
 $light-gray: #e5e5e5;
 $yellow: #FFD700;
-
-//theme-colors
+//theme colors
 $danger-color: #f96868;
 $warning-color: #f2a654;
 $info-color: #48b0f7;
 $success-color: #46be8a;
 $secondary-color: #e4e7ea;
 $primary-color: #33cabb;
-
+//design colors
 $design-color: #CC6CBC;
 $program-color: #FF954D;
 $manage-color: #57D9D1;
 
-//OTHER
-$border-radius: $main-size;
+
+//====OTHER=========================//
+$border-radius: 4px;

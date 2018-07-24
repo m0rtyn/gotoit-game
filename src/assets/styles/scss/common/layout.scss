@@ -9,14 +9,14 @@ div {
   //====СТИЛИЗАЦИЯ СКРОЛЛА====
   &::-webkit-scrollbar {
     background-color: $light-gray;
-    padding: $double-size;
-    width: $double-size;
-    border-radius: $double-size;
+    padding: size(1);
+    width: size(1);
+    border-radius: size(1);
   }
 
   &::-webkit-scrollbar-thumb {
     background-color: lightblue;
-    border-radius: $double-size;
+    border-radius: size(1);
   }
 }
 
@@ -38,7 +38,7 @@ div {
 .activity-column {
   & > div {
     height: 100%;
-    padding: $main-size;
+    padding: size(0.5);
     overflow-y: auto;
     background-image:
       linear-gradient(
@@ -57,7 +57,7 @@ div {
 
   & > button {
     flex: 1 1 50%;
-    margin: $main-size;
+    margin: size(0.5);
   }
 }
 
@@ -69,5 +69,5 @@ div {
 }
 
 .hovered {
-  box-shadow: inset 0 0 0 $main-size rgba($success-color, 0.5);
+  box-shadow: inset 0 0 0 size(0.5) rgba($success-color, 0.5);
 }

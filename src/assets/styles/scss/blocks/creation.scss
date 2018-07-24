@@ -17,21 +17,43 @@
     }
   }
 
-  .creation-gender-select,
-  .creation-background-select,
-  .creation-might-select {
+  .player-avatar {
+  }
+
+  .creation-gender-select {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
   }
 
+  .creation-background-select,
+  .creation-might-select {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: start;
+
+    label.btn {
+      width: 100%;
+      margin: size(0.5) 0;
+    }
+  }
+
+  .creation-select-column {
+    flex: 0 0 30%;
+    margin-right: size(2);
+  }
+
+  .creation-description-column {
+    flex: 1 1 70%;
+  }
+
   .btn {
-    margin: 0 $main-size;
+    margin: 0 size(0.5);
   }
 
   .modal-title {
     width: 100%;
-    margin-bottom: $double-size;
+    margin-bottom: size(1);
   }
 
   .creation-player-name {
@@ -40,7 +62,7 @@
   }
 
   .creation-description {
-    margin-top: $double-size;
+    margin-top: size(1);
     width: 100%;
   }
 }

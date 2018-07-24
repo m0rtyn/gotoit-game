@@ -1,16 +1,16 @@
 .project {
-  margin: $main-size;
-  margin-bottom: $double-size;
+  margin: size(0.5);
+  margin-bottom: size(1);
   display: flex;
   flex-flow: column nowrap;
-  border-radius: $main-size;
-  padding: $main-size;
+  border-radius: size(0.5);
+  padding: size(0.5);
   transition: background-color 0.33s ease-out;
   position: relative;
 
   .card-header {
     align-items: start;
-    padding: $half-size $main-size;
+    padding: size(0.25) size(0.5);
     border-bottom: none;
   }
 
@@ -20,8 +20,8 @@
   // }
 
   .project-avatar {
-    width: $main-size * 16;
-    height: $main-size * 16;
+    width: size(8);
+    height: size(8);
 
     & > img {
       position: absolute;
@@ -34,12 +34,12 @@
   }
 
   .card-body {
-    padding: $half-size $main-size;
+    padding: size(0.25) size(0.5);
   }
 
   .project-name {
     font-family: 'Roboto Condensed', Arial, Helvetica, sans-serif;
-    font-size: $main-size * 3;
+    font-size: size(1.5);
   }
 
   .project-reward {
@@ -51,8 +51,8 @@
   }
 
   .team-remove-worker {
-    padding: 0 $main-size;
-    margin: 0 $main-size;
+    padding: 0 size(0.5);
+    margin: 0 size(0.5);
     color: $primary-color;
 
     &:hover {
@@ -62,7 +62,7 @@
   }
 
   .team-add-worker {
-    padding: 0 $main-size * 4;
-    margin: 0 $main-size;
+    padding: 0 size(2);
+    margin: 0 size(0.5);
   }
 }
