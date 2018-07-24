@@ -282,8 +282,8 @@ export const rules = {
 
             if (!data.wasRecentlyHackathon && _.random(1, 24*60)) {
                 data.wasRecentlyHackathon = true;
-                data.offered_projects.push(Lorer.hackathon());
-            }
+                data.helpers.offerProject(Lorer.hackathon());
+                }
 
             state.data = data;
             return state;

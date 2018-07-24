@@ -95,6 +95,7 @@ class App extends Component {
         this.startMeeting = this.startMeeting.bind(this);
 
         this.contractSearch = this.contractSearch.bind(this);
+        this.offerProject = this.offerProject.bind(this);
         this.rejectOffered = this.rejectOffered.bind(this);
         this.acceptOffered = this.acceptOffered.bind(this);
         this.startOffered = this.startOffered.bind(this);
@@ -182,6 +183,7 @@ class App extends Component {
         app_state.data.helpers['startMeeting'] = this.startMeeting;
 
         app_state.data.helpers['contractSearch'] = this.contractSearch;
+        app_state.data.helpers['offerProject'] = this.offerProject;
         app_state.data.helpers['rejectOffered'] = this.rejectOffered;
         app_state.data.helpers['acceptOffered'] = this.acceptOffered;
         app_state.data.helpers['startOffered'] = this.startOffered;
@@ -698,8 +700,15 @@ class App extends Component {
         this.chargeMoney(agency_reward);
         let project = ProjectModel.generateAgency(agency_state);
         data.sales_agency_state = agency_state;
-        data.offered_projects.push(project);
+        this.offerProject(project);
         this.setState({data: data});
+    }
+
+    offerProject(project) {
+        let data = this.state.data;
+        data.offered_projects.push(project);
+        data.statistics.offered_projects.buffer += 1;
+        this.setState({data});
     }
 
     rejectOffered(id) { // rejectOffer
@@ -924,7 +933,7 @@ class App extends Component {
 
         if (project.type === 'training' && !data.attainments.includes('FirstTraining')) {
             let this_project = Lorer.afterFirstTraining(project);
-            data.offered_projects.push(this_project);
+            this.offerProject(this_project);
             data.mailbox.push({
                 type: 'Hot offer',
                 content: this_project,
@@ -935,7 +944,7 @@ class App extends Component {
         }
         if (project.size === 1 && !data.attainments.includes('FirstPart')) {
             let this_project = Lorer.afterFirstPart(project);
-            data.offered_projects.push(this_project);
+            this.offerProject(this_project);
             data.mailbox.push({
                 type: 'Hot offer',
                 content: this_project,
@@ -946,7 +955,7 @@ class App extends Component {
         }
         if (project.size === 2 && !data.attainments.includes('FirstModule')) {
             let this_project = Lorer.afterFirstModule(project);
-            data.offered_projects.push(this_project);
+            this.offerProject(this_project);
             data.mailbox.push({
                 type: 'Hot offer',
                 content: this_project,
@@ -957,7 +966,7 @@ class App extends Component {
         }
         if (project.size === 3 && !data.attainments.includes('FirstApplication')) {
             let this_project = Lorer.afterFirstApplication(project);
-            data.offered_projects.push(this_project);
+            this.offerProject(this_project);
             data.mailbox.push({
                 type: 'Hot offer',
                 content: this_project,
@@ -968,7 +977,7 @@ class App extends Component {
         }
         if (project.size === 4 && !data.attainments.includes('BigDeal')) {
             let this_project = Lorer.afterFirstBigDeal(project);
-            data.offered_projects.push(this_project);
+            this.offerProject(this_project);
             data.mailbox.push({
                 type: 'Hot offer',
                 content: this_project,
@@ -1525,7 +1534,7 @@ class App extends Component {
 
         if (!data.wasRecentlyHackathon && _.random(1, 24*60)) {
             data.wasRecentlyHackathon = true;
-            data.offered_projects.push(Lorer.hackathon());
+            this.offerProject(Lorer.hackathon());
         }
 
 
@@ -1561,7 +1570,7 @@ class App extends Component {
             );
         let this_project = ProjectModel.generate(quality, size, 'history');
         //console.log('probability: ' + probability.toFixed(2) + ' quality: ' + quality + ' size: ' + size);
-        data.offered_projects.push(this_project);
+        this.offerProject(this_project);
         data.mailbox.push({
             type: 'Offer',
             content: this_project,
