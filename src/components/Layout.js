@@ -22,7 +22,7 @@ class Layout extends Component {
                 <Header data={this.props.data} newGame={this.props.newGame}/>
 
                 <div className="main-container">
-                    <div className="row gap-1">
+                    <div className="row gap-2">
                         <div className="col-3 people-column">
                             <People data={this.props.data}/>
                         </div>
