@@ -1,10 +1,10 @@
 .worker {
-  margin: $main-size;
-  margin-bottom: $double-size;
+  margin: size(0.5);
+  margin-bottom: size(1);
   display: flex;
   flex-flow: row nowrap;
-  border-radius: $main-size;
-  padding: $main-size;
+  border-radius: size(0.5);
+  padding: size(0.5);
   transition: background-color 0.33s ease-out;
   position: relative;
 
@@ -15,7 +15,7 @@
       position: absolute;
       left: 0;
       top: 0;
-      border-radius: $main-size;
+      border-radius: size(0.5);
       width: 100%;
       height: 100%;
       background-image: linear-gradient(to right, #FFFFFF 0%, transparent 100%)
@@ -25,7 +25,7 @@
       position: absolute;
       content: "vacation";
       text-transform: uppercase;
-      font-size: $main-size * 4;
+      font-size: size(2);
       color: #2E99E5;
       font-weight: 900;
       transform: rotate(-45deg);
@@ -39,25 +39,25 @@
 
 
   .card-header {
-    padding: $half-size $main-size;
+    padding: size(0.25) size(0.5);
     border-bottom: none;
   }
 
   .worker-name {
     font-family: 'Roboto Condensed', Arial, Helvetica, sans-serif;
-    font-size: $main-size * 3;
+    font-size: size(1.5);
     margin: 0;
   }
 
   .card-body {
-    padding: $half-size $main-size;
+    padding: size(0.25) size(0.5);
   }
 
   .worker-avatar {
-    width: $main-size * 16;
-    height: $main-size * 16;
+    width: size(8);
+    height: size(8);
     border-radius: 5px;
-    margin: $main-size;
+    margin: size(0.5);
   }
 
   .worker-stats {
@@ -68,18 +68,18 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    padding-top: $main-size;
+    padding-top: size(0.5);
   }
 
   .stats-progress-bar {
     width: 30%;
     display: flex;
-    padding-left: $main-size;
+    padding-left: size(0.5);
 
     .progress {
       width: 100%;
       border-radius: 6px;
-      height: $main-size * 2;
+      height: size(1);
       font-size: 0;
     }
   }

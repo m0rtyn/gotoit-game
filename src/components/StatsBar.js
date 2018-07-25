@@ -18,6 +18,14 @@ class StatsBar extends Component {
                         {stats[stat].name}: <span>{stats[stat].val}{'  '}</span>
                     </span>
 
+                    // return <StatsProgressBar 
+                    // type={stats[stat].name}
+                    // hideCheckbox={true}
+                    // max_stat={data.max_stats_projects_offered}
+                    // stats={stats[stat].val}
+                    // worker={candidate}
+                    // data={data}
+                    // />
                 })}
                 </div>
         );

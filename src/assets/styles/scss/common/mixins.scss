@@ -1,0 +1,4 @@
+//function for sizing in 8pt-grid design system
+@function size($multiplier) {
+  @return $multiplier * 8px;
+}

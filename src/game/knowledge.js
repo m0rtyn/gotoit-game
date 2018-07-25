@@ -74,7 +74,7 @@ export const player_backgrounds = {
     //  university: {name: 'Student', money: 5000, start_tech: ['tdd'], text: 'Fundamental education according to verified program. Flat stats.'},
     technologist: {name: 'Technologist', money: 10000, might: 'technology', start_tech: [], text: 'Has a wide range of start technology.', spices: {
         agile: {name: 'Agile Development', description: technologies.agile.description},
-        tdd: {name: 'TDD', description: technologies.tdd.description},
+        tdd: {name: 'Test Driven Development', description: technologies.tdd.description},
         refactoring: {name: 'Refactoring', description: technologies.refactoring.description}
     }},
     specialist: {name: 'Specialist', money: 10000, might: 'skill', start_tech: ['rad'], text: 'Raised their professional skills to enormous heights and buy some professional stuff.', spices: {

@@ -1,15 +1,12 @@
-//====BUFFER====//
-@import 'scss/buffer.scss';
-
-
-//====COMMON====//
+//====COMMON====================================//
 @import 'scss/common/variables.scss';
+@import 'scss/common/mixins.scss';
 @import 'scss/common/theme-customizing.scss';
 @import 'scss/common/old-custom.scss';
 @import 'scss/common/layout.scss';
 
 
-//====BLOCKS====//
+//====BLOCKS====================================//
 //large blocks
 @import 'scss/blocks/activity-column.scss';
 @import 'scss/blocks/background.scss';
@@ -27,3 +24,6 @@
 @import 'scss/blocks/checkbox.scss';
 @import 'scss/blocks/stats-bar.scss';
 
+
+//====BUFFER====================================//
+@import 'scss/buffer.scss';

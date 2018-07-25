@@ -1,6 +1,6 @@
 .project-find {
   h4 .btn {
-    margin: 0 $double-size;
+    margin: 0 size(1);
   }
 
   .card-header {
@@ -8,7 +8,7 @@
   }
 
   .offered-project {
-    margin: $main-size;
+    margin: size(0.5);
   }
 
   .project-name {
@@ -16,8 +16,8 @@
   }
 
   .project-avatar {
-    width: $main-size * 16;
-    // height: $main-size * 16;
+    width: size(8);
+    // height: size(8);
 
     & > img {
       position: absolute;

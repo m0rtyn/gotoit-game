@@ -1,5 +1,5 @@
 input[type='checkbox'].radial-checkbox {
-  margin: -3px $double-size 0 $half-size;
+  margin: -3px size(1) 0 size(0.25);
   text-rendering: optimizeSpeed;
   width: 0;
   display: flex;
@@ -13,8 +13,8 @@ input[type='checkbox'].radial-checkbox::after {
   content: "";
   position: absolute;
   cursor: pointer;
-  height: $main-size * 3;
-  width: $main-size * 3;
+  height: size(1.5);
+  width: size(1.5);
   background-color: $light-gray;
   border-radius: 50%;
   display: flex;

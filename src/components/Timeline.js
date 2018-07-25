@@ -12,8 +12,8 @@ class Timeline extends Component {
         let { timelineEvents, timelineScale } = this.props.data;
 
         return (
-            <div className="gti-timeline-wrapper">
-                <div className='col-12 gti-timeline'>
+            <div className="timeline-wrapper">
+                <div className='col-12 timeline'>
 
                     <div className='line'>
                         <div
