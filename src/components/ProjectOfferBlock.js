@@ -55,14 +55,14 @@ class ProjectOfferBlock extends Component {
                     <button 
                     className="btn btn-success btn-outline" 
                     id={candidate.id} 
-                    onClick={(e) => this.acceptOffered(e, type)}>
-                        Accept
+                    onClick={(e) => this.startOffered(e, type)}>
+                        Start
                     </button>
                     <button 
                     className="btn btn-warning btn-outline" 
                     id={candidate.id} 
-                    onClick={(e) => this.startOffered(e, type)}>
-                        Start
+                    onClick={(e) => this.acceptOffered(e, type)}>
+                        Accept
                     </button>
                     <button 
                     className="btn btn-danger btn-outline" 
