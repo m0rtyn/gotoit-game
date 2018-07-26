@@ -5,9 +5,9 @@ class Bar extends Component {
     render() {
         let { bar_data } = this.props; //must be array!
         return (
-            <div className="progress">
+            <div className={`progress ${this.props.className}`}>
                 { _.map(bar_data, (item, i) =>
-                    <div className="progress-bar" role="progressbar"
+                    <div key={i} className="progress-bar" role="progressbar"
                     id={item.id}
                     style={{
                         width: item.width +'%',

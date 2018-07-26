@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {FormattedDate} from 'react-intl';
-import {social_links, support} from '../game/app_config';
+import {support} from '../game/app_config';
 import classNames from 'classnames';
-import Timeline from './Timeline'
+import Timeline from './Timeline';
+import Icon from './Icon';
 
 class Header extends Component {
     render() {
@@ -12,12 +13,21 @@ class Header extends Component {
         var real_date = new Date();
         var game_date = new Date();
         game_date.setDate(real_date.getDate()+(date.tick/24));
+        console.log(game_date)
 
         return (
-            <header>
+            <header className="header topbar">
                 <div className="topbar">
                     <div className="topbar-left">
-                        <button className="topbar-btn logo">ГоуТуАйТи:))))))</button>
+
+                        <div className="logo">
+                            {/* <Icon name="logo" />  TODO: commented until webpack.config appears*/}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+                                <use xlinkHref="#icon-logo"></use>
+                            </svg>
+                            Go to IT
+                        </div>
+
                         <button className="topbar-btn" href="#" onClick={this.props.newGame} title='Hard Reset For Developers'>
                             New game
                         </button>
@@ -34,7 +44,7 @@ class Header extends Component {
 
                     <div className="topbar-right" onClick={() => {
                         console.log(data);
-                    }}> 
+                    }}>
 
                         <div className="topbar-left">
                             <button className="topbar-btn" onClick={() => {
@@ -44,7 +54,8 @@ class Header extends Component {
                                     data.helpers.pauseGame();
                                 }
                             }}>
-                                <i className={classNames('fa', (data.game_paused ? 'fa-play' : 'fa-pause'))}></i>
+                                {/* <i className="material-icons">{data.game_paused ? 'play-arrow' : 'pause'}</i> */}
+                                <i className="fa fa-pause"></i>
                             </button>
 
                             <div onClick={ () => {
@@ -56,31 +67,41 @@ class Header extends Component {
                                 }
                             }}>
 
-                                {[1, 3].map((speed, index) => {
+                                {[1, 3, 5].map((speed, index) => {
                                     return (
-                                        <button className="topbar-btn" key={index}>
-                                            {data.game_speed_multiplier === speed ? 
-                                                <span className="">
-                                                    {{0: '►►',1: '►►►'}[index]}
-                                                </span> : 
-                                                <span className="" onClick={() => {
-                                                    data.helpers.setGameSpeed(speed); }}>
-                                                    {{0: '►►',1: '►►►',2: 'faster'}[index]}
-                                                </span>}
+                                        <button className="topbar-btn" >
+                                            {data.game_speed_multiplier === speed 
+                                                ? <span 
+                                                className="speed-control"
+                                                key={index}>
+                                                    {{0: '►', 1: '►►', 2: '►►►'}[index]}
+                                                </span>
+                                                : <span
+                                                className="speed-control"
+                                                key={index}
+                                                onClick={() => {
+                                                    data.helpers.setGameSpeed(speed); 
+                                                }}>
+                                                    {{0: '►', 1: '►►', 2: '►►►'}[index]}
+                                                </span>
+                                            }
                                         </button>
                                     )
                                 })}
 
                                 <button className="topbar-btn">
-                                    <img src={"day-forward.svg"} alt={"Next Day"} title={"Next Day"}
-                                            className="img"/>
+                                    <img src={"day-forward.svg"} alt={"Next Day"} title={"Next Day"}/>
                                 </button>
                             </div>
                         </div>
 
-                        <div className="topbar-divider"></div>
-                            
-                        <div className="topbar-center">
+                        <div className="topbar-center game-time">
+                            {(date.is_working_time ?
+                                <span> Working </span> :
+                                (date.day > 5) ?
+                                <span> Weekends </span> :
+                                <span> Sleeping </span>
+                            )}
                             <FormattedDate 
                                 value={game_date} 
                                 weekday="short" 
@@ -89,24 +110,14 @@ class Header extends Component {
                                 year="numeric" 
                                 hour="numeric" 
                             />
-
-                            {/* <Timeline data={data}/> */}
-
-                            {(date.is_working_time ?
-                                <span className="text-success"> Working </span> :
-                                (date.day > 5) ?
-                                <span  className="text-primary"> Weekends </span> :
-                                <span  className="text-info"> Sleeping </span>)}
                         </div>
 
-
-                        <div className="topbar-divider"></div>
-
                         <div className="topbar-right">
-                            <span className="topbar-btn font-weight-bold"
-                                  onClick={() => {
-                                      data.helpers.changeContent('Exchange');
-                                  }}
+                            <span 
+                            className="topbar-btn font-weight-bold"
+                            onClick={() => {
+                                data.helpers.changeContent('Exchange');
+                            }}
                             >
                                 <i className="fa fa-bitcoin"></i>
                                  {data.btc.toFixed(2)}
@@ -143,11 +154,10 @@ class Header extends Component {
                         &nbsp;
                         Reddit
                     </a> */}
-
-                    <Timeline data={this.props.data}/>
                 </div>
 
-
+                <Timeline data={this.props.data}/>
+                
             </header>
         );
     }

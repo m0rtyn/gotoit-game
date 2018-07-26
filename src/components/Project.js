@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import Portal from 'react-portal';
 
 import Select from 'react-select';
+
 import ReactBootstrapSlider from 'react-bootstrap-slider';
-// import '../../node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css';
+import '../../node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css';
 
 import _ from 'lodash';
 import classNames from 'classnames';
@@ -16,7 +17,7 @@ import ProjectName from './ProjectName';
 import ProjectProgressBar from './ProjectProgressBar';
 import ProjectDeadlineBar from './ProjectDeadlineBar';
 
-import {skills_names, skills, technologies, project_kinds, project_platforms} from '../game/knowledge';
+import {skills_names, technologies, project_kinds, project_platforms} from '../game/knowledge';
 
 
 
@@ -80,11 +81,9 @@ class Project extends Component {
     render() {
         const data = this.props.data;
         const project = this.props.project;
-        console.log(project.estimate)
-        console.log(project.original_estimate)
-        console.log(project.done)
-        console.log(project.bugs)
-        const stats_data = _.mapValues(skills, (stat, key) => {
+
+        /*const stats_data = _.mapValues(skills, (stat, key) => {
+
             return {name: key, // _.capitalize(key[0]),
                 val:
                     <span>
@@ -98,14 +97,14 @@ class Project extends Component {
                         /<span>{project.estimate[key]}</span>
                     </span>
             };
-        });
+        });*/
 
         const manage_button = <button className="btn btn-xs btn-success">Manage</button>;
 
         let onSelectChange = (e) => {
             data.helpers.changeTeamSelector();
             data.helpers.modifyRelation(e.value.id, project.id);
-            data.helpers.modifyHoveredProjects();
+            data.helpers.modifyHoveredObjects();
         };
 
         //let unoccupied_workers = data.workers.filter((worker) => {return data.helpers.deepCheckRelation(worker, project)});
@@ -179,18 +178,19 @@ class Project extends Component {
             onMouseOut={() => {data.helpers.modifyHoveredObjects()}}
             id={project.id}
             >
+
                 <div className="card-header">
                     <div className="card-header">
                         <div className='project-avatar'>
                             <img 
                             className='project-avatar'
-                            alt={project.name + ' avatar'} 
-                            src={require(`../../public/${project_platforms[project.platform].name}.svg`)}
+                            alt={project.name + ' avatar'}
+                            src={project.avatar.platform}
                             />
                             <img 
                             className='project-avatar'
-                            alt={project.name + ' avatar'} 
-                            src={require(`../../public/${project_kinds[project.kind].name}.svg`)}
+                            alt={project.name + ' avatar'}
+                            src={project.avatar.kind}
                             />
                         </div>
 

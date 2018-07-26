@@ -22,7 +22,7 @@ class StartMeeting extends Component {
                 <div className="row filament">
                     <div className="slim col-md-4">
                         {this.props.data.workers.map((worker) => {
-                            return <label key={worker.id} style={{width: '100%'}}>
+                            return <span key={worker.id} style={{width: '100%'}}>
                                 <h4>
                                     <input
                                         type="checkbox"
@@ -34,7 +34,7 @@ class StartMeeting extends Component {
                                             this.setState(state);
                                         }}/> {worker.name}
                                 </h4>
-                            </label>
+                            </span>
                         })}
                     </div>
 

@@ -4,39 +4,23 @@
   // filter: grayscale(100%) contrast(110%);
 }
 
+//====СТИЛИЗАЦИЯ СКРОЛЛА====
 div {
 
-  //====СТИЛИЗАЦИЯ СКРОЛЛА====
   &::-webkit-scrollbar {
     background-color: $light-gray;
-    padding: $double-size;
-    width: $double-size;
-    border-radius: $double-size;
+    width: size(1);
+    border-radius: size(1);
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: lightblue;
-    border-radius: $double-size;
+    background-color: $basic-color;
+    border-radius: size(1);
   }
-  // &::-webkit-scrollbar-button {
-  //   background-color: black;
-  // }
-  // &::-webkit-scrollbar-track {
-  //   background-color: black;
-  // }
-  // &::-webkit-scrollbar-track-piece {
-  //   background-color: black;
-  // }
-  // &::-webkit-scrollbar-corner {
-  //   background-color: black;
-  // }
-  // &::-webkit-resizer {
-  //   background-color: black;
-  // }
 }
+//===========================
 
 .main-container {
-
   & > .row {
     height: 100%;
   }
@@ -49,16 +33,20 @@ div {
   max-height: 100vh;
 }
 
-.people-column, .projects-column, .activity-column {
-  
+.people-column,
+.projects-column,
+.activity-column {
   & > div {
     height: 100%;
-    padding: $main-size;
+    padding: size(0.5);
     overflow-y: auto;
-    background-image: linear-gradient(180deg, 
-      rgba(255, 255, 255, 0.6) 0%, 
-      rgba(255, 255, 255, 0.6) 33%, 
-      transparent 100%);
+    background-image:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.6) 0%,
+        rgba(255, 255, 255, 0.6) 33%,
+        transparent 100%
+      );
     border-radius: 4px;
     overflow-x: hidden;
   }
@@ -69,11 +57,13 @@ div {
 
   & > button {
     flex: 1 1 50%;
-    margin: $main-size;
+    margin: size(0.5);
   }
 }
 
 .activity-column {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 
   & > div {
     height: auto;
@@ -81,17 +71,6 @@ div {
   }
 }
 
-.people-column {
-}
-
-.projects-column {
-  
-}
-
-.activity-column {
-  
-}
-
 .hovered {
-  background-color: rgba($yellow, 0.13);
+  box-shadow: inset 0 0 0 size(0.5) rgba($success-color, 0.5);
 }

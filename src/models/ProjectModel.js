@@ -1,5 +1,5 @@
 import _ from 'lodash';
-
+import React from 'react';
 import bulkStyler from '../services/bulkStyler';
 
 import {skills, skills_inf, project_kinds, project_platforms, project_sizes, project_bars} from '../game/knowledge';
@@ -10,6 +10,8 @@ export function flush() { projects_generated = 0; }
 
 class ProjectModel {
     constructor(name, type, kind, platform, reward, penalty, start_needs, size, deadline, complexity = 0) {
+        console.log('here');
+        console.log(kind, platform)
         this.stage = 'ready';
         this.is_paused = false;
 
@@ -21,6 +23,13 @@ class ProjectModel {
         this.platform = platform;
         this.reward = reward;
         this.penalty = penalty;
+        this.avatar = {
+            platform: require(`../../public/${platform}.svg`),
+            kind: require(`../../public/${kind}.svg`)
+        };
+
+
+
 
         this.estimate = JSON.parse(JSON.stringify(start_needs));
         this.original_estimate = JSON.parse(JSON.stringify(start_needs));
@@ -115,11 +124,11 @@ class ProjectModel {
                 }
 
 
-                const formName = () => {
+                /*const formName = () => {
                     return worker.name
                         + (overtimed ? ' in overtime' : '')
                         + (support ? ' with support of ' + this.supporter.name : '');
-                };
+                };*/
 
                 if (bugs > 0) {
                     this.stored_wisdom[stat] += bugs;

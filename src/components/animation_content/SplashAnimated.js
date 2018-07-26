@@ -15,10 +15,8 @@ class SplashAnimated extends Component {
             >
                 {({scale, opacity}) => {
                     if(scale===2) {
-                        {
-                            this.transitionEnd();
-                            return null
-                        }
+                        this.transitionEnd();
+                        return null
                     } else
                     return(
                         <div style={{

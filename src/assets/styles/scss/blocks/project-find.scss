@@ -1,0 +1,26 @@
+.project-find {
+  h4 .btn {
+    margin: 0 size(1);
+  }
+
+  .card-header {
+    align-items: flex-start;
+  }
+
+  .offered-project {
+    margin: size(0.5);
+  }
+
+  .project-name {
+    margin: 0;
+  }
+
+  .project-avatar {
+    width: size(8);
+    // height: size(8);
+
+    & > img {
+      position: absolute;
+    }
+  }
+}

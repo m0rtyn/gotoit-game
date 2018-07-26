@@ -8,7 +8,7 @@ import ProjectName from './ProjectName';
 import {skills, technologies} from '../game/knowledge';
 
 
-class Project extends Component {
+class ProjectReport extends Component {
 
     render() {
         const data = this.props.data;
@@ -25,7 +25,7 @@ class Project extends Component {
             };
         });
 
-        let label = (id, text) => { return <span key={id}> <label className="text-info small"> {text}</label></span>; };
+        let label = (id, text) => { return <span key={id} className="text-info small"> {text} </span>; };
 
         let team_ids = {};
         _.keys(data.relations).forEach((worker_id) => {
@@ -60,13 +60,17 @@ class Project extends Component {
 
                 {project.deadline_max > 0 ?
                     <div className="progress">
-                        <div className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'bg-danger' : 'bg-warning'))} role="progressbar"
-                             style={{width: (100-(project.deadline / project.deadline_max * 100))+'%'}}>
-                            <label>{project.deadline_max - project.deadline} gone</label>
+                        <div 
+                        className={classNames('progress-bar', (project.deadline / project.deadline_max < 0.1 ? 'bg-danger' : 'bg-warning'))} role="progressbar"
+                        style={{width: (100-(project.deadline / project.deadline_max * 100))+'%'}}
+                        >
+                            {project.deadline_max - project.deadline} gone
                         </div>
-                        <div className="progress-bar bg-success" role="progressbar"
-                             style={{width: (project.deadline / project.deadline_max * 100)+'%'}}>
-                            <label>{project.deadline} to deadline</label>
+                        <div 
+                        className="progress-bar bg-success" role="progressbar"
+                        style={{width: (project.deadline / project.deadline_max * 100)+'%'}}
+                        >
+                            {project.deadline} to deadline
                         </div>
                     </div> : ''}
 
@@ -75,7 +79,6 @@ class Project extends Component {
                     Project is <strong>{project.stage}ed</strong>.
                 </h4>
                 <p className="small">
-                    /*rendering values != 0 only help us save space in archive */
                     With team {team_label}.
                     {tech.length ? <span className="small"> and tech {tech_label}.</span> : ' '}
                     {project.facts.money_spent ? `Spent ${project.facts.money_spent}$ for salary. ` : ''}
@@ -90,7 +93,7 @@ class Project extends Component {
 
                 <div className="">
                     <div className=""> Tasks: {project.tasksQuantity()}/{project.planedTasksQuantity()} </div>
-                    <div className=""> Bugs: <label className="text-danger">{project.bugsQuantity()}</label> </div>
+                    <div className=""> Bugs: <span className="text-danger">{project.bugsQuantity()}</span> </div>
                     <div className=""> Complexity: {project.complexity} </div>
                     <div className=""> Iteration: {project.iteration} </div>
                 </div>
@@ -100,4 +103,4 @@ class Project extends Component {
     }
 }
 
-export default Project;
+export default ProjectReport;

@@ -3,6 +3,7 @@ import Portal from 'react-portal';
 import _ from 'lodash';
 
 import ReactBootstrapSlider from 'react-bootstrap-slider';
+import '../../node_modules/react-bootstrap-slider/src/css/bootstrap-slider.min.css';
 
 import TeamDialog from './TeamDialog';
 
@@ -14,10 +15,12 @@ class SalesAgency extends Component {
         super(props);
 
         let min = JSON.parse(JSON.stringify(skills));
+        let max = JSON.parse(JSON.stringify(skills));
+
         _.keys(min).forEach((skill) => {
             min[skill] = 0;
         });
-        let max = JSON.parse(JSON.stringify(skills));
+
         _.keys(max).forEach((skill) => {
             max[skill] = 100;
         });
@@ -40,6 +43,7 @@ class SalesAgency extends Component {
             //return _.sum([sum, val*3]);
             return _.sum([sum, Math.pow(val, 1.3)]);
         }, 0));
+
         let max_sum_factor = Math.floor(_.values(s.max_stats).reduce((sum, val) => {
             //return _.sum([sum, val*2]);
             return _.sum([sum, Math.pow(val, 1.2)]);
@@ -53,9 +57,10 @@ class SalesAgency extends Component {
         skills_names.forEach((skill) => {
             sum_control_factor += s.max_stats[skill] - s.min_stats[skill];
         });
+
         sum_control_factor = Math.floor(sum_control_factor / 10);
 
-       // console.log(min_sum_factor, max_sum_factor, pike_factor1, pike_factor2, '/', sum_control_factor);
+        // console.log(min_sum_factor, max_sum_factor, pike_factor1, pike_factor2, '/', sum_control_factor);
 
         return 420 + Math.floor((Math.pow(s.size, 1.615) * (1 + (s.deal_counter/10)) * (50 + min_sum_factor + max_sum_factor + pike_factor1 + pike_factor2))
             / (0.03 * (100 + sum_control_factor)));
@@ -111,7 +116,6 @@ class SalesAgency extends Component {
                                     //new_state.min_stats[skill] = Math.min(project_sizes[e.target.value].agency_max, state.max_stats[skill]);
                                 });
 
-                            //    console.log(e, new_state);
                                 this.setState(new_state);
                             }}
                             tooltip='hide'
@@ -140,6 +144,9 @@ class SalesAgency extends Component {
                                 onClick={() => { if (this.calcCost() <= data.money) { this.search() } }}>
                             Search {this.calcCost()}$
                         </button>
+                    </div>
+                    <div data-provide="slider" data-value={30} data-step={10}
+                         className="noUi-target noUi-ltr noUi-horizontal">
                     </div>
                 </TeamDialog>
             </Portal>

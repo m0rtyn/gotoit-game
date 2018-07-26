@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
+import Lorer from "../services/Lorer";
+import ProjectModel from "../models/ProjectModel";
+import _ from 'lodash';
 
 class ButtonToolbar extends Component {
 
     render() {
         let data = this.props.data;
-
+        let unread_messages_count = (()=>{
+            let count = 0;
+            _.map(data.mailbox, letter => {
+                if (!letter.isRead) count++;
+            });
+            return count;
+        })()
         return (
-            <ul className="nav nav-tabs">
+            <ul className="nav nav-tabs nav-tabs-light-mode">
                 <li className="nav-item">
                     {data.projects.length > 0 ? 
                         <a 
@@ -38,14 +47,6 @@ class ButtonToolbar extends Component {
                 <li className="nav-item">
                     <a
                     className="nav-link"
-                    onClick={() => { data.helpers.changeContent('PublicRelations'); }}
-                    >
-                        Public Relations
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <a
-                    className="nav-link"
                     onClick={() => { data.helpers.changeContent('Loans'); }}
                     >
                         Loans
@@ -61,12 +62,26 @@ class ButtonToolbar extends Component {
                 </li>
                 <li className="nav-item">
                     <a 
-                    className="nav-link" 
+                    className="nav-link flexbox"
                     onClick={() => { data.helpers.changeContent('Mail'); }}
                     >
-                        Mail
+
+                        <span><i className='fa fa-envelope'></i>&nbsp;</span>
+                        <span>Mail&nbsp;</span>
+                        {
+                            unread_messages_count !== 0
+                                ? <span className='mail-counter'>
+                                    {
+                                        unread_messages_count
+                                    }
+                                </span>
+                                : ''
+                        }
+
+
                     </a>
                 </li>
+
             </ul>
         );
     }

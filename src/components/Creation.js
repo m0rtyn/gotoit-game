@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 import SimpleModal from './SimpleModal';
 import StatsBar from './StatsBar';
+import StatsProgressBar from './StatsProgressBar';
 import bulkStyler from '../services/bulkStyler';
 
 import WorkerModel from '../models/WorkerModel';
@@ -128,9 +129,9 @@ class Creation extends Component {
         // i must hard set :(
         data.helpers.brutalSet({data: data});
 
-        data.offered_projects.push(ProjectModel.generate(1, 1, 'player'));
-        data.offered_projects.push(ProjectModel.generate(2, 1, 'player'));
-        data.offered_projects.push(ProjectModel.generate(3, 1, 'player'));
+        data.helpers.offerProject(ProjectModel.generate(1, 1, 'player'));
+        data.helpers.offerProject(ProjectModel.generate(2, 1, 'player'));
+        data.helpers.offerProject(ProjectModel.generate(3, 1, 'player'));
 
         data.stage = 'game';
         this.refs.creation.closePortal();
@@ -160,222 +161,202 @@ class Creation extends Component {
             return {name: key, val: stats[key]};
         });
 
-       /* const modal = this.state.step === 'welcome'
-            ? <div>
-                <h3 className="text-center">Go To IT</h3>
-                <h4 className="text-center">Game About Software Development</h4>
-                <div className="card">
-                    <p>This game is about software development and the rise of your company to the heights.</p>
-                    <p>Start with small contracts, save up some money, hire a couple of assistants and try to create something really cool!</p>
-                </div>
-                <div className="text-center">
-                    <button className="big btn-success btn-lg" onClick={() => { this.setState({step: 'creation'}) }}>Create Your Company!</button>
-                </div>
-            </div>
-            : <div>
-                <h3 className="text-center">
-                                            <span className="form-check">
-                                                <input className="form-check-input" type="radio"
-                                                       value="male" checked={this.state.gender === 'male'}
-                                                       onChange={this.handleGenderChange}
-                                                />
-                                                        Male
-                                            </span>
-                    <span className="form-check">
-                                                <input className="form-check-input" type="radio" value="female"
-                                                       checked={this.state.gender === 'female'}
-                                                       onChange={this.handleGenderChange}
-                                                />
-                                                        Female
-                                            </span>
-                </h3>
-                <h3 className="text-center">
-                    Choose <input type="text" name="background" className="form-inline"
-                                  value={this.state.suggest_name}
-                                  onChange={(event) => {
-                                      this.setState({suggest_name: event.target.value})
-                                  }}
-                                  onKeyPress={(event) => {
-                                      event.target.style.width = ((event.target.value.length + 2) * 14) + 'px';
-                                  }}
-                /> background
-                </h3>
-                <div className="card slim">
-                    <div className=" slim">
-                        {Object.keys(player_backgrounds).map((background) => {
-                            return <div key={background} className=" slim">
-                                <div className="radio text-center slim">
-                                    <label className="slim">
-                                        <h3 className="text-center">
-                                            <input type="radio" name="background" value={background}
-                                                   checked={this.state.selected_background === background}
-                                                   onChange={(event) => {
-                                                       this.setState({selected_background: event.target.value})
-                                                   }}/>
-                                            {player_backgrounds[background].name}
-                                        </h3>
-                                    </label>
-                                </div>
-                            </div>
-                        })}
-                    </div>
-                    <div>
-                        <p className="text-center slim">{player_backgrounds[this.state.selected_background].text}</p>
-                        <p className="text-center slim"> Start tech: {('technologist' === this.state.selected_background) ? "Agile, Test Drive Development or Refactoring" : technologies[player_backgrounds[this.state.selected_background].start_tech].name} </p>
-                    </div>
-                </div>
-                <div className="card slim">
-                    <div className="text-center slim">
-                        <h4 className="text-center filament">Start {selected_background.might}:</h4>
-                        <div className=" slim">
-                            {Object.keys(selected_background.spices).map((spice) => {
-                                return <div key={spice} className=" slim">
-                                    <div className="radio text-center slim">
-                                        <label className="slim">
-                                            <h3 className="text-center slim-top">
-                                                <input type="radio" name="spice" value={spice}
-                                                       checked={this.state[this.state.selected_background] === spice}
-                                                       onChange={(event) => {
-                                                           const state = {};
-                                                           state[this.state.selected_background] = event.target.value;
-                                                           this.setState(state);
-                                                       }}/>
-                                                {selected_background.spices[spice].name}
-                                            </h3>
-                                        </label>
-                                    </div>
-                                </div>
-                            })}
-                        </div>
-                        <p className="text-center">{selected_background.spices[this.state[this.state.selected_background]].description}</p>
-                    </div>
-                </div>
-                <div className="card slim">
-                    <h4 className="text-center slim-top">
-                        <p className="filament">Your start skills:</p>
-                        <StatsBar stats={stats_data} data={data}/>
-                    </h4>
-                </div>
-                <div className="text-center">
-                    <button className="big btn-success btn-lg" onClick={this.embark}>Embark</button>
-                </div>
-            </div>;
-        if ( data.stage === 'start') {
-            data.helpers.createPopup('none', modal)
-        }*/
-
         return (
-                <div>
-                    {(data.stage === 'start') ?
-                        <Portal ref="creation">
-                            <SimpleModal>
-                                {this.state.step === 'welcome' ?
-                                    <div>
-                                        <h3 className="text-center">Go To IT</h3>
-                                        <h4 className="text-center">Game About Software Development</h4>
-                                        <div className="card">
-                                            <p>This game is about software development and the rise of your company to the heights.</p>
-                                            <p>Start with small contracts, save up some money, hire a couple of assistants and try to create something really cool!</p>
-                                        </div>
-                                        <div className="text-center">
-                                            <button className="big btn-success btn-lg" onClick={() => { this.setState({step: 'creation'}) }}>Create Your Company!</button>
-                                        </div>
+            <div>
+                {(data.stage === 'start')
+                    ? <Portal ref="creation">
+                        <SimpleModal>
+                            {this.state.step === 'welcome'
+                                ? <div className="modal-content creation">
+                                    <div className="modal-header">
+                                        <h1 className="modal-title">Go To IT</h1>
+                                        <h2 className="subtitle">Game About Software Development</h2>
                                     </div>
+                                    <div className="modal-body">
+                                        <p className="lead">
+                                            This game is about software development and the rise of your company to the heights.
+                                            <br/>
+                                            Start with small contracts, save up some money, hire a couple of assistants and try to create something really cool!
+                                        </p>
+                                    </div>
+                                    <div className="modal-footer">
+                                        <button 
+                                        className="btn btn-success btn-lg" 
+                                        onClick={() => { this.setState({step: 'creation'}) }}
+                                        >
+                                            Create Your Company!
+                                        </button>
+                                    </div>
+                                </div>
 
-                                    :
-                                    <div>
-                                        <h3 className="text-center">
-                                            <span className="form-check">
-                                                <input className="form-check-input" type="radio"
-                                                       value="male" checked={this.state.gender === 'male'}
-                                                       onChange={this.handleGenderChange}
+                                : <div className="modal-content creation">
+                                    <div className="modal-body">
+                                        <section className="card creation-person">
+                                            <div className="card-body">
+                                                <img
+                                                className='player-avatar'
+                                                alt="player's avatar"
+                                                src='../../public/male.png'
                                                 />
+                                                <div className="creation-gender-select">
+                                                    <h3 className="text-center modal-title">Choose gender</h3>
+                                                    <input
+                                                    className="form-check-input"
+                                                    id="male-gender-radio-button"
+                                                    type="radio"
+                                                    value="male" 
+                                                    checked={this.state.gender === 'male'}
+                                                    onChange={this.handleGenderChange}
+                                                    />
+                                                    <label
+                                                    className="form-check-label btn btn-sm"
+                                                    htmlFor="male-gender-radio-button"
+                                                    >
                                                         Male
-                                            </span>
-                                            <span className="form-check">
-                                                <input className="form-check-input" type="radio" value="female"
-                                                       checked={this.state.gender === 'female'}
-                                                       onChange={this.handleGenderChange}
-                                                />
+                                                    </label>
+
+                                                    <input
+                                                    className="form-check-input"
+                                                    id="female-gender-radio-button"
+                                                    type="radio"
+                                                    value="female"
+                                                    checked={this.state.gender === 'female'}
+                                                    onChange={this.handleGenderChange}
+                                                    />
+                                                    <label
+                                                    className="form-check-label btn btn-sm"
+                                                    htmlFor="female-gender-radio-button"
+                                                    >
                                                         Female
-                                            </span>
-                                        </h3>
-                                    <h3 className="text-center">
-                                        Choose <input type="text" name="background" className="form-inline"
-                                                      value={this.state.suggest_name}
-                                                      onChange={(event) => {
-                                                          this.setState({suggest_name: event.target.value})
-                                                      }}
-                                                      onKeyPress={(event) => {
-                                                          event.target.style.width = ((event.target.value.length + 2) * 14) + 'px';
-                                                      }}
-                                    /> background
-                                    </h3>
-                                    <div className="card slim">
-                                        <div className=" slim">
-                                            {Object.keys(player_backgrounds).map((background) => {
-                                                return <div key={background} className=" slim">
-                                                    <div className="radio text-center slim">
-                                                        <label className="slim">
-                                                            <h3 className="text-center">
-                                                                <input type="radio" name="background" value={background}
-                                                                       checked={this.state.selected_background === background}
-                                                                       onChange={(event) => {
-                                                                           this.setState({selected_background: event.target.value})
-                                                                       }}/>
-                                                                {player_backgrounds[background].name}
-                                                            </h3>
-                                                        </label>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <h3 className="text-center modal-title">Your name</h3>
+                                                    <div className="input-group creation-player-name ">
+                                                        <div className="input-group-prepend">
+                                                            <span className="input-group-text">
+                                                                <i className="fa fa-user" id="sizing-addon1"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input 
+                                                        type="text" 
+                                                        name="background" 
+                                                        className="form-control"
+                                                        value={this.state.suggest_name}
+                                                        onChange={(event) => {
+                                                            this.setState({suggest_name: event.target.value})
+                                                        }}
+                                                        />
                                                     </div>
                                                 </div>
-                                            })}
-                                        </div>
-                                        <div>
-                                            <p className="text-center slim">{player_backgrounds[this.state.selected_background].text}</p>
-                                            <p className="text-center slim"> Start tech: {('technologist' === this.state.selected_background) ? "Agile, Test Drive Development or Refactoring" : technologies[player_backgrounds[this.state.selected_background].start_tech].name} </p>
-                                        </div>
-                                    </div>
-                                    <div className="card slim">
-                                        <div className="text-center slim">
-                                            <h4 className="text-center filament">Start {selected_background.might}:</h4>
-                                            <div className=" slim">
-                                                {Object.keys(selected_background.spices).map((spice) => {
-                                                    return <div key={spice} className=" slim">
-                                                        <div className="radio text-center slim">
-                                                            <label className="slim">
-                                                                <h3 className="text-center slim-top">
-                                                                    <input type="radio" name="spice" value={spice}
-                                                                           checked={this.state[this.state.selected_background] === spice}
-                                                                           onChange={(event) => {
-                                                                               const state = {};
-                                                                               state[this.state.selected_background] = event.target.value;
-                                                                               this.setState(state);
-                                                                           }}/>
-                                                                    {selected_background.spices[spice].name}
-                                                                </h3>
-                                                            </label>
+                                            </div>
+                                        </section>
+
+                                        <section className="card creation-background">
+                                            <div className="card-body">
+                                                <div className="creation-background-select">
+                                                    <div className="creation-select-column">
+                                                        {Object.keys(player_backgrounds).map((background) => {
+                                                            return <div key={background}>
+                                                                <input
+                                                                className="form-check-input"
+                                                                id={background + "-radio-button"}
+                                                                type="radio" 
+                                                                name="background" 
+                                                                value={background}
+                                                                checked={this.state.selected_background === background}
+                                                                onChange={(event) => {
+                                                                    this.setState({selected_background: event.target.value})
+                                                                }}/>
+                                                                <label
+                                                                className="form-check-label btn btn-sm"
+                                                                htmlFor={background + "-radio-button"}>
+                                                                    {player_backgrounds[background].name}
+                                                                </label>
+                                                            </div>
+                                                        })}
+                                                    </div>
+                                                    <div className="creation-description-column">
+                                                        <h3 className="text-center modal-title">
+                                                            Choose background
+                                                        </h3>
+
+                                                        <div className="creation-description lead text-center">
+                                                            {player_backgrounds[this.state.selected_background].text}
+                                                            <br/>
+                                                            Start tech: {('technologist' === this.state.selected_background) ? "Agile, Test Drive Development or Refactoring" : technologies[player_backgrounds[this.state.selected_background].start_tech].name}
                                                         </div>
                                                     </div>
-                                                })}
+                                                </div>
                                             </div>
-                                            <p className="text-center">{selected_background.spices[this.state[this.state.selected_background]].description}</p>
-                                        </div>
+                                        </section>
+
+                                        <section className="card creation-technology">
+                                            <div className="card-body">
+                                                <div className="creation-might-select">
+                                                    <div className="creation-select-column">
+                                                        {Object.keys(selected_background.spices).map((spice) => {
+                                                            return <div key={spice} className="">
+                                                                <input
+                                                                className="form-check-input"
+                                                                id={spice + "-radio-button"}
+                                                                type="radio" 
+                                                                name="spice" 
+                                                                value={spice}
+                                                                checked={this.state[this.state.selected_background] === spice}
+                                                                onChange={(event) => {
+                                                                    const state = {};
+                                                                    state[this.state.selected_background] = event.target.value;
+                                                                    this.setState(state);
+                                                                }}/>
+                                                                <label
+                                                                className="form-check-label btn btn-sm"
+                                                                htmlFor={spice + "-radio-button"}
+                                                                >
+                                                                    {selected_background.spices[spice].name}
+                                                                </label>
+                                                            </div>
+                                                        })}
+                                                    </div>
+                                                    <div className="creation-description-column">
+                                                        <h3 className="text-center modal-title">Start {selected_background.might}:</h3>
+                                                        <div
+                                                        className="creation-description lead text-center"
+                                                        >
+                                                            {selected_background.spices[this.state[this.state.selected_background]].description}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+
+
+                                        <section className="card creation-skills">
+                                            <div className="card-body">
+                                                <div className="creation-start-skills">
+                                                    <h3 className="text-center modal-title">
+                                                        Your start skills:
+                                                    </h3>
+                                                    <StatsBar stats={stats_data} data={data}/>
+
+                                                    {/* <StatsProgressBar type={'design'} hideCheckbox={true} max_stat={data.max_stats_projects_offered} stats={stats_progressbar_data} worker={candidate} data={data}/>
+                                                    <StatsProgressBar type={'program'} hideCheckbox={true} max_stat={data.max_stats_projects_offered} stats={stats_progressbar_data} worker={candidate} data={data}/>
+                                                    <StatsProgressBar type={'manage'} hideCheckbox={true} max_stat={data.max_stats_projects_offered} stats={stats_progressbar_data} worker={candidate} data={data}/> */}
+                                                </div>
+                                            </div>
+                                        </section>
+                                        
                                     </div>
-                                    <div className="card slim">
-                                        <h4 className="text-center slim-top">
-                                            <p className="filament">Your start skills:</p>
-                                            <StatsBar stats={stats_data} data={data}/>
-                                        </h4>
-                                    </div>
-                                    <div className="text-center">
-                                        <button className="big btn-success btn-lg" onClick={this.embark}>Embark</button>
+                                    <div className="modal-footer mx-auto">
+                                        <button className="btn btn-success btn-lg btn-" onClick={this.embark}>Embark</button>
                                     </div>
                                 </div>
-                                }
-                            </SimpleModal>
-                        </Portal>
-                        : ''}
-                </div>
+                            }
+                        </SimpleModal>
+                    </Portal>
+                    : ''
+                }
+            </div>
         );
     }
 }

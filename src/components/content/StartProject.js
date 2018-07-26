@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import ReactBootstrapSlider from 'react-bootstrap-slider';
+import '../../../node_modules/react-bootstrap-slider/src/css/bootstrap-slider.min.css';
 
 import _ from 'lodash';
 
@@ -45,7 +46,7 @@ class StartProject extends Component {
             <div className="row filament">
                 <div className="col-md-4">
                     {this.props.data.workers.map((worker) => {
-                        return <label key={worker.id} style={{width: '100%'}}>
+                        return <span key={worker.id} style={{width: '100%'}}>
                             <h4>
                                 <input
                                     type="checkbox"
@@ -56,8 +57,8 @@ class StartProject extends Component {
                                         state.selected_workers[worker.id] = event.target.checked;
                                         this.setState(state);
                                     }}/> {worker.name}
-                             </h4>
-                        </label>
+                            </h4>
+                        </span>
                     })}
                 </div>
 

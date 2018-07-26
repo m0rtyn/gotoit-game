@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import Portal from 'react-portal';
-import _ from "lodash";
+
 import SimpleModal from './SimpleModal';
 import ProjectOfferBlock from './ProjectOfferBlock';
-import {skills} from "../game/knowledge";
+import {project_kinds, project_platforms, skills} from "../game/knowledge";
+import _ from "lodash";
 import StatsBar from './StatsBar';
+
 import ProjectName from './ProjectName';
 
 
-
-class HotOffer extends Component {
+class Offer extends Component {
     constructor(props) {
         super(props);
 
@@ -37,6 +38,8 @@ class HotOffer extends Component {
     render() {
         const data = this.props.data;
         let project = this.props.project;
+
+
         const stats_data = _.mapValues(skills, (stat, key) => {
             return {name: key, val: <span>{project.needs(key)}</span>};
         });
@@ -50,7 +53,7 @@ class HotOffer extends Component {
                     }}>Close</button>
                 </div>
                 <div>
-                    <div className="flexbox">
+                    <div className='flexbox'>
                         <span style={{position: 'relative', width: '200px', height: '200px'}}>
                             <img
                                 style={{ position: 'absolute'}}
@@ -67,26 +70,23 @@ class HotOffer extends Component {
                                 src={project.avatar.kind}
                             />
                         </span>
-                        <span className="moat flex-grow">
-                            <h3>{project.lore.name}</h3>
-                            <p>
-                                {project.lore.text}
-                            </p>
-                        </span>
-                    </div>
-
-                    <div className="moat slim_top">
-                        <div key={project.id} className="card">
+                        <span className='flex-grow'>
                             <ProjectName project={project}/>
                             <div>
+                                <span>Deadline: {project.getDeadlineText()}</span>
                                 <span>
                                     <h4 className="project-reward text-success"> Reward: ${project.reward}</h4>
                                 </span>
                                 {(project.penalty > 0
-                                        ? <span> <h4 className="project-penalty text-warning">Penalty : ${project.penalty}</h4> </span>
+                                        ? <span> <h4 className="project-penalty text-warning">Penalty : ${project.penalty}</h4></span>
                                         : ' '
                                 )}
                             </div>
+                        </span>
+                    </div>
+                    <div className="moat slim_top">
+                        <div key={project.id} className="card">
+
                             <StatsBar stats={stats_data} data={this.props.data}/>
                             {
                                 project.stage === 'ready' ?
@@ -111,4 +111,4 @@ class HotOffer extends Component {
     }
 }
 
-export default HotOffer;
+export default Offer;

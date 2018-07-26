@@ -1,52 +1,83 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
+import ProjectModel from '../models/ProjectModel';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
+import StatsProgressBar from './StatsProgressBar';
 
-import {skills} from '../game/knowledge';
+import {colors, skills} from '../game/knowledge';
+// import Project from './Project';
 
 
 class ProjectOfferBlock extends Component {
 
-    acceptOffered(event, type) {
-        this.props.data.helpers.acceptOffered(event.target.id, type);
+    acceptOffered(event) {
+        this.props.data.helpers.acceptOffered(event.target.id);
     }
 
-    startOffered(event, type) {
-        this.props.data.helpers.startOffered(event.target.id, type);
+    startOffered(event) {
+        this.props.data.helpers.startOffered(event.target.id);
     }
 
-    reject(event, type) {
-        this.props.data.helpers.rejectOffered(event.target.id, type);
+    reject(event) {
+        this.props.data.helpers.rejectOffered(event.target.id);
     }
 
     render() {
         let candidate = this.props.candidate;
         let type = this.props.type;
+        let data = this.props.data;
 
         const stats_data = _.mapValues(skills, (stat, key) => {
             return {name: key, val: <span>{candidate.needs(key)}</span>};
         });
+       const stats_progressbar_data = _.mapValues(candidate.estimate, (val, stat) => {
+            return {
+                name: stat,
+                value: candidate.originalyTasksQuantity(),
+                color: colors[stat].colorCompleted
+            };
+        });
+        console.log(data.max_stats_projects_offered)
+        return <div key={candidate.id} className="card offered-project">
 
-        return <div key={candidate.id} className="card">
-            <ProjectName project={candidate}/>
-            <div>
-                <label>Deadline: {candidate.getDeadlineText()}</label>&nbsp;
-                <label>Reward: {candidate.reward}$</label>&nbsp;
-                {candidate.penalty > 0 ? <label>Penalty: {candidate.penalty}$</label> : ''}
+            <div className="card-header">
+
+                <div className='project-avatar'>
+                    <img src={candidate.avatar.platform}/>
+                    <img src={candidate.avatar.kind}/>
+                </div>
+            
+                <ProjectName project={candidate}/>
+
+                <div className="btn-group btn-group-xs">
+                    <button 
+                    className="btn btn-success btn-outline" 
+                    id={candidate.id} 
+                    onClick={(e) => this.startOffered(e, type)}>
+                        Start
+                    </button>
+                    <button 
+                    className="btn btn-warning btn-outline" 
+                    id={candidate.id} 
+                    onClick={(e) => this.acceptOffered(e, type)}>
+                        Accept
+                    </button>
+                    <button 
+                    className="btn btn-danger btn-outline" 
+                    id={candidate.id} 
+                    onClick={(e) => this.reject(e, type)}>
+                        Hide
+                    </button>
+                </div>
+                
             </div>
-            <StatsBar stats={stats_data} data={this.props.data}/>
-            <div className="btn-group">
-                <button className="btn btn-success" id={candidate.id} onClick={(e) => this.acceptOffered(e, type)}>
-                    Accept
-                </button>
-                &nbsp;
-                <button className="btn btn-warning" id={candidate.id} onClick={(e) => this.startOffered(e, type)}>
-                    Start
-                </button>
-                &nbsp;
-                <button className="btn btn-danger" id={candidate.id} onClick={(e) => this.reject(e, type)}>Hide</button>
+            <div className="card-body" >
+                <StatsProgressBar type={'design'} hideCheckbox={true} max_stat={data.max_stats_projects_offered} stats={stats_progressbar_data} worker={candidate} data={data}/>
+                <StatsProgressBar type={'program'} hideCheckbox={true} max_stat={data.max_stats_projects_offered} stats={stats_progressbar_data} worker={candidate} data={data}/>
+                <StatsProgressBar type={'manage'} hideCheckbox={true} max_stat={data.max_stats_projects_offered} stats={stats_progressbar_data} worker={candidate} data={data}/>
+
             </div>
         </div>;
     }

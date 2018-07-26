@@ -30,6 +30,7 @@ export const rules = {
             time.tick++;
             setCurrentTick(time.tick);
             setGameDate(game_date);
+            console.log(game_date)
             data.helpers.setTimelineScale();
 
             //time.hour++;
@@ -73,22 +74,46 @@ export const rules = {
                     }
                 });
 
+                data.statistics.money_current_value.buffer = data.money;
+                data.statistics.btc_current_value.buffer = data.btc;
+                data.statistics.candidates_resumes.buffer = data.candidates.resumes.length;
+                data.statistics.projects_in_process.buffer = data.projects.length;
 
                _.mapValues(data.statistics, (stats, key) => {
                     stats.values.push(stats.buffer)
-                })
+                });
 
-                data.btc_statistic.values.push(data.current_btc_price);
+                data.exchange_statistics.btc.values.push(data.current_btc_price);
+                data.exchange_statistics.share0.values.push(data.current_share0_price);
+                data.exchange_statistics.share1.values.push(data.current_share1_price);
+                data.exchange_statistics.share2.values.push(data.current_share2_price);
 
 
 
             }
 
+            //MAX STATS UPDATE
+            //workers hired
             data.workers.forEach((worker) => {
                 if (worker.stats.design > data.max_stat) data.max_stat = worker.stats.design;
                 if (worker.stats.program > data.max_stat) data.max_stat = worker.stats.program;
                 if (worker.stats.manage > data.max_stat) data.max_stat = worker.stats.manage;
             });
+            //candidates for hiring
+            data.candidates.resumes.forEach((candidate) => {
+                if (candidate.stats.design > data.max_candidates_stat) data.max_candidates_stat = candidate.stats.design;
+                if (candidate.stats.program > data.max_candidates_stat) data.max_candidates_stat = candidate.stats.program;
+                if (candidate.stats.manage > data.max_candidates_stat) data.max_candidates_stat = candidate.stats.manage;
+            });
+            //offered_projects
+            data.offered_projects.forEach((project) => {
+                if (project.estimate.design > data.max_stats_projects_offered) data.max_stats_projects_offered = project.estimate.design;
+                if (project.estimate.program > data.max_stats_projects_offered) data.max_stats_projects_offered = project.estimate.program;
+                if (project.estimate.manage > data.max_stats_projects_offered) data.max_stats_projects_offered = project.estimate.manage;
+            });
+
+
+
 
             if (time.hour === 14 && data.office_things.lunch) { // lunch time!
                 if ((data.workers.length * 25) <= data.money) {
@@ -138,8 +163,6 @@ export const rules = {
             state.data = data;
 
 
-            let click_count = {};
-
             data.on_tick_effects = _.filter(data.on_tick_effects, (effect) => {
                 let same = _.filter(data.on_tick_effects, (effect2) => {
                     return effect.type === effect2.type
@@ -148,7 +171,6 @@ export const rules = {
                 return public_relations[effect.type].long > data.date.tick - effect.start_tick;
             });
 
-            console.log(data.on_tick_effects)
             _.each(data.on_tick_effects, (effect) => {
                 public_relations[effect.type].onTickByDelta(data, data.date.tick - effect.start_tick, effect.click_count);
 
@@ -179,6 +201,12 @@ export const rules = {
 
             const x = current_tick + 2000;
             data.current_btc_price = Math.floor(Math.abs(Math.sin(x/19)) * x/3 + Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x * 2 + Math.abs(Math.sin(Math.sqrt(x/227))) * x + x);
+
+            data.current_share0_price = Math.floor(Math.abs(Math.sin(x/19)) * x/3 + Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x * 2 + Math.abs(Math.sin(Math.sqrt(x/227))) * x + x);
+            data.current_share1_price = Math.floor(Math.abs(Math.sin(x/19)) * x/3 + Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x * 2 + Math.abs(Math.sin(Math.sqrt(x/227))) * x + x);
+            data.current_share2_price = Math.floor(Math.abs(Math.sin(x/19)) * x/3 + Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x * 2 + Math.abs(Math.sin(Math.sqrt(x/227))) * x + x);
+
+
 
             //data.current_btc_price = Math.abs(Math.sin(x/19)) * x + Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x + Math.abs(Math.sin(Math.sqrt(x/227))) * x + x;
 
@@ -254,8 +282,8 @@ export const rules = {
 
             if (!data.wasRecentlyHackathon && _.random(1, 24*60)) {
                 data.wasRecentlyHackathon = true;
-                data.offered_projects.push(Lorer.hackathon());
-            }
+                data.helpers.offerProject(Lorer.hackathon());
+                }
 
             state.data = data;
             return state;
@@ -307,8 +335,7 @@ export const rules = {
                     if (worker.to_vacation_ticker <= 0) {
                         let weeks = _.random(1,4)
                         worker.sendToVacation(weeks);
-                        state.data.helpers.
-                        lineEvent('vacation','Going to vacation', worker, 7 * weeks)
+                        state.data.helpers.lineEvent('vacation','Going to vacation', worker, 7 * weeks)
                     }
                 }
                 if (worker.in_vacation) {
@@ -375,7 +402,6 @@ export const rules = {
     projects: {
         onTick: function(state) {
             state.data.projects.forEach((project) => {
-                console.log(project.stage, project.type, project.is_paused);
 
                 if (project.is_paused) {
                     console.log('skip calculate paused project ' + project.name);

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import _ from 'lodash'
 import {colors} from "../game/knowledge";
 import Bar from "./Bar";
@@ -8,7 +8,7 @@ class WorkerHappinessBar extends Component {
 
     render() {
         let { worker } = this.props;
-        const sum = worker.calcEfficiencyReal();
+        //const sum = worker.calcEfficiencyReal();
         const bar_color = (() => {
             let ratio = worker.sum / 100;
             switch (true) {
@@ -16,7 +16,7 @@ class WorkerHappinessBar extends Component {
                 case ratio <= 0.75: return colors.warning;
                 case ratio <= 1: return colors.success;
                 case ratio  > 1: return colors.success; // High bonus
-
+                default: break;
             }
         }) ();
         const happiness_array = worker.getEfficiencyArray();

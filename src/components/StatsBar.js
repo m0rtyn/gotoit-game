@@ -12,11 +12,20 @@ class StatsBar extends Component {
         //console.log(stats);
 
         return (
-                <div className="stats-bar">
+                <div className="flexbox text-center">
                 {Object.keys(stats).map((stat) => {
-                    return <div className='' key={stat}>
-                        {stats[stat].name}: <span>{stats[stat].val}</span>
-                    </div>
+                    return <span key={stat}>
+                        {stats[stat].name}: <span>{stats[stat].val}{'  '}</span>
+                    </span>
+
+                    // return <StatsProgressBar 
+                    // type={stats[stat].name}
+                    // hideCheckbox={true}
+                    // max_stat={data.max_stats_projects_offered}
+                    // stats={stats[stat].val}
+                    // worker={candidate}
+                    // data={data}
+                    // />
                 })}
                 </div>
         );

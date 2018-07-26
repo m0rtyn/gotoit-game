@@ -201,6 +201,19 @@ module.exports = function(grunt) {
     },
 
 
+    svgstore: {
+      options: {
+        prefix : 'icon-',
+      },
+      default : {
+          files: {
+            // 'dest/svg-defs.svg': ['svgs/*.svg'],
+            'src/assets/svg/svg-sprite.svg': ['src/assets/svg/symbols/*.svg'],
+          }
+        }
+      }
+
+
 
     // -------------------------------------------------------------------------------
     // END Task configuration
@@ -224,6 +237,7 @@ module.exports = function(grunt) {
   grunt.registerTask('start',
     [
       // 'clean:dist',
+      // 'svgstore',
       'sass',
       'css',
       // 'js',

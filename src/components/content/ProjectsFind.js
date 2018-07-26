@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import ProjectOfferBlock from '../ProjectOfferBlock';
 
+import PublicRelations from '../content/PublicRelations';
 import SalesAgency from '../SalesAgency';
 import Bar from '../Bar';
 import {colors} from "../../game/knowledge";
@@ -20,30 +21,30 @@ class ProjectsFind extends Component {
                 id: 'reputation'
             }
         ];
+        console.log(this.props.data.offered_projects)
 
+        return <div className="project-find">
+            <h3 className="text-center">Find Projects</h3>
 
-        return <div>
-                <h3 className="text-center">
-                    Find Projects
-                </h3>
-                <div className="row">
-                    <div className="col-md-6">
-                        <h4 className="text-center fat">Offered Projects
-                            <SalesAgency data={this.props.data} /></h4>
-                        {this.props.data.offered_projects.map(offered)}
-                    </div>
-                    <div className="col-md-6">
-                        <h4 className="text-center slim-top">
-                            Reputation
-                        </h4>
-                        <Bar bar_data={reputation_bar} />
+            <h4>
+                Reputation
+                <PublicRelations data={this.props.data}/>
+            </h4>
 
-                        <span className="">
-                                <button className="btn btn-success btn-sm" onClick={() => { data.helpers.changeContent('PublicRelations'); }}>PublicRelations</button>
-                        </span>
-                    </div>
+            <div className="reputation card flexbox">
+                <div className="card-body">
+                    <Bar className="reputation-bar progress-lg" bar_data={reputation_bar} />
                 </div>
             </div>
+
+            <h4>
+                Offered Projects
+                <SalesAgency data={this.props.data} />
+            </h4>
+            
+            {this.props.data.offered_projects.map(offered)}
+
+        </div>
     }
 }
 

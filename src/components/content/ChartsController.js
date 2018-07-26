@@ -1,6 +1,6 @@
 import React from 'react'
 import Chart from '../Chart'
-import {charts_parameters, btc_chart_parameters, archive_chats_parameters, market_chart_parameters} from '../../game/knowledge'
+import {charts_parameters, exchange_charts_parameters, archive_chats_parameters, market_chart_parameters} from '../../game/knowledge'
 import _ from 'lodash'
 
 let ChartsController = (props) => {
@@ -15,14 +15,14 @@ let ChartsController = (props) => {
     switch(type) {
         case 'BTC':
 
-          const btc_statistic = props.data.btc_statistic;
+          const btc_statistic = props.data.exchange_statistics.btc;
 
-          labels = Object.keys(props.data.btc_statistic.values);
+          labels = Object.keys(props.data.exchange_statistics.btc.values);
 
           datasets.push({
               data: btc_statistic.values,
-              label: btc_chart_parameters.label,
-              borderColor: btc_chart_parameters.color,
+              label: exchange_charts_parameters.btc.label,
+              borderColor: exchange_charts_parameters.btc.color,
               fill: false
           });
 
@@ -36,6 +36,73 @@ let ChartsController = (props) => {
           };
 
           break;
+
+        case 'share0':
+            const share0_statistic = props.data.exchange_statistics.share0;
+
+            labels = Object.keys(props.data.exchange_statistics.share0.values);
+
+            datasets.push({
+                data: share0_statistic.values,
+                label: exchange_charts_parameters.share0.label,
+                borderColor: exchange_charts_parameters.share0.color,
+                fill: false
+            });
+
+            options = {
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    enabled: false
+                }
+            };
+
+            break;
+        case 'share1':
+            const share1_statistic = props.data.exchange_statistics.share1;
+
+            labels = Object.keys(props.data.exchange_statistics.share1.values);
+
+            datasets.push({
+                data: share1_statistic.values,
+                label: exchange_charts_parameters.share1.label,
+                borderColor: exchange_charts_parameters.share1.color,
+                fill: false
+            });
+
+            options = {
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    enabled: false
+                }
+            };
+
+            break;
+        case 'share2':
+            const share2_statistic = props.data.exchange_statistics.share2;
+
+            labels = Object.keys(props.data.exchange_statistics.share2.values);
+
+            datasets.push({
+                data: share2_statistic.values,
+                label: exchange_charts_parameters.share2.label,
+                borderColor: exchange_charts_parameters.share2.color,
+                fill: false
+            });
+
+            options = {
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    enabled: false
+                }
+            };
+
+            break;
 
       case 'Archive':
 

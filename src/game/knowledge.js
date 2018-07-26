@@ -74,7 +74,7 @@ export const player_backgrounds = {
     //  university: {name: 'Student', money: 5000, start_tech: ['tdd'], text: 'Fundamental education according to verified program. Flat stats.'},
     technologist: {name: 'Technologist', money: 10000, might: 'technology', start_tech: [], text: 'Has a wide range of start technology.', spices: {
         agile: {name: 'Agile Development', description: technologies.agile.description},
-        tdd: {name: 'TDD', description: technologies.tdd.description},
+        tdd: {name: 'Test Driven Development', description: technologies.tdd.description},
         refactoring: {name: 'Refactoring', description: technologies.refactoring.description}
     }},
     specialist: {name: 'Specialist', money: 10000, might: 'skill', start_tech: ['rad'], text: 'Raised their professional skills to enormous heights and buy some professional stuff.', spices: {
@@ -106,6 +106,7 @@ export const project_platforms = {
     mobile: {name: 'Mobile', description: 'For Mobile applications, design is important.'},
     desktop: {name: 'Desktop', description: 'For Desktop applications, programming is important.'},
     browser: {name: 'Browser', description: 'For Browser applications, management is important.'},
+    VR: {name: 'VR', description: 'Virtual Reality applications should be balanced.'}
 };
 
 export const project_kinds = {
@@ -144,12 +145,20 @@ export const education = { // hm...
 
 export const charts_parameters = {
     money_spent: {label: 'Money spent', color: '#3e95cd'},
-    money_received: {label: 'Money received', color: '#FFAB40'},
+    money_summary: {label: 'Money summary', color: '#FFAB40'},
+    money_current_value: {label: 'Current money', color: '#32CD32'},
+    btc_summary: {label: 'Btc summary', color: '#6B8E23'},
+    btc_current_value: {label: 'Current btc', color: '#4B0082'},
     projects_done: {label: 'Projects done', color: '#EA80FC'},
-    workers_hired: {label: 'Workers hired', color: '#1DE9B6'},
+    workers_hired: {label: 'Workers in team', color: '#1DE9B6'},
     salary_costs: {label: 'Salary costs', color: '#5cb85c'},
     office_costs: {label: 'Office costs', color: '#d9534f'},
     environment_costs: {label: 'Environment costs', color: '#8B0000'},
+    candidates_resumes: {label: 'Candidates resumes', color: '#000080'},
+    projects_in_process: {label: 'Current projects', color: '#CD5C5C'},
+    projects_accepted: {label: 'Projects accepted', color: '#FFFF00'},
+    public_relations_costs: {label: 'Public relation costs', color: '#975334'},
+    offered_projects: {label: 'Offered projects', color: '#8A2BE2'}
 };
 
 export const archive_chats_parameters = {
@@ -166,7 +175,12 @@ export const market_chart_parameters = {
     total: {label: 'Total', color: '#f7931a'}
 };
 
-export const btc_chart_parameters = { label: 'Bitcoin', color: '#f7931a' };
+export const exchange_charts_parameters = {
+    btc: { label: 'Bitcoin', color: '#f7931a' },
+    share0: { label: 'Future Sight', color: '#f7931a' },
+    share1: { label: 'L-Ri', color: '#f7931a' },
+    share2: { label: 'Murum', color: '#f7931a' }
+}
 
 export const colors = {
     creativity: {
@@ -295,6 +309,7 @@ export const public_relations = {
         tooltip: 'Duration: 1 week. Spend some money preaching and advertising your company at the most popular hiring web sites there are in the Internet. Rather later than sooner but you`ll definitely find someone willing to take the offer.',
         onClick: (state) => {
             state.money -= 1000;
+            state.statistics.public_relations_costs.buffer += 1000;
             state.on_tick_effects.push({
                 type: 'search_specialist',
                 start_tick: state.date.tick
@@ -314,6 +329,7 @@ export const public_relations = {
         tooltip: 'Duration: 1 week. Spend some money preaching and advertising your company at the most popular hiring web sites there are in the Internet. Rather later than sooner but you`ll definitely find someone willing to take the offer.',
         onClick: (state) => {
             state.money -= 500;
+          state.statistics.public_relations_costs.buffer += 500;
             state.on_tick_effects.push({
                 type: 'search_job',
                 start_tick: state.date.tick
@@ -333,6 +349,7 @@ export const public_relations = {
         tooltip: 'Duration: 2 weeks. Lots of money and time spend. Lots of media coverage afterwards. ',
         onClick: (state) => {
             state.money -= 2500;
+          state.statistics.public_relations_costs.buffer += 2500;
             state.on_tick_effects.push({
                 type: 'big_event',
                 start_tick: state.date.tick

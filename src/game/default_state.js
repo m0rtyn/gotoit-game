@@ -30,6 +30,14 @@ var default_state =
         money: 0,
         btc: 0,
         current_btc_price: 10000,
+
+        share0: 0,
+        share1: 0,
+        share2: 0,
+        current_share0_price: 30,
+        current_share1_price: 11,
+        current_share2_price: 100,
+
         taken_loans: [],
         old_loans: [],
         early_payed_loans: 0,
@@ -74,7 +82,7 @@ var default_state =
 
         wasRecentlyHackathon: false,
 
-        relations: [],
+        relations: {},
 
         helpers: {},
 
@@ -92,8 +100,16 @@ var default_state =
         }),
       
         on_tick_effects: [],
-        btc_statistic: { buffer: 0, values: [] },
+        exchange_statistics: {
+            btc: { buffer: 0, values: [] },
+            share0: { buffer: 0, values: [] },
+            share1: { buffer: 0, values: [] },
+            share2: { buffer: 0, values: [] },
+        },
+
         max_stat: 1,
+        max_candidates_stat: 1,
+        max_stats_projects_offered: 1,
         mailbox: []
 
     },
