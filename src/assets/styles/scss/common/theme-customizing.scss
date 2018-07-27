@@ -99,3 +99,8 @@ body .topbar + .main-container,
 body .topbar + main {
   padding-top: size(1);
 }
+
+.badge-pill {
+  font-size: 70%;
+  vertical-align: top;
+}
