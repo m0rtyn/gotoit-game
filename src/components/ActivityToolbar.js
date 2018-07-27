@@ -62,7 +62,7 @@ class ActivityToolbar extends Component {
                 </li>
                 <li className="nav-item">
                     <a 
-                    className="nav-link flexbox"
+                    className="nav-link"
                     onClick={() => { data.helpers.changeContent('Mail'); }}
                     >
 
@@ -70,15 +70,13 @@ class ActivityToolbar extends Component {
                         <span>Mail&nbsp;</span>
                         {
                             unread_messages_count !== 0
-                                ? <span className='mail-counter'>
+                                ? <span className='badge badge-pill badge-info'>
                                     {
                                         unread_messages_count
                                     }
                                 </span>
                                 : ''
                         }
-
-
                     </a>
                 </li>
 

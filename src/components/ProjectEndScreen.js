@@ -28,7 +28,7 @@ class ProjectEndScreen extends Component {
         let platform_kind_top_handler = all_top_handler.filter('platform', project.platform).filter('kind', project.kind);
 
         return (
-            <div className='flex-container-column'>
+            <div>
                 <div>
                     <p><button className="btn btn-warning float-right" onClick={() => {
                         //data.helpers.projectArchiving();
