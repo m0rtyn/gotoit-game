@@ -81,3 +81,21 @@ div {
 .hovered {
   box-shadow: inset 0 0 0 size(0.5) rgba($success-color, 0.5);
 }
+
+.worker-avatar {
+  border-radius: $border-radius;
+}
+
+.project-avatar {
+  position: relative;
+  width: size(8);
+  height: size(8);
+
+  & > img {
+    position: absolute;
+  }
+}
+
+.tab-content {
+  padding: size(1);
+}
