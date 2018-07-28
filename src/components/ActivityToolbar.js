@@ -3,7 +3,7 @@ import Lorer from "../services/Lorer";
 import ProjectModel from "../models/ProjectModel";
 import _ from 'lodash';
 
-class ButtonToolbar extends Component {
+class ActivityToolbar extends Component {
 
     render() {
         let data = this.props.data;
@@ -15,7 +15,7 @@ class ButtonToolbar extends Component {
             return count;
         })()
         return (
-            <ul className="nav nav-tabs nav-tabs-light-mode">
+            <ul className="nav nav-tabs nav-tabs-light-mode activity-toolbar">
                 <li className="nav-item">
                     {data.projects.length > 0 ? 
                         <a 
@@ -62,7 +62,7 @@ class ButtonToolbar extends Component {
                 </li>
                 <li className="nav-item">
                     <a 
-                    className="nav-link flexbox"
+                    className="nav-link"
                     onClick={() => { data.helpers.changeContent('Mail'); }}
                     >
 
@@ -70,15 +70,13 @@ class ButtonToolbar extends Component {
                         <span>Mail&nbsp;</span>
                         {
                             unread_messages_count !== 0
-                                ? <span className='mail-counter'>
+                                ? <span className='badge badge-pill badge-info'>
                                     {
                                         unread_messages_count
                                     }
                                 </span>
                                 : ''
                         }
-
-
                     </a>
                 </li>
 
@@ -87,4 +85,4 @@ class ButtonToolbar extends Component {
     }
 }
 
-export default ButtonToolbar;
+export default ActivityToolbar;

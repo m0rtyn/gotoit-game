@@ -1,0 +1,54 @@
+.mail {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  padding: size(0.5);
+
+  & > .btn {
+    margin-bottom: size(1);
+  }
+
+  .letter {
+    flex: 0 0 100%;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+
+    span {
+      padding: 0 size(2);
+    }
+  }
+
+  .sender-name {
+    width: 24ch;
+  }
+
+  .letter-type {
+    width: 16ch;
+  }
+
+  .letter-status {
+
+  }
+
+  .worker-avatar,
+  .project-avatar {
+    width: size(4);
+    height: size(4);
+
+    & > img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .card {
+    margin-bottom: 8px;
+    padding: size(1);
+  }
+
+  .formatted-date {
+    position: absolute;
+    right: 0;
+  }
+}

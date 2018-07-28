@@ -6,7 +6,9 @@ class SimpleModal extends Component {
             <div className="modal-backdrop">
                 <div className="modal">
                     <div className="modal-dialog">
-                        {this.props.children}
+                        <div className="modal-content">
+                            {this.props.children}
+                        </div>
                     </div>
                 </div>
             </div>

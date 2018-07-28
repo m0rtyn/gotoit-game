@@ -1,6 +1,6 @@
 //====COLORS=========================//
 $light-gray: #e5e5e5;
-$yellow: #FFD700;
+$yellow: #ffd700;
 //theme colors
 $danger-color: #f96868;
 $warning-color: #f2a654;
@@ -9,11 +9,29 @@ $success-color: #46be8a;
 $secondary-color: #e4e7ea;
 $primary-color: #33cabb;
 //design colors
-$design-color: #CC6CBC;
-$program-color: #FF954D;
-$manage-color: #57D9D1;
+$design-color: #cc6cbc;
+$program-color: #ff954d;  
+$manage-color: #57d9d1;
 $basic-color: #45e5e5; //TODO: rename after implement colors from mock-up in markup
 
 
 //====OTHER=========================//
 $border-radius: 4px;
+
+//Theme's core color variables
+// :root {
+//   --blue: #007bff;
+//   --indigo: #6610f2;
+//   --purple: #6f42c1;
+//   --pink: #e83e8c;
+//   --red: #dc3545;
+//   --orange: #fd7e14;
+//   --yellow: #ffc107;
+//   --green: #28a745;
+//   --teal: #20c997;
+//   --cyan: #17a2b8;
+//   --white: #fff;
+//   --gray: #6c757d;
+//   --gray-dark: #343a40;
+//   --light: #f8f9fa;
+// }

@@ -31,7 +31,7 @@ const components = {
 };
 
 
-class ContentContainer extends Component {
+class Activities extends Component {
 
     render() {
         const ContentComponent = components[this.props.data.content];
@@ -44,4 +44,4 @@ class ContentContainer extends Component {
     }
 }
 
-export default ContentContainer;
+export default Activities;

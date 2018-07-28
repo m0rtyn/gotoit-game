@@ -24,6 +24,10 @@
   padding: size(2);
 }
 
+.card-body {
+  margin-right: size(0.5); //margin for custom scrollbar
+}
+
 .progress {
   height: size(1.5);
   margin-bottom: size(0.5);
@@ -94,4 +98,9 @@
 body .topbar + .main-container,
 body .topbar + main {
   padding-top: size(1);
+}
+
+.badge-pill {
+  font-size: 70%;
+  vertical-align: top;
 }
