@@ -44,7 +44,15 @@ class Mail extends Component {
             switch(letter.type){
                 case 'Project report':
                     handleClick = () => {
-                        this.setState({current_popup: <ProjectEndScreen closePopup={this.closePopup} key={i} project={letter.content} data={this.props.data} />});
+                        this.setState({
+                            current_popup:
+                                <ProjectEndScreen
+                                closePopup={this.closePopup}
+                                key={i}
+                                project={letter.content}
+                                data={this.props.data}
+                                />
+                        });
                         this.setState({show_popup: true});
                         letter.isRead = true;
 
@@ -53,91 +61,115 @@ class Mail extends Component {
 
                 case 'Hot offer':
                     handleClick = () => {
-                        this.setState({current_popup: <HotOffer closePopup={this.closePopup} key={i} project={letter.content} data={this.props.data}/>});
+                        this.setState({
+                            current_popup:
+                                <HotOffer
+                                closePopup={this.closePopup}
+                                key={i}
+                                project={letter.content}
+                                data={this.props.data}
+                                />
+                        });
                         this.setState({show_popup: true});
                         letter.isRead = true;
                     };
                     break;
                 case 'Resume':
                     handleClick = () => {
-                        this.setState({current_popup: <Resume closePopup={this.closePopup} key={i} worker={letter.content} data={this.props.data}/>});
+                        this.setState({
+                            current_popup:
+                                <Resume
+                                closePopup={this.closePopup}
+                                key={i}
+                                worker={letter.content}
+                                data={this.props.data}
+                                />
+                        });
                         this.setState({show_popup: true});
                         letter.isRead = true;
                     };
                     break;
                 case 'Offer':
-                     handleClick = () => {
-                         this.setState({
-                             current_popup: <Offer closePopup={this.closePopup} key={i} project={letter.content}
-                                                   data={this.props.data}/>
-                         });
-                         this.setState({show_popup: true});
-                         letter.isRead = true;
-                     };
+                    handleClick = () => {
+                        this.setState({
+                            current_popup:
+                                <Offer
+                                closePopup={this.closePopup}
+                                key={i}
+                                project={letter.content}
+                                data={this.props.data}
+                                />
+                        });
+                        this.setState({show_popup: true});
+                        letter.isRead = true;
+                    };
                     break;
             }
 
-           return (
-               <div className='mail-letter' onClick={handleClick}>
-                   {
-                       letter.type === 'Resume'
-                           ? <div className='letter-icon'>
-                               <img
-                                   className='worker-avatar'
+            return (
+                <div
+                className='letter card'
+                onClick={handleClick}
+                >
+                    {
+                        letter.type === 'Resume'
+                            ? <img
+                            className='worker-avatar'
+                            alt={letter.content.name + ' avatar'}
+                            src={letter.content.avatar}
+                            />
+                            : <div className='project-avatar'>
+                                <img
+                                alt={letter.content.name + ' avatar'}
+                                src={letter.content.avatar.platform}
+                                />
+                                <img
+                                alt={letter.content.name + ' avatar'}
+                                src={letter.content.avatar.kind}
+                                />
+                            </div>
+                    }
 
-                                   alt={letter.content.name + ' avatar'}
-                                   src={letter.content.avatar}
-                               />
-                           </div>
-                           : <div className='letter-icon'>
-                               <img
-                                   style={{ position: 'absolute'}}
-                                   width={70}//without this img will be only 50px despite container is 70px
-                                   height={70}
-                                   alt={letter.content.name + ' avatar'}
-                                   src={letter.content.avatar.platform}
-                               />
-                               <img
-                                   style={{ position: 'absolute'}}
-                                   width={70}
-                                   height={70}
-                                   alt={letter.content.name + ' avatar'}
-                                   src={letter.content.avatar.kind}
-                               />
-                           </div>
-                   }
-                   <div className='letter-description'>
-                       {
-                           letter.isRead
-                           ? <h4>{letter.type}</h4>
-                           : <h4 style={{fontWeight: 'bold'}}>{letter.type}</h4>
-                       }
+                    <span className="sender-name">{letter.content.name}</span>
 
-                       <p>{letter.content.name}</p>
-                   </div>
-                   {letter.isRead ? 'read' : ''}
+                    {
+                        letter.isRead
+                        ? <span className="letter-type">
+                            {letter.type}
+                        </span>
+                        : <strong>{letter.type}</strong>
+                    }
 
-                   <FormattedDate
-                       value={letter.date}
-                       weekday="short"
-                       day="numeric"
-                       month="short"
-                       year="numeric"
-                       hour="numeric"
-                   />
+                    {/* <span className="letter-status">{letter.isRead ? 'read' : ''}</span> */}
 
-               </div>
-           )
-        });
+                    <span className="formatted-date">
+                        <FormattedDate
+                        value={letter.date}
+                        // weekday="short"
+                        day="numeric"
+                        month="short"
+                        // year="numeric"
+                        hour="numeric"
+                        />
+                    </span>
+                </div>
+            )
+            });
+
         return (
-            <div>
-                <button style={{ float: 'right' }} onClick = { this.markAllAsRead }>Mark all as read</button>
+            <div className="mail">
+                <button
+                className="btn btn-info btn-xs"
+                onClick = { this.markAllAsRead }
+                >
+                    Mark all as read
+                </button>
                 {letters}
                 {
                     this.state.show_popup
                     ? <SimpleModal >
                         {this.state.current_popup}
-                      </SimpleModal>
+                    </SimpleModal>
                     : <div/>
                 }
 

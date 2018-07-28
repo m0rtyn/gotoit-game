@@ -7,8 +7,8 @@ import Projects from './Projects';
 import PopupsNest from './PopupsNest';
 import ToastNest from './ToastNest';
 
-import ButtonToolbar from './ButtonToolbar.js';
-import ContentContainer from './ContentContainer.js';
+import ActivityToolbar from './ActivityToolbar.js';
+import Activities from './Activities.js';
 
 import {colors} from '../game/knowledge.js';
 
@@ -28,8 +28,8 @@ class Layout extends Component {
                         </div>
                         <div className="col-6 activity-column card">
                             <div className="card-body">
-                                <ButtonToolbar data={this.props.data} />
-                                <ContentContainer data={this.props.data} />
+                                <ActivityToolbar data={this.props.data} />
+                                <Activities data={this.props.data} />
                             </div>
                         </div>
                         <div className="col-3 projects-column">

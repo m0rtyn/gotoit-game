@@ -14,13 +14,4 @@
   .project-name {
     margin: 0;
   }
-
-  .project-avatar {
-    width: size(8);
-    // height: size(8);
-
-    & > img {
-      position: absolute;
-    }
-  }
 }

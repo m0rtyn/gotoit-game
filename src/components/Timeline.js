@@ -43,7 +43,7 @@ class Timeline extends Component {
 
                                             <div className="worker-portrait">
                                             {
-                                                _.map(events, (item) => {
+                                                _.map(events, (item, index) => {
                                                     if (item.type === 'deadline') {
                                                         return (
 

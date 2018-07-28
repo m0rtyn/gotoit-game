@@ -43,7 +43,7 @@ class Header extends Component {
                     </div>
 
                     <div className="topbar-right" onClick={() => {
-                        console.log(data);
+                        // console.log(data);
                     }}>
 
                         <div className="topbar-left">
