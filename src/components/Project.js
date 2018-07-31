@@ -163,7 +163,7 @@ class Project extends Component {
             </span>;
 
         const reject_button = <button className="btn btn-sm btn-danger" onClick={() => {
-            if (confirm("Reject project "+project.name+'? (penalty: '+project.penalty+')')) {
+            if (window.confirm("Reject project "+project.name+'? (penalty: '+project.penalty+')')) {
                 this.close();
             } }}>Reject</button>;
 
@@ -173,7 +173,7 @@ class Project extends Component {
 
         return (
             <div 
-            className={`project card ${data.hovered_projects_id.includes(project.id) ? 'hovered' : ''}`}
+            className={`project card ${data.hovered_projects_id || [].includes(project.id) ? 'hovered' : ''}`}
             onMouseOver={() => {data.helpers.modifyHoveredObjects([project], team)}}
             onMouseOut={() => {data.helpers.modifyHoveredObjects()}}
             id={project.id}
@@ -185,12 +185,12 @@ class Project extends Component {
                             <img 
                             className='project-avatar'
                             alt={project.name + ' avatar'}
-                            src={project.avatar.platform}
+                            src={project.avatar && project.avatar.platform}
                             />
                             <img 
                             className='project-avatar'
                             alt={project.name + ' avatar'}
-                            src={project.avatar.kind}
+                            src={project.avatar && project.avatar.kind}
                             />
                         </div>
 

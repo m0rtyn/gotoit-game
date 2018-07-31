@@ -9,7 +9,7 @@ const timelineWidth = window.innerWidth;
 class Timeline extends Component {
 
     render() {
-        let { timelineEvents, timelineScale } = this.props.data;
+        let { timelineEvents =[] , timelineScale } = this.props.data;
 
         return (
             <div className="timeline-wrapper">

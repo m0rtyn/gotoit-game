@@ -196,7 +196,7 @@ class Creation extends Component {
                                                 <img
                                                 className='player-avatar'
                                                 alt="player's avatar"
-                                                src='../../public/male.png'
+                                                src='../assets/images/male.png'
                                                 />
                                                 <div className="creation-gender-select">
                                                     <h3 className="text-center modal-title">Choose gender</h3>

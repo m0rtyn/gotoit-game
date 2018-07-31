@@ -103,7 +103,7 @@ class Worker extends Component {
             onMouseOut={() => {
                 data.helpers.modifyHoveredObjects()
             }}
-            className={`card worker ${data.hovered_workers_id.includes(worker.id) ? 'hovered' : ''} ${worker.in_vacation ? 'vacation' : ''}`}
+            className={`card worker ${data.hovered_workers_id || [].includes(worker.id) ? 'hovered' : ''} ${worker.in_vacation ? 'vacation' : ''}`}
             id={worker.id}
         >
 

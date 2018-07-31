@@ -30,7 +30,6 @@ export const rules = {
             time.tick++;
             setCurrentTick(time.tick);
             setGameDate(game_date);
-            console.log(game_date)
             data.helpers.setTimelineScale();
 
             //time.hour++;
@@ -74,10 +73,11 @@ export const rules = {
                     }
                 });
 
-                data.statistics.money_current_value.buffer = data.money;
-                data.statistics.btc_current_value.buffer = data.btc;
-                data.statistics.candidates_resumes.buffer = data.candidates.resumes.length;
-                data.statistics.projects_in_process.buffer = data.projects.length;
+                let { money_current_value ={}, btc_current_value={} , candidates_resumes={}, projects_in_process={}} = data.statistics;
+                money_current_value.buffer = data.money;
+                btc_current_value.buffer = data.btc;
+                candidates_resumes.buffer = data.candidates.resumes.length;
+                projects_in_process.buffer = data.projects.length;
 
                _.mapValues(data.statistics, (stats, key) => {
                     stats.values.push(stats.buffer)

@@ -13,7 +13,6 @@ class Header extends Component {
         var real_date = new Date();
         var game_date = new Date();
         game_date.setDate(real_date.getDate()+(date.tick/24));
-        console.log(game_date)
 
         return (
             <header className="header topbar">
@@ -69,7 +68,7 @@ class Header extends Component {
 
                                 {[1, 3, 5].map((speed, index) => {
                                     return (
-                                        <button className="topbar-btn" >
+                                        <button className="topbar-btn"  key={index}>
                                             {data.game_speed_multiplier === speed 
                                                 ? <span 
                                                 className="speed-control"

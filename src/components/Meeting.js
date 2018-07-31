@@ -99,7 +99,7 @@ class Meeting extends Component {
             </span>;
 
         const reject_button = <button className="btn btn-danger" onClick={() => {
-            if (confirm("Reject project "+project.name+'? (penalty: '+project.penalty+')')) {
+            if (window.confirm("Reject project "+project.name+'? (penalty: '+project.penalty+')')) {
                 this.close();
             } }}>Reject</button>;
 

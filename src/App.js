@@ -259,28 +259,16 @@ class App extends Component {
 
             _.each(loaded_app_state.data.timelineScale, (time, id) => { //2018-06-17T02:29:38.299Z
                 loaded_app_state.data.timelineScale[id] = (() => {
-                    var year = time.substring(0, 4);
-                    let month = time.substring(5,7);
-                    let number = time.substring(8,10);
-                    let hours = time.substring(11, 13);
-                    let minutes = time.substring(14, 16);
-                    let seconds = time.substring(17, 19);
-                    var date = new Date(year, month, number, hours, minutes, seconds);//string instead number but works
+                    let date = time ? new Date(time) : new Date();
                     return date
                 })()
             });
 
             _.each(loaded_app_state.data.timelineEvents, (item, id) => {
                 loaded_app_state.data.timelineEvents[id].time = (() => {
-                    var time = item.time;
-                    var year = time.substring(0, 4);
-                    let month = time.substring(5,7);
-                    let number = time.substring(8,10);
-                    let hours = time.substring(11, 13);
-                    let minutes = time.substring(14, 16);
-                    let seconds = time.substring(17, 19);
-                    var date = new Date(year, month, number, hours, minutes, seconds);//string instead number but works
-                    return date
+                    let {time = ''} = item;
+                    let date = time ? new Date(time) : new Date();
+                    return date;
                 })()
             });
 
