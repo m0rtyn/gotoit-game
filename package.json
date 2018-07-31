@@ -110,7 +110,10 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "desktop-linux": "electron-builder",
+    "desktop-windows": "electron-builder --win --x64",
+    "desktop-mac": "electron-builder --mac --x64"
   },
   "build": {
     "electronVersion": "1.6.15",
