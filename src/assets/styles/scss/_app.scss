@@ -1,0 +1,26 @@
+@import 'mixins.scss';
+@import 'variables.scss';
+
+
+//====COMMON====================================//
+@import 'app/common/layout.scss';
+@import 'app/common/buffer.scss';
+
+
+//====BLOCKS====================================//
+//large blocks
+@import 'app/blocks/activity-column.scss';
+@import 'app/blocks/background.scss';
+@import 'app/blocks/achievements.scss';
+@import 'app/blocks/header.scss';
+@import 'app/blocks/timeline.scss';
+//medium blocks
+@import 'app/blocks/worker.scss';
+@import 'app/blocks/project.scss';
+@import 'app/blocks/project-find.scss';
+@import 'app/blocks/creation.scss';
+@import 'app/blocks/hire-workers.scss';
+@import 'app/blocks/mail.scss';
+//small blocks
+@import 'app/blocks/checkbox.scss';
+@import 'app/blocks/stats-bar.scss';
