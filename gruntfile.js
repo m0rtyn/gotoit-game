@@ -35,7 +35,7 @@ module.exports = function(grunt) {
           outputStyle: 'expanded'
         },
         files: {
-          'src/assets/styles/main.css': 'src/assets/styles/main.scss'
+          'src/assets/styles/main.css': 'src/assets/styles/scss/main.scss'
         }
       },
 
@@ -45,7 +45,7 @@ module.exports = function(grunt) {
           outputStyle: 'compressed'
         },
         files: {
-          'src/assets/styles/main.min.css': 'src/assets/styles/main.scss'
+          'src/assets/styles/main.min.css': 'src/assets/styles/scss/main.scss'
         }
       }
 
@@ -84,7 +84,7 @@ module.exports = function(grunt) {
           src : [
             'src/assets/styles/*.min.css',
             // 'src/assets/js/*.min.js',
-            'src/**/*.html'
+            // 'src/**/*.html'
           ]
         },
         options: {
@@ -143,7 +143,7 @@ module.exports = function(grunt) {
     //     template: "{%= src %}"
     //   },
     //   js: {
-    //     src: 'src/assets/js/script/main.js',
+    //     src: 'src/assets/js/script/app.js',
     //     dest: 'src/assets/js/script.js'
     //   },
     // },

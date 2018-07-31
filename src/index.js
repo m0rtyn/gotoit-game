@@ -11,7 +11,6 @@ import {IntlProvider} from 'react-intl';
 
 // theAdmin theme =============================
 import './assets/styles/core.min.css';
-import './assets/styles/app.min.css';
 import './assets/styles/main.min.css';
 // import './assets/js/core.min.js';
 // import './assets/js/app.min.js';
