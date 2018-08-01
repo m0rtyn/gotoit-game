@@ -15,12 +15,14 @@ class Projects extends Component {
         return (
             <div>
                 <div className="column-buttons">
+                    {/*
                     <button
                     className="btn btn-xs btn-w-lg btn-info"
                     onClick={() => { data.helpers.changeContent('ProjectsFind'); }}
                     >
                         Freelance
                     </button>
+                    */}
                     <button
                     className="btn btn-xs btn-w-lg btn-success"
                     onClick={() => { data.helpers.changeContent('StartProject'); }}
