@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {IntlProvider} from 'react-intl';
 
- // import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // import jQuery from 'jquery';
 // window.jQuery = jQuery = window.$ = $;
@@ -14,7 +14,6 @@ import {IntlProvider} from 'react-intl';
 // theAdmin theme =============================
 import './assets/styles/core.min.css';
 import './assets/styles/app.min.css';
-
 import 'toastr/build/toastr.min.css';
 import 'animate.css';
 
