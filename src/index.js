@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {IntlProvider} from 'react-intl';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 // import jQuery from 'jquery';
 // window.jQuery = jQuery = window.$ = $;
 // console.log('wat', $);
@@ -12,12 +10,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // const themeApp = require('./assets/js/app.min.js');
 
 // theAdmin theme =============================
-import './assets/styles/core.min.css';
-import './assets/styles/app.min.css';
-import 'toastr/build/toastr.min.css';
-import 'animate.css';
+// import './assets/styles/core.min.css';
 
-import './assets/styles/main.scss';
 // import './assets/js/core.min.js';
 // import './assets/js/app.min.js';
 // import './assets/js/script.min.js';

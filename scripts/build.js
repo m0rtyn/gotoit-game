@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 // @remove-on-eject-end
-'use strict';
+
 
 // Do this as the first thing so that any code reading it knows the right env.
 process.env.BABEL_ENV = 'production';
@@ -80,21 +80,23 @@ checkBrowsers(paths.appPath)
   })
   .then(
     ({ stats, previousFileSizes, warnings }) => {
+      const compileTime = parseFloat((Math.abs(stats.endTime - stats.startTime) / 1000).toFixed(2));
+
       if (warnings.length) {
-        console.log(chalk.yellow('Compiled with warnings.\n'));
-        console.log(warnings.join('\n\n'));
-        console.log(
-          '\nSearch for the ' +
-            chalk.underline(chalk.yellow('keywords')) +
-            ' to learn more about each warning.'
-        );
-        console.log(
-          'To ignore, add ' +
-            chalk.cyan('// eslint-disable-next-line') +
-            ' to the line before.\n'
-        );
+          console.log(chalk.yellow('Compiled in ' + compileTime + 's with warnings.\n'));
+          console.log(warnings.join('\n\n'));
+          console.log(
+              '\nSearch for the ' +
+              chalk.underline(chalk.yellow('keywords')) +
+              ' to learn more about each warning.'
+          );
+          console.log(
+              'To ignore, add ' +
+              chalk.cyan('// eslint-disable-next-line') +
+              ' to the line before.\n'
+          );
       } else {
-        console.log(chalk.green('Compiled successfully.\n'));
+          console.log(chalk.green('Compiled successfully in ' + compileTime + 's!'));
       }
 
       console.log('File sizes after gzip:\n');

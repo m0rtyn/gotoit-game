@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Lorer from "../services/Lorer";
-import ProjectModel from "../models/ProjectModel";
 import _ from 'lodash';
 
 class ActivityToolbar extends Component {

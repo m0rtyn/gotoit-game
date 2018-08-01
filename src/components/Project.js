@@ -18,7 +18,7 @@ import ProjectName from './ProjectName';
 import ProjectProgressBar from './ProjectProgressBar';
 import ProjectDeadlineBar from './ProjectDeadlineBar';
 
-import {skills_names, technologies, project_kinds, project_platforms} from '../game/knowledge';
+import {skills_names, technologies} from '../game/knowledge';
 
 
 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {FormattedDate} from 'react-intl';
 import {support} from '../game/app_config';
-import classNames from 'classnames';
+
 import Timeline from './Timeline';
-import Icon from './Icon';
+
 
 class Header extends Component {
     render() {

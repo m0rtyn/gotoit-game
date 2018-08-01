@@ -10,6 +10,7 @@ const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeM
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
@@ -31,9 +32,10 @@ const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
 // common function to get style loaders
-const getStyleLoaders = (cssOptions, preProcessor) => {
+const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
   const loaders = [
-    require.resolve('style-loader'),
+    'css-hot-loader',
+    MiniCssExtractPlugin.loader,
     {
       loader: require.resolve('css-loader'),
       options: cssOptions,
@@ -46,6 +48,7 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
       options: {
         // Necessary for external CSS imports to work
         // https://github.com/facebook/create-react-app/issues/2677
+        sourceMap: true,
         ident: 'postcss',
         plugins: () => [
           require('postcss-flexbugs-fixes'),
@@ -57,7 +60,10 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
     },
   ];
   if (preProcessor) {
-    loaders.push(require.resolve(preProcessor));
+    loaders.push({
+            loader:require.resolve(preProcessor),
+            options: preProcessorOptions
+        });
   }
   return loaders;
 };
@@ -106,7 +112,7 @@ module.exports = {
     publicPath: publicPath,
     // Point sourcemap entries to original disk location (format as URL on Windows)
     devtoolModuleFilenameTemplate: info =>
-      path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
+        'file://' + path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
   },
   optimization: {
     // Automatically split vendor and commons
@@ -167,10 +173,6 @@ module.exports = {
             options: {
               formatter: eslintFormatter,
               eslintPath: require.resolve('eslint'),
-              baseConfig: {
-                extends: [require.resolve('eslint-config-react-app')],
-              },
-              
             },
             loader: require.resolve('eslint-loader'),
           },
@@ -215,6 +217,7 @@ module.exports = {
                   
                   presets: [require.resolve('babel-preset-react-app')],
                   plugins: [
+                    require.resolve('react-hot-loader/babel'),
                     [
                       require.resolve('babel-plugin-named-asset-import'),
                       {
@@ -273,6 +276,7 @@ module.exports = {
             exclude: cssModuleRegex,
             use: getStyleLoaders({
               importLoaders: 1,
+              sourceMap:true
             }),
           },
           // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
@@ -280,8 +284,9 @@ module.exports = {
           {
             test: cssModuleRegex,
             use: getStyleLoaders({
-              importLoaders: 1,
+              importLoaders: 4,
               modules: true,
+              sourceMap:true,
               getLocalIdent: getCSSModuleLocalIdent,
             }),
           },
@@ -293,7 +298,17 @@ module.exports = {
           {
             test: sassRegex,
             exclude: sassModuleRegex,
-            use: getStyleLoaders({ importLoaders: 2 }, 'sass-loader'),
+            use: getStyleLoaders({
+                importLoaders: 4,
+                sourceMap: true,
+            },  'sass-loader', {
+                outputStyle: 'expanded',
+                sourceMap: true,
+                sourceMapContents: true,
+                includePaths: [
+                    paths.scssSrc,
+                    paths.scssSrc
+                ]}),
           },
           // Adds support for CSS Modules, but using SASS
           // using the extension .module.scss or .module.sass
@@ -301,11 +316,15 @@ module.exports = {
             test: sassModuleRegex,
             use: getStyleLoaders(
               {
-                importLoaders: 2,
+                importLoaders: 4,
                 modules: true,
+                sourceMap:true,
                 getLocalIdent: getCSSModuleLocalIdent,
               },
-              'sass-loader'
+              'sass-loader', { outputStyle: 'expanded',
+                    sourceMap: true,
+                    sourceMapContents: true,
+                }
             ),
           },
           // The GraphQL loader preprocesses GraphQL queries in .graphql files.
@@ -366,6 +385,10 @@ module.exports = {
     // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
     // You can remove this if you don't use Moment.js:
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new MiniCssExtractPlugin({
+        filename: '[name].css',
+        chunkFilename: '[name].css'
+    }),
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without
     // having to parse `index.html`.

@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import Portal from 'react-portal';
-
-import SimpleModal from './SimpleModal';
-import ProjectOfferBlock from './ProjectOfferBlock';
-import {project_kinds, project_platforms, skills} from "../game/knowledge";
+import {skills} from "../game/knowledge";
 import _ from "lodash";
 import StatsBar from './StatsBar';
 
@@ -36,7 +32,6 @@ class Offer extends Component {
 
 
     render() {
-        const data = this.props.data;
         let project = this.props.project;
 
 

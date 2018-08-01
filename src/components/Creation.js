@@ -4,7 +4,6 @@ import _ from 'lodash';
 
 import SimpleModal from './SimpleModal';
 import StatsBar from './StatsBar';
-import StatsProgressBar from './StatsProgressBar';
 import bulkStyler from '../services/bulkStyler';
 
 import WorkerModel from '../models/WorkerModel';

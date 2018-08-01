@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
-
+import { hot } from 'react-hot-loader';
 //import '../node_modules/react-bootstrap-slider/node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css';
 //import * from 'bootstrap-slider';
 
@@ -27,6 +27,14 @@ import Lorer from './services/Lorer';
 import {skills_names, project_platforms, project_kinds, meetings, workers_bonus_items, technologies, skills_true} from './game/knowledge';
 
 import {getDefaultState} from './game/default_state';
+
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import 'toastr/build/toastr.min.css';
+import 'animate.css';
+
+import './assets/styles/scss/main.scss';
 
 export var current_tick = 0;
 export const setCurrentTick = (tick) => { current_tick = tick; };
@@ -225,7 +233,7 @@ class App extends Component {
         };
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         let helpers = this.state.data.helpers;
 
         let loaded_app_state = JSON.parse(localStorage.getItem(game_name+"_app_state"));
@@ -1834,4 +1842,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default hot(module)(App)

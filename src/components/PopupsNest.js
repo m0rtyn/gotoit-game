@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 
 import Creation from './Creation';
-import HotOffer from './HotOffer';
 
 class PopupsNest extends Component {
     render() {

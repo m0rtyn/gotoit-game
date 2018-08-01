@@ -21,7 +21,7 @@ class Worker extends Component {
         this.manageAll = this.manageAll.bind(this);
         this.dismiss = this.dismiss.bind(this);
     }
-    componentWillMount(){
+    UNSAFE_componentWillMount(){
         let data = this.props.data;
         data.workers.forEach((worker) => {
             if (worker.stats.design > data.max_stat) data.max_stat = worker.stats.design;

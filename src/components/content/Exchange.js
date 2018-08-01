@@ -178,6 +178,8 @@ class Exchange extends Component {
                     </div>
                 </div>;
                 break;
+            default:
+                break;
         }
         return (
             <div className="text-center">

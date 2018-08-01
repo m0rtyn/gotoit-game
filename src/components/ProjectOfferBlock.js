@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
-import ProjectModel from '../models/ProjectModel';
-import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
 import StatsProgressBar from './StatsProgressBar';
 
-import {colors, skills} from '../game/knowledge';
+import {colors} from '../game/knowledge';
 // import Project from './Project';
 
 
@@ -29,10 +27,7 @@ class ProjectOfferBlock extends Component {
         let type = this.props.type;
         let data = this.props.data;
 
-        const stats_data = _.mapValues(skills, (stat, key) => {
-            return {name: key, val: <span>{candidate.needs(key)}</span>};
-        });
-       const stats_progressbar_data = _.mapValues(candidate.estimate, (val, stat) => {
+        const stats_progressbar_data = _.mapValues(candidate.estimate, (val, stat) => {
             return {
                 name: stat,
                 value: candidate.originalyTasksQuantity(),

@@ -15,7 +15,6 @@ class StatsProgressBar extends Component {
     }
     render() {
         const stats = this.props.stats;
-        const data = this.props.data;
         const worker = this.props.worker;
         const type = this.props.type;
         const hideCheckbox = this.props.hideCheckbox;
