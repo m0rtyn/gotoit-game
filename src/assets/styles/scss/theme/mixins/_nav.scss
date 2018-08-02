@@ -1,11 +1,11 @@
-@mixin nav-process-colors($color, $color-pale) {
+@mixin nav-process-colors($color, var(--color-pale)) {
   &.nav-process-circle .nav-item {
 
     &.complete .nav-link,
     &.processing .nav-link {
       &,
       &::before {
-        background-color: $color-pale;
+        background-color: var(--color-pale);
       }
 
       &::after {

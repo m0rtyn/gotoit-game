@@ -11,7 +11,7 @@
   }
 
   a:not(.btn):not(.avatar) {
-    color: $color-text;
+    color: var(--color-text);
   }
 
 
@@ -24,11 +24,11 @@
   }
 
   &.active {
-    background-color: $color-bg-lighter;
+    background-color: var(--color-bg-lighter);
   }
 
   &.bordered {
-    border: 1px solid $color-divider;
+    border: 1px solid var(--color-divider);
   }
 
   &.items-center {
@@ -189,12 +189,12 @@
   padding-left: 1.25rem;
 
   a {
-    color: $color-text-light;
+    color: var(--color-text-light);
     font-size: 1.125rem;
     opacity: 0.8;
 
     &:hover {
-      color: $color-primary;
+      color: var(--color-primary);
     }
   }
 
@@ -206,7 +206,7 @@
 
 .media-action {
   opacity: 0;
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
 }
 
 .media:hover .media-action {
@@ -259,14 +259,14 @@
   .small,
   small,
   time {
-    color: $color-alpha-light-text;
+    color: var(--color-alpha-light-text);
   }
 
   .nav-link {
-    color: $color-alpha-light-text;
+    color: var(--color-alpha-light-text);
 
     &:hover {
-      color: $color-alpha-light-text-active;
+      color: var(--color-alpha-light-text-active);
     }
   }
 
@@ -275,10 +275,10 @@
 // New item
 //
 .media-new {
-  background-color: $color-bg-new;
+  background-color: var(--color-bg-new);
 }
 
 .media-list-hover .media-new:hover {
-  background-color: $color-bg-new-hover !important;
+  background-color: var(--color-bg-new-hover) !important;
 }
 

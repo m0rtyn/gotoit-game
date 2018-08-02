@@ -11,12 +11,12 @@
     display: none;
 
     &:checked ~ .switch-indicator {
-      background: $color-pale-primary;
+      background: var(--color-pale-primary);
 
       &::after {
-        background: $color-primary;
+        background: var(--color-primary);
         left: calc(100% - 20px);
-        box-shadow: 0px 0px 3px $color-bg-lightest;
+        box-shadow: 0px 0px 3px var(--color-bg-lightest);
       }
     }
 
@@ -38,7 +38,7 @@
   display: inline-block;
   width: 40px;
   height: 10px;
-  background: $color-bg-dark;
+  background: var(--color-dark);
   border-radius: 20px;
   vertical-align: middle;
   transition: 0.3s;
@@ -70,7 +70,7 @@
 .switch-border {
 
   input:checked + .switch-indicator {
-    border-color: $color-pale-primary;
+    border-color: var(--color-pale-primary);
 
     &::after {
       left: calc(100% - 14px);
@@ -78,12 +78,12 @@
   }
 
   .switch-indicator {
-    border: 2px solid $color-bg-dark;
+    border: 2px solid var(--color-dark);
     background: transparent !important;
     height: 20px;
 
     &::after {
-      background: darken($color-bg-dark, 5%);
+      background: color(var(--color-dark) b(+5%));
       border-radius: 50%;
       width: 12px;
       height: 12px;
@@ -142,14 +142,14 @@
 //
 // Colors
 //
-.switch-secondary { @include switch-colors($color-secondary, $color-pale-secondary); }
-.switch-success   { @include switch-colors($color-success, $color-pale-success); }
-.switch-info      { @include switch-colors($color-info, $color-pale-info); }
-.switch-warning   { @include switch-colors($color-warning, $color-pale-warning); }
-.switch-danger    { @include switch-colors($color-danger, $color-pale-danger); }
-.switch-gray      { @include switch-colors($color-gray, $color-pale-gray); }
-.switch-dark      { @include switch-colors($color-dark, $color-pale-dark); }
-.switch-pink      { @include switch-colors($color-pink, $color-pale-pink); }
-.switch-purple    { @include switch-colors($color-purple, $color-pale-purple); }
-.switch-brown    { @include switch-colors($color-brown, $color-pale-brown); }
-.switch-cyan      { @include switch-colors($color-cyan, $color-pale-cyan); }
+.switch-secondary { @include switch-colors(var(--color-secondary), var(--color-pale-secondary)); }
+.switch-success   { @include switch-colors(var(--color-success), var(--color-pale-success)); }
+.switch-info      { @include switch-colors(var(--color-info), var(--color-pale-info)); }
+.switch-warning   { @include switch-colors(var(--color-warning), var(--color-pale-warning)); }
+.switch-danger    { @include switch-colors(var(--color-danger), var(--color-pale-danger)); }
+.switch-gray      { @include switch-colors(var(--color-gray), var(--color-pale-gray)); }
+.switch-dark      { @include switch-colors(var(--color-dark), var(--color-pale-dark)); }
+.switch-pink      { @include switch-colors(var(--color-pink), var(--color-pale-pink)); }
+.switch-purple    { @include switch-colors(var(--color-purple), var(--color-pale-purple)); }
+.switch-brown    { @include switch-colors(var(--color-brown), var(--color-pale-brown)); }
+.switch-cyan      { @include switch-colors(var(--color-cyan), var(--color-pale-cyan)); }

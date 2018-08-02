@@ -2,7 +2,7 @@
 .topbar-secondary {
 
   $local_dropdown-item-height: 38px;
-  $local_darker-background: $color-pale-secondary;
+  $local_darker-background: var(--color-pale-secondary);
 
   border-bottom: 1px solid rgba(0,0,0,0.05);
   box-shadow: none;
@@ -100,7 +100,7 @@
 
   .menu-item.active > .menu-link,
   .menu-item:hover > .menu-link {
-    color: $color-text;
+    color: var(--color-text);
     background-color: transparent !important;
   }
 

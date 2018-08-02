@@ -1,6 +1,6 @@
 @mixin callout-variation($color) {
   border-left-color: $color;
-  background-color: $color-bg-lightest;
+  background-color: var(--color-bg-lightest);
 
   h3,
   h4,

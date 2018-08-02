@@ -3,9 +3,9 @@
 // Pagination
 //
 .page-link {
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
   font-weight: 400;
-  border-color: $color-divider;
+  border-color: var(--color-divider);
   padding: 0 8px;
   margin: 0 3px;
   min-width: $height-sm + 2px;
@@ -15,8 +15,8 @@
 
   &:hover,
   &:focus {
-    background-color: $color-bg-lighter;
-    color: $color-text;
+    background-color: var(--color-bg-lighter);
+    color: var(--color-text);
   }
 
   span {
@@ -36,8 +36,8 @@
   &,
   &:focus,
   &:hover {
-    background-color: $color-primary;
-    border-color: $color-primary;
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
     font-weight: 500;
   }
 }
@@ -50,7 +50,7 @@
 
   &:hover,
   &:focus {
-    border-color: $color-bg-lighter;
+    border-color: var(--color-bg-lighter);
   }
 
 }
@@ -104,7 +104,7 @@
   &,
   &:focus,
   &:hover {
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
   }
 
 }

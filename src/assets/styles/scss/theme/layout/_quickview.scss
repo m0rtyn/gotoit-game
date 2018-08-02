@@ -80,7 +80,7 @@
   align-items: center;
   padding: 0 20px;
   min-height: $height-topbar !important;
-  border-bottom: 1px solid $color-divider;
+  border-bottom: 1px solid var(--color-divider);
 
   .close {
     margin-left: 16px;
@@ -118,8 +118,8 @@
   align-items: center;
   padding: 0 16px;
   min-height: $height-topbar;
-  background-color: $color-bg-lightest;
-  border-top: 1px solid $color-divider-light;
+  background-color: var(--color-bg-lightest);
+  border-top: 1px solid var(--color-divider-light);
 
   .row {
     flex: 1;
@@ -132,10 +132,10 @@
   a:not(.btn) {
     display: inline-block;
     padding: 0.75rem 0.5rem;
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
 
     &:hover {
-      color: $color-title;
+      color: var(--color-title);
     }
   }
 }

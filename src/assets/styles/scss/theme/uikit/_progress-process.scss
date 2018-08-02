@@ -38,7 +38,7 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
     padding: 0 12px;
 
     &:first-child .nav-link::before {
@@ -52,11 +52,11 @@
 
         &,
         &::before {
-          background-color: $color-pale-primary;
+          background-color: var(--color-pale-primary);
         }
 
         &::after {
-          background-color: $color-primary;
+          background-color: var(--color-primary);
           width: $height-sm;
           height: $height-sm;
           transform: translateX(0);
@@ -73,7 +73,7 @@
     }
 
     &.processing {
-      color: $color-text;
+      color: var(--color-text);
 
       .nav-link::after {
         width: $height-sm - 16px;
@@ -94,7 +94,7 @@
     height: $height-sm;
     max-height: $height-sm;
     border-radius: 50%;
-    background-color: $color-pale-secondary;
+    background-color: var(--color-pale-secondary);
     transition: .5s;
     z-index: 1;
 
@@ -105,7 +105,7 @@
       right: calc(50% + #{$height-sm/2});
       height: 10px;
       margin-top: $height-sm/2 - 5px;
-      background-color: $color-pale-secondary;
+      background-color: var(--color-pale-secondary);
       cursor: default;
       transition: .5s;
     }
@@ -147,11 +147,11 @@
     flex-direction: column;
     flex: 1;
     text-align: center;
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
     padding: 0 12px;
 
     i {
-      color: $color-text-secondary;
+      color: var(--color-text-secondary);
     }
 
     &:first-child .nav-link::before {
@@ -162,7 +162,7 @@
     &.processing {
 
       .nav-link::before {
-        background-color: $color-primary;
+        background-color: var(--color-primary);
       }
     }
 
@@ -173,19 +173,19 @@
       }
 
       .nav-link {
-        background-color: $color-primary;
+        background-color: var(--color-primary);
       }
     }
 
     &.processing {
-      color: $color-text;
+      color: var(--color-text);
 
       i {
-        color: $color-primary;
+        color: var(--color-primary);
       }
 
       .nav-link {
-        border-color: $color-primary;
+        border-color: var(--color-primary);
         background-color: #fff;
       }
     }
@@ -202,7 +202,7 @@
     max-height: $height-lg;
     border-radius: 50%;
     border: 2px solid transparent;
-    background-color: $color-pale-secondary;
+    background-color: var(--color-pale-secondary);
     color: inherit;
 
     &::before {
@@ -212,7 +212,7 @@
       right: calc(50% + #{$height-lg/2});
       height: 3px;
       margin-top: $height-lg/2 - 1.5px;
-      background-color: $color-pale-secondary;
+      background-color: var(--color-pale-secondary);
       cursor: default;
     }
   }
@@ -232,12 +232,12 @@
   .nav-item {
     display: flex;
     flex: 1;
-    border-right: 1px solid $color-divider-light;
+    border-right: 1px solid var(--color-divider-light);
 
     &::after {
       content: "\e649";
       font-family: $font-icon-themify;
-      color: $color-divider-light;
+      color: var(--color-divider-light);
       background-color: #fff;
       margin-right: -10px;
       line-height: 1;
@@ -255,7 +255,7 @@
 
       .nav-link-number {
         color: #fff;
-        background-color: $color-primary;
+        background-color: var(--color-primary);
 
         i {
           color: #fff;
@@ -266,12 +266,12 @@
     &.processing {
 
       .nav-link-number {
-        background-color: $color-dark;
+        background-color: var(--color-dark);
         color: #fff;
       }
 
       .nav-title {
-        color: $color-dark;
+        color: var(--color-dark);
       }
 
     }
@@ -292,8 +292,8 @@
     font-size: 15px;
     font-weight: 400;
     border-radius: 50%;
-    background-color: $color-pale-secondary;
-    color: $color-text-secondary;
+    background-color: var(--color-pale-secondary);
+    color: var(--color-text-secondary);
     text-align: center;
 
     i {
@@ -320,7 +320,7 @@
   .nav-item {
     display: flex;
     flex: 1;
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
     margin-right: 4px;
 
     &:last-child {
@@ -328,17 +328,17 @@
     }
 
     &.complete:not(.processing) .nav-link {
-      background-color: $color-primary;
+      background-color: var(--color-primary);
       color: #fff;
 
       .nav-link-number {
-        color: $color-primary;
+        color: var(--color-primary);
         font-weight: 400;
       }
     }
 
     &.processing .nav-link-number {
-      background-color: $color-primary;
+      background-color: var(--color-primary);
       color: #fff;
     }
   }
@@ -346,7 +346,7 @@
   .nav-link {
     display: flex;
     width: 100%;
-    background-color: $color-pale-secondary;
+    background-color: var(--color-pale-secondary);
     padding: 20px;
   }
 
@@ -359,7 +359,7 @@
     font-weight: 300;
     border-radius: 50%;
     background-color: #fff;
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
     text-align: center;
     flex-shrink: 0;
   }
@@ -690,45 +690,45 @@
 //-----------------------------------------------------------------
 // Colors
 //
-.nav-process-secondary { @include nav-process-colors($color-secondary, $color-pale-secondary); }
-.nav-process-gray      { @include nav-process-colors($color-gray, $color-pale-gray); }
-.nav-process-dark      { @include nav-process-colors($color-dark, $color-pale-dark); }
-.nav-process-success   { @include nav-process-colors($color-success, $color-pale-success); }
-.nav-process-info      { @include nav-process-colors($color-info, $color-pale-info); }
-.nav-process-warning   { @include nav-process-colors($color-warning, $color-pale-warning); }
-.nav-process-danger    { @include nav-process-colors($color-danger, $color-pale-danger); }
-.nav-process-pink      { @include nav-process-colors($color-pink, $color-pale-pink); }
-.nav-process-purple    { @include nav-process-colors($color-purple, $color-pale-purple); }
-.nav-process-brown     { @include nav-process-colors($color-brown, $color-pale-brown); }
-.nav-process-cyan      { @include nav-process-colors($color-cyan, $color-pale-cyan); }
-.nav-process-yellow    { @include nav-process-colors($color-yellow, $color-pale-yellow); }
+.nav-process-secondary { @include nav-process-colors(var(--color-secondary), var(--color-pale-secondary)); }
+.nav-process-gray      { @include nav-process-colors(var(--color-gray), var(--color-pale-gray)); }
+.nav-process-dark      { @include nav-process-colors(var(--color-dark), var(--color-pale-dark)); }
+.nav-process-success   { @include nav-process-colors(var(--color-success), var(--color-pale-success)); }
+.nav-process-info      { @include nav-process-colors(var(--color-info), var(--color-pale-info)); }
+.nav-process-warning   { @include nav-process-colors(var(--color-warning), var(--color-pale-warning)); }
+.nav-process-danger    { @include nav-process-colors(var(--color-danger), var(--color-pale-danger)); }
+.nav-process-pink      { @include nav-process-colors(var(--color-pink), var(--color-pale-pink)); }
+.nav-process-purple    { @include nav-process-colors(var(--color-purple), var(--color-pale-purple)); }
+.nav-process-brown     { @include nav-process-colors(var(--color-brown), var(--color-pale-brown)); }
+.nav-process-cyan      { @include nav-process-colors(var(--color-cyan), var(--color-pale-cyan)); }
+.nav-process-yellow    { @include nav-process-colors(var(--color-yellow), var(--color-pale-yellow)); }
 
 .nav-process-secondary {
   &.nav-process-circle .nav-item {
     &.complete .nav-link::after {
-      color: $color-text-secondary;
+      color: var(--color-text-secondary);
     }
   }
 
 
   &.nav-process-iconic .nav-item {
     .nav-link {
-      color: $color-secondary;
+      color: var(--color-secondary);
     }
 
     &.complete .nav-link {
-      color: $color-text-secondary;
+      color: var(--color-text-secondary);
     }
   }
 
 
   &.nav-process-block .nav-item {
     &.complete .nav-link {
-      color: $color-text-secondary;
+      color: var(--color-text-secondary);
     }
 
     &.processing .nav-link-number {
-      color: $color-text-secondary;
+      color: var(--color-text-secondary);
     }
   }
 }

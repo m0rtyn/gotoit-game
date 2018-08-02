@@ -4,8 +4,8 @@
     height: 0;
 
     &:checked + label {
-      background-color: $success-color;
-      border-color: $success-color;
+      background-color: green; //TODO: TEMP color
+      border-color: green; //TODO: TEMP color
       color: #fff;
     }
   }

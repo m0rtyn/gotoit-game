@@ -1,10 +1,10 @@
 
 pre {
-  background-color: $color-bg-lighter;
-  border-left: 5px solid $color-divider;
+  background-color: var(--color-bg-lighter);
+  border-left: 5px solid var(--color-divider);
   padding: 12px;
   border-radius: 3px;
-  color: $color-text-light;
+  color: var(--color-text-light);
 }
 
 code {
@@ -19,7 +19,7 @@ code {
 }
 
 kbd {
-  background-color: $color-dark;
+  background-color: var(--color-dark);
 }
 
 .pre-scrollable {
@@ -55,22 +55,22 @@ pre:hover .clipboard-copy {
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
   position: relative;
-  background-color: $color-bg-lighter;
+  background-color: var(--color-bg-lighter);
   padding-bottom: 12px;
   margin-top: 0;
   margin-bottom: 25px;
   word-wrap: normal;
-  border: 1px solid $color-divider;
+  border: 1px solid var(--color-divider);
 }
 
 .line-numbers .line-numbers-rows {
-  border-right-color: $color-divider;
+  border-right-color: var(--color-divider);
 }
 
 div.prism-show-language > div.prism-show-language-label {
   border-radius: 0;
   background-color: transparent;
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
   font-family: $font-title;
   font-size: 11px;
   opacity: 0.5;
@@ -98,7 +98,7 @@ div.prism-show-language > div.prism-show-language-label {
 // Code preview
 //
 .code-preview {
-  border: 1px solid $color-divider;
+  border: 1px solid var(--color-divider);
   border-bottom: none;
   padding: 20px;
   background-color: #fff;
@@ -114,8 +114,8 @@ div.prism-show-language > div.prism-show-language-label {
 // Code title
 //
 .code-title {
-  background-color: $color-bg-lighter;
-  border: 1px solid $color-divider;
+  background-color: var(--color-bg-lighter);
+  border: 1px solid var(--color-divider);
   border-bottom: none;
   padding: 15px 20px;
   margin-bottom: 0;
@@ -162,15 +162,15 @@ div.prism-show-language > div.prism-show-language-label {
 // Pre toggler
 //
 .code-toggler {
-  border-top: 1px solid $color-divider;
+  border-top: 1px solid var(--color-divider);
   margin-top: -1px;
   text-align: right;
 
   .btn {
     border-radius: 0;
-    background-color: $color-bg-lighter;
+    background-color: var(--color-bg-lighter);
     border-top: none;
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
 
     i {
       vertical-align: middle;

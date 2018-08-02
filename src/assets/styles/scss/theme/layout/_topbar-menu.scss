@@ -16,14 +16,14 @@
 
     &:hover > .menu-link,
     &.active > .menu-link {
-      color: $color-alpha-dark-text-active;
-      border-top-color: $color-primary;
+      color: var(--color-alpha-dark-text-active);
+      border-top-color: var(--color-primary);
     }
   }
 
   .menu-link {
     height: $height-topbar;
-    color: $color-alpha-dark-text;
+    color: var(--color-alpha-dark-text);
     border-top: 2px solid transparent;
 
     .icon,
@@ -59,13 +59,13 @@
       }
 
       &:hover > .menu-link {
-        color: $color-text;
-        background-color: $color-bg-lighter;
+        color: var(--color-text);
+        background-color: var(--color-bg-lighter);
       }
 
       &.active > .menu-link {
-        color: $color-text;
-        background-color: $color-bg-lighter;
+        color: var(--color-text);
+        background-color: var(--color-bg-lighter);
       }
 
       .icon,
@@ -85,7 +85,7 @@
     }
 
     .dot::after {
-      border-color: $color-text;
+      border-color: var(--color-text);
     }
   }
 

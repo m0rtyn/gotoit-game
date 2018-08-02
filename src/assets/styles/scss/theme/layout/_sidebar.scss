@@ -131,19 +131,19 @@
 
 // Alternative color
 .sidebar-header-inverse {
-  color: $color-text;
+  color: var(--color-text);
   background-color: #fff;
 
   .sidebar-toggle-fold::before {
-    border-color: $color-text;
+    border-color: var(--color-text);
   }
 
   a {
-    color: $color-text;
+    color: var(--color-text);
   }
 }
 .sidebar-folded .sidebar-header-inverse .sidebar-toggle-fold::before {
-  background-color: $color-text;
+  background-color: var(--color-text);
 }
 
 
@@ -152,7 +152,7 @@
 // Sidebar footer
 //
 .sidebar-footer {
-  border-top: 1px solid $color-alpha-dark-divider;
+  border-top: 1px solid var(--color-alpha-dark-divider);
   padding: 0 16px;
   display: flex;
   align-items: center;

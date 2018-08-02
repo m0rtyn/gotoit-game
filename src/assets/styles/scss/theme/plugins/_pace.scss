@@ -5,7 +5,7 @@
   display: none;
 
   .pace-progress {
-    background: $color-primary;
+    background: var(--color-primary);
     position: fixed;
     top: 0;
     left: 0;

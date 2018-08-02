@@ -82,7 +82,7 @@
   border-bottom: $card-internal-border;
 
   a {
-    color: $color-title;
+    color: var(--color-title);
   }
 
   strong,
@@ -165,9 +165,9 @@
 // Footer
 //
 .card-footer {
-  background-color: $color-bg-lightest;
+  background-color: var(--color-bg-lightest);
   border-top: $card-internal-border;
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
   padding: 10px 20px;
 
   > *:last-child {
@@ -192,12 +192,12 @@
     display: inline-block;
     padding: 0 4px;
     margin: 0 4px;
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
     opacity: .8;
     transition: 0.3s linear;
 
     &:hover {
-      color: $color-primary;
+      color: var(--color-primary);
     }
   }
 
@@ -206,7 +206,7 @@
   }
 
   .dropdown.show > a {
-    color: $color-primary;
+    color: var(--color-primary);
   }
 
   [data-toggle="dropdown"],
@@ -284,7 +284,7 @@
 .card-inverse {
 
   color: #fff!important;
-  background-color: $color-dark;
+  background-color: var(--color-dark);
 
   h1,h2,h3,h4,h5,h6,
   .card-title,
@@ -305,7 +305,7 @@
   .card-header,
   .card-footer,
   .card-action {
-    border-color: $color-alpha-light-divider;
+    border-color: var(--color-alpha-light-divider);
   }
 }
 
@@ -331,7 +331,7 @@
 // Card modifiers
 //
 .card-bordered {
-  border: 1px solid $color-divider;
+  border: 1px solid var(--color-divider);
 }
 
 .card-shadowed {
@@ -361,7 +361,7 @@
   transition: left 0.3s ease;
 
   .card-btn-maximize {
-    color: $color-primary;
+    color: var(--color-primary);
   }
 }
 
@@ -375,7 +375,7 @@
   z-index: $zindex-card-fullscreen;
 
   .card-btn-fullscreen {
-    color: $color-primary;
+    color: var(--color-primary);
   }
 }
 

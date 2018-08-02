@@ -67,11 +67,11 @@
   padding-top: 16px;
 
   li {
-    background-color: $color-bg-darker;
+    background-color: var(--color-darker);
   }
 
   .active {
-    background-color: darken($color-secondary, 12%);
+    background-color: darken(var(--color-secondary), 12%);
   }
 }
 

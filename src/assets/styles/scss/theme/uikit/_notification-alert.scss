@@ -15,12 +15,12 @@
 
 
 .alert-primary {
-  color: darken($color-primary, 22%);
+  color: darken(var(--color-primary), 22%);
   background-color: #d5f5f3;
 }
 
 .alert-secondary {
-  background-color: $color-secondary;
+  background-color: var(--color-secondary);
 }
 
 .alert-info {
@@ -29,5 +29,5 @@
 }
 
 .alert-light {
-  background-color: $color-pale-secondary;
+  background-color: var(--color-pale-secondary);
 }
