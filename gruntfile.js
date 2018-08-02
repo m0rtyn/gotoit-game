@@ -10,6 +10,7 @@ module.exports = function(grunt) {
   var customProperties = require('postcss-custom-properties');
   var colorFunctions = require('postcss-color-function');
   var flexbugsFixes= require('postcss-flexbugs-fixes');
+  var postcssReporter = require('postcss-reporter');
 
   // Project configuration.
   grunt.initConfig({
@@ -180,6 +181,7 @@ module.exports = function(grunt) {
           flexbugsFixes,
           customProperties,
           colorFunctions,
+          postcssReporter,
         ]
       },
       style: {
