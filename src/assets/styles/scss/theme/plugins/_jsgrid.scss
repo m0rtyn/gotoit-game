@@ -14,7 +14,7 @@
 
 .jsgrid-grid-header,
 .jsgrid-header-row > .jsgrid-header-cell {
-  background-color: $color-bg-lighter;
+  background-color: var(--color-bg-lighter);
 }
 
 
@@ -24,16 +24,16 @@
 .jsgrid-grid-header,
 .jsgrid-header-row > .jsgrid-header-cell,
 .jsgrid-insert-row > .jsgrid-cell {
-  border-color: $color-divider-light;
+  border-color: var(--color-divider-light);
 }
 
 .jsgrid-alt-row>.jsgrid-cell {
-  background: $color-bg-lightest;
+  background: var(--color-bg-lightest);
 }
 
 .jsgrid-selected-row>.jsgrid-cell {
-  background: $color-bg-new;
-  border-color: $color-divider-light;
+  background: var(--color-bg-new);
+  border-color: var(--color-divider-light);
 }
 
 
@@ -48,17 +48,17 @@
 .jsgrid input,
 .jsgrid select,
 .jsgrid textarea {
-  border: 1px solid $color-divider;
+  border: 1px solid var(--color-divider);
   border-radius: 2px;
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
   padding: 5px 8px;
   font-size: 14px;
   line-height: $line-height-sm;
   transition: 0.2s linear;
 
   &:focus {
-    border-color: lighten($color-primary, 20%);
-    color: $color-text;
+    border-color: color(var(--color-primary) l(+20%));
+    color: var(--color-text);
     outline: none;
   }
 }
@@ -74,7 +74,7 @@
   text-align: center;
 
   a {
-    color: $color-info;
+    color: var(--color-info);
   }
 }
 .jsgrid-pager-current-page {

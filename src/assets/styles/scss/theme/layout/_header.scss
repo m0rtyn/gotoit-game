@@ -10,7 +10,7 @@
   margin-bottom: 30px;
   background-size: cover;
   background-position: center center;
-  border-bottom: 1px solid $color-divider;
+  border-bottom: 1px solid var(--color-divider);
 
   > .container {
     margin-bottom: 0;
@@ -49,7 +49,7 @@
   padding: 12px 30px;
 
   background-color: #fff;
-  border-bottom: 1px solid $color-divider-light;
+  border-bottom: 1px solid var(--color-divider-light);
 
   > * {
     margin-bottom: 0;
@@ -65,7 +65,7 @@
 .header-title {
   font-weight: 100;
   font-family: $font-body;
-  color: $color-alpha-dark-text-active;
+  color: var(--color-alpha-dark-text-active);
 
   strong {
     font-weight: 300;
@@ -104,18 +104,18 @@
   .breadcrumb-item {
 
     &::before {
-      color: $color-alpha-dark-text;
+      color: var(--color-alpha-dark-text);
     }
 
     &.active {
-      color: $color-alpha-dark-text-active;
+      color: var(--color-alpha-dark-text-active);
     }
 
     a {
-      color: $color-alpha-dark-text;
+      color: var(--color-alpha-dark-text);
 
       &:hover {
-        color: $color-alpha-dark-text-active;
+        color: var(--color-alpha-dark-text-active);
       }
     }
   }
@@ -159,13 +159,13 @@
     text-transform: uppercase;
     padding: 0.75rem 1rem 1rem;
     border-bottom: 3px solid transparent;
-    color: $color-alpha-dark-text;
+    color: var(--color-alpha-dark-text);
     background-color: transparent !important;
 
     &.active,
     &:hover {
-      color: $color-alpha-dark-text-active;
-      border-bottom-color: $color-primary;
+      color: var(--color-alpha-dark-text-active);
+      border-bottom-color: var(--color-primary);
     }
 
     + .nav-link {
@@ -192,8 +192,8 @@
   }
 
   .dropdown.show .nav-link {
-    color: $color-alpha-dark-text-active;
-    border-bottom-color: $color-primary;
+    color: var(--color-alpha-dark-text-active);
+    border-bottom-color: var(--color-primary);
   }
 
   .nav-item {
@@ -231,29 +231,29 @@
 // Inverse
 .header-inverse {
 
-  background-color: $sidebar-dark-bg;
+  background-color: var(--sidebar-dark-bg);
 
   .header-info {
 
     .header-title {
-      color: $color-alpha-light-text-active;
+      color: var(--color-alpha-light-text-active);
     }
 
     .breadcrumb-item {
 
       &::before {
-        color: $color-alpha-light-text;
+        color: var(--color-alpha-light-text);
       }
 
       &.active {
-        color: $color-alpha-light-text-active;
+        color: var(--color-alpha-light-text-active);
       }
 
       a {
-        color: $color-alpha-light-text;
+        color: var(--color-alpha-light-text);
 
         &:hover {
-          color: $color-alpha-light-text-active;
+          color: var(--color-alpha-light-text-active);
         }
       }
     }
@@ -262,17 +262,17 @@
 
   .header-action {
     .nav-link {
-      color: $color-alpha-light-text;
+      color: var(--color-alpha-light-text);
 
       &.active,
       &:hover {
-        color: $color-alpha-light-text-active;
-        border-bottom-color: $color-primary;
+        color: var(--color-alpha-light-text-active);
+        border-bottom-color: var(--color-primary);
       }
     }
 
     .dropdown.show .nav-link {
-      color: $color-alpha-light-text-active;
+      color: var(--color-alpha-light-text-active);
     }
   }
 
@@ -280,12 +280,12 @@
     .header-action .nav-link {
       &.active,
       &:hover {
-        border-bottom-color: $color-alpha-light-text;
+        border-bottom-color: var(--color-alpha-light-text);
       }
     }
 
     .header-action .dropdown.show .nav-link {
-      border-bottom-color: $color-alpha-light-text;
+      border-bottom-color: var(--color-alpha-light-text);
     }
   }
 
@@ -293,18 +293,18 @@
   .lookup-circle {
 
     &::before {
-      color: $color-alpha-light-text;
+      color: var(--color-alpha-light-text);
     }
 
     input {
-      background-color: $color-alpha-light-bg;
-      color: $color-alpha-light-text-active;
+      background-color: var(--color-alpha-light-bg);
+      color: var(--color-alpha-light-text-active);
 
       &:focus {
-        background-color: $color-alpha-light-bg-hover;
+        background-color: var(--color-alpha-light-bg-hover);
       }
 
-      @include placeholder-color($color-alpha-light-text);
+      @include placeholder-color(var(--color-alpha-light-text));
     }
   }
 

@@ -9,7 +9,7 @@
   position: relative;
   background-color: #fff;
   position: relative;
-  border: 1px solid $color-divider;
+  border: 1px solid var(--color-divider);
   border-radius: 2px;
   padding: 4px 12px 8px;
   cursor: text;
@@ -18,7 +18,7 @@
 
   &:focus,
   &.focused {
-    background-color: $color-bg-lightest;
+    background-color: var(--color-bg-lightest);
 
     label,
     small,
@@ -29,7 +29,7 @@
   }
 
   &.disabled {
-    background-color: $color-bg-lighter;
+    background-color: var(--color-bg-lighter);
     opacity: .5;
     cursor: not-allowed;
   }
@@ -74,7 +74,7 @@
 
   &.require::after {
     content: '*';
-    color: $color-danger;
+    color: var(--color-danger);
     font-size: 0.875rem;
     font-weight: 500;
     position: absolute;
@@ -192,7 +192,7 @@
 
     &:focus,
     &.focused {
-      background-color: $color-bg-lightest;
+      background-color: var(--color-bg-lightest);
 
       label,
       small,
@@ -214,20 +214,20 @@
   .input-group-input + .input-group-text,
   .input-group-input + .input-group-btn .btn,
   .input-group-btn .btn + .btn {
-    border-left: 1px solid $color-divider;
+    border-left: 1px solid var(--color-divider);
   }
 
   .input-group-append {
-    border-left: 1px solid $color-divider;
+    border-left: 1px solid var(--color-divider);
   }
   .input-group-prepend {
-    border-right: 1px solid $color-divider;
+    border-right: 1px solid var(--color-divider);
   }
 
 
   .form-control:focus {
-    border-color: $color-divider;
-    background-color: $color-bg-lightest;
+    border-color: var(--color-divider);
+    background-color: var(--color-bg-lightest);
     transition: .5s;
   }
 
@@ -247,28 +247,28 @@
 
   &.has-success,
   .has-success {
-    border-color: $color-success;
+    border-color: var(--color-success);
 
     + .form-control-feedback {
-      color: $color-success;
+      color: var(--color-success);
     }
   }
 
   &.has-warning,
   .has-warning {
-    border-color: $color-warning;
+    border-color: var(--color-warning);
 
     + .form-control-feedback {
-      color: $color-warning;
+      color: var(--color-warning);
     }
   }
 
   &.has-danger,
   .has-danger {
-    border-color: $color-danger;
+    border-color: var(--color-danger);
 
     + .form-control-feedback {
-      color: $color-danger;
+      color: var(--color-danger);
     }
   }
 
@@ -287,7 +287,7 @@
   .form-control.is-invalid,
   .was-validated .custom-select:invalid,
   .was-validated .form-control:invalid {
-    border-color: $color-danger !important;
+    border-color: var(--color-danger) !important;
 
     &:focus {
       box-shadow: none !important;
@@ -298,7 +298,7 @@
   .form-control.is-valid,
   .was-validated .custom-select:valid,
   .was-validated .form-control:valid {
-    border-color: $color-success !important;
+    border-color: var(--color-success) !important;
 
     &:focus {
       box-shadow: none !important;

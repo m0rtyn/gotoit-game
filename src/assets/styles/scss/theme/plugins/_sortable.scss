@@ -6,8 +6,8 @@
 }
 
 .sortable-placeholder {
-  background-color: $color-bg-lighter;
-  border: 2px dashed $color-divider;
+  background-color: var(--color-bg-lighter);
+  border: 2px dashed var(--color-divider);
 }
 
 .sortable-dragging {

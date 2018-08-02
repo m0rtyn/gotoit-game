@@ -6,8 +6,8 @@
     &.focus,
     &:focus,
     &:hover {
-      background-color: darken($color, $percentage);
-      border-color: darken($color, $percentage);
+      background-color: color($color b($percentage));
+      border-color: color($color b($percentage));
     }
   }
 

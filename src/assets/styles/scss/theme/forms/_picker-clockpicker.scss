@@ -8,16 +8,16 @@
 }
 
 .clockpicker-button {
-  color: $color-text;
+  color: var(--color-text);
   padding: 3px;
   height: auto;
   font-size: .875rem;
 }
 
 .clockpicker-popover .popover-content {
-  background-color: $color-bg-lighter;
+  background-color: var(--color-bg-lighter);
 }
 
 .clockpicker-plate {
-  border-color: $color-divider;
+  border-color: var(--color-divider);
 }

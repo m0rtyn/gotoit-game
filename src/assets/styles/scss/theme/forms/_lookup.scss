@@ -17,15 +17,15 @@
     top: 52%;
     left: 0;
     transform: translateY(-50%);
-    color: $color-alpha-dark-text-light;
+    color: var(--color-alpha-dark-text-light);
     width: $height;
     text-align: center;
     cursor: text;
   }
 
   input {
-    color: $color-alpha-dark-text-active;
-    border: 1px solid $color-divider;
+    color: var(--color-alpha-dark-text-active);
+    border: 1px solid var(--color-divider);
     border-radius: $height/2;
     height: $height;
     width: 200px;
@@ -39,10 +39,10 @@
     outline: none!important;
     transition: .5s;
 
-    @include placeholder-color($color-alpha-dark-text);
+    @include placeholder-color(var(--color-alpha-dark-text));
 
     &:focus {
-      background-color: $color-alpha-dark-bg;
+      background-color: var(--color-alpha-dark-bg);
     }
 
 
@@ -184,13 +184,13 @@
   }
 
   input {
-    background-color: $color-alpha-dark-bg;
+    background-color: var(--color-alpha-dark-bg);
     border: none;
     width: $height-md;
     padding-right: 0;
 
     &:focus {
-      background-color: $color-alpha-dark-bg-hover;
+      background-color: var(--color-alpha-dark-bg-hover);
       width: 170px;
       padding-right: $height-md/2;
     }
@@ -304,7 +304,7 @@
     font-weight: 100;
     width: 100%;
 
-    @include placeholder-color($color-text-placeholder);
+    @include placeholder-color(var(--color-text-placeholder));
   }
 
   .btn,
@@ -349,7 +349,7 @@
 
   .lookup-form {
 
-    border-bottom: 1px solid $color-divider;
+    border-bottom: 1px solid var(--color-divider);
     margin-bottom: 2rem;
 
     input {
@@ -358,10 +358,10 @@
       background-color: transparent;
       outline: none !important;
       padding: 25px 0;
-      color: $color-text;
+      color: var(--color-text);
       width: 100%;
 
-      @include placeholder-color($color-text-placeholder);
+      @include placeholder-color(var(--color-text-placeholder));
     }
 
   }

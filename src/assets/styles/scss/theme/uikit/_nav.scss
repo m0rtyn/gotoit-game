@@ -16,7 +16,7 @@
 
 .nav-link {
   font-weight: 400;
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
   line-height: $height-sm + 4px;
   padding: 0px 12px;
   white-space: nowrap;
@@ -24,11 +24,11 @@
   &:hover,
   &:focus,
   &.active {
-    color: $color-text;
+    color: var(--color-text);
   }
 
   &.disabled {
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
     opacity: .7;
   }
 
@@ -37,7 +37,7 @@
 .nav-primary .nav-link:not(.disabled) {
   &:hover,
   &:focus {
-    color: $color-primary;
+    color: var(--color-primary);
   }
 }
 
@@ -66,13 +66,13 @@
 // Actions
 //
 .nav-action {
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
   font-size: 14px;
   opacity: 0;
   margin: 0 4px;
 
   &:hover {
-    color: $color-text;
+    color: var(--color-text);
   }
 }
 
@@ -100,8 +100,8 @@
 
   .nav-item.show .nav-link,
   .nav-link.active {
-    color: $color-text;
-    background-color: $color-bg-lighter;
+    color: var(--color-text);
+    background-color: var(--color-bg-lighter);
   }
 
 }
@@ -134,7 +134,7 @@
     }
 
     &.active .nav-link {
-      color: $color-text;
+      color: var(--color-text);
     }
 
     &.disabled {
@@ -143,7 +143,7 @@
       cursor: not-allowed;
 
       .nav-link {
-        color: $color-text-secondary;
+        color: var(--color-text-secondary);
       }
 
       > * {
@@ -174,7 +174,7 @@
 
     &.active,
     &:hover {
-      background-color: $color-bg-lighter;
+      background-color: var(--color-bg-lighter);
     }
 
     .nav-link {
@@ -199,7 +199,7 @@
   &::after {
     content: '•';
     vertical-align: middle;
-    color: $color-text-light;
+    color: var(--color-text-light);
     opacity: 0.4;
     cursor: default;
   }
@@ -209,7 +209,7 @@
   }
 
   &:hover::after {
-    color: $color-text-light;
+    color: var(--color-text-light);
   }
 }
 
@@ -231,7 +231,7 @@
   padding: 0 4px;
   margin-left: 8px;
   margin-right: 8px;
-  border-bottom: 1px dotted lighten($color-text-light, 20%);
+  border-bottom: 1px dotted color(var(--color-text-light) l(+20%));
 }
 
 

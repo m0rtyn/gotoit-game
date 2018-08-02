@@ -5,12 +5,12 @@
 .article {
 
   a {
-    color: $color-info;
+    color: var(--color-info);
   }
 
   .lead {
     font-size: 17px;
-    color: $color-text-light;
+    color: var(--color-text-light);
     opacity: .8;
   }
 

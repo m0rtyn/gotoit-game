@@ -34,7 +34,7 @@
       position: relative;
       padding: 6px 8px;
       margin: 4px 0;
-      background-color: $color-bg-light;
+      background-color: var(--color-bg-light);
       border-radius: 3px;
       //display: inherit; // If set, cause .row images doesn't work properly in firefox
 
@@ -61,7 +61,7 @@
     p {
       float: right;
       clear: right;
-      background-color: $color-info;
+      background-color: var(--color-info);
       color: #fff;
     }
 
@@ -74,7 +74,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0;
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
   opacity: .8;
   font-weight: 400;
 
@@ -82,7 +82,7 @@
   &::after {
     content: '';
     flex: 1;
-    border-top: 1px solid $color-divider;
+    border-top: 1px solid var(--color-divider);
   }
 
   &::before {
