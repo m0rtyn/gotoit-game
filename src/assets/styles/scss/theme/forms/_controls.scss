@@ -24,7 +24,7 @@
 .custom-radio .custom-control-input {
   &:checked ~ .custom-control-label::before,
   &:active:not(:disabled) ~ .custom-control-label::before {
-    background-color: $color-bg-lightest;
+    background-color: var(--color-bg-lightest);
   }
 
   &:focus ~ .custom-control-label::before {
@@ -44,7 +44,7 @@
     }
 
     &::before {
-      background-color: $color-bg-lightest !important;
+      background-color: var(--color-bg-lightest) !important;
     }
   }
 
@@ -55,7 +55,7 @@
 }
 
 .custom-control-label {
-  color: $color-text;
+  color: var(--color-text);
   font-weight: 300;
   padding-left: 0.25rem;
 
@@ -63,8 +63,8 @@
     top: .125rem;
     width: 18px;
     height: 18px;
-    background-color: $color-bg-lightest;
-    border: 1px solid $color-divider;
+    background-color: var(--color-bg-lightest);
+    border: 1px solid var(--color-divider);
     pointer-events: initial;
   }
 
@@ -92,7 +92,7 @@
     display: inline-block;
     width: 8px;
     height: 8px;
-    background-color: $color-primary;
+    background-color: var(--color-primary);
   }
 
 }
@@ -118,7 +118,7 @@
       font-size: 11px;
       font-weight: bold;
       text-align: center;
-      color: $color-primary;
+      color: var(--color-primary);
     }
 
     &:empty::after {
@@ -260,9 +260,9 @@
 .custom-control-light { @include custom-control-colors(#fff); }
 
 
-.custom-control-secondary .custom-control-label::after          { color: $color-text; }
-.custom-control-light .custom-control-label::after              { color: $color-primary; }
-.custom-control-light.custom-radio .custom-control-label::after { background-color: $color-primary; }
+.custom-control-secondary .custom-control-label::after          { color: var(--color-text); }
+.custom-control-light .custom-control-label::after              { color: var(--color-primary); }
+.custom-control-light.custom-radio .custom-control-label::after { background-color: var(--color-primary); }
 
 
 
@@ -273,14 +273,14 @@
 .was-validated .custom-control-input:invalid~.custom-control-indicator,
 .custom-control-input.is-valid~.custom-control-indicator,
 .was-validated .custom-control-input:valid~.custom-control-indicator {
-  background-color: $color-bg-lightest;
+  background-color: var(--color-bg-lightest);
 }
 
 
 .custom-control-input.is-invalid {
 
   ~ .custom-control-description {
-    color: $color-danger;
+    color: var(--color-danger);
   }
 
   ~ .invalid-feedback {
@@ -300,6 +300,6 @@
 .custom-control-input.is-valid {
 
   ~ .custom-control-description {
-    color: $color-success;
+    color: var(--color-success);
   }
 }

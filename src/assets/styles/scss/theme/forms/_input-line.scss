@@ -15,7 +15,7 @@
     background-size: 0 1px, 100% 1px;
     background-repeat: no-repeat;
     background-position: center bottom, center calc(100%);
-    background-image: linear-gradient($color-primary, $color-primary), linear-gradient($color-divider, $color-divider);
+    background-image: linear-gradient(var(--color-primary), var(--color-primary)), linear-gradient(var(--color-divider), var(--color-divider));
     transition: background 0.3s;
 
     &:focus,
@@ -56,7 +56,7 @@
     .input-group-text {
       background-color: #fff;
       border: none;
-      color: $color-text-secondary;
+      color: var(--color-text-secondary);
     }
 
 
@@ -73,7 +73,7 @@
   .custom-file-control {
     border: 0;
     border-radius: 0;
-    border-bottom: 1px solid $color-divider;
+    border-bottom: 1px solid var(--color-divider);
     padding-left: 0;
     padding-right: 0;
 
@@ -94,7 +94,7 @@
       background-size: 0 1px, 100% 1px;
       background-repeat: no-repeat;
       background-position: center bottom, center calc(100%);
-      background-image: linear-gradient($color-primary,$color-primary), linear-gradient($color-divider,$color-divider);
+      background-image: linear-gradient(var(--color-primary),var(--color-primary)), linear-gradient(var(--color-divider),var(--color-divider));
       transition: background 0.3s;
 
       &:focus {
@@ -120,17 +120,17 @@
 //
 .form-type-line .has-success .form-control,
 .form-type-line.has-success .form-control {
-  background-image: linear-gradient($color-success,$color-success), linear-gradient($color-success,$color-success);
+  background-image: linear-gradient(var(--color-success),var(--color-success)), linear-gradient(var(--color-success),var(--color-success));
 }
 
 .form-type-line .has-warning .form-control,
 .form-type-line.has-warning .form-control {
-  background-image: linear-gradient($color-warning,$color-warning), linear-gradient($color-warning,$color-warning);
+  background-image: linear-gradient(var(--color-warning),var(--color-warning)), linear-gradient(var(--color-warning),var(--color-warning));
 }
 
 .form-type-line .has-danger .form-control,
 .form-type-line.has-danger .form-control {
-  background-image: linear-gradient($color-danger,$color-danger), linear-gradient($color-danger,$color-danger);
+  background-image: linear-gradient(var(--color-danger),var(--color-danger)), linear-gradient(var(--color-danger),var(--color-danger));
 }
 
 
@@ -142,7 +142,7 @@
   .form-control.is-invalid,
   .was-validated .custom-select:invalid,
   .was-validated .form-control:invalid {
-    background-image: linear-gradient($color-danger, $color-danger), linear-gradient($color-danger, $color-danger);
+    background-image: linear-gradient(var(--color-danger), var(--color-danger)), linear-gradient(var(--color-danger), var(--color-danger));
     border: none;
 
     &:focus {
@@ -154,7 +154,7 @@
   .form-control.is-valid,
   .was-validated .custom-select:valid,
   .was-validated .form-control:valid {
-    background-image: linear-gradient($color-success, $color-success), linear-gradient($color-success, $color-success);
+    background-image: linear-gradient(var(--color-success), var(--color-success)), linear-gradient(var(--color-success), var(--color-success));
     border: none;
 
     &:focus {

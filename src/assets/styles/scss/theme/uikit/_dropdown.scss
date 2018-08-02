@@ -43,12 +43,12 @@
 
 }
 
-@include dropdown-toggle(primary, $color-primary, 8%);
-@include dropdown-toggle(secondary, $color-secondary, 3%);
-@include dropdown-toggle(success, $color-success, 6%);
-@include dropdown-toggle(info, $color-info, 6%);
-@include dropdown-toggle(warning, $color-warning, 5%);
-@include dropdown-toggle(danger, $color-danger, 5%);
+@include dropdown-toggle(primary, var(--color-primary), 8%);
+@include dropdown-toggle(secondary, var(--color-secondary), 3%);
+@include dropdown-toggle(success, var(--color-success), 6%);
+@include dropdown-toggle(info, var(--color-info), 6%);
+@include dropdown-toggle(warning, var(--color-warning), 5%);
+@include dropdown-toggle(danger, var(--color-danger), 5%);
 
 
 //-----------------------------------------------------------------
@@ -76,10 +76,10 @@
 
 .dropdown-menu,
 .dropdown-grid {
-  color: $color-text;
+  color: var(--color-text);
   border-radius: 2px;
   font-size: 13px;
-  border-color: $color-divider-light;
+  border-color: var(--color-divider-light);
   padding: 0;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.06);
   z-index: $zindex-dropdown;
@@ -92,7 +92,7 @@
   //transition: .3s;
 
   a {
-    color: $color-text;
+    color: var(--color-text);
   }
 
   // Replacing Tether with Popper, has conflict with this idea
@@ -158,7 +158,7 @@
 // Dropdown item
 //
 .dropdown-item {
-  color: lighten($color-text, 8%);
+  color: color(var(--color-text) l(+8%));
   font-weight: 300;
   padding: 4px 12px;
   width: auto;
@@ -167,20 +167,20 @@
 
   &:hover,
   &:focus {
-    background-color: $color-bg-lighter;
+    background-color: var(--color-bg-lighter);
   }
 
   &.active,
   &:active {
-    color: $color-text;
-    background-color: $color-bg-light;
+    color: var(--color-text);
+    background-color: var(--color-bg-light);
   }
 
   &.show,
   &.show:focus,
   &.show:hover {
-    background-color: $color-bg-lighter;
-    color: $color-text;
+    background-color: var(--color-bg-lighter);
+    color: var(--color-text);
   }
 
   &.disabled {
@@ -233,7 +233,7 @@
     border: 1px solid transparent;
 
     &:hover {
-      border-color: $color-divider-light;
+      border-color: var(--color-divider-light);
     }
 
   }
@@ -283,7 +283,7 @@
 //
 .dropdown-header {
   text-transform: uppercase;
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
   font-size: 12px;
   margin-bottom: 0;
   padding: 12px;
@@ -294,17 +294,17 @@
 .dropdown-footer {
   display: flex;
   justify-content: space-between;
-  background-color: $color-bg-lighter;
-  border-top: 1px solid $color-divider;
+  background-color: var(--color-bg-lighter);
+  border-top: 1px solid var(--color-divider);
   padding: 0 0.75rem;
 
   a {
     display: inline-block;
     padding: 10px 8px;
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
 
     &:hover {
-      color: $color-text;
+      color: var(--color-text);
     }
   }
 
@@ -358,7 +358,7 @@
 //
 
 .dropdown-divider {
-  background-color: $color-divider-light;
+  background-color: var(--color-divider-light);
   margin: 4px 0;
 }
 

@@ -58,7 +58,7 @@
 
 
 .tooltip-secondary .tooltip-inner {
-  color: $color-text;
+  color: var(--color-text);
 }
 
 
@@ -83,7 +83,7 @@
   }
 
   .tooltip-inner {
-    color: $color-text;
+    color: var(--color-text);
     background-color: $color;
   }
 

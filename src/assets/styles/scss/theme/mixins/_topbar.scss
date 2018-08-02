@@ -44,16 +44,16 @@
 
     .menu-category {
       display: block;
-      color: $color-text;
+      color: var(--color-text);
 
       &::after {
-        border-top-color: $color-text;
+        border-top-color: var(--color-text);
       }
     }
 
     .menu-divider {
       display: block;
-      background-color: $color-text;
+      background-color: var(--color-text);
     }
 
     .menu-item {
@@ -64,18 +64,18 @@
       }
 
       &:hover > .menu-link {
-        color: $color-text;
+        color: var(--color-text);
       }
 
       &.active > .menu-link {
         color: #fff; // It was commented before
-        background-color: $color-primary;
+        background-color: var(--color-primary);
       }
     }
 
     .menu-link {
       border-top: none;
-      color: $color-text-secondary;
+      color: var(--color-text-secondary);
 
       .arrow::before {
         content: "\e649";
@@ -99,7 +99,7 @@
 
         &:hover > .menu-link,
         &.active > .menu-link {
-          color: $color-text;
+          color: var(--color-text);
           background-color: transparent;
         }
 
@@ -124,7 +124,7 @@
     //
     &.topbar-secondary {
       .menu-item.active > .menu-link {
-        color: $color-alpha-dark-text-active;
+        color: var(--color-alpha-dark-text-active);
       }
     }
 
@@ -151,7 +151,7 @@
     > .menu-link {
       &,
       .icon::before {
-        color: $color-text;
+        color: var(--color-text);
       }
     }
 

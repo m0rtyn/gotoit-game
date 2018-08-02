@@ -7,11 +7,11 @@
 }
 
 .datepicker-dropdown:before {
-  border-bottom-color: $color-divider;
+  border-bottom-color: var(--color-divider);
 }
 
 .datepicker-dropdown.datepicker-orient-top:before {
-  border-top-color: $color-divider;
+  border-top-color: var(--color-divider);
 }
 
 .datepicker > div.datepicker-days {
@@ -25,7 +25,7 @@
   td span {
     border-radius: 0;
     font-size: 12px;
-    color: $color-text;
+    color: var(--color-text);
   }
 
   th {
@@ -36,19 +36,19 @@
 
     &.old,
     &.new {
-      color: lighten($color-text, 43%);
+      color: color(var(--color-text) l(+43%));
     }
 
     &.range {
-      background-color: $color-bg-light;
-      border-color: $color-bg-light;
+      background-color: var(--color-bg-light);
+      border-color: var(--color-bg-light);
 
     }
 
     &.range-start,
     &.range-end {
-      background-color: $color-primary !important;
-      border-color: $color-primary !important;
+      background-color: var(--color-primary) !important;
+      border-color: var(--color-primary) !important;
       text-shadow: none;
       border-radius: 100%;
     }
@@ -95,7 +95,7 @@
 
     &::before {
       font-family: $font-icon-themify;
-      color: $color-text-secondary;
+      color: var(--color-text-secondary);
       font-size: 12px;
       vertical-align: top;
     }
@@ -118,15 +118,15 @@
 .datepicker .datepicker-switch:hover,
 .datepicker .next:hover,
 .datepicker .prev:hover {
-  background-color: $color-bg-lighter;
+  background-color: var(--color-bg-lighter);
 }
 
 .datepicker table tr td.active.active,
 .datepicker table tr td.active.highlighted.active,
 .datepicker table tr td.active.highlighted:active,
 .datepicker table tr td.active:active {
-  background-color: $color-primary;
-  border-color: $color-primary;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
   text-shadow: none;
   border-radius: 100%;
 }
@@ -139,8 +139,8 @@
 .datepicker table tr td span.active:active,
 .datepicker table tr td span.active:hover.active,
 .datepicker table tr td span.active:hover:active {
-  background-color: $color-primary;
-  border-color: $color-primary;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 
 .datepicker table tr td.active.active.focus,
@@ -155,13 +155,13 @@
 .datepicker table tr td.active:active.focus,
 .datepicker table tr td.active:active:focus,
 .datepicker table tr td.active:active:hover {
-  background-color: darken($color-primary, 2%);
-  border-color: darken($color-primary, 2%);
+  background-color: darken(var(--color-primary), 2%);
+  border-color: darken(var(--color-primary), 2%);
 }
 
 
 .datepicker table tr td.today {
-  color: $color-text;
-  background-color: $color-bg-light;
-  border-color: $color-bg-light;
+  color: var(--color-text);
+  background-color: var(--color-bg-light);
+  border-color: var(--color-bg-light);
 }

@@ -4,11 +4,11 @@
   padding: 0;
 
   a {
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
   }
 
   a:hover {
-    color: $color-primary;
+    color: var(--color-primary);
     text-decoration: none;
   }
 
@@ -19,7 +19,7 @@
 }
 
 .breadcrumb-item+.breadcrumb-item::before {
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
 }
 
 

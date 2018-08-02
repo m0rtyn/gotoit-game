@@ -12,7 +12,7 @@
     font-size: 12px;
     font-weight: 400;
     line-height: 25px;
-    color: $color-text-light;
+    color: var(--color-text-light);
   }
 
   sup {
@@ -37,5 +37,5 @@
   vertical-align: text-bottom;
   margin-left: -10px;
   margin-bottom: 14px;
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
 }
