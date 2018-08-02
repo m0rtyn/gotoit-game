@@ -1,48 +1,53 @@
-.achievement {
-  border: 2px solid black;
-  height: 10vw;
-  width: 10vw;
-  position: relative;
-}
+.achievements {
+  .achievement {
+    border: 2px solid black;
+    height: 10vw;
+    width: 10vw;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
 
-.medals-bar {
-  background-color: #fff;
-  position: absolute;
-  bottom: -1vw;
-  left: calc(50% - 3vw);
-}
+  .medals-bar {
+    background-color: #fff;
+    display: flex;
+  }
 
-.medal {
-  height: 2vw;
-  width: 2vw;
-  border-radius: 50%;
-  border: 1px solid black;
-  background-color: #fff;
-}
+  .medal {
+    height: 2vw;
+    width: 2vw;
+    border-radius: 50%;
+    border: 1px solid black;
+    background-color: #fff;
+  }
 
-.bronze-medal-unlocked {
-  background-color: #cd7f32;
-}
+  .bronze-medal-unlocked {
+    background-color: #cd7f32;
+  }
 
-.silver-medal-unlocked {
-  background-color: #c0c0c0;
-}
+  .silver-medal-unlocked {
+    background-color: #c0c0c0;
+  }
 
-.gold-medal-unlocked {
-  background-color: #daa520;
-}
+  .gold-medal-unlocked {
+    background-color: #daa520;
+  }
 
-.bronze-medal-locked {
-  background-color: #cd7f32;
-  opacity: 0.4;
-}
+  .bronze-medal-locked {
+    background-color: #cd7f32;
+    opacity: 0.4;
+  }
 
-.silver-medal-locked {
-  background-color: #c0c0c0;
-  opacity: 0.4;
-}
+  .silver-medal-locked {
+    background-color: #c0c0c0;
+    opacity: 0.4;
+  }
 
-.gold-medal-locked {
-  background-color: #daa520;
-  opacity: 0.4;
+  .gold-medal-locked {
+    background-color: #daa520;
+    opacity: 0.4;
+  }
+
 }
