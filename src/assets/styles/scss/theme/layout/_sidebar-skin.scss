@@ -66,10 +66,10 @@
 //
 .sidebar.sidebar-dark {
 
-  background-color: $sidebar-darker-bg;
+  background-color: var(--sidebar-darker-bg);
 
   .menu-submenu {
-    background-color: $sidebar-darker-submenu-bg;
+    background-color: var(--sidebar-darker-submenu-bg);
   }
 
 }
@@ -152,7 +152,7 @@
   }
 
   .menu-submenu {
-    background-color: $sidebar-light-submenu-bg;
+    background-color: var(--sidebar-light-submenu-bg);
 
     .menu-item:hover .menu-link,
     .menu-item.active .menu-link {

@@ -50,11 +50,11 @@
   }
 
   &.backdrop-light + .backdrop-quickview {
-    background-color: $backdrop-bg-light;
+    background-color: var(--backdrop-bg-light);
   }
 
   &.backdrop-dark + .backdrop-quickview {
-    background-color: $backdrop-bg-dark;
+    background-color: var(--backdrop-bg-dark);
   }
 
   > .nav-tabs {

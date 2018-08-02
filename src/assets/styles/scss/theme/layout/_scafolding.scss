@@ -75,7 +75,7 @@ body .topbar-secondary + main {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: $backdrop-bg-light;
+  background-color: var(--backdrop-bg-light);
 
   cursor: pointer; // Fix for iOS
 

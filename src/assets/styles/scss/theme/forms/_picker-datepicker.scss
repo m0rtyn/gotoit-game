@@ -155,8 +155,8 @@
 .datepicker table tr td.active:active.focus,
 .datepicker table tr td.active:active:focus,
 .datepicker table tr td.active:active:hover {
-  background-color: darken(var(--color-primary), 2%);
-  border-color: darken(var(--color-primary), 2%);
+  background-color: color(var(--color-primary) b(+2%));
+  border-color: color(var(--color-primary) b(+2%));
 }
 
 

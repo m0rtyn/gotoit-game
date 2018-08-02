@@ -1,7 +1,7 @@
 
 .topbar-inverse {
 
-  background-color: $sidebar-dark-bg;
+  background-color: var(--sidebar-dark-bg);
 
   .topbar-title,
   .sidebar-toggler,
@@ -88,7 +88,7 @@
     .dropdown.show .topbar-btn,
     .dropdown:hover .topbar-btn,
     .topbar-btn:hover {
-      background-color: darken($sidebar-dark-bg, 2%);
+      background-color: color(var(--sidebar-dark-bg) b(+2%));
     }
 
     .dropdown-item {
@@ -97,7 +97,7 @@
       &:hover,
       &:focus {
         color: var(--color-alpha-light-text-active);
-        background-color: darken($sidebar-dark-bg, 3%);
+        background-color: color(var(--sidebar-dark-bg) b(+3%));
       }
     }
 

@@ -71,7 +71,7 @@
   }
 
   .active {
-    background-color: darken(var(--color-secondary), 12%);
+    background-color: color(var(--color-secondary) b(+12%));
   }
 }
 

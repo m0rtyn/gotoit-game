@@ -93,7 +93,7 @@
       box-shadow: none;
       padding-top: 1rem;
       padding-bottom: 1rem;
-      background-color: $menu-light-submenu-bg;
+      background-color: var(--menu-light-submenu-bg);
 
       .menu-item {
 
@@ -177,14 +177,14 @@
   .dropdown.show .topbar-btn,
   .dropdown:hover .topbar-btn,
   .topbar-btn:hover {
-    background-color: darken($color, 2%);
+    background-color: color($color b(+2%));
   }
 
   .dropdown-item {
 
     &:hover,
     &:focus {
-      background-color: darken($color, 3%);
+      background-color: color($color b(+3%));
     }
   }
 

@@ -79,7 +79,7 @@ div {
 }
 
 .hovered {
-  box-shadow: inset 0 0 0 size(0.5) rgba(green, 0.5); //TODO: TEMP color
+  box-shadow: inset 0 0 0 size(0.5) rgba(var(--color-success), 0.5);
 }
 
 .worker-avatar {

@@ -87,7 +87,7 @@
 
 
 .noUi-tooltip {
-  background-color: $tooltip-bg;
+  background-color: var(--tooltip-bg);
   font-size: 0.75rem;
   border: none;
   color: #fff;

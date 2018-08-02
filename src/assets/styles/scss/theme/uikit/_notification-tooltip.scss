@@ -3,26 +3,26 @@
 }
 
 .tooltip-inner {
-  background-color: $tooltip-bg;
+  background-color: var(--tooltip-bg);
   border-radius: 2px;
   font-size: 12px;
 }
 
 .tooltip {
   &.bs-tooltip-bottom .arrow::before {
-    border-bottom-color: $tooltip-bg;
+    border-bottom-color: var(--tooltip-bg);
   }
 
   &.bs-tooltip-top .arrow::before {
-    border-top-color: $tooltip-bg;
+    border-top-color: var(--tooltip-bg);
   }
 
   &.bs-tooltip-right .arrow::before {
-    border-right-color: $tooltip-bg
+    border-right-color: var(--tooltip-bg)
   }
 
   &.bs-tooltip-left .arrow::before {
-    border-left-color: $tooltip-bg;
+    border-left-color: var(--tooltip-bg);
   }
 }
 

@@ -23,7 +23,7 @@
 
     &[href]:focus,
     &[href]:hover {
-      background-color: darken($color, 5%);
+      background-color: color($color b(+5%));
     }
   }
 }
@@ -39,7 +39,7 @@
   &[href]:focus,
   &[href]:hover {
     color: var(--color-text-light);
-    background-color: darken(var(--color-bg-light), 3%);
+    background-color: color(var(--color-bg-light) b(+3%));
   }
 }
 
@@ -50,7 +50,7 @@
   &[href]:focus,
   &[href]:hover {
     color: var(--color-text-light);
-    background-color: darken(var(--color-secondary), 3%);
+    background-color: color(var(--color-secondary) b(+3%));
   }
 }
 
