@@ -41,7 +41,7 @@
 // Single dock
 //
 .dock {
-  border: 1px solid $color-divider-light;
+  border: 1px solid var(--color-divider-light);
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
@@ -67,7 +67,7 @@
   }
 
   &.blink .dock-header {
-    background-color: $color-pale-info;
+    background-color: var(--color-pale-info);
   }
 
   &.minimize {
@@ -128,8 +128,8 @@
   align-items: center;
   padding: 6px 12px;
   height: $dock-header-height;
-  background-color: $color-bg-lighter;
-  border-bottom: 1px solid $color-divider-light;
+  background-color: var(--color-bg-lighter);
+  border-bottom: 1px solid var(--color-divider-light);
   transition: .3s;
 }
 
@@ -152,7 +152,7 @@
   flex-direction: row-reverse;
   position: relative;
   z-index: 9;
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
 
   @include gap-items(8px);
 

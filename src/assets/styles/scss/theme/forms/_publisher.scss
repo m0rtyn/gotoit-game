@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   padding: 12px 20px;
-  background-color: $color-bg-lighter;
+  background-color: var(--color-bg-lighter);
 
   > * {
     margin: 0 8px;
@@ -47,14 +47,14 @@
 .publisher-btn {
   background-color: transparent;
   border: none;
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
   font-size: 16px;
   cursor: pointer;
   overflow: -moz-hidden-unscrollable;
   transition: .2s linear;
 
   &:hover {
-    color: $color-text;
+    color: var(--color-text);
   }
 }
 

@@ -10,16 +10,16 @@
 }
 
 .table thead th {
-  border-bottom: 1px solid $color-divider;
+  border-bottom: 1px solid var(--color-divider);
 }
 
 .table tfoot th {
-  border-top: 1px solid $color-divider;
+  border-top: 1px solid var(--color-divider);
   border-bottom: 0;
 }
 
 .thead-default th {
-  background-color: $color-bg-lightest;
+  background-color: var(--color-bg-lightest);
 }
 
 .table-hover tbody tr {
@@ -27,11 +27,11 @@
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-  background-color: $color-bg-lightest;
+  background-color: var(--color-bg-lightest);
 }
 
 .table-hover tbody tr:hover {
-  background-color: $color-bg-lighter;
+  background-color: var(--color-bg-lighter);
 }
 
 // Sizes
@@ -59,11 +59,11 @@
 
   &.table-striped tbody tr:nth-of-type(odd),
   &.table-hover tbody tr:hover {
-    background-color: $color-bg-lighter;
+    background-color: var(--color-bg-lighter);
   }
 
   tbody tr {
-    background-color: $color-bg-lightest;
+    background-color: var(--color-bg-lightest);
     transition: .5s;
 
     > *:first-child {
@@ -89,7 +89,7 @@
 
 // Background colors
 //
-.table-active  { @include table-colors($color-bg-light); }
+.table-active  { @include table-colors(var(--color-bg-light)); }
 
 
 // Bordery
@@ -154,7 +154,7 @@
   .table-action {
     padding: 0 4px;
     font-size: 1rem;
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
   }
 
   .table-action:first-child {
@@ -173,11 +173,11 @@
 
 
 .table tr.active {
-  background-color: $color-bg-lighter;
+  background-color: var(--color-bg-lighter);
   transition: background-color .3s;
 }
 
 
 .table-bordered {
-  border: 1px solid $color-divider !important;
+  border: 1px solid var(--color-divider) !important;
 }

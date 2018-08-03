@@ -97,7 +97,7 @@
 
 
 [data-overlay-primary]::before {
-  background: $color-primary;
+  background: var(--color-primary);
 }
 
 

@@ -1,6 +1,6 @@
 
 .minicolors-panel {
-  border-color: $color-divider;
+  border-color: var(--color-divider);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.09);
 }
 
@@ -18,7 +18,7 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  border-color: $color-divider;
+  border-color: var(--color-divider);
 }
 
 .minicolors-swatches .minicolors-swatch {

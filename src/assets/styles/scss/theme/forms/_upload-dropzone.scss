@@ -4,12 +4,12 @@
 //
 .dropzone {
   padding: 10px;
-  border: 2px dashed $color-divider;
-  background-color: $color-bg-lightest;
+  border: 2px dashed var(--color-divider);
+  background-color: var(--color-bg-lightest);
   transition: .5s;
 
   &.dz-drag-hover {
-    border: 2px dashed $color-info;
+    border: 2px dashed var(--color-info);
   }
 
   .dz-preview {
@@ -22,7 +22,7 @@
 }
 
 .dz-message {
-  color: $color-text-disable;
+  color: var(--color-text-disable);
   font-size: 1rem;
 
   span::before {

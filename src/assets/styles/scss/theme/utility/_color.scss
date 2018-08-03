@@ -14,12 +14,12 @@
 }
 
 .bg-white         { background-color: #fff !important; }
-.bg-inverse       { background-color: $color-dark !important; color: #fff; }
+.bg-inverse       { background-color: var(--color-dark) !important; color: #fff; }
 .bg-transparent   { background-color: transparent !important; }
-.bg-secondary     { color: $color-text; }
-.bg-lightest      { background-color: $color-bg-lightest !important; }
-.bg-lighter       { background-color: $color-bg-lighter !important; }
-.bg-light         { background-color: $color-bg-light !important; }
+.bg-secondary     { color: var(--color-text); }
+.bg-lightest      { background-color: var(--color-bg-lightest) !important; }
+.bg-lighter       { background-color: var(--color-bg-lighter) !important; }
+.bg-light         { background-color: var(--color-bg-light) !important; }
 
 
 // Pale background colors
@@ -47,22 +47,22 @@
   }
 }
 
-.text-default     {color: $color-text !important;}
-.text-muted       {color: $color-gray !important;}
-.text-light       {color: $color-text-light !important;}
-.text-lighter     {color: $color-text-disable !important;}
-.text-fade        {color: rgba($color-text, .7) !important;}
-.text-fader       {color: rgba($color-text, .5) !important;}
-.text-fadest      {color: rgba($color-text, .4) !important;}
+.text-default     {color: var(--color-text) !important;}
+.text-muted       {color: var(--color-gray) !important;}
+.text-light       {color: var(--color-text-light) !important;}
+.text-lighter     {color: var(--color-text-disable) !important;}
+.text-fade        {color: rgba(var(--color-text), .7) !important;}
+.text-fader       {color: rgba(var(--color-text), .5) !important;}
+.text-fadest      {color: rgba(var(--color-text), .4) !important;}
 .text-transparent {color: transparent !important;}
 
 // Link hover colors
-a.text-primary    { @include link-colors-important($color-primary); }
-a.text-secondary  { @include link-colors-important($color-secondary); }
-a.text-info       { @include link-colors-important($color-info); }
-a.text-success    { @include link-colors-important($color-success); }
-a.text-warning    { @include link-colors-important($color-warning); }
-a.text-danger     { @include link-colors-important($color-danger); }
+a.text-primary    { @include link-colors-important(var(--color-primary)); }
+a.text-secondary  { @include link-colors-important(var(--color-secondary)); }
+a.text-info       { @include link-colors-important(var(--color-info)); }
+a.text-success    { @include link-colors-important(var(--color-success)); }
+a.text-warning    { @include link-colors-important(var(--color-warning)); }
+a.text-danger     { @include link-colors-important(var(--color-danger)); }
 
 
 // Hover color on hover
@@ -80,10 +80,10 @@ a.text-danger     { @include link-colors-important($color-danger); }
 }
 
 .hover-white       { @include link-colors-important(#fff); }
-.hover-muted       { @include link-colors-important($color-gray); }
-.hover-light       { @include link-colors-important($color-text-light); }
-.hover-lighter     { @include link-colors-important($color-text-disable); }
-.hover-fade        { @include link-colors-important($color-alpha-dark-text-light); }
+.hover-muted       { @include link-colors-important(var(--color-gray)); }
+.hover-light       { @include link-colors-important(var(--color-text-light)); }
+.hover-lighter     { @include link-colors-important(var(--color-text-disable)); }
+.hover-fade        { @include link-colors-important(var(--color-alpha-dark-text-light)); }
 .hover-transparent { @include link-colors-important(transparent); }
 
 

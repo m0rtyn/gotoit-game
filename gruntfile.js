@@ -7,7 +7,10 @@ module.exports = function(grunt) {
       'Chrome >= 45'
     ]
   });
-
+  var customProperties = require('postcss-custom-properties');
+  var colorFunctions = require('postcss-color-function');
+  var flexbugsFixes= require('postcss-flexbugs-fixes');
+  var postcssReporter = require('postcss-reporter');
 
   // Project configuration.
   grunt.initConfig({
@@ -175,7 +178,10 @@ module.exports = function(grunt) {
       options: {
         processors: [
           autoprefixer,
-          require('postcss-flexbugs-fixes')
+          flexbugsFixes,
+          customProperties,
+          colorFunctions,
+          postcssReporter,
         ]
       },
       style: {

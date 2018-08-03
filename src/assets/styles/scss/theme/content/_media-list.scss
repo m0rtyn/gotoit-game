@@ -38,7 +38,7 @@ $media-excludes: ':not(.media-list-header):not(.media-list-footer)';
 
   > .media#{$media-excludes}:hover,
   .media-list-body > .media:hover {
-    background-color: $color-bg-lighter;
+    background-color: var(--color-bg-lighter);
   }
 
 }
@@ -47,7 +47,7 @@ $media-excludes: ':not(.media-list-header):not(.media-list-footer)';
 
   > .media#{$media-excludes},
   .media-list-body > .media {
-    border-bottom: 1px solid $color-alpha-dark-divider;
+    border-bottom: 1px solid var(--color-alpha-dark-divider);
 
     &:last-child {
       border-bottom: none;
@@ -57,13 +57,13 @@ $media-excludes: ':not(.media-list-header):not(.media-list-footer)';
 }
 
 .media-list-bordered {
-  border: 1px solid $color-divider-light;
+  border: 1px solid var(--color-divider-light);
 }
 
 .media-list-striped {
 
   .media#{$media-excludes}:nth-child(even) {
-    background-color: $color-bg-lighter;
+    background-color: var(--color-bg-lighter);
   }
 
 }
@@ -93,13 +93,13 @@ $media-excludes: ':not(.media-list-header):not(.media-list-footer)';
 // Header and footer
 //
 .media-list-header {
-  border-bottom: 1px solid $color-divider;
-  background-color: $color-bg-lightest;
+  border-bottom: 1px solid var(--color-divider);
+  background-color: var(--color-bg-lightest);
 }
 
 .media-list-footer {
-  border-top: 1px solid $color-divider;
-  background-color: $color-bg-lightest;
+  border-top: 1px solid var(--color-divider);
+  background-color: var(--color-bg-lightest);
 }
 
 
@@ -135,14 +135,14 @@ $media-excludes: ':not(.media-list-header):not(.media-list-footer)';
 
 .media-grid-bordered {
   .media {
-    border: 1px solid $color-divider;
+    border: 1px solid var(--color-divider);
   }
 }
 
 .media-grid-hover {
 
   .media:hover {
-    background-color: $color-bg-lighter;
+    background-color: var(--color-bg-lighter);
   }
 
 }

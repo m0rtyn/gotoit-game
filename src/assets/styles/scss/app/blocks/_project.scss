@@ -44,10 +44,10 @@
   .team-remove-worker {
     padding: 0 size(0.5);
     margin: 0 size(0.5);
-    color: $primary-color;
+    color: var(--color-primary);
 
     &:hover {
-      background-color: $danger-color;
+      background-color: var(--color-danger);
       color: white;
     }
   }

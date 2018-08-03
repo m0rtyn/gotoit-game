@@ -1,6 +1,6 @@
 
 .nav-tabs {
-  border-bottom-color: $color-divider;
+  border-bottom-color: var(--color-divider);
   margin-bottom: 1rem;
 
   .nav-item {
@@ -8,7 +8,7 @@
     &.show .nav-link,
     &.show .nav-link:focus,
     &.show .nav-link:hover {
-      color: $color-text;
+      color: var(--color-text);
     }
   }
 
@@ -17,7 +17,7 @@
     border: none;
     font-size: 13px;
     text-align: center;
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
     border-bottom: 2px solid transparent;
     padding: 10px 16px;
     border-radius: 0;
@@ -31,8 +31,8 @@
     &.active,
     &.active:focus,
     &.active:hover {
-      color: $color-text;
-      border-color: $color-primary;
+      color: var(--color-text);
+      border-color: var(--color-primary);
     }
 
     .icon {
@@ -77,7 +77,7 @@
 //
 .nav-tabs-light-mode {
   border-bottom: none;
-  background-color: $color-bg-lighter;
+  background-color: var(--color-bg-lighter);
 
   .nav-link {
     border-bottom: none;
@@ -99,12 +99,12 @@
     &.active,
     &.active:focus,
     &.active:hover {
-      background-color: $color-bg-lighter;
+      background-color: var(--color-bg-lighter);
     }
   }
 
   + .tab-content {
-    background-color: $color-bg-lighter;
+    background-color: var(--color-bg-lighter);
     padding: 20px 16px;
   }
 }
@@ -139,7 +139,7 @@
 
 .nav-tabs-left {
   .nav-tabs {
-    border-right: 1px solid $color-divider;
+    border-right: 1px solid var(--color-divider);
 
     .nav-link {
       border-right: 2px solid transparent;
@@ -159,7 +159,7 @@
 .nav-tabs-right {
   .nav-tabs {
     order: 2;
-    border-left: 1px solid $color-divider;
+    border-left: 1px solid var(--color-divider);
 
     .nav-link {
       border-left: 2px solid transparent;

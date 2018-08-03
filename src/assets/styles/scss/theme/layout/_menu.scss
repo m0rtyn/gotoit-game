@@ -112,7 +112,7 @@
 // Submenu - <ul>
 //
 .menu-submenu {
-  background-color: $sidebar-dark-submenu-bg;
+  background-color: var(--sidebar-dark-submenu-bg);
   padding-top: 1rem;
   padding-bottom: 1rem;
   padding-left: 0;

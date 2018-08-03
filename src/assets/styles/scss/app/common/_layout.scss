@@ -11,7 +11,7 @@ div {
     width: size(0.5);
     border-radius: size(1);
   }
- 
+
   &::-webkit-scrollbar-button {
     background-color: white;
   }
@@ -79,7 +79,7 @@ div {
 }
 
 .hovered {
-  box-shadow: inset 0 0 0 size(0.5) rgba($success-color, 0.5);
+  box-shadow: inset 0 0 0 size(0.5) rgba(var(--color-success), 0.5);
 }
 
 .worker-avatar {

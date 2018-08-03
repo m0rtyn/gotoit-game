@@ -3,7 +3,7 @@
   padding: 14px 24px;
   line-height: 20px;
   color: #fff;
-  background: $toaster-bg;
+  background: var(--toaster-bg);
   display: flex;
   justify-content: space-between;
   position: fixed;

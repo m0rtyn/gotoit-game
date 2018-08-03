@@ -6,13 +6,13 @@
 
 .ql-toolbar.ql-snow {
   font-family: $font-body;
-  border-color: $color-divider;
-  border-bottom-color: $color-divider-light;
-  background-color: $color-bg-lightest;
+  border-color: var(--color-divider);
+  border-bottom-color: var(--color-divider-light);
+  background-color: var(--color-bg-lightest);
 }
 
 .ql-container.ql-snow {
-  border-color: $color-divider;
+  border-color: var(--color-divider);
 }
 
 .ql-toolbar.ql-snow .ql-picker-label {
@@ -20,7 +20,7 @@
 }
 
 .ql-editor.ql-blank::before {
-  color: $color-text-placeholder;
+  color: var(--color-text-placeholder);
   font-style: normal;
 }
 
@@ -42,6 +42,6 @@
 
   .ql-toolbar.ql-snow {
     border: none;
-    border-bottom: 1px solid $color-divider-light;
+    border-bottom: 1px solid var(--color-divider-light);
   }
 }

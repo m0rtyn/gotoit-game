@@ -2,7 +2,7 @@
 // Common style
 //
 .teaser {
-  background: $color-dark;
+  background: var(--color-dark);
   position: relative;
   overflow: hidden;
   text-align: center;
@@ -94,7 +94,7 @@
     left: 0;
     width: 100%;
     height: 10px;
-    background: $color-primary;
+    background: var(--color-primary);
     content: '';
     transform: translate3d(0,10px,0);
   }
@@ -153,19 +153,19 @@
   }
 
   h3 {
-    color: $color-title;
+    color: var(--color-title);
     float: left;
   }
 
   .icon-links a {
     float: right;
-    color: $color-text;
+    color: var(--color-text);
     font-size: 1.4em;
   }
 
   &:hover .icon-links a:hover,
   &:hover .icon-links a:focus {
-    color: $color-title;
+    color: var(--color-title);
   }
 
   p.description {
@@ -531,13 +531,13 @@
 
   a {
     margin: 0 10px;
-    color: $color-title;
+    color: var(--color-title);
     font-size: 170%;
   }
 
   a:hover,
   a:focus {
-    color: $color-primary;
+    color: var(--color-primary);
   }
 
   p a i {
@@ -816,7 +816,7 @@
 
   p a {
     margin: 0 0.5em;
-    color: $color-title;
+    color: var(--color-title);
     vertical-align: middle;
 
     &:hover,
@@ -886,7 +886,7 @@
     margin: 0 0 0.25em;
     padding: 0.4em 1em;
     background: rgba(255,255,255,0.9);
-    color: $color-text;
+    color: var(--color-text);
     text-transform: none;
     font-weight: 500;
     font-size: 75%;

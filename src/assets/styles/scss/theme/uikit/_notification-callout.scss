@@ -8,19 +8,19 @@
 }
 
 .callout-success {
-  @include callout-variation($color-success);
+  @include callout-variation(var(--color-success));
 }
 
 .callout-info {
-  @include callout-variation($color-info);
+  @include callout-variation(var(--color-info));
 }
 
 .callout-warning {
-  @include callout-variation($color-warning);
+  @include callout-variation(var(--color-warning));
 }
 
 .callout-danger {
-  @include callout-variation($color-danger);
+  @include callout-variation(var(--color-danger));
 }
 
 // Media queries
