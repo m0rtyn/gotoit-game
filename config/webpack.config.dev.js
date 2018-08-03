@@ -14,7 +14,12 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const CircularDependencyPlugin = require('circular-dependency-plugin');
 
+const smp = new SpeedMeasurePlugin({
+    outputTarget: 'smp.js'
+});
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
 const publicPath = '/';
@@ -31,10 +36,17 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
+const getCacheLoader = () => ({
+    loader: require.resolve('cache-loader'),
+    options: {
+        cacheDirectory: path.join(paths.appNodeModules, 'cache-loader')
+    }
+});
 // common function to get style loaders
 const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
   const loaders = [
     'css-hot-loader',
+      // getCacheLoader(),
     MiniCssExtractPlugin.loader,
     {
       loader: require.resolve('css-loader'),
@@ -71,8 +83,9 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
 // The production configuration is different and lives in a separate file.
-module.exports = {
+ module.exports = {
   mode: 'development',
+  cache:true,
   // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
   // See the discussion in https://github.com/facebook/create-react-app/issues/343.
   devtool: 'cheap-module-source-map',
@@ -101,7 +114,7 @@ module.exports = {
   ],
   output: {
     // Add /* filename */ comments to generated require()s in the output.
-    pathinfo: true,
+    pathinfo: false,
     // This does not produce a real file. It's just the virtual path that is
     // served by WebpackDevServer in development. This is the JS bundle
     // containing code from all our entry points, and the Webpack runtime.
@@ -118,13 +131,16 @@ module.exports = {
     // Automatically split vendor and commons
     // https://twitter.com/wSokra/status/969633336732905474
     // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
-    splitChunks: {
-      chunks: 'all',
-      name: 'vendors',
-    },
+    // splitChunks: {
+    //   chunks: 'all',
+    //   name: 'vendors',
+    // },
     // Keep the runtime chunk seperated to enable long term caching
     // https://twitter.com/wSokra/status/969679223278505985
+    splitChunks: false,
     runtimeChunk: true,
+    removeAvailableModules: false,
+    removeEmptyChunks: false
   },
   resolve: {
     // This allows you to set a fallback for where Webpack should look for modules.
@@ -142,20 +158,22 @@ module.exports = {
     // `web` extension prefixes have been added for better support
     // for React Native Web.
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
-    alias: {
-      
-      // Support React Native Web
-      // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
-      'react-native': 'react-native-web',
-    },
+    // alias: {
+    //
+    //   // Support React Native Web
+    //   // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
+    //   'react-native': 'react-native-web',
+    // },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).
       // This often causes confusion because we only process files within src/ with babel.
       // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
       // please link the files into your node_modules/ and let module-resolution kick in.
       // Make sure your source files are compiled, as they will not be processed in any way.
-      new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
+      // new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
     ],
+    unsafeCache: true,
+    cacheWithContext: true
   },
   module: {
     strictExportPresence: true,
@@ -240,31 +258,31 @@ module.exports = {
           },
           // Process any JS outside of the app with Babel.
           // Unlike the application JS, we only compile the standard ES features.
-          {
-            test: /\.js$/,
-            use: [
-              // This loader parallelizes code compilation, it is optional but
-              // improves compile time on larger projects
-              {
-                loader: require.resolve('thread-loader'),
-                options: {
-                  poolTimeout: Infinity // keep workers alive for more effective watch mode
-                },
-              },
-              {
-                loader: require.resolve('babel-loader'),
-                options: {
-                  babelrc: false,
-                  compact: false,
-                  presets: [
-                    require.resolve('babel-preset-react-app/dependencies'),
-                  ],
-                  cacheDirectory: true,
-                  highlightCode: true,
-                },
-              },
-            ],
-          },
+          // {
+          //   test: /\.js$/,
+          //   use: [
+          //     // This loader parallelizes code compilation, it is optional but
+          //     // improves compile time on larger projects
+          //     {
+          //       loader: require.resolve('thread-loader'),
+          //       options: {
+          //         poolTimeout: Infinity // keep workers alive for more effective watch mode
+          //       },
+          //     },
+          //     {
+          //       loader: require.resolve('babel-loader'),
+          //       options: {
+          //         babelrc: false,
+          //         compact: false,
+          //         presets: [
+          //           require.resolve('babel-preset-react-app/dependencies'),
+          //         ],
+          //         cacheDirectory: true,
+          //         highlightCode: true,
+          //       },
+          //     },
+          //   ],
+          // },
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.
           // "style" loader turns CSS into JS modules that inject <style> tags.
@@ -276,7 +294,7 @@ module.exports = {
             exclude: cssModuleRegex,
             use: getStyleLoaders({
               importLoaders: 1,
-              sourceMap:true
+              sourceMap: true
             }),
           },
           // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
@@ -284,7 +302,7 @@ module.exports = {
           {
             test: cssModuleRegex,
             use: getStyleLoaders({
-              importLoaders: 4,
+              importLoaders: 1,
               modules: true,
               sourceMap:true,
               getLocalIdent: getCSSModuleLocalIdent,
@@ -299,15 +317,13 @@ module.exports = {
             test: sassRegex,
             exclude: sassModuleRegex,
             use: getStyleLoaders({
-                importLoaders: 4,
+                importLoaders: 1,
                 sourceMap: true,
             },  'sass-loader', {
                 outputStyle: 'expanded',
                 sourceMap: true,
-                sourceMapContents: true,
                 includePaths: [
                     paths.scssSrc,
-                    paths.scssSrc
                 ]}),
           },
           // Adds support for CSS Modules, but using SASS
@@ -316,21 +332,31 @@ module.exports = {
             test: sassModuleRegex,
             use: getStyleLoaders(
               {
-                importLoaders: 4,
+                importLoaders: 1,
                 modules: true,
                 sourceMap:true,
                 getLocalIdent: getCSSModuleLocalIdent,
               },
-              'sass-loader', { outputStyle: 'expanded',
+              'sass-loader', {
+                    outputStyle: 'expanded',
                     sourceMap: true,
                     sourceMapContents: true,
+                    includePaths: [
+                        paths.scssSrc,
+                    ]
                 }
             ),
           },
           // The GraphQL loader preprocesses GraphQL queries in .graphql files.
-          {
-            test: /\.(graphql)$/,
-            loader: 'graphql-tag/loader',
+            {
+                test: /\.(graphql|gql)$/,
+                exclude: /node_modules/,
+                use: [
+                    getCacheLoader(),
+                    {
+                        loader: 'graphql-tag/loader'
+                    }
+                ]
           },
           // "file" loader makes sure those assets get served by WebpackDevServer.
           // When you `import` an asset, you get its (virtual) filename.
@@ -342,11 +368,16 @@ module.exports = {
             // its runtime that would otherwise be processed through "file" loader.
             // Also exclude `html` and `json` extensions so they get processed
             // by webpacks internal loaders.
-            exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
-            loader: require.resolve('file-loader'),
-            options: {
-              name: 'static/media/[name].[hash:8].[ext]',
-            },
+              exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/, /\.flow$/],
+              use: [
+                  getCacheLoader(),
+                  {
+                      loader: require.resolve('file-loader'),
+                      options: {
+                          name: 'static/media/[name].[hash:8].[ext]'
+                      }
+                  }
+              ]
           },
         ],
       },
@@ -356,15 +387,23 @@ module.exports = {
   },
   plugins: [
     // Generates an `index.html` file with the <script> injected.
+    //   new InterpolateHtmlPlugin(env.raw),
+    // new webpack.debug.ProfilingPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
       template: paths.appHtml,
     }),
+    // new CircularDependencyPlugin({
+    //     // exclude detection of files based on a RegExp
+    //     exclude: /a\.js|node_modules/,
+    //     // add errors to webpack instead of warnings
+    //     // failOnError: true
+    // }),
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     // In development, this will be an empty string.
-    new InterpolateHtmlPlugin(env.raw),
+    // new InterpolateHtmlPlugin(env.raw),
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'development') { ... }. See `./env.js`.
     new webpack.DefinePlugin(env.stringified),
@@ -373,7 +412,7 @@ module.exports = {
     // Watcher doesn't work well if you mistype casing in a path so we use
     // a plugin that prints an error when you attempt to do this.
     // See https://github.com/facebook/create-react-app/issues/240
-    new CaseSensitivePathsPlugin(),
+    // new CaseSensitivePathsPlugin(),
     // If you require a missing module and then `npm install` it, you still have
     // to restart the development server for Webpack to discover it. This plugin
     // makes the discovery automatic so you don't have to restart.
@@ -389,6 +428,9 @@ module.exports = {
         filename: '[name].css',
         chunkFilename: '[name].css'
     }),
+    // new webpack.debug.ProfilingPlugin({
+    //     outputPath: 'profileEvents.json'
+    // }),
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without
     // having to parse `index.html`.
@@ -410,4 +452,4 @@ module.exports = {
   // Turn off performance processing because we utilize
   // our own hints via the FileSizeReporter
   performance: false,
-};
+}

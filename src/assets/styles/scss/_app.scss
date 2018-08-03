@@ -1,26 +1,26 @@
-@import 'mixins.scss';
-@import 'variables.scss';
+@import '_mixins.scss';
+@import '_variables.scss';
 
 
 //====COMMON====================================//
-@import 'app/common/layout.scss';
-@import 'app/common/buffer.scss';
+@import 'app/common/_layout.scss';
+@import 'app/common/_buffer.scss';
 
 
 //====BLOCKS====================================//
 //large blocks
-@import 'app/blocks/activity-column.scss';
-@import 'app/blocks/background.scss';
-@import 'app/blocks/achievements.scss';
-@import 'app/blocks/header.scss';
-@import 'app/blocks/timeline.scss';
+@import 'app/blocks/_activity-column.scss';
+@import 'app/blocks/_background.scss';
+@import 'app/blocks/_achievements.scss';
+@import 'app/blocks/_header.scss';
+@import 'app/blocks/_timeline.scss';
 //medium blocks
-@import 'app/blocks/worker.scss';
-@import 'app/blocks/project.scss';
-@import 'app/blocks/project-find.scss';
-@import 'app/blocks/creation.scss';
-@import 'app/blocks/hire-workers.scss';
-@import 'app/blocks/mail.scss';
+@import 'app/blocks/_worker.scss';
+@import 'app/blocks/_project.scss';
+@import 'app/blocks/_project-find.scss';
+@import 'app/blocks/_creation.scss';
+@import 'app/blocks/_hire-workers.scss';
+@import 'app/blocks/_mail.scss';
 //small blocks
-@import 'app/blocks/checkbox.scss';
-@import 'app/blocks/stats-bar.scss';
+@import 'app/blocks/_checkbox.scss';
+@import 'app/blocks/_stats-bar.scss';
