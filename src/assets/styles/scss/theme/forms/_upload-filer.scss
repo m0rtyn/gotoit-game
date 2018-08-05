@@ -11,10 +11,10 @@
     width: 100%;
     height: $height-md;
     background: #fff;
-    border-color: $color-divider;
+    border-color: var(--color-divider);
     font-size: 14px;
     font-family: $font-body;
-    color: $color-text;
+    color: var(--color-text);
     border-radius: 3px;
     box-shadow: none;
   }
@@ -25,7 +25,7 @@
     padding: 0 12px;
     line-height: $height-md;
     font-size: 12px;
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
   }
 
   .jFiler-input-button {
@@ -33,28 +33,28 @@
     font-size: 13px;
     line-height: $height-md;
     padding: 0 12px;
-    border-left-color: $color-divider;
-    color: $color-text;
-    background-color: $color-bg-lightest;
+    border-left-color: var(--color-divider);
+    color: var(--color-text);
+    background-color: var(--color-bg-lightest);
     background-image: none;
   }
 
   .jFiler-input-button:hover {
     box-shadow: none;
-    background-color: $color-bg-lighter;
+    background-color: var(--color-bg-lighter);
   }
 
   .jFiler-input-button:active {
     background-image: none;
-    background-color: $color-bg-lighter;
+    background-color: var(--color-bg-lighter);
   }
 
 
   // Items
   //
   .jFiler-item {
-    background: $color-bg-lighter;
-    color: $color-text;
+    background: var(--color-bg-lighter);
+    color: var(--color-text);
 
     .jFiler-item-inner {
       display: flex;
@@ -75,7 +75,7 @@
 
     .jFiler-item-assets a {
       border: none;
-      color: $color-text-secondary;
+      color: var(--color-text-secondary);
       font-size: 16px;
     }
   }
@@ -86,15 +86,15 @@
 // Grid items
 //
 .jFiler-items-grid .jFiler-item .jFiler-item-container {
-  border-color: $color-divider;
+  border-color: var(--color-divider);
   border-radius: 2px;
 
   .jFiler-item-thumb {
-    border-color: $color-divider-light;
+    border-color: var(--color-divider-light);
   }
 
   .jFiler-item-assets {
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
   }
 }
 
@@ -105,33 +105,33 @@
   width: 100%;
   margin: 0 0 25px;
   padding: 40px 25px;
-  background-color: $color-bg-lightest;
-  color: $color-text;
-  border-color: $color-divider;
+  background-color: var(--color-bg-lightest);
+  color: var(--color-text);
+  border-color: var(--color-divider);
 
   .jFiler-input-icon {
     margin: 10px 0;
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
   }
 
   .jFiler-input-text {
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
 
     h3 {
-      color: $color-text-secondary;
+      color: var(--color-text-secondary);
       font-size: 16px;
     }
   }
 }
 
 .jFiler-input-choose-btn.blue {
-  background-color: $color-secondary;
+  background-color: var(--color-secondary);
   height: $height-md;
   line-height: $height-md + 1px;
   padding: 0 16px;
   border: none;
   border-radius: 2px;
-  color: $color-text;
+  color: var(--color-text);
   box-shadow: none;
   font-size: 0.875rem;
   font-weight: 400;
@@ -139,7 +139,7 @@
 
   &:hover,
   &:active {
-    background-color: lighten($color-secondary, 3%);
+    background-color: color(var(--color-secondary) l(+3%));
   }
 }
 
@@ -147,5 +147,5 @@
 //
 .jFiler-jProgressBar {
   height: 5px;
-  background: $color-bg-lightest;
+  background: var(--color-bg-lightest);
 }

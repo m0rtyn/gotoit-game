@@ -11,13 +11,21 @@ class ActivityToolbar extends Component {
                 if (!letter.isRead) count++;
             });
             return count;
-        })()
+        })();
         return (
             <ul className="nav nav-tabs nav-tabs-light-mode activity-toolbar">
                 <li className="nav-item">
-                    {data.projects.length > 0 ? 
-                        <a 
-                        className="nav-link" 
+                    <a
+                    className="nav-link"
+                    onClick={() => { data.helpers.changeContent('PublicRelations'); }}
+                    >
+                        Public Relations
+                    </a>
+                </li>
+                <li className="nav-item">
+                    {data.projects.length > 0 ?
+                        <a
+                        className="nav-link"
                         onClick={() => { data.helpers.changeContent('StartMeeting'); }}
                         >
                             Start Meeting

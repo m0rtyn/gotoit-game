@@ -3,11 +3,11 @@
   font-size: 14px;
   padding: 5px 16px;
   line-height: inherit;
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
   letter-spacing: 1px;
   border-radius: 2px;
   background-color: #fff;
-  border-color: $color-divider;
+  border-color: var(--color-divider);
   outline: none !important;
   transition: 0.15s linear;
 
@@ -95,46 +95,46 @@
 //-----------------------------------------------------------------
 // Button variations
 //
-.btn-primary   { @include btn-colors($color-primary, 8%); }
-.btn-success   { @include btn-colors($color-success, 3%); }
-.btn-info      { @include btn-colors($color-info, 6%); }
-.btn-warning   { @include btn-colors($color-warning, 5%); }
-.btn-danger    { @include btn-colors($color-danger, 5%); }
+.btn-primary   { @include btn-colors(var(--color-primary), 8%); }
+.btn-success   { @include btn-colors(var(--color-success), 3%); }
+.btn-info      { @include btn-colors(var(--color-info), 6%); }
+.btn-warning   { @include btn-colors(var(--color-warning), 5%); }
+.btn-danger    { @include btn-colors(var(--color-danger), 5%); }
 
 
 .btn-secondary {
-  color: $color-text !important;
-  @include btn-colors($color-secondary, 3%);
+  color: var(--color-text) !important;
+  @include btn-colors(var(--color-secondary), 3%);
 }
 
 .btn-link {
-  color: $color-info;
+  color: var(--color-info);
   font-weight: 500;
 
   &:hover,
   &:focus {
     text-decoration: none;
-    color: $color-secondary;
+    color: var(--color-secondary);
   }
 }
 
 .btn-light {
-  background-color: $color-bg-lightest;
-  border-color: $color-divider;
-  color: $color-text-secondary;
+  background-color: var(--color-bg-lightest);
+  border-color: var(--color-divider);
+  color: var(--color-text-secondary);
 
   &:hover,
   &:focus {
-    background-color: $color-bg-lighter;
-    color: $color-text;
+    background-color: var(--color-bg-lighter);
+    color: var(--color-text);
   }
 
 
   &:active,
   &.active,
   .show > &.dropdown-toggle {
-    background-color: $color-bg-lighter;
-    color: $color-text;
+    background-color: var(--color-bg-lighter);
+    color: var(--color-text);
   }
 
 }
@@ -142,12 +142,12 @@
 
 
 // Extended colors
-.btn-purple     { @include btn-colors($color-purple, 5%); }
-.btn-pink       { @include btn-colors($color-pink, 4%); }
-.btn-cyan       { @include btn-colors($color-cyan, 8%); }
-.btn-yellow     { @include btn-colors($color-yellow, 8%); }
-.btn-brown      { @include btn-colors($color-brown, 5%); }
-.btn-dark       { @include btn-colors($color-dark, 5%); }
+.btn-purple     { @include btn-colors(var(--color-purple), 5%); }
+.btn-pink       { @include btn-colors(var(--color-pink), 4%); }
+.btn-cyan       { @include btn-colors(var(--color-cyan), 8%); }
+.btn-yellow     { @include btn-colors(var(--color-yellow), 8%); }
+.btn-brown      { @include btn-colors(var(--color-brown), 5%); }
+.btn-dark       { @include btn-colors(var(--color-dark), 5%); }
 
 
 // Social media colors
@@ -164,36 +164,36 @@
 //-----------------------------------------------------------------
 // Outline buttons
 //
-.btn-primary-outline   { @include btn-outline($color-primary, 8%); }
-.btn-success-outline   { @include btn-outline($color-success, 6%); }
-.btn-info-outline      { @include btn-outline($color-info, 6%); }
-.btn-warning-outline   { @include btn-outline($color-warning, 5%); }
-.btn-danger-outline    { @include btn-outline($color-danger, 5%); }
+.btn-primary-outline   { @include btn-outline(var(--color-primary), 8%); }
+.btn-success-outline   { @include btn-outline(var(--color-success), 6%); }
+.btn-info-outline      { @include btn-outline(var(--color-info), 6%); }
+.btn-warning-outline   { @include btn-outline(var(--color-warning), 5%); }
+.btn-danger-outline    { @include btn-outline(var(--color-danger), 5%); }
 .btn-secondary-outline {
-  @include btn-outline($color-secondary, 3%);
+  @include btn-outline(var(--color-secondary), 3%);
 }
 
 // Separated class
-.btn-outline.btn-primary   { @include btn-outline($color-primary, 8%); }
-.btn-outline.btn-success   { @include btn-outline($color-success, 6%); }
-.btn-outline.btn-info      { @include btn-outline($color-info, 6%); }
-.btn-outline.btn-warning   { @include btn-outline($color-warning, 5%); }
-.btn-outline.btn-danger    { @include btn-outline($color-danger, 5%); }
+.btn-outline.btn-primary   { @include btn-outline(var(--color-primary), 8%); }
+.btn-outline.btn-success   { @include btn-outline(var(--color-success), 6%); }
+.btn-outline.btn-info      { @include btn-outline(var(--color-info), 6%); }
+.btn-outline.btn-warning   { @include btn-outline(var(--color-warning), 5%); }
+.btn-outline.btn-danger    { @include btn-outline(var(--color-danger), 5%); }
 .btn-outline.btn-secondary {
-  @include btn-outline($color-secondary, 3%);
+  @include btn-outline(var(--color-secondary), 3%);
 }
 
 .btn-outline.btn-light      { @include btn-outline(#fff, 5%); }
-.btn-outline.btn-purple     { @include btn-outline($color-purple, 5%); }
-.btn-outline.btn-pink       { @include btn-outline($color-pink, 4%); }
-.btn-outline.btn-cyan       { @include btn-outline($color-cyan, 8%); }
-.btn-outline.btn-yellow     { @include btn-outline($color-yellow, 8%); }
-.btn-outline.btn-brown      { @include btn-outline($color-brown, 5%); }
-.btn-outline.btn-dark       { @include btn-outline($color-dark, 5%); }
+.btn-outline.btn-purple     { @include btn-outline(var(--color-purple), 5%); }
+.btn-outline.btn-pink       { @include btn-outline(var(--color-pink), 4%); }
+.btn-outline.btn-cyan       { @include btn-outline(var(--color-cyan), 8%); }
+.btn-outline.btn-yellow     { @include btn-outline(var(--color-yellow), 8%); }
+.btn-outline.btn-brown      { @include btn-outline(var(--color-brown), 5%); }
+.btn-outline.btn-dark       { @include btn-outline(var(--color-dark), 5%); }
 
 
 .btn-outline.btn-light:hover {
-  color: $color-text;
+  color: var(--color-text);
 }
 
 
@@ -355,13 +355,13 @@
   font-size: 13px;
   font-family: $font-title;
   text-transform: uppercase;
-  background-color: $color-bg-lightest;
+  background-color: var(--color-bg-lightest);
   border: none;
   letter-spacing: 1px;
   border-radius: 0;
 
   &:hover {
-    background-color: $color-bg-lighter;
+    background-color: var(--color-bg-lighter);
   }
 
   svg {
@@ -386,7 +386,7 @@
     }
   }
   &.btn-secondary {
-    color: $color-text-light;
+    color: var(--color-text-light);
   }
 
   // Social media colors

@@ -3,14 +3,14 @@
 // Dropify
 //
 .dropify-wrapper {
-  border: 1px solid $color-divider;
+  border: 1px solid var(--color-divider);
   padding: 12px;
 
   .dropify-clear,
   &.touch-fallback .dropify-clear {
     bottom: 6px; // 18px when ".dropify-infos-message" displayed
     border: none;
-    color: $color-danger;
+    color: var(--color-danger);
     font-weight: 400;
     font-size: 11px;
     letter-spacing: 1px;
@@ -19,7 +19,7 @@
 
      &:hover {
 
-      background-color: $color-bg-lighter;
+      background-color: var(--color-bg-lighter);
     }
   }
 
@@ -32,7 +32,7 @@
 
 .dropify-wrapper .dropify-preview .dropify-infos .dropify-infos-inner p,
 .dropify-wrapper.touch-fallback .dropify-preview .dropify-infos .dropify-infos-inner p {
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
   font-weight: 300;
 }
 
@@ -46,5 +46,5 @@
 .dropify-wrapper.touch-fallback .dropify-preview .dropify-infos .dropify-infos-inner p.dropify-filename {
   font-weight: 400;
   font-size: 13px;
-  color: $color-text-light;
+  color: var(--color-text-light);
 }

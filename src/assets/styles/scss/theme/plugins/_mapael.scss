@@ -8,8 +8,8 @@
 
   .zoomButton {
     background-color: #fff;
-    border: 1px solid $color-divider-light;
-    color: $color-text;
+    border: 1px solid var(--color-divider-light);
+    color: var(--color-text);
     width: 20px;
     height: 20px;
     line-height: 20px;
@@ -24,7 +24,7 @@
     transition: .2s linear;
 
     &:hover {
-      background-color: $color-bg-lighter;
+      background-color: var(--color-bg-lighter);
     }
   }
 

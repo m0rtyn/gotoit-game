@@ -8,13 +8,13 @@
   height: 2px;
   display: block;
   width: 100%;
-  background-color: $color-bg-light;
+  background-color: var(--color-bg-light);
   border-radius: 2px;
   background-clip: padding-box;
   overflow: hidden;
 
   .line {
-    background-color: $color-primary;
+    background-color: var(--color-primary);
 
     &::before,
     &::after {
@@ -64,7 +64,7 @@
   span {
     width: 12px;
     height: 12px;
-    background-color: $color-primary;
+    background-color: var(--color-primary);
     border-radius: 100%;
     display: inline-block;
     animation: spinner-dots 1.4s infinite ease-in-out both;
@@ -100,7 +100,7 @@
   height: 50px;
   animation: spinner-ball infinite linear 1s;
   border-radius: 100%;
-  background-color: $color-primary;
+  background-color: var(--color-primary);
 }
 
 @keyframes spinner-ball {
@@ -123,7 +123,7 @@
   width: 25px;
   height: 25px;
   animation: spinner-circle infinite .75s linear;
-  border: 1px solid $color-primary;
+  border: 1px solid var(--color-primary);
   border-top-color: transparent;
   border-radius: 100%;
 }
@@ -137,8 +137,8 @@
   width: 25px;
   height: 25px;
   animation: spinner-circle infinite .75s linear;
-  border: 1px solid rgba($color-primary, .3);
-  border-left-color: $color-primary;
+  border: 1px solid rgba(var(--color-primary), .3);
+  border-left-color: var(--color-primary);
   border-radius: 100%;
 }
 

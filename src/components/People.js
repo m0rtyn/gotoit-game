@@ -26,11 +26,13 @@ class People extends Component {
             {
                 (data.workers.length < data.office.space)
                     ? <div className="column-buttons">
+                    {/*
                         <button
                             className="btn btn-success btn-xs"
                             onClick={() => { data.helpers.changeContent('HireWorkers')}}>
                             Hire Worker
                         </button>
+                        */}
 
                         {
                             (data.office.size > 1 && offices[data.office.size-1].space >= data.workers.length)

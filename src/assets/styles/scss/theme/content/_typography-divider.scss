@@ -4,7 +4,7 @@
 //
 
 hr {
-  border-top-color: $color-alpha-dark-divider;
+  border-top-color: var(--color-alpha-dark-divider);
   margin: 2rem auto;
 }
 
@@ -15,7 +15,7 @@ hr {
   opacity: .7;
   margin: 0 4px;
   vertical-align: middle;
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
 
   &::before {
     content: '\2014 \00A0';
@@ -31,7 +31,7 @@ hr {
   margin: 0 4px;
   vertical-align: middle;
   opacity: .5;
-  background-color: $color-text-secondary;
+  background-color: var(--color-text-secondary);
 }
 
 .divider-line {
@@ -39,7 +39,7 @@ hr {
   height: 20px;
   width: 1px;
   margin: 0 4px;
-  background-color: $color-alpha-dark-divider;
+  background-color: var(--color-alpha-dark-divider);
 }
 
 
@@ -48,7 +48,7 @@ hr {
   display: flex;
   align-items: center;
   flex: 0;
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
   font-size: 11px;
   letter-spacing: .5px;
   margin: 2rem auto;
@@ -58,7 +58,7 @@ hr {
   &::after {
     content: '';
     flex-grow: 1;
-    border-top: 1px solid $color-divider;
+    border-top: 1px solid var(--color-divider);
   }
 
   &::before {
@@ -70,7 +70,7 @@ hr {
   }
 
   a {
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
   }
 }
 
@@ -85,7 +85,7 @@ hr {
   &::before,
   &::after {
     border-top: none;
-    border-right: 1px solid $color-divider;
+    border-right: 1px solid var(--color-divider);
     margin: 0;
   }
 

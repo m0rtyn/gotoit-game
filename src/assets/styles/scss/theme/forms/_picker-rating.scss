@@ -14,7 +14,7 @@
   }
 
   label {
-    color: $color-bg-dark;
+    color: var(--color-dark);
     cursor: pointer;
 
     &::before {
@@ -24,7 +24,7 @@
     }
   }
 
-  @include rating-colors($color-primary);
+  @include rating-colors(var(--color-primary));
 }
 
 // Static
@@ -37,7 +37,7 @@
   }
 
   label:not(.active) {
-    color: $color-bg-dark !important;
+    color: var(--color-dark) !important;
   }
 }
 
@@ -97,7 +97,7 @@
 // Toggler
 //
 .toggler {
-  color: $color-bg-dark;
+  color: var(--color-dark);
   cursor: pointer;
   font-size: 20px;
   margin-bottom: 0;
@@ -111,7 +111,7 @@
     display: none;
 
     &:checked + i {
-      color: $color-yellow;
+      color: var(--color-yellow);
     }
   }
 }

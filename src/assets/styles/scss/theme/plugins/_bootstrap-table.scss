@@ -15,7 +15,7 @@
     }
 
     > thead > tr > th {
-      border-bottom-color: $color-divider;
+      border-bottom-color: var(--color-divider);
     }
   }
 
@@ -75,11 +75,11 @@
     }
 
     .both::before {
-      border-bottom: 8px solid $color-divider;
+      border-bottom: 8px solid var(--color-divider);
       bottom: 55%;
     }
     .both::after {
-      border-top: 8px solid $color-divider;
+      border-top: 8px solid var(--color-divider);
       top: 55%;
     }
 
@@ -87,11 +87,11 @@
       display: none
     }
     .desc::after {
-      border-top-color: $color-text-secondary;
+      border-top-color: var(--color-text-secondary);
     }
 
     .asc::before {
-      border-bottom-color: $color-text-secondary;
+      border-bottom-color: var(--color-text-secondary);
     }
     .asc::after {
       display: none;

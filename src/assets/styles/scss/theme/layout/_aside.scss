@@ -71,7 +71,7 @@
 // Title
 //
 .aside-title {
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
   font-size: 13px;
   letter-spacing: .5px;
   text-transform: uppercase;
@@ -89,7 +89,7 @@
   width: $height-lg/2;
   border-top-right-radius: $height-lg;
   border-bottom-right-radius: $height-lg;
-  border: 1px solid $color-divider;
+  border: 1px solid var(--color-divider);
   border-left: none;
   position: absolute;
   top: 50%;
@@ -97,7 +97,7 @@
   margin-top: -$height-lg/2;
   font-family: $font-icon-themify;
   padding-left: 2px;
-  color: $color-text-light;
+  color: var(--color-text-light);
   cursor: pointer;
   box-shadow: 4px 1px 9px rgba(0,0,0,0.07);
 

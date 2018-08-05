@@ -38,35 +38,35 @@ const Achievements = (props) => {
     });
 
 
-    return <div className="row">
+    return <div className="achievements">
         {
             Object.keys(achievements_for_render).map((key, id) => {
-                return <div key={id} className="row">
-                    <div><h3 className="text-center">{key}</h3></div>
-                    <div className=" justity-content-around">
+                return <section key={id} className="">
+                    <h3 className="text-center">{key}</h3>
+                    <div className="flexbox">
                         {
                             achievements_for_render[key].map((achievement, i) => {
-                                return <span className="achievement" key={i}>
+                                return <div className="achievement" key={i}>
                                     <h4 className="text-center">{achievement.name}</h4>
                                     <div className="achievement-icon">ICON</div>
-                                    <div className=" justity-content-around medals-bar">
+                                    <div className="medals-bar">
                                         <OverlayTrigger delay={150} placement="top" overlay={<Tooltip id={i}>{achievements_descriptions[`${achievement.name} bronze`]}</Tooltip>}>
-                                            <span className={`medal ${achievement.bronze === true ? 'bronze-medal-unlocked' : 'bronze-medal-locked'}`}></span>
+                                            <div className={`medal ${achievement.bronze === true ? 'bronze-medal-unlocked' : 'bronze-medal-locked'}`}></div>
                                         </OverlayTrigger>
 
                                         <OverlayTrigger delay={150} placement="top" overlay={<Tooltip id={i}>{achievements_descriptions[`${achievement.name} silver`]}</Tooltip>}>
-                                            <span className={`medal ${achievement.silver === true ? 'bronze-medal-unlocked' : 'silver-medal-locked'}`}></span>
+                                            <div className={`medal ${achievement.silver === true ? 'bronze-medal-unlocked' : 'silver-medal-locked'}`}></div>
                                         </OverlayTrigger>
 
                                         <OverlayTrigger delay={150} placement="top" overlay={<Tooltip id={i}>{achievements_descriptions[`${achievement.name} gold`]}</Tooltip>}>
-                                            <span className={`medal ${achievement.gold === true ? 'bronze-medal-unlocked' : 'gold-medal-locked'}`}></span>
+                                            <div className={`medal ${achievement.gold === true ? 'bronze-medal-unlocked' : 'gold-medal-locked'}`}></div>
                                         </OverlayTrigger>
                                     </div>
-                                </span>
+                                </div>
                             })
                         }
                     </div>
-                </div>
+                </section>
             })
         }
     </div>

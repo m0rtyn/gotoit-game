@@ -1,7 +1,7 @@
 
 .bootstrap-tagsinput {
   display: block;
-  border: 1px solid $color-divider;
+  border: 1px solid var(--color-divider);
   box-shadow: none;
   padding: 12px 12px 0;
   min-height: 52px;
@@ -9,7 +9,7 @@
   input {
     font-size: 0.875rem;
     font-weight: 400;
-    color: $color-text;
+    color: var(--color-text);
   }
 
   .badge {
@@ -23,7 +23,7 @@
 
     &.badge-default,
     &.badge-secondary {
-      color: $color-text-light;
+      color: var(--color-text-light);
     }
 
     [data-role=remove] {
@@ -40,8 +40,8 @@
   }
 
   .badge:not([class*="badge-"]) {
-    color: $color-text-light;
-    background-color: $color-bg-light;
+    color: var(--color-text-light);
+    background-color: var(--color-bg-light);
   }
 
 

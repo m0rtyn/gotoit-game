@@ -8,8 +8,8 @@
   line-height: $size;
   text-align: center;
   border-radius: 100%;
-  background-color: $color-bg-light;
-  color: $color-text-secondary;
+  background-color: var(--color-bg-light);
+  color: var(--color-text-secondary);
   text-transform: uppercase;
 
   img {
@@ -87,10 +87,10 @@
 .avatar-pill {
   width: auto;
   border-radius: $height-md/2;
-  color: $color-text-light;
+  color: var(--color-text-light);
   text-transform: none;
   letter-spacing: 0;
-  background-color: $color-bg-lighter;
+  background-color: var(--color-bg-lighter);
   font-size: 0.875rem;
 
   display: inline-flex;
@@ -98,8 +98,8 @@
 
   &:hover,
   &:focus {
-    color: $color-text-light;
-    background-color: $color-bg-light;
+    color: var(--color-text-light);
+    background-color: var(--color-bg-light);
   }
 
   img {
@@ -242,7 +242,7 @@
     height: 10px;
     border-radius: 100%;
     border: 2px solid #fff;
-    background-color: $color-primary;
+    background-color: var(--color-primary);
   }
 
   &.avatar-sm::after          { right: -2px; width: 9px; height: 9px; }
@@ -254,11 +254,11 @@
 
 
 // Status colors
-.avatar.status-success::after { background-color: $color-success; }
-.avatar.status-info::after    { background-color: $color-info; }
-.avatar.status-warning::after { background-color: $color-warning; }
-.avatar.status-danger::after  { background-color: $color-danger; }
-.avatar.status-dark::after    { background-color: $color-dark; }
+.avatar.status-success::after { background-color: var(--color-success); }
+.avatar.status-info::after    { background-color: var(--color-info); }
+.avatar.status-warning::after { background-color: var(--color-warning); }
+.avatar.status-danger::after  { background-color: var(--color-danger); }
+.avatar.status-dark::after    { background-color: var(--color-dark); }
 
 
 
@@ -313,8 +313,8 @@
 .avatar-add {
   font-family: $font-icon-themify;
   background-color: transparent;
-  border: 1px dashed lighten($color-text-secondary, 10%);
-  color: $color-text-secondary;
+  border: 1px dashed color(var(--color-text-secondary) l(+10%));
+  color: var(--color-text-secondary);
   font-size: 0.875rem;
 
   &::before {
@@ -322,8 +322,8 @@
   }
 
   &:hover {
-    background-color: $color-primary;
-    border-color: $color-primary;
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
     color: #fff;
   }
 }

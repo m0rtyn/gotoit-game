@@ -23,7 +23,7 @@
 
     &[href]:focus,
     &[href]:hover {
-      background-color: darken($color, 5%);
+      background-color: color($color b(+5%));
     }
   }
 }
@@ -33,24 +33,24 @@
 }
 
 .badge-default   {
-  color: $color-text-light;
-  background-color: $color-bg-light;
+  color: var(--color-text-light);
+  background-color: var(--color-bg-light);
 
   &[href]:focus,
   &[href]:hover {
-    color: $color-text-light;
-    background-color: darken($color-bg-light, 3%);
+    color: var(--color-text-light);
+    background-color: color(var(--color-bg-light) b(+3%));
   }
 }
 
 .badge-secondary {
-  color: $color-text-light;
-  background-color: $color-secondary;
+  color: var(--color-text-light);
+  background-color: var(--color-secondary);
 
   &[href]:focus,
   &[href]:hover {
-    color: $color-text-light;
-    background-color: darken($color-secondary, 3%);
+    color: var(--color-text-light);
+    background-color: color(var(--color-secondary) b(+3%));
   }
 }
 

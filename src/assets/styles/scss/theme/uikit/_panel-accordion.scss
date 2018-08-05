@@ -3,7 +3,7 @@
 
   .card {
     background-color: #fff;
-    border: 1px solid $color-divider-light;
+    border: 1px solid var(--color-divider-light);
     margin-bottom: 16px;
 
     &:last-child {
@@ -12,7 +12,7 @@
   }
 
   .card-title {
-    background-color: $color-bg-lightest;
+    background-color: var(--color-bg-lightest);
   }
 
   .card-title a {
@@ -44,7 +44,7 @@
   .card {
     margin-bottom: 0;
     border: none;
-    border-bottom: 1px solid $color-divider-light;
+    border-bottom: 1px solid var(--color-divider-light);
 
     &:last-child {
       border-bottom: 0;
