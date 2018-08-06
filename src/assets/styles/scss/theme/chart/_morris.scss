@@ -1,7 +1,7 @@
 
 
 .morris-hover {
-  z-index: $zindex-morris;
+  z-index: var(--zindex-morris);
 }
 
 .morris-hover.morris-default-style {

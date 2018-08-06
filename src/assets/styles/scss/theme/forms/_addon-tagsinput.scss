@@ -13,9 +13,9 @@
   }
 
   .badge {
-    height: $height-xs;
-    line-height: $height-xs;
-    border-radius: $height-xs/2;
+    height: var(--height-xs);
+    line-height: var(--height-xs);
+    border-radius: calc(var(--height-xs) / 2);
     padding: 0 0.75rem;
     font-size: 0.875rem;
     margin-right: 0.75rem;

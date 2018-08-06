@@ -61,11 +61,11 @@
 .publisher-avatar {
   position: absolute;
   width: auto;
-  left: -$height-md/2;
+  left: -calc(var(--height-md) / 2);
   top: 8px;
 
   &.avatar-sm {
-    left: -$height-sm/2;
+    left: -calc(var(--height-sm) / 2);
     top: auto;
   }
 }

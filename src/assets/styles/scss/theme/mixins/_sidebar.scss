@@ -13,11 +13,11 @@
   // Sidebar icon only
   //
   &.sidebar-icon-only {
-    width: $width-sidebar-icon-only;
+    width: var(--width-sidebar-icon-only);
 
     ~ .topbar,
     ~ main {
-      margin-left: $width-sidebar-icon-only;
+      margin-left: var(--width-sidebar-icon-only);
     }
 
     .menu > .menu-item.active > .menu-link,
@@ -36,12 +36,12 @@
   // Sidebar iconic
   //
   &.sidebar-iconic {
-    width: $width-sidebar-iconic;
+    width: var(--width-sidebar-iconic);
     overflow: visible;
 
     ~ .topbar,
     ~ main {
-      margin-left: $width-sidebar-iconic;
+      margin-left: var(--width-sidebar-iconic);
     }
 
     .menu-link {
@@ -52,14 +52,14 @@
 
       .title {
         flex-grow: 0;
-        line-height: $height-md;
+        line-height: var(--height-md);
         font-weight: 300;
         letter-spacing: 0;
       }
 
       .icon {
         font-size: 20px;
-        line-height: $height-md;
+        line-height: var(--height-md);
       }
 
       .badge {
@@ -86,11 +86,11 @@
 
     // Sizes
     &.sidebar-sm {
-      width: $width-sidebar-iconic - 20px;
+      width: calc(var(--width-sidebar-iconic) - 20px);
 
       ~ .topbar,
       ~ main {
-        margin-left: $width-sidebar-iconic - 20px;
+        margin-left: calc(var(--width-sidebar-iconic) - 20px);
       }
 
       .menu-link {
@@ -98,13 +98,13 @@
         padding-bottom: 4px;
 
         .title {
-          line-height: $height-sm;
+          line-height: var(--height-sm);
           font-size: 12px;
         }
 
         .icon {
           font-size: 16px;
-          line-height: $height-sm;
+          line-height: var(--height-sm);
         }
 
         .badge {
@@ -122,11 +122,11 @@
 
 
     &.sidebar-lg {
-      width: $width-sidebar-iconic + 20px;
+      width: calc(var(--width-sidebar-iconic) + 20px);
 
       ~ .topbar,
       ~ main {
-        margin-left: $width-sidebar-iconic + 20px;
+        margin-left: calc(var(--width-sidebar-iconic) + 20px);
       }
 
       .menu-link {
@@ -170,7 +170,7 @@
 
   &.sidebar {
     box-shadow: none;
-    left: -$width-sidebar-normal;
+    left: -var(--width-sidebar-normal);
 
     ~ .topbar,
     ~ main {
@@ -179,11 +179,11 @@
   }
 
   &.sidebar-sm {
-    left: -$width-sidebar-sm;
+    left: -var(--width-sidebar-sm);
   }
 
   &.sidebar-lg {
-    left: -$width-sidebar-lg;
+    left: -var(--width-sidebar-lg);
   }
 
 }
@@ -203,7 +203,7 @@
   // Left sided icons, even boxed
   .title,
   .logo {
-    margin-left: $sidebar-items-margin-x;
+    margin-left: var(--sidebar-items-margin-x);
   }
 
 
@@ -229,8 +229,8 @@
     .logo-icon,
     .icon,
     .dot {
-      margin-left: $sidebar-items-margin-x;
-      flex-basis: $sidebar-icon-size;
+      margin-left: var(--sidebar-items-margin-x);
+      flex-basis: var(--sidebar-icon-size);
     }
 
   }
@@ -240,12 +240,12 @@
 
     .logo-icon,
     .icon {
-      margin-left: $sidebar-items-margin-x;
+      margin-left: var(--sidebar-items-margin-x);
     }
 
     .menu-submenu .icon,
     .menu-submenu .dot {
-      margin-left: $sidebar-items-margin-x + 5px;
+      margin-left: calc(var(--sidebar-items-margin-x) + 5px);
     }
 
   }

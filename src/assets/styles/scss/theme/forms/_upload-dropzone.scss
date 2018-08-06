@@ -26,7 +26,7 @@
   font-size: 1rem;
 
   span::before {
-    font-family: $font-icon-fontawesome;
+    font-family: var(--font-icon-fontawesome);
     content: "\f0ee";
     font-size: 2rem;
     display: block;

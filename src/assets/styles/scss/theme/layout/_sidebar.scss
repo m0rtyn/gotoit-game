@@ -8,14 +8,14 @@
   top: 0;
   left: 0;
   bottom: 0;
-  width: $width-sidebar-normal;
+  width: var(--width-sidebar-normal);
   background-color: var(--sidebar-dark-bg);
   white-space: nowrap;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.08);
   display: flex;
   overflow: hidden;
   flex-direction: column;
-  z-index: $zindex-sidebar;
+  z-index: var(--zindex-sidebar);
   transform: translateZ(0);
   transition: .3s ease;
   backface-visibility: hidden;
@@ -24,30 +24,30 @@
 
   ~ .topbar,
   ~ main {
-    margin-left: $width-sidebar-normal;
+    margin-left: var(--width-sidebar-normal);
   }
 }
 
 .sidebar-sm {
-  width: $width-sidebar-sm;
+  width: var(--width-sidebar-sm);
   ~ .topbar,
   ~ main {
-    margin-left: $width-sidebar-sm;
+    margin-left: var(--width-sidebar-sm);
   }
 }
 
 .sidebar-lg {
-  width: $width-sidebar-lg;
+  width: var(--width-sidebar-lg);
   ~ .topbar,
   ~ main {
-    margin-left: $width-sidebar-lg;
+    margin-left: var(--width-sidebar-lg);
   }
 }
 
 
 .sidebar-header,
 .sidebar-footer {
-  height: $height-topbar;
+  height: var(--height-topbar);
 }
 
 .sidebar-navigation {
@@ -79,19 +79,19 @@
 //
 .sidebar-header {
   background-color: var(--sidebar-header-bg);
-  padding: 0 $sidebar-padding-x;
+  padding: 0 var(--sidebar-padding-x);
   display: flex;
   align-items: center;
   color: #fff;
 
   > * {
-    margin-left: $sidebar-items-margin-x;
-    margin-right: $sidebar-items-margin-x;
+    margin-left: var(--sidebar-items-margin-x);
+    margin-right: var(--sidebar-items-margin-x);
   }
 
   .logo-icon {
     text-align: center;
-    flex-basis: $sidebar-icon-size;
+    flex-basis: var(--sidebar-icon-size);
     font-size: 1.25rem;
     flex-shrink: 0;
   }
@@ -110,7 +110,7 @@
 .sidebar-toggle-fold {
 
   margin: 0;
-  padding: 12px $sidebar-items-margin-x;
+  padding: 12px var(--sidebar-items-margin-x);
   cursor: pointer;
 
   &::before {
@@ -179,15 +179,15 @@
 // Spacer
 //
 .sidebar-spacer-sm {
-  height: $height-topbar/2;
+  height: calc(var(--height-topbar) / 2);
 }
 
 .sidebar-spacer {
-  height: $height-topbar;
+  height: var(--height-topbar);
 }
 
 .sidebar-spacer-lg {
-  height: $height-topbar*3/2;
+  height: calc(var(--height-topbar) *3 /2);
 }
 
 
@@ -201,7 +201,7 @@
 
   .sidebar {
     left: 0 !important;
-    box-shadow: $offcanvas-left-shadow !important;
+    box-shadow: var(--offcanvas-left-shadow) !important;
   }
 }
 
@@ -210,7 +210,7 @@
   .sidebar {
     ~ .topbar,
     ~ main {
-      margin-left: $width-sidebar-folded;
+      margin-left: var(--width-sidebar-folded);
     }
 
 
@@ -227,13 +227,13 @@
   }
 
   .sidebar:not(.sidebar-icons-right) {
-    width: $width-sidebar-folded;
+    width: var(--width-sidebar-folded);
 
 
     .sidebar-profile {
       .avatar {
-        width: $sidebar-icon-size-lg;
-        height: $sidebar-icon-size-lg;
+        width: var(--sidebar-icon-size-lg);
+        height: var(--sidebar-icon-size-lg);
       }
 
       .profile-info {
@@ -244,8 +244,8 @@
     }
 
     &:hover {
-      width: $width-sidebar-normal;
-      box-shadow: $offcanvas-left-shadow;
+      width: var(--width-sidebar-normal);
+      box-shadow: var(--offcanvas-left-shadow);
 
       .sidebar-profile {
 
@@ -262,35 +262,35 @@
     }
 
     &.sidebar-sm:hover {
-      width: $width-sidebar-sm;
+      width: var(--width-sidebar-sm);
     }
 
     &.sidebar-lg:hover {
-      width: $width-sidebar-lg;
+      width: var(--width-sidebar-lg);
     }
 
   }
 
   .sidebar-icons-right {
-    left: -($width-sidebar-normal - $width-sidebar-folded);
+    left: calc(-1 * (var(--width-sidebar-normal) - var(--width-sidebar-folded)));
 
     &:hover {
       left: 0;
-      box-shadow: $offcanvas-left-shadow;
+      box-shadow: var(--offcanvas-left-shadow);
     }
 
     &.sidebar-sm {
-      left: -($width-sidebar-sm - $width-sidebar-folded);
+      left: calc(-1 * (var(--width-sidebar-sm) - var(--width-sidebar-folded)));
     }
 
     &.sidebar-lg {
-      left: -($width-sidebar-lg - $width-sidebar-folded);
+      left: calc(-1 * (var(--width-sidebar-lg) - var(--width-sidebar-folded)));
     }
   }
 
 
   .card-maximize {
-    left: $width-sidebar-folded;
+    left: var(--width-sidebar-folded);
   }
 }
 
@@ -302,14 +302,14 @@
 .sidebar-hidden {
 
   .sidebar {
-    left: -$width-sidebar-normal;
+    left: -var(--width-sidebar-normal);
 
     &.sidebar-lg {
-      left: -$width-sidebar-lg;
+      left: -var(--width-sidebar-lg);
     }
 
     &.sidebar-sm {
-      left: -$width-sidebar-sm;
+      left: -var(--width-sidebar-sm);
     }
 
     ~ .topbar,

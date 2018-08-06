@@ -94,7 +94,7 @@
   }
 
   .nav-link {
-    line-height: $line-height-md;
+    line-height: var(--line-height-md);
     font-size: 90%;
     padding: 0 8px;
   }
@@ -142,7 +142,7 @@
 
   &::before {
     content: "\e64b";
-    font-family: $font-icon-themify;
+    font-family: var(--font-icon-themify);
     display: inline-block;
     transition: .4s;
   }

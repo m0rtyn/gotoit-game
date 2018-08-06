@@ -64,7 +64,7 @@
 
 .header-title {
   font-weight: 100;
-  font-family: $font-body;
+  font-family: var(--font-body);
   color: var(--color-alpha-dark-text-active);
 
   strong {
@@ -152,7 +152,7 @@
 
   .nav-link {
     display: inline-block;
-    font-family: $font-title;
+    font-family: var(--font-title);
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 1px;

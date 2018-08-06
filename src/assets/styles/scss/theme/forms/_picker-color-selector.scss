@@ -6,8 +6,8 @@
   label {
     position: relative;
     display: inline-block;
-    width: $height-sm;
-    height: $height-sm;
+    width: var(--height-sm);
+    height: var(--height-sm);
     border-radius: 50%;
     cursor: pointer;
     margin-right: 4px;
@@ -31,7 +31,7 @@
 
     &::after {
       content: "\e64c";
-      font-family: $font-icon-themify;
+      font-family: var(--font-icon-themify);
       font-size: 1rem;
       font-weight: bold;
       display: block;
@@ -59,8 +59,8 @@
 .color-selector-sm {
 
   label {
-    width: $height-xs;
-    height: $height-xs;
+    width: var(--height-xs);
+    height: var(--height-xs);
   }
 
   span::after {
@@ -72,8 +72,8 @@
 .color-selector-lg {
 
   label {
-    width: $height-md;
-    height: $height-md;
+    width: var(--height-md);
+    height: var(--height-md);
   }
 
   span::after {

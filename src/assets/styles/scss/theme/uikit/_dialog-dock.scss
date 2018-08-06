@@ -10,11 +10,11 @@
   position: fixed;
   right: 0;
   bottom: 0;
-  z-index: $zindex-dock;
+  z-index: var(--zindex-dock);
   max-width: calc(100% - 30px);
 
   &.maximize {
-    z-index: $zindex-dock-maximize;
+    z-index: var(--zindex-dock-maximize);
   }
 }
 
@@ -26,7 +26,7 @@
 }
 
 .modal-open .dock-list {
-  z-index: $zindex-dock-open-modal;
+  z-index: var(--zindex-dock-open-modal);
 
   .dock {
     border-color: transparent;
@@ -72,7 +72,7 @@
 
   &.minimize {
 
-    transform: translateY( calc(100% - #{$dock-header-height}) );
+    transform: translateY( calc(100% - #{var(--dock-header-height)}) );
 
     .dock-header {
       cursor: pointer;
@@ -111,7 +111,7 @@
     bottom: 0;
     margin-left: 0;
     margin-right: 0;
-    z-index: $zindex-dock-maximize;
+    z-index: var(--zindex-dock-maximize);
 
     .dock-body {
       width: 100%;
@@ -127,7 +127,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 6px 12px;
-  height: $dock-header-height;
+  height: var(--dock-header-height);
   background-color: var(--color-bg-lighter);
   border-bottom: 1px solid var(--color-divider-light);
   transition: .3s;
@@ -159,7 +159,7 @@
   > *:not(.dropdown),
   > .dropdown .dropdown-toggle {
     min-width: 20px;
-    height: $dock-header-height;
+    height: var(--dock-header-height);
     text-align: center;
     opacity: .7;
     cursor: pointer;
@@ -173,14 +173,14 @@
 
   > *:not(.dropdown),
   .dropdown-toggle {
-    line-height: $dock-header-height;
+    line-height: var(--dock-header-height);
   }
 
   [data-dock="close"],
   [data-dock="maximize"],
   [data-dock="minimize"] {
     &::before {
-      font-family: $font-icon-themify;
+      font-family: var(--font-icon-themify);
     }
   }
 

@@ -8,8 +8,8 @@
   border-color: var(--color-divider);
   padding: 0 8px;
   margin: 0 3px;
-  min-width: $height-sm + 2px;
-  line-height: $height-sm;
+  min-width: calc(var(--height-sm) + 2px);
+  line-height: var(--height-sm);
   text-align: center;
   border-radius: 2px !important;
 
@@ -80,14 +80,14 @@
 //
 .pagination-sm .page-link {
   padding: 0;
-  min-width: $height-xs + 2px;
-  line-height: $height-xs;
+  min-width: calc(var(--height-xs) + 2px);
+  line-height: var(--height-xs);
 }
 
 .pagination-lg .page-link {
   padding: 0;
-  min-width: $height-md + 2px;
-  line-height: $height-md;
+  min-width: calc(var(--height-md) + 2px);
+  line-height: var(--height-md);
 }
 
 

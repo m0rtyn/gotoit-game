@@ -108,7 +108,7 @@
 
 
 .bs-searchbox .form-control {
-  line-height: $line-height-sm;
+  line-height: var(--line-height-sm);
   font-size: 13px;
   padding: 4px 8px 3px;
 }

@@ -1,6 +1,6 @@
 
 .lity-close {
-  font-family: $font-body;
+  font-family: var(--font-body);
   font-weight: 300;
   opacity: .6;
   transition: .5s;
@@ -8,7 +8,7 @@
   &:hover,
   &:focus,
   &:active {
-    font-family: $font-body;
+    font-family: var(--font-body);
     font-weight: 300;
     opacity: 1;
   }

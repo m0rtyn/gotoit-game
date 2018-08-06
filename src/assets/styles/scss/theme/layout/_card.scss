@@ -74,12 +74,12 @@
 
 // Card title
 .card-title {
-  font-family: $font-body;
+  font-family: var(--font-body);
   font-weight: 300;
   line-height: 1.5;
   margin-bottom: 0;
   padding: 15px 20px;
-  border-bottom: $card-internal-border;
+  border-bottom: var(--card-internal-border);
 
   a {
     color: var(--color-title);
@@ -103,7 +103,7 @@
 
 
 .card-title-bold {
-  font-family: $font-title;
+  font-family: var(--font-title);
   text-transform: uppercase;
   letter-spacing: 1.5px;
   font-weight: 500;
@@ -116,7 +116,7 @@
   align-items: center;
   padding: 15px 20px;
   background-color: transparent;
-  border-bottom: $card-internal-border;
+  border-bottom: var(--card-internal-border);
 
   &::after {
     display: none;
@@ -166,7 +166,7 @@
 //
 .card-footer {
   background-color: var(--color-bg-lightest);
-  border-top: $card-internal-border;
+  border-top: var(--card-internal-border);
   color: var(--color-text-secondary);
   padding: 10px 20px;
 
@@ -187,7 +187,7 @@
 
 
   li > a {
-    font-family: $font-icon-themify;
+    font-family: var(--font-icon-themify);
     font-size: 12px;
     display: inline-block;
     padding: 0 4px;
@@ -353,11 +353,11 @@
 
 .card-maximize {
   position: fixed;
-  top: $height-topbar;
+  top: var(--height-topbar);
   right: 0;
   bottom: 0;
   margin-bottom: 0;
-  z-index: $zindex-card-maximize;
+  z-index: var(--zindex-card-maximize);
   transition: left 0.3s ease;
 
   .card-btn-maximize {
@@ -372,7 +372,7 @@
   right: 0;
   bottom: 0;
   margin-bottom: 0;
-  z-index: $zindex-card-fullscreen;
+  z-index: var(--zindex-card-fullscreen);
 
   .card-btn-fullscreen {
     color: var(--color-primary);
@@ -409,7 +409,7 @@
 @include media-up(xs) {
 
   .card-group .card + .card {
-    border-left: $card-internal-border;
+    border-left: var(--card-internal-border);
   }
 
 }

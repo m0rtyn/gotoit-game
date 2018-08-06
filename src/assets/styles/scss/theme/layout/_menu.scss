@@ -21,16 +21,16 @@
 // Menu link - <a>
 //
 .menu-link {
-  height: $menu-height;
-  padding: 0 $sidebar-padding-x;
+  height: var(--menu-height);
+  padding: 0 var(--sidebar-padding-x);
   font-weight: 400;
   display: flex;
   align-items: center;
   transition: .2s linear;
 
   > * {
-    margin-left: $menu-link-items-margin-x;
-    margin-right: $menu-link-items-margin-x;
+    margin-left: var(--menu-link-items-margin);
+    margin-right: var(--menu-link-items-margin);
   }
 
   // Icon
@@ -40,7 +40,7 @@
     font-weight: 500;
     letter-spacing: 1px;
     text-align: center;
-    flex-basis: $sidebar-icon-size;
+    flex-basis: var(--sidebar-icon-size);
     flex-shrink: 0;
 
     &::before {
@@ -52,7 +52,7 @@
   //
   .dot {
     position: relative;
-    flex-basis: $sidebar-icon-size;
+    flex-basis: var(--sidebar-icon-size);
     flex-shrink: 0;
 
     &::after {
@@ -92,7 +92,7 @@
   //
   .arrow::before {
     content: "\e649";
-    font-family: $font-icon-themify;
+    font-family: var(--font-icon-themify);
     font-size: 8px;
     cursor: pointer;
     display: inline-block;
@@ -121,7 +121,7 @@
   margin-bottom: 0;
 
   .menu-link {
-    height: $menu-submenu-height;
+    height: var(--menu-submenu-height);
     font-size: .875rem;
     font-weight: 300;
     letter-spacing: 0;
@@ -161,10 +161,10 @@
 .menu-sub-submenu {
   list-style-type: none;
   margin-bottom: 0;
-  padding-left: $sidebar-icon-size + 10px;
+  padding-left: calc(var(--sidebar-icon-size) + 10px);
 
   .menu-item {
-    padding-left: $sidebar-padding-x;
+    padding-left: var(--sidebar-padding-x);
     opacity: 0.7;
     transition: 0.2s linear;
 
@@ -188,14 +188,14 @@
 //
 .menu-category {
   position: relative;
-  font-family: $font-title;
+  font-family: var(--font-title);
   display: block;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 0.6875rem;
   font-weight: 500;
-  line-height: $menu-submenu-height;
-  padding: 1rem ($sidebar-padding-x + $menu-link-items-margin-x) 0.5rem;
+  line-height: var(--menu-submenu-height);
+  padding: 1rem calc(var(--sidebar-padding-x) + var(--menu-link-items-margin-x)) 0.5rem;
   color: #fff;
   opacity: 0.7;
   white-space: nowrap;
@@ -228,7 +228,7 @@
 //-------------------------------
 // Menu size - <ul>
 //
-.menu-xs > .menu-item > .menu-link { height: $menu-height-xs; }
-.menu-sm > .menu-item > .menu-link { height: $menu-height-sm; }
-.menu-lg > .menu-item > .menu-link { height: $menu-height-lg; }
-.menu-xl > .menu-item > .menu-link { height: $menu-height-xl; }
+.menu-xs > .menu-item > .menu-link { height: var(--menu-height-xs); }
+.menu-sm > .menu-item > .menu-link { height: var(--menu-height-sm); }
+.menu-lg > .menu-item > .menu-link { height: var(--menu-height-lg); }
+.menu-xl > .menu-item > .menu-link { height: var(--menu-height-xl); }

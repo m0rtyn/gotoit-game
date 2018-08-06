@@ -1,7 +1,7 @@
 .topbar {
   padding: 0 18px;
-  height: $height-topbar;
-  //line-height: $height-topbar;
+  height: var(--height-topbar);
+  //line-height: var(--height-topbar);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -9,7 +9,7 @@
   top: 0;
   right: 0;
   left: 0;
-  z-index: $zindex-topbar;
+  z-index: var(--zindex-topbar);
   transition: margin-left 0.3s ease;
   background-color: #fff;
   box-shadow: 4px 0 5px rgba(0,0,0,0.08);
@@ -55,8 +55,8 @@
   display: inline-block;
   font-size: 1rem;
   font-weight: 400;
-  line-height: $height-topbar;
-  padding: 0 $topbar-gap;
+  line-height: var(--height-topbar);
+  padding: 0 var(--topbar-gap);
   text-align: center;
   color: var(--color-alpha-dark-text);
   cursor: pointer;
@@ -68,7 +68,7 @@
 
   // Click make toggle buttons click-able
   position: relative;
-  z-index: $zindex-dropdown-toggle;
+  z-index: var(--zindex-dropdown-toggle);
 
   &:hover {
     color: var(--color-alpha-dark-text-active);
@@ -91,7 +91,7 @@
   }
 
   img {
-    max-height: $height-topbar;
+    max-height: var(--height-topbar);
   }
 }
 
@@ -133,23 +133,23 @@
   // Search
   //
   .lookup-circle {
-    padding-left: $topbar-gap;
-    padding-right: $topbar-gap;
+    padding-left: var(--topbar-gap);
+    padding-right: var(--topbar-gap);
 
     &::before {
-      left: $topbar-gap;
+      left: var(--topbar-gap);
     }
 
     &.lookup-right::before {
       left: auto;
-      right: $topbar-gap;
+      right: var(--topbar-gap);
     }
   }
 
   .topbar-lookup-text {
     display: inline-block;
-    padding-left: $topbar-gap;
-    padding-right: $topbar-gap;
+    padding-left: var(--topbar-gap);
+    padding-right: var(--topbar-gap);
     color: var(--color-alpha-dark-text-light);
     cursor: text;
     transition: .7s;
@@ -160,7 +160,7 @@
   }
 
   .form-control {
-    line-height: $height-xs;
+    line-height: var(--height-xs);
   }
 
   p {
@@ -174,11 +174,11 @@
   border-left: 1px solid var(--color-alpha-dark-divider);
   height: 20px;
   align-self: center;
-  margin: 0 $topbar-gap;
+  margin: 0 var(--topbar-gap);
 }
 
 .topbar-divider-full {
-  height: $height-topbar;
+  height: var(--height-topbar);
 }
 
 //-----------------------------------------------------------------
@@ -191,7 +191,7 @@
 
 .topbar-title {
   margin-bottom: 0;
-  margin-right: $topbar-gap;
+  margin-right: var(--topbar-gap);
   font-size: 1.25rem;
   font-weight: 500;
   align-self: center;
@@ -316,8 +316,8 @@
   }
 
   .form-control {
-    height: $height-topbar;
-    line-height: $height-topbar;
+    height: var(--height-topbar);
+    line-height: var(--height-topbar);
     background-color: transparent;
     padding-left: 38px;
   }

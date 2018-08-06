@@ -53,11 +53,11 @@
   color: var(--color-text-secondary);
   padding: 5px 8px;
   font-size: 14px;
-  line-height: $line-height-sm;
+  line-height: var(--line-height-sm);
   transition: 0.2s linear;
 
   &:focus {
-    border-color: color(var(--color-primary) l(+20%));
+    border-color: color-mod(var(--color-primary) tint(+20%));
     color: var(--color-text);
     outline: none;
   }

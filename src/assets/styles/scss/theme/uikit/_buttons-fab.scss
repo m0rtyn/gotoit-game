@@ -2,7 +2,7 @@
 .fab {
   position: relative;
   display: inline-block;
-  z-index: $zindex-fab;
+  z-index: var(--zindex-fab);
 
   > .btn {
     position: relative;

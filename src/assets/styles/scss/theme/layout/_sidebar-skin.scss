@@ -115,12 +115,12 @@
   .menu {
 
     .menu-link {
-      color: color(var(--color-text) l(+20%));
+      color: color-mod(var(--color-text) tint(+20%));
       opacity: 1
     }
 
     .dot::after {
-      border-color: color(var(--color-text) l(+5%));
+      border-color: color-mod(var(--color-text) tint(+5%));
     }
 
     .menu-link .title small {

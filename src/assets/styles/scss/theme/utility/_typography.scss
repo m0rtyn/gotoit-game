@@ -4,13 +4,13 @@
 // Font family
 //
 .font-body,
-.font-roboto { font-family: $font-body; }
+.font-roboto { font-family: var(--font-body); }
 
 .font-title,
-.font-ubuntu { font-family: $font-title; }
+.font-ubuntu { font-family: var(--font-title); }
 
 .font-article,
-.font-lora   { font-family: $font-article; }
+.font-lora   { font-family: var(--font-article); }
 
 
 

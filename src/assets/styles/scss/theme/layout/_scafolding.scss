@@ -27,12 +27,12 @@ body > div > main {
 
 body .topbar + .main-container,
 body .topbar + main {
-  padding-top: $height-topbar;
+  padding-top: var(--height-topbar);
 }
 
 body .topbar-secondary + .main-container,
 body .topbar-secondary + main {
-  padding-top: $height-topbar-sec;
+  padding-top: var(--height-topbar-sec);
 }
 
 
@@ -80,7 +80,7 @@ body .topbar-secondary + main {
   cursor: pointer; // Fix for iOS
 
   &.backdrop-sidebar {
-    z-index: $zindex-backdrop-sidebar;
+    z-index: var(--zindex-backdrop-sidebar);
 
     &::after {
       content: "\e646";
@@ -95,12 +95,12 @@ body .topbar-secondary + main {
   }
 
   &.backdrop-topbar-menu {
-    z-index: $zindex-backdrop-topbar;
+    z-index: var(--zindex-backdrop-topbar);
   }
 
   &.backdrop-quickview {
     background-color: transparent;
-    z-index: $zindex-backdrop-quickview;
+    z-index: var(--zindex-backdrop-quickview);
   }
 }
 
@@ -110,7 +110,7 @@ body .topbar-secondary + main {
 @include media-up(md) {
 
   .card-maximize {
-    left: $width-sidebar-normal;
+    left: var(--width-sidebar-normal);
   }
 
 }
