@@ -1841,5 +1841,8 @@ class App extends Component {
         );
     }
 }
-
+// webpack Hot Module Replacement API
+if (module.hot) {
+   console.info('hot')
+}
 export default hot(module)(App)

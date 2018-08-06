@@ -7,7 +7,6 @@ import ProjectName from './ProjectName';
 import StatsProgressBar from './StatsProgressBar';
 
 
-
 //import {addAction} from '../components/ToastNest';
 
 import {skills_names, workers_bonus_items, education, colors} from '../game/knowledge';

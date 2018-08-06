@@ -2,7 +2,24 @@
 
 module.exports = {
     'extends': [
-        'eslint-config-react-app'
+        'eslint-config-react-app',
+        'plugin:prettier/recommended',
+        'plugin:react/recommended',
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:promise/recommended",
+        "plugin:lodash/recommended",
+        "plugin:destructuring/recommended"
+    ],
+    "plugins": [
+        "react",
+        "security",
+        "import",
+        "compat",
+        "promise",
+        "prefer-object-spread",
+        "destructuring",
+        "lodash"
     ],
     rules: {
         'jsx-a11y/accessible-emoji': 0,
