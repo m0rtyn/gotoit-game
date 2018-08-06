@@ -8,7 +8,7 @@ module.exports = function(grunt) {
     ]
   });
   var customProperties = require('postcss-custom-properties');
-  var colorFunctions = require('postcss-color-function');
+  var colorFunctions = require('postcss-color-mod-function');
   var flexbugsFixes= require('postcss-flexbugs-fixes');
   var postcssReporter = require('postcss-reporter');
 
