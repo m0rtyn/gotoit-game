@@ -9,11 +9,11 @@
     display: flex;
     align-items: center;
     width: 100%;
-    height: $height-md;
+    height: var(--height-md);
     background: #fff;
     border-color: var(--color-divider);
     font-size: 14px;
-    font-family: $font-body;
+    font-family: var(--font-body);
     color: var(--color-text);
     border-radius: 3px;
     box-shadow: none;
@@ -23,7 +23,7 @@
     flex-grow: 1;
     float: none;
     padding: 0 12px;
-    line-height: $height-md;
+    line-height: var(--height-md);
     font-size: 12px;
     color: var(--color-text-secondary);
   }
@@ -31,7 +31,7 @@
   .jFiler-input-button {
     float: none;
     font-size: 13px;
-    line-height: $height-md;
+    line-height: var(--height-md);
     padding: 0 12px;
     border-left-color: var(--color-divider);
     color: var(--color-text);
@@ -126,8 +126,8 @@
 
 .jFiler-input-choose-btn.blue {
   background-color: var(--color-secondary);
-  height: $height-md;
-  line-height: $height-md + 1px;
+  height: var(--height-md);
+  line-height: calc(var(--height-md) + 1px);
   padding: 0 16px;
   border: none;
   border-radius: 2px;
@@ -139,7 +139,7 @@
 
   &:hover,
   &:active {
-    background-color: color(var(--color-secondary) l(+3%));
+    background-color: color-mod(var(--color-secondary) tint(+3%));
   }
 }
 

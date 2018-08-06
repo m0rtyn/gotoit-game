@@ -34,22 +34,22 @@
 
   // Sidebar header
   .sidebar-header .logo-icon {
-    flex-basis: $sidebar-icon-size-lg;
+    flex-basis: var(--sidebar-icon-size-lg);
   }
 
   // Sidebar navigation
   .menu-link .icon {
     font-size: 16px;
     background-color: rgba(0,0,0,0.07);
-    flex-basis: $sidebar-icon-size-lg;
-    line-height: $sidebar-icon-size-lg;
+    flex-basis: var(--sidebar-icon-size-lg);
+    line-height: var(--sidebar-icon-size-lg);
     border-radius: 2px;
   }
 
   .menu-submenu .menu-link .icon {
     font-size: 13px;
-    flex-basis: $sidebar-icon-size;
-    line-height: $sidebar-icon-size;
+    flex-basis: var(--sidebar-icon-size);
+    line-height: var(--sidebar-icon-size);
   }
 
   .menu .active > .menu-link .icon {
@@ -57,13 +57,13 @@
   }
 
   .menu-sub-submenu {
-    padding-left: $sidebar-icon-size-lg + 10px;
+    padding-left: calc(var(--sidebar-icon-size-lg) + 10px);
   }
 
   .menu-submenu .icon,
   .menu-submenu .dot {
-    margin-left: $sidebar-items-margin-x + 5px;
-    margin-right: $sidebar-items-margin-x + 5px;
+    margin-left: calc(var(--sidebar-items-margin-x) + 5px);
+    margin-right: calc(var(--sidebar-items-margin-x) + 5px);
   }
 
 }
@@ -121,7 +121,7 @@
     .icon,
     .dot {
       margin-left: 20px;
-      flex-basis: $sidebar-icon-size-lg;
+      flex-basis: var(--sidebar-icon-size-lg);
     }
 
   }

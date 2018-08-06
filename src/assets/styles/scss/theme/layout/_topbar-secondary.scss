@@ -6,10 +6,10 @@
 
   border-bottom: 1px solid rgba(0,0,0,0.05);
   box-shadow: none;
-  height: $height-topbar-sec + 1px;
+  height: calc(var(--height-topbar-sec) + 1px);
 
   .topbar-btn {
-    line-height: $height-topbar-sec;
+    line-height: var(--height-topbar-sec);
     border-top: none;
 
     &.has-new i::after {
@@ -51,7 +51,7 @@
   }
 
   .dropdown-item {
-    font-family: $font-title;
+    font-family: var(--font-title);
     font-size: 13px;
     text-transform: uppercase;
     height: $local_dropdown-item-height;
@@ -73,11 +73,11 @@
   // Navigation
   //
   .menu-link {
-    font-family: $font-title;
+    font-family: var(--font-title);
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    height: $height-topbar-sec;
+    height: var(--height-topbar-sec);
     border-top: none;
 
     .title {

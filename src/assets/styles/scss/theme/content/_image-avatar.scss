@@ -1,6 +1,6 @@
 
 .avatar {
-  $size: $height-md;
+  $size: var(--height-md);
   position: relative;
   display: inline-block;
   width: $size;
@@ -38,7 +38,7 @@
 // Sizes
 //
 .avatar-sm {
-  $size: $height-sm;
+  $size: var(--height-sm);
   width: $size;
   height: $size;
   line-height: $size;
@@ -46,7 +46,7 @@
 }
 
 .avatar-lg {
-  $size: $height-lg;
+  $size: var(--height-lg);
   width: $size;
   height: $size;
   line-height: $size;
@@ -54,7 +54,7 @@
 }
 
 .avatar-xl {
-  $size: $height-xl;
+  $size: var(--height-xl);
   width: $size;
   height: $size;
   line-height: $size;
@@ -62,7 +62,7 @@
 }
 
 .avatar-xxl {
-  $size: $height-xxl;
+  $size: var(--height-xxl);
   width: $size;
   height: $size;
   line-height: $size;
@@ -70,7 +70,7 @@
 }
 
 .avatar-xxxl {
-  $size: $height-xxxl;
+  $size: var(--height-xxxl);
   width: $size;
   height: $size;
   line-height: $size;
@@ -86,7 +86,7 @@
 //
 .avatar-pill {
   width: auto;
-  border-radius: $height-md/2;
+  border-radius: calc(var(--height-md) / 2);
   color: var(--color-text-light);
   text-transform: none;
   letter-spacing: 0;
@@ -103,11 +103,11 @@
   }
 
   img {
-    width: $height-md;
+    width: var(--height-md);
   }
 
   span {
-    padding-right: $height-md/2;
+    padding-right: calc(var(--height-md) / 2);
     padding-left: 8px;
   }
 
@@ -123,7 +123,7 @@
   // Sizes
   //
   &.avatar-sm {
-    $size: $height-sm;
+    $size: var(--height-sm);
     border-radius: $size/2;
     font-size: 0.8125rem;
 
@@ -142,7 +142,7 @@
   }
 
   &.avatar-lg {
-    $size: $height-lg;
+    $size: var(--height-lg);
     border-radius: $size/2;
     font-size: 0.9375rem;
 
@@ -161,7 +161,7 @@
   }
 
   &.avatar-xl {
-    $size: $height-xl;
+    $size: var(--height-xl);
     border-radius: $size/2;
     font-size: 1rem;
 
@@ -181,7 +181,7 @@
   }
 
   &.avatar-xxl {
-    $size: $height-xxl;
+    $size: var(--height-xxl);
     border-radius: $size/2;
     font-size: 1.125rem;
 
@@ -201,7 +201,7 @@
   }
 
   &.avatar-xxxl {
-    $size: $height-xxxl;
+    $size: var(--height-xxxl);
     border-radius: $size/2;
     font-size: 1.25rem;
 
@@ -311,9 +311,9 @@
 // Add avatar
 //
 .avatar-add {
-  font-family: $font-icon-themify;
+  font-family: var(--font-icon-themify);
   background-color: transparent;
-  border: 1px dashed color(var(--color-text-secondary) l(+10%));
+  border: 1px dashed color-mod(var(--color-text-secondary) tint(+10%));
   color: var(--color-text-secondary);
   font-size: 0.875rem;
 

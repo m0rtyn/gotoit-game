@@ -36,7 +36,7 @@
 
     &.old,
     &.new {
-      color: color(var(--color-text) l(+43%));
+      color: color-mod(var(--color-text) tint(+43%));
     }
 
     &.range {
@@ -86,7 +86,7 @@
   .datepicker-switch,
   .prev,
   .next {
-    line-height: $height-md;
+    line-height: var(--height-md);
   }
 
   .prev,
@@ -94,7 +94,7 @@
     font-size: 0;
 
     &::before {
-      font-family: $font-icon-themify;
+      font-family: var(--font-icon-themify);
       color: var(--color-text-secondary);
       font-size: 12px;
       vertical-align: top;
@@ -155,8 +155,8 @@
 .datepicker table tr td.active:active.focus,
 .datepicker table tr td.active:active:focus,
 .datepicker table tr td.active:active:hover {
-  background-color: color(var(--color-primary) b(+2%));
-  border-color: color(var(--color-primary) b(+2%));
+  background-color: color-mod(var(--color-primary) shade(+2%));
+  border-color: color-mod(var(--color-primary) shade(+2%));
 }
 
 

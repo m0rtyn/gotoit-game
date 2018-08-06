@@ -1,15 +1,15 @@
 
 body {
-  font-family: $font-body;
+  font-family: var(--font-body);
   color: var(--color-text);
   font-weight: 300;
   font-size: 13px;
-  line-height: $line-height-md;
+  line-height: var(--line-height-md);
 }
 
 // TODO: will fix in Beta release
 button, input, optgroup, select, textarea {
-  font-family: $font-body;
+  font-family: var(--font-body);
   font-weight: 300;
 }
 
@@ -19,12 +19,12 @@ canvas:focus {
 }
 
 ::selection {
-  background: color(var(--color-primary) l(+7%));
+  background: color-mod(var(--color-primary) tint(+7%));
   color: #fff;
 }
 
 ::-moz-selection {
-  background: color(var(--color-primary) l(+7%));
+  background: color-mod(var(--color-primary) tint(+7%));
   color: #fff;
 }
 
@@ -65,7 +65,7 @@ strong {
 small,
 time,
 .small {
-  font-family: $font-body;
+  font-family: var(--font-body);
   font-weight: 400;
   font-size: 11px;
   color: var(--color-text-secondary);
@@ -83,7 +83,7 @@ time,
 
 .lead {
   font-size: 16px;
-  line-height: $line-height-lg;
+  line-height: var(--line-height-lg);
 }
 
 .semibold {
@@ -105,7 +105,7 @@ time,
 //
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: $font-title;
+  font-family: var(--font-title);
   font-weight: 300;
   color: var(--color-title);
   line-height: 1.5;
@@ -135,7 +135,7 @@ h5, .h5 { font-size: 16px; font-weight: 400; }
 h6, .h6 { font-size: 14px; font-weight: 400; }
 
 .font-alt {
-  font-family: $font-body;
+  font-family: var(--font-body);
 }
 
 .sidetitle {

@@ -2,7 +2,7 @@
 // Lookup
 //
 .lookup {
-  $height: $height-md;
+  $height: var(--height-md);
 
   position: relative;
   display: inline-flex;
@@ -11,7 +11,7 @@
 
   &::before {
     content: "\e610";
-    font-family: $font-icon-themify;
+    font-family: var(--font-icon-themify);
     font-size: 16px;
     position: absolute;
     top: 52%;
@@ -32,7 +32,7 @@
     max-width: 100%;
     padding-left: $height;
     padding-right: $height/2;
-    font-family: $font-body;
+    font-family: var(--font-body);
     font-size: 15px;
     font-weight: 300;
     letter-spacing: .5px;
@@ -78,7 +78,7 @@
 
 // Small
 .lookup-sm {
-  $height: $height-sm;
+  $height: var(--height-sm);
 
   &::before {
     font-size: 14px;
@@ -105,7 +105,7 @@
 
 // Large
 .lookup-lg {
-  $height: $height-lg;
+  $height: var(--height-lg);
 
   &::before {
     font-size: 20px;
@@ -138,31 +138,31 @@
   }
 
   input {
-    padding-left: $height-md/2;
-    padding-right: $height-md;
+    padding-left: calc(var(--height-md) / 2);
+    padding-right: var(--height-md);
   }
 
   &.lookup-sm input {
-    padding-left: $height-sm/2;
-    padding-right: $height-sm;
+    padding-left: calc(var(--height-sm) / 2);
+    padding-right: var(--height-sm);
   }
 
   &.lookup-lg input {
-    padding-left: $height-lg/2;
-    padding-right: $height-lg;
+    padding-left: calc(var(--height-lg) / 2);
+    padding-right: var(--height-lg);
   }
 
 
   &.no-icon input {
-    padding-right: $height-md/2;
+    padding-right: calc(var(--height-md) / 2);
   }
 
   &.no-icon.lookup-sm input {
-    padding-right: $height-sm/2;
+    padding-right: calc(var(--height-sm) / 2);
   }
 
   &.no-icon.lookup-lg input {
-    padding-right: $height-lg/2;
+    padding-right: calc(var(--height-lg) / 2);
   }
 
 }
@@ -186,13 +186,13 @@
   input {
     background-color: var(--color-alpha-dark-bg);
     border: none;
-    width: $height-md;
+    width: var(--height-md);
     padding-right: 0;
 
     &:focus {
       background-color: var(--color-alpha-dark-bg-hover);
       width: 170px;
-      padding-right: $height-md/2;
+      padding-right: calc(var(--height-md) / 2);
     }
   }
 
@@ -200,18 +200,18 @@
   &.lookup-sm {
     &::before {
       font-size: 14px;
-      width: $height-sm;
+      width: var(--height-sm);
     }
 
     input {
-      border-radius: $height-sm/2;
-      height: $height-sm;
-      width: $height-sm;
-      padding-left: $height-sm;
+      border-radius: calc(var(--height-sm) / 2);
+      height: var(--height-sm);
+      width: var(--height-sm);
+      padding-left: var(--height-sm);
 
       &:focus {
         width: 150px;
-        padding-right: $height-sm/2;
+        padding-right: calc(var(--height-sm) / 2);
       }
     }
   }
@@ -220,18 +220,18 @@
   &.lookup-lg {
     &::before {
       font-size: 16px;
-      width: $height-lg;
+      width: var(--height-lg);
     }
 
     input {
-      border-radius: $height-lg/2;
-      height: $height-lg;
-      width: $height-lg;
-      padding-left: $height-lg;
+      border-radius: calc(var(--height-lg) / 2);
+      height: var(--height-lg);
+      width: var(--height-lg);
+      padding-left: var(--height-lg);
 
       &:focus {
         width: 200px;
-        padding-right: $height-lg/2;
+        padding-right: calc(var(--height-lg) / 2);
       }
     }
   }
@@ -246,28 +246,28 @@
 
     input {
       padding-left: 0;
-      padding-right: $height-md;
+      padding-right: var(--height-md);
 
       &:focus {
-        padding-left: $height-md/2;
+        padding-left: calc(var(--height-md) / 2);
       }
     }
 
     &.lookup-sm input {
       padding-left: 0;
-      padding-right: $height-sm;
+      padding-right: var(--height-sm);
 
       &:focus {
-        padding-left: $height-sm/2;
+        padding-left: calc(var(--height-sm) / 2);
       }
     }
 
     &.lookup-lg input {
       padding-left: 0;
-      padding-right: $height-lg;
+      padding-right: var(--height-lg);
 
       &:focus {
-        padding-left: $height-lg/2;
+        padding-left: calc(var(--height-lg) / 2);
       }
     }
 
@@ -332,7 +332,7 @@
   right: 0;
   bottom: 0;
   background-color: rgba(255,255,255,.985);
-  z-index: $zindex-lookup-fullscreen;
+  z-index: var(--zindex-lookup-fullscreen);
   padding: 50px 5%;
   display: none;
   flex-direction: column;

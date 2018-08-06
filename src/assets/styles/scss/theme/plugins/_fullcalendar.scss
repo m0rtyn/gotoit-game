@@ -2,8 +2,8 @@
 
 .fc button {
   font-weight: 400;
-  height: $height-md;
-  line-height: $height-md;
+  height: var(--height-md);
+  line-height: var(--height-md);
   padding: 0 12px;
   text-transform: capitalize;
 }
@@ -117,7 +117,7 @@
 }
 
 .fc-toolbar h2 {
-  font-family: $font-body;
+  font-family: var(--font-body);
   font-size: 18px;
   color: var(--color-text);
   padding-top: 8px;

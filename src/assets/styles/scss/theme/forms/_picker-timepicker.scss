@@ -18,9 +18,9 @@
   border-radius: 2px;
   border: 1px solid var(--color-divider);
   font-size: 0.875rem;
-  height: $height-sm;
-  width: $height-sm;
-  line-height: $height-sm;
+  height: var(--height-sm);
+  width: var(--height-sm);
+  line-height: var(--height-sm);
 
   &:focus {
     outline: none;
@@ -30,9 +30,9 @@
 // Buttons
 .bootstrap-timepicker-widget table td a {
   color: var(--color-text-secondary);
-  height: $height-sm;
-  width: $height-sm;
-  line-height: $height-sm;
+  height: var(--height-sm);
+  width: var(--height-sm);
+  line-height: var(--height-sm);
   padding: 0;
 
   &:hover {
@@ -44,7 +44,7 @@
 
 // Icons
 .bootstrap-timepicker-widget .glyphicon {
-  font-family: $font-icon-themify;
+  font-family: var(--font-icon-themify);
 }
 
 .bootstrap-timepicker-widget .glyphicon-chevron-up::before {

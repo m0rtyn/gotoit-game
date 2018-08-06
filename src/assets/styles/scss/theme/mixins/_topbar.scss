@@ -39,7 +39,7 @@
 
     .menu {
       margin-left: 0;
-      width: $width-sidebar-normal;
+      width: var(--width-sidebar-normal);
     }
 
     .menu-category {
@@ -135,11 +135,11 @@
   .topbar-navigation {
     position: fixed;
     top: 0;
-    left: -$width-sidebar-normal;
+    left: -var(--width-sidebar-normal);
     bottom: 0;
-    width: $width-sidebar-normal;
+    width: var(--width-sidebar-normal);
     overflow: hidden;
-    z-index: $zindex-topbar-navigation;
+    z-index: var(--zindex-topbar-navigation);
     transition: left 0.3s ease;
   }
 
@@ -177,14 +177,14 @@
   .dropdown.show .topbar-btn,
   .dropdown:hover .topbar-btn,
   .topbar-btn:hover {
-    background-color: color($color b(+2%));
+    background-color: color($color shade(2%));
   }
 
   .dropdown-item {
 
     &:hover,
     &:focus {
-      background-color: color($color b(+3%));
+      background-color: color($color shade(3%));
     }
   }
 

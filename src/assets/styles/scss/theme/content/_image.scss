@@ -5,7 +5,7 @@ img {
 
 .img-thumbnail {
   padding: 0.25rem;
-  border-color: color(var(--color-divider) l(+3%));
+  border-color: color-mod(var(--color-divider) tint(+3%));
   border-radius: 3px;
 }
 

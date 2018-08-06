@@ -24,7 +24,7 @@
     &::before {
       content: "\e648";
       display: inline-block;
-      font-family: $font-icon-themify;
+      font-family: var(--font-icon-themify);
       font-size: 12px;
       margin-right: 20px;
       margin-left: -33px;

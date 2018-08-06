@@ -15,7 +15,7 @@
 
 
 .alert-primary {
-  color: color(var(--color-primary) b(+22%));
+  color: color-mod(var(--color-primary) shade(+22%));
   background-color: #d5f5f3;
 }
 

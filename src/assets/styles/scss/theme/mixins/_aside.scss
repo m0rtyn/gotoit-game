@@ -10,7 +10,7 @@
   }
 
   &.aside {
-    left: -$width-aside-md;
+    left: -var(--width-aside-md);
     box-shadow: none;
 
     ~ .header,
@@ -21,11 +21,11 @@
   }
 
   &.aside-sm {
-    left: -$width-aside-sm;
+    left: -var(--width-aside-sm);
   }
 
   &.aside-lg {
-    left: -$width-aside-lg;
+    left: -var(--width-aside-lg);
   }
 
 }

@@ -23,7 +23,7 @@
 
     &[href]:focus,
     &[href]:hover {
-      background-color: color($color b(+5%));
+      background-color: color($color shade(5%));
     }
   }
 }
@@ -39,7 +39,7 @@
   &[href]:focus,
   &[href]:hover {
     color: var(--color-text-light);
-    background-color: color(var(--color-bg-light) b(+3%));
+    background-color: color-mod(var(--color-bg-light) shade(+3%));
   }
 }
 
@@ -50,7 +50,7 @@
   &[href]:focus,
   &[href]:hover {
     color: var(--color-text-light);
-    background-color: color(var(--color-secondary) b(+3%));
+    background-color: color-mod(var(--color-secondary) shade(+3%));
   }
 }
 
@@ -177,7 +177,7 @@
 // Bold badge
 //
 .badge-bold {
-  font-family: $font-title;
+  font-family: var(--font-title);
   text-transform: uppercase;
   font-weight: 500;
   letter-spacing: 1px;

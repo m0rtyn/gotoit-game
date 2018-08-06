@@ -23,7 +23,7 @@
 //
 .carousel-control-next-icon,
 .carousel-control-prev-icon {
-  font-family: $font-icon-themify;
+  font-family: var(--font-icon-themify);
   font-size: 28px;
   background: none;
 }
@@ -71,7 +71,7 @@
   }
 
   .active {
-    background-color: color(var(--color-secondary) b(+12%));
+    background-color: color-mod(var(--color-secondary) shade(+12%));
   }
 }
 

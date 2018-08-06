@@ -82,7 +82,7 @@
   border-color: var(--color-divider-light);
   padding: 0;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.06);
-  z-index: $zindex-dropdown;
+  z-index: var(--zindex-dropdown);
 
   // Unable to open dropdown with animation, due to Popper
   //
@@ -158,7 +158,7 @@
 // Dropdown item
 //
 .dropdown-item {
-  color: color(var(--color-text) l(+8%));
+  color: color-mod(var(--color-text) tint(+8%));
   font-weight: 300;
   padding: 4px 12px;
   width: auto;

@@ -57,8 +57,8 @@
 
         &::after {
           background-color: var(--color-primary);
-          width: $height-sm;
-          height: $height-sm;
+          width: var(--height-sm);
+          height: var(--height-sm);
           transform: translateX(0);
           color: #fff;
         }
@@ -66,8 +66,8 @@
     }
 
     &.complete .nav-link::after {
-      width: $height-sm;
-      height: $height-sm;
+      width: var(--height-sm);
+      height: var(--height-sm);
       transform: translateX(0);
       color: #fff;
     }
@@ -76,8 +76,8 @@
       color: var(--color-text);
 
       .nav-link::after {
-        width: $height-sm - 16px;
-        height: $height-sm - 16px;
+        width: calc(var(--height-sm) - 16px);
+        height: calc(var(--height-sm) - 16px);
         margin-top: 8px;
         transform: translateX(8px);
         color: transparent;
@@ -90,9 +90,9 @@
   .nav-link {
     display: inline-flex;
     margin: 10px 0;
-    width: $height-sm;
-    height: $height-sm;
-    max-height: $height-sm;
+    width: var(--height-sm);
+    height: var(--height-sm);
+    max-height: var(--height-sm);
     border-radius: 50%;
     background-color: var(--color-pale-secondary);
     transition: .5s;
@@ -101,10 +101,10 @@
     &::before {
       content: '';
       position: absolute;
-      left: calc(-50% + #{$height-sm/2});
-      right: calc(50% + #{$height-sm/2});
+      left: calc(-50% + #{var(--height-sm) / 2});
+      right: calc(50% + #{var(--height-sm) / 2});
       height: 10px;
-      margin-top: $height-sm/2 - 5px;
+      margin-top: calc(var(--height-sm) /2  - 5px);
       background-color: var(--color-pale-secondary);
       cursor: default;
       transition: .5s;
@@ -112,7 +112,7 @@
 
     &::after {
       content: "\e64c";
-      font-family: $font-icon-themify;
+      font-family: var(--font-icon-themify);
       width: 0;
       height: 0;
       text-align: center;
@@ -121,7 +121,7 @@
       border-radius: 50%;
       background-color: transparent;
       color: transparent;
-      transform: translate($height-sm/2, $height-sm/2);
+      transform: translate(calc(var(--height-sm) / 2), calc(var(--height-sm) / 2));
       transition: .5s;
       z-index: 1;
 
@@ -196,10 +196,10 @@
     font-size: 22px;
     justify-content: center !important;
     margin: 10px 0;
-    width: $height-lg;
-    height: $height-lg;
-    line-height: $height-lg - 4px;
-    max-height: $height-lg;
+    width: var(--height-lg);
+    height: var(--height-lg);
+    line-height: calc(var(--height-lg) - 4px);
+    max-height: var(--height-lg);
     border-radius: 50%;
     border: 2px solid transparent;
     background-color: var(--color-pale-secondary);
@@ -208,10 +208,10 @@
     &::before {
       content: '';
       position: absolute;
-      left: calc(-50% + #{$height-lg/2});
-      right: calc(50% + #{$height-lg/2});
+      left: calc(-50% + #{var(--height-lg) / 2});
+      right: calc(50% + #{var(--height-lg) / 2});
       height: 3px;
-      margin-top: $height-lg/2 - 1.5px;
+      margin-top: calc(var(--height-lg) /2 - 1.5px);
       background-color: var(--color-pale-secondary);
       cursor: default;
     }
@@ -236,7 +236,7 @@
 
     &::after {
       content: "\e649";
-      font-family: $font-icon-themify;
+      font-family: var(--font-icon-themify);
       color: var(--color-divider-light);
       background-color: #fff;
       margin-right: -10px;
@@ -283,7 +283,7 @@
   }
 
   .nav-link-number {
-    $size: $height-sm;
+    $size: var(--height-sm);
     display: inline-block;
     max-width: $size;
     width: $size;
@@ -351,10 +351,10 @@
   }
 
   .nav-link-number {
-    max-width: $height-lg;
-    width: $height-lg;
-    height: $height-lg;
-    line-height: $height-lg;
+    max-width: var(--height-lg);
+    width: var(--height-lg);
+    height: var(--height-lg);
+    line-height: var(--height-lg);
     font-size: 28px;
     font-weight: 300;
     border-radius: 50%;
@@ -417,7 +417,7 @@
 .nav-process-sm {
 
   &.nav-process-circle {
-    $size: $height-xs;
+    $size: var(--height-xs);
 
     .nav-item {
 
@@ -472,7 +472,7 @@
 
 
   &.nav-process-iconic {
-    $size: $height-md;
+    $size: var(--height-md);
 
     .nav-link {
       font-size: 18px;
@@ -492,7 +492,7 @@
 
 
   &.nav-process-box {
-    $size: $height-xs;
+    $size: var(--height-xs);
 
     .nav-link {
       padding-top: 8px;
@@ -521,7 +521,7 @@
 
 
   &.nav-process-block {
-    $size: $height-md;
+    $size: var(--height-md);
 
     .nav-link {
       padding: 16px;
@@ -552,7 +552,7 @@
 .nav-process-lg {
 
   &.nav-process-circle {
-    $size: $height-md;
+    $size: var(--height-md);
 
     .nav-item {
 
@@ -608,7 +608,7 @@
 
 
   &.nav-process-iconic {
-    $size: $height-xl;
+    $size: var(--height-xl);
 
     .nav-link {
       font-size: 28px;
@@ -629,7 +629,7 @@
 
 
   &.nav-process-box {
-    $size: $height-md;
+    $size: var(--height-md);
 
     .nav-link {
       padding-top: 16px;
@@ -658,7 +658,7 @@
 
 
   &.nav-process-block {
-    $size: $height-xl;
+    $size: var(--height-xl);
 
     .nav-link {
       padding: 24px;

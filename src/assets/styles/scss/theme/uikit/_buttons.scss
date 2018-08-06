@@ -25,7 +25,7 @@
 }
 
 .btn-bold {
-  font-family: $font-title;
+  font-family: var(--font-title);
   text-transform: uppercase;
   font-weight: 500;
   font-size: 12px;
@@ -43,7 +43,7 @@
 .btn-xs {
   font-size: 11px;
   padding: 2px 8px;
-  line-height: $line-height-xs;
+  line-height: var(--line-height-xs);
 
   &.btn-bold {
     font-size: 9px;
@@ -54,7 +54,7 @@
 .btn-sm {
   font-size: 12px;
   padding: 4px 12px;
-  line-height: $line-height-sm;
+  line-height: var(--line-height-sm);
   &.btn-bold {
     font-size: 11px;
   }
@@ -64,18 +64,18 @@
 .btn-lg {
   font-size: 15px;
   padding: 7px 20px;
-  line-height: $line-height-lg;
+  line-height: var(--line-height-lg);
   &.btn-bold {
     font-size: 14px;
   }
 }
 
 // Consistent width
-.btn-w-xs { width: $width-cons-xs; }
-.btn-w-sm { width: $width-cons-sm; }
-.btn-w-md { width: $width-cons-md; }
-.btn-w-lg { width: $width-cons-lg; }
-.btn-w-xl { width: $width-cons-xl; }
+.btn-w-xs { width: var(--width-cons-xs); }
+.btn-w-sm { width: var(--width-cons-sm); }
+.btn-w-md { width: var(--width-cons-md); }
+.btn-w-lg { width: var(--width-cons-lg); }
+.btn-w-xl { width: var(--width-cons-xl); }
 
 
 
@@ -210,7 +210,7 @@
 //
 .btn-label {
   position: relative;
-  padding-left: $height-md + 16px;
+  padding-left: calc(var(--height-md) + 16px);
   overflow: hidden;
 
   label {
@@ -218,7 +218,7 @@
     left: 0;
     top: 0;
     bottom: 0;
-    width: $height-md;
+    width: var(--height-md);
     line-height: inherit;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -233,26 +233,26 @@
 
   // Sizes
   &.btn-xs {
-    padding-left: $height-xs + 8px;
+    padding-left: calc(var(--height-xs) + 8px);
 
     label {
-      width: $height-xs;
+      width: var(--height-xs);
     }
   }
 
   &.btn-sm {
-    padding-left: $height-sm + 12px;
+    padding-left: calc(var(--height-sm) + 12px);
 
     label {
-      width: $height-sm;
+      width: var(--height-sm);
     }
   }
 
   &.btn-lg {
-    padding-left: $height-lg + 16px;
+    padding-left: calc(var(--height-lg) + 16px);
 
     label {
-      width: $height-lg;
+      width: var(--height-lg);
     }
   }
 }
@@ -298,22 +298,22 @@
 .btn-sq,
 .btn-square {
   padding: 5px;
-  width: $height-md;
-  height: $height-md;
+  width: var(--height-md);
+  height: var(--height-md);
 
   &.btn-lg {
-    width: $height-lg;
-    height: $height-lg;
+    width: var(--height-lg);
+    height: var(--height-lg);
   }
 
   &.btn-sm {
-    width: $height-sm;
-    height: $height-sm;
+    width: var(--height-sm);
+    height: var(--height-sm);
   }
 
   &.btn-xs {
-    width: $height-xs;
-    height: $height-xs;
+    width: var(--height-xs);
+    height: var(--height-xs);
   }
 }
 
@@ -353,7 +353,7 @@
 .btn-flat {
   position: relative;
   font-size: 13px;
-  font-family: $font-title;
+  font-family: var(--font-title);
   text-transform: uppercase;
   background-color: var(--color-bg-lightest);
   border: none;

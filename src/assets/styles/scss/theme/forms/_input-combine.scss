@@ -62,7 +62,7 @@
   }
 
   label {
-    font-family: $font-title;
+    font-family: var(--font-title);
     font-weight: 500;
     font-size: 10px;
     line-height: 20px;

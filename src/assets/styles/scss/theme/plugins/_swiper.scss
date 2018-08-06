@@ -30,7 +30,7 @@
   transition: .4s;
 
   &::before {
-    font-family: $font-icon-themify;
+    font-family: var(--font-icon-themify);
     font-size: 1.75rem;
     opacity: .7;
     transition: .4s;
@@ -98,7 +98,7 @@
     transition: .4s;
 
     &::before {
-      font-family: $font-icon-themify;
+      font-family: var(--font-icon-themify);
       font-size: 1.75rem;
       opacity: 1;
     }

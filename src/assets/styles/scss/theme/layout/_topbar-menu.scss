@@ -5,7 +5,7 @@
 .topbar {
 
   .menu {
-    margin-left: $topbar-gap;
+    margin-left: var(--topbar-gap);
     margin-bottom: 0;
     white-space: nowrap;
   }
@@ -22,13 +22,13 @@
   }
 
   .menu-link {
-    height: $height-topbar;
+    height: var(--height-topbar);
     color: var(--color-alpha-dark-text);
     border-top: 2px solid transparent;
 
     .icon,
     .dot {
-      flex-basis: $topbar-icon-size;
+      flex-basis: var(--topbar-icon-size);
     }
 
     .title small {
@@ -45,7 +45,7 @@
     top: 100%;
     left: 0;
     padding: 0;
-    min-width: $topbar-menu-dropdown-size;
+    min-width: var(--topbar-menu-dropdown-size);
     background-color: #fff;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 
@@ -75,7 +75,7 @@
     }
 
     .menu-link {
-      height: $menu-submenu-height;
+      height: var(--menu-submenu-height);
       border-top: none;
       opacity: 1;
 
@@ -95,7 +95,7 @@
     left: 100%;
     display: none;
     background-color: #fff;
-    min-width: $topbar-menu-dropdown-size;
+    min-width: var(--topbar-menu-dropdown-size);
     padding-left: 0;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.06);
 
@@ -173,6 +173,6 @@
   overflow: hidden;
   .topbar-navigation {
     left: 0;
-    box-shadow: $offcanvas-left-shadow;
+    box-shadow: var(--offcanvas-left-shadow);
   }
 }

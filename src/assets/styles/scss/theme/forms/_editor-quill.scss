@@ -5,7 +5,7 @@
 }
 
 .ql-toolbar.ql-snow {
-  font-family: $font-body;
+  font-family: var(--font-body);
   border-color: var(--color-divider);
   border-bottom-color: var(--color-divider-light);
   background-color: var(--color-bg-lightest);
@@ -25,12 +25,12 @@
 }
 
 .ql-container {
-  font-family: $font-body;
+  font-family: var(--font-body);
   height: auto;
 }
 
 .ql-editor {
-  line-height: $line-height-md;
+  line-height: var(--line-height-md);
 }
 
 
