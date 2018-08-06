@@ -110,6 +110,7 @@
     "build": "node scripts/build.js",
     "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "lint:js": "eslint ./src/**/*.js --ignore-path .gitignore --ignore-pattern internals/scripts",
+    "lint:js:fix": "npm run lint:js -- --fix",
     "lint:scss": "stylelint './src/**/*.scss'",
     "test": "node scripts/test.js --env=jsdom",
     "desktop-linux": "electron-builder",

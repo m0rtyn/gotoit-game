@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import ReactBootstrapSlider from 'react-bootstrap-slider';
 import '../../../node_modules/react-bootstrap-slider/src/css/bootstrap-slider.min.css';
@@ -7,7 +7,7 @@ import _ from 'lodash';
 
 import ProjectModel from '../../models/ProjectModel';
 
-import {project_platforms, project_kinds} from '../../game/knowledge';
+import {project_kinds, project_platforms} from '../../game/knowledge';
 
 class StartProject extends Component {
     constructor(props) {

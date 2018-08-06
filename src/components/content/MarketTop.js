@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ChartsController from './ChartsController'
 import _ from 'lodash';
 import Select from 'react-select';

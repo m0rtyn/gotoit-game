@@ -15,33 +15,31 @@ import Welcome from '../components/content/Welcome.js';
 import Mail from '../components/content/Mail.js';
 
 const components = {
-    'Achievements': Achievements,
-    'PublicRelations': PublicRelations, //перенести отдельный попап
-    'Archive': Archive,
-    'ChartsController': ChartsController,
-    'Exchange': Exchange,
-    'HireWorkers': HireWorkers,
-    'Loans': Loans,
-    'MarketTop': MarketTop,
-    'ProjectsFind': ProjectsFind,
-    'StartMeeting': StartMeeting,
-    'StartProject': StartProject,
-    'Welcome': Welcome,
-    'Mail': Mail
+  Achievements: Achievements,
+  PublicRelations: PublicRelations, //перенести отдельный попап
+  Archive: Archive,
+  ChartsController: ChartsController,
+  Exchange: Exchange,
+  HireWorkers: HireWorkers,
+  Loans: Loans,
+  MarketTop: MarketTop,
+  ProjectsFind: ProjectsFind,
+  StartMeeting: StartMeeting,
+  StartProject: StartProject,
+  Welcome: Welcome,
+  Mail: Mail,
 };
 
-
 class Activities extends Component {
+  render() {
+    const ContentComponent = components[this.props.data.content];
 
-    render() {
-        const ContentComponent = components[this.props.data.content];
-
-        return (
-            <div className="tab-content">
-                <ContentComponent data={this.props.data} />
-            </div>
-        );
-    }
+    return (
+      <div className="tab-content">
+        <ContentComponent data={this.props.data} />
+      </div>
+    );
+  }
 }
 
 export default Activities;

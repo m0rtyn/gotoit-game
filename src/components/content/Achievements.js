@@ -1,6 +1,6 @@
 import React from 'react';
 import {achievements} from '../../game/achievements';
-import {Tooltip, OverlayTrigger} from 'react-bootstrap'
+import {OverlayTrigger, Tooltip} from 'react-bootstrap'
 import _ from 'lodash';
 
 const Achievements = (props) => {

@@ -1,5 +1,4 @@
-
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ChartsController from "./ChartsController";
 import btc_icon from '../../assets/images/btc_logo.png'
 

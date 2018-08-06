@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {IntlProvider} from 'react-intl';
+import App from './App';
 
 // import jQuery from 'jquery';
 // window.jQuery = jQuery = window.$ = $;
@@ -16,10 +17,6 @@ import {IntlProvider} from 'react-intl';
 // import './assets/js/app.min.js';
 // import './assets/js/script.min.js';
 // ============================================
-
-
-
-import App from './App';
 
 
 // jQuery( document ).ready(function() {

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {current_tick} from '../../App';
 
 import {meetings, technologies} from '../../game/knowledge';

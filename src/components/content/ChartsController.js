@@ -1,6 +1,11 @@
 import React from 'react'
 import Chart from '../Chart'
-import {charts_parameters, exchange_charts_parameters, archive_chats_parameters, market_chart_parameters} from '../../game/knowledge'
+import {
+    archive_chats_parameters,
+    charts_parameters,
+    exchange_charts_parameters,
+    market_chart_parameters
+} from '../../game/knowledge'
 import _ from 'lodash'
 
 let ChartsController = (props) => {
