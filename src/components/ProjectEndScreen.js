@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import Portal from 'react-portal';
 
-import SimpleModal from './SimpleModal';
 import ProjectReport from './ProjectReport';
 import ProjectsTop from '../services/ProjectsTop';
 

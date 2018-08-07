@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
-
+import { hot } from 'react-hot-loader';
 //import '../node_modules/react-bootstrap-slider/node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css';
 //import * from 'bootstrap-slider';
 
@@ -27,6 +27,15 @@ import Lorer from './services/Lorer';
 import {skills_names, project_platforms, project_kinds, meetings, workers_bonus_items, technologies, skills_true} from './game/knowledge';
 
 import {getDefaultState} from './game/default_state';
+
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import 'toastr/build/toastr.min.css';
+import 'animate.css';
+
+import './assets/styles/theme.css';
+import './assets/styles/scss/main.scss';
 
 export var current_tick = 0;
 export const setCurrentTick = (tick) => { current_tick = tick; };
@@ -225,7 +234,7 @@ class App extends Component {
         };
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         let helpers = this.state.data.helpers;
 
         let loaded_app_state = JSON.parse(localStorage.getItem(game_name+"_app_state"));
@@ -259,28 +268,16 @@ class App extends Component {
 
             _.each(loaded_app_state.data.timelineScale, (time, id) => { //2018-06-17T02:29:38.299Z
                 loaded_app_state.data.timelineScale[id] = (() => {
-                    var year = time.substring(0, 4);
-                    let month = time.substring(5,7);
-                    let number = time.substring(8,10);
-                    let hours = time.substring(11, 13);
-                    let minutes = time.substring(14, 16);
-                    let seconds = time.substring(17, 19);
-                    var date = new Date(year, month, number, hours, minutes, seconds);//string instead number but works
+                    let date = time ? new Date(time) : new Date();
                     return date
                 })()
             });
 
             _.each(loaded_app_state.data.timelineEvents, (item, id) => {
                 loaded_app_state.data.timelineEvents[id].time = (() => {
-                    var time = item.time;
-                    var year = time.substring(0, 4);
-                    let month = time.substring(5,7);
-                    let number = time.substring(8,10);
-                    let hours = time.substring(11, 13);
-                    let minutes = time.substring(14, 16);
-                    let seconds = time.substring(17, 19);
-                    var date = new Date(year, month, number, hours, minutes, seconds);//string instead number but works
-                    return date
+                    let {time = ''} = item;
+                    let date = time ? new Date(time) : new Date();
+                    return date;
                 })()
             });
 
@@ -592,7 +589,6 @@ class App extends Component {
                 break;
             case 'demo':
                 if (data.rumor >= 10) {
-                    data.rumor -= 10;
                     data.demo++;
                 }
                 else {
@@ -1845,5 +1841,8 @@ class App extends Component {
         );
     }
 }
-
-export default App;
+// webpack Hot Module Replacement API
+if (module.hot) {
+   console.info('hot')
+}
+export default hot(module)(App)

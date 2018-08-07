@@ -1,10 +1,9 @@
 import React, {Component} from "react";
 import _ from 'lodash';
-import StatsBar from '../StatsBar';
 import PublicRelations from './PublicRelations';
 import HiringAgency from '../HiringAgency';
 import Bar from '../Bar';
-import {colors, skills} from "../../game/knowledge";
+import {colors} from "../../game/knowledge";
 
 import StatsProgressBar from '../StatsProgressBar';
 
@@ -45,6 +44,7 @@ class HireWorkers extends Component {
                     <img
                     className="worker-avatar"
                     src={candidate.avatar}
+                    alt={candidate.name}
                     />
 
                     <h4 className="flex-grow">

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 
 import {ToastContainer, ToastMessage} from "react-toastr";
 
