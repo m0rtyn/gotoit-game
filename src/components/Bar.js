@@ -7,13 +7,18 @@ class Bar extends Component {
         return (
             <div className={`progress ${this.props.className}`}>
                 { _.map(bar_data, (item, i) =>
-                    <div key={i} className="progress-bar" role="progressbar"
+                    <div
+                    key={i}
+                    className="progress-bar"
+                    role="progressbar"
                     id={item.id}
                     style={{
                         width: item.width +'%',
                         backgroundColor: item.color
                     }}>
-                        { item.showName ? item.name : null }{ ' ' + item.value}
+                        <span className="progress-bar-name">
+                            { item.showName ? item.name : null }{ ' ' + item.value}
+                        </span>
                     </div>
                 )}
             </div>
