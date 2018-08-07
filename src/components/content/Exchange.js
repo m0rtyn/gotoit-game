@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import ChartsController from "./ChartsController";
-import btc_icon from '../../../public/btc_logo.png'
+import btc_icon from '../../assets/images/btc_logo.png'
 
 class Exchange extends Component {
     constructor(props){
@@ -177,6 +177,8 @@ class Exchange extends Component {
                         </div>
                     </div>
                 </div>;
+                break;
+            default:
                 break;
         }
         return (

@@ -40,7 +40,6 @@ class Mail extends Component {
         })();
         let handleClick;
         const letters = _.map(inverted_mailbox, (letter, i) => {
-            let button;
             switch(letter.type){
                 case 'Project report':
                     handleClick = () => {
@@ -103,6 +102,8 @@ class Mail extends Component {
                         this.setState({show_popup: true});
                         letter.isRead = true;
                     };
+                    break;
+                default :
                     break;
             }
 

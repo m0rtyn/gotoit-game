@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import Portal from 'react-portal';
 import _ from "lodash";
-import SimpleModal from './SimpleModal';
-import ProjectOfferBlock from './ProjectOfferBlock';
 import {skills} from "../game/knowledge";
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
@@ -35,7 +32,6 @@ class HotOffer extends Component {
 
 
     render() {
-        const data = this.props.data;
         let project = this.props.project;
         const stats_data = _.mapValues(skills, (stat, key) => {
             return {name: key, val: <span>{project.needs(key)}</span>};

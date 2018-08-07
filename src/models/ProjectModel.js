@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React from 'react';
+
 import bulkStyler from '../services/bulkStyler';
 
 import {skills, skills_inf, project_kinds, project_platforms, project_sizes, project_bars} from '../game/knowledge';
