@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {IntlProvider} from 'react-intl';
+import { IntlProvider } from 'react-intl';
 import App from './App';
 
 // import jQuery from 'jquery';
@@ -18,11 +18,9 @@ import App from './App';
 // import './assets/js/script.min.js';
 // ============================================
 
-
 // jQuery( document ).ready(function() {
 //   alert('stnstnstnstn');
 // });
-
 
 ReactDOM.render(
   <IntlProvider locale="en">

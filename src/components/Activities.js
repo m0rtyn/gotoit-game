@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import Achievements from './content/Achievements.js';
@@ -31,6 +32,12 @@ const components = {
 };
 
 class Activities extends Component {
+  static propTypes = {
+    data: PropTypes.shape({
+      content: PropTypes.any.isRequired,
+    }),
+  };
+
   render() {
     const ContentComponent = components[this.props.data.content];
 

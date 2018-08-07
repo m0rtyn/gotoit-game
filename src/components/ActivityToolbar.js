@@ -1,7 +1,14 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import _ from 'lodash';
 
 class ActivityToolbar extends Component {
+  static propTypes = {
+    data: PropTypes.shape({
+      helpers: PropTypes.object.isRequired,
+    }),
+  };
+
   render() {
     let data = this.props.data;
     let unread_messages_count = (() => {
