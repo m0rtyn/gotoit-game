@@ -8,7 +8,7 @@ class Resume extends Component {
         let worker = this.props.worker;
         console.log(data.workers[worker])
         return (
-            <div>
+            <div className="resume">
                 <div className="flexbox">
                     <span className="flex-grow">
                         <h2  className='resume-title '>
