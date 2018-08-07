@@ -1,7 +1,6 @@
 .creation {
   input[type="radio"] {
-    width: 0;
-    height: 0;
+    display: none;
 
     &:checked + label {
       background-color: var(--color-success);
