@@ -22,7 +22,7 @@ class WorkerStaminaBar extends Component {
             {
                 name : 'Stamina',
                 width : Math.min(100, worker.stamina/50),
-                color : bar_color,
+                // color : bar_color,
                 value : `${Math.floor(worker.stamina/50)}%`,
                 showName: true
             },
@@ -30,7 +30,10 @@ class WorkerStaminaBar extends Component {
 
         return (
             <div>
-                <Bar bar_data={bar_data} />
+                <Bar
+                className='stamina-bar'
+                bar_data={bar_data}
+                />
             </div>
         );
     }

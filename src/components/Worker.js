@@ -68,7 +68,7 @@ class Worker extends Component {
         const data = this.props.data;
         const worker = this.props.worker;
 
-        const manage_button = <button className="btn btn-success btn-xs">Manage</button>;
+        const manage_button = <button className="btn btn-primary btn-xs">Manage</button>;
 
         const stats_progressbar_data = _.mapValues(worker.stats, (val, stat) => {
 
@@ -103,7 +103,7 @@ class Worker extends Component {
             onMouseOut={() => {
                 data.helpers.modifyHoveredObjects()
             }}
-            className={`card worker ${data.hovered_workers_id.includes(worker.id) ? 'hovered' : ''} ${worker.in_vacation ? 'vacation' : ''}`}
+            className={`card worker gap-items-2 ${data.hovered_workers_id.includes(worker.id) ? 'hovered' : ''} ${worker.in_vacation ? 'vacation' : ''}`}
             id={worker.id}
         >
 
@@ -115,7 +115,7 @@ class Worker extends Component {
 
             <div>
                 <header className="card-header">
-                    <span> {worker.name} </span>
+                    <span className="worker-name"> {worker.name} </span>
                     <Portal
                         ref="manage"
                         closeOnEsc
@@ -153,10 +153,14 @@ class Worker extends Component {
 
                                 <div className="card text-center filament">
                                     <div className="row filament">
-                                        <WorkerHappinessBar worker={worker}/>
+                                        <WorkerHappinessBar
+                                        worker={worker} 
+                                        />
                                     </div>
                                     <div className="row filament">
-                                        <WorkerStaminaBar worker={worker} />
+                                        <WorkerStaminaBar
+                                        worker={worker}
+                                        />
                                     </div>
                                     <StatsBar stats={efficiency_data} data={this.props.data} />
                                     <div>{`Character: ${worker.character.name}. ${worker.character.description}.`}</div>
@@ -263,10 +267,27 @@ class Worker extends Component {
 
                     <WorkerHappinessBar worker={worker}/>
                     <WorkerStaminaBar worker={worker}/>
+
                     <div className="worker-skills">
-                        <StatsProgressBar type={'design'} max_stat={data.max_stat} stats={stats_progressbar_data} worker={worker} data={data}/>
-                        <StatsProgressBar type={'program'} max_stat={data.max_stat} stats={stats_progressbar_data} worker={worker} data={data}/>
-                        <StatsProgressBar type={'manage'} max_stat={data.max_stat} stats={stats_progressbar_data} worker={worker} data={data}/>
+                        <StatsProgressBar
+                        type={'design'} max_stat={data.max_stat}
+                        stats={stats_progressbar_data}
+                        worker={worker}
+                        data={data}
+                        />
+                        <StatsProgressBar
+                        type={'program'} max_stat={data.max_stat}
+                        stats={stats_progressbar_data}
+                        worker={worker}
+                        data={data}
+                        />
+                        <StatsProgressBar
+                        type={'manage'}
+                        max_stat={data.max_stat}
+                        stats={stats_progressbar_data}
+                        worker={worker}
+                        data={data}
+                        />
                     </div>
                 </div>
             </div>

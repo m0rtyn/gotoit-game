@@ -35,9 +35,10 @@ class WorkerHappinessBar extends Component {
 
 
         return (
-            <div>
-                <Bar bar_data={bar_data} />
-            </div>
+            <Bar
+            className="happiness-bar"
+            bar_data={bar_data} 
+            />
         );
     }
 }
