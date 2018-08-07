@@ -20,26 +20,44 @@ class Header extends Component {
                 <div className="topbar">
                     <div className="topbar-left">
 
-                        <div className="logo">
-                            {/* <Icon name="logo" />  TODO: commented until webpack.config appears*/}
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
-                                <use xlinkHref="#icon-logo"></use>
-                            </svg>
-                            Go to IT
-                        </div>
+                        {/* <Icon name="logo" />  TODO: commented until webpack.config appears*/}
+                        <svg className="logo" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+                            <use xlinkHref="#icon-logo"></use>
+                        </svg>
 
-                        <button className="topbar-btn" href="#" onClick={this.props.newGame} title='Hard Reset For Developers'>
-                            New game
-                        </button>
-                        <button className="topbar-btn" onClick={() => {data.helpers.changeContent('Achievements')}} href="#" title='Achievements bar'>
-                            Achievements
-                        </button>
-                        <button className="topbar-btn" onClick={() => {data.helpers.changeContent('ChartsController')}} href="#" title='Statistics'>
-                            Charts
-                        </button>
-                        <button className="topbar-btn" rel="noopener noreferrer" href={support.show}>
-                            Support
-                        </button>
+                        <nav className="nav nav-primary">
+                            <a
+                            className="nav-link"
+                            href="#"
+                            title='Hard Reset For Developers'
+                            onClick={this.props.newGame}
+                            >
+                                New game
+                            </a>
+                            <a
+                            className="nav-link"
+                            href="#"
+                            title='Achievements bar'
+                            onClick={() => {data.helpers.changeContent('Achievements')}}
+                            >
+                                Achievements
+                            </a>
+                            <a
+                            className="nav-link"
+                            href="#"
+                            title='Statistics'
+                            onClick={() => {data.helpers.changeContent('ChartsController')}}
+                            >
+                                Charts
+                            </a>
+                            <a
+                            className="nav-link"
+                            rel="noopener noreferrer"
+                            href={support.show}
+                            >
+                                Support
+                            </a>
+                        </nav>
                     </div>
 
                     <div className="topbar-right" onClick={() => {
@@ -114,19 +132,19 @@ class Header extends Component {
 
                         <div className="topbar-right">
                             <span 
-                            className="topbar-btn font-weight-bold"
+                            className="font-weight-bold"
                             onClick={() => {
                                 data.helpers.changeContent('Exchange');
                             }}
                             >
-                                <i className="fa fa-bitcoin"></i>
+                                <i className="nav-link fa fa-bitcoin"></i>
                                  {data.btc.toFixed(2)}
                                 {/*<span onClick={() => { CHEAT!
                                         data.helpers.addMoney(1, 'btc');
                                         }}> BTC </span>*/}
                             </span>
 
-                            <span className="topbar-btn font-weight-bold">
+                            <span className="nav-link font-weight-bold">
                                 <i className="fa fa-dollar"></i>
                                  {data.money}
                                 {/*<span onClick={() => { CHEAT!
