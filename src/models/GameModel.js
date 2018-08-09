@@ -1,8 +1,5 @@
-
 class GameModel {
-    constructor () {
-    }
-
+  // constructor() {}
 }
 
 export default GameModel;

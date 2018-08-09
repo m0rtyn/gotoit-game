@@ -2,50 +2,50 @@ import _ from 'lodash';
 
 import ProjectModel from '../models/ProjectModel';
 
-import {meetings} from '../game/knowledge';
+import { meetings } from '../game/knowledge';
 
 class MeetingModel {
-    constructor(type, deadline) {
-        this.stage = 'ready';
-        this.id = _.uniqueId('meeting');
-        this.name = meetings[type].name;
-        this.type = 'meeting'; //
-        this.meeting_type = type; //
-        this.deadline = deadline;
-        this.deadline_max = deadline;
+  constructor(type, deadline) {
+    this.stage = 'ready';
+    this.id = _.uniqueId('meeting');
+    this.name = meetings[type].name;
+    this.type = 'meeting'; //
+    this.meeting_type = type; //
+    this.deadline = deadline;
+    this.deadline_max = deadline;
 
-        this.facts = {money_spent: 0};
+    this.facts = { money_spent: 0 };
+  }
+
+  static generate(type, team) {
+    const meeting_conf = meetings[type];
+
+    if (type === 'training') {
+      return ProjectModel.generateTrainingHackathon(team);
     }
 
-    static generate(type, team) {
-        const meeting_conf = meetings[type];
+    return new MeetingModel(type, meeting_conf.deadline);
+  }
 
-        if (type === 'training') {
-            return ProjectModel.generateTrainingHackathon(team);
-        }
+  isNeed(roles) {
+    return roles['meeting'] === true;
+  }
 
-        return new MeetingModel(type, meeting_conf.deadline);
-    }
+  generateReport() {
+    return {
+      id: this.id,
+      name: '',
+      type: this.type,
+    };
+  }
 
-    isNeed(roles) {
-        return (roles['meeting'] === true);
-    }
+  getName() {
+    return this.name;
+  }
 
-    generateReport() {
-        return {
-            id: this.id, name: '', type: this.type
-        }
-    }
-
-    getName() {
-        return this.name;
-    }
-
-    getDeadlineText() {
-        return this.deadline + ' hours';
-    }
-
-
+  getDeadlineText() {
+    return this.deadline + ' hours';
+  }
 }
 
 export default MeetingModel;
