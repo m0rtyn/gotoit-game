@@ -65,3 +65,4 @@ build/
 *.todo
 src/assets/styles/theme.css
 src/assets/styles/theme.css.map
+dist/
