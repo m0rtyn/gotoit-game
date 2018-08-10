@@ -17,9 +17,9 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 
-const smp = new SpeedMeasurePlugin({
-    outputTarget: 'smp.js'
-});
+// const smp = new SpeedMeasurePlugin({
+//     outputTarget: 'smp.js'
+// });
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
 const publicPath = '/';

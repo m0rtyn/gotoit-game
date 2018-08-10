@@ -105,7 +105,4 @@ class Timeline extends Component {
   }
 }
 
-
-
-
 export default Timeline;
