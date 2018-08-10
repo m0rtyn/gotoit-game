@@ -105,6 +105,4 @@ class Timeline extends Component {
   }
 }
 
-Timeline.propTypes = {};
-
 export default Timeline;
