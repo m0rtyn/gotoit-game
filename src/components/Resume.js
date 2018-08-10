@@ -47,7 +47,7 @@ class Resume extends Component {
         <h3>
           {worker.character.name}. {worker.character.description}
         </h3>
-        {!worker.hired ? (
+        {!worker.hired && !worker.rejected ? (
           <div>
             <button
               className="btn btn-success"
@@ -64,6 +64,7 @@ class Resume extends Component {
               id={worker.id}
               onClick={e => {
                 this.props.data.helpers.rejectCandidate(e.target.id, 'resumes');
+                worker.rejected = true;
                 this.props.closePopup();
               }}
             >

@@ -440,7 +440,7 @@ export const rules = {
           if (worker.to_vacation_ticker <= 0) {
             let weeks = _.random(1, 4);
             worker.sendToVacation(weeks);
-            state.data.helpers.lineEvent(
+            state.data.helpers.addTimelineEvent(
               'vacation',
               'Going to vacation',
               worker,

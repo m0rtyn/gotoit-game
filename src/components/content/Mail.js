@@ -19,10 +19,8 @@ class Mail extends Component {
   }
   closePopup = () => {
     this.setState({ show_popup: false });
-    console.log(this.state.show_popup);
   };
   markAllAsRead = () => {
-    console.log(this.props.data.mailbox);
     _.map(this.props.data.mailbox, letter => {
       letter.isRead = true;
     });
@@ -42,6 +40,8 @@ class Mail extends Component {
       switch (letter.type) {
         case 'Project report':
           handleClick = () => {
+            console.log('content');
+            console.log(letter.content);
             this.setState({
               current_popup: (
                 <ProjectEndScreen
