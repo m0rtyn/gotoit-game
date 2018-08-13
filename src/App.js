@@ -1833,13 +1833,19 @@ class App extends Component {
     let worker = WorkerModel.generate(
       _.random(1, Math.floor(3 + projects_done * 0.1 + current_tick * 0.001))
     );
+    let resume = {
+      worker: worker,
+      createdAt: current_tick,
+      expired: false,
+    };
+
     data.candidates.resumes.push(worker);
     data.mailbox.push({
       type: 'Resume',
-      content: worker,
+      content: resume,
       date: current_game_date,
     });
-    addAction('New resume! Resume: ' + worker.name);
+    addAction('New resume! Resume: ' + resume.worker.name);
   }
 
   work() {

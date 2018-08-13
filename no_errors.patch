@@ -1,0 +1,185 @@
+Index: .eslintrc.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .eslintrc.js	(date 1533934121000)
++++ .eslintrc.js	(date 1533991226000)
+@@ -1,3 +1,4 @@
++/*
+ // .eslintrc.js is prioritised over other eslintrc formats
+ 
+ module.exports = {
+@@ -42,4 +43,4 @@
+         'lodash/prefer-constant': 0,
+         'lodash/prefer-filter': 0
+     }
+-};
+\ No newline at end of file
++};*/
+Index: src/game/rules.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/game/rules.js	(date 1533934121000)
++++ src/game/rules.js	(date 1533991226000)
+@@ -40,7 +40,7 @@
+       setCurrentTick(time.tick);
+       setGameDate(game_date);
+       data.helpers.setTimelineScale();
+-
++      console.log(current_tick);
+       //time.hour++;
+       time.hour = game_date.getHours();
+ 
+@@ -200,6 +200,7 @@
+ 
+       data.date = time;
+       state.data = data;
++      console.log(data.candidates.resumes);
+ 
+       data.on_tick_effects = _.filter(data.on_tick_effects, effect => {
+         let same = _.filter(data.on_tick_effects, effect2 => {
+@@ -220,6 +221,10 @@
+         );
+       });
+ 
++      _.each(data.candidates.resume, resume => {
++
++      })
++
+       return state;
+     },
+   },
+Index: src/App.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/App.js	(date 1533934121000)
++++ src/App.js	(date 1533992771000)
+@@ -11,6 +11,7 @@
+ 
+ import bulkStyler from './services/bulkStyler';
+ 
++
+ import WorkerModel from './models/WorkerModel';
+ import ProjectModel from './models/ProjectModel';
+ import MeetingModel from './models/MeetingModel';
+@@ -1833,13 +1834,19 @@
+     let worker = WorkerModel.generate(
+       _.random(1, Math.floor(3 + projects_done * 0.1 + current_tick * 0.001))
+     );
+-    data.candidates.resumes.push(worker);
++    let resume = {
++      worker: worker,
++      createdAt: current_tick,
++      expired: false
++    };
++
++    data.candidates.resumes.push(resume);
+     data.mailbox.push({
+       type: 'Resume',
+-      content: worker,
++      content: resume,
+       date: current_game_date,
+     });
+-    addAction('New resume! Resume: ' + worker.name);
++    addAction('New resume! Resume: ' + resume.worker.name);
+   }
+ 
+   work() {
+Index: src/components/content/Mail.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/content/Mail.js	(date 1533934121000)
++++ src/components/content/Mail.js	(date 1533987053000)
+@@ -80,7 +80,7 @@
+                 <Resume
+                   closePopup={this.closePopup}
+                   key={i}
+-                  worker={letter.content}
++                  resume={letter.content}
+                   data={this.props.data}
+                 />
+               ),
+Index: src/components/Resume.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Resume.js	(date 1533934121000)
++++ src/components/Resume.js	(date 1533992111000)
+@@ -1,10 +1,10 @@
+ import React, { Component } from 'react';
+ 
++
+ class Resume extends Component {
+   render() {
+     let data = this.props.data;
+-    let worker = this.props.worker;
+-    console.log(data.workers[worker]);
++    let resume = this.props.resume;
+     return (
+       <div>
+         <div className="flexbox">
+@@ -27,31 +27,31 @@
+           <span>
+             {' '}
+             <img
+-              className="worker-avatar"
+-              alt={worker.name + ' avatar'}
+-              src={worker.avatar}
++              className="resume-avatar"
++              alt={resume.worker.name + ' avatar'}
++              src={resume.worker.avatar}
+             />
+           </span>
+           <span className="resume-info">
+-            <h3>{worker.name}</h3>
+-            <h3>Gender: {worker.gender}</h3>
+-            <h3>Salary: ${worker.salary} per month</h3>
++            <h3>{resume.worker.name}</h3>
++            <h3>Gender: {resume.worker.gender}</h3>
++            <h3>Salary: ${resume.worker.salary} per month</h3>
+           </span>
+           <span>
+-            <h3>Design: {worker.stats.design}</h3>
+-            <h3>Program: {worker.stats.program}</h3>
+-            <h3>Manage: {worker.stats.manage}</h3>
++            <h3>Design: {resume.worker.stats.design}</h3>
++            <h3>Program: {resume.worker.stats.program}</h3>
++            <h3>Manage: {resume.worker.stats.manage}</h3>
+           </span>
+         </div>
+         <h2>Character:</h2>
+         <h3>
+-          {worker.character.name}. {worker.character.description}
++          {resume.worker.character.name}. {resume.worker.character.description}
+         </h3>
+-        {!worker.hired && !worker.rejected ? (
++        {!resume.worker.hired && !resume.expired ? (
+           <div>
+             <button
+               className="btn btn-success"
+-              id={worker.id}
++              id={resume.worker.id}
+               onClick={e => {
+                 this.props.data.helpers.hireCandidate(e.target.id, 'resumes');
+                 this.props.closePopup();
+@@ -61,10 +61,10 @@
+             </button>
+             <button
+               className="btn btn-danger"
+-              id={worker.id}
++              id={resume.worker.id}
+               onClick={e => {
+                 this.props.data.helpers.rejectCandidate(e.target.id, 'resumes');
+-                worker.rejected = true;
++                resume.expired = true;
+                 this.props.closePopup();
+               }}
+             >

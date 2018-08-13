@@ -9,7 +9,7 @@ import {
 import { addAction } from '../components/ToastNest';
 import Lorer from '../services/Lorer';
 import WorkerModel from '../models/WorkerModel';
-import { public_relations } from './knowledge';
+import { public_relations, resume_will_expire_after } from './knowledge';
 
 export const rules = {
   matrix_show: {
@@ -40,7 +40,7 @@ export const rules = {
       setCurrentTick(time.tick);
       setGameDate(game_date);
       data.helpers.setTimelineScale();
-
+      console.log(current_tick);
       //time.hour++;
       time.hour = game_date.getHours();
 
@@ -200,6 +200,7 @@ export const rules = {
 
       data.date = time;
       state.data = data;
+      console.log(data.candidates.resumes);
 
       data.on_tick_effects = _.filter(data.on_tick_effects, effect => {
         let same = _.filter(data.on_tick_effects, effect2 => {
@@ -218,6 +219,19 @@ export const rules = {
           data.date.tick - effect.start_tick,
           effect.click_count
         );
+      });
+
+      //Expiring resumes
+      _.each(data.mailbox, letter => {
+        console.log(letter);
+        if (letter.type === 'Resume') {
+          if (
+            current_tick - letter.content.createdAt >=
+            resume_will_expire_after
+          ) {
+            letter.content.expired = true;
+          }
+        }
       });
 
       return state;

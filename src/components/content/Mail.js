@@ -80,7 +80,7 @@ class Mail extends Component {
                 <Resume
                   closePopup={this.closePopup}
                   key={i}
-                  worker={letter.content}
+                  resume={letter.content}
                   data={this.props.data}
                 />
               ),
