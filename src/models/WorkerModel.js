@@ -502,7 +502,7 @@ class WorkerModel {
   }
 
   static generateGender() {
-    return _.random(1, 100) > 70 ? 'famale' : 'male';
+    return _.random(1, 100) > 70 ? 'female' : 'male';
   }
 
   static generate(quality = 1) {

@@ -7,10 +7,16 @@ class Resume extends Component {
     console.log(current_tick);
     let data = this.props.data;
     let resume = this.props.resume;
+    let worker = resume.worker;
     let days_to_expire = Math.round(
       (this.props.resume.createdAt + resume_will_expire_after - current_tick) /
         24
     );
+    let gender_pointer = (() => {
+      if (worker.gender === 'male') return 'him';
+      if (worker.gender === 'female') return 'her';
+      if (worker.gender === 'other') return 'them';
+    })();
     const buttons = (
       <div>
         <button
@@ -80,11 +86,15 @@ class Resume extends Component {
           {resume.worker.character.name}. {resume.worker.character.description}
         </h3>
         {!resume.expired ? `Will expire in ${days_to_expire} days` : ''}
-        {!resume.worker.hired
-          ? !resume.expired
-            ? buttons
-            : 'This resume is expired'
-          : 'This employer is already hired'}
+        {!resume.worker.hired ? (
+          !resume.expired ? (
+            buttons
+          ) : (
+            <h3>{'This employer found another job.'}</h3>
+          )
+        ) : (
+          <h3>{`You already hired ${gender_pointer}`}</h3>
+        )}
       </div>
     );
   }
