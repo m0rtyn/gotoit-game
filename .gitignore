@@ -58,12 +58,15 @@ fabric.properties
 yarn.lock
 yarn-error.log
 
-
+# vscode staff
 .history
 .vscode
+*.todo
+
+
+# project's building files
 build
 build/
-*.todo
 src/assets/styles/theme.css
 src/assets/styles/theme.css.map
 dist/
