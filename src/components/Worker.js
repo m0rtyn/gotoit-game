@@ -89,7 +89,7 @@ class Worker extends Component {
         value: worker.getStatsData(stat),
         color: colors[stat].colorCompleted,
       };
-    });
+    }); 
 
     /*const stats_data = _.mapValues(worker.stats, (val, stat) => {
             return {

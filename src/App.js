@@ -36,7 +36,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'toastr/build/toastr.min.css';
 import 'animate.css';
 
-import './assets/styles/theme.css';
 import './assets/styles/scss/main.scss';
 
 export var current_tick = 0;
