@@ -116,9 +116,9 @@ class Mail extends Component {
                   event={letter.content}
                   data={this.props.data}
                 />
-              )
+              ),
             });
-            this.setState({show_popup: true})
+            this.setState({ show_popup: true });
           };
         default:
           break;
