@@ -35,7 +35,6 @@ export const rules = {
       var real_date = new Date(1991, 1, 26, 1, 0);
       var game_date = new Date(1991, 1, 26, 1, 0);
       game_date.setDate(real_date.getDate() + date.tick / 24);
-      console.log(game_date, 'DATA SUKA');
 
       time.tick++;
       setCurrentTick(time.tick);
@@ -441,7 +440,7 @@ export const rules = {
           if (worker.to_vacation_ticker <= 0) {
             let weeks = _.random(1, 4);
             worker.sendToVacation(weeks);
-            state.data.helpers.lineEvent(
+            state.data.helpers.addTimelineEvent(
               'vacation',
               'Going to vacation',
               worker,
