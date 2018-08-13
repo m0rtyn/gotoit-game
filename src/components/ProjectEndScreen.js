@@ -6,7 +6,7 @@ import ProjectsTop from '../services/ProjectsTop';
 import {
   project_kinds,
   project_platforms,
-  skills_names,
+  skills_names
 } from '../game/knowledge';
 
 class ProjectEndScreen extends Component {

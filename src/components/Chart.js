@@ -4,7 +4,7 @@ import { Line } from 'react-chartjs-2';
 const Chart = props => {
   let data = {
     labels: props.data.labels,
-    datasets: props.data.datasets,
+    datasets: props.data.datasets
   };
 
   let options = props.options;

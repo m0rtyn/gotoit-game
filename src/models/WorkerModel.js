@@ -8,7 +8,7 @@ import {
   skills,
   skills_1,
   worker_character_types,
-  workers_bonus_items,
+  workers_bonus_items
 } from '../game/knowledge';
 
 import { addAction } from '../components/ToastNest';
@@ -45,7 +45,7 @@ class WorkerModel {
 
     this.temper = {
       earliness: _.random(0, 4),
-      variability: _.random(0, 4),
+      variability: _.random(0, 4)
     };
 
     this.character = worker_character_types[_.random(0, 4)];
@@ -97,7 +97,7 @@ class WorkerModel {
       bugs_passed: 0,
       refactored: 0,
       tests_wrote: 0,
-      retrospected: 0,
+      retrospected: 0
     };
 
     this.effects = {};
@@ -129,7 +129,7 @@ class WorkerModel {
       this.name + ' leaves on vacation in two weeks',
       {
         timeOut: 10000,
-        extendedTimeOut: 5000,
+        extendedTimeOut: 5000
       },
       'error'
     );
@@ -143,7 +143,7 @@ class WorkerModel {
       this.name + ' leaves on a ' + long + ' week vacation now',
       {
         timeOut: 15000,
-        extendedTimeOut: 8000,
+        extendedTimeOut: 8000
       },
       'error'
     );
@@ -373,36 +373,36 @@ class WorkerModel {
     let happiness_array = {
       happiness_const: {
         name: 'Happiness const',
-        value: salary_mod * 20,
+        value: salary_mod * 20
       },
       overrate: {
         name: 'Overrate',
-        value: salary_mod * Math.floor(this.getOverrate() / 10),
+        value: salary_mod * Math.floor(this.getOverrate() / 10)
       },
       motivation: {
         name: 'Motivation',
-        value: salary_mod * this.getMotivate(),
+        value: salary_mod * this.getMotivate()
       },
       gadgets: {
         name: 'Gadgets',
-        value: salary_mod * getData().office_things.gadget,
+        value: salary_mod * getData().office_things.gadget
       },
       tasks_stream: {
         name: 'Tasks stream',
-        value: salary_mod * 20 - Math.abs(tasks_stream),
+        value: salary_mod * 20 - Math.abs(tasks_stream)
       },
       tasks_difficulty: {
         name: 'Tasks difficulty',
-        value: salary_mod * (20 - Math.abs(tasks_difficulty)),
+        value: salary_mod * (20 - Math.abs(tasks_difficulty))
       },
       education_stream: {
         name: 'Education_stream',
-        value: salary_mod * (20 - Math.abs(education_stream)),
+        value: salary_mod * (20 - Math.abs(education_stream))
       },
       collective: {
         name: 'Collective',
-        value: salary_mod * (20 - Math.abs(collective)),
-      },
+        value: salary_mod * (20 - Math.abs(collective))
+      }
     };
 
     return happiness_array;
@@ -509,7 +509,7 @@ class WorkerModel {
     let stats_bulk = {
       design: this.genStat(quality),
       program: this.genStat(quality),
-      manage: this.genStat(quality),
+      manage: this.genStat(quality)
     };
 
     let stats = bulkStyler.speciality(stats_bulk);
@@ -576,7 +576,7 @@ class WorkerModel {
         'Nicol',
         'Alexey',
         'Aleksandr',
-        'Peter',
+        'Peter'
       ];
     } else {
       first_names = [
@@ -595,7 +595,7 @@ class WorkerModel {
         'Alice',
         'Anna',
         'Aurora',
-        'Audrey',
+        'Audrey'
       ];
     }
     const second_names = [
@@ -806,7 +806,7 @@ class WorkerModel {
       'Anderson',
       'Cunningham',
       'Knight',
-      'Bradley',
+      'Bradley'
     ];
     return _.sample(first_names) + ' ' + _.sample(second_names);
   }

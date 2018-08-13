@@ -10,7 +10,7 @@ const Achievements = props => {
   let achievements_for_render = {
     Breakthroughts: [],
     Conquest: [],
-    Challenges: [],
+    Challenges: []
   };
 
   _.each(achievements, (achievement, key) => {
@@ -20,7 +20,7 @@ const Achievements = props => {
         silver: false,
         gold: false,
         type: achievement.type,
-        name: achievement.name,
+        name: achievement.name
       };
     }
 

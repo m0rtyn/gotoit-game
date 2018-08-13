@@ -9,7 +9,7 @@ import {
   colors,
   education,
   skills_names,
-  workers_bonus_items,
+  workers_bonus_items
 } from '../game/knowledge';
 import WorkerHappinessBar from './WorkerHappinessBar';
 import WorkerStaminaBar from './WorkerStaminaBar';
@@ -87,9 +87,9 @@ class Worker extends Component {
       return {
         name: stat,
         value: worker.getStatsData(stat),
-        color: colors[stat].colorCompleted,
+        color: colors[stat].colorCompleted
       };
-    }); 
+    });
 
     /*const stats_data = _.mapValues(worker.stats, (val, stat) => {
             return {
@@ -102,10 +102,10 @@ class Worker extends Component {
       work_load: { name: 'Work Load', val: worker.workloadPenalty() },
       work_difficulty: {
         name: 'Task Difficulty',
-        val: worker.difficultyPenalty(),
+        val: worker.difficultyPenalty()
       },
       education: { name: 'Education Balance', val: worker.educationPenalty() },
-      collective: { name: 'Collective', val: worker.collectivePenalty() },
+      collective: { name: 'Collective', val: worker.collectivePenalty() }
     };
 
     return (
@@ -360,7 +360,7 @@ class Worker extends Component {
                                       project.estimate[skill]}
                                   </div>
                                 </div>
-                              ),
+                              )
                             };
                           }
                         );

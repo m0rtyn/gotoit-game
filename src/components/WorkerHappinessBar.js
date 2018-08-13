@@ -31,7 +31,7 @@ class WorkerHappinessBar extends Component {
         width: item.value,
         color: bar_color,
         value: item.value,
-        showName: false,
+        showName: false
       };
     });
 
