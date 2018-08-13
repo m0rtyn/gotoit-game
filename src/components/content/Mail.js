@@ -108,14 +108,14 @@ class Mail extends Component {
         default:
           break;
       }
-
+      console.log(letter);
       return (
         <div className="letter card" onClick={handleClick}>
           {letter.type === 'Resume' ? (
             <img
               className="worker-avatar"
-              alt={letter.content.name + ' avatar'}
-              src={letter.content.avatar}
+              alt={letter.content.worker.name + ' avatar'}
+              src={letter.content.worker.avatar}
             />
           ) : (
             <div className="project-avatar">

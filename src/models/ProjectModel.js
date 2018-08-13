@@ -44,8 +44,8 @@ class ProjectModel {
     this.reward = reward;
     this.penalty = penalty;
     this.avatar = {
-      platform: require(`../../public/${platform}.svg`),
-      kind: require(`../../public/${kind}.svg`),
+      platform: require(`../assets/images/${platform}.svg`),
+      kind: require(`../assets/images/${kind}.svg`),
     };
 
     this.estimate = JSON.parse(JSON.stringify(start_needs));
