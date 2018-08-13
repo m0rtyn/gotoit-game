@@ -56,6 +56,7 @@ fabric.properties
 
 # yarn stuff
 yarn.lock
+yarn-error.log
 
 
 .history
