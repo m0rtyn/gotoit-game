@@ -17,7 +17,12 @@ class Header extends Component {
       <header className="header topbar">
         <div className="topbar">
           <div className="topbar-left">
-            <div className="logo">
+            <div
+              className="logo"
+              onClick={() => {
+                console.log(data);
+              }}
+            >
               {/* <Icon name="logo" />  TODO: commented until webpack.config appears*/}
               <svg
                 xmlns="http://www.w3.org/2000/svg"

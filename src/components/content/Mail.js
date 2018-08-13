@@ -40,8 +40,6 @@ class Mail extends Component {
       switch (letter.type) {
         case 'Project report':
           handleClick = () => {
-            console.log('content');
-            console.log(letter.content);
             this.setState({
               current_popup: (
                 <ProjectEndScreen
@@ -108,7 +106,6 @@ class Mail extends Component {
         default:
           break;
       }
-      console.log(letter);
       return (
         <div className="letter card" onClick={handleClick}>
           {letter.type === 'Resume' ? (
