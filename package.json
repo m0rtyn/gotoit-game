@@ -64,6 +64,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.0",
     "popper.js": "^1.14.4",
     "postcss-color-function": "^4.0.1",
+    "postcss-color-mod-function": "^2.4.3",
     "postcss-custom-properties": "^7.0.0",
     "postcss-flexbugs-fixes": "4.1.0",
     "postcss-loader": "3.0.0",

@@ -177,14 +177,14 @@
   .dropdown.show .topbar-btn,
   .dropdown:hover .topbar-btn,
   .topbar-btn:hover {
-    background-color: color($color shade(2%));
+    background-color: color-mod($color shade(2%));
   }
 
   .dropdown-item {
 
     &:hover,
     &:focus {
-      background-color: color($color shade(3%));
+      background-color: color-mod($color shade(3%));
     }
   }
 
