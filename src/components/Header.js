@@ -90,6 +90,7 @@ class Header extends Component {
                 }}
               >
                 {/* <i className="material-icons">{data.game_paused ? 'play-arrow' : 'pause'}</i> */}
+                Pause
                 <i className="fa fa-pause" />
               </button>
 
@@ -167,11 +168,14 @@ class Header extends Component {
                                         }}> BTC </span>*/}
               </span>
 
-              <span className="topbar-btn font-weight-bold">
+              <span
+                className="topbar-btn font-weight-bold"
+                onClick={() => data.helpers.addMoney(10000, 'usd')}
+              >
                 <i className="fa fa-dollar" />
                  {data.money}
                 {/*<span onClick={() => { CHEAT!
-                                        data.helpers.addMoney(10000, 'usd');
+
                                         }}> $ </span>*/}
               </span>
             </div>

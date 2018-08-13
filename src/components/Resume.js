@@ -23,9 +23,13 @@ class Resume extends Component {
           className="btn btn-success"
           id={resume.worker.id}
           onClick={e => {
-            this.props.data.helpers.hireCandidate(e.target.id, 'resumes');
-            resume.worker.hired = true;
-            this.props.closePopup();
+            if (data.workers.length !== data.office.space) {
+              this.props.data.helpers.hireCandidate(e.target.id, 'resumes');
+              resume.worker.hired = true;
+              this.props.closePopup();
+            } else {
+              alert('Your office is full');
+            }
           }}
         >
           Accept
