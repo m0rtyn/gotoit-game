@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 //import PropTypes from 'prop-types';
 import _ from 'lodash';
 import ProjectEndScreen from '../ProjectEndScreen';
+import HistoricalEvent from '../HistoricalEvent';
 import HotOffer from '../HotOffer';
 import SimpleModal from '../SimpleModal';
 import Resume from '../Resume';
@@ -105,12 +106,26 @@ class Mail extends Component {
             letter.isRead = true;
           };
           break;
+        case 'Event':
+          handleClick = () => {
+            this.setState({
+              current_popup: (
+                <HistoricalEvent
+                  closePopup={this.closePopup}
+                  key={i}
+                  event={letter.content}
+                  data={this.props.data}
+                />
+              )
+            });
+            this.setState({show_popup: true})
+          };
         default:
           break;
       }
 
       return (
-        <div className="letter card" onClick={handleClick}>
+        <div className="letter card" onClick={handleClick} key={i}>
           {letter.type === 'Resume' ? (
             <img
               className="worker-avatar"
