@@ -32,9 +32,10 @@ export const rules = {
       let time = data.date;
       let current_tick = data.date.tick;
 
-      var real_date = new Date();
-      var game_date = new Date();
+      var real_date = new Date(1991, 1, 26, 1, 0);
+      var game_date = new Date(1991, 1, 26, 1, 0);
       game_date.setDate(real_date.getDate() + date.tick / 24);
+      console.log(game_date, 'DATA SUKA');
 
       time.tick++;
       setCurrentTick(time.tick);

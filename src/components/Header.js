@@ -9,8 +9,8 @@ class Header extends Component {
     const data = this.props.data;
     const date = this.props.data.date;
 
-    var real_date = new Date();
-    var game_date = new Date();
+    var real_date = new Date(1991, 1, 26, 0, 0);
+    var game_date = new Date(1991, 1, 26, 0, 0);
     game_date.setDate(real_date.getDate() + date.tick / 24);
 
     return (
