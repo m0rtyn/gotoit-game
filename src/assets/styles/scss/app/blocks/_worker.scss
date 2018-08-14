@@ -1,4 +1,6 @@
 .worker {
+  --worker-avatar-size: calc(8px * 9);
+
   margin: size(0.5);
   margin-bottom: size(1);
   display: flex;
@@ -32,8 +34,9 @@
     }
   }
 
-  & > div {
-    width: calc(100% - 60px); // 60px - avatar width
+  .worker-info {
+    width: calc(100% - var(--worker-avatar-size);
+    margin-left: size(1);
   }
 
 
@@ -54,8 +57,8 @@
   }
 
   .worker-avatar {
-    width: size(9);
-    height: size(9);
+    width: var(--worker-avatar-size);
+    height: var(--worker-avatar-size);
   }
 
   .worker-stats {

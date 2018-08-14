@@ -32,11 +32,7 @@ class WorkerStaminaBar extends Component {
       }
     ];
 
-    return (
-      <div>
-        <Bar bar_data={bar_data} />
-      </div>
-    );
+    return <Bar className="stamina-bar" bar_data={bar_data} />;
   }
 }
 

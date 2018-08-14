@@ -80,7 +80,7 @@ class Worker extends Component {
     const worker = this.props.worker;
 
     const manage_button = (
-      <button className="btn btn-success btn-xs">Manage</button>
+      <button className="btn btn-primary btn-xs">Manage</button>
     );
 
     const stats_progressbar_data = _.mapValues(worker.stats, (val, stat) => {
@@ -121,7 +121,7 @@ class Worker extends Component {
         onMouseOut={() => {
           data.helpers.modifyHoveredObjects();
         }}
-        className={`card worker ${
+        className={`card worker gap-items-2 ${
           data.hovered_workers_id || [].includes(worker.id) ? 'hovered' : ''
         } ${worker.in_vacation ? 'vacation' : ''}`}
         id={worker.id}
@@ -132,9 +132,9 @@ class Worker extends Component {
           src={worker.avatar}
         />
 
-        <div>
+        <div className="worker-info">
           <header className="card-header">
-            <span> {worker.name} </span>
+            <span className="worker-name"> {worker.name} </span>
             <Portal
               ref="manage"
               closeOnEsc
