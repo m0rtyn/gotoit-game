@@ -7,7 +7,7 @@ import OfficeModel from '../models/OfficeModel';
 import {
   charts_parameters,
   project_kinds,
-  project_platforms,
+  project_platforms
 } from './knowledge';
 
 var default_state = {
@@ -23,7 +23,7 @@ var default_state = {
       weak: 0,
       month: 0,
       year: 0,
-      is_working_time: false,
+      is_working_time: false
     },
 
     content: 'Welcome',
@@ -48,12 +48,12 @@ var default_state = {
     office_things: {
       coffeemaker: false,
       lunch: false,
-      gadget: 0,
+      gadget: 0
     },
 
     candidates: {
       resumes: [WorkerModel.generate(3)],
-      agency: [],
+      agency: []
     },
 
     offered_projects: [],
@@ -105,16 +105,16 @@ var default_state = {
       btc: { buffer: 0, values: [] },
       share0: { buffer: 0, values: [] },
       share1: { buffer: 0, values: [] },
-      share2: { buffer: 0, values: [] },
+      share2: { buffer: 0, values: [] }
     },
 
     max_stat: 1,
     max_candidates_stat: 1,
     max_stats_projects_offered: 1,
-    mailbox: [],
+    mailbox: []
   },
 
-  is_animation_fresh: false,
+  is_animation_fresh: false
 };
 
 _.keys(project_platforms).forEach(platform => {

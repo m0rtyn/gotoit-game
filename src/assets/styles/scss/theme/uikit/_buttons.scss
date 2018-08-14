@@ -10,6 +10,9 @@
   border-color: var(--color-divider);
   outline: none !important;
   transition: 0.15s linear;
+  font-family: 'Roboto Condensed';
+  text-transform: uppercase;
+  font-weight: 700;
 
   &:hover {
     cursor: pointer;
@@ -41,9 +44,9 @@
 //
 .btn-group-xs > .btn,
 .btn-xs {
-  font-size: 11px;
-  padding: 2px 8px;
-  line-height: var(--line-height-xs);
+  font-size: 10px;
+  padding: 0 size(1);
+  line-height: calc(var(--line-height-xs) - 2px);
 
   &.btn-bold {
     font-size: 9px;

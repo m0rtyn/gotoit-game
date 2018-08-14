@@ -1,0 +1,49 @@
+.progress {
+  &.progress-sm {
+    height: size(1);
+  }
+
+  &.progress-lg {
+    height: size(2);
+  }
+
+  .progress-bar-name {
+    text-transform: uppercase;
+    font-size: size(1);
+    font-weight: 700;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+}
+
+.stats-progress-bar {
+  width: 30%;
+  display: flex;
+  padding-left: size(0.5);
+
+  .progress {
+    width: 100%;
+    border-radius: 6px;
+    height: size(1);
+    font-size: 0;
+  }
+}
+
+.happiness-bar {
+  background-color: var(--color-secondary);
+
+  .progress-bar {
+    background-color: var(--color-info);
+  }
+}
+
+.stamina-bar {
+  --color-stamina-bar: var(--color-success);
+
+  background-color: var(--color-secondary);
+
+  .progress-bar {
+    background-color: var(--color-success);
+  }
+}

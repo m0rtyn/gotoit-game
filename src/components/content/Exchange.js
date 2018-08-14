@@ -6,7 +6,7 @@ class Exchange extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tab: 'share0',
+      tab: 'share0'
     };
   }
   render() {
@@ -29,7 +29,7 @@ class Exchange extends Component {
             <h4>Current BTC Price: ${data.current_btc_price} per 1 BTC</h4>
             {ChartsController({
               chart: { type: 'BTC' },
-              data: data,
+              data: data
             })}
             {/*<ChartsController chart={ {type: 'BTC'} }/>*/}
 
@@ -157,7 +157,7 @@ class Exchange extends Component {
             <h4>Current FSC Price: ${data.current_share0_price} per 1 FS</h4>
             {ChartsController({
               chart: { type: 'share0' },
-              data: data,
+              data: data
             })}
             {/*<ChartsController chart={ {type: 'BTC'} }/>*/}
 
@@ -285,7 +285,7 @@ class Exchange extends Component {
             <h4>Current LRC Price: ${data.current_share1_price} per 1 LRC</h4>
             {ChartsController({
               chart: { type: 'share1' },
-              data: data,
+              data: data
             })}
             {/*<ChartsController chart={ {type: 'BTC'} }/>*/}
 
@@ -413,7 +413,7 @@ class Exchange extends Component {
             <h4>Current MRM Price: ${data.current_share2_price} per 1 MRM</h4>
             {ChartsController({
               chart: { type: 'share2' },
-              data: data,
+              data: data
             })}
             {/*<ChartsController chart={ {type: 'BTC'} }/>*/}
 

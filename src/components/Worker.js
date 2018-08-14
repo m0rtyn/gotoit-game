@@ -9,7 +9,7 @@ import {
   colors,
   education,
   skills_names,
-  workers_bonus_items,
+  workers_bonus_items
 } from '../game/knowledge';
 import WorkerHappinessBar from './WorkerHappinessBar';
 import WorkerStaminaBar from './WorkerStaminaBar';
@@ -80,14 +80,14 @@ class Worker extends Component {
     const worker = this.props.worker;
 
     const manage_button = (
-      <button className="btn btn-success btn-xs">Manage</button>
+      <button className="btn btn-primary btn-xs">Manage</button>
     );
 
     const stats_progressbar_data = _.mapValues(worker.stats, (val, stat) => {
       return {
         name: stat,
         value: worker.getStatsData(stat),
-        color: colors[stat].colorCompleted,
+        color: colors[stat].colorCompleted
       };
     });
 
@@ -102,10 +102,10 @@ class Worker extends Component {
       work_load: { name: 'Work Load', val: worker.workloadPenalty() },
       work_difficulty: {
         name: 'Task Difficulty',
-        val: worker.difficultyPenalty(),
+        val: worker.difficultyPenalty()
       },
       education: { name: 'Education Balance', val: worker.educationPenalty() },
-      collective: { name: 'Collective', val: worker.collectivePenalty() },
+      collective: { name: 'Collective', val: worker.collectivePenalty() }
     };
 
     return (
@@ -121,7 +121,7 @@ class Worker extends Component {
         onMouseOut={() => {
           data.helpers.modifyHoveredObjects();
         }}
-        className={`card worker ${
+        className={`card worker gap-items-2 ${
           data.hovered_workers_id || [].includes(worker.id) ? 'hovered' : ''
         } ${worker.in_vacation ? 'vacation' : ''}`}
         id={worker.id}
@@ -132,9 +132,9 @@ class Worker extends Component {
           src={worker.avatar}
         />
 
-        <div>
+        <div className="worker-info">
           <header className="card-header">
-            <span> {worker.name} </span>
+            <span className="worker-name"> {worker.name} </span>
             <Portal
               ref="manage"
               closeOnEsc
@@ -360,7 +360,7 @@ class Worker extends Component {
                                       project.estimate[skill]}
                                   </div>
                                 </div>
-                              ),
+                              )
                             };
                           }
                         );
