@@ -7,8 +7,8 @@
   color: #fff;
 
   &:hover {
-    background-color: color($color tint($percentage));
-    border-color: color($color tint($percentage));
+    background-color: color-mod($color tint($percentage));
+    border-color: color-mod($color tint($percentage));
     color: #fff;
   }
 
@@ -29,8 +29,8 @@
   &:not([disabled]):not(.disabled).active,
   &:not([disabled]):not(.disabled):active,
   .show > &.dropdown-toggle {
-    background-color: color($color shade(percentage));
-    border-color: color($color shade(percentage));
+    background-color: color-mod($color shade($percentage));
+    border-color: color-mod($color shade($percentage));
     color: #fff;
     box-shadow: none;
   }
@@ -56,8 +56,8 @@
   &:not([disabled]):not(.disabled).active,
   &:not([disabled]):not(.disabled):active,
   .show > &.dropdown-toggle {
-    background-color: color($color shade(percentage));
-    border-color: color($color shade(percentage));
+    background-color: color-mod($color shade($percentage));
+    border-color: color-mod($color shade($percentage));
     box-shadow: none;
   }
 
@@ -75,7 +75,7 @@
   &:not([disabled]):not(.disabled).active,
   &:not([disabled]):not(.disabled):active,
   .show > &.dropdown-toggle {
-    color: color($color shade(10%));
+    color: color-mod($color shade(10%));
     box-shadow: none;
   }
 

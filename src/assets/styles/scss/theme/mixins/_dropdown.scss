@@ -6,8 +6,8 @@
     &.focus,
     &:focus,
     &:hover {
-      background-color: color($color shade(percentage));
-      border-color: color($color shade(percentage));
+      background-color: color-mod($color shade($percentage));
+      border-color: color-mod($color shade($percentage));
     }
   }
 
