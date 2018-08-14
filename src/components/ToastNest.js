@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-
-import { ToastContainer, ToastMessage } from 'react-toastr';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { chatMessage } from './Chat';
-
-const ToastMessageFactory = React.createFactory(ToastMessage.animation);
 
 export var addMessage = text => {
   console.log(text);
@@ -33,20 +31,9 @@ class ToastNest extends Component {
 
   addMessage(text, options, type = 'info') {
     chatMessage('', text, type);
-
-    this.refs.messages[type](
-      text,
-      ``,
-      Object.assign(
-        {
-          closeButton: false,
-          preventDuplicates: false,
-          timeOut: 1000,
-          extendedTimeOut: 500,
-        },
-        options
-      )
-    );
+    toast.info(text, {
+      position: toast.POSITION.BOTTOM_LEFT,
+    });
   }
 
   clearActions() {
@@ -54,19 +41,9 @@ class ToastNest extends Component {
   }
 
   addAction(text, options, type = 'info') {
-    this.refs.actions[type](
-      text,
-      ``,
-      Object.assign(
-        {
-          closeButton: true,
-          preventDuplicates: false,
-          timeOut: 30000,
-          extendedTimeOut: 5000,
-        },
-        options
-      )
-    );
+    toast.info(text, {
+      position: toast.POSITION.BOTTOM_RIGHT,
+    });
   }
 
   componentDidMount() {
@@ -79,22 +56,18 @@ class ToastNest extends Component {
   render() {
     return (
       <div className="toast-nest">
-        <div>
-          <ToastContainer
-            key="messages"
-            ref="messages"
-            toastMessageFactory={ToastMessageFactory}
-            className="toast-bottom-right"
-          />
-        </div>
-        <div>
-          <ToastContainer
-            key="actions"
-            ref="actions"
-            toastMessageFactory={ToastMessageFactory}
-            className="toast-bottom-left"
-          />
-        </div>
+        <ToastContainer
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnVisibilityChange
+          draggable
+          pauseOnHover
+        />
+        {/* Same as */}
+        <ToastContainer />
       </div>
     );
   }
