@@ -25,8 +25,8 @@ class ProjectsFind extends Component {
         width: Math.min(100, data.reputation),
         color: colors.orange,
         value: Math.ceil(data.reputation * 100) / 100,
-        id: 'reputation',
-      },
+        id: 'reputation'
+      }
     ];
     console.log(this.props.data.offered_projects);
 

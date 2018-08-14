@@ -20,7 +20,7 @@ class Chat extends Component {
 
     this.state = {
       messages: [],
-      new_message: false,
+      new_message: false
     };
 
     this.chatMessage = this.chatMessage.bind(this);

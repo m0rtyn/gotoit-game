@@ -23,7 +23,7 @@
 
     &[href]:focus,
     &[href]:hover {
-      background-color: color($color shade(5%));
+      background-color: color-mod($color shade(5%));
     }
   }
 }

@@ -2,6 +2,7 @@ input[type='checkbox'].radial-checkbox {
   margin: -3px size(1) 0 size(0.25);
   text-rendering: optimizeSpeed;
   width: 0;
+  display: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,7 +16,7 @@ input[type='checkbox'].radial-checkbox::after {
   cursor: pointer;
   height: size(1.5);
   width: size(1.5);
-  background-color: light-gray;
+  background-color: var(--color-secondary);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -23,5 +24,5 @@ input[type='checkbox'].radial-checkbox::after {
 }
 
 input[type='checkbox'].radial-checkbox:checked::after {
-  background-color: #15c377;
+  background-color: var(--color-success);
 }

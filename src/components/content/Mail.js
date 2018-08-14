@@ -15,7 +15,7 @@ class Mail extends Component {
     this.state = {
       current_popup: null,
       letters: null,
-      show_popup: false,
+      show_popup: false
     };
   }
   closePopup = () => {
@@ -51,7 +51,7 @@ class Mail extends Component {
                   project={letter.content}
                   data={this.props.data}
                 />
-              ),
+              )
             });
             this.setState({ show_popup: true });
             letter.isRead = true;
@@ -68,7 +68,7 @@ class Mail extends Component {
                   project={letter.content}
                   data={this.props.data}
                 />
-              ),
+              )
             });
             this.setState({ show_popup: true });
             letter.isRead = true;
@@ -84,7 +84,7 @@ class Mail extends Component {
                   worker={letter.content}
                   data={this.props.data}
                 />
-              ),
+              )
             });
             this.setState({ show_popup: true });
             letter.isRead = true;
@@ -100,7 +100,7 @@ class Mail extends Component {
                   project={letter.content}
                   data={this.props.data}
                 />
-              ),
+              )
             });
             this.setState({ show_popup: true });
             letter.isRead = true;

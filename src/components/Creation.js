@@ -27,7 +27,7 @@ class Creation extends Component {
       technologist: _.sample(_.keys(player_backgrounds['technologist'].spices)),
       specialist: _.sample(_.keys(player_backgrounds['specialist'].spices)),
       coworker: _.sample(_.keys(player_backgrounds['coworker'].spices)),
-      businessman: _.sample(_.keys(player_backgrounds['businessman'].spices)),
+      businessman: _.sample(_.keys(player_backgrounds['businessman'].spices))
     };
 
     this.embark = this.embark.bind(this);
@@ -165,7 +165,7 @@ class Creation extends Component {
   handleGenderChange = changeEvent => {
     this.setState({
       gender: changeEvent.target.value,
-      suggest_name: WorkerModel.genName(changeEvent.target.value),
+      suggest_name: WorkerModel.genName(changeEvent.target.value)
     });
   };
 
@@ -274,7 +274,7 @@ class Creation extends Component {
                               value={this.state.suggest_name}
                               onChange={event => {
                                 this.setState({
-                                  suggest_name: event.target.value,
+                                  suggest_name: event.target.value
                                 });
                               }}
                             />
@@ -302,7 +302,7 @@ class Creation extends Component {
                                     }
                                     onChange={event => {
                                       this.setState({
-                                        selected_background: event.target.value,
+                                        selected_background: event.target.value
                                       });
                                     }}
                                   />

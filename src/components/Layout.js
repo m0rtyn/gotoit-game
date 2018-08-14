@@ -19,14 +19,14 @@ class Layout extends Component {
         <div
           className="background-color"
           style={{
-            backgroundColor: colors.backgrounds[this.props.data.content],
+            backgroundColor: colors.backgrounds[this.props.data.content]
           }}
         />
         <div
           className="background-image"
           style={{
             backgroundImage:
-              'url(backgrounds/' + this.props.data.content + '.png)',
+              'url(backgrounds/' + this.props.data.content + '.png)'
           }}
         />
 

@@ -28,7 +28,7 @@ class BubbleAnimated extends Component {
         defaultStyle={{ x: from.x, y: from.y }}
         style={{
           x: spring(to.x, animation_parameters),
-          y: spring(to.y, animation_parameters),
+          y: spring(to.y, animation_parameters)
         }}
       >
         {({ x, y }) => {
@@ -54,7 +54,7 @@ class BubbleAnimated extends Component {
                   position: 'fixed',
                   textAlign: 'center',
                   lineHeight: size,
-                  zIndex: 10,
+                  zIndex: 10
                 }}
               >
                 {count}
@@ -72,7 +72,7 @@ BubbleAnimated.propTypes = {
   count: PropTypes.number.isRequired,
   from: PropTypes.string.isRequired,
   to: PropTypes.string.isRequired,
-  handleTransitionEnd: PropTypes.func.isRequired,
+  handleTransitionEnd: PropTypes.func.isRequired
 };
 
 export default BubbleAnimated;

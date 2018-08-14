@@ -7,7 +7,7 @@ class Narrator {
       'workloadPenalty',
       'difficultyPenalty',
       'educationPenalty',
-      'collectivePenalty',
+      'collectivePenalty'
     ];
     let penalties = {};
 
@@ -275,7 +275,7 @@ class Narrator {
           }
         };
         return realCollectivePenalty();
-      },
+      }
     };
 
     const aboutStamina = () => {
