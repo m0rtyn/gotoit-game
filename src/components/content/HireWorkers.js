@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import PublicRelations from './PublicRelations';
 import HiringAgency from '../HiringAgency';
-import Bar from '../Bar';
+import Bar from '../Bar/Bar';
 import { colors } from '../../game/knowledge';
 
 import StatsProgressBar from '../StatsProgressBar';

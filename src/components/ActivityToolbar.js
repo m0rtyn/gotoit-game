@@ -8,7 +8,9 @@ class ActivityToolbar extends Component {
       helpers: PropTypes.object.isRequired
     })
   };
-
+  // shouldComponentUpdate() {
+  //   return false;
+  // }
   render() {
     let data = this.props.data;
     let unread_messages_count = (() => {

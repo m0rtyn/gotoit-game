@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import _ from 'lodash';
 import { skills } from '../game/knowledge';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
-// Dublicate, should to remove. do not style this
-class HotOffer extends Component {
+
+class HotOffer extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -28,8 +28,8 @@ class HotOffer extends Component {
   }
 
   render() {
-    let project = this.props.offer.project;
-    let expired = this.props.offer.expired;
+    let project = this.props.project;
+    let expired = this.props.expired;
     const stats_data = _.mapValues(skills, (stat, key) => {
       return { name: key, val: <span>{project.needs(key)}</span> };
     });

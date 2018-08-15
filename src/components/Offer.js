@@ -26,14 +26,14 @@ class Offer extends Component {
 
   reject(event) {
     this.props.data.helpers.rejectOffered(event.target.id);
-    this.props.offer.expired = true;
+    this.props.expired = true;
     this.props.closePopup();
   }
 
   render() {
-    let project = this.props.offer.project;
-    let createdAt = this.props.offer.createdAt;
-    let expired = this.props.offer.expired;
+    let project = this.props.project;
+    let createdAt = this.props.createdAt;
+    let expired = this.props.expired;
     let days_to_expire = Math.round(
       (createdAt + resume_will_expire_after - current_tick) / 24
     );
@@ -101,7 +101,7 @@ class Offer extends Component {
           <div className="moat slim_top">
             <div key={project.id} className="card">
               <StatsBar stats={stats_data} data={this.props.data} />
-              {!this.props.offer.expired
+              {!this.props.expired
                 ? `Will expire in ${days_to_expire} days`
                 : ''}
               {project.stage === 'ready' ? (

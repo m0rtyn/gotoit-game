@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Bar from './Bar';
+import Bar from './Bar/Bar';
 //import PropTypes from 'prop-types';
 //import _ from "lodash";
 //import {roles, skills_names} from "../game/knowledge";

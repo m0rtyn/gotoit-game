@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 //import PropTypes from 'prop-types';
 import _ from 'lodash';
 import ProjectEndScreen from '../ProjectEndScreen';
-import HistoricalEvent from '../HistoricalEvent';
 import HotOffer from '../HotOffer';
 import SimpleModal from '../SimpleModal';
 import Resume from '../Resume';
@@ -46,7 +45,7 @@ class Mail extends Component {
                 <ProjectEndScreen
                   closePopup={this.closePopup}
                   key={i}
-                  project={letter.content}
+                  project={letter.object}
                   data={this.props.data}
                 />
               )
@@ -63,7 +62,9 @@ class Mail extends Component {
                 <HotOffer
                   closePopup={this.closePopup}
                   key={i}
-                  offer={letter.content}
+                  project={letter.object}
+                  expired={letter.expired}
+                  createdAt={letter.createdAt}
                   data={this.props.data}
                 />
               )
@@ -79,7 +80,9 @@ class Mail extends Component {
                 <Resume
                   closePopup={this.closePopup}
                   key={i}
-                  resume={letter.content}
+                  expired={letter.expired}
+                  createdAt={letter.createdAt}
+                  worker={letter.object}
                   data={this.props.data}
                 />
               )
@@ -95,7 +98,9 @@ class Mail extends Component {
                 <Offer
                   closePopup={this.closePopup}
                   key={i}
-                  offer={letter.content}
+                  expired={letter.expired}
+                  createdAt={letter.createdAt}
+                  project={letter.object}
                   data={this.props.data}
                 />
               )
@@ -104,45 +109,38 @@ class Mail extends Component {
             letter.isRead = true;
           };
           break;
-        case 'Event':
-          handleClick = () => {
-            this.setState({
-              current_popup: (
-                <HistoricalEvent
-                  closePopup={this.closePopup}
-                  key={i}
-                  event={letter.content}
-                  data={this.props.data}
-                />
-              )
-            });
-            this.setState({ show_popup: true });
-          };
         default:
           break;
       }
       return (
-        <div className="letter card" onClick={handleClick} key={i}>
-          {letter.type === 'Resume' ? (
-            <img
-              className="worker-avatar"
-              alt={letter.content.worker.name + ' avatar'}
-              src={letter.content.worker.avatar}
-            />
-          ) : (
-            <div className="project-avatar">
-              <img
-                alt={letter.content.project.name + ' avatar'}
-                src={letter.content.project.avatar.platform}
-              />
-              <img
-                alt={letter.content.project.name + ' avatar'}
-                src={letter.content.project.avatar.kind}
-              />
-            </div>
-          )}
+        <div className="letter card" onClick={handleClick}>
+          {(() => {
+            if (letter.type === 'Resume') {
+              return (
+                <img
+                  className="worker-avatar"
+                  alt={letter.object.name + ' avatar'}
+                  src={letter.object.avatar}
+                />
+              );
+            } else {
+              //for project reporting, offer and hotoffer
+              return (
+                <div className="project-avatar">
+                  <img
+                    alt={letter.object.name + ' platform avatar'}
+                    src={letter.object.avatar.platform}
+                  />
+                  <img
+                    alt={letter.object.name + ' kind avatar'}
+                    src={letter.object.avatar.kind}
+                  />
+                </div>
+              );
+            }
+          })()}
 
-          <span className="sender-name">{letter.content.name}</span>
+          <span className="sender-name">{letter.object.name}</span>
 
           {letter.isRead ? (
             <span className="letter-type">{letter.type}</span>
