@@ -19,10 +19,8 @@ class Mail extends Component {
   }
   closePopup = () => {
     this.setState({ show_popup: false });
-    console.log(this.state.show_popup);
   };
   markAllAsRead = () => {
-    console.log(this.props.data.mailbox);
     _.map(this.props.data.mailbox, letter => {
       letter.isRead = true;
     });
@@ -64,7 +62,7 @@ class Mail extends Component {
                 <HotOffer
                   closePopup={this.closePopup}
                   key={i}
-                  project={letter.content}
+                  offer={letter.content}
                   data={this.props.data}
                 />
               )
@@ -80,7 +78,7 @@ class Mail extends Component {
                 <Resume
                   closePopup={this.closePopup}
                   key={i}
-                  worker={letter.content}
+                  resume={letter.content}
                   data={this.props.data}
                 />
               )
@@ -96,7 +94,7 @@ class Mail extends Component {
                 <Offer
                   closePopup={this.closePopup}
                   key={i}
-                  project={letter.content}
+                  offer={letter.content}
                   data={this.props.data}
                 />
               )
@@ -108,24 +106,23 @@ class Mail extends Component {
         default:
           break;
       }
-
       return (
         <div className="letter card" onClick={handleClick}>
           {letter.type === 'Resume' ? (
             <img
               className="worker-avatar"
-              alt={letter.content.name + ' avatar'}
-              src={letter.content.avatar}
+              alt={letter.content.worker.name + ' avatar'}
+              src={letter.content.worker.avatar}
             />
           ) : (
             <div className="project-avatar">
               <img
-                alt={letter.content.name + ' avatar'}
-                src={letter.content.avatar.platform}
+                alt={letter.content.project.name + ' avatar'}
+                src={letter.content.project.avatar.platform}
               />
               <img
-                alt={letter.content.name + ' avatar'}
-                src={letter.content.avatar.kind}
+                alt={letter.content.project.name + ' avatar'}
+                src={letter.content.project.avatar.kind}
               />
             </div>
           )}

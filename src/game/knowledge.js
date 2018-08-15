@@ -15,6 +15,9 @@ export const skills_false = _.mapValues(skills, () => {
 });
 export const skills_names = _.keys(skills);
 
+export const resume_will_expire_after = 24 * 7 * 2;
+export const project_offer_will_expire_after = 24 * 7 * 4;
+
 export const roles = {
   design: {
     name: 'Design',
