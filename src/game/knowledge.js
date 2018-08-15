@@ -19,18 +19,18 @@ export const roles = {
   design: {
     name: 'Design',
     profession_name: 'Designer',
-    description: 'Design',
+    description: 'Design'
   },
   program: {
     name: 'Programming',
     profession_name: 'Programmer',
-    description: 'Programming',
+    description: 'Programming'
   },
   manage: {
     name: 'Management',
     profession_name: 'Manager',
-    description: 'Management',
-  },
+    description: 'Management'
+  }
 };
 
 export const meetings = {
@@ -39,25 +39,25 @@ export const meetings = {
     deadline: 1,
     max_bonus: 4,
     description:
-      'Urgent overtime for several hours to solve a critical problem.',
+      'Urgent overtime for several hours to solve a critical problem.'
   },
   test: {
     name: 'Mass Test',
     deadline: 8,
     max_bonus: 168,
-    description: 'Mass testing will help to write tests twice often.',
+    description: 'Mass testing will help to write tests twice often.'
   },
   review: {
     name: 'Code Review',
     deadline: 8,
     max_bonus: 168,
-    description: 'Code Review will help to refactor twice often.',
+    description: 'Code Review will help to refactor twice often.'
   },
   backlog: {
     name: 'Backlog Grooming',
     deadline: 8,
     max_bonus: 168,
-    description: 'Backlog grooming will help to retrospective twice often.',
+    description: 'Backlog grooming will help to retrospective twice often.'
   },
 
   training: {
@@ -65,28 +65,27 @@ export const meetings = {
     deadline: 0,
     max_bonus: 0,
     description:
-      "An interesting educational project, tailored specifically for the development of your team's skills.",
+      "An interesting educational project, tailored specifically for the development of your team's skills."
   },
   planing: {
     name: 'Planing',
     deadline: 8,
     max_bonus: 168 * 2,
-    description: 'Deep planning improves the tasks/bugs ratio.',
+    description: 'Deep planning improves the tasks/bugs ratio.'
   },
   teambuilding: {
     name: 'Team Building',
     deadline: 8,
     max_bonus: 168 * 4,
     description:
-      'Team Building fills with the belief in the common cause and increases the motivation.',
+      'Team Building fills with the belief in the common cause and increases the motivation.'
   },
   status: {
     name: 'Status',
     deadline: 1,
     max_bonus: 12,
-    description:
-      'Strict discipline and status meetings extend the working day.',
-  },
+    description: 'Strict discipline and status meetings extend the working day.'
+  }
 };
 
 export const technologies = {
@@ -95,7 +94,7 @@ export const technologies = {
     acronym: 'Over',
     price: 0,
     meeting: 'fire',
-    description: 'Overtime helps to finish project on time but exhausts team.',
+    description: 'Overtime helps to finish project on time but exhausts team.'
   },
 
   tdd: {
@@ -103,7 +102,7 @@ export const technologies = {
     acronym: 'TDD',
     price: 10000,
     meeting: 'test',
-    description: 'Developing tests that reduce the probability of errors.',
+    description: 'Developing tests that reduce the probability of errors.'
   },
   refactoring: {
     name: 'Non-stop refactoring',
@@ -111,7 +110,7 @@ export const technologies = {
     price: 10000,
     meeting: 'review',
     description:
-      "The complexity of the code - it's just a task for refactoring.",
+      "The complexity of the code - it's just a task for refactoring."
   },
   agile: {
     name: 'Agile Development',
@@ -119,7 +118,7 @@ export const technologies = {
     price: 10000,
     meeting: 'backlog',
     description:
-      'Focus on priority and lower the cost of the project by cutting out unnecessary tasks.',
+      'Focus on priority and lower the cost of the project by cutting out unnecessary tasks.'
   },
 
   creativity: {
@@ -128,7 +127,7 @@ export const technologies = {
     price: 0,
     meeting: 'training',
     description:
-      'Every fifth working hour is given to pet projects that boost experience.',
+      'Every fifth working hour is given to pet projects that boost experience.'
   },
 
   rad: {
@@ -136,7 +135,7 @@ export const technologies = {
     acronym: 'RAD',
     price: 10000,
     meeting: 'planing',
-    description: 'Faster Development at the cost of increasing complexity.',
+    description: 'Faster Development at the cost of increasing complexity.'
   },
   pair: {
     name: 'Pair Programming',
@@ -144,15 +143,15 @@ export const technologies = {
     price: 10000,
     meeting: 'teambuilding',
     description:
-      'Working in tandem allows us to solve complex problems and sharing experience.',
+      'Working in tandem allows us to solve complex problems and sharing experience.'
   },
   micromanagement: {
     name: 'Micromanagement',
     acronym: 'Micro',
     price: 10000,
     meeting: 'status',
-    description: 'Solid control is averaging performance and work visiting.',
-  },
+    description: 'Solid control is averaging performance and work visiting.'
+  }
 };
 
 export const workers_bonus_items = {
@@ -161,20 +160,20 @@ export const workers_bonus_items = {
       name: 'Sketchbook',
       money: 500,
       bonus: 10,
-      description: 'add 10% EXP',
+      description: 'add 10% EXP'
     },
     flat: {
       name: 'Tablet',
       money: 2500,
       bonus: 1,
-      description: 'add 10 to skill',
+      description: 'add 10 to skill'
     },
     percent: {
       name: '4K Monitor',
       money: 10000,
       bonus: 10,
-      description: 'add 10% to skill',
-    },
+      description: 'add 10% to skill'
+    }
   },
   program: {
     exp: { name: 'IDE', money: 500, bonus: 10, description: 'add 10% EXP' },
@@ -182,14 +181,14 @@ export const workers_bonus_items = {
       name: 'Laptop',
       money: 2500,
       bonus: 1,
-      description: 'add 10 to skill',
+      description: 'add 10 to skill'
     },
     percent: {
       name: 'CI Server',
       money: 10000,
       bonus: 10,
-      description: 'add 10% to skill',
-    },
+      description: 'add 10% to skill'
+    }
   },
   manage: {
     exp: { name: 'Phone', money: 500, bonus: 10, description: 'add 10% EXP' },
@@ -197,40 +196,40 @@ export const workers_bonus_items = {
       name: 'Bug tracker',
       money: 2500,
       bonus: 1,
-      description: 'add 10 to skill',
+      description: 'add 10 to skill'
     },
     percent: {
       name: 'ERP System',
       money: 10000,
       bonus: 10,
-      description: 'add 10% to skill',
-    },
-  },
+      description: 'add 10% to skill'
+    }
+  }
 };
 
 export const worker_character_types = [
   {
     name: 'Normal',
-    description: 'Balanced character without pronounced abilities',
+    description: 'Balanced character without pronounced abilities'
   },
   {
     name: 'Modest',
-    description: 'Rarely requires a pay raise, but is slower to learn',
+    description: 'Rarely requires a pay raise, but is slower to learn'
   },
   {
     name: 'Workaholic',
     description:
-      'Spends more time on work, but more often requires an increase in earnings',
+      'Spends more time on work, but more often requires an increase in earnings'
   },
   {
     name: 'Wonk',
     description:
-      'Likes to learn, but is more often distracted by extraneous things',
+      'Likes to learn, but is more often distracted by extraneous things'
   },
   {
     name: 'Gifted',
-    description: 'High learning rate, but does not like to study',
-  },
+    description: 'High learning rate, but does not like to study'
+  }
 ];
 
 export const player_backgrounds = {
@@ -245,17 +244,17 @@ export const player_backgrounds = {
     spices: {
       agile: {
         name: 'Agile Development',
-        description: technologies.agile.description,
+        description: technologies.agile.description
       },
       tdd: {
         name: 'Test Driven Development',
-        description: technologies.tdd.description,
+        description: technologies.tdd.description
       },
       refactoring: {
         name: 'Refactoring',
-        description: technologies.refactoring.description,
-      },
-    },
+        description: technologies.refactoring.description
+      }
+    }
   },
   specialist: {
     name: 'Specialist',
@@ -271,7 +270,7 @@ export const player_backgrounds = {
           'Start items: ' +
           workers_bonus_items.design.exp.name +
           ' and ' +
-          workers_bonus_items.design.flat.name,
+          workers_bonus_items.design.flat.name
       },
       program: {
         name: 'Programmer',
@@ -279,7 +278,7 @@ export const player_backgrounds = {
           'Start items: ' +
           workers_bonus_items.program.exp.name +
           ' and ' +
-          workers_bonus_items.program.flat.name,
+          workers_bonus_items.program.flat.name
       },
       manage: {
         name: 'Manager',
@@ -287,9 +286,9 @@ export const player_backgrounds = {
           'Start items: ' +
           workers_bonus_items.manage.exp.name +
           ' and ' +
-          workers_bonus_items.manage.flat.name,
-      },
-    },
+          workers_bonus_items.manage.flat.name
+      }
+    }
   },
   coworker: {
     name: 'Teamplayer',
@@ -300,18 +299,18 @@ export const player_backgrounds = {
     spices: {
       apprentice: {
         name: 'Apprentice',
-        description: 'Your partner is your follower and like you in skills.',
+        description: 'Your partner is your follower and like you in skills.'
       },
       helpers: {
         name: 'Two helpers',
         description:
-          'Your team is two reliable helpers that support your skills.',
+          'Your team is two reliable helpers that support your skills.'
       },
       full: {
         name: 'Full team',
-        description: 'Your team is three random employees.',
-      },
-    },
+        description: 'Your team is three random employees.'
+      }
+    }
   },
   businessman: {
     name: 'Businessman',
@@ -323,86 +322,86 @@ export const player_backgrounds = {
       credit: {
         name: 'Credit Rating',
         description:
-          'Good credit story increase your credit rating and allow to take addition credit.',
+          'Good credit story increase your credit rating and allow to take addition credit.'
       },
       btc: {
         name: 'BTC savings',
-        description: 'Once you bought some bitcoins. Now they are worth a lot.',
+        description: 'Once you bought some bitcoins. Now they are worth a lot.'
       },
       office: {
         name: 'Dream office',
         description:
-          "You rented a spacious office and bought a coffeemaker. What's next?",
-      },
-    },
-  },
+          "You rented a spacious office and bought a coffeemaker. What's next?"
+      }
+    }
+  }
 };
 
 export const offices = {
   1: { size: 1, space: 1, price: 0, name: 'Sweet Home', text: '' },
   2: { size: 2, space: 4, price: 500, name: 'Garage Startup', text: '' },
   3: { size: 3, space: 7, price: 2500, name: 'Busy Header', text: '' },
-  4: { size: 4, space: 10, price: 10000, name: 'AAA Studio', text: '' },
+  4: { size: 4, space: 10, price: 10000, name: 'AAA Studio', text: '' }
 };
 
 export const project_platforms = {
   crossplatform: {
     name: 'Cross-platform',
-    description: 'Cross-platform applications should be balanced.',
+    description: 'Cross-platform applications should be balanced.'
   },
   mobile: {
     name: 'Mobile',
-    description: 'For Mobile applications, design is important.',
+    description: 'For Mobile applications, design is important.'
   },
   desktop: {
     name: 'Desktop',
-    description: 'For Desktop applications, programming is important.',
+    description: 'For Desktop applications, programming is important.'
   },
   browser: {
     name: 'Browser',
-    description: 'For Browser applications, management is important.',
+    description: 'For Browser applications, management is important.'
   },
   VR: {
     name: 'VR',
-    description: 'Virtual Reality applications should be balanced.',
-  },
+    description: 'Virtual Reality applications should be balanced.'
+  }
 };
 
 export const project_kinds = {
   application: {
     name: 'Application',
-    description: 'General Applications should be balanced.',
+    description: 'General Applications should be balanced.'
   },
   game: {
     name: 'Game',
     description:
-      'For Games, design is important, but do not forget about programming.',
+      'For Games, design is important, but do not forget about programming.'
   },
   site: {
     name: 'Site',
     description:
-      'For Sites, design is important, but do not forget about management.',
+      'For Sites, design is important, but do not forget about management.'
   },
   editor: {
     name: 'Editor',
     description:
-      'For Editors, programming is important, but do not forget about design.',
+      'For Editors, programming is important, but do not forget about design.'
   },
   magazine: {
     name: 'Magazine',
     description:
-      'For Magazines, management is important, but do not forget about design.',
+      'For Magazines, management is important, but do not forget about design.'
   },
   service: {
     name: 'Service',
     description:
-      'For Services, management is important, but do not forget about programming.',
+      'For Services, management is important, but do not forget about programming.'
   },
   database: {
     name: 'Database',
     description:
-      'For Databases, programming is important, but do not forget about management.',
-  },
+      'For Databases, programming is important, but do not forget about management.'
+  }
 };
 
 export const project_sizes = {
@@ -412,27 +411,27 @@ export const project_sizes = {
     name: 'Module for',
     alone_name: 'Module',
     agency_min: 50,
-    agency_max: 1000,
+    agency_max: 1000
   },
   3: {
     name: 'The',
     alone_name: 'Application',
     agency_min: 100,
-    agency_max: 2500,
+    agency_max: 2500
   },
   4: {
     name: 'Big',
     alone_name: 'Big Deal',
     agency_min: 1000,
-    agency_max: 10000,
+    agency_max: 10000
   },
   5: { name: 'Custom', alone_name: 'Custom', agency_min: 0, agency_max: 0 },
   6: {
     name: 'Hackathon',
     alone_name: 'Hackathon',
     agency_min: 0,
-    agency_max: 0,
-  },
+    agency_max: 0
+  }
 };
 
 export const loans = {
@@ -444,7 +443,7 @@ export const loans = {
     open_after_tick: 24 * 30,
     min_credit_score: 300,
     name: 'Small Credit',
-    text: '',
+    text: ''
   },
   2: {
     size: 2,
@@ -454,7 +453,7 @@ export const loans = {
     open_after_tick: 24 * 30 * 6,
     min_credit_score: 500,
     name: 'Medium Credit',
-    text: '',
+    text: ''
   },
   3: {
     size: 3,
@@ -464,8 +463,8 @@ export const loans = {
     open_after_tick: 24 * 30 * 12,
     min_credit_score: 700,
     name: 'Big Credit',
-    text: '',
-  },
+    text: ''
+  }
 };
 
 export const education = {
@@ -473,7 +472,7 @@ export const education = {
   training: { name: 'Training Project', hide: false, description: '' },
   hackathon: { name: 'Hackathon', hide: true, description: '' },
   university: { name: 'University', hide: true, description: '' },
-  workshop: { name: 'Workshop', hide: true, description: '' },
+  workshop: { name: 'Workshop', hide: true, description: '' }
 };
 
 export const charts_parameters = {
@@ -491,7 +490,7 @@ export const charts_parameters = {
   projects_in_process: { label: 'Current projects', color: '#CD5C5C' },
   projects_accepted: { label: 'Projects accepted', color: '#FFFF00' },
   public_relations_costs: { label: 'Public relation costs', color: '#975334' },
-  offered_projects: { label: 'Offered projects', color: '#8A2BE2' },
+  offered_projects: { label: 'Offered projects', color: '#8A2BE2' }
 };
 
 export const archive_chats_parameters = {
@@ -500,58 +499,58 @@ export const archive_chats_parameters = {
   reward: { label: 'Reward', color: '#f7931a' },
   resolving_time_percents: {
     label: 'Resolving time percents',
-    color: '#3e95cd',
-  },
+    color: '#3e95cd'
+  }
 };
 
 export const market_chart_parameters = {
   design: { label: 'Design', color: '#8B0000' },
   manage: { label: 'Manage', color: '#5cb85c' },
   program: { label: 'Program', color: '#3e95cd' },
-  total: { label: 'Total', color: '#f7931a' },
+  total: { label: 'Total', color: '#f7931a' }
 };
 
 export const exchange_charts_parameters = {
   btc: { label: 'Bitcoin', color: '#f7931a' },
   share0: { label: 'Future Sight', color: '#f7931a' },
   share1: { label: 'L-Ri', color: '#f7931a' },
-  share2: { label: 'Murum', color: '#f7931a' },
+  share2: { label: 'Murum', color: '#f7931a' }
 };
 
 export const colors = {
   creativity: {
     name: 'creativity',
-    colorCompleted: '#EA80FC',
+    colorCompleted: '#EA80FC'
   },
   agile: {
     name: 'agile',
-    colorCompleted: '#1DE9B6',
+    colorCompleted: '#1DE9B6'
   },
   tdd: {
     name: 'tdd',
-    colorCompleted: '#1E90FF',
+    colorCompleted: '#1E90FF'
   },
   refactor: {
     name: 'refactor',
-    colorCompleted: '#FFAB40',
+    colorCompleted: '#FFAB40'
   },
   design: {
     name: 'design',
     colorEstimate: '#ffc299',
     colorCompleted: '#ff954d',
-    colorBug: '#c47640',
+    colorBug: '#c47640'
   },
   program: {
     name: 'program',
     colorEstimate: '#ffb2f2',
     colorCompleted: '#cc6cbc',
-    colorBug: '#99518d',
+    colorBug: '#99518d'
   },
   manage: {
     name: 'manage',
     colorEstimate: '#a9f2ee',
     colorCompleted: '#57d9d1',
-    colorBug: '#43918d',
+    colorBug: '#43918d'
   },
   success: '#5cb85c',
   warning: '#f0ad4e',
@@ -570,8 +569,8 @@ export const colors = {
     ProjectsFind: '#C0E5ED',
     StartMeeting: '#C0E5ED',
     StartProject: '#C0E5ED',
-    Welcome: '#C0E5ED',
-  },
+    Welcome: '#C0E5ED'
+  }
 };
 
 export const genAnimationData = (name, from, to, count, isBug) => {
@@ -584,40 +583,40 @@ export const genAnimationData = (name, from, to, count, isBug) => {
 export const project_bars = {
   design_tasks: {
     id: 'design_tasks',
-    color: colors.design.tasks,
+    color: colors.design.tasks
   },
   design_bugs: {
     id: 'design_bugs',
-    color: colors.design.colorBug,
+    color: colors.design.colorBug
   },
   design_completed: {
     id: 'design_completed',
-    color: colors.design.colorCompleted,
+    color: colors.design.colorCompleted
   },
   program_tasks: {
     id: 'program_tasks',
-    color: colors.program.tasks,
+    color: colors.program.tasks
   },
   program_bugs: {
     id: 'program_bugs',
-    color: colors.program.colorBug,
+    color: colors.program.colorBug
   },
   program_completed: {
     id: 'program_completed',
-    color: colors.program.colorCompleted,
+    color: colors.program.colorCompleted
   },
   manage_tasks: {
     id: 'manage_tasks',
-    color: colors.manage.tasks,
+    color: colors.manage.tasks
   },
   manage_bugs: {
     id: 'manage_bugs',
-    color: colors.manage.colorBug,
+    color: colors.manage.colorBug
   },
   manage_completed: {
     id: 'manage_completed',
-    color: colors.manage.colorCompleted,
-  },
+    color: colors.manage.colorCompleted
+  }
 };
 
 export const public_relations = {
@@ -629,13 +628,13 @@ export const public_relations = {
     onClick: state => {
       state.on_tick_effects.push({
         type: 'forum_thread',
-        start_tick: state.date.tick,
+        start_tick: state.date.tick
       });
     },
     onTickByDelta: (state, delta, n) => {
       state.reputation += (Math.cbrt(delta) / delta) * 2 * (2 / n); // + 12.3
       state.rumor += (Math.cbrt(delta) / delta) * (2 / n); // + 24.59
-    },
+    }
   },
   search_specialist: {
     name: 'Search market for a specialist ($1000)',
@@ -647,7 +646,7 @@ export const public_relations = {
       state.statistics.public_relations_costs.buffer += 1000;
       state.on_tick_effects.push({
         type: 'search_specialist',
-        start_tick: state.date.tick,
+        start_tick: state.date.tick
       });
     },
     onTickByDelta: (state, delta, n) => {
@@ -656,7 +655,7 @@ export const public_relations = {
       if (delta < 24) {
         state.reputation += (Math.cbrt(delta) / delta) * 2 * (2 / n); //+ 24.5
       }
-    },
+    }
   },
   search_job: {
     name: 'Search market for a job ($500)',
@@ -668,7 +667,7 @@ export const public_relations = {
       state.statistics.public_relations_costs.buffer += 500;
       state.on_tick_effects.push({
         type: 'search_job',
-        start_tick: state.date.tick,
+        start_tick: state.date.tick
       });
     },
     onTickByDelta: (state, delta, n) => {
@@ -678,7 +677,7 @@ export const public_relations = {
       if (delta < 24) {
         state.rumor += (Math.cbrt(delta) / delta) * 2 * (2 / n); //+ 24.5
       }
-    },
+    }
   },
   big_event: {
     name: 'Attend big IT event ($2500)',
@@ -690,15 +689,15 @@ export const public_relations = {
       state.statistics.public_relations_costs.buffer += 2500;
       state.on_tick_effects.push({
         type: 'big_event',
-        start_tick: state.date.tick,
+        start_tick: state.date.tick
       });
     },
     onTickByDelta: (state, delta, n) => {
       let customDelta = delta * 0.03;
       state.reputation += (1 + Math.sin(customDelta - Math.PI / 2)) * 2;
       state.rumor += (1 + Math.sin(customDelta - Math.PI / 2)) / n;
-    },
-  },
+    }
+  }
 };
 
 export default {};

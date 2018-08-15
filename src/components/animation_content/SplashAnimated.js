@@ -34,7 +34,7 @@ class SplashAnimated extends Component {
                   borderRadius: '50%',
                   position: 'absolute',
                   lineHeight: size,
-                  zIndex: 10,
+                  zIndex: 10
                 }}
               />
             );
@@ -48,7 +48,7 @@ SplashAnimated.propTypes = {
   size: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   target: PropTypes.object.isRequired,
-  handleTransitionEnd: PropTypes.func.isRequired,
+  handleTransitionEnd: PropTypes.func.isRequired
 };
 
 export default SplashAnimated;

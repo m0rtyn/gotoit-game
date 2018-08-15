@@ -31,15 +31,11 @@ class WorkerHappinessBar extends Component {
         width: item.value,
         color: bar_color,
         value: item.value,
-        showName: false,
+        showName: false
       };
     });
 
-    return (
-      <div>
-        <Bar bar_data={bar_data} />
-      </div>
-    );
+    return <Bar className="happiness-bar" bar_data={bar_data} />;
   }
 }
 

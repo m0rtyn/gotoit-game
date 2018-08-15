@@ -26,7 +26,7 @@ import {
   skills_names,
   skills_true,
   technologies,
-  workers_bonus_items,
+  workers_bonus_items
 } from './game/knowledge';
 
 import { getDefaultState } from './game/default_state';
@@ -398,7 +398,7 @@ class App extends Component {
       type: type,
       info: info,
       object: object,
-      time: addDaysToDate(current_game_date, inTime),
+      time: addDaysToDate(current_game_date, inTime)
     });
   }
   newGame() {
@@ -1076,7 +1076,7 @@ class App extends Component {
     data.mailbox.push({
       type: 'Project report',
       content: _.create(ProjectModel.prototype, project),
-      date: current_game_date,
+      date: current_game_date
     });
 
     data.projects_end_reports.push(project);
@@ -1117,7 +1117,7 @@ class App extends Component {
       data.mailbox.push({
         type: 'Hot offer',
         content: this_project,
-        date: current_game_date,
+        date: current_game_date
       });
       addAction('New hot offer: ' + project.name);
       data.attainments.push('FirstTraining');
@@ -1128,7 +1128,7 @@ class App extends Component {
       data.mailbox.push({
         type: 'Hot offer',
         content: this_project,
-        date: current_game_date,
+        date: current_game_date
       });
       addAction('New hot offer: ' + project.name);
       data.attainments.push('FirstPart');
@@ -1139,7 +1139,7 @@ class App extends Component {
       data.mailbox.push({
         type: 'Hot offer',
         content: this_project,
-        date: current_game_date,
+        date: current_game_date
       });
       addAction('New hot offer: ' + project.name);
       data.attainments.push('FirstModule');
@@ -1150,7 +1150,7 @@ class App extends Component {
       data.mailbox.push({
         type: 'Hot offer',
         content: this_project,
-        date: current_game_date,
+        date: current_game_date
       });
       addAction('New hot offer: ' + project.name);
       data.attainments.push('FirstApplication');
@@ -1161,7 +1161,7 @@ class App extends Component {
       data.mailbox.push({
         type: 'Hot offer',
         content: this_project,
-        date: current_game_date,
+        date: current_game_date
       });
       addAction('New hot offer: ' + project.name);
       data.attainments.push('BigDeal');
@@ -1585,7 +1585,7 @@ class App extends Component {
               worker.name + ' decided to leave from your company in two weeks',
               {
                 timeOut: 20000,
-                extendedTimeOut: 10000,
+                extendedTimeOut: 10000
               },
               'error'
             );
@@ -1606,7 +1606,7 @@ class App extends Component {
           'Not enough money for lunch',
           {
             timeOut: 5000,
-            extendedTimeOut: 2000,
+            extendedTimeOut: 2000
           },
           'error'
         );
@@ -1830,7 +1830,7 @@ class App extends Component {
     data.mailbox.push({
       type: 'Offer',
       content: this_project,
-      date: current_game_date,
+      date: current_game_date
     });
     addAction('New job!', { timeOut: 3000, extendedTimeOut: 1000 });
   }
@@ -1844,7 +1844,7 @@ class App extends Component {
     data.mailbox.push({
       type: 'Resume',
       content: worker,
-      date: current_game_date,
+      date: current_game_date
     });
     addAction('New resume! Resume: ' + worker.name);
   }
@@ -1863,7 +1863,7 @@ class App extends Component {
               worker.name + ' resigned from your company',
               {
                 timeOut: 20000,
-                extendedTimeOut: 10000,
+                extendedTimeOut: 10000
               },
               'error'
             );
@@ -1906,7 +1906,7 @@ class App extends Component {
             worker.name + ' comes back from vacation',
             {
               timeOut: 5000,
-              extendedTimeOut: 3000,
+              extendedTimeOut: 3000
             },
             'success'
           );
@@ -2053,7 +2053,7 @@ class App extends Component {
           _.min([
             project.needs(res),
             Math.sqrt(project.estimate[res]),
-            retrospected,
+            retrospected
           ])
         );
 

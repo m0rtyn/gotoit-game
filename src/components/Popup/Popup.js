@@ -7,7 +7,7 @@ export default class Popup extends React.Component {
     super(props);
 
     this.state = {
-      popupsData: [],
+      popupsData: []
     };
 
     this.closeUpperPopup = this.closeUpperPopup.bind(this);

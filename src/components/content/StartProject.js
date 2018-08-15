@@ -17,7 +17,7 @@ class StartProject extends Component {
       selected_workers: {},
       project_name: '',
       project_platform: _.random(0, 3),
-      project_kind: _.random(0, 6),
+      project_kind: _.random(0, 6)
     };
   }
 
@@ -34,7 +34,7 @@ class StartProject extends Component {
       selected_workers: workers_true,
       project_name: ProjectModel.genName(),
       project_platform: _.random(0, 3),
-      project_kind: _.random(0, 6),
+      project_kind: _.random(0, 6)
     });
     console.log('on open');
   }

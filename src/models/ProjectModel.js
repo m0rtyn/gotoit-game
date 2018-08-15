@@ -8,7 +8,7 @@ import {
   project_platforms,
   project_sizes,
   skills,
-  skills_inf,
+  skills_inf
 } from '../game/knowledge';
 import { hired, projects_done } from '../App';
 
@@ -45,7 +45,7 @@ class ProjectModel {
     this.penalty = penalty;
     this.avatar = {
       platform: require(`../assets/images/project/platforms/${platform}.svg`),
-      kind: require(`../assets/images/project/kind/${kind}.svg`),
+      kind: require(`../assets/images/project/kind/${kind}.svg`)
     };
 
     this.estimate = JSON.parse(JSON.stringify(start_needs));
@@ -81,7 +81,7 @@ class ProjectModel {
       refactored: 0,
       tests_wrote: 0,
       cuted_cost: 0,
-      retrospected: 0,
+      retrospected: 0
     };
   }
 
@@ -116,7 +116,7 @@ class ProjectModel {
       design: this.estimate.design,
       manage: this.estimate.manage,
       program: this.estimate.program,
-      total: this.totalScore(),
+      total: this.totalScore()
     };
   }
 
@@ -387,7 +387,7 @@ class ProjectModel {
     let stats_bulk = {
       design: this.genStat(quality, size),
       program: this.genStat(quality, size),
-      manage: this.genStat(quality, size),
+      manage: this.genStat(quality, size)
     };
 
     stats_bulk = bulkStyler.speciality(stats_bulk);
@@ -453,7 +453,7 @@ class ProjectModel {
     let stats_bulk = {
       design: Number.POSITIVE_INFINITY,
       program: Number.POSITIVE_INFINITY,
-      manage: Number.POSITIVE_INFINITY,
+      manage: Number.POSITIVE_INFINITY
     };
 
     let project = new ProjectModel(

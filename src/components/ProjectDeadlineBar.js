@@ -14,15 +14,15 @@ class ProjectDeadlineBar extends Component {
             ? colors.danger
             : colors.warning,
         value: project.deadline_max - project.deadline,
-        showName: true,
+        showName: true
       },
       {
         name: 'to deadline',
         width: (project.deadline / project.deadline_max) * 100,
         color: colors.success,
         value: project.deadline,
-        showName: true,
-      },
+        showName: true
+      }
     ];
     return (
       <div>

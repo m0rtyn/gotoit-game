@@ -10,7 +10,7 @@ class BubblesAnimation extends React.Component {
     super(props);
     this.state = {
       items: [],
-      length: 0,
+      length: 0
     };
 
     this.addBubbleAnimation = this.addBubbleAnimation.bind(this);
@@ -29,7 +29,7 @@ class BubblesAnimation extends React.Component {
   trueAddBubbleAnimation(animation_data) {
     let items = this.state.items.concat({
       id: this.state.length,
-      item: animation_data,
+      item: animation_data
     });
     this.setState({ items: items, length: this.state.length + 1 });
   }

@@ -28,14 +28,14 @@ const components = {
   StartMeeting: StartMeeting,
   StartProject: StartProject,
   Welcome: Welcome,
-  Mail: Mail,
+  Mail: Mail
 };
 
 class Activities extends Component {
   static propTypes = {
     data: PropTypes.shape({
-      content: PropTypes.any.isRequired,
-    }),
+      content: PropTypes.any.isRequired
+    })
   };
   // shouldComponentUpdate() {
   //   return false;

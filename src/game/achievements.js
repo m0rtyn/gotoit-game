@@ -10,7 +10,7 @@ export const achievements = {
     text: 'Hire 3 employees to your team at the same time.',
     rule: state => {
       return state.data.workers.length === 4;
-    },
+    }
   },
   silver_team_player: {
     rank: 'silver',
@@ -19,7 +19,7 @@ export const achievements = {
     text: 'Hire 6 employees to your team at the same time.',
     rule: state => {
       return state.data.workers.length === 7;
-    },
+    }
   },
   gold_team_palyer: {
     rank: 'gold',
@@ -28,7 +28,7 @@ export const achievements = {
     text: 'Hire 9 employees to your team at the same time.',
     rule: state => {
       return state.data.workers.length === 10;
-    },
+    }
   },
   bronze_money_maker: {
     rank: 'bronze',
@@ -37,7 +37,7 @@ export const achievements = {
     text: 'All you need is just to earn 20 thousand.',
     rule: state => {
       return state.data.money >= 2e4;
-    },
+    }
   },
   silver_money_maker: {
     rank: 'silver',
@@ -46,7 +46,7 @@ export const achievements = {
     text: 'All you need is just to earn 50 thousand.',
     rule: state => {
       return state.data.money >= 5e4;
-    },
+    }
   },
   gold_money_maker: {
     rank: 'gold',
@@ -55,7 +55,7 @@ export const achievements = {
     text: 'All you need is just to earn 100 thousand.',
     rule: state => {
       return state.data.money >= 1e5;
-    },
+    }
   },
   bronze_small_credit: {
     rank: 'bronze',
@@ -66,7 +66,7 @@ export const achievements = {
       return state.data.old_loans.some(credit => {
         return credit.name === 'Small Credit';
       });
-    },
+    }
   },
   silver_medium_credit: {
     rank: 'silver',
@@ -77,7 +77,7 @@ export const achievements = {
       return state.data.old_loans.some(credit => {
         return credit.name === 'Medium Credit';
       });
-    },
+    }
   },
   gold_big_credit: {
     rank: 'gold',
@@ -88,7 +88,7 @@ export const achievements = {
       return state.data.old_loans.some(credit => {
         return credit.name === 'Big Credit';
       });
-    },
+    }
   },
 
   // Conquest
@@ -105,7 +105,7 @@ export const achievements = {
           projects_counter++;
       });
       return projects_counter >= 100;
-    },
+    }
   },
   silver_project_destroyer: {
     rank: 'silver',
@@ -119,7 +119,7 @@ export const achievements = {
           projects_counter++;
       });
       return projects_counter >= 100;
-    },
+    }
   },
   gold_project_destroyer: {
     rank: 'gold',
@@ -136,7 +136,7 @@ export const achievements = {
           projects_counter++;
       });
       return projects_counter >= 100;
-    },
+    }
   },
   bronze_almost_rich: {
     rank: 'bronze',
@@ -146,7 +146,7 @@ export const achievements = {
       'You will need to use all your financial skills and earn 200 thousand.',
     rule: state => {
       return state.data.money >= 2e5;
-    },
+    }
   },
   silver_almost_rich: {
     rank: 'silver',
@@ -156,7 +156,7 @@ export const achievements = {
       'You will need to use all your financial skills and earn 500 thousand.',
     rule: state => {
       return state.data.money >= 5e5;
-    },
+    }
   },
   gold_almost_rich: {
     rank: 'gold',
@@ -165,7 +165,7 @@ export const achievements = {
     text: 'You will need to use all your financial skills and earn 1 million.',
     rule: state => {
       return state.data.money >= 1e6;
-    },
+    }
   },
   bronze_user_quests: {
     rank: 'bronze',
@@ -174,7 +174,7 @@ export const achievements = {
     text: 'Perform quests - get achievements.',
     rule: state => {
       return false;
-    },
+    }
   },
   silver_user_quests: {
     rank: 'silver',
@@ -183,7 +183,7 @@ export const achievements = {
     text: 'Perform quests - get achievements.',
     rule: state => {
       return false;
-    },
+    }
   },
   gold_user_quests: {
     rank: 'gold',
@@ -192,7 +192,7 @@ export const achievements = {
     text: 'Perform quests - get achievements.',
     rule: state => {
       return false;
-    },
+    }
   },
 
   // Challanges
@@ -205,7 +205,7 @@ export const achievements = {
       'Do you like to work alone? Then just earn 200 thousands without hiring employees.',
     rule: state => {
       return state.data.money >= 2e5 && state.data.workers.length === 1;
-    },
+    }
   },
   silver_solo_player: {
     rank: 'silver',
@@ -215,7 +215,7 @@ export const achievements = {
       'Do you like to work alone? Then just earn 500 thousands without hiring employees.',
     rule: state => {
       return state.data.money >= 5e5 && state.data.workers.length === 1;
-    },
+    }
   },
   gold_solo_player: {
     rank: 'gold',
@@ -225,7 +225,7 @@ export const achievements = {
       'Do you like to work alone? Then just earn 1 million without hiring employees.',
     rule: state => {
       return state.data.money >= 1e6 && state.data.workers.length === 1;
-    },
+    }
   },
   bronze_customers_hater: {
     rank: 'bronze',
@@ -240,7 +240,7 @@ export const achievements = {
       } else {
         return false;
       }
-    },
+    }
   },
   silver_customers_hater: {
     rank: 'silver',
@@ -255,7 +255,7 @@ export const achievements = {
       } else {
         return false;
       }
-    },
+    }
   },
   gold_customers_hater: {
     rank: 'gold',
@@ -270,7 +270,7 @@ export const achievements = {
       } else {
         return false;
       }
-    },
+    }
   },
   bronze_lazy_one: {
     rank: 'bronze',
@@ -281,7 +281,7 @@ export const achievements = {
       if (state.data.money >= 2e5) {
         return state.data.workers[0].facts.tasks_done === 0;
       }
-    },
+    }
   },
   silver_lazy_one: {
     rank: 'silver',
@@ -292,7 +292,7 @@ export const achievements = {
       if (state.data.money >= 5e5) {
         return state.data.workers[0].facts.tasks_done === 0;
       }
-    },
+    }
   },
   gold_lazy_one: {
     rank: 'gold',
@@ -303,6 +303,6 @@ export const achievements = {
       if (state.data.money >= 1e6) {
         return state.data.workers[0].facts.tasks_done === 0;
       }
-    },
-  },
+    }
+  }
 };

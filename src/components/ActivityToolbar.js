@@ -5,8 +5,8 @@ import _ from 'lodash';
 class ActivityToolbar extends Component {
   static propTypes = {
     data: PropTypes.shape({
-      helpers: PropTypes.object.isRequired,
-    }),
+      helpers: PropTypes.object.isRequired
+    })
   };
   // shouldComponentUpdate() {
   //   return false;

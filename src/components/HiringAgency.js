@@ -30,7 +30,7 @@ class HiringAgency extends PureComponent {
         min_stats: JSON.parse(JSON.stringify(min)),
         max_stats: JSON.parse(JSON.stringify(max)),
         min_salary: 1,
-        max_salary: 100,
+        max_salary: 100
       },
       this.props.data.hiring_agency_state
     );
@@ -140,7 +140,7 @@ class HiringAgency extends PureComponent {
                 <ReactBootstrapSlider
                   value={[
                     this.state.min_stats[skill],
-                    this.state.max_stats[skill],
+                    this.state.max_stats[skill]
                   ]}
                   change={e => {
                     let state = this.state;

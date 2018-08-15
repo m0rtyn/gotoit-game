@@ -32,7 +32,7 @@ class ProjectOfferBlock extends Component {
         return {
           name: stat,
           value: candidate.originalyTasksQuantity(),
-          color: colors[stat].colorCompleted,
+          color: colors[stat].colorCompleted
         };
       }
     );

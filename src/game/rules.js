@@ -4,7 +4,7 @@ import {
   current_tick,
   projects_done,
   setCurrentTick,
-  setGameDate,
+  setGameDate
 } from '../App';
 import { addAction } from '../components/ToastNest';
 import Lorer from '../services/Lorer';
@@ -22,7 +22,7 @@ export const rules = {
           .toString(36)
           .substring(2, 15);
       return state;
-    },
+    }
   },
 
   nextDay: {
@@ -85,7 +85,7 @@ export const rules = {
                   ' decided to leave from your company in two weeks',
                 {
                   timeOut: 20000,
-                  extendedTimeOut: 10000,
+                  extendedTimeOut: 10000
                 },
                 'error'
               );
@@ -97,7 +97,7 @@ export const rules = {
           money_current_value = {},
           btc_current_value = {},
           candidates_resumes = {},
-          projects_in_process = {},
+          projects_in_process = {}
         } = data.statistics;
         money_current_value.buffer = data.money;
         btc_current_value.buffer = data.btc;
@@ -155,7 +155,7 @@ export const rules = {
             'Not enough money for lunch',
             {
               timeOut: 5000,
-              extendedTimeOut: 2000,
+              extendedTimeOut: 2000
             },
             'error'
           );
@@ -221,7 +221,7 @@ export const rules = {
       });
 
       return state;
-    },
+    }
   },
 
   rollTurn: {
@@ -383,7 +383,7 @@ export const rules = {
 
       state.data = data;
       return state;
-    },
+    }
   },
 
   work: {
@@ -403,7 +403,7 @@ export const rules = {
                 worker.name + ' resigned from your company',
                 {
                   timeOut: 20000,
-                  extendedTimeOut: 10000,
+                  extendedTimeOut: 10000
                 },
                 'error'
               );
@@ -459,7 +459,7 @@ export const rules = {
               worker.name + ' comes back from vacation',
               {
                 timeOut: 5000,
-                extendedTimeOut: 3000,
+                extendedTimeOut: 3000
               },
               'success'
             );
@@ -524,7 +524,7 @@ export const rules = {
 
       state.data = data;
       return state;
-    },
+    }
   },
 
   projects: {
@@ -587,6 +587,6 @@ export const rules = {
       });
 
       return state;
-    },
-  },
+    }
+  }
 };
