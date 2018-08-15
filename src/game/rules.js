@@ -12,7 +12,7 @@ import WorkerModel from '../models/WorkerModel';
 import {
   public_relations,
   resume_will_expire_after,
-  project_offer_will_expire_after,
+  project_offer_will_expire_after
 } from './knowledge';
 
 export const rules = {
