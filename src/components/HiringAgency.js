@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Portal from 'react-portal';
 import _ from 'lodash';
 
@@ -9,7 +9,7 @@ import TeamDialog from './TeamDialog';
 
 import { roles, skills, skills_names } from '../game/knowledge';
 
-class HiringAgency extends Component {
+class HiringAgency extends PureComponent {
   constructor(props) {
     super(props);
 

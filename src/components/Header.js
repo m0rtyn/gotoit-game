@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormattedDate } from 'react-intl';
 import { support } from '../game/app_config';
 
-import Timeline from './Timeline';
+import Timeline from './Timeline/Timeline';
 
 class Header extends Component {
   render() {
