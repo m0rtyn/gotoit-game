@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { colors, public_relations } from '../../game/knowledge';
-import Bar from '../Bar';
+import Bar from '../Bar/Bar';
 import _ from 'lodash';
 
 class PublicRelations extends Component {

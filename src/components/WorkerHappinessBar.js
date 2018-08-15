@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 //import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { colors } from '../game/knowledge';
-import Bar from './Bar';
+import Bar from './Bar/Bar';
 
 class WorkerHappinessBar extends Component {
   render() {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Meeting from './Meeting';
+import Meeting from './Meeting/Meeting';
 import Project from './Project';
 
 class Projects extends Component {

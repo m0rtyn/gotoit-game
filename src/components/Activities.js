@@ -37,7 +37,9 @@ class Activities extends Component {
       content: PropTypes.any.isRequired,
     }),
   };
-
+  // shouldComponentUpdate() {
+  //   return false;
+  // }
   render() {
     const ContentComponent = components[this.props.data.content];
 

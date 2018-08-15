@@ -32,7 +32,9 @@ class Creation extends Component {
 
     this.embark = this.embark.bind(this);
   }
-
+  // shouldComponentUpdate() {
+  //   return false;
+  // }
   getPlayerStats() {
     let stats = JSON.parse(JSON.stringify(skills_1));
 

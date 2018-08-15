@@ -38,7 +38,14 @@ import 'animate.css';
 
 import './assets/styles/theme.css';
 import './assets/styles/scss/main.scss';
-
+// import { registerObserver } from 'react-perf-devtool';
+// import perf from 'react-perftool-extension';
+//
+// if (process.env.NODE_ENV !== 'production') {
+//   // const { whyDidYouUpdate } = require('why-did-you-update');
+//   // whyDidYouUpdate(React);
+//   // registerObserver();
+// }
 export var current_tick = 0;
 export const setCurrentTick = tick => {
   current_tick = tick;

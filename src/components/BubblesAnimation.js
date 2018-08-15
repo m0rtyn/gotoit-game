@@ -16,7 +16,9 @@ class BubblesAnimation extends React.Component {
     this.addBubbleAnimation = this.addBubbleAnimation.bind(this);
     this.trueAddBubbleAnimation = this.trueAddBubbleAnimation.bind(this);
   }
-
+  // shouldComponentUpdate() {
+  //   return false;
+  // }
   componentDidMount() {
     this.props.onRef(this);
   }

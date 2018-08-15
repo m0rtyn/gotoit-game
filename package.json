@@ -5,7 +5,10 @@
   "main": "index.js",
   "homepage": "./",
   "devDependencies": {
-    "electron-builder": "^20.13.4"
+    "electron-builder": "^20.13.4",
+    "react-perf-devtool": "^3.0.8",
+    "react-perftool-extension": "^1.0.6",
+    "why-did-you-update": "^0.1.1"
   },
   "dependencies": {
     "@babel/core": "7.0.0-rc.1",
@@ -94,6 +97,7 @@
     "sass-loader": "7.1.0",
     "speed-measure-webpack-plugin": "^1.2.2",
     "style-loader": "0.22.1",
+    "styled-components": "^3.4.2",
     "stylelint": "^9.4.0",
     "stylelint-config-standard": "^18.2.0",
     "svgr": "1.9.2",
