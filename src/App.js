@@ -1820,9 +1820,14 @@ class App extends Component {
     let this_project = ProjectModel.generate(quality, size, 'history');
     //console.log('probability: ' + probability.toFixed(2) + ' quality: ' + quality + ' size: ' + size);
     this.offerProject(this_project);
+    let project_offer = {
+      project: this_project,
+      createdAt: current_tick,
+      expired: false
+    };
     data.mailbox.push({
       type: 'Offer',
-      content: this_project,
+      content: project_offer,
       date: current_game_date
     });
     addAction('New job!', { timeOut: 3000, extendedTimeOut: 1000 });
@@ -1833,13 +1838,19 @@ class App extends Component {
     let worker = WorkerModel.generate(
       _.random(1, Math.floor(3 + projects_done * 0.1 + current_tick * 0.001))
     );
+    let resume = {
+      worker: worker,
+      createdAt: current_tick,
+      expired: false
+    };
+
     data.candidates.resumes.push(worker);
     data.mailbox.push({
       type: 'Resume',
-      content: worker,
+      content: resume,
       date: current_game_date
     });
-    addAction('New resume! Resume: ' + worker.name);
+    addAction('New resume! Resume: ' + resume.worker.name);
   }
 
   work() {
