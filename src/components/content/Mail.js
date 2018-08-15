@@ -45,7 +45,7 @@ class Mail extends Component {
                 <ProjectEndScreen
                   closePopup={this.closePopup}
                   key={i}
-                  project={letter.content}
+                  project={letter.object}
                   data={this.props.data}
                 />
               )
@@ -62,7 +62,9 @@ class Mail extends Component {
                 <HotOffer
                   closePopup={this.closePopup}
                   key={i}
-                  offer={letter.content}
+                  project={letter.object}
+                  expired={letter.expired}
+                  createdAt={letter.createdAt}
                   data={this.props.data}
                 />
               )
@@ -78,7 +80,9 @@ class Mail extends Component {
                 <Resume
                   closePopup={this.closePopup}
                   key={i}
-                  resume={letter.content}
+                  expired={letter.expired}
+                  createdAt={letter.createdAt}
+                  worker={letter.object}
                   data={this.props.data}
                 />
               )
@@ -94,7 +98,9 @@ class Mail extends Component {
                 <Offer
                   closePopup={this.closePopup}
                   key={i}
-                  offer={letter.content}
+                  expired={letter.expired}
+                  createdAt={letter.createdAt}
+                  project={letter.object}
                   data={this.props.data}
                 />
               )
@@ -108,26 +114,33 @@ class Mail extends Component {
       }
       return (
         <div className="letter card" onClick={handleClick}>
-          {letter.type === 'Resume' ? (
-            <img
-              className="worker-avatar"
-              alt={letter.content.worker.name + ' avatar'}
-              src={letter.content.worker.avatar}
-            />
-          ) : (
-            <div className="project-avatar">
-              <img
-                alt={letter.content.project.name + ' avatar'}
-                src={letter.content.project.avatar.platform}
-              />
-              <img
-                alt={letter.content.project.name + ' avatar'}
-                src={letter.content.project.avatar.kind}
-              />
-            </div>
-          )}
+          {(() => {
+            if (letter.type === 'Resume') {
+              return (
+                <img
+                  className="worker-avatar"
+                  alt={letter.object.name + ' avatar'}
+                  src={letter.object.avatar}
+                />
+              );
+            } else {
+              //for project reporting, offer and hotoffer
+              return (
+                <div className="project-avatar">
+                  <img
+                    alt={letter.object.name + ' platform avatar'}
+                    src={letter.object.avatar.platform}
+                  />
+                  <img
+                    alt={letter.object.name + ' kind avatar'}
+                    src={letter.object.avatar.kind}
+                  />
+                </div>
+              );
+            }
+          })()}
 
-          <span className="sender-name">{letter.content.name}</span>
+          <span className="sender-name">{letter.object.name}</span>
 
           {letter.isRead ? (
             <span className="letter-type">{letter.type}</span>

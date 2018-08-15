@@ -6,11 +6,11 @@ class Resume extends Component {
   render() {
     console.log(current_tick);
     let data = this.props.data;
-    let resume = this.props.resume;
-    let worker = resume.worker;
+    let worker = this.props.worker;
+    let expired = this.props.expired;
+    let createdAt = this.props.createdAt;
     let days_to_expire = Math.round(
-      (this.props.resume.createdAt + resume_will_expire_after - current_tick) /
-        24
+      (createdAt + resume_will_expire_after - current_tick) / 24
     );
     let gender_pointer = (() => {
       if (worker.gender === 'male') return 'him';
@@ -21,11 +21,11 @@ class Resume extends Component {
       <div>
         <button
           className="btn btn-success"
-          id={resume.worker.id}
+          id={worker.id}
           onClick={e => {
             if (data.workers.length !== data.office.space) {
               this.props.data.helpers.hireCandidate(e.target.id, 'resumes');
-              resume.worker.hired = true;
+              worker.hired = true;
               this.props.closePopup();
             } else {
               alert('Your office is full');
@@ -36,10 +36,10 @@ class Resume extends Component {
         </button>
         <button
           className="btn btn-danger"
-          id={resume.worker.id}
+          id={worker.id}
           onClick={e => {
             this.props.data.helpers.rejectCandidate(e.target.id, 'resumes');
-            resume.expired = true;
+            expired = true;
             this.props.closePopup();
           }}
         >
@@ -70,28 +70,28 @@ class Resume extends Component {
             {' '}
             <img
               className="resume-avatar"
-              alt={resume.worker.name + ' avatar'}
-              src={resume.worker.avatar}
+              alt={worker.name + ' avatar'}
+              src={worker.avatar}
             />
           </span>
           <span className="resume-info">
-            <h3>{resume.worker.name}</h3>
-            <h3>Gender: {resume.worker.gender}</h3>
-            <h3>Salary: ${resume.worker.salary} per month</h3>
+            <h3>{worker.name}</h3>
+            <h3>Gender: {worker.gender}</h3>
+            <h3>Salary: ${worker.salary} per month</h3>
           </span>
           <span>
-            <h3>Design: {resume.worker.stats.design}</h3>
-            <h3>Program: {resume.worker.stats.program}</h3>
-            <h3>Manage: {resume.worker.stats.manage}</h3>
+            <h3>Design: {worker.stats.design}</h3>
+            <h3>Program: {worker.stats.program}</h3>
+            <h3>Manage: {worker.stats.manage}</h3>
           </span>
         </div>
         <h2>Character:</h2>
         <h3>
-          {resume.worker.character.name}. {resume.worker.character.description}
+          {worker.character.name}. {worker.character.description}
         </h3>
-        {!resume.expired ? `Will expire in ${days_to_expire} days` : ''}
-        {!resume.worker.hired ? (
-          !resume.expired ? (
+        {!expired ? `Will expire in ${days_to_expire} days` : ''}
+        {!worker.hired ? (
+          !expired ? (
             buttons
           ) : (
             <h3>{'This employer found another job.'}</h3>
