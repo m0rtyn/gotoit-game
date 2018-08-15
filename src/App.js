@@ -308,13 +308,13 @@ class App extends Component {
 
       _.each(loaded_app_state.data.mailbox, (item, id) => {
         item.type === 'Resume'
-          ? (loaded_app_state.data.mailbox[id].content = _.create(
+          ? (loaded_app_state.data.mailbox[id].project = _.create(
               WorkerModel.prototype,
-              item.content
+              item.project
             ))
-          : (loaded_app_state.data.mailbox[id].content = _.create(
+          : (loaded_app_state.data.mailbox[id].project = _.create(
               ProjectModel.prototype,
-              item.content
+              item.project
             ));
       });
 
@@ -1068,7 +1068,7 @@ class App extends Component {
     project.stage = stage;
     data.mailbox.push({
       type: 'Project report',
-      content: _.create(ProjectModel.prototype, project),
+      object: _.create(ProjectModel.prototype, project),
       date: current_game_date
     });
 
@@ -1109,7 +1109,8 @@ class App extends Component {
       this.offerProject(this_project);
       data.mailbox.push({
         type: 'Hot offer',
-        content: this_project,
+        name: this_project.name,
+        object: this_project,
         date: current_game_date
       });
       addAction('New hot offer: ' + project.name);
@@ -1120,7 +1121,8 @@ class App extends Component {
       this.offerProject(this_project);
       data.mailbox.push({
         type: 'Hot offer',
-        content: this_project,
+        name: this_project.name,
+        object: this_project,
         date: current_game_date
       });
       addAction('New hot offer: ' + project.name);
@@ -1131,7 +1133,8 @@ class App extends Component {
       this.offerProject(this_project);
       data.mailbox.push({
         type: 'Hot offer',
-        content: this_project,
+        name: this_project.name,
+        object: this_project,
         date: current_game_date
       });
       addAction('New hot offer: ' + project.name);
@@ -1142,7 +1145,8 @@ class App extends Component {
       this.offerProject(this_project);
       data.mailbox.push({
         type: 'Hot offer',
-        content: this_project,
+        name: this_project.name,
+        object: this_project,
         date: current_game_date
       });
       addAction('New hot offer: ' + project.name);
@@ -1153,7 +1157,8 @@ class App extends Component {
       this.offerProject(this_project);
       data.mailbox.push({
         type: 'Hot offer',
-        content: this_project,
+        name: this_project.name,
+        object: this_project,
         date: current_game_date
       });
       addAction('New hot offer: ' + project.name);
@@ -1820,14 +1825,11 @@ class App extends Component {
     let this_project = ProjectModel.generate(quality, size, 'history');
     //console.log('probability: ' + probability.toFixed(2) + ' quality: ' + quality + ' size: ' + size);
     this.offerProject(this_project);
-    let project_offer = {
-      project: this_project,
-      createdAt: current_tick,
-      expired: false
-    };
     data.mailbox.push({
       type: 'Offer',
-      content: project_offer,
+      object: this_project,
+      createdAt: current_tick,
+      expired: false,
       date: current_game_date
     });
     addAction('New job!', { timeOut: 3000, extendedTimeOut: 1000 });
@@ -1838,19 +1840,16 @@ class App extends Component {
     let worker = WorkerModel.generate(
       _.random(1, Math.floor(3 + projects_done * 0.1 + current_tick * 0.001))
     );
-    let resume = {
-      worker: worker,
-      createdAt: current_tick,
-      expired: false
-    };
 
     data.candidates.resumes.push(worker);
     data.mailbox.push({
       type: 'Resume',
-      content: resume,
+      object: worker,
+      createdAt: current_tick,
+      expired: false,
       date: current_game_date
     });
-    addAction('New resume! Resume: ' + resume.worker.name);
+    addAction('New resume!', { timeOut: 3000, extendedTimeOut: 1000 });
   }
 
   work() {
@@ -2171,8 +2170,8 @@ class App extends Component {
     return true;
   }
 
-  createPopup(name, content) {
-    this.popupHandler.createPopup(name, content);
+  createPopup(name, project) {
+    this.popupHandler.createPopup(name, project);
   }
 
   render() {

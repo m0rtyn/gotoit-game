@@ -28,8 +28,8 @@ class HotOffer extends Component {
   }
 
   render() {
-    let project = this.props.offer.project;
-    let expired = this.props.offer.expired;
+    let project = this.props.project;
+    let expired = this.props.expired;
     const stats_data = _.mapValues(skills, (stat, key) => {
       return { name: key, val: <span>{project.needs(key)}</span> };
     });
