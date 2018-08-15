@@ -9,7 +9,7 @@ const ProgressBar = styled.div`
 
 class BarItem extends PureComponent {
   static defaultProps = {
-    width: 0,
+    width: 0
   };
 
   static propTypes = {
@@ -17,7 +17,7 @@ class BarItem extends PureComponent {
     name: PropTypes.string,
     showName: PropTypes.bool,
     value: PropTypes.string,
-    width: PropTypes.number,
+    width: PropTypes.number
   };
 
   render() {

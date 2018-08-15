@@ -7,7 +7,7 @@ export default class WorkerCard extends Component {
     workerId: PropTypes.string,
     projectId: PropTypes.string,
     name: PropTypes.string,
-    relation: PropTypes.func,
+    relation: PropTypes.func
   };
 
   render() {

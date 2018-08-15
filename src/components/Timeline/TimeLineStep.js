@@ -9,7 +9,7 @@ export class TimeLineStep extends Component {
     events: PropTypes.arrayOf(PropTypes.any),
     f: PropTypes.func,
     index: PropTypes.number,
-    length: PropTypes.number,
+    length: PropTypes.number
   };
 
   render() {
@@ -19,7 +19,7 @@ export class TimeLineStep extends Component {
         className="step"
         style={{
           marginLeft:
-            (timelineWidth / (this.props.length - 1)) * this.props.index + 'px',
+            (timelineWidth / (this.props.length - 1)) * this.props.index + 'px'
         }}
       >
         <div>{this.props.day.getDate()}</div>

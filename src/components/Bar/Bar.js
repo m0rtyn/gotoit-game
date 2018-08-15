@@ -6,7 +6,7 @@ import _ from 'lodash';
 class Bar extends Component {
   static propTypes = {
     bar_data: PropTypes.array.isRequired,
-    className: PropTypes.string.isRequired,
+    className: PropTypes.string.isRequired
   };
 
   render() {

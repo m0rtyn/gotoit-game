@@ -5,7 +5,7 @@ import * as PropTypes from 'prop-types';
 export default class ProjectDeadline extends PureComponent {
   static propTypes = {
     deadline: PropTypes.number.isRequired,
-    deadlineMax: PropTypes.number.isRequired,
+    deadlineMax: PropTypes.number.isRequired
   };
 
   render() {
@@ -23,9 +23,7 @@ export default class ProjectDeadline extends PureComponent {
             role="progressbar"
             style={{
               width:
-                100 -
-                (this.props.deadline / this.props.deadlineMax) * 100 +
-                '%',
+                100 - (this.props.deadline / this.props.deadlineMax) * 100 + '%'
             }}
           >
             {this.props.deadlineMax - this.props.deadline} hours
@@ -34,7 +32,7 @@ export default class ProjectDeadline extends PureComponent {
             className="progress-bar bg-success"
             role="progressbar"
             style={{
-              width: (this.props.deadline / this.props.deadlineMax) * 100 + '%',
+              width: (this.props.deadline / this.props.deadlineMax) * 100 + '%'
             }}
           >
             {this.props.deadline} hours

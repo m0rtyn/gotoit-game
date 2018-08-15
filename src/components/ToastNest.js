@@ -32,7 +32,7 @@ class ToastNest extends Component {
   addMessage(text, options, type = 'info') {
     chatMessage('', text, type);
     toast.info(text, {
-      position: toast.POSITION.BOTTOM_LEFT,
+      position: toast.POSITION.BOTTOM_LEFT
     });
   }
 
@@ -42,7 +42,7 @@ class ToastNest extends Component {
 
   addAction(text, options, type = 'info') {
     toast.info(text, {
-      position: toast.POSITION.BOTTOM_RIGHT,
+      position: toast.POSITION.BOTTOM_RIGHT
     });
   }
 

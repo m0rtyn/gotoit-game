@@ -8,7 +8,7 @@ export default class VacationAndLeave extends Component {
     avatar: PropTypes.string,
     index: PropTypes.number,
     info: PropTypes.string,
-    name: PropTypes.string,
+    name: PropTypes.string
   };
 
   render() {

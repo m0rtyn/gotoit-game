@@ -7,7 +7,7 @@ export default class StartPauseButton extends PureComponent {
     pause: PropTypes.func,
     paused: PropTypes.bool,
     stage: PropTypes.bool,
-    unpause: PropTypes.func,
+    unpause: PropTypes.func
   };
 
   render() {

@@ -5,7 +5,7 @@ import * as PropTypes from 'prop-types';
 export default class ProgressDeadline extends Component {
   static propTypes = {
     deadline: PropTypes.number,
-    deadlineMax: PropTypes.number,
+    deadlineMax: PropTypes.number
   };
 
   render() {
@@ -21,7 +21,7 @@ export default class ProgressDeadline extends Component {
           role="progressbar"
           style={{
             width:
-              100 - (this.props.deadline / this.props.deadlineMax) * 100 + '%',
+              100 - (this.props.deadline / this.props.deadlineMax) * 100 + '%'
           }}
         >
           {this.props.deadlineMax - this.props.deadline} gone
@@ -30,7 +30,7 @@ export default class ProgressDeadline extends Component {
           className="progress-bar bg-success"
           role="progressbar"
           style={{
-            width: (this.props.deadline / this.props.deadlineMax) * 100 + '%',
+            width: (this.props.deadline / this.props.deadlineMax) * 100 + '%'
           }}
         >
           {this.props.deadline} to deadline

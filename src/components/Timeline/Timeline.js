@@ -9,7 +9,7 @@ const timelineWidth = window.innerWidth;
 
 class Timeline extends Component {
   static propTypes = {
-    data: PropTypes.shape(),
+    data: PropTypes.shape()
   };
 
   render() {

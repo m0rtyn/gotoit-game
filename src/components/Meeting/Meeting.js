@@ -8,26 +8,12 @@ import StartPauseButton from './StartPauseButton';
 import ProjectDeadline from './ProjectDeadline';
 import WorkerCard from './WorkerCard';
 import ProgressDeadline from './ProgressDeadline';
-
-class RejectButton extends Component {
-  render() {
-    return (
-      <button
-        className="btn btn-danger"
-        onClick={this.props.onClickRejectProject}
-      >
-        Reject
-      </button>
-    );
-  }
-}
-
-RejectButton.propTypes = { onClickRejectProject: PropTypes.func };
+import { RejectButton } from './RejectButton';
 
 class Meeting extends Component {
   static propTypes = {
     data: PropTypes.object,
-    project: PropTypes.object,
+    project: PropTypes.object
   };
 
   constructor(props) {
