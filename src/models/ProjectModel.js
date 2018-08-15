@@ -30,8 +30,6 @@ class ProjectModel {
     deadline,
     complexity = 0
   ) {
-    console.log('here');
-    console.log(kind, platform);
     this.stage = 'ready';
     this.is_paused = false;
 
@@ -133,7 +131,6 @@ class ProjectModel {
   ) {
     var learned = JSON.parse(JSON.stringify(skills));
     let focus_on_id = project.id + project_bars[focus_on];
-    console.log(focus_on_id);
     Object.keys(work).forEach(stat => {
       if (this.needs(stat) > 0 && work[stat] > 0) {
         var support =

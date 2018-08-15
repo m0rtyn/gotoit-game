@@ -45,7 +45,6 @@ export const rules = {
       setCurrentTick(time.tick);
       setGameDate(game_date);
       data.helpers.setTimelineScale();
-      console.log(current_tick);
       //time.hour++;
       time.hour = game_date.getHours();
 

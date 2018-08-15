@@ -113,7 +113,7 @@ class Mail extends Component {
           break;
       }
       return (
-        <div className="letter card" onClick={handleClick}>
+        <div className="letter card" onClick={handleClick} key={i}>
           {(() => {
             if (letter.type === 'Resume') {
               return (
