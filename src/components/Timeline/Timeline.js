@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import DeadLine from './OverlayTriggers/DeadLine';
 import VacationAndLeave from './OverlayTriggers/VacationAndLeave';
+import { TimeLineStep } from './TimeLineStep';
+
 const timelineWidth = window.innerWidth;
 
 class Timeline extends Component {
@@ -27,46 +29,37 @@ class Timeline extends Component {
                   return true;
                 } else return false;
               });
-
               return (
-                <div
-                  key={index}
-                  className="step"
-                  style={{
-                    marginLeft:
-                      (timelineWidth / (timelineScale.length - 1)) * index +
-                      'px',
+                <TimeLineStep
+                  index={index}
+                  length={timelineScale.length}
+                  day={day}
+                  events={events}
+                  f={(item, index) => {
+                    if (item.type === 'deadline') {
+                      return (
+                        <DeadLine
+                          index={index}
+                          info={item.info}
+                          name={item.object.name}
+                          avatar={item.object.avatar}
+                        />
+                      );
+                    } else if (
+                      item.type === 'vacation' ||
+                      item.type === 'leave'
+                    ) {
+                      return (
+                        <VacationAndLeave
+                          index={index}
+                          info={item.info}
+                          name={item.object.name}
+                          avatar={item.object.avatar}
+                        />
+                      );
+                    } else return null;
                   }}
-                >
-                  <div>{day.getDate()}</div>
-
-                  <div className="worker-portrait">
-                    {_.map(events, (item, index) => {
-                      if (item.type === 'deadline') {
-                        return (
-                          <DeadLine
-                            index={index}
-                            info={item.info}
-                            name={item.object.name}
-                            avatar={item.object.avatar}
-                          />
-                        );
-                      } else if (
-                        item.type === 'vacation' ||
-                        item.type === 'leave'
-                      ) {
-                        return (
-                          <VacationAndLeave
-                            index={index}
-                            info={item.info}
-                            name={item.object.name}
-                            avatar={item.object.avatar}
-                          />
-                        );
-                      } else return null;
-                    })}
-                  </div>
-                </div>
+                />
               );
             })}
           </div>
