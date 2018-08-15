@@ -1,10 +1,52 @@
 import React, { Component } from 'react';
+import { current_tick } from '../App';
+import { resume_will_expire_after } from '../game/knowledge';
 
 class Resume extends Component {
   render() {
+    console.log(current_tick);
     let data = this.props.data;
     let worker = this.props.worker;
-    console.log(data.workers[worker]);
+    let expired = this.props.expired;
+    let createdAt = this.props.createdAt;
+    let days_to_expire = Math.round(
+      (createdAt + resume_will_expire_after - current_tick) / 24
+    );
+    let gender_pointer = (() => {
+      if (worker.gender === 'male') return 'him';
+      if (worker.gender === 'female') return 'her';
+      if (worker.gender === 'other') return 'them';
+    })();
+    const buttons = (
+      <div>
+        <button
+          className="btn btn-success"
+          id={worker.id}
+          onClick={e => {
+            if (data.workers.length !== data.office.space) {
+              this.props.data.helpers.hireCandidate(e.target.id, 'resumes');
+              worker.hired = true;
+              this.props.closePopup();
+            } else {
+              alert('Your office is full');
+            }
+          }}
+        >
+          Accept
+        </button>
+        <button
+          className="btn btn-danger"
+          id={worker.id}
+          onClick={e => {
+            this.props.data.helpers.rejectCandidate(e.target.id, 'resumes');
+            expired = true;
+            this.props.closePopup();
+          }}
+        >
+          Reject
+        </button>
+      </div>
+    );
     return (
       <div className="resume">
         <div className="flexbox">
@@ -27,7 +69,7 @@ class Resume extends Component {
           <span>
             {' '}
             <img
-              className="worker-avatar"
+              className="resume-avatar"
               alt={worker.name + ' avatar'}
               src={worker.avatar}
             />
@@ -47,31 +89,15 @@ class Resume extends Component {
         <h3>
           {worker.character.name}. {worker.character.description}
         </h3>
+        {!expired ? `Will expire in ${days_to_expire} days` : ''}
         {!worker.hired ? (
-          <div>
-            <button
-              className="btn btn-success"
-              id={worker.id}
-              onClick={e => {
-                this.props.data.helpers.hireCandidate(e.target.id, 'resumes');
-                this.props.closePopup();
-              }}
-            >
-              Hire
-            </button>
-            <button
-              className="btn btn-danger"
-              id={worker.id}
-              onClick={e => {
-                this.props.data.helpers.rejectCandidate(e.target.id, 'resumes');
-                this.props.closePopup();
-              }}
-            >
-              Hide
-            </button>
-          </div>
+          !expired ? (
+            buttons
+          ) : (
+            <h3>{'This employer found another job.'}</h3>
+          )
         ) : (
-          ''
+          <h3>{`You already hired ${gender_pointer}`}</h3>
         )}
       </div>
     );

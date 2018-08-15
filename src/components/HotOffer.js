@@ -29,6 +29,7 @@ class HotOffer extends PureComponent {
 
   render() {
     let project = this.props.project;
+    let expired = this.props.expired;
     const stats_data = _.mapValues(skills, (stat, key) => {
       return { name: key, val: <span>{project.needs(key)}</span> };
     });
@@ -95,33 +96,37 @@ class HotOffer extends PureComponent {
               </div>
               <StatsBar stats={stats_data} data={this.props.data} />
               {project.stage === 'ready' ? (
-                <div className="btn-group">
-                  <button
-                    className="btn btn-success"
-                    id={project.id}
-                    onClick={e => this.acceptOffered(e)}
-                  >
-                    Accept
-                  </button>
-                  &nbsp;
-                  <button
-                    className="btn btn-warning"
-                    id={project.id}
-                    onClick={e => this.startOffered(e)}
-                  >
-                    Start
-                  </button>
-                  &nbsp;
-                  <button
-                    className="btn btn-danger"
-                    id={project.id}
-                    onClick={e => this.reject(e)}
-                  >
-                    Hide
-                  </button>
-                </div>
+                !expired ? (
+                  <div className="btn-group">
+                    <button
+                      className="btn btn-success"
+                      id={project.id}
+                      onClick={e => this.acceptOffered(e)}
+                    >
+                      Accept
+                    </button>
+                    &nbsp;
+                    <button
+                      className="btn btn-warning"
+                      id={project.id}
+                      onClick={e => this.startOffered(e)}
+                    >
+                      Start
+                    </button>
+                    &nbsp;
+                    <button
+                      className="btn btn-danger"
+                      id={project.id}
+                      onClick={e => this.reject(e)}
+                    >
+                      Hide
+                    </button>
+                  </div>
+                ) : (
+                  'This offer has expired'
+                )
               ) : (
-                ''
+                'You already took this offer'
               )}
             </div>
           </div>

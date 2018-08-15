@@ -9,7 +9,11 @@ import {
 import { addAction } from '../components/ToastNest';
 import Lorer from '../services/Lorer';
 import WorkerModel from '../models/WorkerModel';
-import { public_relations } from './knowledge';
+import {
+  public_relations,
+  resume_will_expire_after,
+  project_offer_will_expire_after
+} from './knowledge';
 
 export const rules = {
   matrix_show: {
@@ -25,6 +29,7 @@ export const rules = {
     }
   },
 
+  //Is that a good name?
   nextDay: {
     onTick: function(state) {
       const data = state.data;
@@ -40,7 +45,7 @@ export const rules = {
       setCurrentTick(time.tick);
       setGameDate(game_date);
       data.helpers.setTimelineScale();
-
+      console.log(current_tick);
       //time.hour++;
       time.hour = game_date.getHours();
 
@@ -146,7 +151,7 @@ export const rules = {
       if (time.hour === 14 && data.office_things.lunch) {
         // lunch time!
         if (data.workers.length * 25 <= data.money) {
-          this.chargeMoney(data.workers.length * 25);
+          this.chargeMoney(data.workers.length * 25); // !!! minus employers on vacation
           data.workers.forEach(worker => {
             worker.fed_ticker += 24;
           });
@@ -164,6 +169,8 @@ export const rules = {
       }
 
       if (time.date !== 1 && game_date.getDate() === 1) {
+        console.log('Is it next day?');
+        console.log(time.date);
         // first day
         if (data.office.size > 1) {
           this.chargeMoney(data.office.price);
@@ -187,6 +194,9 @@ export const rules = {
         }).forEach(loan => {
           data.old_loans.push(loan);
         });
+      }
+
+      if (game_date.getDate() === 15) {
       }
       time.date = game_date.getDate();
       time.day = game_date.getUTCDay();
@@ -218,6 +228,22 @@ export const rules = {
           data.date.tick - effect.start_tick,
           effect.click_count
         );
+      });
+
+      //Expiring resumes
+      _.each(data.mailbox, letter => {
+        if (letter.type === 'Resume') {
+          if (current_tick - letter.createdAt >= resume_will_expire_after) {
+            letter.expired = true;
+          }
+        } else if (letter.type === 'Offer') {
+          if (
+            current_tick - letter.createdAt >=
+            project_offer_will_expire_after
+          ) {
+            letter.expired = true;
+          }
+        }
       });
 
       return state;
@@ -440,7 +466,7 @@ export const rules = {
           if (worker.to_vacation_ticker <= 0) {
             let weeks = _.random(1, 4);
             worker.sendToVacation(weeks);
-            state.data.helpers.lineEvent(
+            state.data.helpers.addTimelineEvent(
               'vacation',
               'Going to vacation',
               worker,
