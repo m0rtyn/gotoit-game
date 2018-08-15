@@ -62,7 +62,7 @@ class Mail extends Component {
                 <HotOffer
                   closePopup={this.closePopup}
                   key={i}
-                  project={letter.content}
+                  offer={letter.content}
                   data={this.props.data}
                 />
               ),
@@ -94,7 +94,7 @@ class Mail extends Component {
                 <Offer
                   closePopup={this.closePopup}
                   key={i}
-                  project={letter.content}
+                  offer={letter.content}
                   data={this.props.data}
                 />
               ),
@@ -117,12 +117,12 @@ class Mail extends Component {
           ) : (
             <div className="project-avatar">
               <img
-                alt={letter.content.name + ' avatar'}
-                src={letter.content.avatar.platform}
+                alt={letter.content.project.name + ' avatar'}
+                src={letter.content.project.avatar.platform}
               />
               <img
-                alt={letter.content.name + ' avatar'}
-                src={letter.content.avatar.kind}
+                alt={letter.content.project.name + ' avatar'}
+                src={letter.content.project.avatar.kind}
               />
             </div>
           )}

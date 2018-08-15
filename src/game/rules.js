@@ -9,7 +9,11 @@ import {
 import { addAction } from '../components/ToastNest';
 import Lorer from '../services/Lorer';
 import WorkerModel from '../models/WorkerModel';
-import { public_relations, resume_will_expire_after } from './knowledge';
+import {
+  public_relations,
+  resume_will_expire_after,
+  project_offer_will_expire_after,
+} from './knowledge';
 
 export const rules = {
   matrix_show: {
@@ -25,6 +29,7 @@ export const rules = {
     },
   },
 
+  //Is that a good name?
   nextDay: {
     onTick: function(state) {
       const data = state.data;
@@ -146,7 +151,7 @@ export const rules = {
       if (time.hour === 14 && data.office_things.lunch) {
         // lunch time!
         if (data.workers.length * 25 <= data.money) {
-          this.chargeMoney(data.workers.length * 25);
+          this.chargeMoney(data.workers.length * 25); // !!! minus employers on vacation
           data.workers.forEach(worker => {
             worker.fed_ticker += 24;
           });
@@ -164,6 +169,8 @@ export const rules = {
       }
 
       if (time.date !== 1 && game_date.getDate() === 1) {
+        console.log('Is it next day?');
+        console.log(time.date);
         // first day
         if (data.office.size > 1) {
           this.chargeMoney(data.office.price);
@@ -188,6 +195,9 @@ export const rules = {
           data.old_loans.push(loan);
         });
       }
+
+      if (game_date.getDate() === 15) {
+      }
       time.date = game_date.getDate();
       time.day = game_date.getUTCDay();
 
@@ -200,7 +210,6 @@ export const rules = {
 
       data.date = time;
       state.data = data;
-      console.log(data.candidates.resumes);
 
       data.on_tick_effects = _.filter(data.on_tick_effects, effect => {
         let same = _.filter(data.on_tick_effects, effect2 => {
@@ -223,11 +232,17 @@ export const rules = {
 
       //Expiring resumes
       _.each(data.mailbox, letter => {
-        console.log(letter);
         if (letter.type === 'Resume') {
           if (
             current_tick - letter.content.createdAt >=
             resume_will_expire_after
+          ) {
+            letter.content.expired = true;
+          }
+        } else if (letter.type === 'Offer') {
+          if (
+            current_tick - letter.content.createdAt >=
+            project_offer_will_expire_after
           ) {
             letter.content.expired = true;
           }

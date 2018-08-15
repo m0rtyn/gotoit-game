@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { skills } from '../game/knowledge';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
-
+// Dublicate, should to remove. do not style this
 class HotOffer extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +28,8 @@ class HotOffer extends Component {
   }
 
   render() {
-    let project = this.props.project;
+    let project = this.props.offer.project;
+    let expired = this.props.offer.expired;
     const stats_data = _.mapValues(skills, (stat, key) => {
       return { name: key, val: <span>{project.needs(key)}</span> };
     });
@@ -95,33 +96,37 @@ class HotOffer extends Component {
               </div>
               <StatsBar stats={stats_data} data={this.props.data} />
               {project.stage === 'ready' ? (
-                <div className="btn-group">
-                  <button
-                    className="btn btn-success"
-                    id={project.id}
-                    onClick={e => this.acceptOffered(e)}
-                  >
-                    Accept
-                  </button>
-                  &nbsp;
-                  <button
-                    className="btn btn-warning"
-                    id={project.id}
-                    onClick={e => this.startOffered(e)}
-                  >
-                    Start
-                  </button>
-                  &nbsp;
-                  <button
-                    className="btn btn-danger"
-                    id={project.id}
-                    onClick={e => this.reject(e)}
-                  >
-                    Hide
-                  </button>
-                </div>
+                !expired ? (
+                  <div className="btn-group">
+                    <button
+                      className="btn btn-success"
+                      id={project.id}
+                      onClick={e => this.acceptOffered(e)}
+                    >
+                      Accept
+                    </button>
+                    &nbsp;
+                    <button
+                      className="btn btn-warning"
+                      id={project.id}
+                      onClick={e => this.startOffered(e)}
+                    >
+                      Start
+                    </button>
+                    &nbsp;
+                    <button
+                      className="btn btn-danger"
+                      id={project.id}
+                      onClick={e => this.reject(e)}
+                    >
+                      Hide
+                    </button>
+                  </div>
+                ) : (
+                  'This offer has expired'
+                )
               ) : (
-                ''
+                'You already took this offer'
               )}
             </div>
           </div>

@@ -1820,9 +1820,14 @@ class App extends Component {
     let this_project = ProjectModel.generate(quality, size, 'history');
     //console.log('probability: ' + probability.toFixed(2) + ' quality: ' + quality + ' size: ' + size);
     this.offerProject(this_project);
+    let project_offer = {
+      project: this_project,
+      createdAt: current_tick,
+      expired: false,
+    };
     data.mailbox.push({
       type: 'Offer',
-      content: this_project,
+      content: project_offer,
       date: current_game_date,
     });
     addAction('New job!', { timeOut: 3000, extendedTimeOut: 1000 });
