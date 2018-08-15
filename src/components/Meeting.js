@@ -199,7 +199,7 @@ class Meeting extends Component {
                                   100 -
                                   (project.deadline / project.deadline_max) *
                                     100 +
-                                  '%',
+                                  '%'
                               }}
                             >
                               {project.deadline_max - project.deadline} hours
@@ -211,7 +211,7 @@ class Meeting extends Component {
                                 width:
                                   (project.deadline / project.deadline_max) *
                                     100 +
-                                  '%',
+                                  '%'
                               }}
                             >
                               {project.deadline} hours
@@ -272,7 +272,7 @@ class Meeting extends Component {
               role="progressbar"
               style={{
                 width:
-                  100 - (project.deadline / project.deadline_max) * 100 + '%',
+                  100 - (project.deadline / project.deadline_max) * 100 + '%'
               }}
             >
               {project.deadline_max - project.deadline} gone
@@ -281,7 +281,7 @@ class Meeting extends Component {
               className="progress-bar bg-success"
               role="progressbar"
               style={{
-                width: (project.deadline / project.deadline_max) * 100 + '%',
+                width: (project.deadline / project.deadline_max) * 100 + '%'
               }}
             >
               {project.deadline} to deadline

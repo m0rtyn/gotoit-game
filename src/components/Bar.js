@@ -12,13 +12,12 @@ class Bar extends Component {
             className="progress-bar"
             role="progressbar"
             id={item.id}
-            style={{
-              width: item.width + '%',
-              backgroundColor: item.color,
-            }}
+            style={{ width: item.width + '%', backgroundColor: item.color }}
           >
-            {item.showName ? item.name : null}
-            {' ' + item.value}
+            <span className="progress-bar-name">
+              {item.showName ? item.name : null}
+              {' ' + item.value}
+            </span>
           </div>
         ))}
       </div>

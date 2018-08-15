@@ -35,7 +35,7 @@ class MeetingModel {
     return {
       id: this.id,
       name: '',
-      type: this.type,
+      type: this.type
     };
   }
 

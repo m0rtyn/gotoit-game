@@ -31,7 +31,7 @@ class Timeline extends Component {
                   style={{
                     marginLeft:
                       (timelineWidth / (timelineScale.length - 1)) * index +
-                      'px',
+                      'px'
                   }}
                 >
                   <div>{day.getDate()}</div>

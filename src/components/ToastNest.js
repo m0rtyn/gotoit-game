@@ -42,7 +42,7 @@ class ToastNest extends Component {
           closeButton: false,
           preventDuplicates: false,
           timeOut: 1000,
-          extendedTimeOut: 500,
+          extendedTimeOut: 500
         },
         options
       )
@@ -62,7 +62,7 @@ class ToastNest extends Component {
           closeButton: true,
           preventDuplicates: false,
           timeOut: 30000,
-          extendedTimeOut: 5000,
+          extendedTimeOut: 5000
         },
         options
       )

@@ -33,7 +33,7 @@ class StatsProgressBar extends Component {
           value: parseInt(stats[stat].value, 10),
           width: (parseInt(stats[stat].value, 10) / max_stat) * 100,
           color: stats[stat].color,
-          showName: true,
+          showName: true
         };
         break;
       case 'program':
@@ -43,7 +43,7 @@ class StatsProgressBar extends Component {
           value: parseInt(stats[stat].value, 10),
           width: (parseInt(stats[stat].value, 10) / max_stat) * 100,
           color: stats[stat].color,
-          showName: true,
+          showName: true
         };
         break;
       case 'manage':
@@ -53,7 +53,7 @@ class StatsProgressBar extends Component {
           value: parseInt(stats[stat].value, 10),
           width: (parseInt(stats[stat].value, 10) / max_stat) * 100,
           color: stats[stat].color,
-          showName: true,
+          showName: true
         };
         break;
 

@@ -1,15 +1,16 @@
 .worker {
+  --worker-avatar-size: calc(8px * 9);
+
   margin: size(0.5);
   margin-bottom: size(1);
   display: flex;
   flex-flow: row nowrap;
   border-radius: size(0.5);
-  padding: size(0.5);
+  padding: size(1);
   transition: background-color 0.33s ease-out;
   position: relative;
 
   &.vacation {
-    
     &::before {
       content: "";
       position: absolute;
@@ -33,14 +34,16 @@
     }
   }
 
-  & > div {
-    width: calc(100% - 60px); // 60px - avatar width
+  .worker-info {
+    width: calc(100% - var(--worker-avatar-size);
+    margin-left: size(1);
   }
 
 
   .card-header {
-    padding: size(0.25) size(0.5);
+    padding: 0;
     border-bottom: none;
+    margin-bottom: size(0.5);
   }
 
   .worker-name {
@@ -50,13 +53,12 @@
   }
 
   .card-body {
-    padding: size(0.25) size(0.5);
+    padding: 0;
   }
 
   .worker-avatar {
-    width: size(8);
-    height: size(8);
-    margin: size(0.5);
+    width: var(--worker-avatar-size);
+    height: var(--worker-avatar-size);
   }
 
   .worker-stats {
@@ -68,17 +70,8 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     padding-top: size(0.5);
-  }
 
-  .stats-progress-bar {
-    width: 30%;
-    display: flex;
-    padding-left: size(0.5);
-
-    .progress {
-      width: 100%;
-      border-radius: 6px;
-      height: size(1);
+    .progress-bar-name {
       font-size: 0;
     }
   }

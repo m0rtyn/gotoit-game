@@ -12,7 +12,7 @@ class MarketTop extends Component {
 
     this.state = {
       selected_kind: 'all',
-      selected_platform: 'all',
+      selected_platform: 'all'
     };
 
     //  this.embark = this.embark.bind(this);
@@ -100,7 +100,7 @@ class MarketTop extends Component {
           chart={{
             name: 'Market statistics',
             type: 'Market',
-            table_data: table_data,
+            table_data: table_data
           }}
         />
         <div className="text-center">

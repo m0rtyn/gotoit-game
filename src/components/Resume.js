@@ -48,7 +48,7 @@ class Resume extends Component {
       </div>
     );
     return (
-      <div>
+      <div className="resume">
         <div className="flexbox">
           <span className="flex-grow">
             <h2 className="resume-title ">Resume</h2>
