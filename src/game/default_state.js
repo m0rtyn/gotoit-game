@@ -76,6 +76,7 @@ var default_state = {
     projects_known_technologies: ['overtime', 'creativity'],
     projects_technologies: [],
     projects_default_technologies: [],
+    projects_unlocked_platforms: ['desktop'],
     project_team_selector: null,
     hovered_projects_id: [],
     hovered_workers_id: [],

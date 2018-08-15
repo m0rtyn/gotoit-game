@@ -1,11 +1,12 @@
 import React from 'react';
+import { FormattedDate } from 'react-intl';
 
 const HistoricalEvent = props => {
   return (
     <div>
       <div className="flexbox">
         <span className="flex-grow">
-          <h2>{props.event.title}</h2>
+          <h2>{props.content.name}</h2>
         </span>
         <span>
           <button
@@ -18,7 +19,15 @@ const HistoricalEvent = props => {
           </button>
         </span>
       </div>
-      <div>{`Today ${props.date}, ${props.event.description}`}</div>
+      <div>
+        <FormattedDate
+          value={props.date}
+          day="numeric"
+          month="short"
+          year="numeric"
+        />{' '}
+        {`${props.content.description}`}
+      </div>
     </div>
   );
 };

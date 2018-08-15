@@ -14,6 +14,7 @@ import {
   resume_will_expire_after,
   project_offer_will_expire_after
 } from './knowledge';
+import { historical_events } from './knowledge/historical_events';
 
 export const rules = {
   matrix_show: {
@@ -37,8 +38,8 @@ export const rules = {
       let time = data.date;
       let current_tick = data.date.tick;
 
-      var real_date = new Date(1991, 1, 26, 1, 0);
-      var game_date = new Date(1991, 1, 26, 1, 0);
+      var real_date = new Date(1991, 1, 26, 0, 0);
+      var game_date = new Date(1991, 1, 26, 0, 0);
       game_date.setDate(real_date.getDate() + date.tick / 24);
 
       time.tick++;
@@ -47,6 +48,18 @@ export const rules = {
       data.helpers.setTimelineScale();
       //time.hour++;
       time.hour = game_date.getHours();
+
+      let current_date = `${game_date.getFullYear()} ${game_date.getMonth()} ${game_date.getDate()} ${game_date.getHours()}`;
+
+      if (historical_events[current_date]) {
+        historical_events[current_date].updateGameData(data);
+
+        data.mailbox.push({
+          type: 'Event',
+          object: historical_events[current_date],
+          date: game_date
+        });
+      }
 
       if (time.hour === 1 && time.date === 15 && game_date.getDate() === 15) {
         // get Salary
