@@ -1,5 +1,3 @@
-'use strict';
-
 const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
@@ -10,11 +8,11 @@ const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeM
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
-const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 // const smp = new SpeedMeasurePlugin({
@@ -37,20 +35,20 @@ const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
 const getCacheLoader = () => ({
-    loader: require.resolve('cache-loader'),
-    options: {
-        cacheDirectory: path.join(paths.appNodeModules, 'cache-loader')
-    }
+  loader: require.resolve('cache-loader'),
+  options: {
+    cacheDirectory: path.join(paths.appNodeModules, 'cache-loader')
+  }
 });
 // common function to get style loaders
 const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
   const loaders = [
     'css-hot-loader',
-      // getCacheLoader(),
+    // getCacheLoader(),
     MiniCssExtractPlugin.loader,
     {
       loader: require.resolve('css-loader'),
-      options: cssOptions,
+      options: cssOptions
     },
     {
       // Options for PostCSS as we reference these options twice
@@ -63,21 +61,21 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
         sourceMap: true,
         ident: 'postcss',
         plugins: () => [
-            require('postcss-color-mod-function')(),
-            require('postcss-custom-properties')(),
-            require('postcss-flexbugs-fixes')(),
-            autoprefixer({
-                flexbox: 'no-2009',
-            }),
-        ],
-      },
-    },
+          require('postcss-color-mod-function')(),
+          require('postcss-custom-properties')(),
+          require('postcss-flexbugs-fixes')(),
+          autoprefixer({
+            flexbox: 'no-2009'
+          })
+        ]
+      }
+    }
   ];
   if (preProcessor) {
     loaders.push({
-            loader:require.resolve(preProcessor),
-            options: preProcessorOptions
-        });
+      loader: require.resolve(preProcessor),
+      options: preProcessorOptions
+    });
   }
   return loaders;
 };
@@ -85,9 +83,9 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
 // The production configuration is different and lives in a separate file.
- module.exports = {
+module.exports = {
   mode: 'development',
-  cache:true,
+  cache: true,
   // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
   // See the discussion in https://github.com/facebook/create-react-app/issues/343.
   devtool: 'cheap-module-source-map',
@@ -109,7 +107,7 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
     // require.resolve('webpack/hot/dev-server'),
     require.resolve('react-dev-utils/webpackHotDevClient'),
     // Finally, this is your app's code:
-    paths.appIndexJs,
+    paths.appIndexJs
     // We include the app code last so that if there is a runtime error during
     // initialization, it doesn't blow up the WebpackDevServer client, and
     // changing JS code would still trigger a refresh.
@@ -127,7 +125,7 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
     publicPath: publicPath,
     // Point sourcemap entries to original disk location (format as URL on Windows)
     devtoolModuleFilenameTemplate: info =>
-        'file://' + path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
+      'file://' + path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')
   },
   optimization: {
     // Automatically split vendor and commons
@@ -192,13 +190,13 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
           {
             options: {
               formatter: eslintFormatter,
-              eslintPath: require.resolve('eslint'),
+              eslintPath: require.resolve('eslint')
             },
-            loader: require.resolve('eslint-loader'),
-          },
+            loader: require.resolve('eslint-loader')
+          }
         ],
         include: paths.srcPaths,
-        exclude: [/[/\\\\]node_modules[/\\\\]/],
+        exclude: [/[/\\\\]node_modules[/\\\\]/]
       },
       {
         // "oneOf" will traverse all following loaders until one will
@@ -213,8 +211,17 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
             loader: require.resolve('url-loader'),
             options: {
               limit: 10000,
-              name: 'static/media/[name].[hash:8].[ext]',
-            },
+              name: 'static/media/[name].[hash:8].[ext]'
+            }
+          },
+          {
+            test: [/\.svg$/],
+            use: {
+              loader: require.resolve('svg-inline-loader'),
+              options: {
+                name: 'static/svg/[name].[hash:8].[ext]'
+              }
+            }
           },
           // Process application JS with Babel.
           // The preset includes JSX, Flow, and some ESnext features.
@@ -234,29 +241,28 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
               {
                 loader: require.resolve('babel-loader'),
                 options: {
-                  
                   presets: [require.resolve('babel-preset-react-app')],
                   plugins: [
                     require.resolve('react-hot-loader/babel'),
-                    [
-                      require.resolve('babel-plugin-named-asset-import'),
-                      {
-                        loaderMap: {
-                          svg: {
-                            ReactComponent: 'svgr/webpack![path]',
-                          },
-                        },
-                      },
-                    ],
+                    // [
+                    //   require.resolve('babel-plugin-named-asset-import'),
+                    //   {
+                    //     loaderMap: {
+                    //       svg: {
+                    //         ReactComponent: 'svgr/webpack![path]'
+                    //       }
+                    //     }
+                    //   }
+                    // ]
                   ],
                   // This is a feature of `babel-loader` for webpack (not Babel itself).
                   // It enables caching results in ./node_modules/.cache/babel-loader/
                   // directory for faster rebuilds.
                   cacheDirectory: true,
-                  highlightCode: true,
-                },
-              },
-            ],
+                  highlightCode: true
+                }
+              }
+            ]
           },
           // Process any JS outside of the app with Babel.
           // Unlike the application JS, we only compile the standard ES features.
@@ -297,7 +303,7 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
             use: getStyleLoaders({
               importLoaders: 1,
               sourceMap: true
-            }),
+            })
           },
           // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
           // using the extension .module.css
@@ -306,9 +312,9 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
             use: getStyleLoaders({
               importLoaders: 1,
               modules: true,
-              sourceMap:true,
-              getLocalIdent: getCSSModuleLocalIdent,
-            }),
+              sourceMap: true,
+              getLocalIdent: getCSSModuleLocalIdent
+            })
           },
           // Opt-in support for SASS (using .scss or .sass extensions).
           // Chains the sass-loader with the css-loader and the style-loader
@@ -318,15 +324,18 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
           {
             test: sassRegex,
             exclude: sassModuleRegex,
-            use: getStyleLoaders({
+            use: getStyleLoaders(
+              {
                 importLoaders: 1,
-                sourceMap: true,
-            },  'sass-loader', {
+                sourceMap: true
+              },
+              'sass-loader',
+              {
                 outputStyle: 'expanded',
                 sourceMap: true,
-                includePaths: [
-                    paths.scssSrc,
-                ]}),
+                includePaths: [paths.scssSrc]
+              }
+            )
           },
           // Adds support for CSS Modules, but using SASS
           // using the extension .module.scss or .module.sass
@@ -336,29 +345,28 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
               {
                 importLoaders: 1,
                 modules: true,
-                sourceMap:true,
-                getLocalIdent: getCSSModuleLocalIdent,
+                sourceMap: true,
+                getLocalIdent: getCSSModuleLocalIdent
               },
-              'sass-loader', {
-                    outputStyle: 'expanded',
-                    sourceMap: true,
-                    sourceMapContents: true,
-                    includePaths: [
-                        paths.scssSrc,
-                    ]
-                }
-            ),
+              'sass-loader',
+              {
+                outputStyle: 'expanded',
+                sourceMap: true,
+                sourceMapContents: true,
+                includePaths: [paths.scssSrc]
+              }
+            )
           },
           // The GraphQL loader preprocesses GraphQL queries in .graphql files.
-            {
-                test: /\.(graphql|gql)$/,
-                exclude: /node_modules/,
-                use: [
-                    getCacheLoader(),
-                    {
-                        loader: 'graphql-tag/loader'
-                    }
-                ]
+          {
+            test: /\.(graphql|gql)$/,
+            exclude: /node_modules/,
+            use: [
+              getCacheLoader(),
+              {
+                loader: 'graphql-tag/loader'
+              }
+            ]
           },
           // "file" loader makes sure those assets get served by WebpackDevServer.
           // When you `import` an asset, you get its (virtual) filename.
@@ -370,22 +378,28 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
             // its runtime that would otherwise be processed through "file" loader.
             // Also exclude `html` and `json` extensions so they get processed
             // by webpacks internal loaders.
-              exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/, /\.flow$/],
-              use: [
-                  getCacheLoader(),
-                  {
-                      loader: require.resolve('file-loader'),
-                      options: {
-                          name: 'static/media/[name].[hash:8].[ext]'
-                      }
-                  }
-              ]
-          },
-        ],
-      },
+            exclude: [
+              /\.(js|jsx|mjs)$/,
+              /\.html$/,
+              /\.json$/,
+              /\.flow$/,
+              /\.svg$/
+            ],
+            use: [
+              // getCacheLoader(),
+              {
+                loader: require.resolve('file-loader'),
+                options: {
+                  name: 'static/media/file/[name].[hash:8].[ext]'
+                }
+              }
+            ]
+          }
+        ]
+      }
       // ** STOP ** Are you adding a new loader?
       // Make sure to add the new loader(s) before the "file" loader.
-    ],
+    ]
   },
   plugins: [
     // Generates an `index.html` file with the <script> injected.
@@ -393,7 +407,7 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
     // new webpack.debug.ProfilingPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
-      template: paths.appHtml,
+      template: paths.appHtml
     }),
     // new CircularDependencyPlugin({
     //     // exclude detection of files based on a RegExp
@@ -427,8 +441,8 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
     // You can remove this if you don't use Moment.js:
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new MiniCssExtractPlugin({
-        filename: '[name].css',
-        chunkFilename: '[name].css'
+      filename: '[name].css',
+      chunkFilename: '[name].css'
     }),
     // new webpack.debug.ProfilingPlugin({
     //     outputPath: 'profileEvents.json'
@@ -438,8 +452,8 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
     // having to parse `index.html`.
     new ManifestPlugin({
       fileName: 'asset-manifest.json',
-      publicPath: publicPath,
-    }),
+      publicPath: publicPath
+    })
   ],
 
   // Some libraries import Node modules but don't use them in the browser.
@@ -449,9 +463,9 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
-    child_process: 'empty',
+    child_process: 'empty'
   },
   // Turn off performance processing because we utilize
   // our own hints via the FileSizeReporter
-  performance: false,
-}
+  performance: false
+};

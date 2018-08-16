@@ -21,7 +21,7 @@ class BarItem extends PureComponent {
   };
 
   render() {
-    let { showName, name, value, color, width = 0 } = this.props;
+    let { showName, name, value, color, width } = this.props;
     return (
       <ProgressBar
         color={color}

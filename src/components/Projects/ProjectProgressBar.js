@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { colors, project_bars } from '../game/knowledge';
-import Bar from './Bar/Bar';
+import { colors, project_bars } from '../../game/knowledge';
+import Bar from '../Bar/Bar';
 
 class ProjectProgressBar extends Component {
   constructor(props) {

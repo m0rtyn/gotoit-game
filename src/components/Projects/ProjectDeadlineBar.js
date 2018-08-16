@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { colors } from '../game/knowledge';
-import Bar from './Bar/Bar';
+import { colors } from '../../game/knowledge';
+import Bar from '../Bar/Bar';
 
 class ProjectDeadlineBar extends Component {
   render() {

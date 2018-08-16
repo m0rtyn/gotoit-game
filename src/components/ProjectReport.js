@@ -3,7 +3,7 @@ import _ from 'lodash';
 import classNames from 'classnames';
 
 import StatsBar from './StatsBar';
-import ProjectName from './ProjectName';
+import ProjectName from './Projects/ProjectName';
 
 import { skills, technologies } from '../game/knowledge';
 

@@ -351,22 +351,27 @@ export const project_platforms = {
   crossplatform: {
     name: 'Cross-platform',
     description: 'Cross-platform applications should be balanced.'
+    // icon: require('../assets/images/project/platforms/crossplatform.svg')
   },
   mobile: {
     name: 'Mobile',
     description: 'For Mobile applications, design is important.'
+    // icon: require('../assets/images/project/platforms/mobile.svg')
   },
   desktop: {
     name: 'Desktop',
     description: 'For Desktop applications, programming is important.'
+    // icon: require('../assets/images/project/platforms/desktop.svg')
   },
   browser: {
     name: 'Browser',
     description: 'For Browser applications, management is important.'
+    // icon: require('../assets/images/project/platforms/browser.svg')
   },
   VR: {
     name: 'VR',
     description: 'Virtual Reality applications should be balanced.'
+    // icon: require('../assets/images/project/platforms/VR.svg')
   }
 };
 

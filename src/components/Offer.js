@@ -3,7 +3,7 @@ import { resume_will_expire_after, skills } from '../game/knowledge';
 import _ from 'lodash';
 import StatsBar from './StatsBar';
 
-import ProjectName from './ProjectName';
+import ProjectName from './Projects/ProjectName';
 import { current_tick } from '../App';
 
 class Offer extends Component {

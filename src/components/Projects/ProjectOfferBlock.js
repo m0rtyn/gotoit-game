@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 
 import ProjectName from './ProjectName';
-import StatsProgressBar from './StatsProgressBar';
+import StatsProgressBar from '../StatsProgressBar';
 
-import { colors } from '../game/knowledge';
+import { colors } from '../../game/knowledge';
 
 // import Project from './Project';
 

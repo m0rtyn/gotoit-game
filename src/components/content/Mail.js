@@ -1,12 +1,32 @@
 import React, { Component } from 'react';
 //import PropTypes from 'prop-types';
 import _ from 'lodash';
-import ProjectEndScreen from '../ProjectEndScreen';
+import ProjectEndScreen from '../Projects/ProjectEndScreen';
 import HotOffer from '../HotOffer';
 import SimpleModal from '../SimpleModal';
 import Resume from '../Resume';
 import Offer from '../Offer';
 import { FormattedDate } from 'react-intl';
+import * as PropTypes from 'prop-types';
+
+class Avatar extends Component {
+  render() {
+    return (
+      <div className="project-avatar">
+        <img
+          alt={this.props.name + ' avatar'}
+          src={this.props.avatar.platform}
+        />
+        <img alt={this.props.name + ' avatar'} src={this.props.avatar.kind} />
+      </div>
+    );
+  }
+}
+
+Avatar.propTypes = {
+  name: PropTypes.any,
+  avatar: PropTypes.any
+};
 
 class Mail extends Component {
   constructor(props) {

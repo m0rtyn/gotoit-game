@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-import ProjectReport from './ProjectReport';
-import ProjectsTop from '../services/ProjectsTop';
+import ProjectReport from '../ProjectReport';
+import ProjectsTop from '../../services/ProjectsTop';
 
 import {
   project_kinds,
   project_platforms,
   skills_names
-} from '../game/knowledge';
+} from '../../game/knowledge';
 
 class ProjectEndScreen extends Component {
   constructor(props) {

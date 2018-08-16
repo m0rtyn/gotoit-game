@@ -3,21 +3,29 @@ import Portal from 'react-portal';
 
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-
-import ReactBootstrapSlider from 'react-bootstrap-slider';
-import '../../node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css';
+import 'bootstrap-slider/dist/css/bootstrap-slider.min.css';
 
 import _ from 'lodash';
-import classNames from 'classnames';
 
-import { current_tick } from '../App';
-import TeamDialog from './TeamDialog';
-import StatsBar from './StatsBar';
+import { current_tick } from '../../App';
+import TeamDialog from '../TeamDialog';
+import StatsBar from '../StatsBar';
 import ProjectName from './ProjectName';
 import ProjectProgressBar from './ProjectProgressBar';
 import ProjectDeadlineBar from './ProjectDeadlineBar';
 
-import { skills_names, technologies } from '../game/knowledge';
+import { skills_names, technologies } from '../../game/knowledge';
+import { KickWorkerButton } from './KickWorkerButton';
+import { StartPauseButton } from './StartPauseButton';
+import { ReleaseButton } from './ReleaseButton';
+import { ProjectReward } from './ProjectReward';
+import { ProjectMoney } from './ProjectMoney';
+import { ProjectDeadline } from './ProjectDeadline';
+import { Technology } from './Technology';
+import { Statistics } from './Statistics';
+import { RejectButton } from './RejectButton';
+import { Avatar } from './Avatar';
+import { SkillRow } from './SkillRow';
 
 class Project extends Component {
   constructor(props) {
@@ -122,14 +130,11 @@ class Project extends Component {
 
     let label = worker => {
       return (
-        <span key={worker.id}>
-          <button
-            className="btn btn-xs team-remove-worker"
-            onClick={() => data.helpers.kickWorker(worker, project)}
-          >
-            {worker.name}
-          </button>
-        </span>
+        <KickWorkerButton
+          id={worker.id}
+          action={() => data.helpers.kickWorker(worker, project)}
+          name={worker.name}
+        />
       );
     };
 
@@ -172,71 +177,23 @@ class Project extends Component {
       return label(tech_name, technologies[tech_name].acronym);
     });
 
-    const start_pause_button = (
-      <span>
-        {/*{project.stage}*/}
-        {project.is_paused ? (
-          <button className="btn btn-sm btn-success" onClick={this.unpause}>
-            Start
-          </button>
-        ) : (
-          ''
-        )}
-        {project.stage === 'ready' ? (
-          <button className="btn btn-sm btn-success" onClick={this.open}>
-            Start
-          </button>
-        ) : (
-          ''
-        )}
-        {project.stage === 'open' && !project.is_paused ? (
-          <button className="btn btn-sm btn-warning" onClick={this.pause}>
-            Pause
-          </button>
-        ) : (
-          ''
-        )}
-      </span>
-    );
-
-    const reject_button = (
-      <button
-        className="btn btn-sm btn-danger"
-        onClick={() => {
-          if (
-            window.confirm(
-              'Reject project ' +
-                project.name +
-                '? (penalty: ' +
-                project.penalty +
-                ')'
-            )
-          ) {
-            this.close();
-          }
-        }}
-      >
-        Reject
-      </button>
-    );
-
-    const release_button =
-      project.doneQuantity() > 0 &&
-      project.type === 'own' &&
-      project.stage !== 'fixing' ? (
-        <button
-          className="btn btn-success"
-          onClick={() => {
-            this.props.data.helpers.fixProject(project.id);
-          }}
-        >
-          Release!
-        </button>
-      ) : (
-        ''
-      );
-
     //console.log(project_platforms[project.platform].icon)
+
+    let {
+      type,
+      stage,
+      deadline,
+      deadlineMax,
+      iteration,
+      complexity,
+      reward,
+      penalty,
+      avatar,
+      name,
+      platform,
+      kind,
+      size
+    } = project;
 
     return (
       <div
@@ -253,150 +210,93 @@ class Project extends Component {
       >
         <div className="card-header">
           <div className="card-header">
-            <div className="project-avatar">
-              <img
-                className="project-avatar"
-                alt={project.name + ' avatar'}
-                src={project.avatar && project.avatar.platform}
-              />
-              <img
-                className="project-avatar"
-                alt={project.name + ' avatar'}
-                src={project.avatar && project.avatar.kind}
-              />
-            </div>
-
+            <Avatar name={name} avatar={avatar} />
             <div className="project-money">
               <ProjectName project={project} />
-
-              <div>
-                <span className="project-reward text-success">
-                  Reward: {project.reward}$
-                </span>
-                {project.penalty > 0 ? (
-                  <span className="project-penalty text-warning">
-                    {' '}
-                    Penalty : {project.penalty}${' '}
-                  </span>
-                ) : (
-                  ' '
-                )}
-              </div>
+              <ProjectMoney reward={reward} penalty={penalty} />
             </div>
           </div>
-
           <Portal ref="manage" closeOnEsc openByClickOn={manage_button}>
             <TeamDialog>
               <h4>
                 <span>
                   {' '}
-                  <ProjectName project={project} />{' '}
+                  <ProjectName
+                    {...{
+                      size,
+                      platform,
+                      kind,
+                      name,
+                      reward,
+                      penalty
+                    }}
+                    deadlineText={project.getDeadlineText()}
+                  />{' '}
                 </span>
-                <span>
-                  Reward: {project.reward}$
-                  {project.penalty > 0 ? (
-                    <span> Penalty: {project.penalty}$ </span>
-                  ) : (
-                    ' '
-                  )}
-                </span>
+                <ProjectReward reward={reward} project={project} />
                 <div>
                   <span>
-                    {start_pause_button}
-                    {reject_button}
-                    {release_button}
+                    <StartPauseButton
+                      paused={project.is_paused}
+                      stage={stage}
+                      onUnpause={this.unpause}
+                      onOpen={this.open}
+                      onPause={this.pause}
+                    />
+                    <RejectButton
+                      onClick={() => {
+                        if (
+                          window.confirm(
+                            `Reject project ${name}? (penalty: ${penalty})`
+                          )
+                        ) {
+                          this.close();
+                        }
+                      }}
+                    />
+                    <ReleaseButton
+                      doneQuantity={project.doneQuantity()}
+                      type={type}
+                      stage={stage}
+                      onClick={() => {
+                        this.props.data.helpers.fixProject(project.id);
+                      }}
+                    />
                   </span>
                 </div>
               </h4>
               <div className="row">
                 <div className="col-8">
                   <div>
-                    {project.deadline > 0 &&
-                    project.deadline !== Number.POSITIVE_INFINITY ? (
-                      <div key="deadline" className="row">
-                        <div className="col-2">Deadline</div>
-                        <div className="col-10 progress">
-                          <div
-                            className={classNames(
-                              'progress-bar',
-                              project.deadline / project.deadline_max < 0.1
-                                ? 'bg-danger'
-                                : 'bg-warning'
-                            )}
-                            role="progressbar"
-                            style={{
-                              width:
-                                100 -
-                                (project.deadline / project.deadline_max) *
-                                  100 +
-                                '%'
-                            }}
-                          >
-                            <span>
-                              {project.deadline_max - project.deadline} hours
-                            </span>
-                          </div>
-                          <div
-                            className="progress-bar bg-success"
-                            role="progressbar"
-                            style={{
-                              width:
-                                (project.deadline / project.deadline_max) *
-                                  100 +
-                                '%'
-                            }}
-                          >
-                            <span>{project.deadline} hours</span>
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      ''
-                    )}
+                    <ProjectDeadline
+                      deadline={deadline}
+                      deadlineMax={deadlineMax}
+                    />
+                    <Statistics
+                      iteration={iteration}
+                      project={project}
+                      complexity={complexity}
+                    />
                     <div>
-                      <div> Iteration: {project.iteration} </div>
-                      <div>
-                        {' '}
-                        Tasks: {project.tasksQuantity()}/
-                        {project.planedTasksQuantity()}{' '}
-                      </div>
-                      <div>
-                        {' '}
-                        Bugs:{' '}
-                        <span className="text-danger">
-                          {project.bugsQuantity()}
-                        </span>
-                      </div>
-                      <div> Complexity: {project.complexity} </div>
-                    </div>
-
-                    <div>
-                      {project.type === 'draft' && project.stage === 'ready'
-                        ? skills_names.map(skill => {
-                            return (
-                              <div key={skill} className="row">
-                                <div className="col-2">{skill}</div>
-                                <div className="col-10 ">
-                                  <ReactBootstrapSlider
-                                    scale="logarithmic"
-                                    value={project.estimate[skill]}
-                                    change={e => {
-                                      project.estimate[skill] = e.target.value;
-                                      project.original_estimate[skill] =
-                                        e.target.value;
-                                    }}
-                                    step={1}
-                                    max={100000}
-                                    min={0}
-                                  />
-                                </div>
-                              </div>
-                            );
-                          })
-                        : ''}
+                      {type === 'draft' &&
+                        stage === 'ready' &&
+                        skills_names.map(skill => {
+                          return (
+                            <SkillRow
+                              key={skill}
+                              skill={skill}
+                              value={project.estimate[skill]}
+                              onChange={e => {
+                                project.estimate[skill] = e.target.value;
+                                project.original_estimate[skill] =
+                                  e.target.value;
+                              }}
+                            />
+                          );
+                        })}
                     </div>
                     <div>
-                      {project.type === 'draft' && project.stage === 'ready'
+                      {type === 'draft' && stage === 'ready'
                         ? ''
                         : skills_names.map(skill => {
                             //     console.log(project);
@@ -484,12 +384,11 @@ class Project extends Component {
                             role="progressbar"
                             style={{
                               width:
-                                (project.complexity / project.complexity_max) *
-                                  100 +
+                                (complexity / project.complexity_max) * 100 +
                                 '%'
                             }}
                           >
-                            <span>{project.complexity} complexity</span>
+                            <span>{complexity} complexity</span>
                           </div>
                           <div
                             className="progress-bar bg-success"
@@ -497,15 +396,13 @@ class Project extends Component {
                             style={{
                               width:
                                 100 -
-                                (project.complexity / project.complexity_max) *
-                                  100 +
+                                (complexity / project.complexity_max) * 100 +
                                 '%'
                             }}
                           >
-                            {project.complexity_max - project.complexity > 0 ? (
+                            {project.complexity_max - complexity > 0 ? (
                               <span>
-                                {project.complexity_max - project.complexity}{' '}
-                                refactored
+                                {project.complexity_max - complexity} refactored
                               </span>
                             ) : (
                               ''
@@ -637,43 +534,23 @@ class Project extends Component {
                       ))}
                       {current_tick > 24 * 30 * 3
                         ? Object.keys(technologies).map((technology, i) => (
-                            <div key={technology} className="row-md-1">
-                              <div className="form-check-checkbox slim-margin small">
-                                {!data.projects_known_technologies.includes(
-                                  technology
-                                ) ? (
-                                  <span>
-                                    <h5 className="text-center slim">
-                                      <button
-                                        className={
-                                          technologies[technology].price <=
-                                          data.money
-                                            ? 'btn btn-success btn-sm'
-                                            : 'btn btn-secondary btn-sm disabled'
-                                        }
-                                        onClick={() => {
-                                          if (
-                                            technologies[technology].price <=
-                                            data.money
-                                          )
-                                            data.helpers.unlockTechnology(
-                                              technology
-                                            );
-                                        }}
-                                      >
-                                        Unlock {technologies[technology].name}{' '}
-                                        {technologies[technology].price}$
-                                      </button>
-                                    </h5>
-                                    <p className="small slim">
-                                      {technologies[technology].description}
-                                    </p>
-                                  </span>
-                                ) : (
-                                  ''
-                                )}
-                              </div>
-                            </div>
+                            <Technology
+                              key={technology}
+                              technology={technology}
+                              projectsKnownTechnologies={
+                                data.projects_known_technologies
+                              }
+                              price={technologies[technology].price}
+                              money={data.money}
+                              f={() => {
+                                if (
+                                  technologies[technology].price <= data.money
+                                )
+                                  data.helpers.unlockTechnology(technology);
+                              }}
+                              name={technologies[technology].name}
+                              description={technologies[technology].description}
+                            />
                           ))
                         : ''}
                     </div>

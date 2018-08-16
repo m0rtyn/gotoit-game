@@ -3,7 +3,7 @@ import Portal from 'react-portal';
 import _ from 'lodash';
 import TeamDialog from './TeamDialog';
 import StatsBar from './StatsBar';
-import ProjectName from './ProjectName';
+import ProjectName from './Projects/ProjectName';
 import StatsProgressBar from './StatsProgressBar';
 import {
   colors,
