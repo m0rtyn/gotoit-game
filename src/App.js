@@ -308,13 +308,13 @@ class App extends Component {
 
       _.each(loaded_app_state.data.mailbox, (item, id) => {
         item.type === 'Resume'
-          ? (loaded_app_state.data.mailbox[id].project = _.create(
+          ? (loaded_app_state.data.mailbox[id].object = _.create(
               WorkerModel.prototype,
-              item.project
+              item.object
             ))
-          : (loaded_app_state.data.mailbox[id].project = _.create(
+          : (loaded_app_state.data.mailbox[id].object = _.create(
               ProjectModel.prototype,
-              item.project
+              item.object
             ));
       });
 

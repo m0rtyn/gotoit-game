@@ -232,15 +232,16 @@ export const rules = {
 
       //Expiring resumes
       _.each(data.mailbox, letter => {
-        if (letter.type === 'Resume') {
+        if (letter.type === 'Resume' && !letter.expired) {
           if (current_tick - letter.createdAt >= resume_will_expire_after) {
             letter.expired = true;
           }
-        } else if (letter.type === 'Offer') {
+        } else if (letter.type === 'Offer' && !letter.expired) {
           if (
             current_tick - letter.createdAt >=
             project_offer_will_expire_after
           ) {
+            console.log('offer expired');
             letter.expired = true;
           }
         }
