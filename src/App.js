@@ -1073,6 +1073,7 @@ class App extends Component {
     });
 
     data.projects_end_reports.push(project);
+    data.reputation += 50;
     addAction('New project report: ' + project.name);
     //data.projects_archive_reports.unshift(project);
     this.setState({ data: data });
