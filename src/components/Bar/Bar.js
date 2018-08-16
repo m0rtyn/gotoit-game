@@ -5,8 +5,8 @@ import _ from 'lodash';
 
 class Bar extends Component {
   static propTypes = {
-    bar_data: PropTypes.array.isRequired,
-    className: PropTypes.string.isRequired
+    bar_data: PropTypes.array.isRequired
+    //className: PropTypes.string.isRequired (className === undefined)
   };
 
   render() {
@@ -19,7 +19,7 @@ class Bar extends Component {
             showName={item.showName}
             color={item.color}
             name={item.name}
-            value={item.value}
+            value={item.value.toString()}
             width={item.width}
           />
         ))}
