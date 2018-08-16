@@ -20,7 +20,7 @@ class ProjectEndScreen extends Component {
 
   render() {
     const data = this.props.data;
-    let project = this.props.project;
+    let project = this.props.letter.object;
 
     let all_top_handler = ProjectsTop.getHandler(data.simplified_reports);
     let platform_top_handler = all_top_handler.filter(

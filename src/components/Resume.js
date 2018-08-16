@@ -6,9 +6,9 @@ class Resume extends Component {
   render() {
     console.log(current_tick);
     let data = this.props.data;
-    let worker = this.props.worker;
-    let expired = this.props.expired;
-    let createdAt = this.props.createdAt;
+    let worker = this.props.letter.object;
+    let expired = this.props.letter.expired;
+    let createdAt = this.props.letter.createdAt;
     let hours_to_expire = Math.round(
       createdAt + resume_will_expire_after - current_tick
     );
