@@ -54,7 +54,7 @@ export const rules = {
       if (historical_events[current_date]) {
         historical_events[current_date].updateGameData(data);
 
-        data.mailbox.push({
+        data.helpers.createMail({
           type: 'Event',
           object: historical_events[current_date],
           date: game_date

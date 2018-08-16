@@ -137,6 +137,7 @@ class App extends Component {
     this.unlockTechnology = this.unlockTechnology.bind(this);
     this.getTechnology = this.getTechnology.bind(this);
     this.changeTechnology = this.changeTechnology.bind(this);
+    this.createMail = this.createMail.bind(this);
 
     this.changeOffice = this.changeOffice.bind(this);
     this.upOffice = this.upOffice.bind(this);
@@ -223,6 +224,7 @@ class App extends Component {
     app_state.data.helpers['unlockTechnology'] = this.unlockTechnology;
     app_state.data.helpers['getTechnology'] = this.getTechnology;
     app_state.data.helpers['changeTechnology'] = this.changeTechnology;
+    app_state.data.helpers['createMail'] = this.createMail;
 
     app_state.data.helpers['changeOffice'] = this.changeOffice;
     app_state.data.helpers['upOffice'] = this.upOffice;
@@ -1073,7 +1075,7 @@ class App extends Component {
     }
 
     project.stage = stage;
-    data.mailbox.push({
+    this.createMail({
       type: 'Project report',
       object: _.create(ProjectModel.prototype, project),
       date: current_game_date
@@ -1114,7 +1116,7 @@ class App extends Component {
     ) {
       let this_project = Lorer.afterFirstTraining(project);
       this.offerProject(this_project);
-      data.mailbox.push({
+      this.createMail({
         type: 'Hot offer',
         name: this_project.name,
         object: this_project,
@@ -1126,7 +1128,7 @@ class App extends Component {
     if (project.size === 1 && !data.attainments.includes('FirstPart')) {
       let this_project = Lorer.afterFirstPart(project);
       this.offerProject(this_project);
-      data.mailbox.push({
+      this.createMail({
         type: 'Hot offer',
         name: this_project.name,
         object: this_project,
@@ -1138,7 +1140,7 @@ class App extends Component {
     if (project.size === 2 && !data.attainments.includes('FirstModule')) {
       let this_project = Lorer.afterFirstModule(project);
       this.offerProject(this_project);
-      data.mailbox.push({
+      this.createMail({
         type: 'Hot offer',
         name: this_project.name,
         object: this_project,
@@ -1150,7 +1152,7 @@ class App extends Component {
     if (project.size === 3 && !data.attainments.includes('FirstApplication')) {
       let this_project = Lorer.afterFirstApplication(project);
       this.offerProject(this_project);
-      data.mailbox.push({
+      this.createMail({
         type: 'Hot offer',
         name: this_project.name,
         object: this_project,
@@ -1162,7 +1164,7 @@ class App extends Component {
     if (project.size === 4 && !data.attainments.includes('BigDeal')) {
       let this_project = Lorer.afterFirstBigDeal(project);
       this.offerProject(this_project);
-      data.mailbox.push({
+      this.createMail({
         type: 'Hot offer',
         name: this_project.name,
         object: this_project,
@@ -1196,6 +1198,12 @@ class App extends Component {
       data.projects_technologies[project_id] = {};
     data.projects_technologies[project_id][technology] = value;
     data.projects_default_technologies[technology] = value;
+    this.setState({ data: data });
+  }
+
+  createMail(letter) {
+    const data = this.state.data;
+    data.mailbox.push(letter);
     this.setState({ data: data });
   }
 
@@ -1832,7 +1840,7 @@ class App extends Component {
     let this_project = ProjectModel.generate(quality, size, 'history');
     //console.log('probability: ' + probability.toFixed(2) + ' quality: ' + quality + ' size: ' + size);
     this.offerProject(this_project);
-    data.mailbox.push({
+    this.createMail({
       type: 'Offer',
       object: this_project,
       createdAt: current_tick,
@@ -1849,7 +1857,7 @@ class App extends Component {
     );
 
     data.candidates.resumes.push(worker);
-    data.mailbox.push({
+    this.createMail({
       type: 'Resume',
       object: worker,
       createdAt: current_tick,
