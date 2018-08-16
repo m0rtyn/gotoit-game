@@ -14,6 +14,7 @@ import {
   resume_will_expire_after,
   project_offer_will_expire_after
 } from './knowledge';
+import { historical_events } from './knowledge/historical_events';
 
 export const rules = {
   matrix_show: {
@@ -37,17 +38,28 @@ export const rules = {
       let time = data.date;
       let current_tick = data.date.tick;
 
-      var real_date = new Date();
-      var game_date = new Date();
+      var real_date = new Date(1991, 1, 26, 0, 0);
+      var game_date = new Date(1991, 1, 26, 0, 0);
       game_date.setDate(real_date.getDate() + date.tick / 24);
 
       time.tick++;
       setCurrentTick(time.tick);
       setGameDate(game_date);
       data.helpers.setTimelineScale();
-      console.log(current_tick);
       //time.hour++;
       time.hour = game_date.getHours();
+
+      let current_date = `${game_date.getFullYear()} ${game_date.getMonth()} ${game_date.getDate()} ${game_date.getHours()}`;
+
+      if (historical_events[current_date]) {
+        historical_events[current_date].updateGameData(data);
+
+        data.helpers.createMail({
+          type: 'Event',
+          object: historical_events[current_date],
+          date: game_date
+        });
+      }
 
       if (time.hour === 1 && time.date === 15 && game_date.getDate() === 15) {
         // get Salary
@@ -233,18 +245,15 @@ export const rules = {
       //Expiring resumes
       _.each(data.mailbox, letter => {
         if (letter.type === 'Resume') {
-          if (
-            current_tick - letter.content.createdAt >=
-            resume_will_expire_after
-          ) {
-            letter.content.expired = true;
+          if (current_tick - letter.createdAt >= resume_will_expire_after) {
+            letter.expired = true;
           }
         } else if (letter.type === 'Offer') {
           if (
-            current_tick - letter.content.createdAt >=
+            current_tick - letter.createdAt >=
             project_offer_will_expire_after
           ) {
-            letter.content.expired = true;
+            letter.expired = true;
           }
         }
       });

@@ -38,7 +38,14 @@ import 'animate.css';
 
 import './assets/styles/theme.css';
 import './assets/styles/scss/main.scss';
-
+// import { registerObserver } from 'react-perf-devtool';
+// import perf from 'react-perftool-extension';
+//
+// if (process.env.NODE_ENV !== 'production') {
+//   // const { whyDidYouUpdate } = require('why-did-you-update');
+//   // whyDidYouUpdate(React);
+//   // registerObserver();
+// }
 export var current_tick = 0;
 export const setCurrentTick = tick => {
   current_tick = tick;
@@ -130,6 +137,7 @@ class App extends Component {
     this.unlockTechnology = this.unlockTechnology.bind(this);
     this.getTechnology = this.getTechnology.bind(this);
     this.changeTechnology = this.changeTechnology.bind(this);
+    this.createMail = this.createMail.bind(this);
 
     this.changeOffice = this.changeOffice.bind(this);
     this.upOffice = this.upOffice.bind(this);
@@ -216,6 +224,7 @@ class App extends Component {
     app_state.data.helpers['unlockTechnology'] = this.unlockTechnology;
     app_state.data.helpers['getTechnology'] = this.getTechnology;
     app_state.data.helpers['changeTechnology'] = this.changeTechnology;
+    app_state.data.helpers['createMail'] = this.createMail;
 
     app_state.data.helpers['changeOffice'] = this.changeOffice;
     app_state.data.helpers['upOffice'] = this.upOffice;
@@ -308,13 +317,13 @@ class App extends Component {
 
       _.each(loaded_app_state.data.mailbox, (item, id) => {
         item.type === 'Resume'
-          ? (loaded_app_state.data.mailbox[id].content = _.create(
+          ? (loaded_app_state.data.mailbox[id].project = _.create(
               WorkerModel.prototype,
-              item.content
+              item.project
             ))
-          : (loaded_app_state.data.mailbox[id].content = _.create(
+          : (loaded_app_state.data.mailbox[id].project = _.create(
               ProjectModel.prototype,
-              item.content
+              item.project
             ));
       });
 
@@ -1066,9 +1075,9 @@ class App extends Component {
     }
 
     project.stage = stage;
-    data.mailbox.push({
+    this.createMail({
       type: 'Project report',
-      content: _.create(ProjectModel.prototype, project),
+      object: _.create(ProjectModel.prototype, project),
       date: current_game_date
     });
 
@@ -1107,9 +1116,10 @@ class App extends Component {
     ) {
       let this_project = Lorer.afterFirstTraining(project);
       this.offerProject(this_project);
-      data.mailbox.push({
+      this.createMail({
         type: 'Hot offer',
-        content: this_project,
+        name: this_project.name,
+        object: this_project,
         date: current_game_date
       });
       addAction('New hot offer: ' + project.name);
@@ -1118,9 +1128,10 @@ class App extends Component {
     if (project.size === 1 && !data.attainments.includes('FirstPart')) {
       let this_project = Lorer.afterFirstPart(project);
       this.offerProject(this_project);
-      data.mailbox.push({
+      this.createMail({
         type: 'Hot offer',
-        content: this_project,
+        name: this_project.name,
+        object: this_project,
         date: current_game_date
       });
       addAction('New hot offer: ' + project.name);
@@ -1129,9 +1140,10 @@ class App extends Component {
     if (project.size === 2 && !data.attainments.includes('FirstModule')) {
       let this_project = Lorer.afterFirstModule(project);
       this.offerProject(this_project);
-      data.mailbox.push({
+      this.createMail({
         type: 'Hot offer',
-        content: this_project,
+        name: this_project.name,
+        object: this_project,
         date: current_game_date
       });
       addAction('New hot offer: ' + project.name);
@@ -1140,9 +1152,10 @@ class App extends Component {
     if (project.size === 3 && !data.attainments.includes('FirstApplication')) {
       let this_project = Lorer.afterFirstApplication(project);
       this.offerProject(this_project);
-      data.mailbox.push({
+      this.createMail({
         type: 'Hot offer',
-        content: this_project,
+        name: this_project.name,
+        object: this_project,
         date: current_game_date
       });
       addAction('New hot offer: ' + project.name);
@@ -1151,9 +1164,10 @@ class App extends Component {
     if (project.size === 4 && !data.attainments.includes('BigDeal')) {
       let this_project = Lorer.afterFirstBigDeal(project);
       this.offerProject(this_project);
-      data.mailbox.push({
+      this.createMail({
         type: 'Hot offer',
-        content: this_project,
+        name: this_project.name,
+        object: this_project,
         date: current_game_date
       });
       addAction('New hot offer: ' + project.name);
@@ -1184,6 +1198,12 @@ class App extends Component {
       data.projects_technologies[project_id] = {};
     data.projects_technologies[project_id][technology] = value;
     data.projects_default_technologies[technology] = value;
+    this.setState({ data: data });
+  }
+
+  createMail(letter) {
+    const data = this.state.data;
+    data.mailbox.push(letter);
     this.setState({ data: data });
   }
 
@@ -1820,14 +1840,11 @@ class App extends Component {
     let this_project = ProjectModel.generate(quality, size, 'history');
     //console.log('probability: ' + probability.toFixed(2) + ' quality: ' + quality + ' size: ' + size);
     this.offerProject(this_project);
-    let project_offer = {
-      project: this_project,
-      createdAt: current_tick,
-      expired: false
-    };
-    data.mailbox.push({
+    this.createMail({
       type: 'Offer',
-      content: project_offer,
+      object: this_project,
+      createdAt: current_tick,
+      expired: false,
       date: current_game_date
     });
     addAction('New job!', { timeOut: 3000, extendedTimeOut: 1000 });
@@ -1838,19 +1855,16 @@ class App extends Component {
     let worker = WorkerModel.generate(
       _.random(1, Math.floor(3 + projects_done * 0.1 + current_tick * 0.001))
     );
-    let resume = {
-      worker: worker,
-      createdAt: current_tick,
-      expired: false
-    };
 
     data.candidates.resumes.push(worker);
-    data.mailbox.push({
+    this.createMail({
       type: 'Resume',
-      content: resume,
+      object: worker,
+      createdAt: current_tick,
+      expired: false,
       date: current_game_date
     });
-    addAction('New resume! Resume: ' + resume.worker.name);
+    addAction('New resume!', { timeOut: 3000, extendedTimeOut: 1000 });
   }
 
   work() {
@@ -2171,8 +2185,8 @@ class App extends Component {
     return true;
   }
 
-  createPopup(name, content) {
-    this.popupHandler.createPopup(name, content);
+  createPopup(name, project) {
+    this.popupHandler.createPopup(name, project);
   }
 
   render() {
