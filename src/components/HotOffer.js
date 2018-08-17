@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import _ from 'lodash';
 import { skills } from '../game/knowledge';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
-// Dublicate, should to remove. do not style this
-class HotOffer extends Component {
+
+class HotOffer extends PureComponent {
   constructor(props) {
     super(props);
 

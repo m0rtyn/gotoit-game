@@ -14,6 +14,7 @@ import {
   resume_will_expire_after,
   project_offer_will_expire_after
 } from './knowledge';
+import { historical_events } from './knowledge/historical_events';
 
 export const rules = {
   matrix_show: {
@@ -37,17 +38,28 @@ export const rules = {
       let time = data.date;
       let current_tick = data.date.tick;
 
-      var real_date = new Date();
-      var game_date = new Date();
+      var real_date = new Date(1991, 1, 26, 0, 0);
+      var game_date = new Date(1991, 1, 26, 0, 0);
+
       game_date.setDate(real_date.getDate() + date.tick / 24);
 
       time.tick++;
       setCurrentTick(time.tick);
       setGameDate(game_date);
       data.helpers.setTimelineScale();
-      console.log(current_tick);
       //time.hour++;
       time.hour = game_date.getHours();
+
+      let current_date = `${game_date.getFullYear()} ${game_date.getMonth()} ${game_date.getDate()} ${game_date.getHours()}`;
+
+      if (historical_events[current_date]) {
+        historical_events[current_date].updateGameData(data);
+        data.helpers.createMail({
+          type: 'Event',
+          object: historical_events[current_date],
+          date: game_date
+        });
+      }
 
       if (time.hour === 1 && time.date === 15 && game_date.getDate() === 15) {
         // get Salary
@@ -113,10 +125,20 @@ export const rules = {
           stats.values.push(stats.buffer);
         });
 
-        data.exchange_statistics.btc.values.push(data.current_btc_price);
-        data.exchange_statistics.share0.values.push(data.current_share0_price);
-        data.exchange_statistics.share1.values.push(data.current_share1_price);
-        data.exchange_statistics.share2.values.push(data.current_share2_price);
+        if (data.share0_unlock)
+          data.exchange_statistics.share0.values.push(
+            data.current_share0_price
+          );
+        if (data.share1_unlock)
+          data.exchange_statistics.share1.values.push(
+            data.current_share1_price
+          );
+        if (data.share2_unlock)
+          data.exchange_statistics.share2.values.push(
+            data.current_share2_price
+          );
+        if (data.btc_unlock)
+          data.exchange_statistics.btc.values.push(data.current_btc_price);
       }
 
       //MAX STATS UPDATE
@@ -278,35 +300,39 @@ export const rules = {
       }
 
       const x = current_tick + 2000;
-      data.current_btc_price = Math.floor(
-        (Math.abs(Math.sin(x / 19)) * x) / 3 +
-          Math.abs(Math.sin(Math.sqrt(x))) * x +
-          Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
-          Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
-          x
-      );
 
-      data.current_share0_price = Math.floor(
-        (Math.abs(Math.sin(x / 19)) * x) / 3 +
-          Math.abs(Math.sin(Math.sqrt(x))) * x +
-          Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
-          Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
-          x
-      );
-      data.current_share1_price = Math.floor(
-        (Math.abs(Math.sin(x / 19)) * x) / 3 +
-          Math.abs(Math.sin(Math.sqrt(x))) * x +
-          Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
-          Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
-          x
-      );
-      data.current_share2_price = Math.floor(
-        (Math.abs(Math.sin(x / 19)) * x) / 3 +
-          Math.abs(Math.sin(Math.sqrt(x))) * x +
-          Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
-          Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
-          x
-      );
+      if (data.btc_unlock)
+        data.current_btc_price = Math.floor(
+          (Math.abs(Math.sin(x / 19)) * x) / 3 +
+            Math.abs(Math.sin(Math.sqrt(x))) * x +
+            Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
+            Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
+            x
+        );
+      if (data.share0_unlock)
+        data.current_share0_price = Math.floor(
+          (Math.abs(Math.sin(x / 19)) * x) / 3 +
+            Math.abs(Math.sin(Math.sqrt(x))) * x +
+            Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
+            Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
+            x
+        );
+      if (data.share1_unlock)
+        data.current_share1_price = Math.floor(
+          (Math.abs(Math.sin(x / 19)) * x) / 3 +
+            Math.abs(Math.sin(Math.sqrt(x))) * x +
+            Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
+            Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
+            x
+        );
+      if (data.share2_unlock)
+        data.current_share2_price = Math.floor(
+          (Math.abs(Math.sin(x / 19)) * x) / 3 +
+            Math.abs(Math.sin(Math.sqrt(x))) * x +
+            Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
+            Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
+            x
+        );
 
       //data.current_btc_price = Math.abs(Math.sin(x/19)) * x + Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x + Math.abs(Math.sin(Math.sqrt(x/227))) * x + x;
 

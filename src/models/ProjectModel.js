@@ -10,7 +10,7 @@ import {
   skills,
   skills_inf
 } from '../game/knowledge';
-import { hired, projects_done } from '../App';
+import { hired, projects_done, getData } from '../App';
 
 export var projects_generated = 0;
 export function flush() {
@@ -30,8 +30,6 @@ class ProjectModel {
     deadline,
     complexity = 0
   ) {
-    console.log('here');
-    console.log(kind, platform);
     this.stage = 'ready';
     this.is_paused = false;
 
@@ -133,7 +131,6 @@ class ProjectModel {
   ) {
     var learned = JSON.parse(JSON.stringify(skills));
     let focus_on_id = project.id + project_bars[focus_on];
-    console.log(focus_on_id);
     Object.keys(work).forEach(stat => {
       if (this.needs(stat) > 0 && work[stat] > 0) {
         var support =
@@ -379,7 +376,7 @@ class ProjectModel {
     size = 4,
     fit_mode = false,
     kind = _.sample(_.keys(project_kinds)),
-    platform = _.sample(_.keys(project_platforms))
+    platform = _.sample(getData().projects_unlocked_platforms)
   ) {
     //console.log("gen quality="+quality+", size="+size);
     projects_generated++;
@@ -496,7 +493,7 @@ class ProjectModel {
     let level = Math.floor(worker.statsSum() / 4 + worker.stats[skill] * 3);
 
     let kind = _.sample(_.keys(project_kinds));
-    let platform = _.sample(_.keys(project_platforms));
+    let platform = _.sample(getData().projects_unlocked_platforms);
     let stats = JSON.parse(JSON.stringify(skills));
     stats[skill] = level * 2;
     let reward = 0;
@@ -517,7 +514,7 @@ class ProjectModel {
 
   static generateDraft() {
     let kind = _.sample(_.keys(project_kinds));
-    let platform = _.sample(_.keys(project_platforms));
+    let platform = _.sample(getData().projects_unlocked_platforms);
     let stats = JSON.parse(JSON.stringify(skills));
     let reward = 0;
     let penalty = 0;
@@ -537,7 +534,7 @@ class ProjectModel {
 
   static generateTrainingHackathon(team) {
     let kind = _.sample(_.keys(project_kinds));
-    let platform = _.sample(_.keys(project_platforms));
+    let platform = _.sample(getData().projects_unlocked_platforms);
     let complexity_grows = 0;
 
     let stats = JSON.parse(JSON.stringify(skills));
@@ -576,7 +573,7 @@ class ProjectModel {
 
   static generateHackathon(hackathons_generated) {
     let kind = _.sample(_.keys(project_kinds));
-    let platform = _.sample(_.keys(project_platforms));
+    let platform = _.sample(getData().projects_unlocked_platforms);
 
     let stats = _.mapValues(skills, () => {
       return _.random(0, 10 * hackathons_generated);
@@ -616,7 +613,7 @@ class ProjectModel {
     //console.log(stats);
 
     let kind = _.sample(_.keys(project_kinds));
-    let platform = _.sample(_.keys(project_platforms));
+    let platform = _.sample(getData().projects_unlocked_platforms);
     stats = JSON.parse(JSON.stringify(stats));
     let s = _.values(stats);
     let reward = this.genReward(s, size);

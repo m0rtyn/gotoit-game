@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import PropTypes from 'prop-types';
 import { colors } from '../game/knowledge';
-import Bar from './Bar';
+import Bar from './Bar/Bar';
 
 class WorkerStaminaBar extends Component {
   render() {

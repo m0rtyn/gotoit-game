@@ -76,6 +76,7 @@ var default_state = {
     projects_known_technologies: ['overtime', 'creativity'],
     projects_technologies: [],
     projects_default_technologies: [],
+    projects_unlocked_platforms: ['desktop'],
     project_team_selector: null,
     hovered_projects_id: [],
     hovered_workers_id: [],
@@ -107,7 +108,11 @@ var default_state = {
       share1: { buffer: 0, values: [] },
       share2: { buffer: 0, values: [] }
     },
-
+    exchange_unlocked_shares: [],
+    share0_unlock: false,
+    share1_unlock: false,
+    share2_unlock: false,
+    btc_unlock: false,
     max_stat: 1,
     max_candidates_stat: 1,
     max_stats_projects_offered: 1,

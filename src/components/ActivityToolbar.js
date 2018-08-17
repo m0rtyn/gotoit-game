@@ -8,7 +8,9 @@ class ActivityToolbar extends Component {
       helpers: PropTypes.object.isRequired
     })
   };
-
+  // shouldComponentUpdate() {
+  //   return false;
+  // }
   render() {
     let data = this.props.data;
     let unread_messages_count = (() => {
@@ -40,7 +42,7 @@ class ActivityToolbar extends Component {
             Office
           </a>
         </li>
-        <li className="nav-item">
+        {/*<li className="nav-item">
           {data.projects.length > 0 ? (
             <a
               className="nav-link"
@@ -53,7 +55,7 @@ class ActivityToolbar extends Component {
           ) : (
             ''
           )}
-        </li>
+        </li>*/}
         <li className="nav-item">
           {data.projects_archive_reports.length > 0 ? (
             <a
