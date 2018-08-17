@@ -17,7 +17,6 @@ class Exchange extends Component {
     let current = this.state.current;
     let key = this.props.data.exchange_unlocked_shares[current];
     let share = shares[key];
-    console.log(shares[key], key);
     let content = (
       <div>
         <h1 className="text-center">
