@@ -155,6 +155,7 @@ class Exchange extends Component {
           {_.map(this.props.data.exchange_unlocked_shares, (share_name, i) => {
             return (
               <a
+                key={i}
                 className="nav-link"
                 onClick={() => {
                   this.setState({ current: i });
