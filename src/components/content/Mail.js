@@ -46,7 +46,7 @@ class Mail extends Component {
                 <ProjectEndScreen
                   closePopup={this.closePopup}
                   key={i}
-                  project={letter.object}
+                  letter={letter}
                   data={this.props.data}
                 />
               )
@@ -63,9 +63,7 @@ class Mail extends Component {
                 <HotOffer
                   closePopup={this.closePopup}
                   key={i}
-                  project={letter.object}
-                  expired={letter.expired}
-                  createdAt={letter.createdAt}
+                  letter={letter.object}
                   data={this.props.data}
                 />
               )
@@ -81,9 +79,7 @@ class Mail extends Component {
                 <Resume
                   closePopup={this.closePopup}
                   key={i}
-                  expired={letter.expired}
-                  createdAt={letter.createdAt}
-                  worker={letter.object}
+                  letter={letter}
                   data={this.props.data}
                 />
               )

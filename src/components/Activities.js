@@ -14,6 +14,7 @@ import ProjectsFind from '../components/content/ProjectsFind.js';
 import StartProject from '../components/content/StartProject.js';
 import Welcome from '../components/content/Welcome.js';
 import Mail from '../components/content/Mail.js';
+import Office from '../components/content/Office.js';
 
 const components = {
   Achievements: Achievements,
@@ -29,7 +30,8 @@ const components = {
   //StartMeeting: StartMeeting,
   StartProject: StartProject,
   Welcome: Welcome,
-  Mail: Mail
+  Mail: Mail,
+  Office: Office
 };
 
 class Activities extends Component {

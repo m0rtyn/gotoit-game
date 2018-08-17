@@ -317,13 +317,13 @@ class App extends Component {
 
       _.each(loaded_app_state.data.mailbox, (item, id) => {
         item.type === 'Resume'
-          ? (loaded_app_state.data.mailbox[id].project = _.create(
+          ? (loaded_app_state.data.mailbox[id].object = _.create(
               WorkerModel.prototype,
-              item.project
+              item.object
             ))
-          : (loaded_app_state.data.mailbox[id].project = _.create(
+          : (loaded_app_state.data.mailbox[id].object = _.create(
               ProjectModel.prototype,
-              item.project
+              item.object
             ));
       });
 
@@ -1082,6 +1082,7 @@ class App extends Component {
     });
 
     data.projects_end_reports.push(project);
+    data.reputation += 50;
     addAction('New project report: ' + project.name);
     //data.projects_archive_reports.unshift(project);
     this.setState({ data: data });
@@ -1284,7 +1285,7 @@ class App extends Component {
     } else {
       console.log('not enough money');
     }
-    this.setState({ data: data });
+    this.setState({ data: data }); //зачем?
   }
 
   sellShare0(usd) {

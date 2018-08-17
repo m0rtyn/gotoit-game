@@ -31,7 +31,12 @@ export const historical_events = {
     description: 'Dotcoms boom',
     picture: TimeIcon,
     updateGameData: data => {
-      return data;
+      data.exchange_unlocked_shares.push('share0');
+      data.exchange_unlocked_shares.push('share1');
+      data.exchange_unlocked_shares.push('share2');
+      data.share0_unlock = true;
+      data.share1_unlock = true;
+      data.share2_unlock = true;
     }
   },
   '1999 2 31 1': {
@@ -103,6 +108,7 @@ export const historical_events = {
     description: 'BTC cryptocurrency started.',
     picture: TimeIcon,
     updateGameData: data => {
+      data.exchange_unlocked_shares.push('btc');
       return data;
     }
   },

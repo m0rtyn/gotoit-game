@@ -32,6 +32,16 @@ class ActivityToolbar extends Component {
             Public Relations
           </a>
         </li>
+        <li className="nav-item">
+          <a
+            className="nav-link"
+            onClick={() => {
+              data.helpers.changeContent('Office');
+            }}
+          >
+            Office
+          </a>
+        </li>
         {/*<li className="nav-item">
           {data.projects.length > 0 ? (
             <a

@@ -108,7 +108,11 @@ var default_state = {
       share1: { buffer: 0, values: [] },
       share2: { buffer: 0, values: [] }
     },
-
+    exchange_unlocked_shares: [],
+    share0_unlock: false,
+    share1_unlock: false,
+    share2_unlock: false,
+    btc_unlock: false,
     max_stat: 1,
     max_candidates_stat: 1,
     max_stats_projects_offered: 1,
