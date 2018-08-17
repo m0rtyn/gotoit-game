@@ -24,16 +24,6 @@
   padding: size(2);
 }
 
-.modal-dialog {
-  height: 85vh;
-  overflow-y: auto;
-  pointer-events: auto;
-
-  @media (min-width: 576px) {
-    max-width: 800px;
-  }
-}
-
 .topbar {
   height: 30px;
   flex-wrap: wrap;
@@ -48,14 +38,6 @@
 
 .fa-plus {
   vertical-align: middle;
-}
-
-.modal-backdrop {
-  background-color: rgba(0, 0, 0, 0.66);
-}
-
-.modal {
-  display: block;
 }
 
 body .topbar + .main-container,
