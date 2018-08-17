@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import Portal from 'react-portal';
 import _ from 'lodash';
@@ -134,61 +135,128 @@ class Worker extends Component {
           alt={worker.name + ' avatar'}
           src={worker.avatar}
         />
-
         <div className="worker-info">
           <header className="card-header">
             <span className="worker-name"> {worker.name} </span>
+
             <Portal
               ref="manage"
               closeOnEsc
               closeOnOutsideClick
               openByClickOn={manage_button}
             >
+
               <TeamDialog>
-                <div>
-                  <h2>
-                    <img
-                      alt={worker.name + ' avatar'}
-                      width="100"
-                      height="100"
-                      src={worker.avatar}
+
+                <div className="modal-header">
+                  <img
+                    className="worker-avatar"
+                    alt={worker.name + ' avatar'}
+                    src={worker.avatar}
+                  />
+                  <div className="worker-info">
+                    <h3 className="worker-name">
+                      {worker.name}
+                      {worker.in_vacation ? ' on vacation! ' : ''}
+                    </h3>
+                    <div className="worker-happiness">
+                      <WorkerHappinessBar worker={worker} />
+                    </div>
+
+                    <div className="worker-stamina">
+                      <WorkerStaminaBar worker={worker} />
+
+                      {/* ====PROPOSE VACATION BUTTON==== */}
+                      {worker.in_vacation || worker.to_vacation ? (
+                        worker.in_vacation ? (
+                          ' Worker on vacation! '
+                        ) : (
+                          ' Going on vacation in ' +
+                          Math.floor(worker.to_vacation_ticker / 24) +
+                          ' days. '
+                        )
+                      ) : (
+                        <button
+                          className="btn btn-success btn-sm"
+                          onClick={() => {
+                            worker.proposeVacation();
+                          }}
+                        >
+                          Propose Vacation
+                        </button>
+                      )}
+                    </div>
+
+                    {/* <StatsProgressBar
+                    // hideCheckbox={true}
+                    type={'program'}
+                    max_stat={data.max_candidates_stat}
+                    stats={stats_progressbar_data}
+                    // worker={candidate}
+                    data={data}
                     />
-                    {worker.name}
-                    {worker.in_vacation ? ' on vacation! ' : ''}
-                  </h2>
-                  <div className="card text-center">
-                    {worker.is_player ? (
-                      ''
-                    ) : (
-                      <span>
-                        Worker salary: ${worker.getSalary()}. Overrate bonus:{' '}
-                        {worker.getOverrate()}
-                        %.
-                        <button
-                          className="btn btn-danger btn-link"
-                          onClick={() => {
-                            data.helpers.riseEmployer(worker.id);
-                          }}
-                        >
-                          Rise Salary
-                        </button>
-                      </span>
-                    )}
-                    {worker.get_monthly_salary ? (
-                      ''
-                    ) : (
-                      <span>
-                        <button
-                          className="btn btn-danger btn-link"
-                          onClick={() => {
-                            data.helpers.paySalary(worker);
-                          }}
-                        >
-                          Pay a debt
-                        </button>
-                      </span>
-                    )}
+                    n<StatsProgressBar
+                    // hideCheckbox={true}
+                    type={'design'}
+                    max_stat={data.max_candidates_stat}
+                    stats={stats_progressbar_data}
+                    // worker={candidate}
+                    data={data}
+                    />
+                    <StatsProgressBar
+                    // hideCheckbox={true}
+                    type={'manage'}
+                    max_stat={data.max_candidates_stat}
+                    stats={stats_progressbar_data}
+                    // worker={candidate}
+                    data={data}
+                    /> */}
+
+                    {/* <StatsBar stats={efficiency_data} data={this.props.data} /> */}
+
+                    {/* <p>
+                      {worker.tellFeelings()}
+                    </p> */}
                   </div>
+                </div>
+
+                <div className="modal-body">
+                  <div>
+                    {`Character: ${worker.character.name}. ${worker.character.description}.`}
+                  </div>
+
+                  {worker.is_player ? (
+                    ''
+                  ) : (
+                    <span>
+                      Worker salary: ${worker.getSalary()}. Overrate bonus:{' '}
+                      {worker.getOverrate()}
+                      %.
+                      <button
+                        className="btn btn-danger btn-link"
+                        onClick={() => {
+                          data.helpers.riseEmployer(worker.id);
+                        }}
+                      >
+                        Rise Salary
+                      </button>
+                    </span>
+                  )}
+                  {worker.get_monthly_salary ? (
+                    ''
+                  ) : (
+                    <span>
+                      <button
+                        className="btn btn-danger btn-link"
+                        onClick={() => {
+                          data.helpers.paySalary(worker);
+                        }}
+                      >
+                        Pay a debt
+                      </button>
+                    </span>
+                  )}
+                  
                   <ul>
                     <p>
                       Hired{' '}
@@ -211,40 +279,6 @@ class Worker extends Component {
                       {worker.facts.retrospected} tasks.
                     </p>
                   </ul>
-                  <div className="card text-center filament">
-                    <div className="row filament">
-                      <WorkerHappinessBar worker={worker} />
-                    </div>
-                    <div className="row filament">
-                      <WorkerStaminaBar worker={worker} />
-                    </div>
-                    <StatsBar stats={efficiency_data} data={this.props.data} />
-                    <div>{`Character: ${worker.character.name}. ${
-                      worker.character.description
-                    }.`}</div>
-                    <p5>
-                      {worker.tellFeelings()}
-
-                      {worker.in_vacation || worker.to_vacation ? (
-                        worker.in_vacation ? (
-                          ' Worker on vacation! '
-                        ) : (
-                          ' Going on vacation in ' +
-                          Math.floor(worker.to_vacation_ticker / 24) +
-                          ' days. '
-                        )
-                      ) : (
-                        <button
-                          className="btn btn-link"
-                          onClick={() => {
-                            worker.proposeVacation();
-                          }}
-                        >
-                          Propose Vacation
-                        </button>
-                      )}
-                    </p5>
-                  </div>
                   <div className="card text-center">
                     bonus items
                     <div>
