@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import * as PropTypes from 'prop-types';
 
-export class Technology extends Component {
+export class LockedTechnology extends PureComponent {
   render() {
     return (
       <div key={this.props.technology} className="row-md-1">
@@ -33,7 +33,7 @@ export class Technology extends Component {
   }
 }
 
-Technology.propTypes = {
+LockedTechnology.propTypes = {
   technology: PropTypes.string,
   projectsKnownTechnologies: PropTypes.any,
   price: PropTypes.any,

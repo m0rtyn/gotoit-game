@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import { project_sizes } from '../../game/knowledge';
 
-class ProjectName extends Component {
+class ProjectName extends PureComponent {
   static defaultProps = {
     size: 0
   };
@@ -12,7 +12,7 @@ class ProjectName extends Component {
     deadlineText: PropTypes.string,
     kind: PropTypes.string,
     name: PropTypes.string,
-    penalty: PropTypes.number,
+    penalty: PropTypes.string,
     platform: PropTypes.string,
     reward: PropTypes.string,
     size: PropTypes.number

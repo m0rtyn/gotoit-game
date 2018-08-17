@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import * as PropTypes from 'prop-types';
 
-export class Avatar extends Component {
+export class Avatar extends PureComponent {
   render() {
     return (
       <div className="project-avatar">

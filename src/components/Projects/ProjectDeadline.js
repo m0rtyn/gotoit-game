@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import classNames from 'classnames';
+import React, { PureComponent } from 'react';
 import * as PropTypes from 'prop-types';
+import { colors } from '../../game/knowledge';
+import Bar from '../Bar/Bar';
 
-export class ProjectDeadline extends Component {
+export default class Deadline extends PureComponent {
   static propTypes = {
     deadline: PropTypes.number,
     deadlineMax: PropTypes.number
@@ -10,33 +11,34 @@ export class ProjectDeadline extends Component {
 
   render() {
     let { deadline, deadlineMax } = this.props;
-    if (deadline <= 0 || deadline === Number.POSITIVE_INFINITY) return null;
+    if (
+      deadline <= 0 ||
+      deadlineMax <= 0 ||
+      deadline === Number.POSITIVE_INFINITY
+    )
+      return null;
+
+    const bar_data = [
+      {
+        name: 'gone',
+        width: 100 - (deadline / deadlineMax) * 100,
+        color: deadline / deadlineMax < 0.1 ? colors.danger : colors.warning,
+        value: deadlineMax - deadline,
+        showName: true
+      },
+      {
+        name: 'to deadline',
+        width: (deadline / deadlineMax) * 100,
+        color: colors.success,
+        value: deadline,
+        showName: true
+      }
+    ];
+
     return (
       <div key="deadline" className="row">
         <div className="col-2">Deadline</div>
-        <div className="col-10 progress">
-          <div
-            className={classNames(
-              'progress-bar',
-              deadline / deadlineMax < 0.1 ? 'bg-danger' : 'bg-warning'
-            )}
-            role="progressbar"
-            style={{
-              width: 100 - (deadline / deadlineMax) * 100 + '%'
-            }}
-          >
-            <span>{deadlineMax - deadline} hours</span>
-          </div>
-          <div
-            className="progress-bar bg-success"
-            role="progressbar"
-            style={{
-              width: (deadline / deadlineMax) * 100 + '%'
-            }}
-          >
-            <span>{deadline} hours</span>
-          </div>
-        </div>
+        <Bar bar_data={bar_data} />
       </div>
     );
   }

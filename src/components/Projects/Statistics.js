@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import * as PropTypes from 'prop-types';
 
 export class Statistics extends Component {
+  static propTypes = {
+    complexity: PropTypes.any,
+    iteration: PropTypes.any,
+    project: PropTypes.any
+  };
+
   render() {
     return (
       <div>
@@ -23,9 +29,3 @@ export class Statistics extends Component {
     );
   }
 }
-
-Statistics.propTypes = {
-  iteration: PropTypes.any,
-  project: PropTypes.any,
-  complexity: PropTypes.any
-};

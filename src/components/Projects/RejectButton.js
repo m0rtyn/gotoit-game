@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import * as PropTypes from 'prop-types';
 
-export class RejectButton extends Component {
+export class RejectButton extends PureComponent {
   static propTypes = {
     onClick: PropTypes.func
   };
@@ -13,5 +13,3 @@ export class RejectButton extends Component {
     );
   }
 }
-
-RejectButton.propTypes = { onClick: PropTypes.func };

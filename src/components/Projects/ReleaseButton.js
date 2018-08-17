@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import * as PropTypes from 'prop-types';
 
-export class ReleaseButton extends Component {
+export class ReleaseButton extends PureComponent {
   static propTypes = {
     onClick: PropTypes.func,
     doneQuantity: PropTypes.any,
@@ -10,6 +10,7 @@ export class ReleaseButton extends Component {
   };
 
   render() {
+    console.info('ReleaseButton');
     let { onClick, type, stage, doneQuantity } = this.props;
     if (!(doneQuantity > 0 && type === 'own' && stage !== 'fixing'))
       return null;

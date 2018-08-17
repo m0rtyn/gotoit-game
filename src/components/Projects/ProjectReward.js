@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import * as PropTypes from 'prop-types';
 
-export class ProjectReward extends Component {
+export class ProjectReward extends PureComponent {
   static propTypes = {
     penalty: PropTypes.number,
     reward: PropTypes.string

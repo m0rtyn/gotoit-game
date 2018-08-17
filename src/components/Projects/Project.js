@@ -20,12 +20,51 @@ import { StartPauseButton } from './StartPauseButton';
 import { ReleaseButton } from './ReleaseButton';
 import { ProjectReward } from './ProjectReward';
 import { ProjectMoney } from './ProjectMoney';
-import { ProjectDeadline } from './ProjectDeadline';
-import { Technology } from './Technology';
+import ProjectDeadline from './ProjectDeadline';
+import { LockedTechnology } from './LockedTechnology';
 import { Statistics } from './Statistics';
 import { RejectButton } from './RejectButton';
 import { Avatar } from './Avatar';
 import { SkillRow } from './SkillRow';
+import { TasksProgress } from './TasksProgress';
+import { Refactoring } from './Refactoring';
+import { Tests } from './Tests';
+import * as PropTypes from 'prop-types';
+
+class Technology extends Component {
+  render() {
+    return (
+      <div key={this.props.technologyId} className="row-md-1">
+        <div className="form-check-checkbox slim-margin">
+          <span>
+            <h5 className="text-center slim">
+              <input
+                type="checkbox"
+                id={this.props.technologyId}
+                checked={this.props.technology(
+                  this.props.id,
+                  this.props.technologyId
+                )}
+                onChange={this.props.changeTechnology}
+              />
+              {this.props.name}
+            </h5>
+            <p className="small slim">{this.props.description}</p>
+          </span>
+        </div>
+      </div>
+    );
+  }
+}
+
+Technology.propTypes = {
+  technologyId: PropTypes.any,
+  technology: PropTypes.any,
+  id: PropTypes.any,
+  changeTechnology: PropTypes.func,
+  name: PropTypes.any,
+  description: PropTypes.any
+};
 
 class Project extends Component {
   constructor(props) {
@@ -34,6 +73,9 @@ class Project extends Component {
     this.manage = this.manage.bind(this);
     this.manageAll = this.manageAll.bind(this);
     this.changeTechnology = this.changeTechnology.bind(this);
+    this.onSelectChange = this.onSelectChange.bind(this);
+    this.onRelease = this.onRelease.bind(this);
+    this.onReject = this.onReject.bind(this);
     this.finish = this.finish.bind(this);
     this.fix = this.fix.bind(this);
     this.open = this.open.bind(this);
@@ -72,7 +114,25 @@ class Project extends Component {
       event.target.checked
     );
   }
-
+  onSelectChange(e) {
+    this.props.data.helpers.changeTeamSelector();
+    this.props.data.helpers.modifyRelation(e.value.id, this.props.project.id);
+    this.props.data.helpers.modifyHoveredObjects();
+  }
+  onRelease() {
+    this.props.data.helpers.fixProject(this.props.project.id);
+  }
+  onReject() {
+    if (
+      window.confirm(
+        `Reject project ${this.props.project.name}? (penalty: ${
+          this.props.project.penalty
+        })`
+      )
+    ) {
+      this.close();
+    }
+  }
   open() {
     this.props.data.helpers.openProject(this.props.project.id);
   }
@@ -98,7 +158,31 @@ class Project extends Component {
   render() {
     const data = this.props.data;
     const project = this.props.project;
-
+    let {
+      getTechnology,
+      modifyHoveredObjects,
+      fixProject,
+      changeTeamSelector,
+      modifyRelation,
+      kickWorker
+    } = data.helpers;
+    let {
+      id,
+      type,
+      stage,
+      deadline,
+      deadline_max,
+      iteration,
+      complexity,
+      reward,
+      penalty,
+      avatar,
+      name,
+      platform,
+      kind,
+      size,
+      is_paused
+    } = project;
     /*const stats_data = _.mapValues(skills, (stat, key) => {
 
             return {name: key, // _.capitalize(key[0]),
@@ -120,19 +204,13 @@ class Project extends Component {
       <button className="btn btn-xs btn-success">Manage</button>
     );
 
-    let onSelectChange = e => {
-      data.helpers.changeTeamSelector();
-      data.helpers.modifyRelation(e.value.id, project.id);
-      data.helpers.modifyHoveredObjects();
-    };
-
     //let unoccupied_workers = data.workers.filter((worker) => {return data.helpers.deepCheckRelation(worker, project)});
 
     let label = worker => {
       return (
         <KickWorkerButton
           id={worker.id}
-          action={() => data.helpers.kickWorker(worker, project)}
+          action={() => kickWorker(worker, project)}
           name={worker.name}
         />
       );
@@ -165,8 +243,9 @@ class Project extends Component {
     });
 
     let tech = [];
-    if (project.id in data.projects_technologies) {
-      Object.keys(data.projects_technologies[project.id]).forEach(tech_name => {
+
+    if (id in data.projects_technologies) {
+      Object.keys(data.projects_technologies[id]).forEach(tech_name => {
         if (data.projects_technologies[project.id][tech_name]) {
           tech.push(tech_name);
         }
@@ -179,34 +258,23 @@ class Project extends Component {
 
     //console.log(project_platforms[project.platform].icon)
 
-    let {
-      type,
-      stage,
-      deadline,
-      deadlineMax,
-      iteration,
-      complexity,
-      reward,
-      penalty,
-      avatar,
-      name,
-      platform,
-      kind,
-      size
-    } = project;
-
+    let complexityMax = project.complexity_max;
+    let planedTasksQuantity = project.planedTasksQuantity;
+    let tests = project.tests;
+    let doneQuantity = project.doneQuantity();
+    let deadlineText = project.getDeadlineText();
     return (
       <div
         className={`project card ${
-          data.hovered_projects_id || [].includes(project.id) ? 'hovered' : ''
+          data.hovered_projects_id || [].includes(id) ? 'hovered' : ''
         }`}
         onMouseOver={() => {
-          data.helpers.modifyHoveredObjects([project], team);
+          modifyHoveredObjects([project], team);
         }}
         onMouseOut={() => {
-          data.helpers.modifyHoveredObjects();
+          modifyHoveredObjects();
         }}
-        id={project.id}
+        id={id}
       >
         <div className="card-header">
           <div className="card-header">
@@ -230,37 +298,25 @@ class Project extends Component {
                       reward,
                       penalty
                     }}
-                    deadlineText={project.getDeadlineText()}
+                    deadlineText={deadlineText}
                   />{' '}
                 </span>
                 <ProjectReward reward={reward} project={project} />
                 <div>
                   <span>
                     <StartPauseButton
-                      paused={project.is_paused}
+                      paused={is_paused}
                       stage={stage}
                       onUnpause={this.unpause}
                       onOpen={this.open}
                       onPause={this.pause}
                     />
-                    <RejectButton
-                      onClick={() => {
-                        if (
-                          window.confirm(
-                            `Reject project ${name}? (penalty: ${penalty})`
-                          )
-                        ) {
-                          this.close();
-                        }
-                      }}
-                    />
+                    <RejectButton onClick={this.onReject} />
                     <ReleaseButton
-                      doneQuantity={project.doneQuantity()}
+                      doneQuantity={doneQuantity}
                       type={type}
                       stage={stage}
-                      onClick={() => {
-                        this.props.data.helpers.fixProject(project.id);
-                      }}
+                      onClick={this.onRelease}
                     />
                   </span>
                 </div>
@@ -270,7 +326,7 @@ class Project extends Component {
                   <div>
                     <ProjectDeadline
                       deadline={deadline}
-                      deadlineMax={deadlineMax}
+                      deadlineMax={deadline_max}
                     />
                     <Statistics
                       iteration={iteration}
@@ -296,166 +352,80 @@ class Project extends Component {
                         })}
                     </div>
                     <div>
-                      {type === 'draft' && stage === 'ready'
-                        ? ''
-                        : skills_names.map(skill => {
-                            //     console.log(project);
-                            let tasks = project.needs(skill);
-                            if (tasks === Number.POSITIVE_INFINITY) {
-                              tasks = 0;
+                      {!(type === 'draft' && stage === 'ready') &&
+                        skills_names.map(skill => {
+                          //     console.log(project);
+                          let tasks = project.needs(skill);
+                          if (tasks === Number.POSITIVE_INFINITY) {
+                            tasks = 0;
+                          }
+                          let bugs = project.bugs[skill];
+                          let done = project.done[skill];
+
+                          let max_skill = _.maxBy(
+                            _.keys(project.estimate),
+                            function(skill) {
+                              return (
+                                Math.max(
+                                  project.needs(skill) !==
+                                  Number.POSITIVE_INFINITY
+                                    ? project.needs(skill)
+                                    : 0,
+                                  project.estimate[skill],
+                                  project.done[skill]
+                                ) + project.bugs[skill]
+                              );
                             }
-                            let bugs = project.bugs[skill];
-                            let done = project.done[skill];
+                          );
 
-                            let max_skill = _.maxBy(
-                              _.keys(project.estimate),
-                              function(skill) {
-                                return (
-                                  Math.max(
-                                    project.needs(skill) !==
-                                    Number.POSITIVE_INFINITY
-                                      ? project.needs(skill)
-                                      : 0,
-                                    project.estimate[skill],
-                                    project.done[skill]
-                                  ) + project.bugs[skill]
-                                );
-                              }
-                            );
+                          let max =
+                            Math.max(
+                              project.needs(max_skill) !==
+                              Number.POSITIVE_INFINITY
+                                ? project.needs(max_skill)
+                                : 0,
+                              project.estimate[max_skill] !==
+                              Number.POSITIVE_INFINITY
+                                ? project.estimate[max_skill]
+                                : 0,
+                              project.done[max_skill]
+                            ) + project.bugs[max_skill]; //, project.needs(max_skill)) + project.bugs[max_skill];
 
-                            let max =
-                              Math.max(
-                                project.needs(max_skill) !==
-                                Number.POSITIVE_INFINITY
-                                  ? project.needs(max_skill)
-                                  : 0,
-                                project.estimate[max_skill] !==
-                                Number.POSITIVE_INFINITY
-                                  ? project.estimate[max_skill]
-                                  : 0,
-                                project.done[max_skill]
-                              ) + project.bugs[max_skill]; //, project.needs(max_skill)) + project.bugs[max_skill];
+                          if (max === 0) max = 1;
 
-                            if (max === 0) max = 1;
+                          let tasks_percent = (tasks / max) * 100;
+                          let bugs_percent = (bugs / max) * 100;
+                          let done_percent = (done / max) * 100;
 
-                            let tasks_percent = (tasks / max) * 100;
-                            let bugs_percent = (bugs / max) * 100;
-                            let done_percent = (done / max) * 100;
+                          //   console.log(tasks_percent, bugs_percent, done_percent);
 
-                            //   console.log(tasks_percent, bugs_percent, done_percent);
-
-                            return (
-                              <div key={skill} className="row">
-                                <div className="col-2">{skill}</div>
-                                <div className="col-10 progress">
-                                  <div
-                                    className="progress-bar bg-warning"
-                                    role="progressbar"
-                                    style={{ width: tasks_percent + '%' }}
-                                  >
-                                    {tasks ? <span>{tasks} tasks</span> : ''}
-                                  </div>
-                                  <div
-                                    className="progress-bar bg-danger"
-                                    role="progressbar"
-                                    style={{ width: bugs_percent + '%' }}
-                                  >
-                                    {bugs ? <span>{bugs} bugs</span> : ''}
-                                  </div>
-                                  <div
-                                    className="progress-bar bg-success"
-                                    role="progressbar"
-                                    style={{ width: done_percent + '%' }}
-                                  >
-                                    {done ? <span>{done} done</span> : ''}
-                                  </div>
-                                </div>
-                              </div>
-                            );
-                          })}
+                          return (
+                            <TasksProgress
+                              key={skill}
+                              skill={skill}
+                              tasksPercent={tasks_percent}
+                              tasks={tasks}
+                              bugsPercent={bugs_percent}
+                              bugs={bugs}
+                              donePercent={done_percent}
+                              done={done}
+                            />
+                          );
+                        })}
                     </div>
 
-                    {data.helpers.getTechnology(project.id, 'refactoring') ? (
-                      <div key="refactoring" className="row">
-                        <div className="col-2">Refactoring</div>
-                        <div className="col-10 progress">
-                          <div
-                            className="progress-bar bg-warning"
-                            role="progressbar"
-                            style={{
-                              width:
-                                (complexity / project.complexity_max) * 100 +
-                                '%'
-                            }}
-                          >
-                            <span>{complexity} complexity</span>
-                          </div>
-                          <div
-                            className="progress-bar bg-success"
-                            role="progressbar"
-                            style={{
-                              width:
-                                100 -
-                                (complexity / project.complexity_max) * 100 +
-                                '%'
-                            }}
-                          >
-                            {project.complexity_max - complexity > 0 ? (
-                              <span>
-                                {project.complexity_max - complexity} refactored
-                              </span>
-                            ) : (
-                              ''
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      ''
+                    {getTechnology(id, 'refactoring') && (
+                      <Refactoring
+                        complexity={complexity}
+                        complexityMax={complexityMax}
+                      />
                     )}
 
-                    {project.tests > 0 ? (
-                      <div key="tests" className="row">
-                        <div className="col-2">Tests</div>
-                        <div className="col-10 progress">
-                          <div
-                            className="progress-bar bg-warning"
-                            role="progressbar"
-                            style={{
-                              width:
-                                100 -
-                                (project.tests /
-                                  project.planedTasksQuantity()) *
-                                  100 +
-                                '%'
-                            }}
-                          >
-                            <span>
-                              {project.planedTasksQuantity() - project.tests}{' '}
-                              tasks
-                            </span>
-                          </div>
-                          <div
-                            className="progress-bar bg-success"
-                            role="progressbar"
-                            style={{
-                              width:
-                                (project.tests /
-                                  project.planedTasksQuantity()) *
-                                  100 +
-                                '%'
-                            }}
-                          >
-                            {project.tests ? (
-                              <span>{project.tests} done</span>
-                            ) : (
-                              ''
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      ''
+                    {tests > 0 && (
+                      <Tests
+                        tests={tests}
+                        planedTasksQuantity={planedTasksQuantity}
+                      />
                     )}
                   </div>
                   <div className="card">
@@ -478,7 +448,7 @@ class Project extends Component {
                                         skill
                                       )}
                                       onChange={event => {
-                                        data.helpers.modifyRelation(
+                                        modifyRelation(
                                           event.target.id,
                                           project.id,
                                           event.target.checked,
@@ -509,32 +479,22 @@ class Project extends Component {
                 <div className="col-4">
                   <div className="card">
                     <div className="col slim-left">
-                      {data.projects_known_technologies.map((technology, i) => (
-                        <div key={technology} className="row-md-1">
-                          <div className="form-check-checkbox slim-margin">
-                            <span>
-                              <h5 className="text-center slim">
-                                <input
-                                  type="checkbox"
-                                  id={technology}
-                                  checked={data.helpers.getTechnology(
-                                    project.id,
-                                    technology
-                                  )}
-                                  onChange={this.changeTechnology}
-                                />
-                                {technologies[technology].name}
-                              </h5>
-                              <p className="small slim">
-                                {technologies[technology].description}
-                              </p>
-                            </span>
-                          </div>
-                        </div>
-                      ))}
+                      {data.projects_known_technologies.map(
+                        (technologyId, i) => (
+                          <Technology
+                            key={technologyId}
+                            technologyId={technologyId}
+                            technology={getTechnology}
+                            id={id}
+                            changeTechnology={this.changeTechnology}
+                            name={technologies[technologyId].name}
+                            description={technologies[technologyId].description}
+                          />
+                        )
+                      )}
                       {current_tick > 24 * 30 * 3
                         ? Object.keys(technologies).map((technology, i) => (
-                            <Technology
+                            <LockedTechnology
                               key={technology}
                               technology={technology}
                               projectsKnownTechnologies={
@@ -591,17 +551,17 @@ class Project extends Component {
               Team: {team_label}
               <button
                 className={`btn btn-xs btn-info team-add-worker ${
-                  data.project_team_selector === project.id ? 'active' : ''
+                  data.project_team_selector === id ? 'active' : ''
                 }`}
-                onClick={() => data.helpers.changeTeamSelector(project)}
+                onClick={() => changeTeamSelector(project)}
               >
                 <i className="fa fa-plus" />
               </button>
             </p>
-            {data.project_team_selector === project.id ? (
+            {data.project_team_selector === id ? (
               <div>
                 <Select
-                  onChange={e => onSelectChange(e)}
+                  onChange={this.onSelectChange}
                   options={data.workers.map(worker => {
                     return { value: worker, label: worker.name };
                   })}

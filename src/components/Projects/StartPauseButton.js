@@ -11,48 +11,27 @@ export class StartPauseButton extends Component {
   };
 
   render() {
+    const { paused, stage, onUnpause, onOpen, onPause } = this.props;
     return (
       <span>
         {/*{project.stage}*/}
-        {this.props.paused ? (
-          <button
-            className="btn btn-sm btn-success"
-            onClick={this.props.onUnpause}
-          >
+        {paused && (
+          <button className="btn btn-sm btn-success" onClick={onUnpause}>
             Start
           </button>
-        ) : (
-          ''
         )}
-        {this.props.stage === 'ready' ? (
-          <button
-            className="btn btn-sm btn-success"
-            onClick={this.props.onOpen}
-          >
+        {stage === 'ready' && (
+          <button className="btn btn-sm btn-success" onClick={onOpen}>
             Start
           </button>
-        ) : (
-          ''
         )}
-        {this.props.stage === 'open' && !this.props.paused ? (
-          <button
-            className="btn btn-sm btn-warning"
-            onClick={this.props.onPause}
-          >
-            Pause
-          </button>
-        ) : (
-          ''
-        )}
+        {stage === 'open' &&
+          !paused && (
+            <button className="btn btn-sm btn-warning" onClick={onPause}>
+              Pause
+            </button>
+          )}
       </span>
     );
   }
 }
-
-StartPauseButton.propTypes = {
-  paused: PropTypes.bool,
-  onUnpause: PropTypes.func,
-  stage: PropTypes.any,
-  onOpen: PropTypes.func,
-  onPause: PropTypes.func
-};
