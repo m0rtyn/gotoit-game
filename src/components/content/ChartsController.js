@@ -5,7 +5,7 @@ import {
   charts_parameters,
   exchange_charts_parameters,
   market_chart_parameters
-} from '../../game/knowledge';
+} from '../../game/knowledge/charts';
 import _ from 'lodash';
 
 let ChartsController = props => {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Worker from './Worker';
 import Office from './content/Office';
-import { offices } from '../game/knowledge';
+import { offices } from '../game/knowledge/office';
 
 class People extends Component {
   constructor(props) {

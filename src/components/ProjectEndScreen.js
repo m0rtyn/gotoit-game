@@ -3,11 +3,8 @@ import React, { Component } from 'react';
 import ProjectReport from './ProjectReport';
 import ProjectsTop from '../services/ProjectsTop';
 
-import {
-  project_kinds,
-  project_platforms,
-  skills_names
-} from '../game/knowledge';
+import { project_kinds, project_platforms } from '../game/knowledge/projects';
+import { skills_names } from '../game/knowledge/skills';
 
 class ProjectEndScreen extends Component {
   constructor(props) {
