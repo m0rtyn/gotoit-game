@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { loans } from '../../game/knowledge';
+import { loans } from '../../game/knowledge/loans';
 
 class Loans extends Component {
   constructor(props) {
