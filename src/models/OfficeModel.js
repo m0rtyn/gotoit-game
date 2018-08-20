@@ -1,4 +1,4 @@
-import { offices } from '../game/knowledge';
+import { offices } from '../game/knowledge/office';
 
 class OfficeModel {
   constructor(size_arg) {

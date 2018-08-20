@@ -4,11 +4,8 @@ import WorkerModel from '../models/WorkerModel';
 import ProjectModel, { flush } from '../models/ProjectModel';
 import OfficeModel from '../models/OfficeModel';
 
-import {
-  charts_parameters,
-  project_kinds,
-  project_platforms
-} from './knowledge';
+import { charts_parameters } from './knowledge/charts';
+import { project_kinds, project_platforms } from './knowledge/projects';
 
 var default_state = {
   data: {
@@ -108,7 +105,11 @@ var default_state = {
       share1: { buffer: 0, values: [] },
       share2: { buffer: 0, values: [] }
     },
-
+    exchange_unlocked_shares: [],
+    share0_unlock: false,
+    share1_unlock: false,
+    share2_unlock: false,
+    btc_unlock: false,
     max_stat: 1,
     max_candidates_stat: 1,
     max_stats_projects_offered: 1,

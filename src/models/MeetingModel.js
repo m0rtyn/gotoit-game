@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 import ProjectModel from '../models/ProjectModel';
 
-import { meetings } from '../game/knowledge';
+import { meetings } from '../game/knowledge/meetings';
 
 class MeetingModel {
   constructor(type, deadline) {

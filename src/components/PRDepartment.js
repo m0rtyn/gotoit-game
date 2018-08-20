@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { colors, public_relations } from '../game/knowledge';
+import { colors } from '../game/knowledge/colors';
+import { public_relations } from '../game/knowledge/public_relations';
 import Bar from './Bar/Bar';
 
 class PRDepartment extends Component {

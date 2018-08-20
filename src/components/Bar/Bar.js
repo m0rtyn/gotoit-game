@@ -19,7 +19,7 @@ class Bar extends Component {
             showName={item.showName}
             color={item.color}
             name={item.name}
-            value={item.value.toString()}
+            value={item.value}
             width={item.width}
           />
         ))}

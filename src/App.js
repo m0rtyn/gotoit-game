@@ -19,15 +19,11 @@ import ProjectsTop from './services/ProjectsTop';
 
 import Lorer from './services/Lorer';
 
-import {
-  meetings,
-  project_kinds,
-  project_platforms,
-  skills_names,
-  skills_true,
-  technologies,
-  workers_bonus_items
-} from './game/knowledge';
+import { meetings } from './game/knowledge/meetings';
+import { technologies } from './game/knowledge/technologies';
+import { workers_bonus_items } from './game/knowledge/workers';
+import { project_kinds, project_platforms } from './game/knowledge/projects';
+import { skills_names, skills_true } from './game/knowledge/skills';
 
 import { getDefaultState } from './game/default_state';
 
@@ -317,13 +313,13 @@ class App extends Component {
 
       _.each(loaded_app_state.data.mailbox, (item, id) => {
         item.type === 'Resume'
-          ? (loaded_app_state.data.mailbox[id].project = _.create(
+          ? (loaded_app_state.data.mailbox[id].object = _.create(
               WorkerModel.prototype,
-              item.project
+              item.object
             ))
-          : (loaded_app_state.data.mailbox[id].project = _.create(
+          : (loaded_app_state.data.mailbox[id].object = _.create(
               ProjectModel.prototype,
-              item.project
+              item.object
             ));
       });
 
@@ -1082,6 +1078,7 @@ class App extends Component {
     });
 
     data.projects_end_reports.push(project);
+    data.reputation += 50;
     addAction('New project report: ' + project.name);
     //data.projects_archive_reports.unshift(project);
     this.setState({ data: data });
@@ -1284,7 +1281,7 @@ class App extends Component {
     } else {
       console.log('not enough money');
     }
-    this.setState({ data: data });
+    this.setState({ data: data }); //зачем?
   }
 
   sellShare0(usd) {

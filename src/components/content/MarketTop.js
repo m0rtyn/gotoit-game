@@ -4,7 +4,10 @@ import _ from 'lodash';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
-import { project_kinds, project_platforms } from '../../game/knowledge';
+import {
+  project_kinds,
+  project_platforms
+} from '../../game/knowledge/projects';
 
 class MarketTop extends Component {
   constructor(props) {

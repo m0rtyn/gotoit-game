@@ -17,7 +17,8 @@ import ProjectName from './ProjectName';
 import ProjectProgressBar from './ProjectProgressBar';
 import ProjectDeadlineBar from './ProjectDeadlineBar';
 
-import { skills_names, technologies } from '../game/knowledge';
+import { technologies } from '../game/knowledge/technologies';
+import { skills_names } from '../game/knowledge/skills';
 
 class Project extends Component {
   constructor(props) {
