@@ -5,7 +5,7 @@ import ProjectOfferBlock from '../ProjectOfferBlock';
 import PublicRelations from '../content/PublicRelations';
 import SalesAgency from '../SalesAgency';
 import Bar from '../Bar/Bar';
-import { colors } from '../../game/knowledge';
+import { colors } from '../../game/knowledge/colors';
 
 class ProjectsFind extends Component {
   render() {

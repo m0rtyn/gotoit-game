@@ -4,11 +4,8 @@ import WorkerModel from '../models/WorkerModel';
 import ProjectModel, { flush } from '../models/ProjectModel';
 import OfficeModel from '../models/OfficeModel';
 
-import {
-  charts_parameters,
-  project_kinds,
-  project_platforms
-} from './knowledge';
+import { charts_parameters } from './knowledge/charts';
+import { project_kinds, project_platforms } from './knowledge/projects';
 
 var default_state = {
   data: {

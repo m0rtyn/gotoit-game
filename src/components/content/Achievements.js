@@ -1,5 +1,5 @@
 import React from 'react';
-import { achievements } from '../../game/achievements';
+import { achievements } from '../../game/knowledge/achievements';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import _ from 'lodash';
 

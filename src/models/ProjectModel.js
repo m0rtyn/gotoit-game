@@ -6,10 +6,9 @@ import {
   project_bars,
   project_kinds,
   project_platforms,
-  project_sizes,
-  skills,
-  skills_inf
-} from '../game/knowledge';
+  project_sizes
+} from '../game/knowledge/projects';
+import { skills, skills_inf } from '../game/knowledge/skills';
 import { hired, projects_done, getData } from '../App';
 
 export var projects_generated = 0;

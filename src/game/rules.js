@@ -9,11 +9,9 @@ import {
 import { addAction } from '../components/ToastNest';
 import Lorer from '../services/Lorer';
 import WorkerModel from '../models/WorkerModel';
-import {
-  public_relations,
-  resume_will_expire_after,
-  project_offer_will_expire_after
-} from './knowledge';
+import { public_relations } from './knowledge/public_relations';
+import { resume_will_expire_after } from './knowledge/workers';
+import { project_offer_will_expire_after } from './knowledge/projects';
 import { historical_events } from './knowledge/historical_events';
 
 export const rules = {

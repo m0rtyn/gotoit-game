@@ -3,7 +3,7 @@ import _ from 'lodash';
 import PublicRelations from './PublicRelations';
 import HiringAgency from '../HiringAgency';
 import Bar from '../Bar/Bar';
-import { colors } from '../../game/knowledge';
+import { colors } from '../../game/knowledge/colors';
 
 import StatsProgressBar from '../StatsProgressBar';
 

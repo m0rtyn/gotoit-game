@@ -6,16 +6,26 @@ import TeamDialog from './TeamDialog';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
 import StatsProgressBar from './StatsProgressBar';
-import {
-  colors,
-  education,
-  skills_names,
-  workers_bonus_items
-} from '../game/knowledge';
+import { colors } from '../game/knowledge/colors';
+import { workers_bonus_items } from '../game/knowledge/workers';
+import { skills_names } from '../game/knowledge/skills';
+import { education } from '../game/knowledge/education';
 import WorkerHappinessBar from './WorkerHappinessBar';
 import WorkerStaminaBar from './WorkerStaminaBar';
 
+
+import Character from './content/Character';
+import Instrumentary from './content/Instrumentary';
+
+
 //import {addAction} from '../components/ToastNest';
+
+
+
+const components = {
+  Character: Character,
+  Instrumentary: Instrumentary
+};
 
 class Worker extends Component {
   constructor(props) {
@@ -80,6 +90,7 @@ class Worker extends Component {
   }
 
   render() {
+    const ContentComponent = components[this.props.data.content];
     const data = this.props.data;
     const worker = this.props.worker;
 
@@ -187,32 +198,19 @@ class Worker extends Component {
                       )}
                     </div>
 
-                    {/* <StatsProgressBar
-                    // hideCheckbox={true}
-                    type={'program'}
-                    max_stat={data.max_candidates_stat}
-                    stats={stats_progressbar_data}
-                    // worker={candidate}
-                    data={data}
-                    />
-                    n<StatsProgressBar
-                    // hideCheckbox={true}
-                    type={'design'}
-                    max_stat={data.max_candidates_stat}
-                    stats={stats_progressbar_data}
-                    // worker={candidate}
-                    data={data}
-                    />
-                    <StatsProgressBar
-                    // hideCheckbox={true}
-                    type={'manage'}
-                    max_stat={data.max_candidates_stat}
-                    stats={stats_progressbar_data}
-                    // worker={candidate}
-                    data={data}
-                    /> */}
-
-                    {/* <StatsBar stats={efficiency_data} data={this.props.data} /> */}
+                    <div className="worker-stats">
+                      {skills_names.map(skill => {
+                        return (
+                          <StatsProgressBar
+                          key={skill}
+                          type={skill}
+                          stats={stats_progressbar_data}
+                          worker={worker}
+                          data={data}
+                          />
+                        )
+                      })}
+                    </div>
 
                     {/* <p>
                       {worker.tellFeelings()}
@@ -221,7 +219,38 @@ class Worker extends Component {
                 </div>
 
                 <div className="modal-body">
-                  <div>
+                  <ul className="nav nav-tabs nav-tabs-light-mode activity-toolbar">
+                    <li className="nav-item">
+                      <a
+                        className="nav-link"
+                        onClick={() => {
+                          data.helpers.changeContent('Character');
+                        }}
+                      >
+                        <h4>Character</h4>
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a
+                        className="nav-link"
+                        onClick={() => {
+                          data.helpers.changeContent('Instrumentary');
+                        }}
+                      >
+                        <h4>Instrumentary</h4>
+                      </a>
+                    </li>
+                  </ul>
+
+
+
+                    <div className="tab-content">
+                      <ContentComponent data={this.props.data} />
+                    </div>
+
+
+
+                  {/* <div>
                     {`Character: ${worker.character.name}. ${worker.character.description}.`}
                   </div>
 
@@ -256,7 +285,7 @@ class Worker extends Component {
                       </button>
                     </span>
                   )}
-                  
+
                   <ul>
                     <p>
                       Hired{' '}
@@ -286,12 +315,6 @@ class Worker extends Component {
                         {skills_names.map(skill => {
                           return (
                             <div className=" flex-container-column" key={skill}>
-                              <StatsProgressBar
-                                type={skill}
-                                stats={stats_progressbar_data}
-                                worker={worker}
-                                data={data}
-                              />
                               {Object.keys(workers_bonus_items[skill]).map(
                                 item_key => {
                                   let item =
@@ -414,7 +437,7 @@ class Worker extends Component {
                         );
                       })}
                     </div>
-                  </div>
+                  </div> */}
                   <div>
                     {worker.is_player ? (
                       ''

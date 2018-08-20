@@ -1,6 +1,6 @@
 import React from 'react';
 import BubbleAnimated from './animation_content/BubbleAnimated';
-import { genAnimationData } from '../game/knowledge';
+import { genAnimationData } from '../game/knowledge/animation_data';
 import _ from 'lodash';
 
 //var timeoutID = null;
