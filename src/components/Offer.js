@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { project_offer_will_expire_after, skills } from '../game/knowledge';
+import { skills } from '../game/knowledge/skills';
+import { project_offer_will_expire_after } from '../game/knowledge/projects';
 import _ from 'lodash';
 import StatsBar from './StatsBar';
 

@@ -19,15 +19,11 @@ import ProjectsTop from './services/ProjectsTop';
 
 import Lorer from './services/Lorer';
 
-import {
-  meetings,
-  project_kinds,
-  project_platforms,
-  skills_names,
-  skills_true,
-  technologies,
-  workers_bonus_items
-} from './game/knowledge';
+import { meetings } from './game/knowledge/meetings';
+import { technologies } from './game/knowledge/technologies';
+import { workers_bonus_items } from './game/knowledge/workers';
+import { project_kinds, project_platforms } from './game/knowledge/projects';
+import { skills_names, skills_true } from './game/knowledge/skills';
 
 import { getDefaultState } from './game/default_state';
 

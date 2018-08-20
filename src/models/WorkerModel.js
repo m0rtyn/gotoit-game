@@ -3,13 +3,12 @@ import _ from 'lodash';
 import { chatMessage } from '../components/Chat';
 
 import bulkStyler from '../services/bulkStyler';
+import { meetings } from '../game/knowledge/meetings';
 import {
-  meetings,
-  skills,
-  skills_1,
   worker_character_types,
   workers_bonus_items
-} from '../game/knowledge';
+} from '../game/knowledge/workers';
+import { skills, skills_1 } from '../game/knowledge/skills';
 
 import { addAction } from '../components/ToastNest';
 

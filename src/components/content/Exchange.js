@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ChartsController from './ChartsController';
 import btc_icon from '../../assets/images/btc_logo.png';
-import { shares } from '../../game/knowledge.js';
+import { shares } from '../../game/knowledge/shares';
 import _ from 'lodash';
 
 class Exchange extends Component {
@@ -155,6 +155,7 @@ class Exchange extends Component {
           {_.map(this.props.data.exchange_unlocked_shares, (share_name, i) => {
             return (
               <a
+                key={i}
                 className="nav-link"
                 onClick={() => {
                   this.setState({ current: i });

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import _ from 'lodash';
-import { skills } from '../game/knowledge';
+import { skills } from '../game/knowledge/skills';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
 

@@ -6,12 +6,10 @@ import TeamDialog from './TeamDialog';
 import StatsBar from './StatsBar';
 import ProjectName from './ProjectName';
 import StatsProgressBar from './StatsProgressBar';
-import {
-  colors,
-  education,
-  skills_names,
-  workers_bonus_items
-} from '../game/knowledge';
+import { colors } from '../game/knowledge/colors';
+import { workers_bonus_items } from '../game/knowledge/workers';
+import { skills_names } from '../game/knowledge/skills';
+import { education } from '../game/knowledge/education';
 import WorkerHappinessBar from './WorkerHappinessBar';
 import WorkerStaminaBar from './WorkerStaminaBar';
 

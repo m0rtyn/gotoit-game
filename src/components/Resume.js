@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { current_tick } from '../App';
-import { resume_will_expire_after } from '../game/knowledge';
+import { resume_will_expire_after } from '../game/knowledge/workers';
 
 class Resume extends Component {
   render() {
