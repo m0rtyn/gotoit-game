@@ -53,7 +53,7 @@ class Exchange extends Component {
                 className={
                   data.money >= 1 ? 'btn btn-info' : 'btn btn-info disabled'
                 }
-                onClick={() => share.onBuy(1)}
+                onClick={() => share.onBuy(data, 1)}
               >
                 $1
               </button>
@@ -61,7 +61,7 @@ class Exchange extends Component {
                 className={
                   data.money >= 10 ? 'btn btn-info' : 'btn btn-info disabled'
                 }
-                onClick={() => share.onBuy(10)}
+                onClick={() => share.onBuy(data, 10)}
               >
                 $10
               </button>
@@ -69,7 +69,7 @@ class Exchange extends Component {
                 className={
                   data.money >= 100 ? 'btn btn-info' : 'btn btn-info disabled'
                 }
-                onClick={() => share.onBuy(100)}
+                onClick={() => share.onBuy(data, 100)}
               >
                 $100
               </button>
@@ -77,7 +77,7 @@ class Exchange extends Component {
                 className={
                   data.money >= 1000 ? 'btn btn-info' : 'btn btn-info disabled'
                 }
-                onClick={() => share.onBuy(1000)}
+                onClick={() => share.onBuy(data, 1000)}
               >
                 $1000
               </button>
@@ -85,7 +85,7 @@ class Exchange extends Component {
                 className={
                   data.money >= 10000 ? 'btn btn-info' : 'btn btn-info disabled'
                 }
-                onClick={() => share.onBuy(10000)}
+                onClick={() => share.onBuy(data, 10000)}
               >
                 $10000
               </button>
@@ -100,7 +100,7 @@ class Exchange extends Component {
                     ? 'btn btn-info'
                     : 'btn btn-info disabled'
                 }
-                onClick={() => share.onSell(1)}
+                onClick={() => share.onSell(data, 1)}
               >
                 $1
               </button>
@@ -110,7 +110,7 @@ class Exchange extends Component {
                     ? 'btn btn-info'
                     : 'btn btn-info disabled'
                 }
-                onClick={() => share.onSell(10)}
+                onClick={() => share.onSell(data, 10)}
               >
                 $10
               </button>
@@ -120,7 +120,7 @@ class Exchange extends Component {
                     ? 'btn btn-info'
                     : 'btn btn-info disabled'
                 }
-                onClick={() => share.onSell(100)}
+                onClick={() => share.onSell(data, 100)}
               >
                 $100
               </button>
@@ -130,7 +130,7 @@ class Exchange extends Component {
                     ? 'btn btn-info'
                     : 'btn btn-info disabled'
                 }
-                onClick={() => share.onSell(1000)}
+                onClick={() => share.onSell(data, 1000)}
               >
                 $1000
               </button>
@@ -140,7 +140,7 @@ class Exchange extends Component {
                     ? 'btn btn-info'
                     : 'btn btn-info disabled'
                 }
-                onClick={() => share.onSell(10000)}
+                onClick={() => share.onSell(data, 10000)}
               >
                 $10000
               </button>

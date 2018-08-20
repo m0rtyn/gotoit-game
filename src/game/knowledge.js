@@ -708,16 +708,23 @@ export const shares = {
     name: 'Future Sight',
     short: 'FS',
     onBuy: (data, value) => {
+      console.log('buy');
       if (data.money >= value) {
+        console.log(data.money);
         data.helpers.chargeMoney(value);
         data.share0 += value / data.current_share0_price;
+        console.log(data.money);
       }
     },
     onSell: (data, value) => {
+      console.log('sell');
       let cost = value / data.current_share0_price;
       if (data.share0 >= cost) {
+        console.log(data.money);
+        console.log(value);
         data.share0 -= cost;
         data.helpers.addMoney(value);
+        console.log(data.money);
       }
     }
   },
