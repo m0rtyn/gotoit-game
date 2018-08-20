@@ -297,6 +297,8 @@ export const rules = {
           break;
       }
 
+      const x = current_tick + 2000;
+
       if (data.btc_unlock) {
         (() => {
           const x = current_tick + 2000;
