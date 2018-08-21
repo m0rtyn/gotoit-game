@@ -14,22 +14,15 @@ import WorkerHappinessBar from './WorkerHappinessBar';
 import WorkerStaminaBar from './WorkerStaminaBar';
 
 
-import Character from './content/Character';
-import Instrumentary from './content/Instrumentary';
-
-
 //import {addAction} from '../components/ToastNest';
 
-
-
-const components = {
-  Character: Character,
-  Instrumentary: Instrumentary
-};
 
 class Worker extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      currentTab: 0
+    }
     this.manage = this.manage.bind(this);
     this.manageAll = this.manageAll.bind(this);
     this.dismiss = this.dismiss.bind(this);
@@ -90,8 +83,8 @@ class Worker extends Component {
   }
 
   render() {
-    const ContentComponent = components[this.props.data.content];
     const data = this.props.data;
+    let state = this.state;
     const worker = this.props.worker;
 
     const manage_button = (
@@ -105,6 +98,7 @@ class Worker extends Component {
         color: colors[stat].colorCompleted
       };
     });
+
 
     /*const stats_data = _.mapValues(worker.stats, (val, stat) => {
             return {
@@ -122,6 +116,18 @@ class Worker extends Component {
       education: { name: 'Education Balance', val: worker.educationPenalty() },
       collective: { name: 'Collective', val: worker.collectivePenalty() }
     };
+
+    let character = (
+      <div>
+        <h2>Character</h2>
+      </div>
+    );
+
+    let instrumenary = (
+      <div>
+        <h2>Instrumentary</h2>
+      </div>
+    );
 
     return (
       <div
@@ -220,21 +226,21 @@ class Worker extends Component {
 
                 <div className="modal-body">
                   <ul className="nav nav-tabs nav-tabs-light-mode activity-toolbar">
-                    <li className="nav-item">
+                    <li className={"nav-item" + (state.currentTab === 0 ? 'yes' : 'no')}>
                       <a
                         className="nav-link"
                         onClick={() => {
-                          data.helpers.changeContent('Character');
+                          this.setState({ currentTab: 0 });
                         }}
                       >
                         <h4>Character</h4>
                       </a>
                     </li>
-                    <li className="nav-item">
+                    <li className={"nav-item" + (state.currentTab === 1 ? 'yes' : 'no')}>
                       <a
                         className="nav-link"
                         onClick={() => {
-                          data.helpers.changeContent('Instrumentary');
+                          this.setState({ currentTab: 1 });
                         }}
                       >
                         <h4>Instrumentary</h4>
@@ -244,8 +250,16 @@ class Worker extends Component {
 
 
 
-                    <div className="tab-content">
-                      <ContentComponent data={this.props.data} />
+                    <div>
+                      {
+                        (()=>{
+                          if (state.currentTab === 0){
+                            return character
+                          } else if (state.currentTab === 1){
+                            return instrumenary
+                          }
+                        })()
+                      }
                     </div>
 
 
