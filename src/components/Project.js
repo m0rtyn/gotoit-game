@@ -17,7 +17,8 @@ import ProjectName from './ProjectName';
 import ProjectProgressBar from './ProjectProgressBar';
 import ProjectDeadlineBar from './ProjectDeadlineBar';
 
-import { skills_names, technologies } from '../game/knowledge';
+import { technologies } from '../game/knowledge/technologies';
+import { skills_names } from '../game/knowledge/skills';
 
 class Project extends Component {
   constructor(props) {
@@ -329,7 +330,7 @@ class Project extends Component {
                                 100 -
                                 (project.deadline / project.deadline_max) *
                                   100 +
-                                '%',
+                                '%'
                             }}
                           >
                             <span>
@@ -343,7 +344,7 @@ class Project extends Component {
                               width:
                                 (project.deadline / project.deadline_max) *
                                   100 +
-                                '%',
+                                '%'
                             }}
                           >
                             <span>{project.deadline} hours</span>
@@ -486,7 +487,7 @@ class Project extends Component {
                               width:
                                 (project.complexity / project.complexity_max) *
                                   100 +
-                                '%',
+                                '%'
                             }}
                           >
                             <span>{project.complexity} complexity</span>
@@ -499,7 +500,7 @@ class Project extends Component {
                                 100 -
                                 (project.complexity / project.complexity_max) *
                                   100 +
-                                '%',
+                                '%'
                             }}
                           >
                             {project.complexity_max - project.complexity > 0 ? (
@@ -530,7 +531,7 @@ class Project extends Component {
                                 (project.tests /
                                   project.planedTasksQuantity()) *
                                   100 +
-                                '%',
+                                '%'
                             }}
                           >
                             <span>
@@ -546,7 +547,7 @@ class Project extends Component {
                                 (project.tests /
                                   project.planedTasksQuantity()) *
                                   100 +
-                                '%',
+                                '%'
                             }}
                           >
                             {project.tests ? (
@@ -592,7 +593,7 @@ class Project extends Component {
                                     {worker.getStatsData(skill)}
                                   </span>
                                 </div>
-                              ),
+                              )
                             };
                           }
                         );

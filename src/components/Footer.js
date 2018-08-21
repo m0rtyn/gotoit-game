@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 // import '../css/footer.css';
 import { social_links, support } from '../game/app_config';
 
-class Footer extends Component {
+class Footer extends PureComponent {
   render() {
     let data = this.props.data;
     return (

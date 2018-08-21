@@ -10,7 +10,9 @@ class Dialog extends Component {
   componentDidMount() {
     document.getElementById(this.props.id).showModal();
   }
-
+  // shouldComponentUpdate() {
+  //   return false;
+  // }
   render() {
     return (
       <div>

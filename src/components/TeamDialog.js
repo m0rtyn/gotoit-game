@@ -3,18 +3,13 @@ import React, { Component } from 'react';
 class TeamDialog extends Component {
   render() {
     return (
-      <div className="modal-backdrop dialog-backdrop">
-        <div className="modal team-dialog">
+      <div className="modal-backdrop">
+        <div className="modal">
           <div className="modal-dialog">
-            <div className="modal-content" style={{ padding: '10px' }}>
-              <p>
-                <button
-                  className="btn btn-warning float-right"
-                  onClick={this.props.closePortal}
-                >
-                  Close
-                </button>
-              </p>
+            <div className="modal-content">
+              <button className="close" onClick={this.props.closePortal}>
+                <span aria-hidden="true">×</span>
+              </button>
               {this.props.children}
             </div>
           </div>

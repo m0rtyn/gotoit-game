@@ -4,11 +4,8 @@ import WorkerModel from '../models/WorkerModel';
 import ProjectModel, { flush } from '../models/ProjectModel';
 import OfficeModel from '../models/OfficeModel';
 
-import {
-  charts_parameters,
-  project_kinds,
-  project_platforms,
-} from './knowledge';
+import { charts_parameters } from './knowledge/charts';
+import { project_kinds, project_platforms } from './knowledge/projects';
 
 var default_state = {
   data: {
@@ -23,7 +20,7 @@ var default_state = {
       weak: 0,
       month: 0,
       year: 0,
-      is_working_time: false,
+      is_working_time: false
     },
 
     content: 'Welcome',
@@ -48,12 +45,12 @@ var default_state = {
     office_things: {
       coffeemaker: false,
       lunch: false,
-      gadget: 0,
+      gadget: 0
     },
 
     candidates: {
       resumes: [WorkerModel.generate(3)],
-      agency: [],
+      agency: []
     },
 
     offered_projects: [],
@@ -76,6 +73,7 @@ var default_state = {
     projects_known_technologies: ['overtime', 'creativity'],
     projects_technologies: [],
     projects_default_technologies: [],
+    projects_unlocked_platforms: ['desktop'],
     project_team_selector: null,
     hovered_projects_id: [],
     hovered_workers_id: [],
@@ -105,16 +103,20 @@ var default_state = {
       btc: { buffer: 0, values: [] },
       share0: { buffer: 0, values: [] },
       share1: { buffer: 0, values: [] },
-      share2: { buffer: 0, values: [] },
+      share2: { buffer: 0, values: [] }
     },
-
+    exchange_unlocked_shares: [],
+    share0_unlock: false,
+    share1_unlock: false,
+    share2_unlock: false,
+    btc_unlock: false,
     max_stat: 1,
     max_candidates_stat: 1,
     max_stats_projects_offered: 1,
-    mailbox: [],
+    mailbox: []
   },
 
-  is_animation_fresh: false,
+  is_animation_fresh: false
 };
 
 _.keys(project_platforms).forEach(platform => {

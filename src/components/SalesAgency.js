@@ -7,7 +7,9 @@ import '../../node_modules/react-bootstrap-slider/src/css/bootstrap-slider.min.c
 
 import TeamDialog from './TeamDialog';
 
-import { project_sizes, roles, skills, skills_names } from '../game/knowledge';
+import { roles } from '../game/knowledge/workers';
+import { project_sizes } from '../game/knowledge/projects';
+import { skills, skills_names } from '../game/knowledge/skills';
 
 class SalesAgency extends Component {
   constructor(props) {
@@ -29,7 +31,7 @@ class SalesAgency extends Component {
         deal_counter: 1,
         min_stats: JSON.parse(JSON.stringify(min)),
         max_stats: JSON.parse(JSON.stringify(max)),
-        size: 1,
+        size: 1
       },
       this.props.data.sales_agency_state
     );
@@ -130,7 +132,7 @@ class SalesAgency extends Component {
                   let new_state = {
                     size: e.target.value,
                     min_stats: {},
-                    max_stats: {},
+                    max_stats: {}
                   };
 
                   let corridor = (min, value, max) => {
@@ -164,7 +166,7 @@ class SalesAgency extends Component {
                   project_sizes[1].alone_name,
                   project_sizes[2].alone_name,
                   project_sizes[3].alone_name,
-                  project_sizes[4].alone_name,
+                  project_sizes[4].alone_name
                 ]}
               />
             )}
@@ -174,7 +176,7 @@ class SalesAgency extends Component {
                 <ReactBootstrapSlider
                   value={[
                     this.state.min_stats[skill],
-                    this.state.max_stats[skill],
+                    this.state.max_stats[skill]
                   ]}
                   change={e => {
                     let state = this.state;

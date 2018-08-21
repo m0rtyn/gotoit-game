@@ -9,7 +9,9 @@ import bulkStyler from '../services/bulkStyler';
 import WorkerModel from '../models/WorkerModel';
 import ProjectModel from '../models/ProjectModel';
 
-import { player_backgrounds, skills_1, technologies } from '../game/knowledge';
+import { skills_1 } from '../game/knowledge/skills';
+import { technologies } from '../game/knowledge/technologies';
+import { player_backgrounds } from '../game/knowledge/player_backgrounds';
 
 export var player = null;
 
@@ -27,12 +29,14 @@ class Creation extends Component {
       technologist: _.sample(_.keys(player_backgrounds['technologist'].spices)),
       specialist: _.sample(_.keys(player_backgrounds['specialist'].spices)),
       coworker: _.sample(_.keys(player_backgrounds['coworker'].spices)),
-      businessman: _.sample(_.keys(player_backgrounds['businessman'].spices)),
+      businessman: _.sample(_.keys(player_backgrounds['businessman'].spices))
     };
 
     this.embark = this.embark.bind(this);
   }
-
+  // shouldComponentUpdate() {
+  //   return false;
+  // }
   getPlayerStats() {
     let stats = JSON.parse(JSON.stringify(skills_1));
 
@@ -165,7 +169,7 @@ class Creation extends Component {
   handleGenderChange = changeEvent => {
     this.setState({
       gender: changeEvent.target.value,
-      suggest_name: WorkerModel.genName(changeEvent.target.value),
+      suggest_name: WorkerModel.genName(changeEvent.target.value)
     });
   };
 
@@ -274,7 +278,7 @@ class Creation extends Component {
                               value={this.state.suggest_name}
                               onChange={event => {
                                 this.setState({
-                                  suggest_name: event.target.value,
+                                  suggest_name: event.target.value
                                 });
                               }}
                             />
@@ -302,7 +306,7 @@ class Creation extends Component {
                                     }
                                     onChange={event => {
                                       this.setState({
-                                        selected_background: event.target.value,
+                                        selected_background: event.target.value
                                       });
                                     }}
                                   />

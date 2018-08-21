@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 //import PropTypes from 'prop-types';
 import _ from 'lodash';
 import ProjectEndScreen from '../ProjectEndScreen';
+import HistoricalEvent from '../HistoricalEvent';
 import HotOffer from '../HotOffer';
 import SimpleModal from '../SimpleModal';
 import Resume from '../Resume';
@@ -14,15 +15,13 @@ class Mail extends Component {
     this.state = {
       current_popup: null,
       letters: null,
-      show_popup: false,
+      show_popup: false
     };
   }
   closePopup = () => {
     this.setState({ show_popup: false });
-    console.log(this.state.show_popup);
   };
   markAllAsRead = () => {
-    console.log(this.props.data.mailbox);
     _.map(this.props.data.mailbox, letter => {
       letter.isRead = true;
     });
@@ -47,10 +46,10 @@ class Mail extends Component {
                 <ProjectEndScreen
                   closePopup={this.closePopup}
                   key={i}
-                  project={letter.content}
+                  letter={letter}
                   data={this.props.data}
                 />
-              ),
+              )
             });
             this.setState({ show_popup: true });
             letter.isRead = true;
@@ -64,10 +63,10 @@ class Mail extends Component {
                 <HotOffer
                   closePopup={this.closePopup}
                   key={i}
-                  project={letter.content}
+                  letter={letter.object}
                   data={this.props.data}
                 />
-              ),
+              )
             });
             this.setState({ show_popup: true });
             letter.isRead = true;
@@ -80,10 +79,10 @@ class Mail extends Component {
                 <Resume
                   closePopup={this.closePopup}
                   key={i}
-                  worker={letter.content}
+                  letter={letter}
                   data={this.props.data}
                 />
-              ),
+              )
             });
             this.setState({ show_popup: true });
             letter.isRead = true;
@@ -96,41 +95,72 @@ class Mail extends Component {
                 <Offer
                   closePopup={this.closePopup}
                   key={i}
-                  project={letter.content}
+                  expired={letter.expired}
+                  createdAt={letter.createdAt}
+                  project={letter.object}
                   data={this.props.data}
                 />
-              ),
+              )
             });
             this.setState({ show_popup: true });
             letter.isRead = true;
           };
           break;
+        case 'Event':
+          handleClick = () => {
+            this.setState({
+              current_popup: (
+                <HistoricalEvent
+                  closePopup={this.closePopup}
+                  key={i}
+                  content={letter.object}
+                  date={letter.date}
+                />
+              )
+            });
+            this.setState({ show_popup: true });
+            letter.isRead = true;
+          };
         default:
           break;
       }
-
       return (
-        <div className="letter card" onClick={handleClick}>
-          {letter.type === 'Resume' ? (
-            <img
-              className="worker-avatar"
-              alt={letter.content.name + ' avatar'}
-              src={letter.content.avatar}
-            />
-          ) : (
-            <div className="project-avatar">
-              <img
-                alt={letter.content.name + ' avatar'}
-                src={letter.content.avatar.platform}
-              />
-              <img
-                alt={letter.content.name + ' avatar'}
-                src={letter.content.avatar.kind}
-              />
-            </div>
-          )}
+        <div className="letter card" onClick={handleClick} key={i}>
+          {(() => {
+            if (letter.type === 'Resume') {
+              return (
+                <img
+                  className="worker-avatar"
+                  alt={letter.object.name + ' avatar'}
+                  src={letter.object.avatar}
+                />
+              );
+            } else if (letter.type === 'Event') {
+              return (
+                <img
+                  className="worker-avatar"
+                  alt={letter.object.name}
+                  src={letter.object.picture}
+                />
+              );
+            } else {
+              //for project reporting, offer and hotoffer
+              return (
+                <div className="project-avatar">
+                  <img
+                    alt={letter.object.name + ' platform avatar'}
+                    src={letter.object.avatar.platform}
+                  />
+                  <img
+                    alt={letter.object.name + ' kind avatar'}
+                    src={letter.object.avatar.kind}
+                  />
+                </div>
+              );
+            }
+          })()}
 
-          <span className="sender-name">{letter.content.name}</span>
+          <span className="sender-name">{letter.object.name}</span>
 
           {letter.isRead ? (
             <span className="letter-type">{letter.type}</span>

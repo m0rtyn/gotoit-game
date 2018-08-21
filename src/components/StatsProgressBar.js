@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Bar from './Bar';
+import Bar from './Bar/Bar';
 //import PropTypes from 'prop-types';
 //import _ from "lodash";
 //import {roles, skills_names} from "../game/knowledge";
@@ -33,7 +33,7 @@ class StatsProgressBar extends Component {
           value: parseInt(stats[stat].value, 10),
           width: (parseInt(stats[stat].value, 10) / max_stat) * 100,
           color: stats[stat].color,
-          showName: true,
+          showName: true
         };
         break;
       case 'program':
@@ -43,7 +43,7 @@ class StatsProgressBar extends Component {
           value: parseInt(stats[stat].value, 10),
           width: (parseInt(stats[stat].value, 10) / max_stat) * 100,
           color: stats[stat].color,
-          showName: true,
+          showName: true
         };
         break;
       case 'manage':
@@ -53,7 +53,7 @@ class StatsProgressBar extends Component {
           value: parseInt(stats[stat].value, 10),
           width: (parseInt(stats[stat].value, 10) / max_stat) * 100,
           color: stats[stat].color,
-          showName: true,
+          showName: true
         };
         break;
 
@@ -62,7 +62,7 @@ class StatsProgressBar extends Component {
     }
 
     return (
-      <div className="stats-progress-bar">
+      <label className="stats-progress-bar">
         {hideCheckbox ? (
           ''
         ) : (
@@ -76,7 +76,7 @@ class StatsProgressBar extends Component {
         )}
 
         <Bar bar_data={[bar_data]} />
-      </div>
+      </label>
     );
   }
 }

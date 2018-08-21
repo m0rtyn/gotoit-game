@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { colors, public_relations } from '../../game/knowledge';
-import Bar from '../Bar';
+import { public_relations } from '../../game/knowledge/public_relations';
+import { colors } from '../../game/knowledge/colors';
+import Bar from '../Bar/Bar';
 import _ from 'lodash';
 
 class PublicRelations extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      next_click_will_able_at: 0,
+      next_click_will_able_at: 0
     };
   }
 
@@ -19,8 +20,8 @@ class PublicRelations extends Component {
         width: Math.min(100, data.rumor),
         color: colors.blue,
         value: Math.ceil(data.rumor * 100) / 100,
-        id: 'rumor',
-      },
+        id: 'rumor'
+      }
     ];
     const reputation_bar = [
       {
@@ -28,8 +29,8 @@ class PublicRelations extends Component {
         width: Math.min(100, data.reputation),
         color: colors.orange,
         value: Math.ceil(data.reputation * 100) / 100,
-        id: 'reputation',
-      },
+        id: 'reputation'
+      }
     ];
 
     return (

@@ -4,12 +4,15 @@ import {
   current_tick,
   projects_done,
   setCurrentTick,
-  setGameDate,
+  setGameDate
 } from '../App';
 import { addAction } from '../components/ToastNest';
 import Lorer from '../services/Lorer';
 import WorkerModel from '../models/WorkerModel';
-import { public_relations } from './knowledge';
+import { public_relations } from './knowledge/public_relations';
+import { resume_will_expire_after } from './knowledge/workers';
+import { project_offer_will_expire_after } from './knowledge/projects';
+import { historical_events } from './knowledge/historical_events';
 
 export const rules = {
   matrix_show: {
@@ -22,9 +25,10 @@ export const rules = {
           .toString(36)
           .substring(2, 15);
       return state;
-    },
+    }
   },
 
+  //Is that a good name?
   nextDay: {
     onTick: function(state) {
       const data = state.data;
@@ -32,17 +36,28 @@ export const rules = {
       let time = data.date;
       let current_tick = data.date.tick;
 
-      var real_date = new Date();
-      var game_date = new Date();
+      var real_date = new Date(1991, 1, 26, 0, 0);
+      var game_date = new Date(1991, 1, 26, 0, 0);
+
       game_date.setDate(real_date.getDate() + date.tick / 24);
 
       time.tick++;
       setCurrentTick(time.tick);
       setGameDate(game_date);
       data.helpers.setTimelineScale();
-
       //time.hour++;
       time.hour = game_date.getHours();
+
+      let current_date = `${game_date.getFullYear()} ${game_date.getMonth()} ${game_date.getDate()} ${game_date.getHours()}`;
+
+      if (historical_events[current_date]) {
+        historical_events[current_date].updateGameData(data);
+        data.helpers.createMail({
+          type: 'Event',
+          object: historical_events[current_date],
+          date: game_date
+        });
+      }
 
       if (time.hour === 1 && time.date === 15 && game_date.getDate() === 15) {
         // get Salary
@@ -85,7 +100,7 @@ export const rules = {
                   ' decided to leave from your company in two weeks',
                 {
                   timeOut: 20000,
-                  extendedTimeOut: 10000,
+                  extendedTimeOut: 10000
                 },
                 'error'
               );
@@ -97,7 +112,7 @@ export const rules = {
           money_current_value = {},
           btc_current_value = {},
           candidates_resumes = {},
-          projects_in_process = {},
+          projects_in_process = {}
         } = data.statistics;
         money_current_value.buffer = data.money;
         btc_current_value.buffer = data.btc;
@@ -108,10 +123,20 @@ export const rules = {
           stats.values.push(stats.buffer);
         });
 
-        data.exchange_statistics.btc.values.push(data.current_btc_price);
-        data.exchange_statistics.share0.values.push(data.current_share0_price);
-        data.exchange_statistics.share1.values.push(data.current_share1_price);
-        data.exchange_statistics.share2.values.push(data.current_share2_price);
+        if (data.share0_unlock)
+          data.exchange_statistics.share0.values.push(
+            data.current_share0_price
+          );
+        if (data.share1_unlock)
+          data.exchange_statistics.share1.values.push(
+            data.current_share1_price
+          );
+        if (data.share2_unlock)
+          data.exchange_statistics.share2.values.push(
+            data.current_share2_price
+          );
+        if (data.btc_unlock)
+          data.exchange_statistics.btc.values.push(data.current_btc_price);
       }
 
       //MAX STATS UPDATE
@@ -146,7 +171,7 @@ export const rules = {
       if (time.hour === 14 && data.office_things.lunch) {
         // lunch time!
         if (data.workers.length * 25 <= data.money) {
-          this.chargeMoney(data.workers.length * 25);
+          this.chargeMoney(data.workers.length * 25); // !!! minus employers on vacation
           data.workers.forEach(worker => {
             worker.fed_ticker += 24;
           });
@@ -155,7 +180,7 @@ export const rules = {
             'Not enough money for lunch',
             {
               timeOut: 5000,
-              extendedTimeOut: 2000,
+              extendedTimeOut: 2000
             },
             'error'
           );
@@ -164,6 +189,8 @@ export const rules = {
       }
 
       if (time.date !== 1 && game_date.getDate() === 1) {
+        console.log('Is it next day?');
+        console.log(time.date);
         // first day
         if (data.office.size > 1) {
           this.chargeMoney(data.office.price);
@@ -187,6 +214,9 @@ export const rules = {
         }).forEach(loan => {
           data.old_loans.push(loan);
         });
+      }
+
+      if (game_date.getDate() === 15) {
       }
       time.date = game_date.getDate();
       time.day = game_date.getUTCDay();
@@ -220,8 +250,25 @@ export const rules = {
         );
       });
 
+      //Expiring resumes
+      _.each(data.mailbox, letter => {
+        if (letter.type === 'Resume' && !letter.expired) {
+          if (current_tick - letter.createdAt >= resume_will_expire_after) {
+            letter.expired = true;
+          }
+        } else if (letter.type === 'Offer' && !letter.expired) {
+          if (
+            current_tick - letter.createdAt >=
+            project_offer_will_expire_after
+          ) {
+            console.log('offer expired');
+            letter.expired = true;
+          }
+        }
+      });
+
       return state;
-    },
+    }
   },
 
   rollTurn: {
@@ -251,35 +298,39 @@ export const rules = {
       }
 
       const x = current_tick + 2000;
-      data.current_btc_price = Math.floor(
-        (Math.abs(Math.sin(x / 19)) * x) / 3 +
-          Math.abs(Math.sin(Math.sqrt(x))) * x +
-          Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
-          Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
-          x
-      );
 
-      data.current_share0_price = Math.floor(
-        (Math.abs(Math.sin(x / 19)) * x) / 3 +
-          Math.abs(Math.sin(Math.sqrt(x))) * x +
-          Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
-          Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
-          x
-      );
-      data.current_share1_price = Math.floor(
-        (Math.abs(Math.sin(x / 19)) * x) / 3 +
-          Math.abs(Math.sin(Math.sqrt(x))) * x +
-          Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
-          Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
-          x
-      );
-      data.current_share2_price = Math.floor(
-        (Math.abs(Math.sin(x / 19)) * x) / 3 +
-          Math.abs(Math.sin(Math.sqrt(x))) * x +
-          Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
-          Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
-          x
-      );
+      if (data.btc_unlock)
+        data.current_btc_price = Math.floor(
+          (Math.abs(Math.sin(x / 19)) * x) / 3 +
+            Math.abs(Math.sin(Math.sqrt(x))) * x +
+            Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
+            Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
+            x
+        );
+      if (data.share0_unlock)
+        data.current_share0_price = Math.floor(
+          (Math.abs(Math.sin(x / 19)) * x) / 3 +
+            Math.abs(Math.sin(Math.sqrt(x))) * x +
+            Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
+            Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
+            x
+        );
+      if (data.share1_unlock)
+        data.current_share1_price = Math.floor(
+          (Math.abs(Math.sin(x / 19)) * x) / 3 +
+            Math.abs(Math.sin(Math.sqrt(x))) * x +
+            Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
+            Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
+            x
+        );
+      if (data.share2_unlock)
+        data.current_share2_price = Math.floor(
+          (Math.abs(Math.sin(x / 19)) * x) / 3 +
+            Math.abs(Math.sin(Math.sqrt(x))) * x +
+            Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
+            Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
+            x
+        );
 
       //data.current_btc_price = Math.abs(Math.sin(x/19)) * x + Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x + Math.abs(Math.sin(Math.sqrt(x/227))) * x + x;
 
@@ -383,7 +434,7 @@ export const rules = {
 
       state.data = data;
       return state;
-    },
+    }
   },
 
   work: {
@@ -403,7 +454,7 @@ export const rules = {
                 worker.name + ' resigned from your company',
                 {
                   timeOut: 20000,
-                  extendedTimeOut: 10000,
+                  extendedTimeOut: 10000
                 },
                 'error'
               );
@@ -440,7 +491,7 @@ export const rules = {
           if (worker.to_vacation_ticker <= 0) {
             let weeks = _.random(1, 4);
             worker.sendToVacation(weeks);
-            state.data.helpers.lineEvent(
+            state.data.helpers.addTimelineEvent(
               'vacation',
               'Going to vacation',
               worker,
@@ -459,7 +510,7 @@ export const rules = {
               worker.name + ' comes back from vacation',
               {
                 timeOut: 5000,
-                extendedTimeOut: 3000,
+                extendedTimeOut: 3000
               },
               'success'
             );
@@ -524,7 +575,7 @@ export const rules = {
 
       state.data = data;
       return state;
-    },
+    }
   },
 
   projects: {
@@ -587,6 +638,6 @@ export const rules = {
       });
 
       return state;
-    },
-  },
+    }
+  }
 };

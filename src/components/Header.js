@@ -2,22 +2,27 @@ import React, { Component } from 'react';
 import { FormattedDate } from 'react-intl';
 import { support } from '../game/app_config';
 
-import Timeline from './Timeline';
+import Timeline from './Timeline/Timeline';
 
 class Header extends Component {
   render() {
     const data = this.props.data;
     const date = this.props.data.date;
 
-    var real_date = new Date();
-    var game_date = new Date();
+    var real_date = new Date(1991, 1, 26, 0, 0);
+    var game_date = new Date(1991, 1, 26, 0, 0);
     game_date.setDate(real_date.getDate() + date.tick / 24);
 
     return (
       <header className="header topbar">
         <div className="topbar">
           <div className="topbar-left">
-            <div className="logo">
+            <div
+              className="logo"
+              onClick={() => {
+                console.log(data);
+              }}
+            >
               {/* <Icon name="logo" />  TODO: commented until webpack.config appears*/}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -85,6 +90,7 @@ class Header extends Component {
                 }}
               >
                 {/* <i className="material-icons">{data.game_paused ? 'play-arrow' : 'pause'}</i> */}
+                Pause
                 <i className="fa fa-pause" />
               </button>
 
@@ -128,6 +134,20 @@ class Header extends Component {
                   />
                 </button>
               </div>
+              <div>
+                <button
+                  onClick={() => {
+                    let i = 1;
+                    let n = 24 * 30.5;
+                    while (i <= n) {
+                      data.helpers.tick(i === n);
+                      i++;
+                    }
+                  }}
+                >
+                  M
+                </button>
+              </div>
             </div>
 
             <div className="topbar-center game-time">
@@ -162,11 +182,14 @@ class Header extends Component {
                                         }}> BTC </span>*/}
               </span>
 
-              <span className="topbar-btn font-weight-bold">
+              <span
+                className="topbar-btn font-weight-bold"
+                onClick={() => data.helpers.addMoney(10000, 'usd')}
+              >
                 <i className="fa fa-dollar" />
                  {data.money}
                 {/*<span onClick={() => { CHEAT!
-                                        data.helpers.addMoney(10000, 'usd');
+
                                         }}> $ </span>*/}
               </span>
             </div>

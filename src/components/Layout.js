@@ -10,7 +10,7 @@ import ToastNest from './ToastNest';
 import ActivityToolbar from './ActivityToolbar.js';
 import Activities from './Activities.js';
 
-import { colors } from '../game/knowledge.js';
+import { colors } from '../game/knowledge/colors';
 
 class Layout extends Component {
   render() {
@@ -19,14 +19,14 @@ class Layout extends Component {
         <div
           className="background-color"
           style={{
-            backgroundColor: colors.backgrounds[this.props.data.content],
+            backgroundColor: colors.backgrounds[this.props.data.content]
           }}
         />
         <div
           className="background-image"
           style={{
             backgroundImage:
-              'url(backgrounds/' + this.props.data.content + '.png)',
+              'url(backgrounds/' + this.props.data.content + '.png)'
           }}
         />
 

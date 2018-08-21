@@ -1,6 +1,6 @@
 import React from 'react';
 import BubbleAnimated from './animation_content/BubbleAnimated';
-import { genAnimationData } from '../game/knowledge';
+import { genAnimationData } from '../game/knowledge/animation_data';
 import _ from 'lodash';
 
 //var timeoutID = null;
@@ -10,13 +10,15 @@ class BubblesAnimation extends React.Component {
     super(props);
     this.state = {
       items: [],
-      length: 0,
+      length: 0
     };
 
     this.addBubbleAnimation = this.addBubbleAnimation.bind(this);
     this.trueAddBubbleAnimation = this.trueAddBubbleAnimation.bind(this);
   }
-
+  // shouldComponentUpdate() {
+  //   return false;
+  // }
   componentDidMount() {
     this.props.onRef(this);
   }
@@ -27,7 +29,7 @@ class BubblesAnimation extends React.Component {
   trueAddBubbleAnimation(animation_data) {
     let items = this.state.items.concat({
       id: this.state.length,
-      item: animation_data,
+      item: animation_data
     });
     this.setState({ items: items, length: this.state.length + 1 });
   }

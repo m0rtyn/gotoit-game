@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Portal from 'react-portal';
 import _ from 'lodash';
 
@@ -7,9 +7,10 @@ import '../../node_modules/react-bootstrap-slider/src/css/bootstrap-slider.min.c
 
 import TeamDialog from './TeamDialog';
 
-import { roles, skills, skills_names } from '../game/knowledge';
+import { roles } from '../game/knowledge/workers';
+import { skills, skills_names } from '../game/knowledge/skills';
 
-class HiringAgency extends Component {
+class HiringAgency extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -30,7 +31,7 @@ class HiringAgency extends Component {
         min_stats: JSON.parse(JSON.stringify(min)),
         max_stats: JSON.parse(JSON.stringify(max)),
         min_salary: 1,
-        max_salary: 100,
+        max_salary: 100
       },
       this.props.data.hiring_agency_state
     );
@@ -140,7 +141,7 @@ class HiringAgency extends Component {
                 <ReactBootstrapSlider
                   value={[
                     this.state.min_stats[skill],
-                    this.state.max_stats[skill],
+                    this.state.max_stats[skill]
                   ]}
                   change={e => {
                     let state = this.state;

@@ -4,8 +4,8 @@ import {
   archive_chats_parameters,
   charts_parameters,
   exchange_charts_parameters,
-  market_chart_parameters,
-} from '../../game/knowledge';
+  market_chart_parameters
+} from '../../game/knowledge/charts';
 import _ from 'lodash';
 
 let ChartsController = props => {
@@ -25,16 +25,16 @@ let ChartsController = props => {
         data: btc_statistic.values,
         label: exchange_charts_parameters.btc.label,
         borderColor: exchange_charts_parameters.btc.color,
-        fill: false,
+        fill: false
       });
 
       options = {
         legend: {
-          display: false,
+          display: false
         },
         tooltips: {
-          enabled: false,
-        },
+          enabled: false
+        }
       };
 
       break;
@@ -48,16 +48,16 @@ let ChartsController = props => {
         data: share0_statistic.values,
         label: exchange_charts_parameters.share0.label,
         borderColor: exchange_charts_parameters.share0.color,
-        fill: false,
+        fill: false
       });
 
       options = {
         legend: {
-          display: false,
+          display: false
         },
         tooltips: {
-          enabled: false,
-        },
+          enabled: false
+        }
       };
 
       break;
@@ -70,16 +70,16 @@ let ChartsController = props => {
         data: share1_statistic.values,
         label: exchange_charts_parameters.share1.label,
         borderColor: exchange_charts_parameters.share1.color,
-        fill: false,
+        fill: false
       });
 
       options = {
         legend: {
-          display: false,
+          display: false
         },
         tooltips: {
-          enabled: false,
-        },
+          enabled: false
+        }
       };
 
       break;
@@ -92,16 +92,16 @@ let ChartsController = props => {
         data: share2_statistic.values,
         label: exchange_charts_parameters.share2.label,
         borderColor: exchange_charts_parameters.share2.color,
-        fill: false,
+        fill: false
       });
 
       options = {
         legend: {
-          display: false,
+          display: false
         },
         tooltips: {
-          enabled: false,
-        },
+          enabled: false
+        }
       };
 
       break;
@@ -111,7 +111,7 @@ let ChartsController = props => {
         deadlines: [],
         resolving_time: [],
         reward: [],
-        resolving_time_percents: [],
+        resolving_time_percents: []
       };
 
       // reverse() becouse in data.project_archive_reports chunks is added by unshift() method
@@ -145,7 +145,7 @@ let ChartsController = props => {
           data: value,
           label: archive_chats_parameters[key].label,
           borderColor: archive_chats_parameters[key].color,
-          fill: false,
+          fill: false
         });
       });
 
@@ -156,7 +156,7 @@ let ChartsController = props => {
         design: [],
         manage: [],
         program: [],
-        total: [],
+        total: []
       };
 
       props.chart.table_data.forEach((row, i) => {
@@ -172,7 +172,7 @@ let ChartsController = props => {
           data: value,
           label: market_chart_parameters[key].label,
           borderColor: market_chart_parameters[key].color,
-          fill: false,
+          fill: false
         });
       });
 
@@ -182,13 +182,13 @@ let ChartsController = props => {
       options = {
         elements: {
           point: {
-            radius: 0,
-          },
+            radius: 0
+          }
         },
         title: {
           display: true,
-          text: props.data.text,
-        },
+          text: props.data.text
+        }
       };
 
       labels = Object.keys(props.data.statistics.money_spent.values);
@@ -198,7 +198,7 @@ let ChartsController = props => {
           data: stats.values,
           label: charts_parameters[key].label,
           borderColor: charts_parameters[key].color,
-          fill: false,
+          fill: false
         });
       });
   }
@@ -207,7 +207,7 @@ let ChartsController = props => {
     labels: labels,
     datasets: datasets,
     text: text,
-    options: options,
+    options: options
   };
 
   return <Chart data={data} />;

@@ -1,5 +1,6 @@
 .timeline-wrapper {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
   width: 100vw;
   // margin: 0 -18px;
   margin-top: 32px;

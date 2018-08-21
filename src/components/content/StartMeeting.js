@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { current_tick } from '../../App';
 
-import { meetings, technologies } from '../../game/knowledge';
+import { meetings } from '../../game/knowledge/meetings';
+import { technologies } from '../../game/knowledge/technologies';
 
 class StartMeeting extends Component {
   constructor(props) {

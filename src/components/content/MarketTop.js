@@ -4,7 +4,10 @@ import _ from 'lodash';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
-import { project_kinds, project_platforms } from '../../game/knowledge';
+import {
+  project_kinds,
+  project_platforms
+} from '../../game/knowledge/projects';
 
 class MarketTop extends Component {
   constructor(props) {
@@ -12,7 +15,7 @@ class MarketTop extends Component {
 
     this.state = {
       selected_kind: 'all',
-      selected_platform: 'all',
+      selected_platform: 'all'
     };
 
     //  this.embark = this.embark.bind(this);
@@ -100,7 +103,7 @@ class MarketTop extends Component {
           chart={{
             name: 'Market statistics',
             type: 'Market',
-            table_data: table_data,
+            table_data: table_data
           }}
         />
         <div className="text-center">

@@ -4,7 +4,7 @@ import _ from 'lodash';
 import ProjectName from './ProjectName';
 import StatsProgressBar from './StatsProgressBar';
 
-import { colors } from '../game/knowledge';
+import { colors } from '../game/knowledge/colors';
 
 // import Project from './Project';
 
@@ -32,7 +32,7 @@ class ProjectOfferBlock extends Component {
         return {
           name: stat,
           value: candidate.originalyTasksQuantity(),
-          color: colors[stat].colorCompleted,
+          color: colors[stat].colorCompleted
         };
       }
     );

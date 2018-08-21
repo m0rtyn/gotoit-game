@@ -4,8 +4,8 @@ import ProjectOfferBlock from '../ProjectOfferBlock';
 
 import PublicRelations from '../content/PublicRelations';
 import SalesAgency from '../SalesAgency';
-import Bar from '../Bar';
-import { colors } from '../../game/knowledge';
+import Bar from '../Bar/Bar';
+import { colors } from '../../game/knowledge/colors';
 
 class ProjectsFind extends Component {
   render() {
@@ -25,8 +25,8 @@ class ProjectsFind extends Component {
         width: Math.min(100, data.reputation),
         color: colors.orange,
         value: Math.ceil(data.reputation * 100) / 100,
-        id: 'reputation',
-      },
+        id: 'reputation'
+      }
     ];
     console.log(this.props.data.offered_projects);
 

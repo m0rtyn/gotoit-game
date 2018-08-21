@@ -15,10 +15,10 @@
 }
 
 .nav-link {
-  font-weight: 400;
+  font-weight: 500;
   color: var(--color-text-secondary);
   line-height: calc(var(--height-sm) + 4px);
-  padding: 0px 12px;
+  padding: 0px size(1);
   white-space: nowrap;
 
   &:hover,

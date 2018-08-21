@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import PublicRelations from './PublicRelations';
 import HiringAgency from '../HiringAgency';
-import Bar from '../Bar';
-import { colors } from '../../game/knowledge';
+import Bar from '../Bar/Bar';
+import { colors } from '../../game/knowledge/colors';
 
 import StatsProgressBar from '../StatsProgressBar';
 
@@ -33,7 +33,7 @@ class HireWorkers extends Component {
           return {
             name: stat,
             value: candidate.getStatsData(stat),
-            color: colors[stat].colorCompleted,
+            color: colors[stat].colorCompleted
           };
         }
       );
@@ -120,8 +120,8 @@ class HireWorkers extends Component {
         width: Math.min(100, data.rumor),
         color: colors.blue,
         value: Math.ceil(data.rumor * 100) / 100,
-        id: 'rumor',
-      },
+        id: 'rumor'
+      }
     ];
 
     return (

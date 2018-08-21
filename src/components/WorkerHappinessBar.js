@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 //import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { colors } from '../game/knowledge';
-import Bar from './Bar';
+import { colors } from '../game/knowledge/colors';
+import Bar from './Bar/Bar';
 
 class WorkerHappinessBar extends Component {
   render() {
@@ -31,15 +31,11 @@ class WorkerHappinessBar extends Component {
         width: item.value,
         color: bar_color,
         value: item.value,
-        showName: false,
+        showName: false
       };
     });
 
-    return (
-      <div>
-        <Bar bar_data={bar_data} />
-      </div>
-    );
+    return <Bar className="happiness-bar" bar_data={bar_data} />;
   }
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Worker from './Worker';
-import Office from './Office';
-import { offices } from '../game/knowledge';
+import Office from './content/Office';
+import { offices } from '../game/knowledge/office';
 
 class People extends Component {
   constructor(props) {
@@ -103,8 +103,6 @@ class People extends Component {
         {data.workers.map((x, i) => (
           <Worker key={x.id} worker={x} data={data} />
         ))}
-
-        <Office data={this.props.data} />
       </div>
     );
   }

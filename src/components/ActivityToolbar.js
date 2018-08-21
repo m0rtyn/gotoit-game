@@ -5,10 +5,12 @@ import _ from 'lodash';
 class ActivityToolbar extends Component {
   static propTypes = {
     data: PropTypes.shape({
-      helpers: PropTypes.object.isRequired,
-    }),
+      helpers: PropTypes.object.isRequired
+    })
   };
-
+  // shouldComponentUpdate() {
+  //   return false;
+  // }
   render() {
     let data = this.props.data;
     let unread_messages_count = (() => {
@@ -31,6 +33,16 @@ class ActivityToolbar extends Component {
           </a>
         </li>
         <li className="nav-item">
+          <a
+            className="nav-link"
+            onClick={() => {
+              data.helpers.changeContent('Office');
+            }}
+          >
+            Office
+          </a>
+        </li>
+        {/*<li className="nav-item">
           {data.projects.length > 0 ? (
             <a
               className="nav-link"
@@ -43,7 +55,7 @@ class ActivityToolbar extends Component {
           ) : (
             ''
           )}
-        </li>
+        </li>*/}
         <li className="nav-item">
           {data.projects_archive_reports.length > 0 ? (
             <a

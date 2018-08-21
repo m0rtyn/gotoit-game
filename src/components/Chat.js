@@ -20,12 +20,14 @@ class Chat extends Component {
 
     this.state = {
       messages: [],
-      new_message: false,
+      new_message: false
     };
 
     this.chatMessage = this.chatMessage.bind(this);
   }
-
+  // shouldComponentUpdate() {
+  //   return false;
+  // }
   chatMessage(name = '', text = '', type = 'info') {
     this.state.messages.push({ name: name, text: text, type: type });
     this.setState({ new_message: true });

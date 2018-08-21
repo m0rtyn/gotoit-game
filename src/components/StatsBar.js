@@ -5,6 +5,9 @@ import React, { Component } from 'react';
  */
 
 class StatsBar extends Component {
+  // shouldComponentUpdate() {
+  //   return false;
+  // }
   render() {
     const stats = this.props.stats;
 

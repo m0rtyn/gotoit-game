@@ -1,16 +1,10 @@
 .header {
-  font-size: 12px;
+  font-size: size(1.5);
   height: size(4);
+  color: #333;
 
   .logo {
-    font-weight: 900;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-
-    svg {
       margin-right: size(1);
-    }
   }
 
   .game-time {
@@ -40,5 +34,10 @@
     letter-spacing: -4px;
     font-size: 20px;
     line-height: 1;
+  }
+
+  .nav-link {
+    font-weight: 500;
+    color: #333;
   }
 }
