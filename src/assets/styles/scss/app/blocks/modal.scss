@@ -64,6 +64,7 @@
     flex-flow: row nowrap;
     width: 100%;
     align-items: center;
+    margin-bottom: size(2);
 
     .btn {
       margin-left: size(2);
@@ -71,8 +72,24 @@
     }
   }
 
-  .worker-happiness {
-    margin-bottom: size(2);
+  // .worker-happiness {
+  // }
+
+  .worker-stats {
+    display: flex;
+    width: 100%;
   }
 
+  .stats-progress-bar {
+    height: size(2);
+    width: 33%;
+
+    &:not(:last-of-type) {
+      margin-right: size(2);
+    }
+
+    .progress {
+      height: size(2);
+    }
+  }
 }
