@@ -12,12 +12,13 @@ export class LockedTechnology extends PureComponent {
             <span>
               <h5 className="text-center slim">
                 <button
+                  id={this.props.technologyId}
                   className={
                     this.props.price <= this.props.money
                       ? 'btn btn-success btn-sm'
                       : 'btn btn-secondary btn-sm disabled'
                   }
-                  onClick={this.props.f}
+                  onClick={this.props.onClick}
                 >
                   Unlock {this.props.name} {this.props.price}$
                 </button>
@@ -38,7 +39,7 @@ LockedTechnology.propTypes = {
   projectsKnownTechnologies: PropTypes.any,
   price: PropTypes.any,
   money: PropTypes.any,
-  f: PropTypes.func,
+  onClick: PropTypes.func,
   name: PropTypes.any,
   description: PropTypes.any
 };

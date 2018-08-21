@@ -21,7 +21,6 @@ import { ReleaseButton } from './ReleaseButton';
 import { ProjectReward } from './ProjectReward';
 import { ProjectMoney } from './ProjectMoney';
 import ProjectDeadline from './ProjectDeadline';
-import { LockedTechnology } from './LockedTechnology';
 import { Statistics } from './Statistics';
 import { RejectButton } from './RejectButton';
 import { Avatar } from './Avatar';
@@ -29,59 +28,12 @@ import { SkillRow } from './SkillRow';
 import { TasksProgress } from './TasksProgress';
 import { Refactoring } from './Refactoring';
 import { Tests } from './Tests';
-import * as PropTypes from 'prop-types';
-
-class Technology extends Component {
-  render() {
-    return (
-      <div key={this.props.technologyId} className="row-md-1">
-        <div className="form-check-checkbox slim-margin">
-          <span>
-            <h5 className="text-center slim">
-              <input
-                type="checkbox"
-                id={this.props.technologyId}
-                checked={this.props.technology(
-                  this.props.id,
-                  this.props.technologyId
-                )}
-                onChange={this.props.changeTechnology}
-              />
-              {this.props.name}
-            </h5>
-            <p className="small slim">{this.props.description}</p>
-          </span>
-        </div>
-      </div>
-    );
-  }
-}
-
-Technology.propTypes = {
-  technologyId: PropTypes.any,
-  technology: PropTypes.any,
-  id: PropTypes.any,
-  changeTechnology: PropTypes.func,
-  name: PropTypes.any,
-  description: PropTypes.any
-};
+import { Technology } from './Technology';
+import { StatsDataItem } from './StatsDataItem';
 
 class Project extends Component {
   constructor(props) {
     super(props);
-
-    this.manage = this.manage.bind(this);
-    this.manageAll = this.manageAll.bind(this);
-    this.changeTechnology = this.changeTechnology.bind(this);
-    this.onSelectChange = this.onSelectChange.bind(this);
-    this.onRelease = this.onRelease.bind(this);
-    this.onReject = this.onReject.bind(this);
-    this.finish = this.finish.bind(this);
-    this.fix = this.fix.bind(this);
-    this.open = this.open.bind(this);
-    this.pause = this.pause.bind(this);
-    this.unpause = this.unpause.bind(this);
-    this.close = this.close.bind(this);
   }
 
   componentDidMount() {
@@ -91,38 +43,49 @@ class Project extends Component {
     }
   }
 
-  manage(event) {
+  manage = event => {
     this.props.data.helpers.modifyRelation(
       event.target.id,
       this.props.project.id,
       event.target.checked
     );
-  }
+  };
 
-  manageAll(event) {
+  manageAll = event => {
     this.props.data.helpers.modifyRelation(
       null,
       this.props.project.id,
       event.target.checked
     );
-  }
+  };
 
-  changeTechnology(event) {
+  changeTechnology = event => {
     this.props.data.helpers.changeTechnology(
       event.target.id,
       this.props.project.id,
       event.target.checked
     );
-  }
-  onSelectChange(e) {
+  };
+
+  addTechnology = event => {
+    if (technologies[event.target.id].price <= this.props.data.money)
+      this.data.helpers.unlockTechnology(event.target.id);
+  };
+
+  onSelectChange = event => {
     this.props.data.helpers.changeTeamSelector();
-    this.props.data.helpers.modifyRelation(e.value.id, this.props.project.id);
+    this.props.data.helpers.modifyRelation(
+      event.value.id,
+      this.props.project.id
+    );
     this.props.data.helpers.modifyHoveredObjects();
-  }
-  onRelease() {
+  };
+
+  onRelease = () => {
     this.props.data.helpers.fixProject(this.props.project.id);
-  }
-  onReject() {
+  };
+
+  onReject = () => {
     if (
       window.confirm(
         `Reject project ${this.props.project.name}? (penalty: ${
@@ -132,28 +95,122 @@ class Project extends Component {
     ) {
       this.close();
     }
-  }
-  open() {
+  };
+
+  open = () => {
     this.props.data.helpers.openProject(this.props.project.id);
-  }
-  pause() {
+  };
+
+  pause = () => {
     this.props.data.helpers.pauseProject(this.props.project.id);
-  }
-  unpause() {
+  };
+
+  unpause = () => {
     this.props.data.helpers.unpauseProject(this.props.project.id);
-  }
+  };
 
-  close() {
+  close = () => {
     this.props.data.helpers.closeProject(this.props.project.id);
-  }
+  };
 
-  fix() {
+  fix = () => {
     this.props.data.helpers.fixProject(this.props.project.id);
-  }
+  };
 
-  finish() {
+  finish = () => {
     this.props.data.helpers.finishProject(this.props.project.id);
-  }
+  };
+
+  extractTaskProgress = skill => {
+    let { project } = this.props;
+    let tasks = project.needs(skill);
+    if (tasks === Number.POSITIVE_INFINITY) {
+      tasks = 0;
+    }
+    let bugs = project.bugs[skill];
+    let done = project.done[skill];
+
+    let max_skill = _.maxBy(_.keys(project.estimate), function(skill) {
+      return (
+        Math.max(
+          project.needs(skill) !== Number.POSITIVE_INFINITY
+            ? project.needs(skill)
+            : 0,
+          project.estimate[skill],
+          project.done[skill]
+        ) + project.bugs[skill]
+      );
+    });
+
+    let max =
+      Math.max(
+        project.needs(max_skill) !== Number.POSITIVE_INFINITY
+          ? project.needs(max_skill)
+          : 0,
+        project.estimate[max_skill] !== Number.POSITIVE_INFINITY
+          ? project.estimate[max_skill]
+          : 0,
+        project.done[max_skill]
+      ) + project.bugs[max_skill]; //, project.needs(max_skill)) + project.bugs[max_skill];
+
+    if (max === 0) max = 1;
+
+    let tasks_percent = (tasks / max) * 100;
+    let bugs_percent = (bugs / max) * 100;
+    let done_percent = (done / max) * 100;
+    return { tasks, bugs, done, tasks_percent, bugs_percent, done_percent };
+  };
+
+  getProjectTechnologies = () => {
+    return Object.keys(technologies)
+      .reduce((prev, curr) => {
+        const technology = technologies[curr];
+        let { data, project } = this.props;
+        technology.id = curr;
+        technology.locked = false;
+        technology.active = false;
+        if (data.projects_known_technologies.includes(curr)) {
+          technology.active = data.helpers.getTechnology(
+            project.id,
+            technology.id
+          );
+          prev.push(technology);
+        } else if (current_tick > 24 * 30 * 3) {
+          technology.locked = true;
+          prev.push(technology);
+        }
+        return prev;
+      }, [])
+      .sort((a, b) => a.locked - b.locked);
+  };
+
+  getStatsData = worker => {
+    let { project, data } = this.props;
+    let { getRelation, modifyRelation } = data.helpers;
+    // let { getStatsData } = worker;
+    return _.mapValues(worker.stats, (val, skill) => {
+      return {
+        name: skill,
+        val: (
+          <StatsDataItem
+            workerId={worker.id}
+            projectId={project.id}
+            relation={getRelation}
+            skill={skill}
+            onChange={event => {
+              modifyRelation(
+                event.target.id,
+                project.id,
+                event.target.checked,
+                skill
+              );
+            }}
+            statsData={worker.getStatsData}
+          />
+        )
+      };
+    });
+  };
 
   render() {
     const data = this.props.data;
@@ -183,6 +240,7 @@ class Project extends Component {
       size,
       is_paused
     } = project;
+    let projectTechnologies = this.getProjectTechnologies();
     /*const stats_data = _.mapValues(skills, (stat, key) => {
 
             return {name: key, // _.capitalize(key[0]),
@@ -191,8 +249,8 @@ class Project extends Component {
                         <span className="text-warning">
                             {project.needs(key)}
                         </span>
-                        {project.bugs[key] > 0 
-                            ? <span className="text-danger"> +{project.bugs[key]}</span> 
+                        {project.bugs[key] > 0
+                            ? <span className="text-danger"> +{project.bugs[key]}</span>
                             : ''
                         }
                         /<span>{project.estimate[key]}</span>
@@ -210,13 +268,14 @@ class Project extends Component {
       return (
         <KickWorkerButton
           id={worker.id}
-          action={() => kickWorker(worker, project)}
           name={worker.name}
+          action={() => kickWorker(worker, project)}
         />
       );
     };
 
-    let team_ids = {};
+    let team_ids = {};k
+    console.info('data.relations', data.relations);
     _.keys(data.relations).forEach(worker_id => {
       let worker_projects = data.relations[worker_id];
       _.keys(worker_projects).forEach(project_id => {
@@ -354,50 +413,14 @@ class Project extends Component {
                     <div>
                       {!(type === 'draft' && stage === 'ready') &&
                         skills_names.map(skill => {
-                          //     console.log(project);
-                          let tasks = project.needs(skill);
-                          if (tasks === Number.POSITIVE_INFINITY) {
-                            tasks = 0;
-                          }
-                          let bugs = project.bugs[skill];
-                          let done = project.done[skill];
-
-                          let max_skill = _.maxBy(
-                            _.keys(project.estimate),
-                            function(skill) {
-                              return (
-                                Math.max(
-                                  project.needs(skill) !==
-                                  Number.POSITIVE_INFINITY
-                                    ? project.needs(skill)
-                                    : 0,
-                                  project.estimate[skill],
-                                  project.done[skill]
-                                ) + project.bugs[skill]
-                              );
-                            }
-                          );
-
-                          let max =
-                            Math.max(
-                              project.needs(max_skill) !==
-                              Number.POSITIVE_INFINITY
-                                ? project.needs(max_skill)
-                                : 0,
-                              project.estimate[max_skill] !==
-                              Number.POSITIVE_INFINITY
-                                ? project.estimate[max_skill]
-                                : 0,
-                              project.done[max_skill]
-                            ) + project.bugs[max_skill]; //, project.needs(max_skill)) + project.bugs[max_skill];
-
-                          if (max === 0) max = 1;
-
-                          let tasks_percent = (tasks / max) * 100;
-                          let bugs_percent = (bugs / max) * 100;
-                          let done_percent = (done / max) * 100;
-
-                          //   console.log(tasks_percent, bugs_percent, done_percent);
+                          let {
+                            tasks,
+                            bugs,
+                            done,
+                            tasks_percent,
+                            bugs_percent,
+                            done_percent
+                          } = this.extractTaskProgress(skill);
 
                           return (
                             <TasksProgress
@@ -431,38 +454,7 @@ class Project extends Component {
                   <div className="card">
                     <div>
                       {this.props.data.workers.map(worker => {
-                        const stats_data = _.mapValues(
-                          worker.stats,
-                          (val, skill) => {
-                            return {
-                              name: skill,
-                              val: (
-                                <div key={worker.id + project.id}>
-                                  <span style={{ width: '100%' }}>
-                                    <input
-                                      type="checkbox"
-                                      id={worker.id || ''}
-                                      checked={data.helpers.getRelation(
-                                        worker.id,
-                                        project.id,
-                                        skill
-                                      )}
-                                      onChange={event => {
-                                        modifyRelation(
-                                          event.target.id,
-                                          project.id,
-                                          event.target.checked,
-                                          skill
-                                        );
-                                      }}
-                                    />
-                                    {worker.getStatsData(skill)}
-                                  </span>
-                                </div>
-                              )
-                            };
-                          }
-                        );
+                        const stats_data = this.getStatsData(worker);
                         return (
                           <div key={worker.id + project.id}>
                             <div>{worker.name}</div>
@@ -479,40 +471,17 @@ class Project extends Component {
                 <div className="col-4">
                   <div className="card">
                     <div className="col slim-left">
-                      {data.projects_known_technologies.map(
-                        (technologyId, i) => (
-                          <Technology
-                            key={technologyId}
-                            technologyId={technologyId}
-                            technology={getTechnology}
-                            id={id}
-                            changeTechnology={this.changeTechnology}
-                            name={technologies[technologyId].name}
-                            description={technologies[technologyId].description}
-                          />
-                        )
-                      )}
-                      {current_tick > 24 * 30 * 3
-                        ? Object.keys(technologies).map((technology, i) => (
-                            <LockedTechnology
-                              key={technology}
-                              technology={technology}
-                              projectsKnownTechnologies={
-                                data.projects_known_technologies
-                              }
-                              price={technologies[technology].price}
-                              money={data.money}
-                              f={() => {
-                                if (
-                                  technologies[technology].price <= data.money
-                                )
-                                  data.helpers.unlockTechnology(technology);
-                              }}
-                              name={technologies[technology].name}
-                              description={technologies[technology].description}
-                            />
-                          ))
-                        : ''}
+                      {projectTechnologies.map((technology, i) => (
+                        <Technology
+                          key={technology.id}
+                          {...technology}
+                          onChange={
+                            technology.locked
+                              ? this.addTechnology
+                              : this.changeTechnology
+                          }
+                        />
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -569,11 +538,7 @@ class Project extends Component {
                 />
               </div>
             ) : null}
-            {tech.length ? (
-              <p className="small slim">Tech: {tech_label}</p>
-            ) : (
-              ''
-            )}
+            {tech.length && <p className="small slim">Tech: {tech_label}</p>}
           </div>
         </div>
       </div>
