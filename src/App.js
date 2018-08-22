@@ -24,6 +24,7 @@ import { technologies } from './game/knowledge/technologies';
 import { workers_bonus_items } from './game/knowledge/workers';
 import { project_kinds, project_platforms } from './game/knowledge/projects';
 import { skills_names, skills_true } from './game/knowledge/skills';
+import { companies } from './game/knowledge/companies';
 
 import { getDefaultState } from './game/default_state';
 
@@ -1835,7 +1836,12 @@ class App extends Component {
                           : quality < 50
                             ? _.random(3, 4)
                             : 4;
-    let this_project = ProjectModel.generate(quality, size, 'history');
+    let this_project = ProjectModel.generate(
+      _.sample(companies),
+      quality,
+      size,
+      'history'
+    );
     //console.log('probability: ' + probability.toFixed(2) + ' quality: ' + quality + ' size: ' + size);
     this.offerProject(this_project);
     this.createMail({
