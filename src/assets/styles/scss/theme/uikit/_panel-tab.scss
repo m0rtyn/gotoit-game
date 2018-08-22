@@ -9,6 +9,12 @@
     &.show .nav-link:focus,
     &.show .nav-link:hover {
       color: var(--color-text);
+      background-color: var(--white);
+      box-shadow:
+        0 22px 0px white,
+        0px 4px 8px rgba(0, 0, 0, 0.3),
+        0px 0px 16px rgba(0, 0, 0, 0.2);
+      // opacity: 1;
     }
   }
 
@@ -18,10 +24,18 @@
     font-size: 13px;
     text-align: center;
     color: var(--color-text-secondary);
-    border-bottom: 2px solid transparent;
+    background-color: transparent;
+    // border-bottom: 2px solid transparent;
     padding: 10px 16px;
-    border-radius: 0;
-    transition: 0.5s;
+    transition: 0.3s;
+    border-radius: var(--big-border-radius) var(--big-border-radius) 0 0;
+    box-shadow:
+      0 22px 0px white,
+      0px 4px 8px rgba(0, 0, 0, 0.3),
+      0px 0px 16px rgba(0, 0, 0, 0.2);
+    font-weight: 700;
+    // opacity: 0.6;
+
 
     @include media-down(sm) {
       padding: 8px 12px;
