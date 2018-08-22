@@ -1,20 +1,18 @@
-@import '_mixins.scss';
-@import '_variables.scss';
+@import 'mixins.scss';
+@import 'variables.scss';
 
 
 //====COMMON====================================//
-@import 'app/common/_layout.scss';
-@import 'app/common/_buffer.scss';
+@import 'app/common/layout.scss';
+@import 'app/common/buffer.scss';
 
 
 //====BLOCKS====================================//
-//large blocks
-@import 'app/blocks/_activity-column.scss';
-@import 'app/blocks/_background.scss';
-@import 'app/blocks/_achievements.scss';
-@import 'app/blocks/_header.scss';
-@import 'app/blocks/_timeline.scss';
-//medium blocks
+@import 'app/blocks/activity-column.scss';
+@import 'app/blocks/background.scss';
+@import 'app/blocks/achievements.scss';
+@import 'app/blocks/header.scss';
+@import 'app/blocks/timeline.scss';
 @import 'app/blocks/worker.scss';
 @import 'app/blocks/project.scss';
 @import 'app/blocks/project-find.scss';
@@ -23,6 +21,8 @@
 @import 'app/blocks/mail.scss';
 @import 'app/blocks/resume.scss';
 @import 'app/blocks/modal.scss';
-//small blocks
+@import 'app/blocks/modal-content/_modal-worker.scss';
+
+//====COMPONENTS====================================//
 @import 'app/blocks/checkbox.scss';
 @import 'app/blocks/progress-bar.scss';

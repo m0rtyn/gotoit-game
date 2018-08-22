@@ -1,0 +1,110 @@
+.modal {
+
+  .modal-body {
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .nav-tabs {
+    margin: 0 size(4);
+  }
+
+  .nav-item {
+    width: 50%;
+  }
+
+  .nav-link {
+    line-height: 48px;
+    span {
+      padding: size(2) 0;
+    }
+  }
+
+  .modal-header {
+    border-bottom: none;
+  }
+
+  .worker-avatar {
+    width: size(18);
+    height: size(18);
+    flex-shrink: 0;
+  }
+
+  .worker-info {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: size(4);
+    width: 100%;
+  }
+
+  .worker-name {
+    width: 100%;
+    font-size: size(3);
+    font-weight: 400;
+  }
+
+  .worker-happiness, .worker-stamina {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    align-items: center;
+    margin-bottom: size(2);
+
+    .btn {
+      margin-left: size(2);
+      flex-grow: 1;
+    }
+  }
+
+  .worker-stats {
+    display: flex;
+    width: 100%;
+  }
+
+  .worker-statistic {
+
+  }
+
+  .statistic-list {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  .statistic-item {
+    list-style-type: none;
+    font-weight: 400;
+    padding: size(1) 0;
+    border-top: 1px solid var(--gray-300);
+    display: flex;
+    justify-content: space-between;
+
+    &:last-of-type {
+      border-bottom: 1px solid var(--gray-300);
+    }
+
+    span {
+      font-weight: 700;
+    }
+  }
+
+  .worker-character, .worker-instrumentary {
+    padding: size(4);
+    box-shadow:
+      0 22px 0px white,
+      0px 4px 8px rgba(0, 0, 0, 0.3),
+      0px 0px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .instrumentary {
+    padding: size(1);
+    background-color: transparent;
+    border: 2px solid var(--color-primary);
+    border-radius: var(--big-border-radius);
+    margin-right: size(2);
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}

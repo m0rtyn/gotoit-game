@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 class TeamDialog extends Component {
+  // shouldComponentUpdate() {
+  //   return false;
+  // }
   render() {
     return (
       <div className="modal-backdrop">

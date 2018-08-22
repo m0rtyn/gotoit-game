@@ -338,6 +338,7 @@
   // Other
   //
   --border-radius: 4px;
+  --big-border-radius: calc(var(--border-radius) * 4);
 }
 
 
