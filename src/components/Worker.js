@@ -118,14 +118,253 @@ class Worker extends Component {
     };
 
     let character = (
-      <div>
-        <h2>Character</h2>
+      <div className="worker-character">
+        <div className="row pl-24 pr-24">
+          <div className="col-6">
+            <p>
+              <strong>
+              {`${worker.character.name}`}
+              </strong>
+              <br/>
+              {`${worker.character.description}.`}
+            </p>
+            {!worker.is_player
+              ? (<span>Got {worker.facts.money_earned}$ of salary.</span>)
+              : ('')
+            }
+            <p>
+              {worker.tellFeelings()}
+            </p>
+            {worker.is_player ? (
+              ''
+            ) : (
+              <span>
+                Worker salary: ${worker.getSalary()}. Overrate bonus:{' '}
+                {worker.getOverrate()}
+                %.
+                <button
+                  className="btn btn-danger btn-link"
+                  onClick={() => {
+                    data.helpers.riseEmployer(worker.id);
+                  }}
+                >
+                  Rise Salary
+                </button>
+              </span>
+            )}
+          </div>
+          <div className="col-6 worker-statistic">
+            <h4 className="text-center">Employee statistic</h4>
+            {worker.get_monthly_salary ? (
+              ''
+            ) : (
+              <span>
+                <button
+                  className="btn btn-danger btn-link"
+                  onClick={() => {
+                    data.helpers.paySalary(worker);
+                  }}
+                >
+                  Pay a debt
+                </button>
+              </span>
+            )}
+
+            <ul className="statistic-list">
+              <li className="statistic-item">
+                Hired (days ago){' '}
+                <span>
+                  {Math.ceil(
+                    (this.props.data.date.tick - worker.facts.tick_hired) /
+                      24
+                  )}
+                </span>
+              </li>
+              <li className="statistic-item">
+                Projects finished{' '}
+                <span>
+                  {worker.facts.project_finished}
+                </span>
+              </li>
+              <li className="statistic-item">
+                Tasks done{' '}
+                <span>
+                  {worker.facts.tasks_done} of{' '} {worker.facts.tasks_done + worker.facts.bugs_passed}
+                </span>
+              </li>
+              <li className="statistic-item">
+                Bugs prodused
+                <span>
+                  {worker.facts.bugs_passed}
+                </span>
+              </li>
+              <li className="statistic-item">
+                Refactoring done{' '}
+                <span>
+                  {worker.facts.refactored}
+                </span>
+              </li>
+              <li className="statistic-item">
+                Tests wrote{' '}
+                <span>
+                  {worker.facts.tests_wrote}
+                </span>
+              </li>
+              <li className="statistic-item">
+                Retrospected tasks{' '}
+                <span>
+                  {worker.facts.retrospected}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+        {/* ====UNUSABLE CONTENT==== */}
+        {/* <div>
+          Which projects {worker.name} has to work?
+          <div className="card">
+            {data.projects.map(project => {
+              const stats_data = _.mapValues(
+                project.needs,
+                (val, skill) => {
+                  return {
+                    name: skill,
+                    val: (
+                      <div key={worker.id + project.id} className="">
+                        <div style={{ width: '100%' }}>
+                          <input
+                            type="checkbox"
+                            id={project.id || ''}
+                            checked={data.helpers.getRelation(
+                              worker.id,
+                              project.id,
+                              skill
+                            )}
+                            onChange={event => {
+                              data.helpers.modifyRelation(
+                                worker.id,
+                                event.target.id,
+                                event.target.checked,
+                                skill
+                              );
+                            }}
+                          />
+                          {project.needs(skill) +
+                            '/' +
+                            project.estimate[skill]}
+                        </div>
+                      </div>
+                    )
+                  };
+                }
+              );
+              return (
+                <div key={worker.id + project.id}>
+                  <div>
+                    <ProjectName project={project} />
+                  </div>
+                  <StatsBar
+                    stats={stats_data}
+                    data={this.props.data}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div> */}
+        {/* ================ */}
+
+        {/* =====DEPRECATED TRAINING PROJECT====
+        <div>
+          <div className="text-center">
+            {Object.keys(education).map(
+              source =>
+                !education[source].hide ? (
+                  <div className="" key={source}>
+                    {skills_names.map(skill => {
+                      return (
+                        <div className="" key={skill}>
+                          <button
+                            className="btn btn-info"
+                            title={education[source].description}
+                            id={source}
+                            onClick={() => this.teach(skill, source)}
+                          >
+                            {education[source].name}
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  ''
+                )
+            )}
+          </div>
+        </div> */}
+
       </div>
     );
 
-    let instrumenary = (
-      <div>
-        <h2>Instrumentary</h2>
+    let instrumentary = (
+      <div className="worker-instrumentary flexbox flex-justified">
+        {skills_names.map(skill => {
+          return (
+            <div className="card instrumentary" key={skill}>
+              {Object.keys(workers_bonus_items[skill]).map(
+                item_key => {
+                  let item =
+                    workers_bonus_items[skill][item_key];
+                  return (
+                    worker.items[skill][item_key] === true
+                    ? (
+                      <div className="" key={item_key}>
+                        <h3>
+                          {item.name}
+                        </h3>
+                        <p>
+                          {item.description}
+                        </p>
+                      </div>
+                    )
+                    : (
+                      <div className="" key={item_key}>
+                        <h3>
+                          {item.name}
+                        </h3>
+                        <button
+                        className={
+                          data.money >= item.money
+                          ? 'btn btn-info btn-sm'
+                          : 'btn btn-info btn-sm disabled'
+                        }
+                        title={item.description}
+                        id={item}
+                        onClick={() => {
+                          if (data.money >= item.money) {
+                            data.helpers.buyItem(
+                              worker,
+                              skill,
+                              item_key
+                            );
+                          }
+                        }}
+                        >
+                          Buy {item.name} ${item.money}
+                        </button>
+                        <p>
+                          {item.description}
+                        </p>
+                      </div>
+                    )
+                  )
+                }
+              )}
+            </div>
+          );
+        })}
       </div>
     );
 
@@ -217,241 +456,45 @@ class Worker extends Component {
                         )
                       })}
                     </div>
-
-                    {/* <p>
-                      {worker.tellFeelings()}
-                    </p> */}
                   </div>
                 </div>
 
                 <div className="modal-body">
                   <ul className="nav nav-tabs nav-tabs-light-mode activity-toolbar">
-                    <li className={"nav-item" + (state.currentTab === 0 ? 'yes' : 'no')}>
+                    <li className={"nav-item " + (state.currentTab === 0 ? 'active show' : '')}>
                       <a
                         className="nav-link"
                         onClick={() => {
                           this.setState({ currentTab: 0 });
                         }}
                       >
-                        <h4>Character</h4>
+                        <span>Character</span>
                       </a>
                     </li>
-                    <li className={"nav-item" + (state.currentTab === 1 ? 'yes' : 'no')}>
+                    <li className={"nav-item " + (state.currentTab === 1 ? 'active show' : '')}>
                       <a
                         className="nav-link"
                         onClick={() => {
                           this.setState({ currentTab: 1 });
                         }}
                       >
-                        <h4>Instrumentary</h4>
+                        <span>Instrumentary</span>
                       </a>
                     </li>
                   </ul>
 
+                  <>
+                    {
+                      (()=>{
+                        if (state.currentTab === 0){
+                          return character
+                        } else if (state.currentTab === 1){
+                          return instrumentary
+                        }
+                      })()
+                    }
+                  </>
 
-
-                    <div>
-                      {
-                        (()=>{
-                          if (state.currentTab === 0){
-                            return character
-                          } else if (state.currentTab === 1){
-                            return instrumenary
-                          }
-                        })()
-                      }
-                    </div>
-
-
-
-                  {/* <div>
-                    {`Character: ${worker.character.name}. ${worker.character.description}.`}
-                  </div>
-
-                  {worker.is_player ? (
-                    ''
-                  ) : (
-                    <span>
-                      Worker salary: ${worker.getSalary()}. Overrate bonus:{' '}
-                      {worker.getOverrate()}
-                      %.
-                      <button
-                        className="btn btn-danger btn-link"
-                        onClick={() => {
-                          data.helpers.riseEmployer(worker.id);
-                        }}
-                      >
-                        Rise Salary
-                      </button>
-                    </span>
-                  )}
-                  {worker.get_monthly_salary ? (
-                    ''
-                  ) : (
-                    <span>
-                      <button
-                        className="btn btn-danger btn-link"
-                        onClick={() => {
-                          data.helpers.paySalary(worker);
-                        }}
-                      >
-                        Pay a debt
-                      </button>
-                    </span>
-                  )}
-
-                  <ul>
-                    <p>
-                      Hired{' '}
-                      {Math.ceil(
-                        (this.props.data.date.tick - worker.facts.tick_hired) /
-                          24
-                      )}{' '}
-                      days ago.
-                      {!worker.is_player ? (
-                        <span>Got {worker.facts.money_earned}$ of salary.</span>
-                      ) : (
-                        ''
-                      )}
-                      Finished {worker.facts.project_finished} project. Did{' '}
-                      {worker.facts.tasks_done} of{' '}
-                      {worker.facts.tasks_done + worker.facts.bugs_passed}{' '}
-                      tasks. Passed {worker.facts.bugs_passed} bugs. Did{' '}
-                      {worker.facts.refactored} refactoring, wrote{' '}
-                      {worker.facts.tests_wrote} tests and retrospected{' '}
-                      {worker.facts.retrospected} tasks.
-                    </p>
-                  </ul>
-                  <div className="card text-center">
-                    bonus items
-                    <div>
-                      <div className="">
-                        {skills_names.map(skill => {
-                          return (
-                            <div className=" flex-container-column" key={skill}>
-                              {Object.keys(workers_bonus_items[skill]).map(
-                                item_key => {
-                                  let item =
-                                    workers_bonus_items[skill][item_key];
-                                  return worker.items[skill][item_key] ===
-                                    true ? (
-                                    <div className="" key={item_key}>
-                                      <span className="badge">
-                                        {item.name} {item.description}
-                                      </span>
-                                    </div>
-                                  ) : (
-                                    <div className="" key={item_key}>
-                                      <button
-                                        className={
-                                          data.money >= item.money
-                                            ? 'btn btn-info btn-sm'
-                                            : 'btn btn-info btn-sm disabled'
-                                        }
-                                        title={item.description}
-                                        id={item}
-                                        onClick={() => {
-                                          if (data.money >= item.money) {
-                                            data.helpers.buyItem(
-                                              worker,
-                                              skill,
-                                              item_key
-                                            );
-                                          }
-                                        }}
-                                      >
-                                        Buy {item.name} ${item.money}
-                                      </button>
-                                    </div>
-                                  );
-                                }
-                              )}
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                  deprecated training project
-                  <div>
-                    <div className="card text-center">
-                      {Object.keys(education).map(
-                        source =>
-                          !education[source].hide ? (
-                            <div className="" key={source}>
-                              {skills_names.map(skill => {
-                                return (
-                                  <div className="" key={skill}>
-                                    <button
-                                      className="btn btn-info"
-                                      title={education[source].description}
-                                      id={source}
-                                      onClick={() => this.teach(skill, source)}
-                                    >
-                                      {education[source].name}
-                                    </button>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          ) : (
-                            ''
-                          )
-                      )}
-                    </div>
-                  </div>
-                  <div>
-                    Which projects {worker.name} has to work?
-                    <div className="card">
-                      {data.projects.map(project => {
-                        const stats_data = _.mapValues(
-                          project.needs,
-                          (val, skill) => {
-                            return {
-                              name: skill,
-                              val: (
-                                <div key={worker.id + project.id} className="">
-                                  <div style={{ width: '100%' }}>
-                                    <input
-                                      type="checkbox"
-                                      id={project.id || ''}
-                                      checked={data.helpers.getRelation(
-                                        worker.id,
-                                        project.id,
-                                        skill
-                                      )}
-                                      onChange={event => {
-                                        data.helpers.modifyRelation(
-                                          worker.id,
-                                          event.target.id,
-                                          event.target.checked,
-                                          skill
-                                        );
-                                      }}
-                                    />
-                                    {project.needs(skill) +
-                                      '/' +
-                                      project.estimate[skill]}
-                                  </div>
-                                </div>
-                              )
-                            };
-                          }
-                        );
-                        return (
-                          <div key={worker.id + project.id}>
-                            <div>
-                              <ProjectName project={project} />
-                            </div>
-                            <StatsBar
-                              stats={stats_data}
-                              data={this.props.data}
-                            />
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div> */}
                   <div>
                     {worker.is_player ? (
                       ''
