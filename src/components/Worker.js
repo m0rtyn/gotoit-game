@@ -13,11 +13,16 @@ import { education } from '../game/knowledge/education';
 import WorkerHappinessBar from './WorkerHappinessBar';
 import WorkerStaminaBar from './WorkerStaminaBar';
 
+
 //import {addAction} from '../components/ToastNest';
+
 
 class Worker extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      currentTab: 0
+    }
     this.manage = this.manage.bind(this);
     this.manageAll = this.manageAll.bind(this);
     this.dismiss = this.dismiss.bind(this);
@@ -79,6 +84,7 @@ class Worker extends Component {
 
   render() {
     const data = this.props.data;
+    let state = this.state;
     const worker = this.props.worker;
 
     const manage_button = (
@@ -92,6 +98,7 @@ class Worker extends Component {
         color: colors[stat].colorCompleted
       };
     });
+
 
     /*const stats_data = _.mapValues(worker.stats, (val, stat) => {
             return {
@@ -109,6 +116,257 @@ class Worker extends Component {
       education: { name: 'Education Balance', val: worker.educationPenalty() },
       collective: { name: 'Collective', val: worker.collectivePenalty() }
     };
+
+    let character = (
+      <div className="worker-character">
+        <div className="row pl-24 pr-24">
+          <div className="col-6">
+            <p>
+              <strong>
+              {`${worker.character.name}`}
+              </strong>
+              <br/>
+              {`${worker.character.description}.`}
+            </p>
+            {!worker.is_player
+              ? (<span>Got {worker.facts.money_earned}$ of salary.</span>)
+              : ('')
+            }
+            <p>
+              {worker.tellFeelings()}
+            </p>
+            {worker.is_player ? (
+              ''
+            ) : (
+              <span>
+                Worker salary: ${worker.getSalary()}. Overrate bonus:{' '}
+                {worker.getOverrate()}
+                %.
+                <button
+                  className="btn btn-danger btn-link"
+                  onClick={() => {
+                    data.helpers.riseEmployer(worker.id);
+                  }}
+                >
+                  Rise Salary
+                </button>
+              </span>
+            )}
+          </div>
+          <div className="col-6 worker-statistic">
+            <h4 className="text-center">Employee statistic</h4>
+            {worker.get_monthly_salary ? (
+              ''
+            ) : (
+              <span>
+                <button
+                  className="btn btn-danger btn-link"
+                  onClick={() => {
+                    data.helpers.paySalary(worker);
+                  }}
+                >
+                  Pay a debt
+                </button>
+              </span>
+            )}
+
+            <ul className="statistic-list">
+              <li className="statistic-item">
+                Hired (days ago){' '}
+                <span>
+                  {Math.ceil(
+                    (this.props.data.date.tick - worker.facts.tick_hired) /
+                      24
+                  )}
+                </span>
+              </li>
+              <li className="statistic-item">
+                Projects finished{' '}
+                <span>
+                  {worker.facts.project_finished}
+                </span>
+              </li>
+              <li className="statistic-item">
+                Tasks done{' '}
+                <span>
+                  {worker.facts.tasks_done} of{' '} {worker.facts.tasks_done + worker.facts.bugs_passed}
+                </span>
+              </li>
+              <li className="statistic-item">
+                Bugs prodused
+                <span>
+                  {worker.facts.bugs_passed}
+                </span>
+              </li>
+              <li className="statistic-item">
+                Refactoring done{' '}
+                <span>
+                  {worker.facts.refactored}
+                </span>
+              </li>
+              <li className="statistic-item">
+                Tests wrote{' '}
+                <span>
+                  {worker.facts.tests_wrote}
+                </span>
+              </li>
+              <li className="statistic-item">
+                Retrospected tasks{' '}
+                <span>
+                  {worker.facts.retrospected}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+        {/* ====UNUSABLE CONTENT==== */}
+        {/* <div>
+          Which projects {worker.name} has to work?
+          <div className="card">
+            {data.projects.map(project => {
+              const stats_data = _.mapValues(
+                project.needs,
+                (val, skill) => {
+                  return {
+                    name: skill,
+                    val: (
+                      <div key={worker.id + project.id} className="">
+                        <div style={{ width: '100%' }}>
+                          <input
+                            type="checkbox"
+                            id={project.id || ''}
+                            checked={data.helpers.getRelation(
+                              worker.id,
+                              project.id,
+                              skill
+                            )}
+                            onChange={event => {
+                              data.helpers.modifyRelation(
+                                worker.id,
+                                event.target.id,
+                                event.target.checked,
+                                skill
+                              );
+                            }}
+                          />
+                          {project.needs(skill) +
+                            '/' +
+                            project.estimate[skill]}
+                        </div>
+                      </div>
+                    )
+                  };
+                }
+              );
+              return (
+                <div key={worker.id + project.id}>
+                  <div>
+                    <ProjectName project={project} />
+                  </div>
+                  <StatsBar
+                    stats={stats_data}
+                    data={this.props.data}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div> */}
+        {/* ================ */}
+
+        {/* =====DEPRECATED TRAINING PROJECT====
+        <div>
+          <div className="text-center">
+            {Object.keys(education).map(
+              source =>
+                !education[source].hide ? (
+                  <div className="" key={source}>
+                    {skills_names.map(skill => {
+                      return (
+                        <div className="" key={skill}>
+                          <button
+                            className="btn btn-info"
+                            title={education[source].description}
+                            id={source}
+                            onClick={() => this.teach(skill, source)}
+                          >
+                            {education[source].name}
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  ''
+                )
+            )}
+          </div>
+        </div> */}
+
+      </div>
+    );
+
+    let instrumentary = (
+      <div className="worker-instrumentary flexbox flex-justified">
+        {skills_names.map(skill => {
+          return (
+            <div className="card instrumentary" key={skill}>
+              {Object.keys(workers_bonus_items[skill]).map(
+                item_key => {
+                  let item =
+                    workers_bonus_items[skill][item_key];
+                  return (
+                    worker.items[skill][item_key] === true
+                    ? (
+                      <div className="" key={item_key}>
+                        <h3>
+                          {item.name}
+                        </h3>
+                        <p>
+                          {item.description}
+                        </p>
+                      </div>
+                    )
+                    : (
+                      <div className="" key={item_key}>
+                        <h3>
+                          {item.name}
+                        </h3>
+                        <button
+                        className={
+                          data.money >= item.money
+                          ? 'btn btn-info btn-sm'
+                          : 'btn btn-info btn-sm disabled'
+                        }
+                        title={item.description}
+                        id={item}
+                        onClick={() => {
+                          if (data.money >= item.money) {
+                            data.helpers.buyItem(
+                              worker,
+                              skill,
+                              item_key
+                            );
+                          }
+                        }}
+                        >
+                          Buy {item.name} ${item.money}
+                        </button>
+                        <p>
+                          {item.description}
+                        </p>
+                      </div>
+                    )
+                  )
+                }
+              )}
+            </div>
+          );
+        })}
+      </div>
+    );
 
     return (
       <div
@@ -185,234 +443,58 @@ class Worker extends Component {
                       )}
                     </div>
 
-                    {/* <StatsProgressBar
-                    // hideCheckbox={true}
-                    type={'program'}
-                    max_stat={data.max_candidates_stat}
-                    stats={stats_progressbar_data}
-                    // worker={candidate}
-                    data={data}
-                    />
-                    n<StatsProgressBar
-                    // hideCheckbox={true}
-                    type={'design'}
-                    max_stat={data.max_candidates_stat}
-                    stats={stats_progressbar_data}
-                    // worker={candidate}
-                    data={data}
-                    />
-                    <StatsProgressBar
-                    // hideCheckbox={true}
-                    type={'manage'}
-                    max_stat={data.max_candidates_stat}
-                    stats={stats_progressbar_data}
-                    // worker={candidate}
-                    data={data}
-                    /> */}
-
-                    {/* <StatsBar stats={efficiency_data} data={this.props.data} /> */}
-
-                    {/* <p>
-                      {worker.tellFeelings()}
-                    </p> */}
+                    <div className="worker-stats">
+                      {skills_names.map(skill => {
+                        return (
+                          <StatsProgressBar
+                          key={skill}
+                          type={skill}
+                          stats={stats_progressbar_data}
+                          worker={worker}
+                          data={data}
+                          />
+                        )
+                      })}
+                    </div>
                   </div>
                 </div>
 
                 <div className="modal-body">
-                  <div>
-                    {`Character: ${worker.character.name}. ${worker.character.description}.`}
-                  </div>
-
-                  {worker.is_player ? (
-                    ''
-                  ) : (
-                    <span>
-                      Worker salary: ${worker.getSalary()}. Overrate bonus:{' '}
-                      {worker.getOverrate()}
-                      %.
-                      <button
-                        className="btn btn-danger btn-link"
+                  <ul className="nav nav-tabs nav-tabs-light-mode activity-toolbar">
+                    <li className={"nav-item " + (state.currentTab === 0 ? 'active show' : '')}>
+                      <a
+                        className="nav-link"
                         onClick={() => {
-                          data.helpers.riseEmployer(worker.id);
+                          this.setState({ currentTab: 0 });
                         }}
                       >
-                        Rise Salary
-                      </button>
-                    </span>
-                  )}
-                  {worker.get_monthly_salary ? (
-                    ''
-                  ) : (
-                    <span>
-                      <button
-                        className="btn btn-danger btn-link"
+                        <span>Character</span>
+                      </a>
+                    </li>
+                    <li className={"nav-item " + (state.currentTab === 1 ? 'active show' : '')}>
+                      <a
+                        className="nav-link"
                         onClick={() => {
-                          data.helpers.paySalary(worker);
+                          this.setState({ currentTab: 1 });
                         }}
                       >
-                        Pay a debt
-                      </button>
-                    </span>
-                  )}
-                  
-                  <ul>
-                    <p>
-                      Hired{' '}
-                      {Math.ceil(
-                        (this.props.data.date.tick - worker.facts.tick_hired) /
-                          24
-                      )}{' '}
-                      days ago.
-                      {!worker.is_player ? (
-                        <span>Got {worker.facts.money_earned}$ of salary.</span>
-                      ) : (
-                        ''
-                      )}
-                      Finished {worker.facts.project_finished} project. Did{' '}
-                      {worker.facts.tasks_done} of{' '}
-                      {worker.facts.tasks_done + worker.facts.bugs_passed}{' '}
-                      tasks. Passed {worker.facts.bugs_passed} bugs. Did{' '}
-                      {worker.facts.refactored} refactoring, wrote{' '}
-                      {worker.facts.tests_wrote} tests and retrospected{' '}
-                      {worker.facts.retrospected} tasks.
-                    </p>
+                        <span>Instrumentary</span>
+                      </a>
+                    </li>
                   </ul>
-                  <div className="card text-center">
-                    bonus items
-                    <div>
-                      <div className="">
-                        {skills_names.map(skill => {
-                          return (
-                            <div className=" flex-container-column" key={skill}>
-                              <StatsProgressBar
-                                type={skill}
-                                stats={stats_progressbar_data}
-                                worker={worker}
-                                data={data}
-                              />
-                              {Object.keys(workers_bonus_items[skill]).map(
-                                item_key => {
-                                  let item =
-                                    workers_bonus_items[skill][item_key];
-                                  return worker.items[skill][item_key] ===
-                                    true ? (
-                                    <div className="" key={item_key}>
-                                      <span className="badge">
-                                        {item.name} {item.description}
-                                      </span>
-                                    </div>
-                                  ) : (
-                                    <div className="" key={item_key}>
-                                      <button
-                                        className={
-                                          data.money >= item.money
-                                            ? 'btn btn-info btn-sm'
-                                            : 'btn btn-info btn-sm disabled'
-                                        }
-                                        title={item.description}
-                                        id={item}
-                                        onClick={() => {
-                                          if (data.money >= item.money) {
-                                            data.helpers.buyItem(
-                                              worker,
-                                              skill,
-                                              item_key
-                                            );
-                                          }
-                                        }}
-                                      >
-                                        Buy {item.name} ${item.money}
-                                      </button>
-                                    </div>
-                                  );
-                                }
-                              )}
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                  deprecated training project
-                  <div>
-                    <div className="card text-center">
-                      {Object.keys(education).map(
-                        source =>
-                          !education[source].hide ? (
-                            <div className="" key={source}>
-                              {skills_names.map(skill => {
-                                return (
-                                  <div className="" key={skill}>
-                                    <button
-                                      className="btn btn-info"
-                                      title={education[source].description}
-                                      id={source}
-                                      onClick={() => this.teach(skill, source)}
-                                    >
-                                      {education[source].name}
-                                    </button>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          ) : (
-                            ''
-                          )
-                      )}
-                    </div>
-                  </div>
-                  <div>
-                    Which projects {worker.name} has to work?
-                    <div className="card">
-                      {data.projects.map(project => {
-                        const stats_data = _.mapValues(
-                          project.needs,
-                          (val, skill) => {
-                            return {
-                              name: skill,
-                              val: (
-                                <div key={worker.id + project.id} className="">
-                                  <div style={{ width: '100%' }}>
-                                    <input
-                                      type="checkbox"
-                                      id={project.id || ''}
-                                      checked={data.helpers.getRelation(
-                                        worker.id,
-                                        project.id,
-                                        skill
-                                      )}
-                                      onChange={event => {
-                                        data.helpers.modifyRelation(
-                                          worker.id,
-                                          event.target.id,
-                                          event.target.checked,
-                                          skill
-                                        );
-                                      }}
-                                    />
-                                    {project.needs(skill) +
-                                      '/' +
-                                      project.estimate[skill]}
-                                  </div>
-                                </div>
-                              )
-                            };
-                          }
-                        );
-                        return (
-                          <div key={worker.id + project.id}>
-                            <div>
-                              <ProjectName project={project} />
-                            </div>
-                            <StatsBar
-                              stats={stats_data}
-                              data={this.props.data}
-                            />
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
+
+                  <>
+                    {
+                      (()=>{
+                        if (state.currentTab === 0){
+                          return character
+                        } else if (state.currentTab === 1){
+                          return instrumentary
+                        }
+                      })()
+                    }
+                  </>
+
                   <div>
                     {worker.is_player ? (
                       ''

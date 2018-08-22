@@ -31,26 +31,13 @@
 
   .modal-header {
     padding: size(4);
+    padding-bottom: size(2);
     justify-content: flex-start;
   }
 
-  .worker-avatar {
-    width: size(18);
-    height: size(18);
-    flex-shrink: 0;
-  }
-
-  .worker-info {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: size(4);
-    width: 100%;
-  }
-
-  .worker-name {
-    width: 100%;
-    font-size: size(3);
-    font-weight: 400;
+  .modal-body {
+    padding: size(4);
+    padding-top: 0;
   }
 
   .progress {
@@ -59,20 +46,16 @@
     margin-bottom: 0;
   }
 
-  .worker-happiness, .worker-stamina {
-    display: flex;
-    flex-flow: row nowrap;
-    width: 100%;
-    align-items: center;
+  .stats-progress-bar {
+    height: size(2);
+    width: 33%;
 
-    .btn {
-      margin-left: size(2);
-      flex-grow: 1;
+    &:not(:last-of-type) {
+      margin-right: size(2);
+    }
+
+    .progress {
+      height: size(2);
     }
   }
-
-  .worker-happiness {
-    margin-bottom: size(2);
-  }
-
 }
