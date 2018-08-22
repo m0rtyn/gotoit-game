@@ -1,4 +1,5 @@
 import TimeIcon from '../../../public/time_event.png';
+import { current_tick } from '../../App';
 
 export const historical_events = {
   // year :: month :: day :: hour
@@ -109,7 +110,7 @@ export const historical_events = {
     picture: TimeIcon,
     updateGameData: data => {
       data.exchange_unlocked_shares.push('btc');
-      return data;
+      data.btc_unlock = true;
     }
   },
   '2011 1 1 1': {
@@ -141,10 +142,11 @@ export const historical_events = {
     description: 'Cryptocurrency market boom',
     picture: TimeIcon,
     updateGameData: data => {
+      alert(current_tick);
       return data;
     }
   },
-  '2018 0 1 1': {
+  '2018 1 1 1': {
     name: 'Cryptocurrency market low',
     description: 'Cryptocurrency market low',
     picture: TimeIcon,

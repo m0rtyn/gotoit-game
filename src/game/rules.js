@@ -297,53 +297,55 @@ export const rules = {
           break;
       }
 
-      const x = current_tick + 2000;
-
       if (data.btc_unlock) {
         (() => {
-          const x = current_tick + 2000;
+          const x = current_tick - 156506;
           data.current_btc_price = Math.floor(
-            (Math.abs(Math.sin(x / 19)) * x) / 3 +
+            ((Math.abs(Math.sin(x / 19)) * x) / 3 +
               Math.abs(Math.sin(Math.sqrt(x))) * x +
               Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
               Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
-              x
+              x) /
+              3
           );
         })();
       }
       if (data.share0_unlock) {
         (() => {
-          const x = current_tick + 2000;
+          const x = current_tick - 40490;
           data.current_share0_price = Math.floor(
-            (Math.abs(Math.sin(x / 19)) * x) / 3 +
+            ((Math.abs(Math.sin(x / 19)) * x) / 3 +
               Math.abs(Math.sin(Math.sqrt(x))) * x +
               Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
               Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
-              x
+              x) /
+              7
           );
         })();
       }
       if (data.share1_unlock) {
         (() => {
-          const x = current_tick + 2000;
+          const x = current_tick - 40490;
           data.current_share1_price = Math.floor(
-            (Math.abs(Math.sin(x / 19)) * x) / 3 +
+            ((Math.abs(Math.sin(x / 19)) * x) / 3 +
               Math.abs(Math.sin(Math.sqrt(x))) * x +
               Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
               Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
-              x
+              x) /
+              7
           );
         })();
       }
       if (data.share2_unlock) {
         (() => {
-          const x = current_tick + 2000;
+          const x = current_tick - 40490;
           data.current_share2_price = Math.floor(
-            (Math.abs(Math.sin(x / 19)) * x) / 3 +
+            ((Math.abs(Math.sin(x / 19)) * x) / 3 +
               Math.abs(Math.sin(Math.sqrt(x))) * x +
               Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
               Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
-              x
+              x) /
+              7
           );
         })();
       }

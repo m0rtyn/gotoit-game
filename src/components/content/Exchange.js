@@ -20,13 +20,13 @@ class Exchange extends Component {
     let content = (
       <div>
         <h1 className="text-center">
-          <img
+          {/*<img
             style={{ marginLeft: '3px' }}
             width={40}
             height={40}
             src={btc_icon} //need make icons for each company
             role="presentation"
-          />{' '}
+          />{' '}*/}
           {share.name} Exchange
         </h1>
         <h4>
@@ -161,7 +161,7 @@ class Exchange extends Component {
                   this.setState({ current: i });
                 }}
               >
-                shares[share_name].name
+                {shares[share_name].name}
               </a>
             );
           })}

@@ -407,6 +407,7 @@ class App extends Component {
       )
     )
       return false;
+    //localStorage.clear();
     localStorage.setItem(game_name + '_app_state', null);
 
     //console.log(this);

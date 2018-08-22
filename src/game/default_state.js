@@ -33,8 +33,8 @@ var default_state = {
     share0: 0,
     share1: 0,
     share2: 0,
-    current_share0_price: 30,
-    current_share1_price: 11,
+    current_share0_price: 100,
+    current_share1_price: 100,
     current_share2_price: 100,
 
     taken_loans: [],
