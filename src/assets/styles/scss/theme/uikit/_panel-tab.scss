@@ -11,10 +11,9 @@
       color: var(--color-text);
       background-color: var(--white);
       box-shadow:
-        0 22px 0px white,
+        // 0 46px 0px 6px white,
         0px 4px 8px rgba(0, 0, 0, 0.3),
         0px 0px 16px rgba(0, 0, 0, 0.2);
-      // opacity: 1;
     }
   }
 
@@ -25,16 +24,25 @@
     text-align: center;
     color: var(--color-text-secondary);
     background-color: transparent;
-    // border-bottom: 2px solid transparent;
     padding: 10px 16px;
     transition: 0.3s;
     border-radius: var(--big-border-radius) var(--big-border-radius) 0 0;
     box-shadow:
-      0 22px 0px white,
+      // 0 46px 0px 6px white,
       0px 4px 8px rgba(0, 0, 0, 0.3),
       0px 0px 16px rgba(0, 0, 0, 0.2);
     font-weight: 700;
-    // opacity: 0.6;
+
+    // FOR SHADOW-BOTTOM OVERFLOW
+    &::after {
+      content: '';
+      position: absolute;
+      width: 106%;
+      height: 20%;
+      top: 100%;
+      left: -3%;
+      background-color: var(--white);
+    }
 
 
     @include media-down(sm) {
