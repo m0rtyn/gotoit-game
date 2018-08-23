@@ -148,6 +148,20 @@ class Header extends Component {
                   M
                 </button>
               </div>
+              <div>
+                <button
+                  onClick={() => {
+                    let i = 1;
+                    let n = 24 * 365;
+                    while (i <= n) {
+                      data.helpers.tick(i === n);
+                      i++;
+                    }
+                  }}
+                >
+                  Y
+                </button>
+              </div>
             </div>
 
             <div className="topbar-center game-time">

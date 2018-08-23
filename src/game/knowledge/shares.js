@@ -55,7 +55,7 @@ export const shares = {
     short: 'BTC',
     onBuy: (data, value) => {
       if (data.money >= value) {
-        data.chargeMoney(value);
+        data.helpers.chargeMoney(value);
         data.btc += value / data.current_btc_price;
       }
     },
