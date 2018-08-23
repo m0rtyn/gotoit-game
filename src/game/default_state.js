@@ -6,6 +6,7 @@ import OfficeModel from '../models/OfficeModel';
 
 import { charts_parameters } from './knowledge/charts';
 import { project_kinds, project_platforms } from './knowledge/projects';
+import { companies } from './knowledge/companies';
 
 var default_state = {
   data: {
@@ -33,8 +34,8 @@ var default_state = {
     share0: 0,
     share1: 0,
     share2: 0,
-    current_share0_price: 30,
-    current_share1_price: 11,
+    current_share0_price: 100,
+    current_share1_price: 100,
     current_share2_price: 100,
 
     taken_loans: [],
@@ -109,6 +110,9 @@ var default_state = {
     share0_unlock: false,
     share1_unlock: false,
     share2_unlock: false,
+    company0_done: 0,
+    company1_done: 0,
+    company2_done: 0,
     btc_unlock: false,
     max_stat: 1,
     max_candidates_stat: 1,
@@ -125,9 +129,14 @@ _.keys(project_platforms).forEach(platform => {
       let q = (11 - top) * 2;
       let size = Math.ceil(q / 5);
       default_state.data.simplified_reports.push(
-        ProjectModel.generate(q, size, false, kind, platform).generateReport(
-          false
-        )
+        ProjectModel.generate(
+          _.sample(companies),
+          q,
+          size,
+          false,
+          kind,
+          platform
+        ).generateReport(false)
       );
     }
   });

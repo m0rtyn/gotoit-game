@@ -386,12 +386,16 @@ class Worker extends Component {
         } ${worker.in_vacation ? 'vacation' : ''}`}
         id={worker.id}
       >
-        <img
-          className="worker-avatar"
-          alt={worker.name + ' avatar'}
-          src={worker.avatar}
-        />
-        <div className="worker-info">
+        <div style={{ position: 'relative', width: '80px', height: '80px'}}>
+          {
+            _.map(worker.avatar, img => {
+              return (
+                <img style={{ position: 'absolute', width: '80px', height: '80px' }} src={img} />
+              )
+            })
+          }
+        </div>
+      <div className="worker-info">
           <header className="card-header">
             <span className="worker-name"> {worker.name} </span>
 
@@ -405,11 +409,15 @@ class Worker extends Component {
               <TeamDialog>
 
                 <div className="modal-header">
-                  <img
-                    className="worker-avatar"
-                    alt={worker.name + ' avatar'}
-                    src={worker.avatar}
-                  />
+                  <div style={{ position: 'relative', width: '200px', height: '200px'}}>
+                    {
+                      _.map(worker.avatar, img => {
+                        return (
+                          <img style={{ position: 'absolute', width: '200px', height: '200px' }} src={img} />
+                        )
+                      })
+                    }
+                  </div>
                   <div className="worker-info">
                     <h3 className="worker-name">
                       {worker.name}

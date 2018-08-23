@@ -16,7 +16,7 @@ let ChartsController = props => {
   let options = {};
 
   switch (type) {
-    case 'BTC':
+    case 'btc':
       const btc_statistic = props.data.exchange_statistics.btc;
 
       labels = Object.keys(props.data.exchange_statistics.btc.values);
@@ -25,7 +25,8 @@ let ChartsController = props => {
         data: btc_statistic.values,
         label: exchange_charts_parameters.btc.label,
         borderColor: exchange_charts_parameters.btc.color,
-        fill: false
+        fill: false,
+        radius: 0
       });
 
       options = {
@@ -48,7 +49,8 @@ let ChartsController = props => {
         data: share0_statistic.values,
         label: exchange_charts_parameters.share0.label,
         borderColor: exchange_charts_parameters.share0.color,
-        fill: false
+        fill: false,
+        radius: 0
       });
 
       options = {
@@ -70,7 +72,8 @@ let ChartsController = props => {
         data: share1_statistic.values,
         label: exchange_charts_parameters.share1.label,
         borderColor: exchange_charts_parameters.share1.color,
-        fill: false
+        fill: false,
+        radius: 0
       });
 
       options = {
@@ -79,6 +82,11 @@ let ChartsController = props => {
         },
         tooltips: {
           enabled: false
+        },
+        elements: {
+          point: {
+            radius: 0
+          }
         }
       };
 
@@ -92,7 +100,8 @@ let ChartsController = props => {
         data: share2_statistic.values,
         label: exchange_charts_parameters.share2.label,
         borderColor: exchange_charts_parameters.share2.color,
-        fill: false
+        fill: false,
+        radius: 0
       });
 
       options = {
