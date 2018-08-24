@@ -67,7 +67,7 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
             require('postcss-color-mod-function')(),
             require('postcss-custom-properties')(),
             require('postcss-flexbugs-fixes')(),
-            require('postcss-mixins')(),
+            // require('postcss-mixins')(),
             // require('postcss-define-function'),
             // require('postcss-each'),
             autoprefixer({
