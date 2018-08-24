@@ -1,9 +1,8 @@
 .modal {
 
   .modal-body {
-    padding-top: 0;
-    padding-left: 0;
-    padding-right: 0;
+    padding: 0;
+    position: relative;
   }
 
   .nav-tabs {
@@ -13,11 +12,15 @@
   .nav-item {
     width: 50%;
   }
-
+  
   .nav-link {
+    padding: 0;
     line-height: 48px;
-    span {
+    h3 {
+      font-size: size(2.25);
+      font-weight: bold;
       padding: size(2) 0;
+      margin: 0;
     }
   }
 
@@ -51,19 +54,30 @@
     align-items: center;
     margin-bottom: size(2);
 
-    .btn {
-      margin-left: size(2);
+    .worker-salary, .worker-vacation {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-left: size(3);
       flex-grow: 1;
+
+      h3 {
+        color: var(--color-success);
+        font-weight: 700;
+        margin: 0;
+        margin-right: size(1);
+        display: inline;
+      }
+
+      // .btn {
+      //   margin
+      // }
     }
   }
 
   .worker-stats {
     display: flex;
     width: 100%;
-  }
-
-  .worker-statistic {
-
   }
 
   .statistic-list {
@@ -106,5 +120,11 @@
     &:last-of-type {
       margin-right: 0;
     }
+  }
+
+  .worker-dismiss {
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 }
