@@ -19,8 +19,8 @@ class StartProject extends Component {
     this.state = {
       selected_workers: {},
       project_name: '',
-      project_platform: _.random(0, 3),
-      project_kind: _.random(0, 6)
+      project_platform: 'desktop',
+      project_kind: 'application'
     };
   }
 
@@ -36,8 +36,8 @@ class StartProject extends Component {
     this.setState({
       selected_workers: workers_true,
       project_name: ProjectModel.genName(),
-      project_platform: _.random(0, 3),
-      project_kind: _.random(0, 6)
+      project_platform: 'desktop',
+      project_kind: 'application'
     });
     console.log('on open');
   }
@@ -85,7 +85,37 @@ class StartProject extends Component {
             </h4>
             <div className="card text-center">
               <h4 className="text-center">Project platform</h4>
-              <ReactBootstrapSlider
+              {this.props.data.projects_unlocked_platforms.map(
+                (platform, i) => {
+                  return (
+                    <div key={i}>
+                      <input
+                        className="form-check-input"
+                        id={platform + '-radio-button'}
+                        type="radio"
+                        name="platform"
+                        value={platform}
+                        checked={this.state.project_platform === platform}
+                        onChange={e => {
+                          this.setState({
+                            project_platform: e.target.value
+                          });
+                        }}
+                      />
+                      <label
+                        className="form-check-label btn btn-sm"
+                        htmlFor={platform + '-radio-button'}
+                      >
+                        {platform}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+              <p className="filament">
+                {project_platforms[this.state.project_platform].description}
+              </p>
+              {/*<ReactBootstrapSlider
                 value={this.state.project_platform}
                 change={e => {
                   this.setState({ project_platform: e.target.value });
@@ -96,18 +126,39 @@ class StartProject extends Component {
                 max={3}
                 ticks={[0, 1, 2, 3]}
                 ticks_labels={_.map(project_platforms, 'name')}
-              />
-              <p className="filament">
-                {
-                  project_platforms[
-                    _.keys(project_platforms)[this.state.project_platform]
-                  ].description
-                }
-              </p>
+              />*/}
             </div>
             <div className="card text-center">
               <h4 className="text-center">Project kind</h4>
-              <ReactBootstrapSlider
+              {Object.keys(project_kinds).map((kind, i) => {
+                return (
+                  <div key={i}>
+                    <input
+                      className="form-check-input"
+                      id={kind + '-radio-button'}
+                      type="radio"
+                      name="kinds"
+                      value={kind}
+                      checked={this.state.project_kind === kind}
+                      onChange={e => {
+                        this.setState({
+                          project_kind: e.target.value
+                        });
+                      }}
+                    />
+                    <label
+                      className="form-check-label btn btn-sm"
+                      htmlFor={kind + '-radio-button'}
+                    >
+                      {kind}
+                    </label>
+                  </div>
+                );
+              })}
+              <p className="filament">
+                {project_kinds[this.state.project_kind].description}
+              </p>
+              {/*<ReactBootstrapSlider
                 value={this.state.project_kind}
                 change={e => {
                   this.setState({ project_kind: e.target.value });
@@ -118,13 +169,7 @@ class StartProject extends Component {
                 max={6}
                 ticks={[0, 1, 2, 3, 4, 5, 6]}
                 ticks_labels={_.map(project_kinds, 'name')}
-              />
-              <p className="filament">
-                {
-                  project_kinds[_.keys(project_kinds)[this.state.project_kind]]
-                    .description
-                }
-              </p>
+              />*/}
             </div>
           </div>
         </div>
