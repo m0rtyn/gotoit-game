@@ -119,42 +119,48 @@ class Worker extends Component {
 
     let character = (
       <div className="worker-character">
-        <div className="row pl-24 pr-24">
+        <div className="row px-24">
           <div className="col-6">
+            {
+              worker.in_vacation || worker.to_vacation
+              ? (
+                worker.in_vacation
+                ? (<h4>Worker in vacation</h4>)
+                : (
+                  <h4>
+                    Going on vacation in {' '}
+                    {Math.floor(worker.to_vacation_ticker / 24)}{' '}
+                    days
+                  </h4>
+                )
+              )
+              : ('')
+            }
             <p>
-              <strong>
+              <strong className="mb-0">
               {`${worker.character.name}`}
               </strong>
               <br/>
               {`${worker.character.description}.`}
             </p>
-            {!worker.is_player
-              ? (<span>Got {worker.facts.money_earned}$ of salary.</span>)
-              : ('')
-            }
             <p>
               {worker.tellFeelings()}
             </p>
-            {worker.is_player ? (
-              ''
-            ) : (
-              <span>
-                Worker salary: ${worker.getSalary()}. Overrate bonus:{' '}
-                {worker.getOverrate()}
-                %.
+            <>
+              {worker.is_player
+              ? ('')
+              : (
                 <button
-                  className="btn btn-danger btn-link"
-                  onClick={() => {
-                    data.helpers.riseEmployer(worker.id);
-                  }}
+                  className="btn btn-danger btn-sm worker-dismiss"
+                  onClick={this.dismiss}
                 >
-                  Rise Salary
+                  Dismiss an employee
                 </button>
-              </span>
-            )}
+              )}
+            </>
           </div>
           <div className="col-6 worker-statistic">
-            <h4 className="text-center">Employee statistic</h4>
+            <h4 className="text-center fw-700 text-fade">Employee statistic</h4>
             {worker.get_monthly_salary ? (
               ''
             ) : (
@@ -170,14 +176,22 @@ class Worker extends Component {
               </span>
             )}
 
-            <ul className="statistic-list">
+            <ul className="statistic-list mb-0">
+              {!worker.is_player
+                ? (
+                  <li className="statistic-item">
+                    Got of salary{' '}
+                    <span>{worker.facts.money_earned}$</span>
+                  </li>
+                )
+                : ('')
+              }
               <li className="statistic-item">
                 Hired (days ago){' '}
                 <span>
-                  {Math.ceil(
-                    (this.props.data.date.tick - worker.facts.tick_hired) /
-                      24
-                  )}
+                  {
+                    Math.ceil( (this.props.data.date.tick - worker.facts.tick_hired) / 24 )
+                  }
                 </span>
               </li>
               <li className="statistic-item">
@@ -219,7 +233,6 @@ class Worker extends Component {
             </ul>
           </div>
         </div>
-
 
         {/* ====UNUSABLE CONTENT==== */}
         {/* <div>
@@ -381,9 +394,11 @@ class Worker extends Component {
         onMouseOut={() => {
           data.helpers.modifyHoveredObjects();
         }}
-        className={`card worker gap-items-2 ${
-          data.hovered_workers_id || [].includes(worker.id) ? 'hovered' : ''
-        } ${worker.in_vacation ? 'vacation' : ''}`}
+        className={`
+          card worker gap-items-2
+          ${data.hovered_workers_id || [].includes(worker.id) ? 'hovered' : ''}
+          ${worker.in_vacation ? 'vacation' : ''}
+        `}
         id={worker.id}
       >
         <div style={{ position: 'relative', width: '80px', height: '80px'}}>
@@ -397,7 +412,7 @@ class Worker extends Component {
         </div>
       <div className="worker-info">
           <header className="card-header">
-            <span className="worker-name"> {worker.name} </span>
+            <h2 className="worker-name"> {worker.name} </h2>
 
             <Portal
               ref="manage"
@@ -425,30 +440,41 @@ class Worker extends Component {
                     </h3>
                     <div className="worker-happiness">
                       <WorkerHappinessBar worker={worker} />
+                      <>
+                        {worker.is_player
+                          ? ( '' )
+                          : (
+                            <div className="worker-salary">
+                              <h3>
+                                {worker.getSalary()}
+                                $
+                              </h3>
+                              {/* // Overrate bonus:{' '} {worker.getOverrate()} % */}
+                              <button
+                              className="btn btn-danger px-8"
+                              onClick={() => { data.helpers.riseEmployer(worker.id); }}
+                              >
+                                <h4 className="fw-700 mb-0 text-white">+10%</h4>
+                              </button>
+                            </div>
+                          )
+                        }
+                      </>
                     </div>
 
                     <div className="worker-stamina">
                       <WorkerStaminaBar worker={worker} />
 
-                      {/* ====PROPOSE VACATION BUTTON==== */}
-                      {worker.in_vacation || worker.to_vacation ? (
-                        worker.in_vacation ? (
-                          ' Worker on vacation! '
-                        ) : (
-                          ' Going on vacation in ' +
-                          Math.floor(worker.to_vacation_ticker / 24) +
-                          ' days. '
-                        )
-                      ) : (
-                        <button
-                          className="btn btn-success btn-sm"
-                          onClick={() => {
-                            worker.proposeVacation();
-                          }}
-                        >
-                          Propose Vacation
-                        </button>
-                      )}
+                      <button
+                      className={
+                        'btn btn-danger btn-sm worker-vacation '
+                        + (worker.in_vacation || worker.to_vacation ? 'disabled' : '')
+                      }
+                      onClick={ () => { worker.proposeVacation(); } }
+                      disabled={worker.in_vacation || worker.to_vacation}
+                      >
+                        <h5 className="mb-0 text-white text-center">Propose vacation</h5>
+                      </button>
                     </div>
 
                     <div className="worker-stats">
@@ -468,53 +494,36 @@ class Worker extends Component {
                 </div>
 
                 <div className="modal-body">
-                  <ul className="nav nav-tabs nav-tabs-light-mode activity-toolbar">
-                    <li className={"nav-item " + (state.currentTab === 0 ? 'active show' : '')}>
+                  <ul className="nav nav-tabs nav-tabs-light-mode">
+                    <li className="nav-item">
                       <a
-                        className="nav-link"
-                        onClick={() => {
-                          this.setState({ currentTab: 0 });
-                        }}
+                      className={`nav-link ${state.currentTab === 0 ? 'active show' : ''}`}
+                      onClick={ () => { this.setState({ currentTab: 0 }); } }
                       >
-                        <span>Character</span>
+                        <h3>Character</h3>
                       </a>
                     </li>
-                    <li className={"nav-item " + (state.currentTab === 1 ? 'active show' : '')}>
+                    <li className="nav-item">
                       <a
-                        className="nav-link"
-                        onClick={() => {
-                          this.setState({ currentTab: 1 });
-                        }}
+                      className={"nav-link " + (state.currentTab === 1 ? 'active show' : '')}
+                      onClick={() => { this.setState({ currentTab: 1 }); } }
                       >
-                        <span>Instrumentary</span>
+                        <h3>Instrumentary</h3>
                       </a>
                     </li>
                   </ul>
 
                   <>
                     {
-                      (()=>{
+                      ( ()=>{
                         if (state.currentTab === 0){
                           return character
                         } else if (state.currentTab === 1){
                           return instrumentary
                         }
-                      })()
+                      } )()
                     }
                   </>
-
-                  <div>
-                    {worker.is_player ? (
-                      ''
-                    ) : (
-                      <button
-                        className="btn btn-danger btn-sm"
-                        onClick={this.dismiss}
-                      >
-                        Dismiss an employee
-                      </button>
-                    )}
-                  </div>
                 </div>
               </TeamDialog>
             </Portal>

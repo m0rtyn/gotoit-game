@@ -2,7 +2,7 @@
 //-----------------------------------------------------------------
 // Spacing
 //
-$spacing-sizes-list: 10 12 15 16 20 24 25 30 35 40 45 50 60 70 80 90 100 120 140 150 160 180 200 250 300 400 500;
+$spacing-sizes-list: 0 8 16 24 32 40 48 56 64 72 80 88 96;
 @each $prop, $abbrev in (margin: m, padding: p) {
   @each $size in $spacing-sizes-list {
     .#{$abbrev}-#{$size}  { #{$prop}:        #{$size}px !important; }
