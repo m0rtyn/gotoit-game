@@ -47,8 +47,98 @@ class StartProject extends Component {
       <div>
         <h3 className="text-center">Start Project</h3>
 
+        <div className="row filement">
+          <div className="slim col-md-12">
+            <div
+              className="row "
+              style={{ justifyContent: 'center', margin: '10px' }}
+            >
+              <label htmlFor="project-name">
+                <h4>{'Project name: '}</h4>
+              </label>
+              <input
+                type="text"
+                id="project-name"
+                className="form-inline"
+                value={this.state.project_name}
+                onChange={event => {
+                  this.setState({ project_name: event.target.value });
+                }}
+              />
+            </div>
+            <div className="row">
+              <div className="card text-center col-md-6">
+                <h4 className="text-center">Project platform</h4>
+                {this.props.data.projects_unlocked_platforms.map(
+                  (platform, i) => {
+                    return (
+                      <div key={i}>
+                        <input
+                          className="form-check-input"
+                          id={platform + '-radio-button'}
+                          type="radio"
+                          name="platform"
+                          value={platform}
+                          checked={this.state.project_platform === platform}
+                          onChange={e => {
+                            this.setState({
+                              project_platform: e.target.value
+                            });
+                          }}
+                        />
+                        <label
+                          style={{ width: '70%', margin: '3px' }} //margin: size(0.5) 0;
+                          className="form-check-label btn btn-sm"
+                          htmlFor={platform + '-radio-button'}
+                        >
+                          {platform}
+                        </label>
+                      </div>
+                    );
+                  }
+                )}
+                <p className="filament">
+                  {project_platforms[this.state.project_platform].description}
+                </p>
+              </div>
+              <div className="card text-center col-md-6">
+                <h4 className="text-center">Project kind</h4>
+                {Object.keys(project_kinds).map((kind, i) => {
+                  return (
+                    <div key={i}>
+                      <input
+                        className="form-check-input"
+                        id={kind + '-radio-button'}
+                        type="radio"
+                        name="kinds"
+                        value={kind}
+                        checked={this.state.project_kind === kind}
+                        onChange={e => {
+                          this.setState({
+                            project_kind: e.target.value
+                          });
+                        }}
+                      />
+                      <label
+                        style={{ width: '70%', margin: '3px' }} //margin: size(0.5) 0;
+                        className="form-check-label btn btn-sm"
+                        htmlFor={kind + '-radio-button'}
+                      >
+                        {kind}
+                      </label>
+                    </div>
+                  );
+                })}
+                <p className="filament">
+                  {project_kinds[this.state.project_kind].description}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="row filament">
-          <div className="col-md-4">
+          <div className="col-md-12">
             {this.props.data.workers.map(worker => {
               return (
                 <span key={worker.id} style={{ width: '100%' }}>
@@ -70,109 +160,8 @@ class StartProject extends Component {
               );
             })}
           </div>
-
-          <div className="slim col-md-8">
-            <h4 className="text-center">
-              Project name:{' '}
-              <input
-                type="text"
-                className="form-inline"
-                value={this.state.project_name}
-                onChange={event => {
-                  this.setState({ project_name: event.target.value });
-                }}
-              />
-            </h4>
-            <div className="card text-center">
-              <h4 className="text-center">Project platform</h4>
-              {this.props.data.projects_unlocked_platforms.map(
-                (platform, i) => {
-                  return (
-                    <div key={i}>
-                      <input
-                        className="form-check-input"
-                        id={platform + '-radio-button'}
-                        type="radio"
-                        name="platform"
-                        value={platform}
-                        checked={this.state.project_platform === platform}
-                        onChange={e => {
-                          this.setState({
-                            project_platform: e.target.value
-                          });
-                        }}
-                      />
-                      <label
-                        className="form-check-label btn btn-sm"
-                        htmlFor={platform + '-radio-button'}
-                      >
-                        {platform}
-                      </label>
-                    </div>
-                  );
-                }
-              )}
-              <p className="filament">
-                {project_platforms[this.state.project_platform].description}
-              </p>
-              {/*<ReactBootstrapSlider
-                value={this.state.project_platform}
-                change={e => {
-                  this.setState({ project_platform: e.target.value });
-                }}
-                tooltip="hide"
-                step={1}
-                min={0}
-                max={3}
-                ticks={[0, 1, 2, 3]}
-                ticks_labels={_.map(project_platforms, 'name')}
-              />*/}
-            </div>
-            <div className="card text-center">
-              <h4 className="text-center">Project kind</h4>
-              {Object.keys(project_kinds).map((kind, i) => {
-                return (
-                  <div key={i}>
-                    <input
-                      className="form-check-input"
-                      id={kind + '-radio-button'}
-                      type="radio"
-                      name="kinds"
-                      value={kind}
-                      checked={this.state.project_kind === kind}
-                      onChange={e => {
-                        this.setState({
-                          project_kind: e.target.value
-                        });
-                      }}
-                    />
-                    <label
-                      className="form-check-label btn btn-sm"
-                      htmlFor={kind + '-radio-button'}
-                    >
-                      {kind}
-                    </label>
-                  </div>
-                );
-              })}
-              <p className="filament">
-                {project_kinds[this.state.project_kind].description}
-              </p>
-              {/*<ReactBootstrapSlider
-                value={this.state.project_kind}
-                change={e => {
-                  this.setState({ project_kind: e.target.value });
-                }}
-                tooltip="hide"
-                step={1}
-                min={0}
-                max={6}
-                ticks={[0, 1, 2, 3, 4, 5, 6]}
-                ticks_labels={_.map(project_kinds, 'name')}
-              />*/}
-            </div>
-          </div>
         </div>
+
         <div className="text-center">
           <button
             className="big btn-success btn-lg"
