@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import * as PropTypes from 'prop-types';
-import { colors } from '../../game/knowledge';
+import { colors } from '../../game/knowledge/colors';
 import Bar from '../Bar/Bar';
 
 export default class Deadline extends PureComponent {

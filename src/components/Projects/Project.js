@@ -14,7 +14,8 @@ import ProjectName from './ProjectName';
 import ProjectProgressBar from './ProjectProgressBar';
 import ProjectDeadlineBar from './ProjectDeadlineBar';
 
-import { skills_names, technologies } from '../../game/knowledge';
+import { technologies } from '../../game/knowledge/technologies';
+import { skills_names } from '../../game/knowledge/skills';
 import { KickWorkerButton } from './KickWorkerButton';
 import { StartPauseButton } from './StartPauseButton';
 import { ReleaseButton } from './ReleaseButton';
@@ -274,7 +275,7 @@ class Project extends Component {
       );
     };
 
-    let team_ids = {};k
+    let team_ids = {};
     console.info('data.relations', data.relations);
     _.keys(data.relations).forEach(worker_id => {
       let worker_projects = data.relations[worker_id];

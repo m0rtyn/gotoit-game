@@ -9,7 +9,8 @@ const ProgressBar = styled.div`
 
 class BarItem extends PureComponent {
   static defaultProps = {
-    width: 0
+    width: 0,
+    value: 0
   };
 
   static propTypes = {
@@ -21,7 +22,7 @@ class BarItem extends PureComponent {
   };
 
   render() {
-    let { showName, name, value = 0, color, width } = this.props;
+    let { showName, name, value, color, width } = this.props;
     return (
       <ProgressBar
         color={color}
@@ -30,7 +31,7 @@ class BarItem extends PureComponent {
         role="progressbar"
       >
         {showName ? name : null}
-        {' ' + value.toString()}
+        {' ' + value}
       </ProgressBar>
     );
   }
