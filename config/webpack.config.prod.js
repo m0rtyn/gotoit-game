@@ -229,6 +229,15 @@ module.exports = {
               name: 'static/media/[name].[hash:8].[ext]'
             }
           },
+          {
+            test: [/\.svg$/],
+            use: {
+              loader: require.resolve('svg-inline-loader'),
+              options: {
+                name: 'static/svg/[name].[hash:8].[ext]'
+              }
+            }
+          },
           // Process application JS with Babel.
           // The preset includes JSX, Flow, and some ESnext features.
           {
@@ -238,22 +247,22 @@ module.exports = {
             use: [
               // This loader parallelizes code compilation, it is optional but
               // improves compile time on larger projects
-              require.resolve('thread-loader'),
+              // require.resolve('thread-loader'),
               {
                 loader: require.resolve('babel-loader'),
                 options: {
                   presets: [require.resolve('babel-preset-react-app')],
                   plugins: [
-                    [
-                      require.resolve('babel-plugin-named-asset-import'),
-                      {
-                        loaderMap: {
-                          svg: {
-                            ReactComponent: 'svgr/webpack![path]'
-                          }
-                        }
-                      }
-                    ]
+                    // [
+                    //   require.resolve('babel-plugin-named-asset-import'),
+                    //   {
+                    //     loaderMap: {
+                    //       svg: {
+                    //         ReactComponent: 'svgr/webpack![path]'
+                    //       }
+                    //     }
+                    //   }
+                    // ]
                   ],
                   compact: true,
                   highlightCode: true
@@ -268,7 +277,7 @@ module.exports = {
             use: [
               // This loader parallelizes code compilation, it is optional but
               // improves compile time on larger projects
-              require.resolve('thread-loader'),
+              // require.resolve('thread-loader'),
               {
                 loader: require.resolve('babel-loader'),
                 options: {
@@ -320,7 +329,12 @@ module.exports = {
                 importLoaders: 2,
                 sourceMap: shouldUseSourceMap
               },
-              'sass-loader'
+              'sass-loader',
+              {
+                outputStyle: 'expanded',
+                sourceMap: shouldUseSourceMap,
+                includePaths: [paths.scssSrc]
+              }
             )
           },
           // Adds support for CSS Modules, but using SASS
@@ -352,7 +366,13 @@ module.exports = {
             // it's runtime that would otherwise be processed through "file" loader.
             // Also exclude `html` and `json` extensions so they get processed
             // by webpacks internal loaders.
-            exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
+            exclude: [
+              /\.(js|jsx|mjs)$/,
+              /\.html$/,
+              /\.json$/,
+              /\.flow$/,
+              /\.svg$/
+            ],
             options: {
               name: 'static/media/[name].[hash:8].[ext]'
             }
