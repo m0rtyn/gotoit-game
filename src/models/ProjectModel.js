@@ -10,6 +10,7 @@ import {
 } from '../game/knowledge/projects';
 import { skills, skills_inf } from '../game/knowledge/skills';
 import { hired, projects_done, getData } from '../App';
+import { companies } from '../game/knowledge/companies';
 
 export var projects_generated = 0;
 export function flush() {
@@ -22,6 +23,7 @@ class ProjectModel {
     type,
     kind,
     platform,
+    company,
     reward,
     penalty,
     start_needs,
@@ -44,6 +46,7 @@ class ProjectModel {
       platform: require(`../assets/images/project/platforms/${platform}.svg`),
       kind: require(`../assets/images/project/kind/${kind}.svg`)
     };
+    this.company = company;
 
     this.estimate = JSON.parse(JSON.stringify(start_needs));
     this.original_estimate = JSON.parse(JSON.stringify(start_needs));
@@ -109,6 +112,7 @@ class ProjectModel {
       type: this.type,
       platform: this.platform,
       kind: this.kind,
+      company: this.company,
       stage: this.stage,
       design: this.estimate.design,
       manage: this.estimate.manage,
@@ -371,6 +375,7 @@ class ProjectModel {
   }
 
   static generate(
+    company = 'other',
     quality = 1,
     size = 4,
     fit_mode = false,
@@ -430,6 +435,7 @@ class ProjectModel {
       'project',
       kind,
       platform,
+      company,
       reward,
       penalty,
       stats,
@@ -457,6 +463,7 @@ class ProjectModel {
       'own',
       project_kind,
       project_platform,
+      'own',
       0,
       0,
       stats_bulk,
@@ -467,8 +474,8 @@ class ProjectModel {
     return project;
   }
 
-  static generateStorylineProject(quality, size) {
-    let bulk = this.generate(quality, size, 'team');
+  static generateStorylineProject(quality, size, company = 'other') {
+    let bulk = this.generate(company, quality, size, 'team');
     bulk.is_storyline = true;
     bulk.hot = true;
     return bulk;
@@ -503,6 +510,7 @@ class ProjectModel {
       'training',
       kind,
       platform,
+      'training',
       reward,
       penalty,
       stats,
@@ -514,6 +522,7 @@ class ProjectModel {
   static generateDraft() {
     let kind = _.sample(_.keys(project_kinds));
     let platform = _.sample(getData().projects_unlocked_platforms);
+    let company = _.sample(companies);
     let stats = JSON.parse(JSON.stringify(skills));
     let reward = 0;
     let penalty = 0;

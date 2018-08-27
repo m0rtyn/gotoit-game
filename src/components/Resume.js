@@ -89,7 +89,7 @@ class Resume extends Component {
         <h3>
           {worker.character.name}. {worker.character.description}
         </h3>
-        {!expired ? <h3>`Will expire in ${hours_to_expire} hours`</h3> : ''}
+        {!expired ? <h3>{`Will expire in ${hours_to_expire} hours`}</h3> : ''}
         {!worker.hired ? (
           !expired ? (
             buttons

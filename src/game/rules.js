@@ -123,6 +123,35 @@ export const rules = {
           stats.values.push(stats.buffer);
         });
 
+        //calculating companies projects done
+        data.company0_done = (() => {
+          let sum = 0;
+          _.each(data.simplified_reports, report => {
+            if (report.company === 'Future Sight') {
+              sum += report.design + report.program + report.manage;
+            }
+          });
+          return sum;
+        })();
+        data.company1_done = (() => {
+          let sum = 0;
+          _.each(data.simplified_reports, report => {
+            if (report.company === 'L-Ri') {
+              sum += report.design + report.program + report.manage;
+            }
+          });
+          return sum;
+        })();
+        data.company2_done = (() => {
+          let sum = 0;
+          _.each(data.simplified_reports, report => {
+            if (report.company === 'Murum') {
+              sum += report.design + report.program + report.manage;
+            }
+          });
+          return sum;
+        })();
+
         if (data.share0_unlock)
           data.exchange_statistics.share0.values.push(
             data.current_share0_price
@@ -189,7 +218,6 @@ export const rules = {
       }
 
       if (time.date !== 1 && game_date.getDate() === 1) {
-        console.log('Is it next day?');
         console.log(time.date);
         // first day
         if (data.office.size > 1) {
@@ -296,41 +324,48 @@ export const rules = {
         default:
           break;
       }
-
-      const x = current_tick + 2000;
-
-      if (data.btc_unlock)
-        data.current_btc_price = Math.floor(
-          (Math.abs(Math.sin(x / 19)) * x) / 3 +
-            Math.abs(Math.sin(Math.sqrt(x))) * x +
-            Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
-            Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
-            x
-        );
-      if (data.share0_unlock)
-        data.current_share0_price = Math.floor(
-          (Math.abs(Math.sin(x / 19)) * x) / 3 +
-            Math.abs(Math.sin(Math.sqrt(x))) * x +
-            Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
-            Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
-            x
-        );
-      if (data.share1_unlock)
-        data.current_share1_price = Math.floor(
-          (Math.abs(Math.sin(x / 19)) * x) / 3 +
-            Math.abs(Math.sin(Math.sqrt(x))) * x +
-            Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
-            Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
-            x
-        );
-      if (data.share2_unlock)
-        data.current_share2_price = Math.floor(
-          (Math.abs(Math.sin(x / 19)) * x) / 3 +
-            Math.abs(Math.sin(Math.sqrt(x))) * x +
-            Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
-            Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
-            x
-        );
+      let average =
+        (data.company0_done + data.company1_done + data.company2_done) / 3;
+      if (data.btc_unlock) {
+        (() => {
+          const x = current_tick - 156506;
+          data.current_btc_price = Math.floor(
+            ((Math.abs(Math.sin(x / 19)) * x) / 3 +
+              Math.abs(Math.sin(Math.sqrt(x))) * x +
+              Math.abs(Math.sin(Math.sqrt(x / 7))) * x * 2 +
+              Math.abs(Math.sin(Math.sqrt(x / 227))) * x +
+              x) /
+              3
+          );
+        })();
+      }
+      if (data.share0_unlock) {
+        (() => {
+          const x = current_tick - 40490;
+          data.current_share0_price = (
+            (100 * data.company0_done) /
+            average
+          ).toFixed(2);
+        })();
+      }
+      if (data.share1_unlock) {
+        (() => {
+          const x = current_tick - 40490;
+          data.current_share1_price = (
+            (100 * data.company1_done) /
+            average
+          ).toFixed(2);
+        })();
+      }
+      if (data.share2_unlock) {
+        (() => {
+          const x = current_tick - 40490;
+          data.current_share2_price = (
+            (100 * data.company2_done) /
+            average
+          ).toFixed(2);
+        })();
+      }
 
       //data.current_btc_price = Math.abs(Math.sin(x/19)) * x + Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x + Math.abs(Math.sin(Math.sqrt(x/227))) * x + x;
 

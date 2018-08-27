@@ -6,6 +6,8 @@
   "homepage": "./",
   "devDependencies": {
     "electron-builder": "^20.13.4",
+    "postcss-define-function": "^0.1.1",
+    "postcss-nested": "^3.0.0",
     "react-perf-devtool": "^3.0.8",
     "react-perftool-extension": "^1.0.6",
     "why-did-you-update": "^0.1.1"

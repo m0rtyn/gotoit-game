@@ -1,0 +1,9 @@
+input[type="radio"] {
+  display: none;
+
+  &:checked + label {
+    background-color: var(--color-success);
+    border-color: var(--color-success);
+    color: #fff;
+  }
+}
