@@ -81,7 +81,7 @@ class People extends Component {
               }}
               className="btn btn-warning btn-xs"
             >
-              Rent a Office
+              Rent an Office
             </button>
           </div>
         ) : data.office.size < 4 &&
