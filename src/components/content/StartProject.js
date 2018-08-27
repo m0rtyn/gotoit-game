@@ -49,17 +49,12 @@ class StartProject extends Component {
 
         <div className="row filement">
           <div className="slim col-md-12">
-            <div
-              className="row "
-              style={{ justifyContent: 'center', margin: '10px' }}
-            >
-              <label htmlFor="project-name">
-                <h4>{'Project name: '}</h4>
-              </label>
+            <div className="row input-group start-project-name">
+              <h3 className="text-center modal-title">Project name:</h3>
               <input
                 type="text"
                 id="project-name"
-                className="form-inline"
+                className="form-control"
                 value={this.state.project_name}
                 onChange={event => {
                   this.setState({ project_name: event.target.value });
@@ -72,7 +67,7 @@ class StartProject extends Component {
                 {this.props.data.projects_unlocked_platforms.map(
                   (platform, i) => {
                     return (
-                      <div key={i}>
+                      <div className="start-project-platform-select" key={i}>
                         <input
                           className="form-check-input"
                           id={platform + '-radio-button'}
@@ -87,7 +82,6 @@ class StartProject extends Component {
                           }}
                         />
                         <label
-                          style={{ width: '70%', margin: '3px' }} //margin: size(0.5) 0;
                           className="form-check-label btn btn-sm"
                           htmlFor={platform + '-radio-button'}
                         >
@@ -105,7 +99,7 @@ class StartProject extends Component {
                 <h4 className="text-center">Project kind</h4>
                 {Object.keys(project_kinds).map((kind, i) => {
                   return (
-                    <div key={i}>
+                    <div className="start-project-kind-select" key={i}>
                       <input
                         className="form-check-input"
                         id={kind + '-radio-button'}
@@ -120,7 +114,6 @@ class StartProject extends Component {
                         }}
                       />
                       <label
-                        style={{ width: '70%', margin: '3px' }} //margin: size(0.5) 0;
                         className="form-check-label btn btn-sm"
                         htmlFor={kind + '-radio-button'}
                       >
