@@ -38,7 +38,7 @@ export const workers_bonus_items = {
     }
   },
   program: {
-    exp: { name: 'IDE', money: 500, bonus: 10, description: 'add 10% EXP' },
+    exp: { name: 'IDE', money: 500, bonus: 10, description: 'insreases 10% EXP' },
     flat: {
       name: 'Laptop',
       money: 2500,
@@ -76,17 +76,17 @@ export const worker_character_types = [
   },
   {
     name: 'Modest',
-    description: 'Rarely requires a pay raise, but is slower to learn'
+    description: 'Rarely requires a pay raise, but learns slowly'
   },
   {
     name: 'Workaholic',
     description:
-      'Spends more time on work, but more often requires an increase in earnings'
+      'Spends more time on work, but often requires an increase in earnings'
   },
   {
     name: 'Wonk',
     description:
-      'Likes to learn, but is more often distracted by extraneous things'
+      'Likes to learn, but often gets distracted by extraneous things'
   },
   {
     name: 'Gifted',
