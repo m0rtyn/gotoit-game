@@ -62,7 +62,7 @@ class StatsProgressBar extends Component {
     }
 
     return (
-      <div className="stats-progress-bar">
+      <label className="stats-progress-bar">
         {hideCheckbox ? (
           ''
         ) : (
@@ -76,7 +76,7 @@ class StatsProgressBar extends Component {
         )}
 
         <Bar bar_data={[bar_data]} />
-      </div>
+      </label>
     );
   }
 }

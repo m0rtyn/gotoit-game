@@ -33,6 +33,16 @@ class ActivityToolbar extends Component {
           </a>
         </li>
         <li className="nav-item">
+          <a
+            className="nav-link"
+            onClick={() => {
+              data.helpers.changeContent('Office');
+            }}
+          >
+            Office
+          </a>
+        </li>
+        {/*<li className="nav-item">
           {data.projects.length > 0 ? (
             <a
               className="nav-link"
@@ -45,7 +55,7 @@ class ActivityToolbar extends Component {
           ) : (
             ''
           )}
-        </li>
+        </li>*/}
         <li className="nav-item">
           {data.projects_archive_reports.length > 0 ? (
             <a

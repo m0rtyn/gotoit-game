@@ -3,11 +3,8 @@ import React, { Component } from 'react';
 import ProjectReport from '../ProjectReport';
 import ProjectsTop from '../../services/ProjectsTop';
 
-import {
-  project_kinds,
-  project_platforms,
-  skills_names
-} from '../../game/knowledge';
+import { project_kinds, project_platforms } from '../game/knowledge/projects';
+import { skills_names } from '../../game/knowledge/skills';
 
 class ProjectEndScreen extends Component {
   constructor(props) {
@@ -20,7 +17,7 @@ class ProjectEndScreen extends Component {
 
   render() {
     const data = this.props.data;
-    let project = this.props.project;
+    let project = this.props.letter.object;
 
     let all_top_handler = ProjectsTop.getHandler(data.simplified_reports);
     let platform_top_handler = all_top_handler.filter(

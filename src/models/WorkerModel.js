@@ -3,13 +3,12 @@ import _ from 'lodash';
 import { chatMessage } from '../components/Chat';
 
 import bulkStyler from '../services/bulkStyler';
+import { meetings } from '../game/knowledge/meetings';
 import {
-  meetings,
-  skills,
-  skills_1,
   worker_character_types,
   workers_bonus_items
-} from '../game/knowledge';
+} from '../game/knowledge/workers';
+import { skills, skills_1 } from '../game/knowledge/skills';
 
 import { addAction } from '../components/ToastNest';
 
@@ -18,7 +17,7 @@ import ValueCache from '../services/ValueCache';
 
 import { current_tick, getData } from '../App';
 
-import maleAvatar from '../assets/images/male.png';
+import { generateMaleAvatar } from '../game/knowledge/worker_avatar';
 import femaleAvatar from '../assets/images/female.png';
 
 class WorkerModel {
@@ -40,7 +39,7 @@ class WorkerModel {
     this.standing_after_salary_rising = 0;
     this.morale = 100;
     this.accept_default = true;
-    this.avatar = gender === 'male' ? maleAvatar : femaleAvatar;
+    this.avatar = gender === 'male' ? generateMaleAvatar() : null;
     this.hired = false;
 
     this.temper = {

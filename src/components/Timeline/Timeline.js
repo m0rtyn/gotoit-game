@@ -31,6 +31,7 @@ class Timeline extends Component {
               });
               return (
                 <TimeLineStep
+                  key={index}
                   index={index}
                   length={timelineScale.length}
                   day={day}

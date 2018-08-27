@@ -13,7 +13,7 @@
 
 .card {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  border-radius: var(--border-radius);
+  border-radius: size(0.5);
   margin-bottom: size(2);
 }
 
@@ -22,16 +22,6 @@
 .modal-body,
 .modal-header {
   padding: size(2);
-}
-
-.modal-dialog {
-  height: 85vh;
-  overflow-y: auto;
-  pointer-events: auto;
-
-  @media (min-width: 576px) {
-    max-width: 800px;
-  }
 }
 
 .topbar {
@@ -48,14 +38,6 @@
 
 .fa-plus {
   vertical-align: middle;
-}
-
-.modal-backdrop {
-  background-color: rgba(0, 0, 0, 0.66);
-}
-
-.modal {
-  display: block;
 }
 
 body .topbar + .main-container,

@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 import { getData } from '../App';
 
-import { skills } from '../game/knowledge';
+import { skills } from '../game/knowledge/skills';
 
 class bulkStyler {
   static speciality(stats_bulk) {

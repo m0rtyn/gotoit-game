@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import _ from 'lodash';
-import { skills } from '../game/knowledge';
+import { skills } from '../game/knowledge/skills';
 import StatsBar from './StatsBar';
 import ProjectName from './Projects/ProjectName';
 
@@ -28,8 +28,8 @@ class HotOffer extends PureComponent {
   }
 
   render() {
-    let project = this.props.project;
-    let expired = this.props.expired;
+    let project = this.props.letter.object;
+    let expired = this.props.letter.expired;
     const stats_data = _.mapValues(skills, (stat, key) => {
       return { name: key, val: <span>{project.needs(key)}</span> };
     });

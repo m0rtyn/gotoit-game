@@ -9,8 +9,8 @@ class Bar extends Component {
   };
 
   static propTypes = {
-    bar_data: PropTypes.array.isRequired,
-    className: PropTypes.string.isRequired
+    bar_data: PropTypes.array.isRequired
+    //className: PropTypes.string.isRequired
   };
 
   render() {

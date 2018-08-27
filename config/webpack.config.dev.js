@@ -61,9 +61,11 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
         sourceMap: true,
         ident: 'postcss',
         plugins: () => [
-          require('postcss-color-mod-function')(),
+          require('postcss-nested')(),require('postcss-color-mod-function')(),
           require('postcss-custom-properties')(),
-          require('postcss-flexbugs-fixes')(),
+          require('postcss-flexbugs-fixes')(),// require('postcss-mixins')(),
+            // require('postcss-define-function'),
+            // require('postcss-each'),
           autoprefixer({
             flexbox: 'no-2009'
           })

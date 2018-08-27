@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import { rules } from './rules';
-import { achievements } from './achievements';
+import { achievements } from './knowledge/achievements';
 
 export function tick(state) {
   _.each(rules, item => {

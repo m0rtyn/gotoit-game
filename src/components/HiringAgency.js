@@ -7,7 +7,8 @@ import '../../node_modules/react-bootstrap-slider/src/css/bootstrap-slider.min.c
 
 import TeamDialog from './TeamDialog';
 
-import { roles, skills, skills_names } from '../game/knowledge';
+import { roles } from '../game/knowledge/workers';
+import { skills, skills_names } from '../game/knowledge/skills';
 
 class HiringAgency extends PureComponent {
   constructor(props) {

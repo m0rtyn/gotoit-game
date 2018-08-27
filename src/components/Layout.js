@@ -10,7 +10,7 @@ import ToastNest from './ToastNest';
 import ActivityToolbar from './ActivityToolbar.js';
 import Activities from './Activities.js';
 
-import { colors } from '../game/knowledge.js';
+import { colors } from '../game/knowledge/colors';
 
 class Layout extends Component {
   render() {

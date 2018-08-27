@@ -10,10 +10,11 @@ import HireWorkers from './content/HireWorkers';
 import Loans from '../components/content/Loans.js';
 import MarketTop from '../components/content/MarketTop.js';
 import ProjectsFind from '../components/content/ProjectsFind.js';
-import StartMeeting from '../components/content/StartMeeting.js';
+//import StartMeeting from '../components/content/StartMeeting.js';
 import StartProject from '../components/content/StartProject.js';
 import Welcome from '../components/content/Welcome.js';
 import Mail from '../components/content/Mail.js';
+import Office from '../components/content/Office.js';
 
 const components = {
   Achievements: Achievements,
@@ -25,10 +26,12 @@ const components = {
   Loans: Loans,
   MarketTop: MarketTop,
   ProjectsFind: ProjectsFind,
-  StartMeeting: StartMeeting,
+  // this feature locked for {time}, time = undefined
+  //StartMeeting: StartMeeting,
   StartProject: StartProject,
   Welcome: Welcome,
-  Mail: Mail
+  Mail: Mail,
+  Office: Office
 };
 
 class Activities extends Component {

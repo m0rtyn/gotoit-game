@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { current_tick } from '../App';
-import { resume_will_expire_after } from '../game/knowledge';
+import { resume_will_expire_after } from '../game/knowledge/workers';
 
 class Resume extends Component {
   render() {
     console.log(current_tick);
     let data = this.props.data;
-    let worker = this.props.worker;
-    let expired = this.props.expired;
-    let createdAt = this.props.createdAt;
-    let days_to_expire = Math.round(
-      (createdAt + resume_will_expire_after - current_tick) / 24
+    let worker = this.props.letter.object;
+    let expired = this.props.letter.expired;
+    let createdAt = this.props.letter.createdAt;
+    let hours_to_expire = Math.round(
+      createdAt + resume_will_expire_after - current_tick
     );
     let gender_pointer = (() => {
       if (worker.gender === 'male') return 'him';
@@ -89,7 +89,7 @@ class Resume extends Component {
         <h3>
           {worker.character.name}. {worker.character.description}
         </h3>
-        {!expired ? `Will expire in ${days_to_expire} days` : ''}
+        {!expired ? <h3>{`Will expire in ${hours_to_expire} hours`}</h3> : ''}
         {!worker.hired ? (
           !expired ? (
             buttons
