@@ -7,7 +7,7 @@ class PRDepartment extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      next_click_will_able_at: 0,
+      next_click_will_able_at: 0
     };
   }
 
@@ -19,8 +19,8 @@ class PRDepartment extends Component {
         width: Math.min(100, data.rumor),
         color: colors.blue,
         value: Math.ceil(data.rumor * 100) / 100,
-        id: 'rumor',
-      },
+        id: 'rumor'
+      }
     ];
     const reputation_bar = [
       {
@@ -28,8 +28,8 @@ class PRDepartment extends Component {
         width: Math.min(100, data.rumor),
         color: colors.orange,
         value: Math.ceil(data.reputation * 100) / 100,
-        id: 'reputation',
-      },
+        id: 'reputation'
+      }
     ];
 
     return (

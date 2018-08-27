@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Header from './Header';
 import People from './People';
 // import Timeline from './Timeline'
-import Projects from './Projects';
+import Projects from './Projects/Projects';
 import PopupsNest from './PopupsNest';
 import ToastNest from './ToastNest';
 
