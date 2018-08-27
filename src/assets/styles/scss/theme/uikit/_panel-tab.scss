@@ -22,23 +22,25 @@
     border: none;
     font-size: 13px;
     text-align: center;
-    color: var(--color-text-secondary);
     background-color: transparent;
     padding: 10px 16px;
     transition: 0.3s;
-    border-radius: var(--big-border-radius) var(--big-border-radius) 0 0;
+    border-radius: size(2) size(2) 0 0;
     box-shadow:
-      // 0 46px 0px 6px white,
-      0px 4px 8px rgba(0, 0, 0, 0.3),
-      0px 0px 16px rgba(0, 0, 0, 0.2);
+    0px 4px 8px rgba(0, 0, 0, 0.3),
+    0px 0px 16px rgba(0, 0, 0, 0.2);
     font-weight: 700;
+    
+    h2, h3, h4, h5, h6 {
+      color: var(--color-text-secondary);
+    }
 
     // FOR SHADOW-BOTTOM OVERFLOW
     &::after {
       content: '';
       position: absolute;
       width: 106%;
-      height: 40%;
+      height: 32%;
       top: 100%;
       left: -3%;
       background-color: var(--white);
@@ -53,8 +55,15 @@
     &.active,
     &.active:focus,
     &.active:hover {
-      color: var(--color-text);
       border-color: var(--color-primary);
+      
+      h2, h3, h4, h5, h6 {
+        color: var(--color-text);
+      }
+    }
+
+    &.active {
+      z-index: 1;
     }
 
     .icon {

@@ -746,8 +746,8 @@ class App extends Component {
     const project = ProjectModel.generateOwnProject(
       project_name,
       team,
-      _.keys(project_platforms)[project_platform],
-      _.keys(project_kinds)[project_kind]
+      project_platform,
+      project_kind
     );
     this.acceptAndMoveProject(project);
     console.log('start project');
