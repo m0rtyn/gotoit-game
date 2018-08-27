@@ -11,14 +11,17 @@ import eyes_03 from '../../assets/images/man_asset/01_eyes/eyes_03.svg';
 import eyebrows_01_black from '../../assets/images/man_asset/02_eyebrows/eyebrows_01_black.svg';
 import eyebrows_01_brown from '../../assets/images/man_asset/02_eyebrows/eyebrows_01_brown.svg';
 import eyebrows_01_red from '../../assets/images/man_asset/02_eyebrows/eyebrows_01_red.svg';
+import eyebrows_01_blonde from '../../assets/images/man_asset/02_eyebrows/eyebrows_01_blonde.svg';
 
 import eyebrows_02_black from '../../assets/images/man_asset/02_eyebrows/eyebrows_02_black.svg';
 import eyebrows_02_brown from '../../assets/images/man_asset/02_eyebrows/eyebrows_02_brown.svg';
 import eyebrows_02_red from '../../assets/images/man_asset/02_eyebrows/eyebrows_02_red.svg';
+import eyebrows_02_blonde from '../../assets/images/man_asset/02_eyebrows/eyebrows_02_blonde.svg';
 
 import eyebrows_03_black from '../../assets/images/man_asset/02_eyebrows/eyebrows_03_black.svg';
 import eyebrows_03_brown from '../../assets/images/man_asset/02_eyebrows/eyebrows_03_brown.svg';
 import eyebrows_03_red from '../../assets/images/man_asset/02_eyebrows/eyebrows_03_red.svg';
+import eyebrows_03_blonde from '../../assets/images/man_asset/02_eyebrows/eyebrows_03_blonde.svg';
 
 import nose_01 from '../../assets/images/man_asset/03_nose/nose_01.svg';
 import nose_02 from '../../assets/images/man_asset/03_nose/nose_02.svg';
@@ -31,14 +34,17 @@ import mouth_03 from '../../assets/images/man_asset/04_mouth/mouth_03.svg';
 import beard_01_black from '../../assets/images/man_asset/05_beard/beard_01_black.svg';
 import beard_01_brown from '../../assets/images/man_asset/05_beard/beard_01_brown.svg';
 import beard_01_red from '../../assets/images/man_asset/05_beard/beard_01_red.svg';
+import beard_01_blonde from '../../assets/images/man_asset/05_beard/beard_01_blonde.svg';
 
 import beard_02_black from '../../assets/images/man_asset/05_beard/beard_02_black.svg';
 import beard_02_brown from '../../assets/images/man_asset/05_beard/beard_02_brown.svg';
 import beard_02_red from '../../assets/images/man_asset/05_beard/beard_02_red.svg';
+import beard_02_blonde from '../../assets/images/man_asset/05_beard/beard_02_blonde.svg';
 
 import beard_03_black from '../../assets/images/man_asset/05_beard/beard_03_black.svg';
 import beard_03_brown from '../../assets/images/man_asset/05_beard/beard_03_brown.svg';
 import beard_03_red from '../../assets/images/man_asset/05_beard/beard_03_red.svg';
+import beard_03_blonde from '../../assets/images/man_asset/05_beard/beard_03_blonde.svg';
 
 import access_01 from '../../assets/images/man_asset/06_accessories/access_01.svg';
 import access_02 from '../../assets/images/man_asset/06_accessories/access_02.svg';
@@ -50,14 +56,22 @@ import clothes_03 from '../../assets/images/man_asset/07_clothes/clothes_03.svg'
 import hair_01_black from '../../assets/images/man_asset/08_hair/hair_01_black.svg';
 import hair_01_brown from '../../assets/images/man_asset/08_hair/hair_01_brown.svg';
 import hair_01_red from '../../assets/images/man_asset/08_hair/hair_01_red.svg';
+import hair_01_blonde from '../../assets/images/man_asset/08_hair/hair_01_blonde.svg';
 
 import hair_02_black from '../../assets/images/man_asset/08_hair/hair_02_black.svg';
 import hair_02_brown from '../../assets/images/man_asset/08_hair/hair_02_brown.svg';
 import hair_02_red from '../../assets/images/man_asset/08_hair/hair_02_red.svg';
+import hair_02_blonde from '../../assets/images/man_asset/08_hair/hair_02_blonde.svg';
 
 import hair_03_black from '../../assets/images/man_asset/08_hair/hair_03_black.svg';
 import hair_03_brown from '../../assets/images/man_asset/08_hair/hair_03_brown.svg';
 import hair_03_red from '../../assets/images/man_asset/08_hair/hair_03_red.svg';
+import hair_03_blonde from '../../assets/images/man_asset/08_hair/hair_03_blonde.svg';
+
+import hair_04_black from '../../assets/images/man_asset/08_hair/hair_04_black.svg';
+import hair_04_brown from '../../assets/images/man_asset/08_hair/hair_04_brown.svg';
+import hair_04_red from '../../assets/images/man_asset/08_hair/hair_04_red.svg';
+import hair_04_blonde from '../../assets/images/man_asset/08_hair/hair_04_blonde.svg';
 
 export const male_avatar = {
   body: [body_dark_skin, body_light_skin, body_medium_skin],
@@ -65,26 +79,30 @@ export const male_avatar = {
   eyebrows: {
     black: [eyebrows_01_black, eyebrows_02_black, eyebrows_03_black],
     brown: [eyebrows_01_brown, eyebrows_02_brown, eyebrows_03_brown],
-    red: [eyebrows_01_red, eyebrows_02_red, eyebrows_03_red]
+    red: [eyebrows_01_red, eyebrows_02_red, eyebrows_03_red],
+    blonde: [eyebrows_01_blonde, eyebrows_02_blonde, eyebrows_03_blonde]
   },
   nose: [nose_01, nose_02, nose_03],
   mouth: [mouth_01, mouth_02, mouth_03],
   beard: {
     black: [beard_01_black, beard_02_black, beard_03_black],
     brown: [beard_01_brown, beard_02_brown, beard_03_brown],
-    red: [beard_01_red, beard_02_red, beard_03_red]
+    red: [beard_01_red, beard_02_red, beard_03_red],
+    blonde: [beard_01_blonde, beard_02_blonde, beard_03_blonde]
   },
   accessories: [access_01, access_02],
   clothes: [clothes_01, clothes_02, clothes_03],
   hair: {
-    black: [hair_01_black, hair_02_black, hair_03_black],
-    brown: [hair_01_brown, hair_02_brown, hair_03_brown],
-    red: [hair_01_red, hair_02_red, hair_03_red]
+    black: [hair_01_black, hair_02_black, hair_03_black, hair_04_black],
+    brown: [hair_01_brown, hair_02_brown, hair_03_brown, hair_04_brown],
+    red: [hair_01_red, hair_02_red, hair_03_red, hair_04_red],
+    blonde: [hair_01_blonde, hair_02_blonde, hair_03_blonde, hair_04_blonde]
   }
 };
 
 export const generateMaleAvatar = () => {
-  let hair_color = _.sample(['black', 'red', 'brown']);
+  let hair_color = _.sample(['black', 'red', 'brown', 'blonde']);
+  let have_hair = Boolean(Math.round(Math.random() * 8));
   let have_beard = Boolean(Math.round(Math.random()));
   let have_accessories = Boolean(Math.round(Math.random()));
   return {
@@ -96,6 +114,6 @@ export const generateMaleAvatar = () => {
     beard: have_beard ? _.sample(male_avatar.beard[hair_color]) : null,
     accessories: have_accessories ? _.sample(male_avatar.accessories) : null,
     clothes: _.sample(male_avatar.clothes),
-    hair: _.sample(male_avatar.hair[hair_color])
+    hair: have_hair ? _.sample(male_avatar.hair[hair_color]) : null
   };
 };

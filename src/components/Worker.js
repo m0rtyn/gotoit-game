@@ -411,9 +411,9 @@ class Worker extends Component {
                 <div className="modal-header">
                   <div style={{ position: 'relative', width: '200px', height: '200px'}}>
                     {
-                      _.map(worker.avatar, img => {
+                      _.map(worker.avatar, (img,i) => {
                         return (
-                          <img style={{ position: 'absolute', width: '200px', height: '200px' }} src={img} />
+                          <img key={'avatar' + i} style={{ position: 'absolute', width: '200px', height: '200px' }} src={img} />
                         )
                       })
                     }
