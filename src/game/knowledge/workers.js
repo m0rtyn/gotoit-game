@@ -38,7 +38,12 @@ export const workers_bonus_items = {
     }
   },
   program: {
-    exp: { name: 'IDE', money: 500, bonus: 10, description: 'insreases 10% EXP' },
+    exp: {
+      name: 'IDE',
+      money: 500,
+      bonus: 10,
+      description: 'insreases 10% EXP'
+    },
     flat: {
       name: 'Laptop',
       money: 2500,
