@@ -12,9 +12,9 @@ class ProjectName extends PureComponent {
     deadlineText: PropTypes.string,
     kind: PropTypes.string,
     name: PropTypes.string,
-    penalty: PropTypes.string,
+    penalty: PropTypes.number,
     platform: PropTypes.string,
-    reward: PropTypes.string,
+    reward: PropTypes.number,
     size: PropTypes.number
   };
 

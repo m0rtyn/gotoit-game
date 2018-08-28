@@ -4,7 +4,7 @@ import * as PropTypes from 'prop-types';
 export class ProjectReward extends PureComponent {
   static propTypes = {
     penalty: PropTypes.number,
-    reward: PropTypes.string
+    reward: PropTypes.number
   };
 
   render() {

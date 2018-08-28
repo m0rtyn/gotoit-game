@@ -9,25 +9,7 @@ import Resume from '../Resume';
 import Offer from '../Offer';
 import { FormattedDate } from 'react-intl';
 import * as PropTypes from 'prop-types';
-
-class Avatar extends Component {
-  render() {
-    return (
-      <div className="project-avatar">
-        <img
-          alt={this.props.name + ' avatar'}
-          src={this.props.avatar.platform}
-        />
-        <img alt={this.props.name + ' avatar'} src={this.props.avatar.kind} />
-      </div>
-    );
-  }
-}
-
-Avatar.propTypes = {
-  name: PropTypes.any,
-  avatar: PropTypes.any
-};
+import { Avatar } from '../Projects/Avatar';
 
 class Mail extends Component {
   constructor(props) {
@@ -167,13 +149,12 @@ class Mail extends Component {
               //for project reporting, offer and hotoffer
               return (
                 <div className="project-avatar">
-                  <img
-                    alt={letter.object.name + ' platform avatar'}
-                    src={letter.object.avatar.platform}
-                  />
-                  <img
-                    alt={letter.object.name + ' kind avatar'}
-                    src={letter.object.avatar.kind}
+                  <Avatar
+                    name={letter.object.name}
+                    platform={letter.object.avatar.platform}
+                    kind={letter.object.avatar.kind}
+                    style={{ position: 'absolute' }}
+                    size={20}
                   />
                 </div>
               );

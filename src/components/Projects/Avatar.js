@@ -2,25 +2,49 @@ import React, { PureComponent } from 'react';
 import * as PropTypes from 'prop-types';
 
 export class Avatar extends PureComponent {
+  static propTypes = {
+    className: PropTypes.string,
+    kind: PropTypes.string,
+    name: PropTypes.string,
+    platform: PropTypes.string,
+    size: PropTypes.number,
+    style: PropTypes.object
+  };
+
   render() {
+    let props = {};
+    if (this.props.size) {
+      props = {
+        ...props,
+        width: this.props.size,
+        height: this.props.size
+      };
+    }
+    if (this.props.style) {
+      props = {
+        ...props,
+        style: this.props.style
+      };
+    }
+    if (this.props.className) {
+      props = {
+        ...props,
+        className: this.props.className
+      };
+    }
     return (
-      <div className="project-avatar">
+      <>
         <img
-          className="project-avatar"
           alt={this.props.name + ' avatar'}
-          src={this.props.avatar && this.props.avatar.platform}
+          src={this.props.platform}
+          {...props}
         />
         <img
-          className="project-avatar"
           alt={this.props.name + ' avatar'}
-          src={this.props.avatar && this.props.avatar.kind}
+          src={this.props.kind}
+          {...props}
         />
-      </div>
+      </>
     );
   }
 }
-
-Avatar.propTypes = {
-  name: PropTypes.any,
-  avatar: PropTypes.any
-};

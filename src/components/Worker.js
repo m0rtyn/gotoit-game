@@ -403,9 +403,12 @@ class Worker extends Component {
       >
         <div style={{ position: 'relative', width: '80px', height: '80px'}}>
           {
-            _.map(worker.avatar, img => {
+            _.map(worker.avatar, (img, index) => {
               return (
-                <img style={{ position: 'absolute', width: '80px', height: '80px' }} src={img} />
+                <img
+                  key={`card-small-${worker.id}${index}`}
+                  style={{ position: 'absolute', width: '80px', height: '80px' }}
+                  src={img} />
               )
             })
           }
@@ -426,9 +429,11 @@ class Worker extends Component {
                 <div className="modal-header">
                   <div style={{ position: 'relative', width: '200px', height: '200px'}}>
                     {
-                      _.map(worker.avatar, img => {
+                      _.map(worker.avatar, (img, index) => {
                         return (
-                          <img style={{ position: 'absolute', width: '200px', height: '200px' }} src={img} />
+                          <img
+                            key={`card-big-${worker.id}${index}`}
+                            style={{ position: 'absolute', width: '200px', height: '200px' }} src={img} />
                         )
                       })
                     }

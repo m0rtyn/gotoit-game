@@ -14,7 +14,6 @@ export default class VacationAndLeave extends Component {
   render() {
     return (
       <OverlayTrigger
-        key={this.props.index}
         delay={150}
         placement="bottom"
         overlay={

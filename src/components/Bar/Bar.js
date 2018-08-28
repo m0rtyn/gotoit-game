@@ -23,17 +23,17 @@ class Bar extends Component {
             name = '',
             showName = false,
             color = '#fff',
-            value = 0,
+            value,
             width = 0
           } = item;
           return (
             <BarItem
-              key={`${id}-${name}`}
+              key={`${id}-${name}-${value}`}
               showName={showName}
               color={color}
               name={name}
-              value={value}
-              width={width}
+              value={`${value}`}
+              width={Number.isNaN(width) ? 0 : width}
             />
           );
         })}
