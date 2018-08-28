@@ -43,12 +43,12 @@ class ProjectModel {
     this.reward = reward;
     this.penalty = penalty;
     const platformsSVG = require.context(
-      '!svg-url-loader?encoding=base64!../assets/images/project/platforms/',
+      '../assets/images/project/platforms/',
       true,
       /^\.\/.*\.svg$/
     );
     const kindSVG = require.context(
-      '!svg-url-loader?encoding=base64!../assets/images/project/kind/',
+      '../assets/images/project/kind/',
       true,
       /^\.\/.*\.svg$/
     );

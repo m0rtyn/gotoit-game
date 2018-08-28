@@ -4,7 +4,7 @@ import * as PropTypes from 'prop-types';
 export class KickWorkerButton extends PureComponent {
   render() {
     return (
-      <span key={this.props.id}>
+      <span>
         <button
           className="btn btn-xs team-remove-worker"
           onClick={this.props.action}

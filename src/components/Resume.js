@@ -97,7 +97,7 @@ class Resume extends Component {
             <h3>{'This employer found another job.'}</h3>
           )
         ) : (
-          <h3>{`You already hired ${gender_pointer}`}</h3>
+          <h3>{`You already hired ${gender_pointer}.`}</h3>
         )}
       </div>
     );

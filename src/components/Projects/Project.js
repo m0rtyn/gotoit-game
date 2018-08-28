@@ -206,7 +206,7 @@ class Project extends Component {
                 skill
               );
             }}
-            statsData={worker.getStatsData}
+            statsData={worker.getStatsData(skill)}
           />
         )
       };
@@ -270,13 +270,13 @@ class Project extends Component {
         <KickWorkerButton
           id={worker.id}
           name={worker.name}
+          key={worker.id}
           action={() => kickWorker(worker, project)}
         />
       );
     };
 
     let team_ids = {};
-    console.info('data.relations', data.relations);
     _.keys(data.relations).forEach(worker_id => {
       let worker_projects = data.relations[worker_id];
       _.keys(worker_projects).forEach(project_id => {
@@ -338,9 +338,25 @@ class Project extends Component {
       >
         <div className="card-header">
           <div className="card-header">
-            <Avatar name={name} avatar={avatar} />
+            <div className="project-avatar">
+              <Avatar
+                name={name}
+                sources={_.toPairs(avatar)}
+                className={'project-avatar'}
+              />
+            </div>
             <div className="project-money">
-              <ProjectName project={project} />
+              <ProjectName
+                {...{
+                  size,
+                  platform,
+                  kind,
+                  name,
+                  reward,
+                  penalty
+                }}
+                deadlineText={deadlineText}
+              />
               <ProjectMoney reward={reward} penalty={penalty} />
             </div>
           </div>
@@ -361,7 +377,7 @@ class Project extends Component {
                     deadlineText={deadlineText}
                   />{' '}
                 </span>
-                <ProjectReward reward={reward} project={project} />
+                <ProjectReward reward={reward} penalty={penalty} />
                 <div>
                   <span>
                     <StartPauseButton

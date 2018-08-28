@@ -16,7 +16,7 @@ export class StatsDataItem extends Component {
             )}
             onChange={this.props.onChange}
           />
-          {this.props.statsData(this.props.skill)}
+          {this.props.statsData}
         </span>
       </div>
     );

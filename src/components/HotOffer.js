@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { skills } from '../game/knowledge/skills';
 import StatsBar from './StatsBar';
 import ProjectName from './Projects/ProjectName';
+import { Avatar } from './Projects/Avatar';
 
 class HotOffer extends PureComponent {
   constructor(props) {
@@ -29,6 +30,7 @@ class HotOffer extends PureComponent {
 
   render() {
     let project = this.props.letter.object;
+    let { reward, name, platform, kind, size, penalty, id, stage } = project;
     let expired = this.props.letter.expired;
     const stats_data = _.mapValues(skills, (stat, key) => {
       return { name: key, val: <span>{project.needs(key)}</span> };
@@ -52,19 +54,11 @@ class HotOffer extends PureComponent {
             <span
               style={{ position: 'relative', width: '200px', height: '200px' }}
             >
-              <img
+              <Avatar
+                name={name}
                 style={{ position: 'absolute' }}
-                width={200}
-                height={200}
-                alt={project.name + ' avatar'}
-                src={project.avatar.platform}
-              />
-              <img
-                style={{ position: 'absolute' }}
-                width={200}
-                height={200}
-                alt={project.name + ' avatar'}
-                src={project.avatar.kind}
+                size={200}
+                sources={_.toPairs(project.avatar)}
               />
             </span>
             <span className="moat flex-grow">
@@ -74,20 +68,26 @@ class HotOffer extends PureComponent {
           </div>
 
           <div className="moat slim_top">
-            <div key={project.id} className="card">
-              <ProjectName project={project} />
+            <div key={id} className="card">
+              <ProjectName
+                name={name}
+                penalty={penalty}
+                deadlineText={project.getDeadlineText()}
+                platform={platform}
+                reward={reward}
+              />
               <div>
                 <span>
                   <h4 className="project-reward text-success">
                     {' '}
-                    Reward: ${project.reward}
+                    Reward: ${reward}
                   </h4>
                 </span>
-                {project.penalty > 0 ? (
+                {penalty > 0 ? (
                   <span>
                     {' '}
                     <h4 className="project-penalty text-warning">
-                      Penalty : ${project.penalty}
+                      Penalty : ${penalty}
                     </h4>{' '}
                   </span>
                 ) : (
@@ -95,12 +95,12 @@ class HotOffer extends PureComponent {
                 )}
               </div>
               <StatsBar stats={stats_data} data={this.props.data} />
-              {project.stage === 'ready' ? (
+              {stage === 'ready' ? (
                 !expired ? (
                   <div className="btn-group">
                     <button
                       className="btn btn-success"
-                      id={project.id}
+                      id={id}
                       onClick={e => this.acceptOffered(e)}
                     >
                       Accept
@@ -108,7 +108,7 @@ class HotOffer extends PureComponent {
                     &nbsp;
                     <button
                       className="btn btn-warning"
-                      id={project.id}
+                      id={id}
                       onClick={e => this.startOffered(e)}
                     >
                       Start
@@ -116,7 +116,7 @@ class HotOffer extends PureComponent {
                     &nbsp;
                     <button
                       className="btn btn-danger"
-                      id={project.id}
+                      id={id}
                       onClick={e => this.reject(e)}
                     >
                       Hide

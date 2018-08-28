@@ -10,7 +10,7 @@ export class Technology extends Component {
     money: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,
-    price: PropTypes.string
+    price: PropTypes.number
   };
 
   render() {
