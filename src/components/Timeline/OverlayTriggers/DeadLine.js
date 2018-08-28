@@ -3,6 +3,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import { Avatar } from '../../Projects/Avatar';
+import _ from 'lodash';
 
 export default class DeadLine extends Component {
   static propTypes = {
@@ -27,8 +28,7 @@ export default class DeadLine extends Component {
         <div style={{ position: 'relative' }}>
           <Avatar
             name={this.props.name}
-            platform={this.props.avatar.platform}
-            kind={this.props.avatar.kind}
+            sources={_.toPairs(this.props.avatar)}
             style={{ position: 'absolute' }}
             size={20}
           />

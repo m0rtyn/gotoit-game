@@ -131,18 +131,22 @@ class Mail extends Component {
           {(() => {
             if (letter.type === 'Resume') {
               return (
-                <img
+                <Avatar
                   className="worker-avatar"
-                  alt={letter.object.name + ' avatar'}
-                  src={letter.object.avatar}
+                  name={letter.object.name}
+                  sources={_.toPairs(letter.object.avatar)}
+                  style={{ position: 'absolute' }}
+                  size={20}
                 />
               );
             } else if (letter.type === 'Event') {
               return (
-                <img
+                <Avatar
                   className="worker-avatar"
-                  alt={letter.object.name}
-                  src={letter.object.picture}
+                  name={letter.object.name}
+                  sources={_.toPairs(letter.object.avatar)}
+                  style={{ position: 'absolute' }}
+                  size={20}
                 />
               );
             } else {
@@ -151,8 +155,7 @@ class Mail extends Component {
                 <div className="project-avatar">
                   <Avatar
                     name={letter.object.name}
-                    platform={letter.object.avatar.platform}
-                    kind={letter.object.avatar.kind}
+                    sources={_.toPairs(letter.object.avatar)}
                     style={{ position: 'absolute' }}
                     size={20}
                   />

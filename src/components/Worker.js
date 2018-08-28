@@ -12,6 +12,7 @@ import { skills_names } from '../game/knowledge/skills';
 import { education } from '../game/knowledge/education';
 import WorkerHappinessBar from './WorkerHappinessBar';
 import WorkerStaminaBar from './WorkerStaminaBar';
+import { Avatar } from './Projects/Avatar';
 
 
 //import {addAction} from '../components/ToastNest';
@@ -402,16 +403,13 @@ class Worker extends Component {
         id={worker.id}
       >
         <div style={{ position: 'relative', width: '80px', height: '80px'}}>
-          {
-            _.map(worker.avatar, (img, index) => {
-              return (
-                <img
-                  key={`card-small-${worker.id}${index}`}
-                  style={{ position: 'absolute', width: '80px', height: '80px' }}
-                  src={img} />
-              )
-            })
-          }
+          <Avatar
+            name={worker.name}
+            style={{ position: 'absolute'}}
+            size={80}
+            sources={_.toPairs(worker.avatar)}
+          />
+
         </div>
       <div className="worker-info">
           <header className="card-header">
@@ -428,15 +426,13 @@ class Worker extends Component {
 
                 <div className="modal-header">
                   <div style={{ position: 'relative', width: '200px', height: '200px'}}>
-                    {
-                      _.map(worker.avatar, (img, index) => {
-                        return (
-                          <img
-                            key={`card-big-${worker.id}${index}`}
-                            style={{ position: 'absolute', width: '200px', height: '200px' }} src={img} />
-                        )
-                      })
-                    }
+                    <Avatar
+                      name={worker.name}
+                      style={{ position: 'absolute' }}
+                      size={200}
+                      sources={_.toPairs(worker.avatar)}
+                    />
+
                   </div>
                   <div className="worker-info">
                     <h3 className="worker-name">

@@ -232,8 +232,9 @@ module.exports = {
           {
             test: [/\.svg$/],
             use: {
-              loader: require.resolve('svg-inline-loader'),
+              loader: require.resolve('svg-url-loader'),
               options: {
+                encoding: 'base64',
                 name: 'static/svg/[name].[hash:8].[ext]'
               }
             }

@@ -58,8 +58,7 @@ class HotOffer extends PureComponent {
                 name={name}
                 style={{ position: 'absolute' }}
                 size={200}
-                kind={project.avatar.kind}
-                platform={project.avatar.platform}
+                sources={_.toPairs(project.avatar)}
               />
             </span>
             <span className="moat flex-grow">

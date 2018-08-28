@@ -341,8 +341,7 @@ class Project extends Component {
             <div className="project-avatar">
               <Avatar
                 name={name}
-                platform={avatar.platform}
-                kind={avatar.kind}
+                sources={_.toPairs(avatar)}
                 className={'project-avatar'}
               />
             </div>

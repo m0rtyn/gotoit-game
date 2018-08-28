@@ -1,47 +1,47 @@
 import _ from 'lodash';
 
 const bodySVG = require.context(
-  '!svg-url-loader?encoding=base64!../../assets/images/man_asset/00_body/',
+  '../../assets/images/man_asset/00_body/',
   true,
   /^\.\/.*\.svg$/
 );
 const eyesSVG = require.context(
-  '!svg-url-loader?encoding=base64!../../assets/images/man_asset/01_eyes/',
+  '../../assets/images/man_asset/01_eyes/',
   true,
   /^\.\/.*\.svg$/
 );
 const eyebrowsSVG = require.context(
-  '!svg-url-loader?encoding=base64!../../assets/images/man_asset/02_eyebrows/',
+  '../../assets/images/man_asset/02_eyebrows/',
   true,
   /^\.\/.*\.svg$/
 );
 const nosesSVG = require.context(
-  '!svg-url-loader?encoding=base64!../../assets/images/man_asset/03_nose/',
+  '../../assets/images/man_asset/03_nose/',
   true,
   /^\.\/.*\.svg$/
 );
 const mouthesSVG = require.context(
-  '!svg-url-loader?encoding=base64!../../assets/images/man_asset/04_mouth/',
+  '../../assets/images/man_asset/04_mouth/',
   true,
   /^\.\/.*\.svg$/
 );
 const beardsSVG = require.context(
-  '!svg-url-loader?encoding=base64!../../assets/images/man_asset/05_beard/',
+  '../../assets/images/man_asset/05_beard/',
   true,
   /^\.\/.*\.svg$/
 );
 const accessoriesSVG = require.context(
-  '!svg-url-loader?encoding=base64!../../assets/images/man_asset/06_accessories/',
+  '../../assets/images/man_asset/06_accessories/',
   true,
   /^\.\/.*\.svg$/
 );
 const clothesSVG = require.context(
-  '!svg-url-loader?encoding=base64!../../assets/images/man_asset/07_clothes/',
+  '../../assets/images/man_asset/07_clothes/',
   true,
   /^\.\/.*\.svg$/
 );
 const hairSVG = require.context(
-  '!svg-url-loader?encoding=base64!../../assets/images/man_asset/08_hair/',
+  '../../assets/images/man_asset/08_hair/',
   true,
   /^\.\/.*\.svg$/
 );

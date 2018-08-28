@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import * as PropTypes from 'prop-types';
+import _ from 'lodash';
 
 export class Avatar extends PureComponent {
   static propTypes = {
@@ -8,7 +9,8 @@ export class Avatar extends PureComponent {
     name: PropTypes.string,
     platform: PropTypes.string,
     size: PropTypes.number,
-    style: PropTypes.object
+    style: PropTypes.object,
+    sources: PropTypes.array
   };
 
   render() {
@@ -32,18 +34,22 @@ export class Avatar extends PureComponent {
         className: this.props.className
       };
     }
+
     return (
       <>
-        <img
-          alt={this.props.name + ' avatar'}
-          src={this.props.platform}
-          {...props}
-        />
-        <img
-          alt={this.props.name + ' avatar'}
-          src={this.props.kind}
-          {...props}
-        />
+        {_.map(this.props.sources, ([type, src], index) => {
+          if (!src) {
+            return null;
+          }
+          return (
+            <img
+              key={`${index}${type}`}
+              alt={this.props.name + ' avatar'}
+              src={src}
+              {...props}
+            />
+          );
+        })}
       </>
     );
   }
