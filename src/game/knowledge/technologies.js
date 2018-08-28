@@ -4,7 +4,7 @@ export const technologies = {
     acronym: 'Over',
     price: 0,
     meeting: 'fire',
-    description: 'Overtime helps to finish project on time but exhausts team.'
+    description: 'It helps to finish project on time but exhausts your team.'
   },
 
   tdd: {
@@ -12,7 +12,7 @@ export const technologies = {
     acronym: 'TDD',
     price: 10000,
     meeting: 'test',
-    description: 'Developing tests that reduce the probability of errors.'
+    description: 'Developing tests reduce the probability of errors.'
   },
   refactoring: {
     name: 'Non-stop refactoring',
