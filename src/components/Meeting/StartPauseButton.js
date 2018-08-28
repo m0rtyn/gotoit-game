@@ -15,21 +15,21 @@ export default class StartPauseButton extends PureComponent {
       <span>
         {/*{project.stage}*/}
         {this.props.paused ? (
-          <button className="btn btn-success" onClick={this.props.unpause}>
+          <button className="btn btn-success" onClick={this.props.onUnpause}>
             Start
           </button>
         ) : (
           ''
         )}
         {this.props.stage === 'ready' ? (
-          <button className="btn btn-success" onClick={this.props.open}>
+          <button className="btn btn-success" onClick={this.props.onOpen}>
             Start
           </button>
         ) : (
           ''
         )}
         {this.props.stage === 'open' && !this.props.paused ? (
-          <button className="btn btn-warning" onClick={this.props.pause}>
+          <button className="btn btn-warning" onClick={this.props.onPause}>
             Pause
           </button>
         ) : (

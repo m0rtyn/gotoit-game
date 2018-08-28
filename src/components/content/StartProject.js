@@ -102,7 +102,7 @@ class StartProject extends Component {
                 </p>
               </div>
               <div className="card text-center col-md-6">
-                <h4 className="text-center">Project kind</h4>
+                <h4 className="text-center">Project type</h4>
                 {Object.keys(project_kinds).map((kind, i) => {
                   return (
                     <div key={i}>

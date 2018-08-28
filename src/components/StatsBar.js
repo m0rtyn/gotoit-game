@@ -8,11 +8,15 @@ class StatsBar extends Component {
   // shouldComponentUpdate() {
   //   return false;
   // }
+  componentDidMount() {
+    console.info('StatsBar mounted');
+  }
+
   render() {
     const stats = this.props.stats;
 
     //console.log(stats);
-
+    console.info('StatsBar rendered');
     return (
       <div className="flexbox text-center">
         {Object.keys(stats).map(stat => {

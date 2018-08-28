@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import DeadLine from './OverlayTriggers/DeadLine';
+import VacationAndLeave from './OverlayTriggers/VacationAndLeave';
 const timelineWidth = window.innerWidth;
 
 export class TimeLineStep extends Component {
   static propTypes = {
     day: PropTypes.any,
     events: PropTypes.arrayOf(PropTypes.any),
-    f: PropTypes.func,
     index: PropTypes.number,
     length: PropTypes.number
   };
@@ -15,7 +16,6 @@ export class TimeLineStep extends Component {
   render() {
     return (
       <div
-        key={this.props.index}
         className="step"
         style={{
           marginLeft:
@@ -25,7 +25,34 @@ export class TimeLineStep extends Component {
         <div>{this.props.day.getDate()}</div>
 
         <div className="worker-portrait">
-          {_.map(this.props.events, this.props.f)}
+          {_.map(this.props.events, (item, index) => {
+            const {
+              type,
+              info,
+              object: { name, avatar }
+            } = item;
+            if (type === 'deadline') {
+              return (
+                <DeadLine
+                  key={`${type}${name}`}
+                  index={this.props.index}
+                  info={info}
+                  name={name}
+                  avatar={avatar}
+                />
+              );
+            } else if (type === 'vacation' || type === 'leave') {
+              return (
+                <VacationAndLeave
+                  key={`${type}${name}`}
+                  index={this.props.index}
+                  info={info}
+                  name={name}
+                  avatar={avatar}
+                />
+              );
+            } else return null;
+          })}
         </div>
       </div>
     );

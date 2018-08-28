@@ -42,9 +42,19 @@ class ProjectModel {
     this.platform = platform;
     this.reward = reward;
     this.penalty = penalty;
+    const platformsSVG = require.context(
+      '../assets/images/project/platforms/',
+      true,
+      /^\.\/.*\.svg$/
+    );
+    const kindSVG = require.context(
+      '../assets/images/project/kind/',
+      true,
+      /^\.\/.*\.svg$/
+    );
     this.avatar = {
-      platform: require(`../assets/images/project/platforms/${platform}.svg`),
-      kind: require(`../assets/images/project/kind/${kind}.svg`)
+      platform: platformsSVG(`./${platform}.svg`),
+      kind: kindSVG(`./${kind}.svg`)
     };
     this.company = company;
 

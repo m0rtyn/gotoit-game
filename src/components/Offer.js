@@ -4,8 +4,9 @@ import { project_offer_will_expire_after } from '../game/knowledge/projects';
 import _ from 'lodash';
 import StatsBar from './StatsBar';
 
-import ProjectName from './ProjectName';
+import ProjectName from './Projects/ProjectName';
 import { current_tick } from '../App';
+import { Avatar } from './Projects/Avatar';
 
 class Offer extends Component {
   constructor(props) {
@@ -61,19 +62,11 @@ class Offer extends Component {
             <span
               style={{ position: 'relative', width: '200px', height: '200px' }}
             >
-              <img
+              <Avatar
+                name={project.name}
                 style={{ position: 'absolute' }}
-                width={200}
-                height={200}
-                alt={project.name + ' avatar'}
-                src={project.avatar.platform}
-              />
-              <img
-                style={{ position: 'absolute' }}
-                width={200}
-                height={200}
-                alt={project.name + ' avatar'}
-                src={project.avatar.kind}
+                size={200}
+                sources={_.toPairs(project.avatar)}
               />
             </span>
             <span className="flex-grow">
