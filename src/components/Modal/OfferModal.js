@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { skills } from '../game/knowledge/skills';
-import { project_offer_will_expire_after } from '../game/knowledge/projects';
+import { skills } from '../../game/knowledge/skills';
+import { project_offer_will_expire_after } from '../../game/knowledge/projects';
 import _ from 'lodash';
-import StatsBar from './StatsBar';
+import StatsBar from '../StatsBar';
 
-import ProjectName from './ProjectName';
-import { current_tick } from '../App';
+import ProjectName from '../ProjectName';
+import { current_tick } from '../../App';
 
 class Offer extends Component {
   constructor(props) {
@@ -45,17 +45,6 @@ class Offer extends Component {
 
     return (
       <div>
-        <div>
-          <button
-            className="btn btn-warning float-right"
-            onClick={() => {
-              //data.helpers.projectArchiving();
-              this.props.closePopup();
-            }}
-          >
-            Close
-          </button>
-        </div>
         <div>
           <div className="flexbox">
             <span

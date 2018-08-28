@@ -20,9 +20,11 @@
 @import 'app/blocks/creation.scss';
 @import 'app/blocks/hire-workers.scss';
 @import 'app/blocks/mail.scss';
-@import 'app/blocks/resume.scss';
 @import 'app/blocks/modal.scss';
-@import 'app/blocks/modal-content/_modal-worker.scss';
+  @import 'app/blocks/modal-content/_worker-modal.scss';
+  @import 'app/blocks/modal-content/_project-modal.scss';
+  @import 'app/blocks/modal-content/_resume-modal.scss';
+  @import 'app/blocks/modal-content/_offer-modal.scss';
 
 //====COMPONENTS====================================//
 @import 'app/blocks/checkbox.scss';
