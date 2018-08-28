@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { colors } from '../game/knowledge/colors';
-import Bar from './Bar/Bar';
+import React, { PureComponent } from 'react';
+import { colors } from '../../game/knowledge/colors';
+import Bar from '../Bar/Bar';
 
-class ProjectDeadlineBar extends Component {
+class ProjectDeadlineBar extends PureComponent {
   render() {
     let { project } = this.props;
     const bar_data = [

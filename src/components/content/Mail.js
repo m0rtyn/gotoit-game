@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 //import PropTypes from 'prop-types';
 import _ from 'lodash';
-import ProjectEndScreen from '../ProjectEndScreen';
+import ProjectEndScreen from '../Projects/ProjectEndScreen';
 import HistoricalEvent from '../HistoricalEvent';
 import HotOffer from '../HotOffer';
 import SimpleModal from '../SimpleModal';
 import Resume from '../Resume';
 import Offer from '../Offer';
 import { FormattedDate } from 'react-intl';
+import * as PropTypes from 'prop-types';
+import { Avatar } from '../Projects/Avatar';
 
 class Mail extends Component {
   constructor(props) {
@@ -129,31 +131,37 @@ class Mail extends Component {
           {(() => {
             if (letter.type === 'Resume') {
               return (
-                <img
-                  className="worker-avatar"
-                  alt={letter.object.name + ' avatar'}
-                  src={letter.object.avatar}
-                />
+                <div className="project-avatar">
+                  <Avatar
+                    className="worker-avatar"
+                    name={letter.object.name}
+                    sources={_.toPairs(letter.object.avatar)}
+                    style={{ position: 'absolute' }}
+                    size={20}
+                  />
+                </div>
               );
             } else if (letter.type === 'Event') {
               return (
-                <img
-                  className="worker-avatar"
-                  alt={letter.object.name}
-                  src={letter.object.picture}
-                />
+                <div className="project-avatar">
+                  <Avatar
+                    className="worker-avatar"
+                    name={letter.object.name}
+                    sources={_.toPairs(letter.object.avatar)}
+                    style={{ position: 'absolute' }}
+                    size={20}
+                  />
+                </div>
               );
             } else {
               //for project reporting, offer and hotoffer
               return (
                 <div className="project-avatar">
-                  <img
-                    alt={letter.object.name + ' platform avatar'}
-                    src={letter.object.avatar.platform}
-                  />
-                  <img
-                    alt={letter.object.name + ' kind avatar'}
-                    src={letter.object.avatar.kind}
+                  <Avatar
+                    name={letter.object.name}
+                    sources={_.toPairs(letter.object.avatar)}
+                    style={{ position: 'absolute' }}
+                    size={20}
                   />
                 </div>
               );
