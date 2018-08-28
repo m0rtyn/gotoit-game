@@ -131,23 +131,27 @@ class Mail extends Component {
           {(() => {
             if (letter.type === 'Resume') {
               return (
-                <Avatar
-                  className="worker-avatar"
-                  name={letter.object.name}
-                  sources={_.toPairs(letter.object.avatar)}
-                  style={{ position: 'absolute' }}
-                  size={20}
-                />
+                <div className="project-avatar">
+                  <Avatar
+                    className="worker-avatar"
+                    name={letter.object.name}
+                    sources={_.toPairs(letter.object.avatar)}
+                    style={{ position: 'absolute' }}
+                    size={20}
+                  />
+                </div>
               );
             } else if (letter.type === 'Event') {
               return (
-                <Avatar
-                  className="worker-avatar"
-                  name={letter.object.name}
-                  sources={_.toPairs(letter.object.avatar)}
-                  style={{ position: 'absolute' }}
-                  size={20}
-                />
+                <div className="project-avatar">
+                  <Avatar
+                    className="worker-avatar"
+                    name={letter.object.name}
+                    sources={_.toPairs(letter.object.avatar)}
+                    style={{ position: 'absolute' }}
+                    size={20}
+                  />
+                </div>
               );
             } else {
               //for project reporting, offer and hotoffer

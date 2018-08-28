@@ -24,11 +24,16 @@ export default class VacationAndLeave extends Component {
           </Tooltip>
         }
       >
-        <div className="worker-portrait">
+        <div
+          className="worker-portrait"
+          role="presentation"
+          style={{ position: 'relative' }}
+        >
           <Avatar
+            style={{ position: 'absolute' }}
+            size={20}
             name={this.props.name}
             sources={_.toPairs(this.props.avatar)}
-            className={'worker-portrait'}
           />
         </div>
       </OverlayTrigger>
