@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import ProjectOfferBlock from '../ProjectOfferBlock';
+import ProjectOfferBlock from '../Projects/ProjectOfferBlock';
 
 import PublicRelations from '../content/PublicRelations';
 import SalesAgency from '../SalesAgency';

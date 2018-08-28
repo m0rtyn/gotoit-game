@@ -36,30 +36,6 @@ class Timeline extends Component {
                   length={timelineScale.length}
                   day={day}
                   events={events}
-                  f={(item, index) => {
-                    if (item.type === 'deadline') {
-                      return (
-                        <DeadLine
-                          index={index}
-                          info={item.info}
-                          name={item.object.name}
-                          avatar={item.object.avatar}
-                        />
-                      );
-                    } else if (
-                      item.type === 'vacation' ||
-                      item.type === 'leave'
-                    ) {
-                      return (
-                        <VacationAndLeave
-                          index={index}
-                          info={item.info}
-                          name={item.object.name}
-                          avatar={item.object.avatar}
-                        />
-                      );
-                    } else return null;
-                  }}
                 />
               );
             })}

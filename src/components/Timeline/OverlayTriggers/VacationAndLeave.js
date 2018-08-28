@@ -2,6 +2,8 @@ import { Component } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import * as PropTypes from 'prop-types';
 import React from 'react';
+import { Avatar } from '../../Projects/Avatar';
+import _ from 'lodash';
 
 export default class VacationAndLeave extends Component {
   static propTypes = {
@@ -14,7 +16,6 @@ export default class VacationAndLeave extends Component {
   render() {
     return (
       <OverlayTrigger
-        key={this.props.index}
         delay={150}
         placement="bottom"
         overlay={
@@ -23,11 +24,18 @@ export default class VacationAndLeave extends Component {
           </Tooltip>
         }
       >
-        <img
+        <div
           className="worker-portrait"
-          src={this.props.avatar}
           role="presentation"
-        />
+          style={{ position: 'relative' }}
+        >
+          <Avatar
+            style={{ position: 'absolute' }}
+            size={20}
+            name={this.props.name}
+            sources={_.toPairs(this.props.avatar)}
+          />
+        </div>
       </OverlayTrigger>
     );
   }

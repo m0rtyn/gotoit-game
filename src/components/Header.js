@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { FormattedDate } from 'react-intl';
 import { support } from '../game/app_config';
-
 import Timeline from './Timeline/Timeline';
 
 class Header extends Component {
@@ -124,7 +123,7 @@ class Header extends Component {
 
                 <button className="topbar-btn">
                   <img
-                    src={'day-forward.svg'}
+                    src={require('../assets/images/day-forward.svg')}
                     alt={'Next Day'}
                     title={'Next Day'}
                   />

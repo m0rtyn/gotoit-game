@@ -1,4 +1,4 @@
-import TimeIcon from '../../../public/time_event.png';
+import TimeIcon from '../../assets/images/time_event.png';
 import { current_tick } from '../../App';
 
 export const historical_events = {
