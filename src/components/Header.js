@@ -79,7 +79,7 @@ class Header extends Component {
           >
             <div className="topbar-left">
               <button
-                className="topbar-btn"
+                className="topbar-btn icon-pause"
                 onClick={() => {
                   if (data.game_paused) {
                     data.helpers.playGame();
@@ -87,11 +87,7 @@ class Header extends Component {
                     data.helpers.pauseGame();
                   }
                 }}
-              >
-                {/* <i className="material-icons">{data.game_paused ? 'play-arrow' : 'pause'}</i> */}
-                Pause
-                <i className="fa fa-pause" />
-              </button>
+              />
 
               <div
                 onClick={() => {
@@ -182,29 +178,27 @@ class Header extends Component {
             </div>
 
             <div className="topbar-right">
-              <span
-                className="topbar-btn font-weight-bold"
+              <button
+                className="topbar-btn icon-btc"
                 onClick={() => {
                   data.helpers.changeContent('Exchange');
                 }}
               >
-                <i className="fa fa-bitcoin" />
-                 {data.btc.toFixed(2)}
-                {/*<span onClick={() => { CHEAT!
-                                        data.helpers.addMoney(1, 'btc');
-                                        }}> BTC </span>*/}
-              </span>
+                <span className="path1" />
+                <span className="path2" />
+                {' ' + data.btc.toFixed(2)}
+                {/*<span onClick={() => { CHEAT! data.helpers.addMoney(1, 'btc'); }}> BTC </span>*/}
+              </button>
 
-              <span
-                className="topbar-btn font-weight-bold"
+              <button
+                className="topbar-btn icon-usd"
                 onClick={() => data.helpers.addMoney(10000, 'usd')}
               >
-                <i className="fa fa-dollar" />
-                 {data.money}
-                {/*<span onClick={() => { CHEAT!
-
-                                        }}> $ </span>*/}
-              </span>
+                <span className="path1" />
+                <span className="path2" />
+                {' ' + data.money}
+                {/*<span onClick={() => { CHEAT! }}> $ </span>*/}
+              </button>
             </div>
           </div>
 

@@ -4,9 +4,9 @@ import _ from 'lodash';
 import ProjectEndScreen from '../Projects/ProjectEndScreen';
 import HistoricalEvent from '../HistoricalEvent';
 import HotOffer from '../HotOffer';
-import SimpleModal from '../SimpleModal';
-import Resume from '../Resume';
-import Offer from '../Offer';
+import Modal from '../Modal';
+import Resume from '../Modal/ResumeModal';
+import Offer from '../Modal/OfferModal';
 import { FormattedDate } from 'react-intl';
 import * as PropTypes from 'prop-types';
 import { Avatar } from '../Projects/Avatar';
@@ -199,7 +199,10 @@ class Mail extends Component {
         </button>
         {letters}
         {this.state.show_popup ? (
-          <SimpleModal>{this.state.current_popup}</SimpleModal>
+          <Modal closePopup={this.closePopup}>
+            {' '}
+            {this.state.current_popup}
+          </Modal>
         ) : (
           <div />
         )}
