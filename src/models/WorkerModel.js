@@ -95,9 +95,10 @@ class WorkerModel {
       training_tasks_done: 0,
       bugs_passed: 0,
       refactored: 0,
-      tests_wrote: 0,
-      retrospected: 0
+      tests_wrote: 0
     };
+
+    this.motivation_pull = 0;
 
     this.effects = {};
   }
@@ -169,7 +170,7 @@ class WorkerModel {
     }
   }
 
-  isWorkingTime(time, micromanagement, office_things) {
+  isWorkingTime(time, micromanagement, motivation, office_things) {
     let variability = _.random(
       -this.temper.variability,
       this.temper.variability
@@ -200,16 +201,19 @@ class WorkerModel {
         _.random(1, this.effects['teambuilding']) > 100) && // variability guys work on weekends more often
       _.random(1, 10 - this.temper.variability * 0.5) !== 1; // variability guys eblanyat more often
 
-    return this.efficiencyCheck(micromanagement) ? is_working_time : false;
+    return this.efficiencyCheck(micromanagement, motivation)
+      ? is_working_time
+      : false;
   }
 
-  efficiencyCheck(micromanagement) {
+  efficiencyCheck(micromanagement, motivation) {
     return (
       _.random(1, 200) <=
       Math.floor(this.stamina / 50) +
         (micromanagement
-          ? Math.floor((this.getEfficiency() + 90) / 2)
-          : this.getEfficiency())
+          ? Math.floor((this.getEfficiency() + 80) / 2)
+          : this.getEfficiency()) +
+        (motivation ? this.motivation_pull : 0)
     );
   }
 

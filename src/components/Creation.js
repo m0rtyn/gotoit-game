@@ -26,7 +26,6 @@ class Creation extends Component {
       gender: 'male',
       suggest_name: WorkerModel.genName('male'),
       selected_background: back, //'specialist',
-      technologist: _.sample(_.keys(player_backgrounds['technologist'].spices)),
       specialist: _.sample(_.keys(player_backgrounds['specialist'].spices)),
       coworker: _.sample(_.keys(player_backgrounds['coworker'].spices)),
       businessman: _.sample(_.keys(player_backgrounds['businessman'].spices))
@@ -65,20 +64,11 @@ class Creation extends Component {
     data.workers[0] = tmp_player; //: [WorkerModel.generatePlayer()]
     player = tmp_player;
 
-    if (this.state.selected_background === 'technologist') {
-      data.projects_known_technologies = data.projects_known_technologies.concat(
-        this.state.technologist
-      );
-    } else {
-      data.projects_known_technologies = data.projects_known_technologies.concat(
-        player_backgrounds[this.state.selected_background].start_tech
-      );
-    }
+    data.projects_known_technologies = data.projects_known_technologies.concat(
+      player_backgrounds[this.state.selected_background].start_tech
+    );
 
     switch (this.state.selected_background) {
-      case 'technologist':
-        // do nothing
-        break;
       case 'specialist':
         console.log(player.items, this.state.specialist);
         player.items[this.state.specialist].exp = true;
@@ -333,13 +323,13 @@ class Creation extends Component {
                               }
                               <br />
                               Start tech:{' '}
-                              {'technologist' === this.state.selected_background
-                                ? 'Agile, Test Drive Development or Refactoring'
-                                : technologies[
-                                    player_backgrounds[
-                                      this.state.selected_background
-                                    ].start_tech
-                                  ].name}
+                              {
+                                technologies[
+                                  player_backgrounds[
+                                    this.state.selected_background
+                                  ].start_tech
+                                ].name
+                              }
                             </div>
                           </div>
                         </div>
