@@ -12,7 +12,7 @@ const HistoricalEvent = props => {
           <button
             className="btn btn-warning"
             onClick={() => {
-              props.closePopup();
+              props.closeModal();
             }}
           >
             Close

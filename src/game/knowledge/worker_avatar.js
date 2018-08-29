@@ -65,9 +65,9 @@ export const male_avatar = {
   accessories: ['access_01', 'access_02'],
   clothes: ['clothes_01', 'clothes_02', 'clothes_03'],
   hair: {
-    black: ['hair_01_black', 'hair_02_black', 'hair_03_black, hair_04_black'],
-    brown: ['hair_01_brown', 'hair_02_brown', 'hair_03_brown, hair_04_brown'],
-    red: ['hair_01_red', 'hair_02_red', 'hair_03_red, hair_04_red'],
+    black: ['hair_01_black', 'hair_02_black', 'hair_03_black', 'hair_04_black'],
+    brown: ['hair_01_brown', 'hair_02_brown', 'hair_03_brown', 'hair_04_brown'],
+    red: ['hair_01_red', 'hair_02_red', 'hair_03_red', 'hair_04_red'],
     blonde: [
       'hair_01_blonde',
       'hair_02_blonde',
