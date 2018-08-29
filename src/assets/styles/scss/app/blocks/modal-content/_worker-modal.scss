@@ -1,5 +1,10 @@
 .modal {
 
+  .modal-header {
+    border-bottom: none;
+    justify-content: space-between;
+  }
+
   .modal-body {
     padding: 0;
     position: relative;
@@ -24,9 +29,7 @@
     }
   }
 
-  .modal-header {
-    border-bottom: none;
-  }
+
 
   .worker-avatar {
     width: size(18);
