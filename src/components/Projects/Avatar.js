@@ -36,13 +36,14 @@ export class Avatar extends PureComponent {
     }
 
     return (
-      <>
+      <div className="worker-avatar">
         {_.map(this.props.sources, ([type, src], index) => {
           if (!src) {
             return null;
           }
           return (
             <img
+              className="avatar-fragment"
               key={`${index}${type}`}
               alt={this.props.name + ' avatar'}
               src={src}
@@ -50,7 +51,7 @@ export class Avatar extends PureComponent {
             />
           );
         })}
-      </>
+      </div>
     );
   }
 }

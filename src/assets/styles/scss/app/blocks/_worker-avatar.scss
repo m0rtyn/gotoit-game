@@ -1,0 +1,9 @@
+.worker-avatar {
+  position: relative;
+
+  .avatar-fragment {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+}
