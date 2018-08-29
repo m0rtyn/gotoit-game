@@ -146,7 +146,7 @@ class Worker extends Component {
             <p>
               {worker.tellFeelings()}
             </p>
-            <>
+            <p>
               {worker.is_player
               ? ('')
               : (
@@ -157,7 +157,7 @@ class Worker extends Component {
                   Dismiss an employee
                 </button>
               )}
-            </>
+            </p>
           </div>
           <div className="col-6 worker-statistic">
             <h4 className="text-center fw-700 text-fade">Employee statistic</h4>

@@ -135,11 +135,6 @@ class ProjectReport extends Component {
           {project.facts.tests_wrote
             ? `Wrote ${project.facts.tests_wrote} tests. `
             : ''}
-          {project.facts.refactored
-            ? `And retrospected ${
-                project.facts.retrospected
-              } tasks which cost ${project.facts.cuted_cost}$ totally.`
-            : ''}
         </p>
         <StatsBar stats={stats_data} data={this.props.data} />
         <div className="">
