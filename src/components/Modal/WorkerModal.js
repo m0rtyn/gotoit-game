@@ -258,6 +258,7 @@ export default class ModalWorker extends Component {
             style={{ position: 'relative', width: '200px', height: '200px' }}
           >
             <Avatar
+              className="worker-avatar"
               name={worker.name}
               style={{ position: 'absolute' }}
               size={200}

@@ -56,7 +56,7 @@ class Resume extends Component {
       <section className="resume-modal">
         <div className="modal-header flexbox">
           <div>
-            <p>enterpreneur resume</p>
+            <p className="fw-700">enterpreneur resume</p>
           </div>
           <div>
             <FormattedDate
@@ -69,6 +69,7 @@ class Resume extends Component {
             />
             <span className="icon-star_border" />
             <Avatar
+              className="worker-avatar"
               name={worker.name}
               sources={_.toPairs(worker.avatar)}
               // style={{ position: 'absolute' }}
