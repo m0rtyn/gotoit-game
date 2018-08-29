@@ -28,15 +28,15 @@ export class Avatar extends PureComponent {
         style: this.props.style
       };
     }
-    if (this.props.className) {
-      props = {
-        ...props,
-        className: this.props.className
-      };
-    }
+    // if (this.props.className) {
+    //   props = {
+    //     ...props,
+    //     className: this.props.className
+    //   };
+    // }
 
     return (
-      <div className="worker-avatar">
+      <div className={this.props.className}>
         {_.map(this.props.sources, ([type, src], index) => {
           if (!src) {
             return null;
