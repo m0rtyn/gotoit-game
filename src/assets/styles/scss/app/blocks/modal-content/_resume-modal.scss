@@ -1,3 +1,44 @@
-.resume {
-  
+.resume-modal {
+
+  // & ~.close {
+  //   color: var(--white);
+  //   text-shadow: none;
+  // }
+
+  .modal-header {
+    color: var(--white);
+    background-image:
+        url("../../images/modal/resume-modal-bg.png"),
+        linear-gradient(180deg, #F56293 50%, #E65C8A 100%);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: bottom;
+    padding: size(2);
+    position: relative;
+    height: size(12);
+  }
+
+  .modal-body {
+    padding-top: size(9);
+    padding-bottom: size(7);
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+  }
+
+  .worker-avatar {
+    width: size(12);
+    height: size(12);
+    left: 50%;
+    position: absolute;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: var(--color-dark);
+    transform: translate(-50%, -50%);
+    top: 100%;
+  }
+
+  .icon-star, .icon-star-border {
+    
+  }
 }
