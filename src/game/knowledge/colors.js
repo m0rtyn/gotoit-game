@@ -7,6 +7,10 @@ export const colors = {
     name: 'agile',
     colorCompleted: '#1DE9B6'
   },
+  motivation: {
+    name: 'motivation',
+    colorCompleted: '#1DE9B6'
+  },
   tdd: {
     name: 'tdd',
     colorCompleted: '#1E90FF'

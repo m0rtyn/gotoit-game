@@ -117,7 +117,6 @@ class Worker extends Component {
       collective: { name: 'Collective', val: worker.collectivePenalty() }
     };
 
-
     return (
       <div
         onMouseOver={() => {
