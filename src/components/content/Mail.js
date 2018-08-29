@@ -15,13 +15,13 @@ class Mail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current_popup: null,
+      current_modal: null,
       letters: null,
-      show_popup: false
+      show_modal: false
     };
   }
-  closePopup = () => {
-    this.setState({ show_popup: false });
+  closeModal = () => {
+    this.setState({ show_modal: false });
   };
   markAllAsRead = () => {
     _.map(this.props.data.mailbox, letter => {
@@ -44,16 +44,16 @@ class Mail extends Component {
         case 'Project report':
           handleClick = () => {
             this.setState({
-              current_popup: (
+              current_modal: (
                 <ProjectEndScreen
-                  closePopup={this.closePopup}
+                  closeModal={this.closeModal}
                   key={i}
                   letter={letter}
                   data={this.props.data}
                 />
               )
             });
-            this.setState({ show_popup: true });
+            this.setState({ show_modal: true });
             letter.isRead = true;
           };
           break;
@@ -61,41 +61,41 @@ class Mail extends Component {
         case 'Hot offer':
           handleClick = () => {
             this.setState({
-              current_popup: (
+              current_modal: (
                 <HotOffer
-                  closePopup={this.closePopup}
+                  closeModal={this.closeModal}
                   key={i}
                   letter={letter.object}
                   data={this.props.data}
                 />
               )
             });
-            this.setState({ show_popup: true });
+            this.setState({ show_modal: true });
             letter.isRead = true;
           };
           break;
         case 'Resume':
           handleClick = () => {
             this.setState({
-              current_popup: (
+              current_modal: (
                 <Resume
-                  closePopup={this.closePopup}
+                  closeModal={this.closeModal}
                   key={i}
                   letter={letter}
                   data={this.props.data}
                 />
               )
             });
-            this.setState({ show_popup: true });
+            this.setState({ show_modal: true });
             letter.isRead = true;
           };
           break;
         case 'Offer':
           handleClick = () => {
             this.setState({
-              current_popup: (
+              current_modal: (
                 <Offer
-                  closePopup={this.closePopup}
+                  closeModal={this.closeModal}
                   key={i}
                   expired={letter.expired}
                   createdAt={letter.createdAt}
@@ -104,23 +104,23 @@ class Mail extends Component {
                 />
               )
             });
-            this.setState({ show_popup: true });
+            this.setState({ show_modal: true });
             letter.isRead = true;
           };
           break;
         case 'Event':
           handleClick = () => {
             this.setState({
-              current_popup: (
+              current_modal: (
                 <HistoricalEvent
-                  closePopup={this.closePopup}
+                  closeModal={this.closeModal}
                   key={i}
                   content={letter.object}
                   date={letter.date}
                 />
               )
             });
-            this.setState({ show_popup: true });
+            this.setState({ show_modal: true });
             letter.isRead = true;
           };
         default:
@@ -198,10 +198,10 @@ class Mail extends Component {
           Mark all as read
         </button>
         {letters}
-        {this.state.show_popup ? (
-          <Modal closePopup={this.closePopup}>
+        {this.state.show_modal ? (
+          <Modal closeModal={this.closeModal}>
             {' '}
-            {this.state.current_popup}
+            {this.state.current_modal}
           </Modal>
         ) : (
           <div />

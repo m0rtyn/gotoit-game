@@ -1958,7 +1958,7 @@ class App extends Component {
         let temp_meeting = _.sample(worker_meetings);
         if (
           temp_meeting.meeting_type === 'fire' ||
-          worker.isWorkingTime(data.date, false, data.office_things)
+          worker.isWorkingTime(data.date, false, false, data.office_things)
         ) {
           let meeting = temp_meeting;
           worker.drainStamina();
@@ -2000,6 +2000,7 @@ class App extends Component {
       : _.sample(Object.keys(project.getNeeds(worker_roles)));
     let rad = this.getTechnology(project.id, 'rad');
     let micromanagement = this.getTechnology(project.id, 'micromanagement');
+    let motivation = this.getTechnology(project.id, 'motivation');
     let creativity = this.getTechnology(project.id, 'creativity');
     let overtime = this.getTechnology(project.id, 'overtime');
     let pair = this.getTechnology(project.id, 'pair');
@@ -2008,6 +2009,7 @@ class App extends Component {
     let is_working_time = worker.isWorkingTime(
       data.date,
       micromanagement,
+      motivation,
       data.office_things
     );
     if (worker.effects['fire'] > 0) {
@@ -2057,6 +2059,61 @@ class App extends Component {
       //chatMessage(formName(), 'I spent an hour to my pet-project.', 'warning');
     }
 
+    // Motivation
+    if (
+      !skip_work &&
+      this.getTechnology(project.id, 'motivation') &&
+      worker.is_player &&
+      _.random(1, 2) === 1
+    ) {
+      let team_ids = {};
+      _.keys(data.relations).forEach(worker_id => {
+        let worker_projects = data.relations[worker_id];
+        _.keys(worker_projects).forEach(project_id => {
+          let relation = worker_projects[project_id];
+          if (relation && project_id === project.id) {
+            team_ids[worker_id] = true;
+          }
+        });
+      });
+
+      let team = [];
+      data.workers.forEach(worker => {
+        if (
+          worker.id in team_ids &&
+          worker.get_monthly_salary &&
+          data.helpers.deepCheckRelation(worker, project) &&
+          worker.isWorkingTime(
+            data.date,
+            micromanagement,
+            motivation,
+            data.office_things
+          )
+        ) {
+          team.push(worker);
+        }
+      });
+
+      if (team.length > 0) {
+        let motivated = worker.getSideResource();
+        _.times(4, worker.drainStamina());
+
+        _.each(team, worker_follower => {
+          let chunk = Math.ceil(motivated / team.length);
+          worker_follower.motivation_pull += Math.ceil(motivated / team.length);
+          this.animation.addBubbleAnimation(
+            'motivation',
+            chunk,
+            worker.id,
+            worker_follower.id
+          );
+        });
+        skip_work = true;
+      }
+    }
+
+    /*
+
     // Agile
     if (
       !skip_work &&
@@ -2101,6 +2158,7 @@ class App extends Component {
         skip_work = true;
       }
     }
+    */
 
     // TDD
     if (
@@ -2148,7 +2206,7 @@ class App extends Component {
         project.facts.refactored += refactoring;
         project.complexity -= refactoring;
         this.animation.addBubbleAnimation(
-          'agile',
+          'refactor',
           refactoring,
           worker.id,
           project.id

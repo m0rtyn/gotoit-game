@@ -30,7 +30,7 @@ class Resume extends Component {
             if (data.workers.length !== data.office.space) {
               this.props.data.helpers.hireCandidate(e.target.id, 'resumes');
               worker.hired = true;
-              this.props.closePopup();
+              this.props.closeModal();
             } else {
               alert('Your office is full');
             }
@@ -44,7 +44,7 @@ class Resume extends Component {
           onClick={e => {
             this.props.data.helpers.rejectCandidate(e.target.id, 'resumes');
             expired = true;
-            this.props.closePopup();
+            this.props.closeModal();
           }}
         >
           Reject

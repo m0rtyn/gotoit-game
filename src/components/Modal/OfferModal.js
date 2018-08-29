@@ -18,18 +18,18 @@ class Offer extends Component {
   }
   acceptOffered(event) {
     this.props.data.helpers.acceptOffered(event.target.id);
-    this.props.closePopup();
+    this.props.closeModal();
   }
 
   startOffered(event) {
     this.props.data.helpers.startOffered(event.target.id);
-    this.props.closePopup();
+    this.props.closeModal();
   }
 
   reject(event) {
     this.props.data.helpers.rejectOffered(event.target.id);
     this.props.expired = true;
-    this.props.closePopup();
+    this.props.closeModal();
   }
 
   render() {

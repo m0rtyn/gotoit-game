@@ -29,6 +29,7 @@ export const rules = {
   },
 
   //Is that a good name?
+  // no, look like "nex tick"
   nextDay: {
     onTick: function(state) {
       const data = state.data;
@@ -124,6 +125,7 @@ export const rules = {
         });
 
         //calculating companies projects done
+
         data.company0_done = (() => {
           let sum = 0;
           _.each(data.simplified_reports, report => {

@@ -4,27 +4,6 @@ import { workers_bonus_items } from './workers';
 export const player_backgrounds = {
   //  autodidact: {name: 'Autodidact', money: 1000, start_tech: ['creativity'], text: 'Inspired researcher, looking own way. Eclectic stats.'},
   //  university: {name: 'Student', money: 5000, start_tech: ['tdd'], text: 'Fundamental education according to verified program. Flat stats.'},
-  technologist: {
-    name: 'Technologist',
-    money: 10000,
-    might: 'technology',
-    start_tech: [],
-    text: 'Has a wide range of start technology.',
-    spices: {
-      agile: {
-        name: 'Agile Development',
-        description: technologies.agile.description
-      },
-      tdd: {
-        name: 'Test Driven Development',
-        description: technologies.tdd.description
-      },
-      refactoring: {
-        name: 'Refactoring',
-        description: technologies.refactoring.description
-      }
-    }
-  },
   specialist: {
     name: 'Specialist',
     money: 10000,
