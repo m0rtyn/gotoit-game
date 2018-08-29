@@ -8,7 +8,7 @@ class Modal extends Component {
           <div className="modal-dialog">
             <div className="modal-content">
               <button className="close" onClick={this.props.closeModal}>
-                <span aria-hidden="true">×</span>
+                ×
               </button>
               {this.props.children}
             </div>
