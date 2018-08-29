@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { hot } from 'react-hot-loader';
+import { hot, setConfig } from 'react-hot-loader';
 import { game_name } from './game/app_config';
 import { tick } from './game/tick';
 
@@ -2262,7 +2262,9 @@ class App extends Component {
   }
 }
 // webpack Hot Module Replacement API
-if (module.hot) {
-  console.info('hot');
-}
+// if (module.hot) {
+//   console.info('hot');
+// }
+//
+setConfig({ logLevel: 'debug' });
 export default hot(module)(App);
