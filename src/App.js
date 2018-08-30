@@ -1908,7 +1908,7 @@ class App extends Component {
       }
 
       // Vacation
-      if (!worker.to_vacation && !worker.in_vacation && worker.stamina <= 0) {
+      if (!worker.to_vacation && !worker.in_vacation && worker.stamina <= 10) {
         worker.proposeVacation();
       }
       if (worker.to_vacation) {
@@ -1923,7 +1923,7 @@ class App extends Component {
         worker.stamina += 5;
         if (worker.in_vacation_ticker === 0) {
           worker.in_vacation = false;
-          worker.stamina += 500;
+          worker.stamina += 1000;
           addAction(
             worker.name + ' comes back from vacation',
             {

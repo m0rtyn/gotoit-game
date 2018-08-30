@@ -9,11 +9,11 @@ export const player_backgrounds = {
     money: 10000,
     might: 'skill',
     start_tech: ['rad'],
-    text:
-      'Raised their professional skills to enormous heights and buy some professional stuff.',
+    text: 'Raised their professional skills and buy some stuff.',
     spices: {
       design: {
         name: 'Designer',
+        start_tech: [],
         description:
           'Start items: ' +
           workers_bonus_items.design.exp.name +
@@ -22,6 +22,7 @@ export const player_backgrounds = {
       },
       program: {
         name: 'Programmer',
+        start_tech: [],
         description:
           'Start items: ' +
           workers_bonus_items.program.exp.name +
@@ -30,6 +31,7 @@ export const player_backgrounds = {
       },
       manage: {
         name: 'Manager',
+        start_tech: [],
         description:
           'Start items: ' +
           workers_bonus_items.manage.exp.name +
@@ -39,24 +41,26 @@ export const player_backgrounds = {
     }
   },
   coworker: {
-    name: 'Teamplayer',
+    name: 'Founder & co',
     money: 10000,
     might: 'team',
-    start_tech: ['pair'],
-    text: 'An experienced team player.',
+    start_tech: [],
+    text: 'Team player with co-worker.',
     spices: {
-      apprentice: {
-        name: 'Apprentice',
-        description: 'Your partner is your follower and like you in skills.'
+      pair: {
+        name: technologies.pair.name,
+        start_tech: ['pair'],
+        description: technologies.pair.description
       },
-      helpers: {
-        name: 'Two helpers',
-        description:
-          'Your team is two reliable helpers that support your skills.'
+      helper: {
+        name: 'Second co-worker',
+        start_tech: [],
+        description: 'One more co-worker.'
       },
-      full: {
-        name: 'Full team',
-        description: 'Your team is three random employees.'
+      motivation: {
+        name: technologies.motivation.name,
+        start_tech: ['motivation'],
+        description: technologies.motivation.description
       }
     }
   },
@@ -64,22 +68,24 @@ export const player_backgrounds = {
     name: 'Businessman',
     money: 10000,
     might: 'investment',
-    start_tech: ['micromanagement'],
+    start_tech: [],
     text: 'Made a fortune doing business.',
     spices: {
-      credit: {
-        name: 'Credit Rating',
+      cash: {
+        name: 'Cash reserves',
+        start_tech: [],
         description:
-          'Good credit story increase your credit rating and allow to take addition credit.'
+          'You have accumulated a cash reserve and now ready to invest.'
       },
-      btc: {
-        name: 'BTC savings',
-        description: 'Once you bought some bitcoins. Now they are worth a lot.'
+      micromanagement: {
+        name: technologies.micromanagement.name,
+        start_tech: ['micromanagement'],
+        description: technologies.micromanagement.description
       },
-      office: {
-        name: 'Dream office',
-        description:
-          "You rented a spacious office and bought a coffeemaker. What's next?"
+      manager: {
+        name: 'Manager',
+        start_tech: [],
+        description: 'Previous work experience develop your management skills.'
       }
     }
   }
