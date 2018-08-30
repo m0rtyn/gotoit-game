@@ -144,9 +144,8 @@ class Worker extends Component {
             // style={{ position: 'absolute'}}
             sources={_.toPairs(worker.avatar)}
           />
-
         </div>
-      <div className="worker-info">
+        <div className="worker-info">
           <header className="card-header">
             <h2 className="worker-name"> {worker.name} </h2>
             {manage_button}
