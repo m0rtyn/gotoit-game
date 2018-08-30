@@ -62,7 +62,7 @@ class StartProject extends Component {
               />
             </div>
             <div className="row">
-              <div className="card text-center col-md-6">
+              <div className="card text-center col-md-4">
                 <h4 className="text-center">Project platform</h4>
                 {this.props.data.projects_unlocked_platforms.map(
                   (platform, i) => {
@@ -95,7 +95,7 @@ class StartProject extends Component {
                   {project_platforms[this.state.project_platform].description}
                 </p>
               </div>
-              <div className="card text-center col-md-6">
+              <div className="card text-center col-md-4">
                 <h4 className="text-center">Project kind</h4>
                 {Object.keys(project_kinds).map((kind, i) => {
                   return (
@@ -126,35 +126,38 @@ class StartProject extends Component {
                   {project_kinds[this.state.project_kind].description}
                 </p>
               </div>
+
+              <div className="card text-center col-md-4">
+                <h4 className="text-center">Workers on project</h4>
+                {this.props.data.workers.map(worker => {
+                  return (
+                    <span
+                      className="start-project-workers-list"
+                      key={worker.id}
+                    >
+                      <div>
+                        <input
+                          type="checkbox"
+                          id={worker.id || 0}
+                          checked={
+                            this.state.selected_workers[worker.id] || false
+                          }
+                          onChange={event => {
+                            let state = JSON.parse(JSON.stringify(this.state));
+                            state.selected_workers[worker.id] =
+                              event.target.checked;
+                            this.setState(state);
+                          }}
+                        />
+                        <label htmlFor={worker.id}>{worker.name}</label>
+                      </div>
+                    </span>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
-
-        <div className="row filament">
-          <div className="col-md-12">
-            {this.props.data.workers.map(worker => {
-              return (
-                <span key={worker.id} style={{ width: '100%' }}>
-                  <h4>
-                    <input
-                      type="checkbox"
-                      id={worker.id || 0}
-                      checked={this.state.selected_workers[worker.id] || false}
-                      onChange={event => {
-                        let state = JSON.parse(JSON.stringify(this.state));
-                        state.selected_workers[worker.id] =
-                          event.target.checked;
-                        this.setState(state);
-                      }}
-                    />{' '}
-                    {worker.name}
-                  </h4>
-                </span>
-              );
-            })}
-          </div>
-        </div>
-
         <div className="text-center">
           <button
             className="big btn-success btn-lg"
