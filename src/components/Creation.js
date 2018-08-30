@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Portal from 'react-portal';
 import _ from 'lodash';
 
-import SimpleModal from './SimpleModal';
+import Modal from './Modal';
 import StatsBar from './StatsBar';
 import bulkStyler from '../services/bulkStyler';
 
@@ -165,7 +165,7 @@ class Creation extends Component {
       <div>
         {data.stage === 'start' ? (
           <Portal ref="creation">
-            <SimpleModal>
+            <Modal>
               {this.state.step === 'welcome' ? (
                 <div className="modal-content creation">
                   <div className="modal-header">
@@ -458,7 +458,7 @@ class Creation extends Component {
               ) : (
                 ''
               )}
-            </SimpleModal>
+            </Modal>
           </Portal>
         ) : (
           ''

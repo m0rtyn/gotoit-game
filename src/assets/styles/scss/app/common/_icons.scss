@@ -1,0 +1,148 @@
+@font-face {
+  font-family: 'icomoon';
+  src:
+    url('../../fonts/icons-gotoit.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: 24px;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon- {
+  &account-balance-wallet:before {
+    content: "\e850";
+  }
+
+  &pause:before {
+    content: "\e034";
+  }
+
+  &play-arrow:before {
+    content: "\e037";
+  }
+
+  &fast-forward:before {
+    content: "\e01f";
+  }
+
+  &ultra-fast-speed:before {
+    content: "\e900";
+  }
+
+  &h-cycle:before {
+    content: "\e901";
+  }
+
+  &usd {
+    .path1:before {
+      content: "\e902";
+      color: rgb(113, 178, 71);
+    }
+    .path2:before {
+      content: "\e903";
+      margin-left: -1em;
+      color: rgb(255, 255, 255);
+    }
+  }
+
+  &btc {
+    .path1:before {
+      content: "\e904";
+      color: rgb(229, 134, 69);
+    }
+    .path2:before {
+      content: "\e905";
+      margin-left: -1em;
+      color: rgb(255, 255, 255);
+    }
+  }
+
+  &management:before {
+    content: "\e906";
+  }
+
+  &programming:before {
+    content: "\e907";
+  }
+
+  &tech:before {
+    content: "\e908";
+  }
+
+  &workers:before {
+    content: "\e909";
+  }
+
+  &expand-office {
+    .path1:before {
+      content: "\e90a";
+      color: rgb(0, 0, 0);
+    }
+    .path2:before {
+      content: "\e90b";
+      margin-left: -1em;
+      color: rgb(0, 0, 0);
+      opacity: 0.5;
+    }
+  }
+
+  &hire-worker  {
+    .path1:before {
+      content: "\e90c";
+      color: rgb(0, 0, 0);
+    }
+    .path2:before {
+      content: "\e90d";
+      margin-left: -1em;
+      color: rgb(0, 0, 0);
+      opacity: 0.5;
+    }
+  }
+
+  &add:before {
+    content: "\e145";
+  }
+
+  &close:before {
+    content: "\e5cd";
+  }
+
+  &delete:before {
+    content: "\e872";
+  }
+
+  &done:before {
+    content: "\e876";
+  }
+
+  &done-all:before {
+    content: "\e877";
+  }
+
+  &star:before {
+    content: "\e838";
+  }
+
+  &star-border:before {
+    content: "\e83a";
+  }
+
+  &design:before {
+    content: "\e90e";
+  }
+}
+

@@ -79,7 +79,7 @@ class Header extends Component {
           >
             <div className="topbar-left">
               <button
-                className="topbar-btn"
+                className="topbar-btn icon-pause"
                 onClick={() => {
                   if (data.game_paused) {
                     data.helpers.playGame();
@@ -87,13 +87,10 @@ class Header extends Component {
                     data.helpers.pauseGame();
                   }
                 }}
-              >
-                {/* <i className="material-icons">{data.game_paused ? 'play-arrow' : 'pause'}</i> */}
-                Pause
-                <i className="fa fa-pause" />
-              </button>
+              />
 
               <div
+                className="time-controls"
                 onClick={() => {
                   let i = 1;
                   let n = 24;
@@ -108,7 +105,13 @@ class Header extends Component {
                     <button className="topbar-btn" key={index}>
                       {data.game_speed_multiplier === speed ? (
                         <span className="speed-control" key={index}>
-                          {{ 0: '►', 1: '►►', 2: '►►►' }[index]}
+                          {
+                            {
+                              0: <span className="icon-play-arrow" />,
+                              1: <span className="icon-fast-forward" />,
+                              2: <span className="icon-ultra-fast-speed" />
+                            }[index]
+                          }
                         </span>
                       ) : (
                         <span
@@ -118,7 +121,13 @@ class Header extends Component {
                             data.helpers.setGameSpeed(speed);
                           }}
                         >
-                          {{ 0: '►', 1: '►►', 2: '►►►' }[index]}
+                          {
+                            {
+                              0: <span className="icon-play-arrow" />,
+                              1: <span className="icon-fast-forward" />,
+                              2: <span className="icon-ultra-fast-speed" />
+                            }[index]
+                          }
                         </span>
                       )}
                     </button>
@@ -126,11 +135,7 @@ class Header extends Component {
                 })}
 
                 <button className="topbar-btn">
-                  <img
-                    src={require('../assets/images/day-forward.svg')}
-                    alt={'Next Day'}
-                    title={'Next Day'}
-                  />
+                  <span className="icon-h-cycle" />
                 </button>
               </div>
               <div>
@@ -181,50 +186,41 @@ class Header extends Component {
               />
             </div>
 
+            <div className="topbar-divider" />
+
             <div className="topbar-right">
-              <span
-                className="topbar-btn font-weight-bold"
+              {/* Bitcoin ========================================================================= */}
+              {/* <button
+                className="topbar-btn flexbox"
                 onClick={() => {
                   data.helpers.changeContent('Exchange');
                 }}
               >
-                <i className="fa fa-bitcoin" />
-                 {data.btc.toFixed(2)}
-                {/*<span onClick={() => { CHEAT!
-                                        data.helpers.addMoney(1, 'btc');
-                                        }}> BTC </span>*/}
-              </span>
+                <span className="icon-btc">
+                  <span className="path1" />
+                  <span className="path2" />
+                </span>
+                <h6 className="fw-700 mb-0">{' ' + data.btc.toFixed(2)}</h6>
+                /*<span onClick={() => { CHEAT! data.helpers.addMoney(1, 'btc'); }}> BTC </span>
+              </button> */}
 
-              <span
-                className="topbar-btn font-weight-bold"
+              <button
+                className="topbar-btn flexbox"
                 onClick={() => data.helpers.addMoney(10000, 'usd')}
               >
-                <i className="fa fa-dollar" />
-                 {data.money}
-                {/*<span onClick={() => { CHEAT!
+                <span className="icon-usd">
+                  <span className="path1" />
+                  <span className="path2" />
+                </span>
+                <h6 className="fw-700 mb-0">{data.money}</h6>
+                {/*<span onClick={() => { CHEAT! }}> $ </span>*/}
+              </button>
 
-                                        }}> $ </span>*/}
-              </span>
+              <button className="topbar-btn flexbox">
+                <span className="icon-account-balance-wallet" />
+              </button>
             </div>
           </div>
-
-          {/* <a target="_blank" rel="noopener noreferrer" href={social_links.telegram}>
-                        <img alt="" src="http://www.advanceduninstaller.com/7b12b396d38166a899fff585e466e50d-icon.ico" />
-                        &nbsp;
-                        Telegram
-                    </a>
-
-                    <a target="_blank" rel="noopener noreferrer" href={social_links.wiki}>
-                        <img alt="" src="https://static.filehorse.com/icons-web/educational-software/wikipedia-icon-32.png" />
-                        &nbsp;
-                        Wiki
-                    </a>
-
-                    <a target="_blank" rel="noopener noreferrer" href={social_links.reddit}>
-                        <img alt="" src="https://images-na.ssl-images-amazon.com/images/I/418PuxYS63L.png" />
-                        &nbsp;
-                        Reddit
-                    </a> */}
         </div>
 
         <Timeline data={this.props.data} />

@@ -51,21 +51,29 @@ export const male_avatar = {
   eyebrows: {
     black: ['eyebrows_01_black', 'eyebrows_02_black', 'eyebrows_03_black'],
     brown: ['eyebrows_01_brown', 'eyebrows_02_brown', 'eyebrows_03_brown'],
-    red: ['eyebrows_01_red', 'eyebrows_02_red', 'eyebrows_03_red']
+    red: ['eyebrows_01_red', 'eyebrows_02_red', 'eyebrows_03_red'],
+    blonde: ['eyebrows_01_blonde', 'eyebrows_02_blonde', 'eyebrows_03_blonde']
   },
   nose: ['nose_01', 'nose_02', 'nose_03'],
   mouth: ['mouth_01', 'mouth_02', 'mouth_03'],
   beard: {
     black: ['beard_01_black', 'beard_02_black', 'beard_03_black'],
     brown: ['beard_01_brown', 'beard_02_brown', 'beard_03_brown'],
-    red: ['beard_01_red', 'beard_02_red', 'beard_03_red']
+    red: ['beard_01_red', 'beard_02_red', 'beard_03_red'],
+    blonde: ['beard_01_blonde', 'beard_02_blonde', 'beard_03_blonde']
   },
   accessories: ['access_01', 'access_02'],
   clothes: ['clothes_01', 'clothes_02', 'clothes_03'],
   hair: {
-    black: ['hair_01_black', 'hair_02_black', 'hair_03_black'],
-    brown: ['hair_01_brown', 'hair_02_brown', 'hair_03_brown'],
-    red: ['hair_01_red', 'hair_02_red', 'hair_03_red']
+    black: ['hair_01_black', 'hair_02_black', 'hair_03_black', 'hair_04_black'],
+    brown: ['hair_01_brown', 'hair_02_brown', 'hair_03_brown', 'hair_04_brown'],
+    red: ['hair_01_red', 'hair_02_red', 'hair_03_red', 'hair_04_red'],
+    blonde: [
+      'hair_01_blonde',
+      'hair_02_blonde',
+      'hair_03_blonde',
+      'hair_04_blonde'
+    ]
   }
 };
 

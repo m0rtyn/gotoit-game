@@ -8,42 +8,31 @@ import 'bootstrap-slider/dist/css/bootstrap-slider.min.css';
 import _ from 'lodash';
 
 import { current_tick } from '../../App';
-import TeamDialog from '../TeamDialog';
-import StatsBar from '../StatsBar';
+import Modal from '../Modal';
 import ProjectName from './ProjectName';
 import ProjectProgressBar from './ProjectProgressBar';
 import ProjectDeadlineBar from './ProjectDeadlineBar';
 
 import { technologies } from '../../game/knowledge/technologies';
-import { skills_names } from '../../game/knowledge/skills';
 import { KickWorkerButton } from './KickWorkerButton';
-import { StartPauseButton } from './StartPauseButton';
-import { ReleaseButton } from './ReleaseButton';
-import { ProjectReward } from './ProjectReward';
 import { ProjectMoney } from './ProjectMoney';
-import ProjectDeadline from './ProjectDeadline';
-import { Statistics } from './Statistics';
-import { RejectButton } from './RejectButton';
 import { Avatar } from './Avatar';
-import { SkillRow } from './SkillRow';
-import { TasksProgress } from './TasksProgress';
-import { Refactoring } from './Refactoring';
-import { Tests } from './Tests';
-import { Technology } from './Technology';
 import { StatsDataItem } from './StatsDataItem';
+import ProjectModal from '../Modal/ProjectModal';
 
 class Project extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      modalOpen: false
+    };
   }
-
-  componentDidMount() {
-    if (!this.props.project.briefing) {
-      this.props.project.briefing = true;
-      this.refs.manage.openPortal();
-    }
-  }
-
+  openModal = () => {
+    this.setState({ modalOpen: true });
+  };
+  closeModal = () => {
+    this.setState({ modalOpen: false });
+  };
   manage = event => {
     this.props.data.helpers.modifyRelation(
       event.target.id,
@@ -260,7 +249,12 @@ class Project extends Component {
         });*/
 
     const manage_button = (
-      <button className="btn btn-xs btn-success">Manage</button>
+      <button
+        onClick={() => this.openModal()}
+        className="btn btn-xs btn-success"
+      >
+        Manage
+      </button>
     );
 
     //let unoccupied_workers = data.workers.filter((worker) => {return data.helpers.deepCheckRelation(worker, project)});
@@ -315,13 +309,6 @@ class Project extends Component {
     const tech_label = tech.map(tech_name => {
       return label(tech_name, technologies[tech_name].acronym);
     });
-
-    //console.log(project_platforms[project.platform].icon)
-
-    let complexityMax = project.complexity_max;
-    let planedTasksQuantity = project.planedTasksQuantity;
-    let tests = project.tests;
-    let doneQuantity = project.doneQuantity();
     let deadlineText = project.getDeadlineText();
     return (
       <div
@@ -358,153 +345,21 @@ class Project extends Component {
                 deadlineText={deadlineText}
               />
               <ProjectMoney reward={reward} penalty={penalty} />
+              {manage_button}
             </div>
           </div>
-          <Portal ref="manage" closeOnEsc openByClickOn={manage_button}>
-            <TeamDialog>
-              <h4>
-                <span>
-                  {' '}
-                  <ProjectName
-                    {...{
-                      size,
-                      platform,
-                      kind,
-                      name,
-                      reward,
-                      penalty
-                    }}
-                    deadlineText={deadlineText}
-                  />{' '}
-                </span>
-                <ProjectReward reward={reward} penalty={penalty} />
-                <div>
-                  <span>
-                    <StartPauseButton
-                      paused={is_paused}
-                      stage={stage}
-                      onUnpause={this.unpause}
-                      onOpen={this.open}
-                      onPause={this.pause}
-                    />
-                    <RejectButton onClick={this.onReject} />
-                    <ReleaseButton
-                      doneQuantity={doneQuantity}
-                      type={type}
-                      stage={stage}
-                      onClick={this.onRelease}
-                    />
-                  </span>
-                </div>
-              </h4>
-              <div className="row">
-                <div className="col-8">
-                  <div>
-                    <ProjectDeadline
-                      deadline={deadline}
-                      deadlineMax={deadline_max}
-                    />
-                    <Statistics
-                      iteration={iteration}
-                      project={project}
-                      complexity={complexity}
-                    />
-                    <div>
-                      {type === 'draft' &&
-                        stage === 'ready' &&
-                        skills_names.map(skill => {
-                          return (
-                            <SkillRow
-                              key={skill}
-                              skill={skill}
-                              value={project.estimate[skill]}
-                              onChange={e => {
-                                project.estimate[skill] = e.target.value;
-                                project.original_estimate[skill] =
-                                  e.target.value;
-                              }}
-                            />
-                          );
-                        })}
-                    </div>
-                    <div>
-                      {!(type === 'draft' && stage === 'ready') &&
-                        skills_names.map(skill => {
-                          let {
-                            tasks,
-                            bugs,
-                            done,
-                            tasks_percent,
-                            bugs_percent,
-                            done_percent
-                          } = this.extractTaskProgress(skill);
-
-                          return (
-                            <TasksProgress
-                              key={skill}
-                              skill={skill}
-                              tasksPercent={tasks_percent}
-                              tasks={tasks}
-                              bugsPercent={bugs_percent}
-                              bugs={bugs}
-                              donePercent={done_percent}
-                              done={done}
-                            />
-                          );
-                        })}
-                    </div>
-
-                    {getTechnology(id, 'refactoring') && (
-                      <Refactoring
-                        complexity={complexity}
-                        complexityMax={complexityMax}
-                      />
-                    )}
-
-                    {tests > 0 && (
-                      <Tests
-                        tests={tests}
-                        planedTasksQuantity={planedTasksQuantity}
-                      />
-                    )}
-                  </div>
-                  <div className="card">
-                    <div>
-                      {this.props.data.workers.map(worker => {
-                        const stats_data = this.getStatsData(worker);
-                        return (
-                          <div key={worker.id + project.id}>
-                            <div>{worker.name}</div>
-                            <StatsBar
-                              stats={stats_data}
-                              data={this.props.data}
-                            />
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-                <div className="col-4">
-                  <div className="card">
-                    <div className="col slim-left">
-                      {projectTechnologies.map((technology, i) => (
-                        <Technology
-                          key={technology.id}
-                          {...technology}
-                          onChange={
-                            technology.locked
-                              ? this.addTechnology
-                              : this.changeTechnology
-                          }
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </TeamDialog>
-          </Portal>
+          {this.state.modalOpen ? (
+            <Modal closeModal={this.closeModal}>
+              <ProjectModal
+                project={project}
+                data={data}
+                projectTechnologies={projectTechnologies}
+                closeModal={this.closeModal}
+              />
+            </Modal>
+          ) : (
+            ' '
+          )}
         </div>
 
         {/*{project.deadline > 0 && project.deadline !== Number.POSITIVE_INFINITY ?

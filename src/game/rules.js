@@ -125,6 +125,7 @@ export const rules = {
         });
 
         //calculating companies projects done
+
         data.company0_done = (() => {
           let sum = 0;
           _.each(data.simplified_reports, report => {
