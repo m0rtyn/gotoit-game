@@ -1,23 +1,20 @@
-import { current_tick } from '../App';
+import { current_tick } from "../App";
 
 class ValueCache {
-  constructor(expire, sourceFunction) {
-    this.stored_value = undefined;
-    this.last_refresh = 0;
-    this.expire = expire;
-    this.sourceFunction = sourceFunction;
-  }
-
-  get() {
-    if (
-      this.last_refresh === 0 ||
-      current_tick - this.last_refresh > this.expire
-    ) {
-      this.stored_value = this.sourceFunction();
-      this.last_refresh = current_tick;
+    constructor(expire, sourceFunction) {
+        this.stored_value = undefined;
+        this.last_refresh = 0;
+        this.expire = expire;
+        this.sourceFunction = sourceFunction;
     }
-    return this.stored_value;
-  }
+
+    get() {
+        if (this.last_refresh === 0 || current_tick - this.last_refresh > this.expire) {
+            this.stored_value = this.sourceFunction();
+            this.last_refresh = current_tick;
+        }
+        return this.stored_value;
+    }
 }
 
 /*
