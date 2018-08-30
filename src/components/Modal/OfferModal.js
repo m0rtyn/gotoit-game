@@ -61,7 +61,7 @@ class Offer extends Component {
               year="numeric"
               hour="numeric"
             />
-            <span className="icon-star_border" />
+            <span className="icon-star-border" />
             <Avatar
               className="project-avatar"
               name={project.name}
