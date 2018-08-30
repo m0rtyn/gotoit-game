@@ -187,20 +187,20 @@
   --color-rss:              #f26522;
 
   // Alpha channel colors
-  --color-alpha-dark-text:           rgba(var(--color-text), .7);
-  --color-alpha-dark-text-light:     rgba(var(--color-text), .4);
-  --color-alpha-dark-text-active:    rgba(var(--color-text), 1);
-  --color-alpha-dark-bg:             rgba(var(--color-text), .04);
-  --color-alpha-dark-bg-hover:       rgba(var(--color-text), .05);
-  --color-alpha-dark-divider:        rgba(var(--color-text), .07);
+  --color-alpha-dark-text:           color-mod(var(--color-text) a(70%));
+  --color-alpha-dark-text-light:     color-mod(var(--color-text) a(40%));
+  --color-alpha-dark-text-active:    color-mod(var(--color-text) a(100%));
+  --color-alpha-dark-bg:             color-mod(var(--color-text) a(4%));
+  --color-alpha-dark-bg-hover:       color-mod(var(--color-text) a(5%));
+  --color-alpha-dark-divider:        color-mod(var(--color-text) a(7%));
 
-  --color-alpha-light-text:          rgba(#fff, .7);
-  --color-alpha-light-text-light:    rgba(#fff, .4);
-  --color-alpha-light-text-active:   rgba(#fff, 1);
-  --color-alpha-light-bg:            rgba(#fff, .1);
-  --color-alpha-light-bg-hover:      rgba(#fff, .15);
-  --color-alpha-light-divider:       rgba(#fff, .15);
-  --color-alpha-light-divider-light: rgba(#fff, .08);
+  --color-alpha-light-text:          color-mod(#fff a(70%));
+  --color-alpha-light-text-light:    color-mod(#fff a(40%));
+  --color-alpha-light-text-active:   color-mod(#fff a(100%));
+  --color-alpha-light-bg:            color-mod(#fff a(10%));
+  --color-alpha-light-bg-hover:      color-mod(#fff a(15%));
+  --color-alpha-light-divider:       color-mod(#fff a(15%));
+  --color-alpha-light-divider-light: color-mod(#fff a(8%));
 
   --zindex-fab:                9;
   --zindex-morris:             900;
