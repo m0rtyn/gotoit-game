@@ -11,6 +11,10 @@ import ActivityToolbar from "./ActivityToolbar.js";
 import Activities from "./Activities.js";
 
 import { colors } from "../game/knowledge/colors";
+import _ from "lodash";
+import { male_avatar } from "../game/knowledge/worker_avatar";
+
+const backgrounds = require.context("../assets/images/backgrounds/", true, /^\.\/.*\.png$/);
 
 class Layout extends Component {
     render() {
@@ -21,16 +25,14 @@ class Layout extends Component {
                     style={{
                         backgroundColor: colors.backgrounds[this.props.data.content]
                     }}
-                />
+                />{" "}
                 <div
                     className="background-image"
                     style={{
-                        backgroundImage: "url(backgrounds/" + this.props.data.content + ".png)"
+                        backgroundImage: `url(${backgrounds(`./${this.props.data.content}.png`)})`
                     }}
                 />
-
                 <Header data={this.props.data} newGame={this.props.newGame} />
-
                 <div className="main-container">
                     <div className="row gap-2">
                         <div className="col-3 people-column">
@@ -47,9 +49,7 @@ class Layout extends Component {
                         </div>
                     </div>
                 </div>
-
                 <PopupsNest data={this.props.data} />
-
                 <ToastNest data={this.props.data} />
             </div>
         );
