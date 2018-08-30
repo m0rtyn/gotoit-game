@@ -1,21 +1,6 @@
 .resume-modal {
   postition: relative;
 
-  & + .close {
-    color: var(--white);
-    text-shadow: none;
-    // padding: 0;
-    // margin: 0;
-    opacity: 1;
-
-    &:hover,
-    &:active,
-    &:focus {
-      color: var(--white) !important;
-      opacity: 1 !important;
-    }
-  }
-
   .modal-header {
     color: var(--white);
     background-image:
@@ -31,7 +16,7 @@
     div {
       display: flex;
       align-items: center;
-      
+
       :last-of-type {
         margin-right: size(3);
       }
