@@ -316,8 +316,6 @@ class Project extends Component {
       return label(tech_name, technologies[tech_name].acronym);
     });
 
-    //console.log(project_platforms[project.platform].icon)
-
     let complexityMax = project.complexity_max;
     let planedTasksQuantity = project.planedTasksQuantity;
     let tests = project.tests;
@@ -555,7 +553,9 @@ class Project extends Component {
                 />
               </div>
             ) : null}
-            {tech.length && <p className="small slim">Tech: {tech_label}</p>}
+            {tech.length !== 0 && (
+              <p className="small slim">Tech: {tech_label}</p>
+            )}
           </div>
         </div>
       </div>
