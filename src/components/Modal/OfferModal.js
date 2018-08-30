@@ -99,17 +99,17 @@ class Offer extends Component {
                     <button
                       className="btn btn-success"
                       id={project.id}
-                      onClick={e => this.acceptOffered(e)}
+                      onClick={e => this.startOffered(e)}
                     >
-                      Accept
+                      Start
                     </button>
                     &nbsp;
                     <button
                       className="btn btn-warning"
                       id={project.id}
-                      onClick={e => this.startOffered(e)}
+                      onClick={e => this.acceptOffered(e)}
                     >
-                      Start
+                      Accept
                     </button>
                     &nbsp;
                     <button
