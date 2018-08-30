@@ -23,7 +23,7 @@ class Worker extends Component {
     super(props);
     this.state = {
       currentTab: 0
-    }
+    };
     this.manage = this.manage.bind(this);
     this.manageAll = this.manageAll.bind(this);
     this.dismiss = this.dismiss.bind(this);
@@ -147,7 +147,7 @@ class Worker extends Component {
             <p>
               {worker.tellFeelings()}
             </p>
-            <>
+            <p>
               {worker.is_player
               ? ('')
               : (
@@ -158,7 +158,7 @@ class Worker extends Component {
                   Dismiss an employee
                 </button>
               )}
-            </>
+            </p>
           </div>
           <div className="col-6 worker-statistic">
             <h4 className="text-center fw-700 text-fade">Employee statistic</h4>
@@ -409,21 +409,17 @@ class Worker extends Component {
             size={80}
             sources={_.toPairs(worker.avatar)}
           />
-
         </div>
-      <div className="worker-info">
+        <div className="worker-info">
           <header className="card-header">
             <h2 className="worker-name"> {worker.name} </h2>
-
             <Portal
               ref="manage"
               closeOnEsc
               closeOnOutsideClick
               openByClickOn={manage_button}
             >
-
               <TeamDialog>
-
                 <div className="modal-header">
                   <div style={{ position: 'relative', width: '200px', height: '200px'}}>
                     <Avatar
@@ -432,7 +428,6 @@ class Worker extends Component {
                       size={200}
                       sources={_.toPairs(worker.avatar)}
                     />
-
                   </div>
                   <div className="worker-info">
                     <h3 className="worker-name">
@@ -441,7 +436,7 @@ class Worker extends Component {
                     </h3>
                     <div className="worker-happiness">
                       <WorkerHappinessBar worker={worker} />
-                      <>
+                      <div>
                         {worker.is_player
                           ? ( '' )
                           : (
@@ -460,9 +455,8 @@ class Worker extends Component {
                             </div>
                           )
                         }
-                      </>
+                      </div>
                     </div>
-
                     <div className="worker-stamina">
                       <WorkerStaminaBar worker={worker} />
 
@@ -477,7 +471,6 @@ class Worker extends Component {
                         <h5 className="mb-0 text-white text-center">Propose vacation</h5>
                       </button>
                     </div>
-
                     <div className="worker-stats">
                       {skills_names.map(skill => {
                         return (
@@ -493,7 +486,6 @@ class Worker extends Component {
                     </div>
                   </div>
                 </div>
-
                 <div className="modal-body">
                   <ul className="nav nav-tabs nav-tabs-light-mode">
                     <li className="nav-item">
@@ -513,8 +505,7 @@ class Worker extends Component {
                       </a>
                     </li>
                   </ul>
-
-                  <>
+                  <div>
                     {
                       ( ()=>{
                         if (state.currentTab === 0){
@@ -524,7 +515,7 @@ class Worker extends Component {
                         }
                       } )()
                     }
-                  </>
+                  </div>
                 </div>
               </TeamDialog>
             </Portal>

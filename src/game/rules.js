@@ -29,6 +29,7 @@ export const rules = {
   },
 
   //Is that a good name?
+  // no, look like "nex tick"
   nextDay: {
     onTick: function(state) {
       const data = state.data;

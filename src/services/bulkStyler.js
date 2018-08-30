@@ -40,25 +40,20 @@ class bulkStyler {
     let order = _.shuffle(Object.keys(stats_bulk)); //.sort(function(a,b){return stats_bulk[b]-stats_bulk[a]});
 
     switch (background) {
-      case 'technologist': // high like 15
-        stats_bulk[order[0]] += 4;
-        stats_bulk[order[1]] += 4;
-        stats_bulk[order[2]] += 4;
-        break;
       case 'specialist': // med like 10
-        stats_bulk[order[0]] += 1;
-        stats_bulk[order[1]] += 1;
-        stats_bulk[order[2]] += 1;
+        stats_bulk[order[0]] += 2;
+        stats_bulk[order[1]] += 2;
+        stats_bulk[order[2]] += 2;
         break;
       case 'coworker': // low like 7
-        stats_bulk[order[0]] += 3;
-        stats_bulk[order[1]] += 3;
-        stats_bulk[order[2]] += 1;
+        stats_bulk[order[0]] += 2;
+        stats_bulk[order[1]] += 2;
+        stats_bulk[order[2]] += 2;
         break;
       case 'businessman': // low like 4
-        stats_bulk[order[0]] += 1;
-        stats_bulk[order[1]] += 1;
-        stats_bulk[order[2]] += 1;
+        stats_bulk[order[0]] += 2;
+        stats_bulk[order[1]] += 2;
+        stats_bulk[order[2]] += 2;
         break;
       default:
         console.log('error case: ' + background);
@@ -71,13 +66,13 @@ class bulkStyler {
   static playerSpeciality(stats_bulk, speciality) {
     switch (speciality) {
       case 'design':
-        stats_bulk['design'] += 6;
+        stats_bulk['design'] += 3;
         break;
       case 'manage':
-        stats_bulk['manage'] += 6;
+        stats_bulk['manage'] += 3;
         break;
       case 'program':
-        stats_bulk['program'] += 6;
+        stats_bulk['program'] += 3;
         break;
       default:
         console.log('error case: ' + speciality);

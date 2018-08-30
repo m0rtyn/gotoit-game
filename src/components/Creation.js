@@ -21,12 +21,13 @@ class Creation extends Component {
 
     let back = _.sample(_.keys(player_backgrounds));
 
+    let gender = ['male', 'female'][_.random(0, 1)];
+
     this.state = {
       step: 'welcome', // welcome, creation
-      gender: 'male',
-      suggest_name: WorkerModel.genName('male'),
+      gender: gender,
+      suggest_name: WorkerModel.genName(gender),
       selected_background: back, //'specialist',
-      technologist: _.sample(_.keys(player_backgrounds['technologist'].spices)),
       specialist: _.sample(_.keys(player_backgrounds['specialist'].spices)),
       coworker: _.sample(_.keys(player_backgrounds['coworker'].spices)),
       businessman: _.sample(_.keys(player_backgrounds['businessman'].spices))
@@ -46,6 +47,13 @@ class Creation extends Component {
       stats = bulkStyler.playerSpeciality(stats, this.state.specialist);
     }
 
+    if (
+      this.state.selected_background === 'businessman' &&
+      this.state.businessman === 'manager'
+    ) {
+      stats.manage += 4;
+    }
+
     return stats;
   }
 
@@ -57,6 +65,8 @@ class Creation extends Component {
 
     let stats = this.getPlayerStats();
 
+    console.log(stats);
+
     let tmp_player = WorkerModel.generatePlayer(this.state.gender);
 
     tmp_player.stats = stats;
@@ -65,20 +75,14 @@ class Creation extends Component {
     data.workers[0] = tmp_player; //: [WorkerModel.generatePlayer()]
     player = tmp_player;
 
-    if (this.state.selected_background === 'technologist') {
-      data.projects_known_technologies = data.projects_known_technologies.concat(
-        this.state.technologist
-      );
-    } else {
-      data.projects_known_technologies = data.projects_known_technologies.concat(
-        player_backgrounds[this.state.selected_background].start_tech
-      );
-    }
+    data.projects_known_technologies = data.projects_known_technologies.concat(
+      player_backgrounds[this.state.selected_background].start_tech,
+      player_backgrounds[this.state.selected_background].spices[
+        this.state[this.state.selected_background]
+      ].start_tech
+    );
 
     switch (this.state.selected_background) {
-      case 'technologist':
-        // do nothing
-        break;
       case 'specialist':
         console.log(player.items, this.state.specialist);
         player.items[this.state.specialist].exp = true;
@@ -86,39 +90,14 @@ class Creation extends Component {
         break;
 
       case 'coworker':
+        data.helpers.hireEmployer(WorkerModel.generate(1));
         switch (this.state.coworker) {
-          case 'apprentice':
-            data.helpers.hireEmployer(
-              WorkerModel.generateWithStats(
-                bulkStyler.partnerSpeciality(
-                  JSON.parse(JSON.stringify(stats)),
-                  'apprentice'
-                )
-              )
-            );
+          case 'pair':
             break;
-          case 'helpers':
-            data.helpers.hireEmployer(
-              WorkerModel.generateWithStats(
-                bulkStyler.partnerSpeciality(
-                  JSON.parse(JSON.stringify(stats)),
-                  'helper1'
-                )
-              )
-            );
-            data.helpers.hireEmployer(
-              WorkerModel.generateWithStats(
-                bulkStyler.partnerSpeciality(
-                  JSON.parse(JSON.stringify(stats)),
-                  'helper2'
-                )
-              )
-            );
+          case 'helper':
+            data.helpers.hireEmployer(WorkerModel.generate(1));
             break;
-          case 'full':
-            data.helpers.hireEmployer(WorkerModel.generate(1));
-            data.helpers.hireEmployer(WorkerModel.generate(1));
-            data.helpers.hireEmployer(WorkerModel.generate(1));
+          case 'motivation':
             break;
           default:
             console.log('Wrong team?');
@@ -128,17 +107,14 @@ class Creation extends Component {
         break;
 
       case 'businessman':
+        data.early_payed_loans += 9200;
         switch (this.state.businessman) {
-          case 'btc':
-            data.btc += 5000 / data.current_btc_price;
+          case 'cash':
+            data.money += 10000;
             break;
-          case 'credit':
-            data.early_payed_loans += 9200;
+          case 'micromanagement':
             break;
-          case 'office':
-            data.helpers.changeOffice(3);
-            data.office_things.coffeemaker = true;
-            data.office_things.lunch = true;
+          case 'manager':
             break;
           default:
             console.log('Wrong biz?');
@@ -208,11 +184,11 @@ class Creation extends Component {
                       cool!
                     </p>
                   </div>
-                  <div className="modal-footer">
+                  <div className="modal-footer mx-auto">
                     <button
-                      className="btn btn-success btn-lg"
+                      className="btn btn-success btn-lg btn-"
                       onClick={() => {
-                        this.setState({ step: 'creation' });
+                        this.setState({ step: 'appearance' });
                       }}
                     >
                       Create Your Company!
@@ -220,6 +196,9 @@ class Creation extends Component {
                   </div>
                 </div>
               ) : (
+                ''
+              )}
+              {this.state.step === 'appearance' ? (
                 <div className="modal-content creation">
                   <div className="modal-body">
                     <section className="card creation-person">
@@ -286,7 +265,24 @@ class Creation extends Component {
                         </div>
                       </div>
                     </section>
-
+                  </div>
+                  <div className="modal-footer mx-auto">
+                    <button
+                      className="btn btn-success btn-lg btn-"
+                      onClick={() => {
+                        this.setState({ step: 'background' });
+                      }}
+                    >
+                      Choose background!
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                ''
+              )}
+              {this.state.step === 'background' ? (
+                <div className="modal-content creation">
+                  <div className="modal-body">
                     <section className="card creation-background">
                       <div className="card-body">
                         <div className="creation-background-select">
@@ -325,6 +321,11 @@ class Creation extends Component {
                               Choose background
                             </h3>
 
+                            {console.log(
+                              player_backgrounds,
+                              this.state.selected_background
+                            )}
+
                             <div className="creation-description lead text-center">
                               {
                                 player_backgrounds[
@@ -332,14 +333,22 @@ class Creation extends Component {
                                 ].text
                               }
                               <br />
-                              Start tech:{' '}
-                              {'technologist' === this.state.selected_background
-                                ? 'Agile, Test Drive Development or Refactoring'
-                                : technologies[
-                                    player_backgrounds[
-                                      this.state.selected_background
-                                    ].start_tech
-                                  ].name}
+                              {player_backgrounds[
+                                this.state.selected_background
+                              ].start_tech.length > 0 ? (
+                                <span>
+                                  Start tech:{' '}
+                                  {
+                                    technologies[
+                                      player_backgrounds[
+                                        this.state.selected_background
+                                      ].start_tech
+                                    ].name
+                                  }
+                                </span>
+                              ) : (
+                                ''
+                              )}
                             </div>
                           </div>
                         </div>
@@ -393,6 +402,29 @@ class Creation extends Component {
                                   this.state[this.state.selected_background]
                                 ].description
                               }
+                              <br />
+                              {player_backgrounds[
+                                this.state.selected_background
+                              ].spices[
+                                this.state[this.state.selected_background]
+                              ].start_tech.length > 0 ? (
+                                <span>
+                                  Start tech:{' '}
+                                  {
+                                    technologies[
+                                      player_backgrounds[
+                                        this.state.selected_background
+                                      ].spices[
+                                        this.state[
+                                          this.state.selected_background
+                                        ]
+                                      ].start_tech
+                                    ].name
+                                  }
+                                </span>
+                              ) : (
+                                ''
+                              )}
                             </div>
                           </div>
                         </div>
@@ -423,6 +455,8 @@ class Creation extends Component {
                     </button>
                   </div>
                 </div>
+              ) : (
+                ''
               )}
             </SimpleModal>
           </Portal>
