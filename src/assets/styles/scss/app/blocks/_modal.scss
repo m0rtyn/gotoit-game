@@ -30,21 +30,6 @@
       margin: 0;
       z-index: 1;
     }
-
-    .close-invert {
-      color: var(--white);
-      text-shadow: none;
-      // padding: 0;
-      // margin: 0;
-      opacity: 1;
-
-      &:hover,
-      &:active,
-      &:focus {
-        color: var(--white) !important;
-        opacity: 1 !important;
-      }
-    }
   }
 
   .modal-header {
