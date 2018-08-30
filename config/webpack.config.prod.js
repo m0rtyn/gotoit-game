@@ -55,7 +55,6 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
                 // Necessary for external CSS imports to work
                 // https://github.com/facebook/create-react-app/issues/2677
                 ident: "postcss",
-               ident: "postcss",
                 plugins: () => [
                     require("postcss-nested")(),
                     require("postcss-color-mod-function")(),
