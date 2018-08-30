@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { skills } from '../../game/knowledge/skills';
 import { project_offer_will_expire_after } from '../../game/knowledge/projects';
+import { FormattedDate } from 'react-intl';
 import _ from 'lodash';
 import StatsBar from '../StatsBar';
 
@@ -33,6 +34,7 @@ class Offer extends Component {
   }
 
   render() {
+    let letter = this.props.letter;
     let project = this.props.project;
     let createdAt = this.props.createdAt;
     let expired = this.props.expired;
@@ -45,86 +47,89 @@ class Offer extends Component {
     });
 
     return (
-      <div>
-        <div>
-          <div className="flexbox">
-            <span
-              style={{ position: 'relative', width: '200px', height: '200px' }}
-            >
-              <Avatar
-                name={project.name}
-                style={{ position: 'absolute' }}
-                size={200}
-                sources={_.toPairs(project.avatar)}
-              />
-            </span>
-            <span className="flex-grow">
-              <ProjectName project={project} />
-              <div>
-                <span>Deadline: {project.getDeadlineText()}</span>
-                <span>
-                  <h4 className="project-reward text-success">
-                    {' '}
-                    Reward: ${project.reward}
-                  </h4>
-                </span>
-                {project.penalty > 0 ? (
-                  <span>
-                    {' '}
-                    <h4 className="project-penalty text-warning">
-                      Penalty : ${project.penalty}
-                    </h4>
-                  </span>
-                ) : (
-                  ' '
-                )}
-              </div>
-            </span>
+      <section className="offer-modal">
+        <div className="modal-header flexbox">
+          <div>
+            <p className="fw-700">enterpreneur resume</p>
           </div>
-          <div className="moat slim_top">
-            <div key={project.id} className="card">
-              <StatsBar stats={stats_data} data={this.props.data} />
-
-              {project.stage === 'ready' ? (
-                !expired ? (
-                  <div>
-                    <h3>{`Will expire in ${hours_to_expire} hours`}</h3>
-                    <div className="btn-group">
-                      <button
-                        className="btn btn-success"
-                        id={project.id}
-                        onClick={e => this.acceptOffered(e)}
-                      >
-                        Accept
-                      </button>
-                      &nbsp;
-                      <button
-                        className="btn btn-warning"
-                        id={project.id}
-                        onClick={e => this.startOffered(e)}
-                      >
-                        Start
-                      </button>
-                      &nbsp;
-                      <button
-                        className="btn btn-danger"
-                        id={project.id}
-                        onClick={e => this.reject(e)}
-                      >
-                        Hide
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  'This offer has expired'
-                )
-              ) : (
-                'You already took this offer'
-              )}
-            </div>
+          <div>
+            <FormattedDate
+              // value={letter.date}
+              weekday="short"
+              day="numeric"
+              month="short"
+              year="numeric"
+              hour="numeric"
+            />
+            <span className="icon-star_border" />
+            <Avatar
+              className="project-avatar"
+              name={project.name}
+              sources={_.toPairs(project.avatar)}
+            />
           </div>
         </div>
-      </div>
+        <div className="modal-body">
+          <ProjectName project={project} />
+          <span>Deadline: {project.getDeadlineText()}</span>
+          <span>
+            <h4 className="project-reward text-success">
+              {' '}
+              Reward: ${project.reward}
+            </h4>
+          </span>
+          {project.penalty > 0 ? (
+            <span>
+              {' '}
+              <h4 className="project-penalty text-warning">
+                Penalty : ${project.penalty}
+              </h4>
+            </span>
+          ) : (
+            ' '
+          )}
+          <div key={project.id}>
+            <StatsBar stats={stats_data} data={this.props.data} />
+
+            {project.stage === 'ready' ? (
+              !expired ? (
+                <div>
+                  <h3>{`Will expire in ${hours_to_expire} hours`}</h3>
+                  <div className="btn-group">
+                    <button
+                      className="btn btn-success"
+                      id={project.id}
+                      onClick={e => this.acceptOffered(e)}
+                    >
+                      Accept
+                    </button>
+                    &nbsp;
+                    <button
+                      className="btn btn-warning"
+                      id={project.id}
+                      onClick={e => this.startOffered(e)}
+                    >
+                      Start
+                    </button>
+                    &nbsp;
+                    <button
+                      className="btn btn-danger"
+                      id={project.id}
+                      onClick={e => this.reject(e)}
+                    >
+                      Hide
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                'This offer has expired'
+              )
+            ) : (
+              'You already took this offer'
+            )}
+          </div>
+        </div>
+      </section>
     );
   }
 }
