@@ -1,6 +1,7 @@
 import _ from "lodash";
 
 import bulkStyler from "../services/bulkStyler";
+import ProjectsTop from "../services/ProjectsTop";
 
 import { project_bars, project_kinds, project_platforms, project_sizes } from "../game/knowledge/projects";
 import { skills, skills_inf } from "../game/knowledge/skills";
@@ -297,6 +298,38 @@ class ProjectModel {
         //  this.bugs = JSON.parse(JSON.stringify(skills));
         //this.errors = JSON.parse(JSON.stringify(skills));
         //this.complexity -= (_.sum(_.values(this.needs)));
+    }
+
+    getEstimatedReward() {
+        if (this.type !== "own") return;
+
+        const project = _.cloneDeep(this);
+        let all_top_handler = ProjectsTop.getHandler(getData().simplified_reports);
+        let platform_top_handler = all_top_handler.filter("platform", project.platform);
+        let kind_top_handler = all_top_handler.filter("kind", project.kind);
+        let platform_kind_top_handler = all_top_handler.filter("platform", project.platform).filter("kind", project.kind);
+
+        const getBonus = handler => {
+            const top = handler.getTopNumber(project.id);
+            if (top === "out of top") {
+                return 0;
+            }
+
+            const bonus = Math.max(0, 11 - top);
+            return bonus;
+        };
+
+        let bonus_points =
+            getBonus(all_top_handler) * 3 +
+            getBonus(platform_top_handler) * 2 +
+            getBonus(kind_top_handler) * 2 +
+            getBonus(platform_kind_top_handler) * 1;
+
+        bonus_points = Math.max(1, bonus_points);
+
+        return (
+            bonus_points * _.sum(_.values(bulkStyler.projectPlatform(bulkStyler.projectKind(project.done, project.kind), project.platform)))
+        );
     }
 
     totalScore() {

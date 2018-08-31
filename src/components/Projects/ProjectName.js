@@ -24,7 +24,7 @@ class ProjectName extends PureComponent {
             <h4 className="project-name flex-grow">
                 {project_sizes[size].name} {platform} {kind} {name}
                 <br />
-                <span className="text-warning"> {deadlineText}</span>
+                <span className="text-warning">{deadlineText}</span>
                 <span>{penalty > 0 ? <span className="text-danger"> {penalty}$</span> : ""}</span>
             </h4>
         );

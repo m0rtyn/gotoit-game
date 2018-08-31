@@ -281,7 +281,7 @@ class Project extends Component {
                                 }}
                                 deadlineText={deadlineText}
                             />
-                            <ProjectMoney reward={reward} penalty={penalty} />
+                            <ProjectMoney reward={project.getEstimatedReward()} penalty={penalty} />
                             {manage_button}
                         </div>
                     </div>
