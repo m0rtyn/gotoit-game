@@ -58,20 +58,16 @@ class StatsProgressBar extends Component {
 
         return (
             <label className="stats-progress-bar">
-                {hideCheckbox ? (
-                    ""
-                ) : (
-                    <>
-                        <input
-                            className={"custom-checkbox icon-" + stat}
-                            type="checkbox"
-                            id={stat}
-                            checked={this.props.data.helpers.getRole(worker.id, stat)}
-                            onChange={this.changeRole}
-                        />
-                        <span className={"icon-" + stat} />
-                    </>
-                )}
+                <>
+                    <input
+                        className={"custom-checkbox icon-" + stat}
+                        type="checkbox"
+                        id={stat}
+                        checked={this.props.data.helpers.getRole(worker.id, stat)}
+                        onChange={this.changeRole}
+                    />
+                    <span className={"icon-" + stat} />
+                </>
 
                 <Bar bar_data={[bar_data]} />
             </label>
