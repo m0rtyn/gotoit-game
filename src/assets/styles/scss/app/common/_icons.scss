@@ -7,7 +7,6 @@
 }
 
 [class^="icon-"], [class*=" icon-"] {
-  /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: none;
   font-style: normal;
@@ -16,10 +15,7 @@
   text-transform: none;
   line-height: 1;
   font-size: 24px;
-
-  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 .icon- {
@@ -69,14 +65,6 @@
       margin-left: -1em;
       color: rgb(255, 255, 255);
     }
-  }
-
-  &management:before {
-    content: "\e906";
-  }
-
-  &programming:before {
-    content: "\e907";
   }
 
   &tech:before {
@@ -143,6 +131,14 @@
 
   &design:before {
     content: "\e90e";
+  }
+
+  &manage:before {
+    content: "\e906";
+  }
+
+  &program:before {
+    content: "\e907";
   }
 }
 
