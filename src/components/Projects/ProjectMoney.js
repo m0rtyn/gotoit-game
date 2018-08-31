@@ -12,7 +12,7 @@ export class ProjectMoney extends PureComponent {
         let { reward, penalty } = this.props;
         return (
             <div>
-                <span className="project-reward text-success">Reward: {reward}$</span>
+                <span className="project-reward text-success">Estimated reward: {reward}$</span>
                 {penalty > 0 && <span className="project-penalty text-warning"> Penalty : {penalty}$ </span>}
             </div>
         );
