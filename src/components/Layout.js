@@ -12,7 +12,6 @@ import Activities from "./Activities.js";
 
 import { colors } from "../game/knowledge/colors";
 import _ from "lodash";
-import { male_avatar } from "../game/knowledge/worker_avatar";
 
 const backgrounds = require.context("../assets/images/backgrounds/", true, /^\.\/.*\.png$/);
 
@@ -26,12 +25,12 @@ class Layout extends Component {
                         backgroundColor: colors.backgrounds[this.props.data.content]
                     }}
                 />{" "}
-                <div
+                {/*<div
                     className="background-image"
                     style={{
                         backgroundImage: `url(${backgrounds(`./${this.props.data.content}.png`)})`
                     }}
-                />
+                />*/}
                 <Header data={this.props.data} newGame={this.props.newGame} />
                 <div className="main-container">
                     <div className="row gap-2">

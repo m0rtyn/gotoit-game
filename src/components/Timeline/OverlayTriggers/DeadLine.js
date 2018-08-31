@@ -4,6 +4,7 @@ import React from "react";
 import * as PropTypes from "prop-types";
 import { Avatar } from "../../Projects/Avatar";
 import _ from "lodash";
+import ReactTooltip from "react-tooltip";
 
 export default class DeadLine extends Component {
     static propTypes = {
@@ -12,23 +13,18 @@ export default class DeadLine extends Component {
         info: PropTypes.string,
         name: PropTypes.string
     };
-
     render() {
         return (
-            <OverlayTrigger
-                key={this.props.index}
-                delay={150}
-                placement="bottom"
-                overlay={
-                    <Tooltip id={`Tooltip${this.props.index}`}>
-                        <div>{this.props.info + ": " + this.props.name}</div>
-                    </Tooltip>
-                }
-            >
-                <div style={{ position: "relative" }}>
-                    <Avatar name={this.props.name} sources={_.toPairs(this.props.avatar)} style={{ position: "absolute" }} size={20} />
-                </div>
-            </OverlayTrigger>
+            <div>
+                <a data-tip>
+                    <div style={{ position: "relative" }}>
+                        <Avatar name={this.props.name} sources={_.toPairs(this.props.avatar)} style={{ position: "absolute" }} size={20} />
+                    </div>
+                </a>
+                <ReactTooltip place="bottom">
+                    <div>{this.props.info + ": " + this.props.name}</div>
+                </ReactTooltip>
+            </div>
         );
     }
 }
