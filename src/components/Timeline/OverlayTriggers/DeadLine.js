@@ -13,7 +13,6 @@ export default class DeadLine extends Component {
         info: PropTypes.string,
         name: PropTypes.string
     };
-
     render() {
         return (
             <div>
