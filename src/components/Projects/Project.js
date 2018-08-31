@@ -345,7 +345,7 @@ class Project extends Component {
                                 />
                             </div>
                         ) : null}
-                        {tech.length && <p className="small slim">Tech: {tech_label}</p>}
+                        {tech.length !== 0 && <p className="small slim">Tech: {tech_label}</p>}
                     </div>
                 </div>
             </div>

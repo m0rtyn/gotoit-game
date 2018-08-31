@@ -869,9 +869,6 @@ class App extends Component {
         data.workers.forEach(worker => {
             worker.facts.project_finished++;
         });
-        this.addMoney(project.reward);
-
-        this.projectReporting(id, "finish");
 
         let all_top_handler = ProjectsTop.getHandler(data.simplified_reports);
         let platform_top_handler = all_top_handler.filter("platform", project.platform);
@@ -888,12 +885,13 @@ class App extends Component {
             return bonus;
         };
 
-        const bonus_points =
+        let bonus_points =
             getBonus(all_top_handler) * 3 +
             getBonus(platform_top_handler) * 2 +
             getBonus(kind_top_handler) * 2 +
             getBonus(platform_kind_top_handler) * 1;
 
+        bonus_points = Math.max(1, bonus_points);
         if (project.type === "own") {
             //console.log(bonus_points);
             //console.log(_.sum(_.values(bulkStyler.projectPlatform(bulkStyler.projectKind(project.done, project.kind), project.platform))));
@@ -905,6 +903,9 @@ class App extends Component {
                 bonus_points *
                 _.sum(_.values(bulkStyler.projectPlatform(bulkStyler.projectKind(project.done, project.kind), project.platform)));
         }
+
+        this.addMoney(project.reward);
+        this.projectReporting(id, "finish");
 
         data.rumor += Math.floor(bonus_points / 10);
         data.reputation += bonus_points;

@@ -27,14 +27,18 @@ class MarketTop extends Component {
         };
 
         data.simplified_reports.forEach(report => {
-            if (this.state.selected_kind === "all" && this.state.selected_platform === "all") {
+            if (
+                this.state.selected_kind === "all" &&
+                this.state.selected_platform === "all" &&
+                data.projects_unlocked_platforms.includes(report.platform)
+            ) {
                 put(report);
             } else if (this.state.selected_kind === "all") {
                 if (this.state.selected_platform === report.platform) {
                     put(report);
                 }
             } else if (this.state.selected_platform === "all") {
-                if (this.state.selected_kind === report.kind) {
+                if (this.state.selected_kind === report.kind && data.projects_unlocked_platforms.includes(report.platform)) {
                     put(report);
                 }
             } else {
@@ -55,7 +59,7 @@ class MarketTop extends Component {
 
         let no_data = false;
 
-        let platform_options = _.keys(project_platforms).map(platform => {
+        let platform_options = data.projects_unlocked_platforms.map(platform => {
             return { value: platform, label: project_platforms[platform].name };
         });
         platform_options.push({ value: "all", label: "All" });
@@ -64,6 +68,8 @@ class MarketTop extends Component {
             return { value: platform, label: project_kinds[platform].name };
         });
         kind_options.push({ value: "all", label: "All" });
+
+        console.log(this.state.selected_platform);
 
         return (
             <div>
