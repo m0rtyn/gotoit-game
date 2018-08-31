@@ -16,7 +16,8 @@ class ProjectProgressBar extends Component {
         let max = Math.max(project.planedTasksQuantity(), project.tasksQuantity());
         let sum = max + errors;
         let k = 100 / sum;
-        const bar_data = [
+
+        const design_data = [
             {
                 name: "Design tasks",
                 width: k * (project.estimate.design - project.done.design),
@@ -37,7 +38,10 @@ class ProjectProgressBar extends Component {
                 color: colors.design.colorCompleted,
                 value: project.done.design,
                 id: project.id + project_bars.design_completed.id
-            },
+            }
+        ];
+
+        const prog_data = [
             {
                 name: "Program tasks",
                 width: k * (project.estimate.program - project.done.program),
@@ -58,7 +62,10 @@ class ProjectProgressBar extends Component {
                 color: colors.program.colorCompleted,
                 value: project.done.program,
                 id: project.id + project_bars.program_completed.id
-            },
+            }
+        ];
+
+        const manage_data = [
             {
                 name: "Manage tasks",
                 width: k * (project.estimate.manage - project.done.manage),
@@ -83,7 +90,9 @@ class ProjectProgressBar extends Component {
         ];
         return (
             <div>
-                <Bar bar_data={bar_data} />
+                {prog_data[0].value !== 0 ? <Bar bar_data={prog_data} /> : <div />}
+                {design_data[0].value !== 0 ? <Bar bar_data={design_data} /> : <div />}
+                {manage_data[0].value !== 0 ? <Bar bar_data={manage_data} /> : <div />}
             </div>
         );
     }

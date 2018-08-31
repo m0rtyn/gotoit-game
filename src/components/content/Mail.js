@@ -74,6 +74,7 @@ class Mail extends Component {
                         this.setState({
                             current_modal: (
                                 <Offer
+                                    letter={letter}
                                     closeModal={this.closeModal}
                                     key={i}
                                     expired={letter.expired}

@@ -44,6 +44,8 @@ class Offer extends Component {
             return { name: key, val: <span>{project.needs(key)}</span> };
         });
 
+        console.log(letter);
+
         return (
             <section className="offer-modal">
                 <div className="modal-header flexbox">
@@ -51,14 +53,7 @@ class Offer extends Component {
                         <p className="fw-700">enterpreneur resume</p>
                     </div>
                     <div>
-                        <FormattedDate
-                            // value={letter.date}
-                            weekday="short"
-                            day="numeric"
-                            month="short"
-                            year="numeric"
-                            hour="numeric"
-                        />
+                        <FormattedDate value={letter.date} weekday="short" day="numeric" month="short" year="numeric" hour="numeric" />
                         <span className="icon-star-border" />
                         <Avatar className="project-avatar" name={project.name} sources={_.toPairs(project.avatar)} />
                     </div>

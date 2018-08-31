@@ -21,10 +21,10 @@ import { StatsDataItem } from "../Projects/StatsDataItem";
 import { technologies } from "../../game/knowledge/technologies";
 
 export default class ProjectModal extends Component {
-    static propTypes = {
+    /*static propTypes = {
         project: PropTypes.object.required,
         data: PropTypes.object.required
-    };
+    };*/
     open = () => {
         this.props.data.helpers.openProject(this.props.project.id);
     };
