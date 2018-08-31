@@ -1,0 +1,48 @@
+.offer-modal {
+  postition: relative;
+
+  .modal-header {
+    color: var(--white);
+    background-image:
+        url("../../images/modal/offer-modal-bg.png"),
+        linear-gradient(180deg, #2E99E6 50%, #2483B3 100%);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: bottom;
+    padding: size(2);
+    position: relative;
+    height: size(12);
+
+    div {
+      display: flex;
+      align-items: center;
+
+      :last-of-type {
+        margin-right: size(3);
+      }
+    }
+  }
+
+  .project-avatar {
+    width: size(12);
+    height: size(12);
+    left: 50%;
+    position: absolute;
+    overflow: hidden;
+    border-radius: size(1);
+    transform: translate(-50%, -50%);
+    top: 100%;
+  }
+
+  .modal-body {
+    padding-top: size(9);
+    padding-bottom: size(7);
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+  }
+
+  .icon-star, .icon-star-border {
+    
+  }
+}
