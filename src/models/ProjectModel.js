@@ -279,7 +279,7 @@ class ProjectModel {
 
     getDeadlineText() {
         const { type, deadline } = this;
-        return type === 'own' ? 'Release your project' : `${deadline} hours`;
+        return type === "own" ? "Release your project" : `${deadline} hours`;
     }
 
     fix() {

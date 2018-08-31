@@ -21,12 +21,12 @@ class ProjectDeadlineBar extends PureComponent {
                 showName: true
             }
         ];
-        return project.type !== 'own' ? (
-          <div>
-            <Bar bar_data={bar_data} />
-          </div>
+        return project.type !== "own" ? (
+            <div>
+                <Bar bar_data={bar_data} />
+            </div>
         ) : (
-          <div />
+            <div />
         );
     }
 }

@@ -89,11 +89,11 @@ class ProjectProgressBar extends Component {
             }
         ];
         return (
-          <div>
-            {prog_data[0].value !== 0 ? <Bar bar_data={prog_data} /> : <div />}
-            {design_data[0].value !== 0 ? <Bar bar_data={design_data} /> : <div />}
-            {manage_data[0].value !== 0 ? <Bar bar_data={manage_data} /> : <div />}
-          </div>
+            <div>
+                {prog_data[0].value !== 0 ? <Bar bar_data={prog_data} /> : <div />}
+                {design_data[0].value !== 0 ? <Bar bar_data={design_data} /> : <div />}
+                {manage_data[0].value !== 0 ? <Bar bar_data={manage_data} /> : <div />}
+            </div>
         );
     }
 }
