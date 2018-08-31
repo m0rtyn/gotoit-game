@@ -40,4 +40,28 @@
     font-weight: 500;
     color: #333;
   }
+
+  .time-controls {
+    display: flex;
+  }
+
+  .topbar-btn {
+    border-radius: 25% / 50%;
+
+
+    &.active {
+      background-color: var(--color-primary);
+      color: var(--white);
+    }
+  }
+
+  .topbar-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon-btc, .icon-usd {
+    font-size: size(2.5);
+  }
 }

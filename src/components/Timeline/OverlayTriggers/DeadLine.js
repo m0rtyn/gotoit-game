@@ -7,12 +7,12 @@ import _ from 'lodash';
 import ReactTooltip from 'react-tooltip';
 
 export default class DeadLine extends Component {
-  static propTypes = {
-    avatar: PropTypes.shape(),
-    index: PropTypes.number,
-    info: PropTypes.string,
-    name: PropTypes.string
-  };
+    static propTypes = {
+        avatar: PropTypes.shape(),
+        index: PropTypes.number,
+        info: PropTypes.string,
+        name: PropTypes.string
+    };
 
   render() {
     return (

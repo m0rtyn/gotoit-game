@@ -23,15 +23,19 @@
 }
 
 .icon- {
+  &account-balance-wallet:before {
+    content: "\e850";
+  }
+
   &pause:before {
     content: "\e034";
   }
 
-  &play_arrow:before {
+  &play-arrow:before {
     content: "\e037";
   }
 
-  &fast_forward:before {
+  &fast-forward:before {
     content: "\e01f";
   }
 
@@ -125,7 +129,7 @@
     content: "\e876";
   }
 
-  &done_all:before {
+  &done-all:before {
     content: "\e877";
   }
 
@@ -133,7 +137,7 @@
     content: "\e838";
   }
 
-  &star_border:before {
+  &star-border:before {
     content: "\e83a";
   }
 

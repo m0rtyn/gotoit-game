@@ -1,4 +1,9 @@
-.modal {
+.worker-modal {
+
+  .modal-header {
+    border-bottom: none;
+    justify-content: space-between;
+  }
 
   .modal-body {
     padding: 0;
@@ -22,10 +27,6 @@
       padding: size(2) 0;
       margin: 0;
     }
-  }
-
-  .modal-header {
-    border-bottom: none;
   }
 
   .worker-avatar {
@@ -68,10 +69,6 @@
         margin-right: size(1);
         display: inline;
       }
-
-      // .btn {
-      //   margin
-      // }
     }
   }
 

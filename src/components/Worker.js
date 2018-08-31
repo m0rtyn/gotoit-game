@@ -136,14 +136,13 @@ class Worker extends Component {
       >
         <div style={{ position: 'relative', width: '80px', height: '80px'}}>
           <Avatar
+            className="worker-avatar"
             name={worker.name}
-            style={{ position: 'absolute'}}
-            size={80}
+            // style={{ position: 'absolute'}}
             sources={_.toPairs(worker.avatar)}
           />
-
         </div>
-      <div className="worker-info">
+        <div className="worker-info">
           <header className="card-header">
             <h2 className="worker-name"> {worker.name} </h2>
             {manage_button}
