@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import * as PropTypes from "prop-types";
-import { colors } from "../../game/knowledge/colors";
 
 export class TasksProgress extends Component {
     render() {

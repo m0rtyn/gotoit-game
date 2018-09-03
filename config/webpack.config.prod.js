@@ -46,7 +46,7 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
             options: {
                 // you can specify a publicPath here
                 // by default it use publicPath in webpackOptions.output
-                publicPath: '../../'
+                publicPath: "../../"
             }
         },
         {
@@ -66,12 +66,11 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
                     require("postcss-nested")(),
                     require("postcss-color-mod-function")(),
                     require("postcss-custom-properties")(),
-                    require("postcss-flexbugs-fixes")(), // require('postcss-mixins')(),
-                    // require('postcss-define-function'),
-                    // require('postcss-each'),
-                    autoprefixer({
-                        flexbox: "no-2009"
-                    })
+                    require("postcss-flexbugs-fixes")(),
+                    require("postcss-mixins")(),
+                    require("postcss-define-function")(),
+                    require("postcss-each")(),
+                    autoprefixer()
                 ],
                 sourceMap: shouldUseSourceMap
             }
@@ -181,7 +180,7 @@ module.exports = {
         // for React Native Web.
         extensions: [".web.js", ".mjs", ".js", ".json", ".web.jsx", ".jsx"],
         alias: {
-            'assets': paths.assetsSrc
+            assets: paths.assetsSrc
         },
         // alias: {
         //
@@ -385,8 +384,8 @@ module.exports = {
                         // by webpacks internal loaders.
                         exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/, /\.flow$/, /\.svg$/],
                         options: {
-                            publicPath: '/static/media/',
-                            outputPath: 'static/media/',
+                            publicPath: "/static/media/",
+                            outputPath: "static/media/",
                             name: "[name].[hash:8].[ext]"
                         }
                     }

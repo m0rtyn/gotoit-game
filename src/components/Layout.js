@@ -11,7 +11,6 @@ import ActivityToolbar from "./ActivityToolbar.js";
 import Activities from "./Activities.js";
 
 import { colors } from "../game/knowledge/colors";
-import _ from "lodash";
 
 const backgrounds = require.context("../assets/images/backgrounds/", true, /^\.\/.*\.png$/);
 

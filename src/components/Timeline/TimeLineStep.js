@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import _ from "lodash";
 import DeadLine from "./OverlayTriggers/DeadLine";
 import VacationAndLeave from "./OverlayTriggers/VacationAndLeave";
+
 const timelineWidth = window.innerWidth;
 
 export class TimeLineStep extends Component {

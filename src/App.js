@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import { hot, setConfig } from "react-hot-loader";
+import { hot } from "react-hot-loader";
 import { game_name } from "./game/app_config";
 import { tick } from "./game/tick";
 
@@ -22,7 +22,6 @@ import Lorer from "./services/Lorer";
 import { meetings } from "./game/knowledge/meetings";
 import { technologies } from "./game/knowledge/technologies";
 import { workers_bonus_items } from "./game/knowledge/workers";
-import { project_kinds, project_platforms } from "./game/knowledge/projects";
 import { skills_names, skills_true } from "./game/knowledge/skills";
 import { companies } from "./game/knowledge/companies";
 

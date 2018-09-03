@@ -1,5 +1,5 @@
+import PropTypes from "prop-types";
 import React, { Component } from "react";
-//import PropTypes from 'prop-types';
 import _ from "lodash";
 import ProjectEndScreen from "../Projects/ProjectEndScreen";
 import HistoricalEvent from "../HistoricalEvent";
@@ -8,10 +8,13 @@ import Modal from "../Modal";
 import Resume from "../Modal/ResumeModal";
 import Offer from "../Modal/OfferModal";
 import { FormattedDate } from "react-intl";
-import * as PropTypes from "prop-types";
 import { Avatar } from "../Projects/Avatar";
 
 class Mail extends Component {
+    static propTypes = {
+        data: PropTypes.object
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -98,6 +101,7 @@ class Mail extends Component {
                         this.setState({ show_modal: true });
                         letter.isRead = true;
                     };
+                    break;
                 default:
                     break;
             }
@@ -174,7 +178,5 @@ class Mail extends Component {
         );
     }
 }
-
-Mail.propTypes = {};
 
 export default Mail;

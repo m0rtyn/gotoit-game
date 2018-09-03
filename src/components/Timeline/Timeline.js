@@ -1,8 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import _ from "lodash";
-import DeadLine from "./OverlayTriggers/DeadLine";
-import VacationAndLeave from "./OverlayTriggers/VacationAndLeave";
 import { TimeLineStep } from "./TimeLineStep";
 
 const timelineWidth = window.innerWidth;

@@ -14,7 +14,7 @@ import ValueCache from "../services/ValueCache";
 
 import { current_tick, getData } from "../App";
 
-import { generateMaleAvatar, generateFemaleAvatar } from "../game/knowledge/worker_avatar";
+import { generateFemaleAvatar, generateMaleAvatar } from "../game/knowledge/worker_avatar";
 
 class WorkerModel {
     constructor(name = "Default", stats = skills_1, gender = "male", is_player = false) {

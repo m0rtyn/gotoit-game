@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ChartsController from "./ChartsController";
-import btc_icon from "../../assets/images/btc_logo.png";
 import { shares } from "../../game/knowledge/shares";
 import _ from "lodash";
 

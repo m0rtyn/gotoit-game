@@ -3,9 +3,9 @@ import _ from "lodash";
 import bulkStyler from "../services/bulkStyler";
 import ProjectsTop from "../services/ProjectsTop";
 
-import { project_bars, project_kinds, project_platforms, project_sizes } from "../game/knowledge/projects";
+import { project_bars, project_kinds, project_sizes } from "../game/knowledge/projects";
 import { skills, skills_inf } from "../game/knowledge/skills";
-import { hired, projects_done, getData } from "../App";
+import { getData, hired, projects_done } from "../App";
 import { companies } from "../game/knowledge/companies";
 
 export var projects_generated = 0;
@@ -108,7 +108,7 @@ class ProjectModel {
 
     applyWork(work, worker, project, animation, focus_on, rad = false, creativity = false, pair = false, overtimed = false) {
         var learned = JSON.parse(JSON.stringify(skills));
-        let focus_on_id = project.id + project_bars[focus_on];
+        // let focus_on_id = project.id + project_bars[focus_on];
         Object.keys(work).forEach(stat => {
             if (this.needs(stat) > 0 && work[stat] > 0) {
                 var support = this.supporter && this.supporter.id !== worker.id ? this.supporter.stats[stat] : 0;
