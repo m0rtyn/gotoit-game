@@ -27,55 +27,6 @@
   // Sizes
   //
 
-  // OLD Sizes
-
-  // --line-height-xs:      18px;
-  // --line-height-sm:      20px;
-  // --line-height-md:      24px;
-  // --line-height-lg:      32px;
-  // --line-height-xl:      54px;
-
-  // Elements height
-  // $height-xs:            24px;
-  // $height-sm:            29px;
-  // $height-md:            36px;
-  // $height-lg:            48px;
-  // $height-xl:            64px;
-  // $height-xxl:           96px;
-  // $height-xxxl:          128px;
-
-  // // Elements consistent width
-  // $width-cons-xs:        85px;
-  // $width-cons-sm:        100px;
-  // $width-cons-md:        120px;
-  // $width-cons-lg:        145px;
-  // $width-cons-xl:        180px;
-
-  // // Layout sizes
-  // $width-sidebar-normal:    260px;
-  // $width-sidebar-sm:        220px;
-  // $width-sidebar-lg:        300px;
-  // $width-sidebar-iconic:    100px;
-  // $width-sidebar-folded:    80px;
-  // var(--width-sidebar-icon-only): 70px;
-
-  // $width-aside-sm:       200px;
-  // $width-aside-md:       250px;
-  // $width-aside-lg:       300px;
-
-  // $width-quickview-sm:   220px;
-  // $width-quickview-md:   300px;
-  // $width-quickview-lg:   420px;
-  // $width-quickview-xl:   640px;
-  // $width-quickview-xxl:  860px;
-
-  // $width-aside:          300px;
-
-  // $height-topbar:        64px;
-  // $height-topbar-sec:    80px;
-
-
-  //NEW SIZES
 
   // Elements height
   --height-xs:            24px;
@@ -137,28 +88,30 @@
   //
 
   --white:                  #fff;
-  --gray-100:               #f8f9fa;
-  --gray-200:               #e9ecef;
-  --gray-300:               #dee2e6;
-  --gray-400:               #ced4da;
-  --gray-500:               #adb5bd;
-  --gray-600:               #868e96;
-  --gray-700:               #495057;
-  --gray-800:               #343a40;
-  --gray-900:               #212529;
+  --gray-100:               #f5f5f5;
+  --gray-200:               #ebebeb;
+  --gray-300:               #cccccc;
+  --gray-400:               #b2b2b2;
+  --gray-500:               #999999;
+  --gray-600:               #808080;
+  --gray-700:               #666666;
+  --gray-800:               #4d4d4d;
+  --gray-900:               #333333;
   --black:                  #000;
 
   // Base colors
-  --color-blue: #48b0f7;
-  --color-indigo:           #6610f2;
-  --color-purple:           #926dde; // 926dde
-  --color-pink:             #f96197; // ff708e
-  --color-red:              #f96868;
-  --color-orange:           #faa64b;
-  --color-yellow:           #fcc525;
-  --color-green:            #15c377; // 46be8a
-  --color-teal:             #33cabb;
-  --color-cyan:             #57c7d4;
+  --color-red:              #f76456;
+  --color-orange:           #ff954d;
+  --color-yellow:           #f5b431;
+  --color-green:            #81cc52;
+  --color-teal:             #52cc8f;
+  --color-cyan:             #3dcccc;
+  --color-blue:             #45b0e5;
+  --color-indigo:           #bb66cc;
+  --color-purple:           #cc66bb;
+  --color-pink:             #f26191;
+
+  // OLD COLORS==============================
   --color-brown:            #8d6658;
   --color-dark:             #465161;
 
@@ -166,29 +119,33 @@
   --color-light:            var(--gray-100);
 
   // Context colors
-  --color-primary:          #33cabb;
-  --color-secondary:        #e4e7ea;
-  --color-success:          var(--color-green); // 46be8a
+  --color-primary:          var(--color-cyan);
+  --color-secondary:        var(--gray-200);
+  --color-success:          var(--color-green);
   --color-info:             var(--color-blue);
-  --color-warning:          var(--color-orange);
+  --color-warning:          var(--color-yellow);
   --color-danger:           var(--color-red);
+  
+  --color-manage:           var(--color-cyan);
+  --color-design:           var(--color-orange);
+  --color-program:          var(--color-indigo);
 
 
 
   // Pale context colors
-  --color-pale-primary:     #dcfcfa;
-  --color-pale-secondary:   #f7fafc;
-  --color-pale-success:     #e3fcf2;
-  --color-pale-info:        #e3f3fc;
-  --color-pale-warning:     #fcf0e3;
-  --color-pale-danger:      #fce3e3;
-  --color-pale-purple:      #ece3fc;
-  --color-pale-pink:        #fce3ec;
-  --color-pale-cyan:        #e3fafc;
-  --color-pale-yellow:      #fcf8e3;
-  --color-pale-brown:       #eddcd5;
-  --color-pale-dark:        #c8c8c8;
-  --color-pale-gray:        #f2f2f2;
+  --color-pale-primary:     color-mod(var(--color-primary) w(+70%));
+  --color-pale-secondary:   color-mod(var(--color-secondary) w(+70%));
+  --color-pale-success:     color-mod(var(--color-success) w(+70%));
+  --color-pale-info:        color-mod(var(--color-info) w(+70%));
+  --color-pale-warning:     color-mod(var(--color-warning) w(+70%));
+  --color-pale-danger:      color-mod(var(--color-danger) w(+70%));
+  --color-pale-purple:      color-mod(var(--color-purple) w(+70%));
+  --color-pale-pink:        color-mod(var(--color-pink) w(+70%));
+  --color-pale-cyan:        color-mod(var(--color-cyan) w(+70%));
+  --color-pale-yellow:      color-mod(var(--color-yellow) w(+70%));
+  --color-pale-brown:       color-mod(var(--color-brown) w(+70%));
+  --color-pale-dark:        color-mod(var(--color-dark) w(+70%));
+  --color-pale-gray:        color-mod(var(--color-gray) w(+70%));
 
 
   // Background colors
@@ -234,20 +191,20 @@
   --color-rss:              #f26522;
 
   // Alpha channel colors
-  --color-alpha-dark-text:           rgba(var(--color-text), .7);
-  --color-alpha-dark-text-light:     rgba(var(--color-text), .4);
-  --color-alpha-dark-text-active:    rgba(var(--color-text), 1);
-  --color-alpha-dark-bg:             rgba(var(--color-text), .04);
-  --color-alpha-dark-bg-hover:       rgba(var(--color-text), .05);
-  --color-alpha-dark-divider:        rgba(var(--color-text), .07);
+  --color-alpha-dark-text:           color-mod(var(--color-text) a(70%));
+  --color-alpha-dark-text-light:     color-mod(var(--color-text) a(40%));
+  --color-alpha-dark-text-active:    color-mod(var(--color-text) a(100%));
+  --color-alpha-dark-bg:             color-mod(var(--color-text) a(4%));
+  --color-alpha-dark-bg-hover:       color-mod(var(--color-text) a(5%));
+  --color-alpha-dark-divider:        color-mod(var(--color-text) a(7%));
 
-  --color-alpha-light-text:          rgba(#fff, .7);
-  --color-alpha-light-text-light:    rgba(#fff, .4);
-  --color-alpha-light-text-active:   rgba(#fff, 1);
-  --color-alpha-light-bg:            rgba(#fff, .1);
-  --color-alpha-light-bg-hover:      rgba(#fff, .15);
-  --color-alpha-light-divider:       rgba(#fff, .15);
-  --color-alpha-light-divider-light: rgba(#fff, .08);
+  --color-alpha-light-text:          color-mod(#fff a(70%));
+  --color-alpha-light-text-light:    color-mod(#fff a(40%));
+  --color-alpha-light-text-active:   color-mod(#fff a(100%));
+  --color-alpha-light-bg:            color-mod(#fff a(10%));
+  --color-alpha-light-bg-hover:      color-mod(#fff a(15%));
+  --color-alpha-light-divider:       color-mod(#fff a(15%));
+  --color-alpha-light-divider-light: color-mod(#fff a(8%));
 
   --zindex-fab:                9;
   --zindex-morris:             900;
@@ -295,8 +252,8 @@
   --sidebar-header-bg:           var(--color-purple);
   --sidebar-dark-bg:             #3f4a59;
   --sidebar-dark-submenu-bg:     #455160;
-  --sidebar-darker-bg:           #242a33;//21252d
-  --sidebar-darker-submenu-bg:   #2b323b;//2b303b
+  --sidebar-darker-bg:           #242a33;
+  --sidebar-darker-submenu-bg:   #2b323b; 
   --sidebar-light-submenu-bg:    #f7f9fa;
   --sidebar-padding-x:           12px;
   --sidebar-items-margin-x:      8px;

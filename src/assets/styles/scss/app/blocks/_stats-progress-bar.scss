@@ -1,0 +1,50 @@
+.stats-progress-bar {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  .progress {
+    margin-left: size(0.5);
+    margin-bottom: 0;
+    width: 100%;
+    border-radius: 6px;
+    height: size(1);
+    font-size: 0;
+  }
+
+
+  [type='checkbox'].custom-checkbox {
+    display: none;
+
+    &+.icon-manage,
+    &+.icon-program,
+    &+.icon-design {
+      color: var(--color-secondary);
+      cursor: pointer;
+      font-size: size(1.5);
+    }
+
+    & ~ .progress {
+      filter: grayscale(100%);
+    }
+
+    &:checked {
+      &+.icon-program {
+        color: var(--color-indigo);
+      }
+      &+.icon-design {
+        color: var(--color-orange);
+      }
+      &+.icon-manage {
+        color: var(--color-cyan);
+      }
+
+      & ~ .progress {
+        filter: grayscale(0);
+      }
+    }
+  }
+}
+
+

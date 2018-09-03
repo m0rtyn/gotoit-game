@@ -70,10 +70,10 @@
   position: relative;
   z-index: var(--zindex-dropdown-toggle);
 
-  &:hover {
-    color: var(--color-alpha-dark-text-active);
-    border-top-color: var(--color-primary);
-  }
+  // &:hover {
+  //   color: var(--color-alpha-dark-text-active);
+  //   border-top-color: var(--color-primary);
+  // }
 
   .icon {
     vertical-align: baseline;
