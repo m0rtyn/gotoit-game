@@ -68,11 +68,8 @@ class Worker extends Component {
     );
   }
 
-
-
   teach(skill, source) {
     //  console.log(skill, source);
-
     switch (source) {
       case 'training':
         this.props.data.helpers.trainingProject(this.props.worker, skill);

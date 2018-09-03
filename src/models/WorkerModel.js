@@ -14,8 +14,7 @@ import ValueCache from "../services/ValueCache";
 
 import { current_tick, getData } from "../App";
 
-import { generateMaleAvatar } from "../game/knowledge/worker_avatar";
-import femaleAvatar from "../assets/images/female.png";
+import { generateMaleAvatar, generateFemaleAvatar } from "../game/knowledge/worker_avatar";
 
 class WorkerModel {
     constructor(name = "Default", stats = skills_1, gender = "male", is_player = false) {
@@ -29,7 +28,7 @@ class WorkerModel {
         this.standing_after_salary_rising = 0;
         this.morale = 100;
         this.accept_default = true;
-        this.avatar = gender === "male" ? generateMaleAvatar() : null;
+        this.avatar = gender === "male" ? generateMaleAvatar() : generateFemaleAvatar();
         this.hired = false;
 
         this.temper = {
