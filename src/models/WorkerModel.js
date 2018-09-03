@@ -43,8 +43,8 @@ class WorkerModel {
     this.hired = false;
 
     this.temper = {
-      earliness: _.random(0, 4),
-      variability: _.random(0, 4)
+      earliness: _.random(0, 4), //насколько он рано просыпается
+      variability: _.random(0, 4) //насколько это стабильно (могут зайти работать на выхах или уйти посреди дня)
     };
 
     this.character = worker_character_types[_.random(0, 4)];
@@ -395,7 +395,7 @@ class WorkerModel {
         value: salary_mod * (20 - Math.abs(tasks_difficulty))
       },
       education_stream: {
-        name: 'Education_stream',
+        name: 'Education stream',
         value: salary_mod * (20 - Math.abs(education_stream))
       },
       collective: {
