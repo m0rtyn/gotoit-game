@@ -3,6 +3,10 @@
   height: size(4);
   color: #333;
 
+  .topbar {
+    flex-wrap: nowrap;
+  }
+
   .logo {
       margin-right: size(1);
   }

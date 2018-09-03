@@ -7,7 +7,7 @@ import "bootstrap-slider/dist/css/bootstrap-slider.min.css";
 import _ from "lodash";
 
 import { current_tick } from "../../App";
-import Modal from "../Modal";
+import Modal from "../Modal/Modal";
 import ProjectName from "./ProjectName";
 import ProjectProgressBar from "./ProjectProgressBar";
 import ProjectDeadlineBar from "./ProjectDeadlineBar";

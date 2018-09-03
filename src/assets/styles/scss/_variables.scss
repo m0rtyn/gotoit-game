@@ -103,49 +103,46 @@
   --color-red:              #f76456;
   --color-orange:           #ff954d;
   --color-yellow:           #f5b431;
+  --color-pale-yellow:      #ffdd99;
   --color-green:            #81cc52;
   --color-teal:             #52cc8f;
   --color-cyan:             #3dcccc;
+  --color-pale-cyan:        #90f0f0;
   --color-blue:             #45b0e5;
+  --color-darkest-blue:          #2E7599;
   --color-indigo:           #bb66cc;
   --color-purple:           #cc66bb;
+  --color-pale-purple:      #fac8f2;
   --color-pink:             #f26191;
+  --color-pale-pink:        #fac8d9;
 
   // OLD COLORS==============================
   --color-brown:            #8d6658;
+  --color-pale-brown:       color-mod(var(--color-brown) w(+70%));
   --color-dark:             #465161;
-
+  --color-pale-dark:        color-mod(var(--color-dark) w(+70%));
+    
   --color-gray:             var(--gray-600);
+  --color-pale-gray:        color-mod(var(--color-gray) w(+70%));
   --color-light:            var(--gray-100);
 
   // Context colors
   --color-primary:          var(--color-cyan);
+  --color-pale-primary:     var(--color-pale-cyan);
   --color-secondary:        var(--gray-200);
+  --color-pale-secondary:   color-mod(var(--color-secondary) w(+70%));
   --color-success:          var(--color-green);
+  --color-pale-success:     var(--color-pale-success);
   --color-info:             var(--color-blue);
+  --color-pale-info:        var(--color-pale-info);
   --color-warning:          var(--color-yellow);
+  --color-pale-info:        var(--color-pale-yellow);
   --color-danger:           var(--color-red);
-  
+  --color-pale-danger:      var(--color-pale-danger);
+
   --color-manage:           var(--color-cyan);
   --color-design:           var(--color-orange);
   --color-program:          var(--color-indigo);
-
-
-
-  // Pale context colors
-  --color-pale-primary:     color-mod(var(--color-primary) w(+70%));
-  --color-pale-secondary:   color-mod(var(--color-secondary) w(+70%));
-  --color-pale-success:     color-mod(var(--color-success) w(+70%));
-  --color-pale-info:        color-mod(var(--color-info) w(+70%));
-  --color-pale-warning:     color-mod(var(--color-warning) w(+70%));
-  --color-pale-danger:      color-mod(var(--color-danger) w(+70%));
-  --color-pale-purple:      color-mod(var(--color-purple) w(+70%));
-  --color-pale-pink:        color-mod(var(--color-pink) w(+70%));
-  --color-pale-cyan:        color-mod(var(--color-cyan) w(+70%));
-  --color-pale-yellow:      color-mod(var(--color-yellow) w(+70%));
-  --color-pale-brown:       color-mod(var(--color-brown) w(+70%));
-  --color-pale-dark:        color-mod(var(--color-dark) w(+70%));
-  --color-pale-gray:        color-mod(var(--color-gray) w(+70%));
 
 
   // Background colors
