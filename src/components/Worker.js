@@ -13,7 +13,7 @@ import { education } from '../game/knowledge/education';
 import WorkerHappinessBar from './WorkerHappinessBar';
 import WorkerStaminaBar from './WorkerStaminaBar';
 import { Avatar } from './Projects/Avatar';
-import Modal from './Modal';
+import Modal from './Modal/Modal';
 import WorkerModal from './Modal/WorkerModal';
 
 

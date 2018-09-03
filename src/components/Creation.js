@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Portal from "react-portal";
 import _ from "lodash";
 
-import Modal from "./Modal";
+import Modal from "./Modal/Modal";
 import StatsBar from "./StatsBar";
 import bulkStyler from "../services/bulkStyler";
 

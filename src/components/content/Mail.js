@@ -4,7 +4,7 @@ import _ from "lodash";
 import ProjectEndScreen from "../Projects/ProjectEndScreen";
 import HistoricalEvent from "../HistoricalEvent";
 import HotOffer from "../HotOffer";
-import Modal from "../Modal";
+import Modal from "../Modal/Modal";
 import Resume from "../Modal/ResumeModal";
 import Offer from "../Modal/OfferModal";
 import { FormattedDate } from "react-intl";
