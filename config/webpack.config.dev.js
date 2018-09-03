@@ -64,12 +64,11 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
                     require("postcss-nested")(),
                     require("postcss-color-mod-function")(),
                     require("postcss-custom-properties")(),
-                    require("postcss-flexbugs-fixes")(), // require('postcss-mixins')(),
-                    // require('postcss-define-function'),
-                    // require('postcss-each'),
-                    autoprefixer({
-                        flexbox: "no-2009"
-                    })
+                    require("postcss-flexbugs-fixes")(),
+                    require("postcss-mixins")(),
+                    require("postcss-define-function")(),
+                    require("postcss-each")(),
+                    autoprefixer()
                 ]
             }
         }
@@ -167,7 +166,7 @@ module.exports = {
         //   'react-native': 'react-native-web',
         // },
         alias: {
-            'assets': paths.assetsSrc
+            assets: paths.assetsSrc
         },
         plugins: [
             // Prevents users from importing files from outside of src/ (or node_modules/).

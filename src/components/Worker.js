@@ -1,21 +1,13 @@
 /* eslint-disable */
-import React, { Component } from 'react';
-import Portal from 'react-portal';
-import _ from 'lodash';
-import TeamDialog from './TeamDialog';
-import StatsBar from './StatsBar';
-import ProjectName from './Projects/ProjectName';
-import StatsProgressBar from './StatsProgressBar';
-import { colors } from '../game/knowledge/colors';
-import { workers_bonus_items } from '../game/knowledge/workers';
-import { skills_names } from '../game/knowledge/skills';
-import { education } from '../game/knowledge/education';
-import WorkerHappinessBar from './WorkerHappinessBar';
-import WorkerStaminaBar from './WorkerStaminaBar';
-import { Avatar } from './Projects/Avatar';
-import Modal from './Modal/Modal';
-import WorkerModal from './Modal/WorkerModal';
-
+import React, { Component } from "react";
+import _ from "lodash";
+import StatsProgressBar from "./StatsProgressBar";
+import { colors } from "../game/knowledge/colors";
+import WorkerHappinessBar from "./WorkerHappinessBar";
+import WorkerStaminaBar from "./WorkerStaminaBar";
+import { Avatar } from "./Projects/Avatar";
+import Modal from "./Modal";
+import WorkerModal from "./Modal/WorkerModal";
 
 //import {addAction} from '../components/ToastNest';
 

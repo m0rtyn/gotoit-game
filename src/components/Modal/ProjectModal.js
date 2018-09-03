@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ProjectName from "../Projects/ProjectName";
-import PropTypes from "prop-types";
 import { skills_names } from "../../game/knowledge/skills";
 import { StartPauseButton } from "../Projects/StartPauseButton";
 import { ReleaseButton } from "../Projects/ReleaseButton";

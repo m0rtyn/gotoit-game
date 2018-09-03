@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import * as PropTypes from "prop-types";
 import StatsProgressBar from "../StatsProgressBar";
-import { colors } from "../../game/knowledge/colors";
 import { workers_bonus_items } from "../../game/knowledge/workers";
 import { skills_names } from "../../game/knowledge/skills";
-import { education } from "../../game/knowledge/education";
 import WorkerHappinessBar from "../WorkerHappinessBar";
 import WorkerStaminaBar from "../WorkerStaminaBar";
 import { Avatar } from "../Projects/Avatar";

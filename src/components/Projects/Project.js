@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Portal from "react-portal";
 
 import Select from "react-select";
 import "react-select/dist/react-select.css";

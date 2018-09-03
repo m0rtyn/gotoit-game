@@ -1,6 +1,4 @@
-import { Component } from "react";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import React from "react";
+import React, { Component } from "react";
 import * as PropTypes from "prop-types";
 import { Avatar } from "../../Projects/Avatar";
 import _ from "lodash";
