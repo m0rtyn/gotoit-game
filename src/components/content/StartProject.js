@@ -139,7 +139,7 @@ class StartProject extends Component {
 
                 <div className="text-center">
                     <button
-                        className="big btn-success btn-lg"
+                        className="btn btn-success btn-lg"
                         onClick={() => {
                             this.props.data.helpers.startProject(
                                 this.state.project_name,

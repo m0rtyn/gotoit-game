@@ -52,7 +52,7 @@ class PublicRelations extends Component {
                 <div>
                     <div>
                         <button
-                            className="btn btn-info pr-button"
+                            className="btn btn-info "
                             onClick={() => {
                                 public_relations["forum_thread"].onClick(data);
                             }}
@@ -69,7 +69,7 @@ class PublicRelations extends Component {
                     </div>
                     <div>
                         <button
-                            className={250 <= data.money ? "btn btn-info pr-button" : "btn btn-info disabled pr-button"}
+                            className={250 <= data.money ? "btn btn-info " : "btn btn-info disabled "}
                             onClick={() => {
                                 public_relations["search_specialist"].onClick(data);
                             }}
@@ -86,7 +86,7 @@ class PublicRelations extends Component {
                     </div>
                     <div>
                         <button
-                            className={100 <= data.money ? "btn btn-info pr-button" : "btn btn-info disabled pr-button"}
+                            className={100 <= data.money ? "btn btn-info " : "btn btn-info disabled "}
                             onClick={() => {
                                 public_relations["search_job"].onClick(data);
                             }}
@@ -105,8 +105,8 @@ class PublicRelations extends Component {
                         <button
                             className={
                                 1000 <= data.money && this.state.next_click_will_able_at < data.date.tick
-                                    ? "btn btn-info pr-button"
-                                    : "btn btn-info disabled pr-button"
+                                    ? "btn btn-info "
+                                    : "btn btn-info disabled "
                             }
                             onClick={() => {
                                 public_relations["big_event"].onClick(data);

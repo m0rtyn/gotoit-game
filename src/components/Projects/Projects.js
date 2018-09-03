@@ -16,12 +16,12 @@ class Projects extends Component {
             <div>
                 <div className="column-buttons">
                     <button
-                        className="btn btn-xs btn-w-lg btn-success"
+                        className="btn btn-bold btn-w-lg btn-success"
                         onClick={() => {
                             data.helpers.changeContent("StartProject");
                         }}
                     >
-                        Start new project
+                        New project
                     </button>
                 </div>
 
@@ -46,7 +46,7 @@ class Projects extends Component {
                             )}
                         </div>
                     ) : (
-                        <div className="text-center fat">You have no projects in progress.</div>
+                        <div className="text-center">You have no projects in progress.</div>
                     )}
                 </div>
             </div>
