@@ -21,6 +21,7 @@ class Bar extends Component {
                     const { id, name = "", showName = false, color = "#fff", value, width = 0 } = item;
                     return (
                         <BarItem
+                            id={id}
                             key={`${id}-${name}-${value}`}
                             showName={showName}
                             color={color}

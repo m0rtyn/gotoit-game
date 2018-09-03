@@ -45,6 +45,7 @@ class BubblesAnimation extends React.Component {
     }
 
     removeItem = id => {
+        console.info("removeItem", id);
         let newItems = this.state.items.filter(i => i.id !== id);
 
         this.setState({ items: newItems });
@@ -54,6 +55,7 @@ class BubblesAnimation extends React.Component {
         return (
             <BubbleAnimated
                 key={id}
+                queue={this.state.items.length}
                 size={item.size}
                 color={item.color}
                 count={item.count}
@@ -65,6 +67,7 @@ class BubblesAnimation extends React.Component {
     };
     render() {
         const items = _.map(this.state.items, this.renderItem);
+        console.info("render", items);
         return <div>{items}</div>;
     }
 }

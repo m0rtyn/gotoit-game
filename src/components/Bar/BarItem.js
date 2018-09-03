@@ -14,6 +14,7 @@ class BarItem extends PureComponent {
     };
 
     static propTypes = {
+        id: PropTypes.string,
         color: PropTypes.string,
         name: PropTypes.string,
         showName: PropTypes.bool,
@@ -22,9 +23,9 @@ class BarItem extends PureComponent {
     };
 
     render() {
-        let { showName, name, value, color, width } = this.props;
+        let { id, showName, name, value, color, width } = this.props;
         return (
-            <ProgressBar color={color} width={width} className="progress-bar" role="progressbar">
+            <ProgressBar id={id} color={color} width={width} className="progress-bar" role="progressbar">
                 {showName ? name : null}
                 {" " + value}
             </ProgressBar>
