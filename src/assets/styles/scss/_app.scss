@@ -15,19 +15,22 @@
 @import 'app/blocks/header.scss';
 @import 'app/blocks/timeline.scss';
 @import 'app/blocks/worker.scss';
-@import 'app/blocks/project.scss';
-@import 'app/blocks/project-find.scss';
 @import 'app/blocks/creation.scss';
 @import 'app/blocks/hire-workers.scss';
 @import 'app/blocks/mail.scss';
-@import 'app/blocks/avatar.scss';
-@import 'app/blocks/modal.scss';
-  @import 'app/blocks/modal-content/_worker-modal.scss';
-  @import 'app/blocks/modal-content/_project-modal.scss';
-  @import 'app/blocks/modal-content/_resume-modal.scss';
-  @import 'app/blocks/modal-content/_offer-modal.scss';
+
+@import 'app/blocks/project/project.scss';
+@import 'app/blocks/project/project-find.scss';
+@import 'app/blocks/project/project-name.scss';
+
+@import 'app/blocks/modal/modal.scss';
+@import 'app/blocks/modal/worker-modal.scss';
+@import 'app/blocks/modal/project-modal.scss';
+@import 'app/blocks/modal/resume-modal.scss';
+@import 'app/blocks/modal/offer-modal.scss';
 
 //====COMPONENTS====================================//
 @import 'app/blocks/progress-bar.scss';
-  @import 'app/blocks/stats-progress-bar.scss';
+@import 'app/blocks/stats-progress-bar.scss';
+@import 'app/blocks/avatar.scss';
 
