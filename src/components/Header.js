@@ -13,7 +13,7 @@ class Header extends Component {
         game_date.setDate(real_date.getDate() + date.tick / 24);
 
         return (
-            <header className="header topbar">
+            <header className="header">
                 <div className="topbar">
                     <div className="topbar-left">
                         <div
