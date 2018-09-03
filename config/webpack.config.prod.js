@@ -39,9 +39,16 @@ const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
 // common function to get style loaders
-const getStyleLoaders = (cssOptions, preProcessor) => {
+const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
     const loaders = [
-        MiniCssExtractPlugin.loader,
+        {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+                // you can specify a publicPath here
+                // by default it use publicPath in webpackOptions.output
+                publicPath: '../../'
+            }
+        },
         {
             loader: require.resolve("css-loader"),
             options: cssOptions
@@ -71,11 +78,10 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
         }
     ];
     if (preProcessor) {
+        loaders.push("resolve-url-loader");
         loaders.push({
             loader: require.resolve(preProcessor),
-            options: {
-                sourceMap: shouldUseSourceMap
-            }
+            options: preProcessorOptions
         });
     }
     return loaders;
@@ -174,6 +180,9 @@ module.exports = {
         // `web` extension prefixes have been added for better support
         // for React Native Web.
         extensions: [".web.js", ".mjs", ".js", ".json", ".web.jsx", ".jsx"],
+        alias: {
+            'assets': paths.assetsSrc
+        },
         // alias: {
         //
         //   // Support React Native Web
@@ -186,7 +195,7 @@ module.exports = {
             // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
             // please link the files into your node_modules/ and let module-resolution kick in.
             // Make sure your source files are compiled, as they will not be processed in any way.
-            new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson])
+            // new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson])
         ]
     },
     module: {
@@ -313,7 +322,7 @@ module.exports = {
                         test: cssModuleRegex,
                         loader: getStyleLoaders({
                             importLoaders: 1,
-                            sourceMap: shouldUseSourceMap,
+                            sourceMap: true,
                             modules: true,
                             getLocalIdent: getCSSModuleLocalIdent
                         })
@@ -334,7 +343,7 @@ module.exports = {
                             "sass-loader",
                             {
                                 outputStyle: "expanded",
-                                sourceMap: shouldUseSourceMap,
+                                sourceMap: true,
                                 includePaths: [paths.scssSrc]
                             }
                         )
@@ -346,7 +355,7 @@ module.exports = {
                         loader: getStyleLoaders(
                             {
                                 importLoaders: 2,
-                                sourceMap: shouldUseSourceMap,
+                                sourceMap: true,
                                 modules: true,
                                 getLocalIdent: getCSSModuleLocalIdent
                             },
@@ -376,7 +385,9 @@ module.exports = {
                         // by webpacks internal loaders.
                         exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/, /\.flow$/, /\.svg$/],
                         options: {
-                            name: "static/media/[name].[hash:8].[ext]"
+                            publicPath: '/static/media/',
+                            outputPath: 'static/media/',
+                            name: "[name].[hash:8].[ext]"
                         }
                     }
                     // ** STOP ** Are you adding a new loader?
