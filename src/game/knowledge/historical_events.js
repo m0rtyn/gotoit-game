@@ -136,6 +136,14 @@ export const historical_events = {
             return data;
         }
     },
+    "1997 11 11 1": {
+        name: "The Kyoto Protocol international treaty",
+        description: "Commits to reduce greenhouse gas emissions.",
+        picture: TimeIcon,
+        updateGameData: data => {
+            return data;
+        }
+    },
     "1998 7 17 1": {
         name: "Russian financial crisis",
         description: "The devaluation of the ruble was caused.",
@@ -211,6 +219,14 @@ export const historical_events = {
     "2001 1 1 1": {
         name: "The Agile Manifesto was launched",
         description: "Agile project management approaches grow in popularity.",
+        picture: TimeIcon,
+        updateGameData: data => {
+            return data;
+        }
+    },
+    "2001 2 1 1": {
+        name: "President George W. Bush announce",
+        description: "The US would not implement the Kyoto Protocol to save US economy.",
         picture: TimeIcon,
         updateGameData: data => {
             return data;
@@ -409,6 +425,14 @@ export const historical_events = {
             return data;
         }
     },
+    "2011 0 10 1": {
+        name: "Freak weather incidents growing",
+        description: "Since the year 2010, there has been a growing occurrence of freak weather incidents.",
+        picture: TimeIcon,
+        updateGameData: data => {
+            return data;
+        }
+    },
     "2011 1 11 1": {
         name: "Arab Revolutions",
         description: "A dramatic increase in oil prices.",
@@ -473,9 +497,25 @@ export const historical_events = {
             return data;
         }
     },
+    "2014 4 20 1": {
+        name: "Melting ice caps and rising sea waters",
+        description: "Droughts. Wildfires. Massive flooding.",
+        picture: TimeIcon,
+        updateGameData: data => {
+            return data;
+        }
+    },
     "2014 8 3 1": {
         name: "Samsung Gear VR release",
         description: "Samsung Gear VR was released.",
+        picture: TimeIcon,
+        updateGameData: data => {
+            return data;
+        }
+    },
+    "2015 11 12 1": {
+        name: "The Paris Agreement was sealed",
+        description: "An agreement within the United Nations Framework Convention on Climate Change.",
         picture: TimeIcon,
         updateGameData: data => {
             return data;
@@ -538,6 +578,23 @@ export const historical_events = {
             return data;
         }
     },
+    "2017 5 1 1": {
+        name: "Donald Trump announce",
+        description: "The U.S. would withdrawal from the 2015 Paris Agreement on climate change mitigation.",
+        picture: TimeIcon,
+        updateGameData: data => {
+            alert(current_tick);
+            return data;
+        }
+    },
+    "2017 0 18 1": {
+        name: "U.S. scientists officially declare 2016 the hottest year on record",
+        description: "Sixteen of the seventeen warmest years on record have occurred since 2000.",
+        picture: TimeIcon,
+        updateGameData: data => {
+            return data;
+        }
+    },
     "2018 1 1 1": {
         name: "Cryptocurrency market recession",
         description: "Cryptocurrencies continues to lower.",
@@ -554,6 +611,14 @@ export const historical_events = {
             return data;
         }
     },
+    "2018 8 15 1": {
+        name: "The Paris Climate Agreement continues",
+        description: "194 states and the European Union have signed the Agreement.",
+        picture: TimeIcon,
+        updateGameData: data => {
+            return data;
+        }
+    },
     "2019 0 1 1": {
         name: "AR/VR is flowering",
         description: "AR/VR is getting more and more popular.",
@@ -565,6 +630,14 @@ export const historical_events = {
     "2020 10 1 1": {
         name: "5G technology release",
         description: "5G technology release was released.",
+        picture: TimeIcon,
+        updateGameData: data => {
+            return data;
+        }
+    },
+    "2020 08 1 1": {
+        name: "The global surface temperature was increased",
+        description: "It's more than 0.5°C warmer than the 1986-2005 average.",
         picture: TimeIcon,
         updateGameData: data => {
             return data;
