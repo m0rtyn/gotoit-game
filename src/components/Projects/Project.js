@@ -219,6 +219,7 @@ class Project extends Component {
                     avatar={worker.avatar}
                     name={worker.name}
                     key={worker.id}
+                    title={worker.name}
                     action={() => kickWorker(worker, project)}
                 />
             );
@@ -325,8 +326,10 @@ class Project extends Component {
                     </div> */}
                     {/* TODO: ^ DESIGN TEMPORARY CLEANING */}
 
-                    <div className="project-team">
-                        <span className="icon-team" />
+                    <p className="project-team">
+                        {/* <span className="icon-team" /> */}
+                        Team:
+                        {team_label}
                         <button
                             className={`btn icon-add btn-add-worker ${data.project_team_selector === id ? "active" : ""}`}
                             onClick={() => changeTeamSelector(project)}
@@ -335,13 +338,13 @@ class Project extends Component {
                             <Select
                                 onChange={this.onSelectChange}
                                 options={data.workers.map(worker => {
-                                    return { value: worker, project_worker: worker.name };
+                                    return { value: worker, label: worker.name };
                                 })}
                                 value={null}
                             />
                         ) : null}
-                        {tech.length !== 0 && <p className="small slim">Tech: {tech_label}</p>}
-                    </div>
+                    </p>
+                    {tech.length !== 0 && <p className="project-tech">Tech: {tech_label}</p>}
                 </div>
             </div>
         );
