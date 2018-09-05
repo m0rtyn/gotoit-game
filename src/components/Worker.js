@@ -77,7 +77,7 @@ class Worker extends Component {
     const worker = this.props.worker;
 
     const manage_button = (
-      <button onClick={() => this.openModal() } className="btn btn-primary btn-xs">Manage</button>
+      <button onClick={() => this.openModal() } className="btn btn-manage">Manage</button>
     );
 
     const stats_progressbar_data = _.mapValues(worker.stats, (val, stat) => {

@@ -13,7 +13,7 @@ import ProjectProgressBar from "./ProjectProgressBar";
 import ProjectDeadlineBar from "./ProjectDeadlineBar";
 
 import { technologies } from "../../game/knowledge/technologies";
-import { KickWorkerButton } from "./KickWorkerButton";
+import { WorkerButton } from "./WorkerButton";
 import { ProjectMoney } from "./ProjectMoney";
 import { Avatar } from "./Avatar";
 import { StatsDataItem } from "./StatsDataItem";
@@ -205,15 +205,23 @@ class Project extends Component {
         });*/
 
         const manage_button = (
-            <button onClick={() => this.openModal()} className="btn btn-xs btn-success">
+            <button onClick={() => this.openModal()} className="btn btn-manage">
                 Manage
             </button>
         );
 
         //let unoccupied_workers = data.workers.filter((worker) => {return data.helpers.deepCheckRelation(worker, project)});
 
-        let label = worker => {
-            return <KickWorkerButton id={worker.id} name={worker.name} key={worker.id} action={() => kickWorker(worker, project)} />;
+        let project_worker = worker => {
+            return (
+                <WorkerButton
+                    id={worker.id}
+                    avatar={worker.avatar}
+                    name={worker.name}
+                    key={worker.id}
+                    action={() => kickWorker(worker, project)}
+                />
+            );
         };
 
         let team_ids = {};
@@ -235,7 +243,7 @@ class Project extends Component {
         });
 
         const team_label = team.map(worker => {
-            return label(worker);
+            return project_worker(worker);
         });
 
         let tech = [];
@@ -249,7 +257,7 @@ class Project extends Component {
         }
 
         const tech_label = tech.map(tech_name => {
-            return label(tech_name, technologies[tech_name].acronym);
+            return project_worker(tech_name, technologies[tech_name].acronym);
         });
         let deadlineText = project.getDeadlineText();
         return (
@@ -264,26 +272,20 @@ class Project extends Component {
                 id={id}
             >
                 <div className="card-header">
-                    <div className="card-header">
-                        <div className="project-avatar">
-                            <Avatar name={name} sources={_.toPairs(avatar)} className={"project-avatar"} />
-                        </div>
-                        <div className="project-money">
-                            <ProjectName
-                                {...{
-                                    size,
-                                    platform,
-                                    kind,
-                                    name,
-                                    reward,
-                                    penalty
-                                }}
-                                deadlineText={deadlineText}
-                            />
-                            <ProjectMoney reward={project.getEstimatedReward()} penalty={penalty} />
-                            {manage_button}
-                        </div>
-                    </div>
+                    <Avatar name={name} sources={_.toPairs(avatar)} className={"project-avatar"} />
+                    <ProjectName
+                        {...{
+                            size,
+                            platform,
+                            kind,
+                            name,
+                            reward,
+                            penalty
+                        }}
+                        deadlineText={deadlineText}
+                    />
+                    <ProjectMoney reward={project.getEstimatedReward()} penalty={penalty} />
+                    {manage_button}
                     {this.state.modalOpen ? (
                         <Modal closeModal={this.closeModal}>
                             <ProjectModal
@@ -324,25 +326,19 @@ class Project extends Component {
                     {/* TODO: ^ DESIGN TEMPORARY CLEANING */}
 
                     <div className="project-team">
-                        <p>
-                            Team: {team_label}
-                            <button
-                                className={`btn btn-xs btn-info team-add-worker ${data.project_team_selector === id ? "active" : ""}`}
-                                onClick={() => changeTeamSelector(project)}
-                            >
-                                <i className="fa fa-plus" />
-                            </button>
-                        </p>
+                        <span className="icon-team" />
+                        <button
+                            className={`btn icon-add btn-add-worker ${data.project_team_selector === id ? "active" : ""}`}
+                            onClick={() => changeTeamSelector(project)}
+                        />
                         {data.project_team_selector === id ? (
-                            <div>
-                                <Select
-                                    onChange={this.onSelectChange}
-                                    options={data.workers.map(worker => {
-                                        return { value: worker, label: worker.name };
-                                    })}
-                                    value={null}
-                                />
-                            </div>
+                            <Select
+                                onChange={this.onSelectChange}
+                                options={data.workers.map(worker => {
+                                    return { value: worker, project_worker: worker.name };
+                                })}
+                                value={null}
+                            />
                         ) : null}
                         {tech.length !== 0 && <p className="small slim">Tech: {tech_label}</p>}
                     </div>
