@@ -1,4 +1,4 @@
-.worker-avatar {
+.worker-avatar, .project-avatar {
   position: relative;
   background-color: var(--color-darkest-blue);
 
@@ -10,13 +10,5 @@
 }
 
 .project-avatar {
-  position: relative;
   background-color: var(--white);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .avatar-fragments {
-    width: 75%;
-  }
 }
