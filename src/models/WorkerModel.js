@@ -12,7 +12,7 @@ import { addAction } from "../components/ToastNest";
 import Narrator from "../services/Narrator";
 import ValueCache from "../services/ValueCache";
 
-import { current_tick, getData } from "../App";
+import { getData } from "../App";
 
 import { generateFemaleAvatar, generateMaleAvatar } from "../game/knowledge/worker_avatar";
 
@@ -42,7 +42,7 @@ class WorkerModel {
 
         this.feelings = new ValueCache(24, () => {
             return Narrator.workerFeelings(this);
-        }); //{current_tick: 0, value: ''};
+        });
 
         this.efficiency = new ValueCache(24, () => {
             return this.calcEfficiencyReal();
@@ -173,17 +173,17 @@ class WorkerModel {
     }
 
     getEfficiency() {
-        //   if (current_tick < 10) return 100;
+        //   if (getData().date.tick < 10) return 100;
 
         let efficiency = this.calcEfficiency();
 
         /*
-        if (((current_tick - this.facts.tick_hired)/24) < 30) return 100;
-        if (((current_tick - this.facts.tick_hired)/24) < 100) return Math.floor((efficiency + 100) / 2);
+        if (((getData().date.tick - this.facts.tick_hired)/24) < 30) return 100;
+        if (((getData().date.tick - this.facts.tick_hired)/24) < 100) return Math.floor((efficiency + 100) / 2);
         */
 
         // smooth first 14 days
-        //   if (((current_tick - this.facts.tick_hired)/24) < 14) return Math.floor((efficiency + 100) / 2);
+        //   if (((getData().date.tick - this.facts.tick_hired)/24) < 14) return Math.floor((efficiency + 100) / 2);
 
         return efficiency;
     }
@@ -194,7 +194,7 @@ class WorkerModel {
     }
 
     workloadPenalty() {
-        const task_preferred = Math.ceil((current_tick - this.facts.tick_hired) / 24) * 3;
+        const task_preferred = Math.ceil((getData().date.tick - this.facts.tick_hired) / 24) * 3;
         const tasks_stream = Math.max(
             Math.min(Math.floor(20 * (1 - (200 + task_preferred) / (200 + (this.facts.tasks_done - this.facts.training_tasks_done)))), 20),
             -20
