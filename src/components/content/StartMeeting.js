@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { current_tick } from "../../App";
 
 import { meetings } from "../../game/knowledge/meetings";
 import { technologies } from "../../game/knowledge/technologies";
@@ -47,7 +46,7 @@ class StartMeeting extends Component {
                             return (
                                 <div key={technology}>
                                     {!data.projects_known_technologies.includes(technology) ? (
-                                        <div className={current_tick > 24 * 30 * 3 ? "" : "hidden"}>
+                                        <div className={data.date.tick > 24 * 30 * 3 ? "" : "hidden"}>
                                             <div className="card">
                                                 <button className="btn btn-secondary btn-sm disabled">{meeting.name}</button>{" "}
                                                 <span>

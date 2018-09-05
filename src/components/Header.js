@@ -8,10 +8,6 @@ class Header extends Component {
         const data = this.props.data;
         const date = this.props.data.date;
 
-        var real_date = new Date(1991, 1, 26, 0, 0);
-        var game_date = new Date(1991, 1, 26, 0, 0);
-        game_date.setDate(real_date.getDate() + date.tick / 24);
-
         return (
             <header className="header">
                 <div className="topbar">
@@ -162,7 +158,14 @@ class Header extends Component {
                             ) : (
                                 <span> Sleeping </span>
                             )}
-                            <FormattedDate value={game_date} weekday="short" day="numeric" month="short" year="numeric" hour="numeric" />
+                            <FormattedDate
+                                value={data.current_game_date}
+                                weekday="short"
+                                day="numeric"
+                                month="short"
+                                year="numeric"
+                                hour="numeric"
+                            />
                         </div>
 
                         <div className="topbar-divider" />

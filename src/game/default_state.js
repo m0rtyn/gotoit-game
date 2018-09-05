@@ -7,6 +7,7 @@ import OfficeModel from "../models/OfficeModel";
 import { charts_parameters } from "./knowledge/charts";
 import { project_kinds, project_platforms } from "./knowledge/projects";
 import { companies } from "./knowledge/companies";
+import { GAME_START_UNIXTIME } from "./knowledge/date";
 
 var default_state = {
     data: {
@@ -14,11 +15,12 @@ var default_state = {
         game_speed_multiplier: 1,
         game_paused: true,
         stage: "start",
+        current_game_date: new Date(GAME_START_UNIXTIME),
         date: {
             tick: 0,
             hour: 0,
             day: 0,
-            weak: 0,
+            week: 0,
             month: 0,
             year: 0,
             is_working_time: false

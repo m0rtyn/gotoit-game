@@ -32,7 +32,7 @@ class ProjectEndScreen extends Component {
                             className="btn btn-warning float-right"
                             onClick={() => {
                                 //data.helpers.projectArchiving();
-                                this.props.closePopup();
+                                this.props.closeModal();
                             }}
                         >
                             Close

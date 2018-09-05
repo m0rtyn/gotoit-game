@@ -1,19 +1,17 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { FormattedDate } from "react-intl";
-import { current_tick } from "../../App";
 import { resume_will_expire_after } from "../../game/knowledge/workers";
 import { Avatar } from "../Projects/Avatar";
 
 class Resume extends Component {
     render() {
-        // console.log(current_tick);
         let data = this.props.data;
         let letter = this.props.letter;
         let worker = this.props.letter.object;
         let expired = this.props.letter.expired;
         let createdAt = this.props.letter.createdAt;
-        let hours_to_expire = Math.round(createdAt + resume_will_expire_after - current_tick);
+        let hours_to_expire = Math.round(createdAt + resume_will_expire_after - data.date.tick);
         let gender_pointer = (() => {
             if (worker.gender === "male") return "him";
             if (worker.gender === "female") return "her";
