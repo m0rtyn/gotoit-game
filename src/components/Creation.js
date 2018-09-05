@@ -192,8 +192,9 @@ class Creation extends Component {
                                 <div className="modal-content creation">
                                     <div className="modal-body">
                                         <section className="card creation-person">
+                                            <h3 className="text-center modal-title">Create your character</h3>
                                             <div className="card-body">
-                                                <img className="player-avatar" alt="player's avatar" src="../assets/images/male.png" />
+                                                {/*<img className="player-avatar" alt="player's avatar" src="../assets/images/male.png" />*/}
                                                 <div className="creation-gender-select">
                                                     <h3 className="text-center modal-title">Choose gender</h3>
                                                     <input
@@ -240,6 +241,9 @@ class Creation extends Component {
                                                             }}
                                                         />
                                                     </div>
+                                                </div>
+                                                <div>
+                                                    <div />
                                                 </div>
                                             </div>
                                         </section>
