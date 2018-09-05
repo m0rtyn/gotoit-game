@@ -15,17 +15,17 @@ class HotOffer extends PureComponent {
     }
     acceptOffered(event) {
         this.props.data.helpers.acceptOffered(event.target.id);
-        this.props.closePopup();
+        this.props.closeModal();
     }
 
     startOffered(event) {
         this.props.data.helpers.startOffered(event.target.id);
-        this.props.closePopup();
+        this.props.closeModal();
     }
 
     reject(event) {
         this.props.data.helpers.rejectOffered(event.target.id);
-        this.props.closePopup();
+        this.props.closeModal();
     }
 
     render() {
@@ -43,7 +43,7 @@ class HotOffer extends PureComponent {
                         className="btn btn-warning float-right"
                         onClick={() => {
                             //data.helpers.projectArchiving();
-                            this.props.closePopup();
+                            this.propsModalPopup();
                         }}
                     >
                         Close
