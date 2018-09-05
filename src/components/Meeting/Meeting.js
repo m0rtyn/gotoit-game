@@ -82,7 +82,7 @@ class Meeting extends Component {
         const data = this.props.data;
         const project = this.props.project;
 
-        const manage_button = <button className="btn ">Manage</button>;
+        const manage_button = <button className="btn btn-manage">Manage</button>;
 
         let label = (id, text) => {
             return (
