@@ -41,19 +41,36 @@
 
   }
 
-  .team-remove-worker {
-    padding: 0 size(0.5);
+  .btn-worker {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--color-darken-cyan);
+    padding: 0;
     margin: 0 size(0.5);
-    color: var(--color-primary);
+    position: relative;
 
-    &:hover {
-      background-color: var(--color-danger);
-      color: white;
+    .icon-close {
+      color: var(--white);
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      border-radius: size(0.25);
     }
   }
 
-  .team-add-worker {
-    padding: 0 size(2);
-    margin: 0 size(0.5);
+  .btn-add-worker {
+    color: var(--white);
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    background-color: var(--color-darken-cyan);
+    // margin: 0 size(0.5);
+    
   }
 }
