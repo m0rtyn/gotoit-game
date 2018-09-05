@@ -42,14 +42,6 @@ import "./assets/styles/scss/main.scss";
 //   // whyDidYouUpdate(React);
 //   // registerObserver();
 // }
-export var current_tick = 0;
-export const setCurrentTick = tick => {
-    current_tick = tick;
-};
-export var current_game_date;
-export const setGameDate = game_date => {
-    current_game_date = game_date;
-};
 
 export const addDaysToDate = (date, days) => {
     var result = new Date(date);
@@ -71,6 +63,7 @@ class App extends Component {
         this.playGame = this.playGame.bind(this);
         this.pauseGame = this.pauseGame.bind(this);
         this.setGameSpeed = this.setGameSpeed.bind(this);
+        this.setGameDate = this.setGameDate.bind(this);
         this.newGame = this.newGame.bind(this);
 
         this.brutalSet = this.brutalSet.bind(this);
@@ -158,6 +151,7 @@ class App extends Component {
         app_state.data.helpers["playGame"] = this.playGame;
         app_state.data.helpers["pauseGame"] = this.pauseGame;
         app_state.data.helpers["setGameSpeed"] = this.setGameSpeed;
+        app_state.data.helpers["setGameDate"] = this.setGameDate;
         app_state.data.helpers["newGame"] = this.newGame;
 
         app_state.data.helpers["brutalSet"] = this.brutalSet;
@@ -348,21 +342,28 @@ class App extends Component {
         this.setState({ data: data });
     }
 
+    setGameDate(date) {
+        const data = this.state.data;
+        data.current_game_date = date;
+        this.setState({ data: data });
+    }
+
     setTimelineScale() {
         const data = this.state.data;
         let days = [];
         for (let i = -15; i < 16; i++) {
-            days.push(addDaysToDate(current_game_date, i));
+            days.push(addDaysToDate(data.current_game_date, i));
         }
         data.timelineScale = days;
         this.setState({ data: data });
     }
     addTimelineEvent(type, info, object, inTime) {
+        const data = this.state.data;
         this.state.data.timelineEvents.push({
             type: type,
             info: info,
             object: object,
-            time: addDaysToDate(current_game_date, inTime)
+            time: addDaysToDate(data.current_game_date, inTime)
         });
     }
     newGame() {
@@ -951,7 +952,7 @@ class App extends Component {
         this.createMail({
             type: "Project report",
             object: _.create(ProjectModel.prototype, project),
-            date: current_game_date
+            date: data.current_game_date
         });
 
         data.projects_end_reports.push(project);
@@ -989,7 +990,7 @@ class App extends Component {
                 type: "Hot offer",
                 name: this_project.name,
                 object: this_project,
-                date: current_game_date
+                date: data.current_game_date
             });
             addAction("New hot offer: " + project.name);
             data.attainments.push("FirstTraining");
@@ -1001,7 +1002,7 @@ class App extends Component {
                 type: "Hot offer",
                 name: this_project.name,
                 object: this_project,
-                date: current_game_date
+                date: data.current_game_date
             });
             addAction("New hot offer: " + project.name);
             data.attainments.push("FirstPart");
@@ -1013,7 +1014,7 @@ class App extends Component {
                 type: "Hot offer",
                 name: this_project.name,
                 object: this_project,
-                date: current_game_date
+                date: data.current_game_date
             });
             addAction("New hot offer: " + project.name);
             data.attainments.push("FirstModule");
@@ -1025,7 +1026,7 @@ class App extends Component {
                 type: "Hot offer",
                 name: this_project.name,
                 object: this_project,
-                date: current_game_date
+                date: data.current_game_date
             });
             addAction("New hot offer: " + project.name);
             data.attainments.push("FirstApplication");
@@ -1037,7 +1038,7 @@ class App extends Component {
                 type: "Hot offer",
                 name: this_project.name,
                 object: this_project,
-                date: current_game_date
+                date: data.current_game_date
             });
             addAction("New hot offer: " + project.name);
             data.attainments.push("BigDeal");
@@ -1379,20 +1380,20 @@ class App extends Component {
         }
     }
 
-    calcSalary(worker, current_tick) {
+    calcSalary(worker, tick) {
         let daily_salary = Math.floor((worker.getSalary() / 160) * (160 / 30)); // (160 / 30) - working hours in a single day
-        let last_month_worked_days = Math.floor((current_tick - worker.facts.prev_salary_payment_tick) / 24);
+        let last_month_worked_days = Math.floor((tick - worker.facts.prev_salary_payment_tick) / 24);
 
         // if the employee worked full month he get fixed monthly salary,
         // else salary calculating in depending on the days worked
         return last_month_worked_days < 30 ? Math.floor(last_month_worked_days * daily_salary) : worker.getSalary();
     }
 
-    paySalary(worker, current_tick) {
+    paySalary(worker, tick) {
         if (worker.is_player) return;
 
         let data = this.state.data;
-        let salary = this.calcSalary(worker, current_tick);
+        let salary = this.calcSalary(worker, tick);
 
         if (data.money - salary > 0) {
             this.chargeMoney(salary, true);
@@ -1403,10 +1404,10 @@ class App extends Component {
             worker.get_monthly_salary = false;
         }
 
-        worker.facts.prev_salary_payment_tick = current_tick;
+        worker.facts.prev_salary_payment_tick = tick;
     }
 
-    nextDay() {
+    /*nextDay() {
         const data = this.state.data;
         let time = data.date;
         const date = data.date;
@@ -1416,7 +1417,7 @@ class App extends Component {
         game_date.setDate(real_date.getDate() + date.tick / 24);
 
         time.tick++;
-        current_tick = time.tick;
+        data.date.tick = time.tick;
         //time.hour++;
         time.hour = game_date.getHours();
 
@@ -1514,7 +1515,7 @@ class App extends Component {
     rollTurn() {
         const data = this.state.data;
 
-        switch (current_tick) {
+        switch (data.date.tick) {
             case 5:
                 addAction(
                     "Hi there! Important messages will appear in this corner of the screen.",
@@ -1536,7 +1537,7 @@ class App extends Component {
                 break;
         }
 
-        const x = current_tick + 2000;
+        const x = data.date.tick + 2000;
         data.current_btc_price = Math.floor(
             (Math.abs(Math.sin(x / 19)) * x) / 3 +
                 Math.abs(Math.sin(Math.sqrt(x))) * x +
@@ -1549,11 +1550,11 @@ class App extends Component {
 
         //data.current_btc_price = Math.floor(Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x + Math.abs(Math.sin(Math.sqrt(x/227))) * x);
 
-        /*
-        if (current_tick < (24 * 7)) {
+        /!*
+        if (data.date.tick < (24 * 7)) {
             return false; // no generation first week
         }
-        */
+        *!/
 
         if (data.reputation >= 100) {
             data.reputation -= 100;
@@ -1582,7 +1583,7 @@ class App extends Component {
             this.pushNewProject();
         }
 
-        /*
+        /!*
         if (data.candidates.resumes.length > 0) { //  WTF section
             if (_.random(1, 100) < Math.sqrt(probability)) {
                 _.remove(data.candidates.resumes, (candidate) => {
@@ -1595,9 +1596,9 @@ class App extends Component {
                 });
             }
         }
-        */
+        *!/
 
-        let spike = (current_tick > 24 * 30) & (current_tick < 24 * 60) ? 40 : 0;
+        let spike = (data.date.tick > 24 * 30) & (data.date.tick < 24 * 60) ? 40 : 0;
         if (
             Math.floor(_.random(1, 24 * (50 - Math.max(spike, Math.min(25, projects_done * 0.2))))) === 1 &&
             data.candidates.resumes.length < 5
@@ -1616,7 +1617,7 @@ class App extends Component {
             addAction("Excellent " + max_skill + " ninja " + worker.name + " looking for a job");
         }
 
-        if (current_tick < 24 * 30 * 12) {
+        if (data.date.tick < 24 * 30 * 12) {
             return false; // no additional generation first 12 month
         }
 
@@ -1626,11 +1627,11 @@ class App extends Component {
         }
 
         //this.setState({data: data});
-    }
+    }*/
 
     pushNewProject() {
         const data = this.state.data;
-        let quality = Math.ceil(_.random(1, current_tick / (24 * 30) + projects_done * 0.1));
+        let quality = Math.ceil(_.random(1, data.date.tick / (24 * 30) + projects_done * 0.1));
 
         let size =
             quality < 3
@@ -1668,24 +1669,24 @@ class App extends Component {
         this.createMail({
             type: "Offer",
             object: this_project,
-            createdAt: current_tick,
+            createdAt: data.date.tick,
             expired: false,
-            date: current_game_date
+            date: data.current_game_date
         });
         addAction("New job!", { timeOut: 3000, extendedTimeOut: 1000 });
     }
 
     pushNewCandidate() {
         const data = this.state.data;
-        let worker = WorkerModel.generate(_.random(1, Math.floor(3 + projects_done * 0.1 + current_tick * 0.001)));
+        let worker = WorkerModel.generate(_.random(1, Math.floor(3 + projects_done * 0.1 + data.date.tick * 0.001)));
 
         data.candidates.resumes.push(worker);
         this.createMail({
             type: "Resume",
             object: worker,
-            createdAt: current_tick,
+            createdAt: data.date.tick,
             expired: false,
-            date: current_game_date
+            date: data.current_game_date
         });
         addAction("New resume!", { timeOut: 3000, extendedTimeOut: 1000 });
     }

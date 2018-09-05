@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { current_tick, projects_done, setCurrentTick, setGameDate } from "../App";
+import { projects_done } from "../App";
 import { addAction } from "../components/ToastNest";
 import Lorer from "../services/Lorer";
 import WorkerModel from "../models/WorkerModel";
@@ -8,6 +8,7 @@ import { public_relations } from "./knowledge/public_relations";
 import { resume_will_expire_after } from "./knowledge/workers";
 import { project_offer_will_expire_after } from "./knowledge/projects";
 import { historical_events } from "./knowledge/historical_events";
+import { GAME_START_UNIXTIME } from "./knowledge/date";
 
 export const rules = {
     matrix_show: {
@@ -28,23 +29,22 @@ export const rules = {
     nextDay: {
         onTick: function(state) {
             const data = state.data;
-            const date = data.date;
-            let time = data.date;
-            let current_tick = data.date.tick;
-
-            var real_date = new Date(1991, 1, 26, 0, 0);
-            var game_date = new Date(1991, 1, 26, 0, 0);
-
-            game_date.setDate(real_date.getDate() + date.tick / 24);
+            const time = data.date;
+            const current_tick = data.date.tick;
+            const game_date = new Date(GAME_START_UNIXTIME + time.tick * 60 * 60 * 1000);
+            const date_config = {
+                year: game_date.getFullYear(),
+                month: game_date.getMonth(),
+                date: game_date.getDate(),
+                day: game_date.getUTCDay(),
+                hour: game_date.getHours()
+            };
+            const current_date = `${date_config.year} ${date_config.month} ${date_config.date} ${date_config.hour}`;
 
             time.tick++;
-            setCurrentTick(time.tick);
-            setGameDate(game_date);
+            time.hour = date_config.hour;
             data.helpers.setTimelineScale();
-            //time.hour++;
-            time.hour = game_date.getHours();
-
-            let current_date = `${game_date.getFullYear()} ${game_date.getMonth()} ${game_date.getDate()} ${game_date.getHours()}`;
+            data.helpers.setGameDate(game_date);
 
             if (historical_events[current_date]) {
                 historical_events[current_date].updateGameData(data);
@@ -55,8 +55,8 @@ export const rules = {
                 });
             }
 
-            if (time.hour === 1 && time.date === 15 && game_date.getDate() === 15) {
-                // get Salary
+            if (time.hour === 1 && time.date === 15 && date_config.date === 15) {
+                // paying Salary
                 // sorting workers from lowest to highest salary
                 let workers = data.workers.sort((worker1, worker2) => {
                     return worker1.salary - worker2.salary;
@@ -187,7 +187,7 @@ export const rules = {
                 }
             }
 
-            if (time.date !== 1 && game_date.getDate() === 1) {
+            if (time.date !== 1 && date_config.date === 1) {
                 console.log(time.date);
                 // first day
                 if (data.office.size > 1) {
@@ -212,10 +212,10 @@ export const rules = {
                 });
             }
 
-            if (game_date.getDate() === 15) {
+            if (date_config.date === 15) {
             }
-            time.date = game_date.getDate();
-            time.day = game_date.getUTCDay();
+            time.date = date_config.date;
+            time.day = date_config.day;
 
             time.is_working_time = !!(time.hour >= 10 && time.hour <= 18 && time.day !== 6 && time.day !== 0);
 
@@ -256,7 +256,7 @@ export const rules = {
         onTick: function(state) {
             const data = state.data;
 
-            switch (current_tick) {
+            switch (data.date.tick) {
                 case 5:
                     addAction(
                         "Hi there! Important messages will appear in this corner of the screen.",
@@ -280,7 +280,7 @@ export const rules = {
             let average = (data.company0_done + data.company1_done + data.company2_done) / 3;
             if (data.btc_unlock) {
                 (() => {
-                    const x = current_tick - 156506;
+                    const x = data.date.tick - 156506;
                     data.current_btc_price = Math.floor(
                         ((Math.abs(Math.sin(x / 19)) * x) / 3 +
                             Math.abs(Math.sin(Math.sqrt(x))) * x +
@@ -293,19 +293,19 @@ export const rules = {
             }
             if (data.share0_unlock) {
                 (() => {
-                    const x = current_tick - 40490;
+                    const x = data.date.tick - 40490;
                     data.current_share0_price = ((100 * data.company0_done) / average).toFixed(2);
                 })();
             }
             if (data.share1_unlock) {
                 (() => {
-                    const x = current_tick - 40490;
+                    const x = data.date.tick - 40490;
                     data.current_share1_price = ((100 * data.company1_done) / average).toFixed(2);
                 })();
             }
             if (data.share2_unlock) {
                 (() => {
-                    const x = current_tick - 40490;
+                    const x = data.date.tick - 40490;
                     data.current_share2_price = ((100 * data.company2_done) / average).toFixed(2);
                 })();
             }
@@ -315,7 +315,7 @@ export const rules = {
             //data.current_btc_price = Math.floor(Math.abs(Math.sin(Math.sqrt(x))) * x + Math.abs(Math.sin(Math.sqrt(x/7))) * x + Math.abs(Math.sin(Math.sqrt(x/227))) * x);
 
             /*
-             if (current_tick < (24 * 7)) {
+             if (data.date.tick < (24 * 7)) {
              return false; // no generation first week
              }
              */
@@ -362,7 +362,7 @@ export const rules = {
              }
              */
 
-            let spike = (current_tick > 24 * 30) & (current_tick < 24 * 60) ? 40 : 0;
+            let spike = (data.date.tick > 24 * 30) & (data.date.tick < 24 * 60) ? 40 : 0;
             if (
                 Math.floor(_.random(1, 24 * (50 - Math.max(spike, Math.min(25, projects_done * 0.2))))) === 1 &&
                 data.candidates.resumes.length < 5
@@ -381,7 +381,7 @@ export const rules = {
                 addAction("Excellent " + max_skill + " ninja " + worker.name + " looking for a job");
             }
 
-            if (current_tick < 24 * 30 * 12) {
+            if (data.date.tick < 24 * 30 * 12) {
                 state.data = data;
                 return state; // no additional generation first 12 month
             }

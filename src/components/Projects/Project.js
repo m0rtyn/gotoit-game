@@ -6,7 +6,6 @@ import "bootstrap-slider/dist/css/bootstrap-slider.min.css";
 
 import _ from "lodash";
 
-import { current_tick } from "../../App";
 import Modal from "../Modal/Modal";
 import ProjectName from "./ProjectName";
 import ProjectProgressBar from "./ProjectProgressBar";
@@ -133,7 +132,7 @@ class Project extends Component {
                 if (data.projects_known_technologies.includes(curr)) {
                     technology.active = data.helpers.getTechnology(project.id, technology.id);
                     prev.push(technology);
-                } else if (current_tick > 24 * 30 * 3) {
+                } else if (data.date.tick > 24 * 30 * 3) {
                     technology.locked = true;
                     prev.push(technology);
                 }
