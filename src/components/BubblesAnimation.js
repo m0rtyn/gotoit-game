@@ -31,7 +31,10 @@ class BubblesAnimation extends React.Component {
             id: this.state.length,
             item: animation_data
         });
-        this.setState({ items: items, length: this.state.length + 1 });
+        this.setState(() => ({
+            items: items,
+            length: this.state.length + 1
+        }));
     }
 
     addBubbleAnimation(name, count, workerId, projectId, isBug = false) {
@@ -45,10 +48,10 @@ class BubblesAnimation extends React.Component {
     }
 
     removeItem = id => {
-        console.info("removeItem", id);
         let newItems = this.state.items.filter(i => i.id !== id);
-
-        this.setState({ items: newItems });
+        this.setState(() => ({
+            items: newItems
+        }));
     };
 
     renderItem = ({ id, item }) => {
@@ -67,7 +70,6 @@ class BubblesAnimation extends React.Component {
     };
     render() {
         const items = _.map(this.state.items, this.renderItem);
-        console.info("render", items);
         return <div>{items}</div>;
     }
 }
