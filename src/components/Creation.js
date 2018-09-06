@@ -262,12 +262,8 @@ class Creation extends Component {
         });
         let asset = this.state.gender === "male" ? male_asset : female_asset;
         let keys = _.keys(asset);
-        console.log(asset);
-        console.log(keys);
         //SELECTORS FOR THE CONSTRUCTOR
         let selectors = _.map(keys, key => {
-            console.log(asset[key]);
-            console.log(this.state.avatar[key]);
             return (
                 <div style={{ textAlign: "center" }}>
                     <button onClick={() => this.fragmentDec(key)}>{"<"}</button>
