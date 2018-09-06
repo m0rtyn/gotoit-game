@@ -71,6 +71,7 @@ export default class ProjectModal extends Component {
     onReject = () => {
         if (window.confirm(`Reject project ${this.props.project.name}? (penalty: ${this.props.project.penalty})`)) {
             this.props.closeModal();
+            this.props.data.helpers.rejectProject(this.props.project.id);
         }
     };
 

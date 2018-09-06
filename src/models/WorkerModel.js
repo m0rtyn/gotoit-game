@@ -420,6 +420,9 @@ class WorkerModel {
             meetings[meeting.meeting_type].max_bonus / meetings[meeting.meeting_type].deadline
         );
     }
+    setAvatar(avatar) {
+        this.avatar = avatar;
+    }
 
     static generateGender() {
         return _.random(1, 100) > 70 ? "female" : "male";
