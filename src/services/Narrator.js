@@ -49,25 +49,25 @@ class Narrator {
             let num = worker.calcEfficiency();
             switch (true) {
                 case num < 20:
-                    return "Worker " + worker.name + " hates" + drawNum(num) + " their job.";
+                    return worker.name + " hates" + drawNum(num) + " the job.";
                 case num < 30:
-                    return "Worker " + worker.name + " almost hates" + drawNum(num) + " their job.";
+                    return worker.name + " is extremely unhappy with" + drawNum(num) + " the job.";
                 case num < 40:
-                    return "Worker " + worker.name + " is very dissatisfied" + drawNum(num) + " with their job.";
+                    return worker.name + " doesn't like" + drawNum(num) + " the job.";
                 case num < 50:
-                    return "Worker " + worker.name + " is dissatisfied" + drawNum(num) + " with their job.";
+                    return worker.name + " is a little disappointed" + drawNum(num) + " with the job.";
                 case num < 60:
-                    return "Worker " + worker.name + " is indifferent" + drawNum(num) + " to their job.";
+                    return worker.name + " thinks there's nothing wrong with" + drawNum(num) + " the job.";
                 case num < 70:
-                    return "Worker " + worker.name + " is almost satisfied" + drawNum(num) + " with their job.";
+                    return worker.name + " is satisfied with" + drawNum(num) + " the job.";
                 case num < 80:
-                    return "Worker " + worker.name + " is satisfied" + drawNum(num) + " with their job.";
+                    return worker.name + " likes" + drawNum(num) + " with the job.";
                 case num < 90:
-                    return "Worker " + worker.name + " is very satisfied" + drawNum(num) + " with their job.";
+                    return worker.name + " is happy with" + drawNum(num) + " with the job.";
                 case num < 100:
-                    return "Worker " + worker.name + " almost loves" + drawNum(num) + " their job.";
+                    return worker.name + " is extremely happy with" + drawNum(num) + " the job.";
                 case num >= 100:
-                    return "Worker " + worker.name + " loves" + drawNum(num) + " their job.";
+                    return worker.name + " loves" + drawNum(num) + " the job.";
                 default:
                     console.log("error case: " + num);
             }
@@ -77,19 +77,19 @@ class Narrator {
             workloadPenalty: penalty => {
                 switch (penalty.level) {
                     case "very low":
-                        return "Grows lazy due to lack" + drawNum(penalty.value) + " of goals, ";
+                        return "Laziness grows due to the lack" + drawNum(penalty.value) + " of goals. ";
                     case "lower":
-                        return "Dissatisfied by the lack" + drawNum(penalty.value) + " of tasks, ";
+                        return `${worker.name} is dissatisfied due to the lack` + drawNum(penalty.value) + " of tasks. ";
                     case "low":
-                        return "Relaxed by the lack" + drawNum(penalty.value) + " of tasks, ";
+                        return worker.name + " is relaxed due to the lack" + drawNum(penalty.value) + " of tasks. ";
                     case "normal":
-                        return "Pleased by" + drawNum(penalty.value) + " quantity of tasks, ";
+                        return worker.name + " is pleased by" + drawNum(penalty.value) + " quantity of tasks. ";
                     case "high":
-                        return "Stressed by excess" + drawNum(penalty.value) + " of tasks, ";
+                        return worker.name + " is stressed by excess" + drawNum(penalty.value) + " of tasks. ";
                     case "higher":
-                        return "Was exhausted from flow" + drawNum(penalty.value) + " of tasks, ";
+                        return worker.name + " is exhausted from having too much" + drawNum(penalty.value) + " work. ";
                     case "very high":
-                        return "Stunned by enormous overflow" + drawNum(penalty.value) + " of tasks, ";
+                        return worker.name + " is suffering because of an endless stream" + drawNum(penalty.value) + " of tasks. ";
                     default:
                         console.log("error case: " + penalty.level);
                         return " # Error! # ";
@@ -98,19 +98,19 @@ class Narrator {
             difficultyPenalty: penalty => {
                 switch (penalty.level) {
                     case "very low":
-                        return "with impossible" + drawNum(penalty.value) + " complexity. ";
+                        return "The complexity of tasks is " + "insane" + drawNum(penalty.value) + ". ";
                     case "lower":
-                        return "with very hard" + drawNum(penalty.value) + " complexity. ";
+                        return "The tasks are really taught" + drawNum(penalty.value) + ". ";
                     case "low":
-                        return "with hard" + drawNum(penalty.value) + " complexity. ";
+                        return "The complexity of tasks is " + "positively challenging" + drawNum(penalty.value) + ". ";
                     case "normal":
-                        return "with enjoyable" + drawNum(penalty.value) + " complexity. ";
+                        return "The complexity of tasks is " + "appropriate" + drawNum(penalty.value) + ". ";
                     case "high":
-                        return "with easy" + drawNum(penalty.value) + " complexity. ";
+                        return "The complexity of tasks is " + "easy" + drawNum(penalty.value) + ". ";
                     case "higher":
-                        return "with very easy" + drawNum(penalty.value) + " complexity. ";
+                        return "The complexity of tasks is " + "too simple" + drawNum(penalty.value) + ". ";
                     case "very high":
-                        return "with ridiculous" + drawNum(penalty.value) + " complexity. ";
+                        return "The complexity of tasks is " + "ridiculously low" + drawNum(penalty.value) + ". ";
                     default:
                         console.log("error case: " + penalty.level);
                         return " # Error! # ";
@@ -119,19 +119,19 @@ class Narrator {
             educationPenalty: penalty => {
                 switch (penalty.level) {
                     case "very low":
-                        return "Hates the monotonous" + drawNum(penalty.value) + " learning and ";
+                        return worker.name + " is sick of endless learning and ";
                     case "lower":
-                        return "Tired of constant" + drawNum(penalty.value) + " learning and";
+                        return worker.name + " is tired of constant learning and";
                     case "low":
-                        return "Wants to work more" + drawNum(penalty.value) + " than learn and";
+                        return worker.name + " wants to work more than learn and";
                     case "normal":
-                        return "Happy with the balance" + drawNum(penalty.value) + " between work and study, and";
+                        return worker.name + " is happy with the balance between working and learning, and";
                     case "high":
-                        return "Wants to learn more" + drawNum(penalty.value) + " than work and";
+                        return worker.name + " wants to learn more than work and";
                     case "higher":
-                        return "Dreams of additional" + drawNum(penalty.value) + " education and ";
+                        return worker.name + " dreams of an additional education and ";
                     case "very high":
-                        return "Hates the monotonous" + drawNum(penalty.value) + " work and";
+                        return worker.name + " hates the monotonous work and";
                     default:
                         console.log("error case: " + penalty.level);
                         return " # Error! # ";
@@ -141,19 +141,19 @@ class Narrator {
                 let realCollectivePenalty = () => {
                     switch (penalty.level) {
                         case "very low":
-                            return " feels depressed by " + drawNum(penalty.value) + " the level of experience of the colleagues.";
+                            return " feels depressed by the solid experience of the colleagues.";
                         case "lower":
-                            return " feels upset by low skills compared" + drawNum(penalty.value) + " to the skills of colleagues.";
+                            return " feels upset by low skills comparing to to the skills of the team.";
                         case "low":
-                            return " feels like a follower" + drawNum(penalty.value) + " in the team.";
+                            return " feels like a follower in the team.";
                         case "normal":
-                            return " feels comfortably" + drawNum(penalty.value) + " in the team.";
+                            return " feels comfortably in the team.";
                         case "high":
-                            return " feels like a leader" + drawNum(penalty.value) + " in the team.";
+                            return " feels like a leader in the team.";
                         case "higher":
-                            return " sad in the team of weaklings" + drawNum(penalty.value) + ".";
+                            return " is sad in the incompetent team.";
                         case "very high":
-                            return " bored in the team of idiots" + drawNum(penalty.value) + ".";
+                            return " becomes bored in the team of total newbies.";
                         default:
                             console.log("error case: " + penalty.level);
                             return " # Error! # ";
@@ -167,29 +167,29 @@ class Narrator {
             let num = worker.stamina;
             switch (true) {
                 case num < 100:
-                    return " Packed" + drawNum(num) + " up their suitcase.";
+                    return " The suitcase has been packed up.";
                 case num < 250:
-                    return " Thoughts" + drawNum(num) + " are already on vacation.";
+                    return " Thoughts are already on vacation.";
                 case num < 500:
-                    return " Bought" + drawNum(num) + " plane tickets.";
+                    return " Plane tickets have been bought.";
                 case num < 1000:
-                    return " Selects" + drawNum(num) + " the travel route.";
+                    return " The travel route has been selected.";
                 case num < 1500:
-                    return " Planning" + drawNum(num) + " a trip.";
+                    return " The worker is planning a trip.";
                 case num < 2000:
-                    return " Thinking" + drawNum(num) + " about vacation.";
+                    return " The worker is thinking about vacation.";
                 case num < 2500:
-                    return " Dreaming" + drawNum(num) + " about vacation.";
+                    return " The worker is dreaming about vacation.";
                 case num < 3000:
-                    return " Encouraged" + drawNum(num) + " and ready to work.";
+                    return " The worker is encouraged and ready to work.";
                 case num < 3500:
-                    return " Full" + drawNum(num) + " of energy.";
+                    return " The worker is full of energy.";
                 case num < 4000:
-                    return " Rested and full" + drawNum(num) + " of energy.";
+                    return " The worker is rested and full of energy.";
                 case num < 5000:
-                    return " Fresh" + drawNum(num) + " from holidays.";
+                    return " The worker is fresh after the vacation.";
                 case num >= 5000:
-                    return " Can not even think " + drawNum(num) + " about rest.";
+                    return " The worker can't even think of resting.";
                 default:
                     console.log("error case: " + num);
             }
