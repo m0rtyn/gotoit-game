@@ -32,11 +32,9 @@ export const male_asset = {
         { name: "01red", src: "eyebrows_01_red" },
         { name: "02red", src: "eyebrows_02_red" },
         { name: "03red", src: "eyebrows_03_red" },
-        { name: "07red", src: "eyebrows_07_red" },
         { name: "01 blonde", src: "eyebrows_01_blonde" },
         { name: "02 blonde", src: "eyebrows_02_blonde" },
-        { name: "03 blonde", src: "eyebrows_03_blonde" },
-        { name: "07 blonde", src: "eyebrows_07_blonde" }
+        { name: "03 blonde", src: "eyebrows_03_blonde" }
     ],
     nose: [{ name: "01", src: "nose_01" }, { name: "02", src: "nose_02" }, { name: "03", src: "nose_03" }],
     mouth: [{ name: "01", src: "mouth_01" }, { name: "02", src: "mouth_02" }, { name: "03", src: "mouth_03" }],
@@ -165,7 +163,7 @@ export const generateFemaleAvatar = () => {
 };
 
 export const customizeAvatar = (gender, body, eyes, eyebrows, nose, mouth, beard, accessories, hair, clothes) => {
-    if (gender === "Male") {
+    if (gender === "male") {
         return {
             body: bodySVG_man(`./${male_asset.body[body].src}.svg`),
             eyes: eyesSVG_man(`./${male_asset.eyes[eyes].src}.svg`),
@@ -176,6 +174,18 @@ export const customizeAvatar = (gender, body, eyes, eyebrows, nose, mouth, beard
             accessories: accessoriesSVG_man(`./${male_asset.accessories[accessories].src}.svg`),
             hair: hairSVG_man(`./${male_asset.hair[hair].src}.svg`),
             clothes: clothesSVG_man(`./${male_asset.clothes[clothes].src}.svg`)
+        };
+    } else if (gender === "female") {
+        return {
+            body: bodySVG_female(`./${female_asset.body[body].src}.svg`),
+            eyes: eyesSVG_female(`./${female_asset.eyes[eyes].src}.svg`),
+            eyebrows: eyebrowsSVG_female(`./${female_asset.eyebrows[eyebrows].src}.svg`),
+            nose: nosesSVG_female(`./${female_asset.nose[nose].src}.svg`),
+            mouth: mouthesSVG_female(`./${female_asset.mouth[mouth].src}.svg`),
+            beard: null,
+            accessories: accessoriesSVG_female(`./${female_asset.accessories[accessories].src}.svg`),
+            hair: hairSVG_female(`./${female_asset.hair[hair].src}.svg`),
+            clothes: clothesSVG_female(`./${female_asset.clothes[clothes].src}.svg`)
         };
     }
 };

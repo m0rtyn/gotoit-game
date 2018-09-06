@@ -1,6 +1,8 @@
 .worker-avatar, .project-avatar {
   position: relative;
   background-color: var(--color-darkest-blue);
+  height: 100%;
+  width: 100%;
 
   .avatar-fragment {
     position: absolute;

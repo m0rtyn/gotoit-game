@@ -12,6 +12,8 @@ import ProjectModel from "../models/ProjectModel";
 import { skills_1 } from "../game/knowledge/skills";
 import { technologies } from "../game/knowledge/technologies";
 import { player_backgrounds } from "../game/knowledge/player_backgrounds";
+import { Avatar } from "./Projects/Avatar";
+import { generateFemaleAvatar, generateMaleAvatar, customizeAvatar, male_asset, female_asset } from "../game/knowledge/worker_avatar";
 
 export var player = null;
 
@@ -23,6 +25,37 @@ class Creation extends Component {
 
         let gender = ["male", "female"][_.random(0, 1)];
 
+        let avatar = null;
+        if (gender === "male") {
+            avatar = {
+                body: _.random(0, male_asset.body.length - 1),
+                eyes: _.random(0, male_asset.eyes.length - 1),
+                eyebrows: _.random(0, male_asset.eyebrows.length - 1),
+                nose: _.random(0, male_asset.nose.length - 1),
+                mouth: _.random(0, male_asset.mouth.length - 1),
+                beard: _.random(0, male_asset.beard.length - 1),
+                accessories: _.random(0, male_asset.accessories.length - 1),
+                hair: _.random(0, male_asset.hair.length - 1),
+                clothes: _.random(0, male_asset.clothes.length - 1)
+            };
+        } else {
+            avatar = {
+                body: _.random(0, female_asset.body.length - 1),
+                eyes: _.random(0, female_asset.eyes.length - 1),
+                eyebrows: _.random(0, female_asset.eyebrows.length - 1),
+                nose: _.random(0, female_asset.nose.length - 1),
+                mouth: _.random(0, female_asset.mouth.length - 1),
+                beard: null,
+                accessories: _.random(0, female_asset.accessories.length - 1),
+                hair: _.random(0, female_asset.hair.length - 1),
+                clothes: _.random(0, female_asset.clothes.length - 1)
+            };
+        }
+        let realAvatar = (() => {
+            let { body, eyes, eyebrows, nose, mouth, beard, accessories, hair, clothes } = avatar;
+            return customizeAvatar(gender, body, eyes, eyebrows, nose, mouth, beard, accessories, hair, clothes);
+        })();
+
         this.state = {
             step: "welcome", // welcome, creation
             gender: gender,
@@ -30,14 +63,23 @@ class Creation extends Component {
             selected_background: back, //'specialist',
             specialist: _.sample(_.keys(player_backgrounds["specialist"].spices)),
             coworker: _.sample(_.keys(player_backgrounds["coworker"].spices)),
-            businessman: _.sample(_.keys(player_backgrounds["businessman"].spices))
+            businessman: _.sample(_.keys(player_backgrounds["businessman"].spices)),
+            avatar: avatar,
+            realAvatar: realAvatar,
+            asset: gender === "male" ? male_asset : female_asset
         };
 
         this.embark = this.embark.bind(this);
     }
+
     // shouldComponentUpdate() {
     //   return false;
     // }
+    genAvatar = () => {
+        let gender = this.state.gender;
+        let { body, eyes, eyebrows, nose, mouth, beard, accessories, hair, clothes } = this.state.avatar;
+        this.setState({ realAvatar: customizeAvatar(gender, body, eyes, eyebrows, nose, mouth, beard, accessories, hair, clothes) });
+    };
     getPlayerStats() {
         let stats = JSON.parse(JSON.stringify(skills_1));
 
@@ -65,6 +107,7 @@ class Creation extends Component {
         console.log(stats);
 
         let tmp_player = WorkerModel.generatePlayer(this.state.gender);
+        tmp_player.setAvatar(this.state.realAvatar);
 
         tmp_player.stats = stats;
         tmp_player.name = this.state.suggest_name;
@@ -136,14 +179,77 @@ class Creation extends Component {
     componentDidMount() {
         this.refs.creation.openPortal();
     }
-
-    handleGenderChange = changeEvent => {
+    generateAvatar = gender => {
+        let avatar;
+        if (gender === "male") {
+            avatar = {
+                body: _.random(0, male_asset.body.length - 1),
+                eyes: _.random(0, male_asset.eyes.length - 1),
+                eyebrows: _.random(0, male_asset.eyebrows.length - 1),
+                nose: _.random(0, male_asset.nose.length - 1),
+                mouth: _.random(0, male_asset.mouth.length - 1),
+                beard: _.random(0, male_asset.beard.length - 1),
+                accessories: _.random(0, male_asset.accessories.length - 1),
+                hair: _.random(0, male_asset.hair.length - 1),
+                clothes: _.random(0, male_asset.clothes.length - 1)
+            };
+        } else {
+            avatar = {
+                body: _.random(0, female_asset.body.length - 1),
+                eyes: _.random(0, female_asset.eyes.length - 1),
+                eyebrows: _.random(0, female_asset.eyebrows.length - 1),
+                nose: _.random(0, female_asset.nose.length - 1),
+                mouth: _.random(0, female_asset.mouth.length - 1),
+                beard: null,
+                accessories: _.random(0, female_asset.accessories.length - 1),
+                hair: _.random(0, female_asset.hair.length - 1),
+                clothes: _.random(0, female_asset.clothes.length - 1)
+            };
+        }
+        return avatar;
+    };
+    generateRealAvatar = (avatar, gender) => {
+        let { body, eyes, eyebrows, nose, mouth, beard, accessories, hair, clothes } = avatar;
+        let newRealAvatar = customizeAvatar(gender, body, eyes, eyebrows, nose, mouth, beard, accessories, hair, clothes);
         this.setState({
-            gender: changeEvent.target.value,
-            suggest_name: WorkerModel.genName(changeEvent.target.value)
+            gender: gender,
+            avatar: avatar,
+            realAvatar: newRealAvatar
         });
     };
+    handleGenderChange = changeEvent => {
+        let newGender = changeEvent.target.value; //randomize
+        this.setState({ suggest_name: WorkerModel.genName(newGender) });
+        this.generateRealAvatar(this.generateAvatar(newGender), newGender);
+    };
+    randomize = () => {
+        this.generateRealAvatar(this.generateAvatar(this.state.gender), this.state.gender);
+    };
+    fragmentDec = fragment => {
+        let state = this.state;
+        let fragmentLength = state.gender === "male" ? male_asset[fragment].length - 1 : female_asset[fragment].length - 1;
 
+        if (state.avatar[fragment] !== 0) {
+            state.avatar[fragment]--;
+        } else {
+            state.avatar[fragment] = fragmentLength;
+        }
+        this.generateRealAvatar(state.avatar, state.gender);
+    };
+    fragmentInc = fragment => {
+        let state = this.state;
+        let fragmentLength = state.gender === "male" ? male_asset[fragment].length - 1 : female_asset[fragment].length - 1;
+        if (state.avatar[fragment] !== fragmentLength) {
+            state.avatar[fragment]++;
+        } else {
+            state.avatar[fragment] = 0;
+        }
+        this.generateRealAvatar(state.avatar, state.gender);
+    };
+    /*handleAvatarInc(type, value){
+
+    }
+*/
     render() {
         const data = this.props.data;
         const selected_background = player_backgrounds[this.state.selected_background];
@@ -154,7 +260,22 @@ class Creation extends Component {
         const stats_data = _.mapValues(stats, (val, key) => {
             return { name: key, val: stats[key] };
         });
-
+        let asset = this.state.gender === "male" ? male_asset : female_asset;
+        let keys = _.keys(asset);
+        console.log(asset);
+        console.log(keys);
+        //SELECTORS FOR THE CONSTRUCTOR
+        let selectors = _.map(keys, key => {
+            console.log(asset[key]);
+            console.log(this.state.avatar[key]);
+            return (
+                <div style={{ textAlign: "center" }}>
+                    <button onClick={() => this.fragmentDec(key)}>{"<"}</button>
+                    <span>{asset[key][this.state.avatar[key]].name}</span>
+                    <button onClick={() => this.fragmentInc(key)}>{">"}</button>
+                </div>
+            );
+        });
         return (
             <div>
                 {data.stage === "start" ? (
@@ -194,7 +315,15 @@ class Creation extends Component {
                                         <section className="card creation-person">
                                             <h3 className="text-center modal-title">Create your character</h3>
                                             <div className="card-body">
-                                                {/*<img className="player-avatar" alt="player's avatar" src="../assets/images/male.png" />*/}
+                                                <div style={{ position: "relative", width: "80px", height: "80px" }}>
+                                                    <Avatar
+                                                        className="worker-avatar"
+                                                        name={"player avatar"}
+                                                        // style={{ position: 'absolute'}}
+                                                        sources={_.toPairs(this.state.realAvatar)}
+                                                    />
+                                                    <button onClick={this.randomize}>Randomize</button>
+                                                </div>
                                                 <div className="creation-gender-select">
                                                     <h3 className="text-center modal-title">Choose gender</h3>
                                                     <input
@@ -242,12 +371,10 @@ class Creation extends Component {
                                                         />
                                                     </div>
                                                 </div>
-                                                <div>
-                                                    <div />
-                                                </div>
                                             </div>
                                         </section>
                                     </div>
+                                    <div style={{ display: "flex", flexDirection: "column" }}>{selectors}</div>
                                     <div className="modal-footer mx-auto">
                                         <button
                                             className="btn btn-success btn-lg btn-"
