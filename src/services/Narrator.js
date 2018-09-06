@@ -1,334 +1,216 @@
 class Narrator {
-  static workerFeelings(worker, widthNumbers = false) {
-    // quantum {level: '', value: '', text: ''}
-    // level in ['very low', 'lower', 'low', 'normal', 'high', 'higher', 'very high']
+    static workerFeelings(worker, widthNumbers = false) {
+        // quantum {level: '', value: '', text: ''}
+        // level in ['very low', 'lower', 'low', 'normal', 'high', 'higher', 'very high']
 
-    let penalties_names = [
-      'workloadPenalty',
-      'difficultyPenalty',
-      'educationPenalty',
-      'collectivePenalty'
-    ];
-    let penalties = {};
+        let penalties_names = ["workloadPenalty", "difficultyPenalty", "educationPenalty", "collectivePenalty"];
+        let penalties = {};
 
-    const drawNum = (number, level = 'normal') => {
-      if (widthNumbers) {
-        return '(' + number + ')';
-      }
-      return '';
-    };
-
-    const formQuantum = (penalty_name, num) => {
-      let quantum = { level: '', value: num, text: '' };
-
-      switch (true) {
-        case num === -20:
-          quantum.level = 'very low';
-          break;
-        case num <= -15:
-          quantum.level = 'lower';
-          break;
-        case num <= -5:
-          quantum.level = 'low';
-          break;
-        case num < 5:
-          quantum.level = 'normal';
-          break;
-        case num < 15:
-          quantum.level = 'high';
-          break;
-        case num < 20:
-          quantum.level = 'higher';
-          break;
-        case num === 20:
-          quantum.level = 'very high';
-          break;
-        default:
-          console.log('error case: ' + num);
-      }
-
-      return quantum;
-    };
-
-    const aboutHappiness = () => {
-      let num = worker.calcEfficiency();
-      switch (true) {
-        case num < 20:
-          return (
-            'Worker ' + worker.name + ' hates' + drawNum(num) + ' their job.'
-          );
-        case num < 30:
-          return (
-            'Worker ' +
-            worker.name +
-            ' almost hates' +
-            drawNum(num) +
-            ' their job.'
-          );
-        case num < 40:
-          return (
-            'Worker ' +
-            worker.name +
-            ' is very dissatisfied' +
-            drawNum(num) +
-            ' with their job.'
-          );
-        case num < 50:
-          return (
-            'Worker ' +
-            worker.name +
-            ' is dissatisfied' +
-            drawNum(num) +
-            ' with their job.'
-          );
-        case num < 60:
-          return (
-            'Worker ' +
-            worker.name +
-            ' is indifferent' +
-            drawNum(num) +
-            ' to their job.'
-          );
-        case num < 70:
-          return (
-            'Worker ' +
-            worker.name +
-            ' is almost satisfied' +
-            drawNum(num) +
-            ' with their job.'
-          );
-        case num < 80:
-          return (
-            'Worker ' +
-            worker.name +
-            ' is satisfied' +
-            drawNum(num) +
-            ' with their job.'
-          );
-        case num < 90:
-          return (
-            'Worker ' +
-            worker.name +
-            ' is very satisfied' +
-            drawNum(num) +
-            ' with their job.'
-          );
-        case num < 100:
-          return (
-            'Worker ' +
-            worker.name +
-            ' almost loves' +
-            drawNum(num) +
-            ' their job.'
-          );
-        case num >= 100:
-          return (
-            'Worker ' + worker.name + ' loves' + drawNum(num) + ' their job.'
-          );
-        default:
-          console.log('error case: ' + num);
-      }
-    };
-
-    const tellers = {
-      workloadPenalty: penalty => {
-        switch (penalty.level) {
-          case 'very low':
-            return (
-              'Grows lazy due to lack' + drawNum(penalty.value) + ' of goals, '
-            );
-          case 'lower':
-            return (
-              'Dissatisfied by the lack' +
-              drawNum(penalty.value) +
-              ' of tasks, '
-            );
-          case 'low':
-            return (
-              'Relaxed by the lack' + drawNum(penalty.value) + ' of tasks, '
-            );
-          case 'normal':
-            return (
-              'Pleased by' + drawNum(penalty.value) + ' quantity of tasks, '
-            );
-          case 'high':
-            return (
-              'Stressed by excess' + drawNum(penalty.value) + ' of tasks, '
-            );
-          case 'higher':
-            return (
-              'Was exhausted from flow' + drawNum(penalty.value) + ' of tasks, '
-            );
-          case 'very high':
-            return (
-              'Stunned by enormous overflow' +
-              drawNum(penalty.value) +
-              ' of tasks, '
-            );
-          default:
-            console.log('error case: ' + penalty.level);
-            return ' # Error! # ';
-        }
-      },
-      difficultyPenalty: penalty => {
-        switch (penalty.level) {
-          case 'very low':
-            return 'with impossible' + drawNum(penalty.value) + ' complexity. ';
-          case 'lower':
-            return 'with very hard' + drawNum(penalty.value) + ' complexity. ';
-          case 'low':
-            return 'with hard' + drawNum(penalty.value) + ' complexity. ';
-          case 'normal':
-            return 'with enjoyable' + drawNum(penalty.value) + ' complexity. ';
-          case 'high':
-            return 'with easy' + drawNum(penalty.value) + ' complexity. ';
-          case 'higher':
-            return 'with very easy' + drawNum(penalty.value) + ' complexity. ';
-          case 'very high':
-            return 'with ridiculous' + drawNum(penalty.value) + ' complexity. ';
-          default:
-            console.log('error case: ' + penalty.level);
-            return ' # Error! # ';
-        }
-      },
-      educationPenalty: penalty => {
-        switch (penalty.level) {
-          case 'very low':
-            return (
-              'Hates the monotonous' + drawNum(penalty.value) + ' learning and '
-            );
-          case 'lower':
-            return (
-              'Tired of constant' + drawNum(penalty.value) + ' learning and'
-            );
-          case 'low':
-            return (
-              'Wants to work more' + drawNum(penalty.value) + ' than learn and'
-            );
-          case 'normal':
-            return (
-              'Happy with the balance' +
-              drawNum(penalty.value) +
-              ' between work and study, and'
-            );
-          case 'high':
-            return (
-              'Wants to learn more' + drawNum(penalty.value) + ' than work and'
-            );
-          case 'higher':
-            return (
-              'Dreams of additional' +
-              drawNum(penalty.value) +
-              ' education and '
-            );
-          case 'very high':
-            return (
-              'Hates the monotonous' + drawNum(penalty.value) + ' work and'
-            );
-          default:
-            console.log('error case: ' + penalty.level);
-            return ' # Error! # ';
-        }
-      },
-      collectivePenalty: penalty => {
-        let realCollectivePenalty = () => {
-          switch (penalty.level) {
-            case 'very low':
-              return (
-                ' feels depressed by ' +
-                drawNum(penalty.value) +
-                ' the level of experience of the colleagues.'
-              );
-            case 'lower':
-              return (
-                ' feels upset by low skills compared' +
-                drawNum(penalty.value) +
-                ' to the skills of colleagues.'
-              );
-            case 'low':
-              return (
-                ' feels like a follower' +
-                drawNum(penalty.value) +
-                ' in the team.'
-              );
-            case 'normal':
-              return (
-                ' feels comfortably' + drawNum(penalty.value) + ' in the team.'
-              );
-            case 'high':
-              return (
-                ' feels like a leader' +
-                drawNum(penalty.value) +
-                ' in the team.'
-              );
-            case 'higher':
-              return (
-                ' sad in the team of weaklings' + drawNum(penalty.value) + '.'
-              );
-            case 'very high':
-              return (
-                ' bored in the team of idiots' + drawNum(penalty.value) + '.'
-              );
-            default:
-              console.log('error case: ' + penalty.level);
-              return ' # Error! # ';
-          }
+        const drawNum = (number, level = "normal") => {
+            if (widthNumbers) {
+                return "(" + number + ")";
+            }
+            return "";
         };
-        return realCollectivePenalty();
-      }
-    };
 
-    const aboutStamina = () => {
-      let num = worker.stamina;
-      switch (true) {
-        case num < 100:
-          return ' Packed' + drawNum(num) + ' up their suitcase.';
-        case num < 250:
-          return ' Thoughts' + drawNum(num) + ' are already on vacation.';
-        case num < 500:
-          return ' Bought' + drawNum(num) + ' plane tickets.';
-        case num < 1000:
-          return ' Selects' + drawNum(num) + ' the travel route.';
-        case num < 1500:
-          return ' Planning' + drawNum(num) + ' a trip.';
-        case num < 2000:
-          return ' Thinking' + drawNum(num) + ' about vacation.';
-        case num < 2500:
-          return ' Dreaming' + drawNum(num) + ' about vacation.';
-        case num < 3000:
-          return ' Encouraged' + drawNum(num) + ' and ready to work.';
-        case num < 3500:
-          return ' Full' + drawNum(num) + ' of energy.';
-        case num < 4000:
-          return ' Rested and full' + drawNum(num) + ' of energy.';
-        case num < 5000:
-          return ' Fresh' + drawNum(num) + ' from holidays.';
-        case num >= 5000:
-          return ' Can not even think ' + drawNum(num) + ' about rest.';
-        default:
-          console.log('error case: ' + num);
-      }
-    };
+        const formQuantum = (penalty_name, num) => {
+            let quantum = { level: "", value: num, text: "" };
 
-    penalties_names.forEach(penalty_name => {
-      penalties[penalty_name] = formQuantum(
-        penalty_name,
-        worker[penalty_name]()
-      );
-    });
-    //    console.log(penalties);
+            switch (true) {
+                case num === -20:
+                    quantum.level = "very low";
+                    break;
+                case num <= -15:
+                    quantum.level = "lower";
+                    break;
+                case num <= -5:
+                    quantum.level = "low";
+                    break;
+                case num < 5:
+                    quantum.level = "normal";
+                    break;
+                case num < 15:
+                    quantum.level = "high";
+                    break;
+                case num < 20:
+                    quantum.level = "higher";
+                    break;
+                case num === 20:
+                    quantum.level = "very high";
+                    break;
+                default:
+                    console.log("error case: " + num);
+            }
 
-    let tale = aboutHappiness();
+            return quantum;
+        };
 
-    tale += penalties_names.reduce((string, penalty_name) => {
-      return string + ' ' + tellers[penalty_name](penalties[penalty_name]);
-    }, '');
+        const aboutHappiness = () => {
+            let num = worker.calcEfficiency();
+            switch (true) {
+                case num < 20:
+                    return worker.name + " hates" + drawNum(num) + " the job.";
+                case num < 30:
+                    return worker.name + " is extremely unhappy with" + drawNum(num) + " the job.";
+                case num < 40:
+                    return worker.name + " doesn't like" + drawNum(num) + " the job.";
+                case num < 50:
+                    return worker.name + " is a little disappointed" + drawNum(num) + " with the job.";
+                case num < 60:
+                    return worker.name + " thinks there's nothing wrong with" + drawNum(num) + " the job.";
+                case num < 70:
+                    return worker.name + " is satisfied with" + drawNum(num) + " the job.";
+                case num < 80:
+                    return worker.name + " likes" + drawNum(num) + " with the job.";
+                case num < 90:
+                    return worker.name + " is happy with" + drawNum(num) + " with the job.";
+                case num < 100:
+                    return worker.name + " is extremely happy with" + drawNum(num) + " the job.";
+                case num >= 100:
+                    return worker.name + " loves" + drawNum(num) + " the job.";
+                default:
+                    console.log("error case: " + num);
+            }
+        };
 
-    tale += aboutStamina();
+        const tellers = {
+            workloadPenalty: penalty => {
+                switch (penalty.level) {
+                    case "very low":
+                        return "Laziness grows due to the lack" + drawNum(penalty.value) + " of goals. ";
+                    case "lower":
+                        return `${worker.name} is dissatisfied due to the lack` + drawNum(penalty.value) + " of tasks. ";
+                    case "low":
+                        return worker.name + " is relaxed due to the lack" + drawNum(penalty.value) + " of tasks. ";
+                    case "normal":
+                        return worker.name + " is pleased by" + drawNum(penalty.value) + " quantity of tasks. ";
+                    case "high":
+                        return worker.name + " is stressed by excess" + drawNum(penalty.value) + " of tasks. ";
+                    case "higher":
+                        return worker.name + " is exhausted from having too much" + drawNum(penalty.value) + " work. ";
+                    case "very high":
+                        return worker.name + " is suffering because of an endless stream" + drawNum(penalty.value) + " of tasks. ";
+                    default:
+                        console.log("error case: " + penalty.level);
+                        return " # Error! # ";
+                }
+            },
+            difficultyPenalty: penalty => {
+                switch (penalty.level) {
+                    case "very low":
+                        return "The complexity of tasks is " + "insane" + drawNum(penalty.value) + ". ";
+                    case "lower":
+                        return "The tasks are really taught" + drawNum(penalty.value) + ". ";
+                    case "low":
+                        return "The complexity of tasks is " + "positively challenging" + drawNum(penalty.value) + ". ";
+                    case "normal":
+                        return "The complexity of tasks is " + "appropriate" + drawNum(penalty.value) + ". ";
+                    case "high":
+                        return "The complexity of tasks is " + "easy" + drawNum(penalty.value) + ". ";
+                    case "higher":
+                        return "The complexity of tasks is " + "too simple" + drawNum(penalty.value) + ". ";
+                    case "very high":
+                        return "The complexity of tasks is " + "ridiculously low" + drawNum(penalty.value) + ". ";
+                    default:
+                        console.log("error case: " + penalty.level);
+                        return " # Error! # ";
+                }
+            },
+            educationPenalty: penalty => {
+                switch (penalty.level) {
+                    case "very low":
+                        return worker.name + " is sick of endless learning and ";
+                    case "lower":
+                        return worker.name + " is tired of constant learning and";
+                    case "low":
+                        return worker.name + " wants to work more than learn and";
+                    case "normal":
+                        return worker.name + " is happy with the balance between working and learning, and";
+                    case "high":
+                        return worker.name + " wants to learn more than work and";
+                    case "higher":
+                        return worker.name + " dreams of an additional education and ";
+                    case "very high":
+                        return worker.name + " hates the monotonous work and";
+                    default:
+                        console.log("error case: " + penalty.level);
+                        return " # Error! # ";
+                }
+            },
+            collectivePenalty: penalty => {
+                let realCollectivePenalty = () => {
+                    switch (penalty.level) {
+                        case "very low":
+                            return " feels depressed by the solid experience of the colleagues.";
+                        case "lower":
+                            return " feels upset by low skills comparing to to the skills of the team.";
+                        case "low":
+                            return " feels like a follower in the team.";
+                        case "normal":
+                            return " feels comfortably in the team.";
+                        case "high":
+                            return " feels like a leader in the team.";
+                        case "higher":
+                            return " is sad in the incompetent team.";
+                        case "very high":
+                            return " becomes bored in the team of total newbies.";
+                        default:
+                            console.log("error case: " + penalty.level);
+                            return " # Error! # ";
+                    }
+                };
+                return realCollectivePenalty();
+            }
+        };
 
-    //  console.log(tale); // BUT! FIX repeatable calls
-    return tale;
-  }
+        const aboutStamina = () => {
+            let num = worker.stamina;
+            switch (true) {
+                case num < 100:
+                    return " The suitcase has been packed up.";
+                case num < 250:
+                    return " Thoughts are already on vacation.";
+                case num < 500:
+                    return " Plane tickets have been bought.";
+                case num < 1000:
+                    return " The travel route has been selected.";
+                case num < 1500:
+                    return " The worker is planning a trip.";
+                case num < 2000:
+                    return " The worker is thinking about vacation.";
+                case num < 2500:
+                    return " The worker is dreaming about vacation.";
+                case num < 3000:
+                    return " The worker is encouraged and ready to work.";
+                case num < 3500:
+                    return " The worker is full of energy.";
+                case num < 4000:
+                    return " The worker is rested and full of energy.";
+                case num < 5000:
+                    return " The worker is fresh after the vacation.";
+                case num >= 5000:
+                    return " The worker can't even think of resting.";
+                default:
+                    console.log("error case: " + num);
+            }
+        };
+
+        penalties_names.forEach(penalty_name => {
+            penalties[penalty_name] = formQuantum(penalty_name, worker[penalty_name]());
+        });
+        //    console.log(penalties);
+
+        let tale = aboutHappiness();
+
+        tale += penalties_names.reduce((string, penalty_name) => {
+            return string + " " + tellers[penalty_name](penalties[penalty_name]);
+        }, "");
+
+        tale += aboutStamina();
+
+        //  console.log(tale); // BUT! FIX repeatable calls
+        return tale;
+    }
 }
 
 export default Narrator;

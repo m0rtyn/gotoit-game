@@ -1,6 +1,6 @@
 :root {
   width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 //====СТИЛИЗАЦИЯ СКРОЛЛА====
@@ -48,7 +48,7 @@ div {
     overflow-y: auto;
     background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
-    border-radius: 4px;
+    border-radius: size(1);
     overflow-x: hidden;
   }
 
@@ -67,6 +67,7 @@ div {
 }
 
 .activity-column {
+  border-radius: size(1);
   padding-left: 0 !important;
   padding-right: 0 !important;
 

@@ -1,1 +1,1 @@
-export const companies = ['Future Sight', 'L-Ri', 'Murum'];
+export const companies = ["Future Sight", "L-Ri", "Murum"];

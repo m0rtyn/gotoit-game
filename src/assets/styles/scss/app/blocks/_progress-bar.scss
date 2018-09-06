@@ -19,20 +19,6 @@
   }
 }
 
-.stats-progress-bar {
-  width: 30%;
-  display: flex;
-  padding-left: size(0.5);
-  align-items: center;
-
-  .progress {
-    width: 100%;
-    border-radius: 6px;
-    height: size(1);
-    font-size: 0;
-  }
-}
-
 .happiness-bar {
   background-color: var(--color-secondary);
 

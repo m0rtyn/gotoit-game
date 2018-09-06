@@ -7,3 +7,34 @@ input[type="radio"] {
     color: #fff;
   }
 }
+
+// StartProject.js component styles, added 27.08.18 by Artem
+
+.start-project-name {
+  margin: size(1) auto;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.start-project-platform-select,
+.start-project-kind-select {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+
+  label.btn {
+    width: 100%;
+    margin: size(0.5) 0;
+  }
+}
+
+.start-project-workers-list {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: size(0.5) 0;
+}
+
+//---------------------------------------------------

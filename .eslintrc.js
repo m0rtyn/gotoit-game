@@ -3,7 +3,6 @@
 module.exports = {
     'extends': [
         'eslint-config-react-app',
-        'plugin:prettier/recommended',
         'plugin:react/recommended',
         "plugin:import/errors",
         "plugin:import/warnings",
@@ -19,6 +18,7 @@ module.exports = {
         "promise",
         "prefer-object-spread",
         "destructuring",
+        "prettier"
         // "lodash"
     ],
     rules: {
@@ -36,10 +36,11 @@ module.exports = {
         'lodash/prefer-lodash-chain': 0,
         'lodash/import-scope': 0,
         'lodash/prefer-noop': 0,
+        'lodash/prefer-filter': 0,
+        'lodash/prefer-constant': 0,
         'react/prop-types': 0,
         'react/no-string-refs': 0,
         'react/no-find-dom-node': 0,
-        'lodash/prefer-constant': 0,
-        'lodash/prefer-filter': 0
+        "prettier/prettier": "error"
     }
 };
