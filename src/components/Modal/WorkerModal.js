@@ -291,7 +291,14 @@ export default class ModalWorker extends Component {
                         <div className="worker-stats">
                             {skills_names.map(skill => {
                                 return (
-                                    <StatsProgressBar key={skill} type={skill} stats={stats_progressbar_data} worker={worker} data={data} />
+                                    <StatsProgressBar
+                                        max_stat={data.max_stat}
+                                        key={skill}
+                                        type={skill}
+                                        stats={stats_progressbar_data}
+                                        worker={worker}
+                                        data={data}
+                                    />
                                 );
                             })}
                         </div>
