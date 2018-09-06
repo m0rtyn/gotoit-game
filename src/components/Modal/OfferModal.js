@@ -6,7 +6,6 @@ import _ from "lodash";
 import StatsBar from "../StatsBar";
 
 import ProjectName from "../Projects/ProjectName";
-import { current_tick } from "../../App";
 import { Avatar } from "../Projects/Avatar";
 
 class Offer extends Component {
@@ -34,11 +33,12 @@ class Offer extends Component {
     }
 
     render() {
+        const data = this.props.data;
         let letter = this.props.letter;
         let project = this.props.project;
         let createdAt = this.props.createdAt;
         let expired = this.props.expired;
-        let hours_to_expire = Math.round(createdAt + project_offer_will_expire_after - current_tick);
+        let hours_to_expire = Math.round(createdAt + project_offer_will_expire_after - data.date.tick);
 
         const stats_data = _.mapValues(skills, (stat, key) => {
             return { name: key, val: <span>{project.needs(key)}</span> };

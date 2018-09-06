@@ -1,5 +1,4 @@
 import TimeIcon from "../../assets/images/time_event.png";
-import { current_tick } from "../../App";
 
 export const historical_events = {
     // year :: month :: day :: hour
@@ -574,7 +573,6 @@ export const historical_events = {
         description: "Cryptocurrency market booms.",
         picture: TimeIcon,
         updateGameData: data => {
-            alert(current_tick);
             return data;
         }
     },
@@ -583,7 +581,6 @@ export const historical_events = {
         description: "The U.S. would withdrawal from the 2015 Paris Agreement on climate change mitigation.",
         picture: TimeIcon,
         updateGameData: data => {
-            alert(current_tick);
             return data;
         }
     },

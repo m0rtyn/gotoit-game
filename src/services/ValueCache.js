@@ -1,4 +1,4 @@
-import { current_tick } from "../App";
+import { getData } from "../App";
 
 class ValueCache {
     constructor(expire, sourceFunction) {
@@ -9,9 +9,10 @@ class ValueCache {
     }
 
     get() {
-        if (this.last_refresh === 0 || current_tick - this.last_refresh > this.expire) {
+        let tick = getData().date.tick;
+        if (this.last_refresh === 0 || tick - this.last_refresh > this.expire) {
             this.stored_value = this.sourceFunction();
-            this.last_refresh = current_tick;
+            this.last_refresh = tick;
         }
         return this.stored_value;
     }
