@@ -10,11 +10,11 @@ export class WorkerButton extends PureComponent {
                 <Avatar className="worker-avatar" name={this.props.name} sources={_.toPairs(this.props.avatar)} />
                 <span
                     className="icon-close"
-                    onMouseOver={
+                    /*onMouseOver={
                         {
-                            /* TODO: make display toggle */
+                            /!* TODO: make display toggle *!/
                         }
-                    }
+                    }*/
                 />
             </button>
         );
