@@ -265,7 +265,7 @@ class Creation extends Component {
         //SELECTORS FOR THE CONSTRUCTOR
         let selectors = _.map(keys, key => {
             return (
-                <div style={{ textAlign: "center" }}>
+                <div style={{ textAlign: "center" }} key={key}>
                     <button onClick={() => this.fragmentDec(key)}>{"<"}</button>
                     <span>{asset[key][this.state.avatar[key]].name}</span>
                     <button onClick={() => this.fragmentInc(key)}>{">"}</button>
@@ -420,8 +420,6 @@ class Creation extends Component {
                                                     </div>
                                                     <div className="creation-description-column">
                                                         <h3 className="text-center modal-title">Choose background</h3>
-
-                                                        {console.log(player_backgrounds, this.state.selected_background)}
 
                                                         <div className="creation-description lead text-center">
                                                             {player_backgrounds[this.state.selected_background].text}
