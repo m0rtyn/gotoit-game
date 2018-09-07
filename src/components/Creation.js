@@ -14,6 +14,7 @@ import { technologies } from "../game/knowledge/technologies";
 import { player_backgrounds } from "../game/knowledge/player_backgrounds";
 import { Avatar } from "./Projects/Avatar";
 import { generateFemaleAvatar, generateMaleAvatar, customizeAvatar, male_asset, female_asset } from "../game/knowledge/worker_avatar";
+import logo from "../assets/images/go2it-logo.png";
 
 export var player = null;
 
@@ -260,6 +261,7 @@ class Creation extends Component {
         const stats_data = _.mapValues(stats, (val, key) => {
             return { name: key, val: stats[key] };
         });
+
         let asset = this.state.gender === "male" ? male_asset : female_asset;
         let keys = _.keys(asset);
         //SELECTORS FOR THE CONSTRUCTOR
@@ -278,18 +280,16 @@ class Creation extends Component {
                     <Portal ref="creation">
                         <Modal>
                             {this.state.step === "welcome" ? (
-                                <div className="modal-content creation">
-                                    <div className="modal-header">
-                                        <h1 className="modal-title">Go To IT</h1>
-                                        <h2 className="subtitle">Game About Software Development</h2>
-                                    </div>
+                                <div className="modal-content creation welcome">
                                     <div className="modal-body">
-                                        <p className="lead">
-                                            This game is about software development and the rise of your company to the heights.
-                                            <br />
-                                            Start with small contracts, save up some money, hire a couple of assistants and try to create
-                                            something really cool!
-                                        </p>
+                                        <img className="logo" src={logo} />
+                                        <h4 className="lead">
+                                            <p>This game is about software development and the rise of your company to the heights.</p>
+                                            {/* <p>
+                                                Start with small contracts, save up some money, hire a couple of assistants and try to create something really cool!
+                                            </p> */}
+                                            <p>text about the game is in open beta</p>
+                                        </h4>
                                     </div>
                                     <div className="modal-footer mx-auto">
                                         <button
@@ -305,8 +305,9 @@ class Creation extends Component {
                             ) : (
                                 ""
                             )}
+
                             {this.state.step === "appearance" ? (
-                                <div className="modal-content creation">
+                                <div className="modal-content creation appearance">
                                     <div className="modal-body">
                                         <section className="card creation-person">
                                             <h3 className="text-center modal-title">Create your character</h3>
@@ -386,7 +387,7 @@ class Creation extends Component {
                                 ""
                             )}
                             {this.state.step === "background" ? (
-                                <div className="modal-content creation">
+                                <div className="modal-content creation background">
                                     <div className="modal-body">
                                         <section className="card creation-background">
                                             <div className="card-body">

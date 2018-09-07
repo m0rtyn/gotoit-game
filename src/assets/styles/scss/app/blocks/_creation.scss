@@ -1,4 +1,28 @@
 .creation {
+
+  &.welcome {
+    .modal-body {
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: size(10) size(7);
+    }
+
+    .logo {
+      width: size(25);
+      margin-right: size(6);
+    }
+
+    .lead {
+      width: size(40);
+      color: var(--white);
+      font-weight: 400;
+    }
+  }
+
+  
+
   .creation-person {
     & > .card-body {
       display: flex;
