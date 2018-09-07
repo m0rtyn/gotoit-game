@@ -1,9 +1,9 @@
-.main {
+.dashboard {
     display: flex;
     padding: size(0.5);
     height: calc(100% - 74px);
 
-    .people,
+    .workers,
     .projects {
         height: 100%;
         padding: size(0.5);
@@ -14,7 +14,7 @@
         border-radius: size(1);
     }
 
-    .people {
+    .workers {
         width: 33%;
     }
 
