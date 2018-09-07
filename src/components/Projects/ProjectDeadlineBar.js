@@ -1,11 +1,11 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import { colors } from "../../game/knowledge/colors";
 import Bar from "../Bar/Bar";
 
-class ProjectDeadlineBar extends PureComponent {
+class ProjectDeadlineBar extends Component {
     render() {
         let { project } = this.props;
-        const bar_data = [
+        let bar_data = [
             {
                 name: "gone",
                 width: 100 - (project.deadline / project.deadline_max) * 100,

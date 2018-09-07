@@ -24,16 +24,24 @@ class WorkerHappinessBar extends Component {
             }
         })();
         const happiness_array = worker.getEfficiencyArray();
-
-        const bar_data = _.map(happiness_array, item => {
-            return {
-                name: item.name,
-                width: item.value,
-                color: bar_color,
-                value: item.value,
+        const happiness_real = worker.calcEfficiencyReal();
+        console.log(happiness_real);
+        const bar_data = [
+            {
+                name: "Happiness",
+                width: happiness_real,
+                color: "#81CC52",
+                value: happiness_real,
+                showName: true
+            },
+            {
+                name: "empty",
+                width: 100 - happiness_real,
+                color: "#61993D",
+                value: "",
                 showName: false
-            };
-        });
+            }
+        ];
 
         return <Bar className="happiness-bar" bar_data={bar_data} />;
     }

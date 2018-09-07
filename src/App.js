@@ -34,6 +34,8 @@ import "animate.css";
 
 import "./assets/styles/theme.css";
 import "./assets/styles/scss/main.scss";
+import Modal from "./components/Modal/Modal";
+import WorkerModal from "./components/Modal/WorkerModal";
 // import { registerObserver } from 'react-perf-devtool';
 // import perf from 'react-perftool-extension';
 //
