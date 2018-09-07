@@ -61,7 +61,7 @@ class Header extends Component {
                     >
                         <div className="topbar-left">
                             <button
-                                className="topbar-btn icon-pause"
+                                className={`topbar-btn icon-pause ${data.game_paused ? "active" : ""}`}
                                 onClick={() => {
                                     if (data.game_paused) {
                                         data.helpers.playGame();
@@ -85,7 +85,9 @@ class Header extends Component {
                                 {[1, 3, 5].map((speed, index) => {
                                     return (
                                         <button
-                                            className="topbar-btn"
+                                            className={`topbar-btn ${
+                                                data.game_speed_multiplier === speed && !data.game_paused ? "active" : ""
+                                            }`}
                                             key={index}
                                             onClick={() => {
                                                 data.helpers.setGameSpeed(speed);
