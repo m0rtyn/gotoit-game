@@ -48,8 +48,8 @@ class Header extends Component {
                         >
                             Charts
                         </button>
-                        <button className="topbar-btn" rel="noopener noreferrer" href={support.show}>
-                            Support
+                        <button className="topbar-btn" rel="noopener noreferrer">
+                            <a href={support.show}>Support</a>
                         </button>
                     </div>
 
