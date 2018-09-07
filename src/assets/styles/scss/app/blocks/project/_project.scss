@@ -57,6 +57,27 @@
     }
   }
 
+  .project-team, .project-techs {
+    margin-bottom: 0;
+
+    button {
+      margin-right: size(0.25);
+      margin-left: size(0.25);
+    }
+  }
+
+  .worker-avatar {
+    border-radius: 0;
+  }
+
+  .icon-tech {
+    margin-right: 2px;
+  }
+  
+  .icon-workers {
+    margin-right: 4px;
+  }
+
   .btn-add-worker {
     color: var(--white);
     padding: 0;
