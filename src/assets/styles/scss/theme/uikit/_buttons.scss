@@ -60,6 +60,15 @@
   font-size: 9px;
   padding: 3px 6px;
   line-height: calc(var(--line-height-xs) - 2px);
+
+  .project &,
+  .worker & {
+    opacity: 0;
+  }
+
+  .project:hover &, .worker:hover & {
+    opacity: 1;
+  }
 }
 
 

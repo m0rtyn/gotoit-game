@@ -89,30 +89,30 @@ class ProjectProgressBar extends Component {
             }
         ];
         return (
-            <div className="project-progress-bar flexbox">
+            <div className="project-progress-bar">
                 {prog_data[0].value !== 0 ? (
-                    <>
+                    <div className="flexbox">
                         <span className="icon-program" />
                         <Bar className="flex-grow" bar_data={prog_data} />
-                    </>
+                    </div>
                 ) : (
-                    <div />
+                    ""
                 )}
                 {design_data[0].value !== 0 ? (
-                    <>
+                    <div className="flexbox">
                         <span className="icon-design" />
                         <Bar className="flex-grow" bar_data={design_data} />
-                    </>
+                    </div>
                 ) : (
-                    <div />
+                    ""
                 )}
                 {manage_data[0].value !== 0 ? (
-                    <>
+                    <div className="flexbox">
                         <span className="icon-manage" />
                         <Bar className="flex-grow" bar_data={manage_data} />
-                    </>
+                    </div>
                 ) : (
-                    <div />
+                    ""
                 )}
             </div>
         );

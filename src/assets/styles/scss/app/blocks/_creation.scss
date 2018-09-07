@@ -1,12 +1,112 @@
 .creation {
-  .creation-person {
-    & > .card-body {
+
+  .close {
+    display: none;
+  }
+
+  &.welcome {
+    .modal-body {
+      background-color: rgba(0, 0, 0, 0.8);
       display: flex;
       justify-content: center;
+      align-items: center;
+      padding: size(5) size(7);
+    }
+
+    .logo {
+      width: size(25);
+      margin-right: size(6);
+    }
+
+    .lead {
+      width: size(40);
+      color: var(--white);
+      font-weight: 400;
+      line-height: 19px;
+    }
+
+    .warning {
+      background-color: var(--color-orange);
+      color: var(--white);
+      padding: 10px;
+      border-radius: size(1);
     }
   }
 
-  .player-avatar {
+  &.appearance {
+    .modal-header {
+      font-size: 24px;
+    }
+
+    .modal-body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 size(7)
+    }
+
+    .modal-footer {
+      padding-top: size(4);
+    }
+
+    .inputs {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+    }
+
+    .portrait {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      align-items: center;
+      padding: size(3);
+      border: 1px solid var(--gray-300);
+      border-radius: size(4);
+
+      .btn {
+        margin-top: size(2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .customizator {
+      // margin-top: size(2);
+      width: size(28);
+      display: flex;
+      flex-flow: column nowrap;
+    }
+
+    .customizator-item {
+      width: size(28);
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        background-color: transparent;
+        border: none;
+        font-weight: 700;
+        color: var(--gray-500);
+      }
+    }
+
+    // [class^="icon-gender"] {
+    //   color: var(--white);
+    // }
+
+    .player-avatar {
+      width: size(25);
+      height: size(25);
+    }
+
+  }
+
+  &.background {
+    .modal-body {
+      padding-top: size(4);
+    }
   }
 
   .creation-gender-select {

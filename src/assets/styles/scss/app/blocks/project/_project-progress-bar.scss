@@ -1,4 +1,7 @@
 .project-progress-bar {
+    display: flex;
+    flex-flow: column nowrap;
+
 
     .icon- {
         &program {
@@ -10,5 +13,10 @@
         &manage {
             color: var(--color-manage);
         }
+    }
+
+    [class^='icon-'] {
+        margin-right: 4px;
+        cursor: initial;
     }
 }

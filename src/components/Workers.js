@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Worker from "./Worker";
 import { offices } from "../game/knowledge/office";
 
-class People extends Component {
+class Workers extends Component {
     constructor(props) {
         super(props);
 
@@ -22,7 +22,7 @@ class People extends Component {
         const data = this.props.data;
 
         return (
-            <section className="people">
+            <section className="workers">
                 {data.workers.length < data.office.space ? (
                     <div className="column-buttons">
                         {/*
@@ -104,4 +104,4 @@ class People extends Component {
     }
 }
 
-export default People;
+export default Workers;

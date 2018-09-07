@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import Header from "./Header";
-import People from "./People";
+import Workers from "./Workers";
 // import Timeline from './Timeline'
 import Projects from "./Projects/Projects";
 import PopupsNest from "./PopupsNest";
@@ -31,8 +31,8 @@ class Layout extends Component {
                     }}
                 />*/}
                 <Header data={this.props.data} newGame={this.props.newGame} />
-                <main className="main">
-                    <People data={this.props.data} />
+                <main className="dashboard">
+                    <Workers data={this.props.data} />
                     <section className="activity card">
                         <ActivityToolbar data={this.props.data} />
                         <Activities data={this.props.data} />

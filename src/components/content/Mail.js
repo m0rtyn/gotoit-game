@@ -110,39 +110,34 @@ class Mail extends Component {
                     {(() => {
                         if (letter.type === "Resume") {
                             return (
-                                <div className="project-avatar">
-                                    <Avatar
-                                        className="worker-avatar"
-                                        name={letter.object.name}
-                                        sources={_.toPairs(letter.object.avatar)}
-                                        style={{ position: "absolute" }}
-                                        size={20}
-                                    />
-                                </div>
+                                <Avatar
+                                    className="worker-avatar"
+                                    name={letter.object.name}
+                                    sources={_.toPairs(letter.object.avatar)}
+                                    style={{ position: "absolute" }}
+                                    size={20}
+                                />
                             );
                         } else if (letter.type === "Event") {
                             return (
-                                <div className="project-avatar">
-                                    <Avatar
-                                        className="worker-avatar"
-                                        name={letter.object.name}
-                                        sources={_.toPairs(letter.object.avatar)}
-                                        style={{ position: "absolute" }}
-                                        size={20}
-                                    />
-                                </div>
+                                <Avatar
+                                    // className="worker-avatar"
+                                    name={letter.object.name}
+                                    sources={_.toPairs(letter.object.avatar)}
+                                    style={{ position: "absolute" }}
+                                    size={20}
+                                />
                             );
                         } else {
                             //for project reporting, offer and hotoffer
                             return (
-                                <div className="project-avatar">
-                                    <Avatar
-                                        name={letter.object.name}
-                                        sources={_.toPairs(letter.object.avatar)}
-                                        style={{ position: "absolute" }}
-                                        size={20}
-                                    />
-                                </div>
+                                <Avatar
+                                    className="project-avatar"
+                                    name={letter.object.name}
+                                    sources={_.toPairs(letter.object.avatar)}
+                                    style={{ position: "absolute" }}
+                                    size={20}
+                                />
                             );
                         }
                     })()}
