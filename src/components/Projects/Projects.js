@@ -13,7 +13,7 @@ class Projects extends Component {
         let data = this.props.data;
 
         return (
-            <div>
+            <section className="projects">
                 <div className="column-buttons">
                     <button
                         className="btn btn-bold btn-w-lg btn-success"
@@ -49,7 +49,7 @@ class Projects extends Component {
                         <div className="text-center">You have no projects in progress.</div>
                     )}
                 </div>
-            </div>
+            </section>
         );
     }
 }

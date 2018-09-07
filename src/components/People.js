@@ -22,7 +22,7 @@ class People extends Component {
         const data = this.props.data;
 
         return (
-            <div>
+            <section className="people">
                 {data.workers.length < data.office.space ? (
                     <div className="column-buttons">
                         {/*
@@ -99,7 +99,7 @@ class People extends Component {
                 {data.workers.map((x, i) => (
                     <Worker key={x.id} worker={x} data={data} />
                 ))}
-            </div>
+            </section>
         );
     }
 }

@@ -1,13 +1,13 @@
 @font-face {
-  font-family: 'icomoon';
+  font-family: 'go-to-it-icons';
   src:
-    url('~assets/fonts/icons-gotoit.woff') format('woff');
+    url('~assets/fonts/go-to-it-icons.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 [class^="icon-"], [class*=" icon-"] {
-  font-family: 'icomoon' !important;
+  font-family: 'go-to-it-icons' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -15,6 +15,7 @@
   text-transform: none;
   line-height: 1;
   font-size: 24px;
+  color: hsb(180, 24, 50, 0.6);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -73,32 +74,20 @@
 
   &workers:before {
     content: "\e909";
+    font-size: 12px;
   }
 
-  &expand-office {
-    .path1:before {
-      content: "\e90a";
-      color: rgb(0, 0, 0);
-    }
-    .path2:before {
-      content: "\e90b";
-      margin-left: -1em;
-      color: rgb(0, 0, 0);
-      opacity: 0.5;
-    }
+  &tech:before {
+    content: "\e908";
+    font-size: 12px;
   }
 
-  &hire-worker  {
-    .path1:before {
-      content: "\e90c";
-      color: rgb(0, 0, 0);
-    }
-    .path2:before {
-      content: "\e90d";
-      margin-left: -1em;
-      color: rgb(0, 0, 0);
-      opacity: 0.5;
-    }
+  &expand-office:before {
+    content: "\e90a";
+  }
+
+  .icon-hire-worker:before {
+    content: "\e90c";
   }
 
   &add:before {
@@ -141,9 +130,25 @@
     content: "\e907";
   }
 
+  &design, &manage, &program {
+    cursor: pointer;
+    font-size: size(1.5);
+  }
+
   &team:before {
     content: "\e972";
   }
   
+  &gender-other:before {
+    content: "\e90b";
+  }
+  &gender-women:before {
+    content: "\e90d";
+  }
+  &gender-men:before {
+    content: "\e90f";
+  }
+
+
 }
 

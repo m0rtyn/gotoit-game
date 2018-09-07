@@ -1,0 +1,14 @@
+.project-progress-bar {
+
+    .icon- {
+        &program {
+            color: var(--color-program);
+        }
+        &design {
+            color: var(--color-design);
+        }
+        &manage {
+            color: var(--color-manage);
+        }
+    }
+}
