@@ -108,6 +108,7 @@ class App extends Component {
 
         this.contractSearch = this.contractSearch.bind(this);
         this.offerProject = this.offerProject.bind(this);
+        this.rejectProject = this.rejectProject.bind(this);
         this.rejectOffered = this.rejectOffered.bind(this);
         this.acceptOffered = this.acceptOffered.bind(this);
         this.startOffered = this.startOffered.bind(this);
@@ -196,6 +197,7 @@ class App extends Component {
 
         app_state.data.helpers["contractSearch"] = this.contractSearch;
         app_state.data.helpers["offerProject"] = this.offerProject;
+        app_state.data.helpers["rejectProject"] = this.rejectProject;
         app_state.data.helpers["rejectOffered"] = this.rejectOffered;
         app_state.data.helpers["acceptOffered"] = this.acceptOffered;
         app_state.data.helpers["startOffered"] = this.startOffered;
@@ -728,7 +730,13 @@ class App extends Component {
         data.statistics.offered_projects.buffer += 1;
         this.setState({ data });
     }
-
+    rejectProject(id) {
+        const data = this.state.data;
+        _.remove(data.projects, candidate => {
+            return candidate.id === id;
+        });
+        this.setState({ data: data });
+    }
     rejectOffered(id) {
         // rejectOffer
         const data = this.state.data;
@@ -737,7 +745,6 @@ class App extends Component {
         });
         this.setState({ data: data });
     }
-
     acceptOffered(id) {
         console.log("accept");
         const data = this.state.data;
