@@ -25,9 +25,9 @@ class ActivityToolbar extends Component {
                 <ul className="nav nav-tabs">
                     <li className="nav-item">
                         <a
-                            className="nav-link"
+                            className={`nav-link ${data.context === "mail" ? "active" : ""}`}
                             onClick={() => {
-                                data.helpers.changeContent("Mail");
+                                data.helpers.changeContent("Mail", "mail");
                             }}
                         >
                             <span>Mail </span>
@@ -40,9 +40,9 @@ class ActivityToolbar extends Component {
                     </li>
                     <li className="nav-item">
                         <a
-                            className="nav-link"
+                            className={`nav-link ${data.context === "relations" ? "active" : ""}`}
                             onClick={() => {
-                                data.helpers.changeContent("PublicRelations");
+                                data.helpers.changeContent("PublicRelations", "relations");
                             }}
                         >
                             Relations
@@ -50,9 +50,9 @@ class ActivityToolbar extends Component {
                     </li>
                     <li className="nav-item">
                         <a
-                            className="nav-link"
+                            className={`nav-link ${data.context === "office" ? "active" : ""}`}
                             onClick={() => {
-                                data.helpers.changeContent("Office");
+                                data.helpers.changeContent("Office", "office");
                             }}
                         >
                             Office
@@ -61,9 +61,9 @@ class ActivityToolbar extends Component {
                     {/*<li className="nav-item">
                         {data.projects.length > 0 ? (
                             <a
-                            className="nav-link"
+                            className={`nav-link ${data.context === "meeting" ? "active" : ""}`}
                             onClick={() => {
-                                data.helpers.changeContent('StartMeeting');
+                                data.helpers.changeContent('StartMeeting', "meeting");
                             }}
                             >
                             Start Meeting
@@ -75,9 +75,9 @@ class ActivityToolbar extends Component {
 
                     <li className="nav-item">
                         <a
-                            className="nav-link"
+                            className={`nav-link ${data.context === "market" ? "active" : ""}`}
                             onClick={() => {
-                                data.helpers.changeContent("MarketTop");
+                                data.helpers.changeContent("MarketTop", "market");
                             }}
                         >
                             Analitics
@@ -85,9 +85,9 @@ class ActivityToolbar extends Component {
                     </li>
                     <li className="nav-item">
                         <a
-                            className="nav-link"
+                            className={`nav-link ${data.context === "loans" ? "active" : ""}`}
                             onClick={() => {
-                                data.helpers.changeContent("Loans");
+                                data.helpers.changeContent("Loans", "loans");
                             }}
                         >
                             Loans
@@ -95,9 +95,9 @@ class ActivityToolbar extends Component {
                     </li>
                     <li className="nav-item">
                         <a
-                            className="nav-link"
+                            className={`nav-link ${data.context === "exchange" ? "active" : ""}`}
                             onClick={() => {
-                                data.helpers.changeContent("Exchange");
+                                data.helpers.changeContent("Exchange", "exchange");
                             }}
                         >
                             Exchange
@@ -106,9 +106,9 @@ class ActivityToolbar extends Component {
                     {data.projects_archive_reports.length > 0 ? (
                         <li className="nav-item">
                             <a
-                                className="nav-link"
+                                className={`nav-link ${data.context === "archive" ? "active" : ""}`}
                                 onClick={() => {
-                                    data.helpers.changeContent("Archive");
+                                    data.helpers.changeContent("Archive", "archive");
                                 }}
                             >
                                 Archive

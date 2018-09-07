@@ -284,7 +284,7 @@ class Project extends Component {
                         }}
                         deadlineText={deadlineText}
                     >
-                        <ProjectMoney reward={project.getEstimatedReward()} penalty={penalty} />
+                        <ProjectMoney project={project} penalty={penalty} />
                     </ProjectName>
                     {this.state.modalOpen ? (
                         <Modal closeModal={this.closeModal}>

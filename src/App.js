@@ -496,7 +496,6 @@ class App extends Component {
     }
 
     changeContent(component, context = {}) {
-        console.log(component, context);
         const data = this.state.data;
         data.content = component;
         data.context = context;
