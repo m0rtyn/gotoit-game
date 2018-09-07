@@ -9,12 +9,16 @@ export class ProjectMoney extends PureComponent {
     };
 
     render() {
-        let { reward, penalty } = this.props;
+        let { project, penalty } = this.props;
         return (
-            <div>
-                <span className="project-reward text-success">Estimated reward: {reward}$</span>
-                {penalty > 0 && <span className="project-penalty text-warning"> Penalty : {penalty}$ </span>}
-            </div>
+            <p className="project-money">
+                {project.type === "own" ? (
+                    <span className="project-reward text-success">Estimated reward: {project.getEstimatedReward()}$</span>
+                ) : (
+                    <span className="project-reward text-success">Reward: {project.reward}$</span>
+                )}
+                {penalty > 0 && <span className="project-penalty"> -{penalty} </span>}
+            </p>
         );
     }
 }

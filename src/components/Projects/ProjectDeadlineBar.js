@@ -14,20 +14,14 @@ class ProjectDeadlineBar extends Component {
                 showName: true
             },
             {
-                name: "to deadline",
+                name: "days to deadline",
                 width: (project.deadline / project.deadline_max) * 100,
                 color: colors.success,
                 value: project.deadline,
                 showName: true
             }
         ];
-        return project.type !== "own" ? (
-            <div>
-                <Bar bar_data={bar_data} />
-            </div>
-        ) : (
-            <div />
-        );
+        return project.type !== "own" ? <Bar className="deadline-bar" bar_data={bar_data} /> : " ";
     }
 }
 

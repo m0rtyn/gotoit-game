@@ -19,14 +19,16 @@ class ProjectName extends PureComponent {
     };
 
     render() {
-        const { size, platform, kind, name, reward, penalty, deadlineText } = this.props;
+        const { size, platform, kind, name, deadlineText } = this.props;
         return (
-            <h4 className="project-name flex-grow">
-                {project_sizes[size].name} {platform} {kind} {name}
-                <br />
-                <span className="text-warning">{deadlineText}</span>
-                <span>{penalty > 0 ? <span className="text-danger"> {penalty}$</span> : ""}</span>
-            </h4>
+            <div className="project-name flex-grow">
+                <h4>{name}</h4>
+                <span className="project-desription">
+                    {project_sizes[size].name} {platform} {kind}
+                </span>
+                {/* <span className="project-deadline">{deadlineText}</span> */}
+                {this.props.children}
+            </div>
         );
     }
 }

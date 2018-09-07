@@ -34,8 +34,7 @@ class BarItem extends PureComponent {
                 className="progress-bar"
                 role="progressbar"
             >
-                {showName ? name : null}
-                {" " + value}
+              {value} {showName ? name : null}
             </div>
         );
     }

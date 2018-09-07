@@ -1,8 +1,12 @@
 .worker-avatar, .project-avatar {
   position: relative;
   background-color: var(--color-darkest-blue);
+  border-radius: size(0.5);
   height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   .avatar-fragment {
     position: absolute;
@@ -13,4 +17,11 @@
 
 .project-avatar {
   background-color: var(--white);
+  position: relative;
+  width: size(8);
+  height: size(8);
+
+  & > img {
+    position: absolute;
+  }
 }

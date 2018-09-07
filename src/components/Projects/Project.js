@@ -283,9 +283,9 @@ class Project extends Component {
                             penalty
                         }}
                         deadlineText={deadlineText}
-                    />
-                    <ProjectMoney reward={project.getEstimatedReward()} penalty={penalty} />
-                    {manage_button}
+                    >
+                        <ProjectMoney project={project} penalty={penalty} />
+                    </ProjectName>
                     {this.state.modalOpen ? (
                         <Modal closeModal={this.closeModal}>
                             <ProjectModal
@@ -298,6 +298,7 @@ class Project extends Component {
                     ) : (
                         " "
                     )}
+                    {manage_button}
                 </div>
 
                 {/*{project.deadline > 0 && project.deadline !== Number.POSITIVE_INFINITY ?
@@ -326,8 +327,8 @@ class Project extends Component {
                     {/* TODO: ^ DESIGN TEMPORARY CLEANING */}
 
                     <p className="project-team">
-                        {/* <span className="icon-team" /> */}
-                        Team:
+                        <span className="icon-workers" />
+                        {/* Team: */}
                         {team_label}
                         <button
                             className={`btn icon-add btn-add-worker ${data.project_team_selector === id ? "active" : ""}`}
@@ -343,7 +344,11 @@ class Project extends Component {
                             />
                         ) : null}
                     </p>
-                    {tech.length !== 0 && <p className="project-tech">Tech: {tech_label}</p>}
+                    {tech.length !== 0 && (
+                        <p className="project-techs">
+                            <span className="icon-tech" /> {tech_label}
+                        </p>
+                    )}
                 </div>
             </div>
         );

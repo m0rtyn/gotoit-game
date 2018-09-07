@@ -3,7 +3,9 @@
 }
 
 .modal {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   .modal-dialog {
     max-height: size(85);

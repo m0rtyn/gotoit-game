@@ -14,6 +14,7 @@ import { technologies } from "../game/knowledge/technologies";
 import { player_backgrounds } from "../game/knowledge/player_backgrounds";
 import { Avatar } from "./Projects/Avatar";
 import { generateFemaleAvatar, generateMaleAvatar, customizeAvatar, male_asset, female_asset } from "../game/knowledge/worker_avatar";
+import logo from "../assets/images/go2it-logo.png";
 
 export var player = null;
 
@@ -260,12 +261,14 @@ class Creation extends Component {
         const stats_data = _.mapValues(stats, (val, key) => {
             return { name: key, val: stats[key] };
         });
+
         let asset = this.state.gender === "male" ? male_asset : female_asset;
         let keys = _.keys(asset);
         //SELECTORS FOR THE CONSTRUCTOR
         let selectors = _.map(keys, key => {
             return (
-                <div style={{ textAlign: "center" }}>
+                <div className="customizator-item" key={key}>
+                    {/* <h4></h4> */}
                     <button onClick={() => this.fragmentDec(key)}>{"<"}</button>
                     <span>{asset[key][this.state.avatar[key]].name}</span>
                     <button onClick={() => this.fragmentInc(key)}>{">"}</button>
@@ -278,18 +281,17 @@ class Creation extends Component {
                     <Portal ref="creation">
                         <Modal>
                             {this.state.step === "welcome" ? (
-                                <div className="modal-content creation">
-                                    <div className="modal-header">
-                                        <h1 className="modal-title">Go To IT</h1>
-                                        <h2 className="subtitle">Game About Software Development</h2>
-                                    </div>
+                                <div className="modal-content creation welcome">
                                     <div className="modal-body">
-                                        <p className="lead">
-                                            This game is about software development and the rise of your company to the heights.
-                                            <br />
-                                            Start with small contracts, save up some money, hire a couple of assistants and try to create
-                                            something really cool!
-                                        </p>
+                                        <img className="logo" src={logo} />
+                                        <h4 className="lead">
+                                            <p>This game is about software development and the rise of your company to the heights.</p>
+                                            <p>
+                                                Start with small contracts, save up some money, hire a couple of assistants and try to
+                                                create something really cool!
+                                            </p>
+                                            <p className="warning text-center">The game is in open beta</p>
+                                        </h4>
                                     </div>
                                     <div className="modal-footer mx-auto">
                                         <button
@@ -305,80 +307,98 @@ class Creation extends Component {
                             ) : (
                                 ""
                             )}
-                            {this.state.step === "appearance" ? (
-                                <div className="modal-content creation">
-                                    <div className="modal-body">
-                                        <section className="card creation-person">
-                                            <h3 className="text-center modal-title">Create your character</h3>
-                                            <div className="card-body">
-                                                <div style={{ position: "relative", width: "80px", height: "80px" }}>
-                                                    <Avatar
-                                                        className="worker-avatar"
-                                                        name={"player avatar"}
-                                                        // style={{ position: 'absolute'}}
-                                                        sources={_.toPairs(this.state.realAvatar)}
-                                                    />
-                                                    <button onClick={this.randomize}>Randomize</button>
-                                                </div>
-                                                <div className="creation-gender-select">
-                                                    <h3 className="text-center modal-title">Choose gender</h3>
-                                                    <input
-                                                        className="form-check-input"
-                                                        id="male-gender-radio-button"
-                                                        type="radio"
-                                                        value="male"
-                                                        checked={this.state.gender === "male"}
-                                                        onChange={this.handleGenderChange}
-                                                    />
-                                                    <label className="form-check-label btn btn-sm" htmlFor="male-gender-radio-button">
-                                                        Male
-                                                    </label>
 
+                            {this.state.step === "appearance" ? (
+                                <div className="modal-content creation appearance">
+                                    <div className="modal-header">
+                                        <p className="modal-title text-center">Create your character</p>
+                                    </div>
+                                    <div className="modal-body">
+                                        {/* <section className="card creation-person"> */}
+                                        <div className="inputs">
+                                            <h3 className="modal-title">Your name</h3>
+                                            <div>
+                                                <div className="input-group creation-player-name ">
                                                     <input
-                                                        className="form-check-input"
-                                                        id="female-gender-radio-button"
-                                                        type="radio"
-                                                        value="female"
-                                                        checked={this.state.gender === "female"}
-                                                        onChange={this.handleGenderChange}
+                                                        type="text"
+                                                        name="background"
+                                                        className="form-control"
+                                                        value={this.state.suggest_name}
+                                                        onChange={event => {
+                                                            this.setState({
+                                                                suggest_name: event.target.value
+                                                            });
+                                                        }}
                                                     />
-                                                    <label className="form-check-label btn btn-sm" htmlFor="female-gender-radio-button">
-                                                        Female
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <h3 className="text-center modal-title">Your name</h3>
-                                                    <div className="input-group creation-player-name ">
-                                                        <div className="input-group-prepend">
-                                                            <span className="input-group-text">
-                                                                <i className="fa fa-user" id="sizing-addon1" />
-                                                            </span>
-                                                        </div>
-                                                        <input
-                                                            type="text"
-                                                            name="background"
-                                                            className="form-control"
-                                                            value={this.state.suggest_name}
-                                                            onChange={event => {
-                                                                this.setState({
-                                                                    suggest_name: event.target.value
-                                                                });
-                                                            }}
-                                                        />
-                                                    </div>
                                                 </div>
                                             </div>
-                                        </section>
+                                            <div className="creation-gender-select">
+                                                <h3 className="modal-title mt-16">Choose gender</h3>
+                                                <input
+                                                    className="form-check-input"
+                                                    id="male-gender-radio-button"
+                                                    type="radio"
+                                                    value="male"
+                                                    checked={this.state.gender === "male"}
+                                                    onChange={this.handleGenderChange}
+                                                />
+                                                <label className="form-check-label btn btn-sm" htmlFor="male-gender-radio-button">
+                                                    <span className="icon-gender-men" />
+                                                    Male
+                                                </label>
+                                                <input
+                                                    className="form-check-input"
+                                                    id="female-gender-radio-button"
+                                                    type="radio"
+                                                    value="female"
+                                                    checked={this.state.gender === "female"}
+                                                    onChange={this.handleGenderChange}
+                                                />
+                                                <label className="form-check-label btn btn-sm" htmlFor="female-gender-radio-button">
+                                                    <span className="icon-gender-women" />
+                                                    Female
+                                                </label>
+                                                {/* <input
+                                                    className="form-check-input"
+                                                    id="female-gender-radio-button"
+                                                    type="radio"
+                                                    value="other"
+                                                    checked={this.state.gender === "other"}
+                                                    onChange={this.handleGenderChange}
+                                                /> */}
+                                                {/* <label
+                                                    className="form-check-label btn btn-sm btn-primary"
+                                                    htmlFor="female-gender-radio-button"
+                                                >
+                                                    <span className="icon-gender-other" />
+                                                    Other
+                                                </label> */}
+                                            </div>
+                                            <h3 className="modal-title mt-16">Customization</h3>
+                                            <div className="customizator">{selectors}</div>
+                                        </div>
+                                        <div className="portrait">
+                                            <Avatar
+                                                className="player-avatar worker-avatar"
+                                                name={"player avatar"}
+                                                // style={{ position: 'absolute'}}
+                                                sources={_.toPairs(this.state.realAvatar)}
+                                            />
+                                            <button className="btn btn-primary" onClick={this.randomize}>
+                                                Randomize
+                                            </button>
+                                        </div>
+                                        {/* </section> */}
                                     </div>
-                                    <div style={{ display: "flex", flexDirection: "column" }}>{selectors}</div>
-                                    <div className="modal-footer mx-auto">
+
+                                    <div className="modal-footer ml-auto">
                                         <button
-                                            className="btn btn-success btn-lg btn-"
+                                            className="btn btn-lg btn-success"
                                             onClick={() => {
                                                 this.setState({ step: "background" });
                                             }}
                                         >
-                                            Choose background!
+                                            Next
                                         </button>
                                     </div>
                                 </div>
@@ -386,7 +406,7 @@ class Creation extends Component {
                                 ""
                             )}
                             {this.state.step === "background" ? (
-                                <div className="modal-content creation">
+                                <div className="modal-content creation background">
                                     <div className="modal-body">
                                         <section className="card creation-background">
                                             <div className="card-body">
@@ -420,8 +440,6 @@ class Creation extends Component {
                                                     </div>
                                                     <div className="creation-description-column">
                                                         <h3 className="text-center modal-title">Choose background</h3>
-
-                                                        {console.log(player_backgrounds, this.state.selected_background)}
 
                                                         <div className="creation-description lead text-center">
                                                             {player_backgrounds[this.state.selected_background].text}
@@ -517,7 +535,7 @@ class Creation extends Component {
                                             </div>
                                         </section>
                                     </div>
-                                    <div className="modal-footer mx-auto">
+                                    <div className="modal-footer ml-auto">
                                         <button className="btn btn-success btn-lg btn-" onClick={this.embark}>
                                             Embark
                                         </button>

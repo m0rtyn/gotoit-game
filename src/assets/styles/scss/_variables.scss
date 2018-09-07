@@ -79,8 +79,6 @@
   --font-title:            Roboto, sans-serif;
   --font-article:          Roboto, sans-serif;
   --font-quote:            Georgia, Verdana, Serif;
-  --font-icon-fontawesome: FontAwesome;
-  --font-icon-themify:     themify;
 
 
   //-----------------------------------------------------------------
@@ -120,7 +118,7 @@
   // OLD COLORS==============================
   --color-brown:            #8d6658;
   --color-pale-brown:       color-mod(var(--color-brown) w(+70%));
-  --color-dark:             #465161;
+  --color-dark:             #003333;
   --color-pale-dark:        color-mod(var(--color-dark) w(+70%));
     
   --color-gray:             var(--gray-600);
@@ -157,7 +155,7 @@
   --color-bg-darker:        #dcddde;
 
   // Text colors
-  --color-title:            #003333; //changed
+  --color-title:            var(--color-dark); //changed
   --color-subtitle:         #999999;
   --color-text:             #4d5259; //616a78
   --color-text-light:       #616a78;

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Worker from "./Worker";
 import { offices } from "../game/knowledge/office";
 
-class People extends Component {
+class Workers extends Component {
     constructor(props) {
         super(props);
 
@@ -22,7 +22,7 @@ class People extends Component {
         const data = this.props.data;
 
         return (
-            <div>
+            <section className="workers">
                 {data.workers.length < data.office.space ? (
                     <div className="column-buttons">
                         {/*
@@ -99,9 +99,9 @@ class People extends Component {
                 {data.workers.map((x, i) => (
                     <Worker key={x.id} worker={x} data={data} />
                 ))}
-            </div>
+            </section>
         );
     }
 }
 
-export default People;
+export default Workers;

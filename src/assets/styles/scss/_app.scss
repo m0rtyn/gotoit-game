@@ -3,13 +3,15 @@
 
 
 //====COMMON====================================//
-@import 'app/common/layout.scss';
+@import 'app/common/common.scss';
 @import 'app/common/buffer.scss';
 @import 'app/common/icons.scss';
 
 
 //====BLOCKS====================================//
-@import 'app/blocks/activity-column.scss';
+@import 'app/blocks/layout.scss';
+@import 'app/blocks/dashboard.scss';
+@import 'app/blocks/activity.scss';
 @import 'app/blocks/background.scss';
 @import 'app/blocks/achievements.scss';
 @import 'app/blocks/header.scss';
@@ -22,6 +24,9 @@
 @import 'app/blocks/project/project.scss';
 @import 'app/blocks/project/project-find.scss';
 @import 'app/blocks/project/project-name.scss';
+@import 'app/blocks/project/project-money.scss';
+@import 'app/blocks/project/deadline-bar.scss';
+@import 'app/blocks/project/project-progress-bar.scss';
 
 @import 'app/blocks/modal/modal.scss';
 @import 'app/blocks/modal/worker-modal.scss';

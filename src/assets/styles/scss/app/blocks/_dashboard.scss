@@ -1,0 +1,29 @@
+.dashboard {
+    display: flex;
+    padding: size(0.5);
+    height: calc(100% - 74px);
+
+    .workers,
+    .projects {
+        height: 100%;
+        padding: size(0.5);
+        overflow-y: auto;
+        overflow-x: hidden;
+        background-color: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+        border-radius: size(1);
+    }
+
+    .workers {
+        width: 33%;
+    }
+
+    .activity {
+        width: 66%;
+        margin: 0 size(0.5);
+    }
+
+    .projects {
+        width: 33%;
+    }
+}

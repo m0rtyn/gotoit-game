@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import Header from "./Header";
-import People from "./People";
+import Workers from "./Workers";
 // import Timeline from './Timeline'
 import Projects from "./Projects/Projects";
 import PopupsNest from "./PopupsNest";
@@ -17,7 +17,7 @@ const backgrounds = require.context("../assets/images/backgrounds/", true, /^\.\
 class Layout extends Component {
     render() {
         return (
-            <div className="container-fluid">
+            <div className="layout">
                 <div
                     className="background-color"
                     style={{
@@ -31,22 +31,14 @@ class Layout extends Component {
                     }}
                 />*/}
                 <Header data={this.props.data} newGame={this.props.newGame} />
-                <div className="main-container">
-                    <div className="row gap-2">
-                        <div className="col-3 people-column">
-                            <People data={this.props.data} />
-                        </div>
-                        <div className="col-6 activity-column card">
-                            <div className="card-body">
-                                <ActivityToolbar data={this.props.data} />
-                                <Activities data={this.props.data} />
-                            </div>
-                        </div>
-                        <div className="col-3 projects-column">
-                            <Projects data={this.props.data} />
-                        </div>
-                    </div>
-                </div>
+                <main className="dashboard">
+                    <Workers data={this.props.data} />
+                    <section className="activity card">
+                        <ActivityToolbar data={this.props.data} />
+                        <Activities data={this.props.data} />
+                    </section>
+                    <Projects data={this.props.data} />
+                </main>
                 <PopupsNest data={this.props.data} />
                 <ToastNest data={this.props.data} />
             </div>

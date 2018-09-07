@@ -61,11 +61,11 @@ class Narrator {
                 case num < 70:
                     return worker.name + " is satisfied with" + drawNum(num) + " the job.";
                 case num < 80:
-                    return worker.name + " likes" + drawNum(num) + " with the job.";
+                    return worker.name + " likes" + drawNum(num) + " the job.";
                 case num < 90:
-                    return worker.name + " is happy with" + drawNum(num) + " with the job.";
+                    return worker.name + " is happy" + drawNum(num) + " with the job.";
                 case num < 100:
-                    return worker.name + " is extremely happy with" + drawNum(num) + " the job.";
+                    return worker.name + " is extremely happy " + drawNum(num) + "with the job.";
                 case num >= 100:
                     return worker.name + " loves" + drawNum(num) + " the job.";
                 default:

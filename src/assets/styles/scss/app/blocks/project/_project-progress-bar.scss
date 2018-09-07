@@ -1,0 +1,22 @@
+.project-progress-bar {
+    display: flex;
+    flex-flow: column nowrap;
+
+
+    .icon- {
+        &program {
+            color: var(--color-program);
+        }
+        &design {
+            color: var(--color-design);
+        }
+        &manage {
+            color: var(--color-manage);
+        }
+    }
+
+    [class^='icon-'] {
+        margin-right: 4px;
+        cursor: initial;
+    }
+}

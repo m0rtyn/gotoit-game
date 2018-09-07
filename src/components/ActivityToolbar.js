@@ -21,101 +21,104 @@ class ActivityToolbar extends Component {
             return count;
         })();
         return (
-            <ul className="nav nav-tabs nav-tabs-light-mode activity-toolbar">
-                <li className="nav-item">
-                    <a
-                        className="nav-link"
-                        onClick={() => {
-                            data.helpers.changeContent("PublicRelations");
-                        }}
-                    >
-                        Public Relations
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <a
-                        className="nav-link"
-                        onClick={() => {
-                            data.helpers.changeContent("Office");
-                        }}
-                    >
-                        Office
-                    </a>
-                </li>
-                {/*<li className="nav-item">
-          {data.projects.length > 0 ? (
-            <a
-              className="nav-link"
-              onClick={() => {
-                data.helpers.changeContent('StartMeeting');
-              }}
-            >
-              Start Meeting
-            </a>
-          ) : (
-            ''
-          )}
-        </li>*/}
-                <li className="nav-item">
-                    {data.projects_archive_reports.length > 0 ? (
+            <div className="card-header">
+                <ul className="nav nav-tabs">
+                    <li className="nav-item">
                         <a
-                            className="nav-link"
+                            className={`nav-link ${data.context === "mail" ? "active" : ""}`}
                             onClick={() => {
-                                data.helpers.changeContent("Archive");
+                                data.helpers.changeContent("Mail", "mail");
                             }}
                         >
-                            Archive
+                            <span>Mail </span>
+                            {unread_messages_count !== 0 ? (
+                                <span className="badge badge-pill badge-info">{unread_messages_count}</span>
+                            ) : (
+                                ""
+                            )}
                         </a>
+                    </li>
+                    <li className="nav-item">
+                        <a
+                            className={`nav-link ${data.context === "relations" ? "active" : ""}`}
+                            onClick={() => {
+                                data.helpers.changeContent("PublicRelations", "relations");
+                            }}
+                        >
+                            Relations
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <a
+                            className={`nav-link ${data.context === "office" ? "active" : ""}`}
+                            onClick={() => {
+                                data.helpers.changeContent("Office", "office");
+                            }}
+                        >
+                            Office
+                        </a>
+                    </li>
+                    {/*<li className="nav-item">
+                        {data.projects.length > 0 ? (
+                            <a
+                            className={`nav-link ${data.context === "meeting" ? "active" : ""}`}
+                            onClick={() => {
+                                data.helpers.changeContent('StartMeeting', "meeting");
+                            }}
+                            >
+                            Start Meeting
+                            </a>
+                        ) : (
+                            ''
+                        )}
+                    </li>*/}
+
+                    <li className="nav-item">
+                        <a
+                            className={`nav-link ${data.context === "market" ? "active" : ""}`}
+                            onClick={() => {
+                                data.helpers.changeContent("MarketTop", "market");
+                            }}
+                        >
+                            Analitics
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <a
+                            className={`nav-link ${data.context === "loans" ? "active" : ""}`}
+                            onClick={() => {
+                                data.helpers.changeContent("Loans", "loans");
+                            }}
+                        >
+                            Loans
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <a
+                            className={`nav-link ${data.context === "exchange" ? "active" : ""}`}
+                            onClick={() => {
+                                data.helpers.changeContent("Exchange", "exchange");
+                            }}
+                        >
+                            Exchange
+                        </a>
+                    </li>
+                    {data.projects_archive_reports.length > 0 ? (
+                        <li className="nav-item">
+                            <a
+                                className={`nav-link ${data.context === "archive" ? "active" : ""}`}
+                                onClick={() => {
+                                    data.helpers.changeContent("Archive", "archive");
+                                }}
+                            >
+                                Archive
+                            </a>
+                        </li>
                     ) : (
                         ""
                     )}
-                </li>
-                <li className="nav-item">
-                    <a
-                        className="nav-link"
-                        onClick={() => {
-                            data.helpers.changeContent("MarketTop");
-                        }}
-                    >
-                        Market Analysis
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <a
-                        className="nav-link"
-                        onClick={() => {
-                            data.helpers.changeContent("Loans");
-                        }}
-                    >
-                        Loans
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <a
-                        className="nav-link"
-                        onClick={() => {
-                            data.helpers.changeContent("Exchange");
-                        }}
-                    >
-                        Exchange
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <a
-                        className="nav-link"
-                        onClick={() => {
-                            data.helpers.changeContent("Mail");
-                        }}
-                    >
-                        <span>
-                            <i className="fa fa-envelope" />
-                            &nbsp;
-                        </span>
-                        <span>Mail&nbsp;</span>
-                        {unread_messages_count !== 0 ? <span className="badge badge-pill badge-info">{unread_messages_count}</span> : ""}
-                    </a>
-                </li>
-            </ul>
+                </ul>
+            </div>
         );
     }
 }
