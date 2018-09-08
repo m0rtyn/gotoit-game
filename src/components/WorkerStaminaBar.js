@@ -6,8 +6,6 @@ import Bar from "./Bar/Bar";
 class WorkerStaminaBar extends Component {
     render() {
         let { worker } = this.props;
-        console.log("stamina");
-        console.log(worker.stamina);
         const bar_data = [
             {
                 name: "Stamina",

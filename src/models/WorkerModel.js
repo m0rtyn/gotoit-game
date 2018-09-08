@@ -234,11 +234,9 @@ class WorkerModel {
 
         const collective_avg = collective_sum / getData().workers.length;
         const collective = 20 * (1 - (10 + collective_avg) / (10 + this.statsSum()));
+        if (isNaN(collective)) return this.collectivePenalty();
+        else return Math.max(Math.min(Math.floor(collective), 20), -20);
         //console.log(collective_sum, getData().workers.length, collective_avg, this.statsSum(), collective);
-        if (isNaN(collective_sum)) console.log("sum");
-        if (isNaN(collective_avg)) console.log("avg");
-        if (isNaN(collective)) console.log("collective");
-        return Math.max(Math.min(Math.floor(collective), 20), -20);
     }
 
     getOverrate() {
@@ -302,8 +300,6 @@ class WorkerModel {
         const tasks_difficulty = this.difficultyPenalty();
         const education_stream = this.educationPenalty();
         const collective = this.collectivePenalty();
-        console.log(collective);
-
         let happiness_array = {
             happiness_const: {
                 name: "Happiness const",
