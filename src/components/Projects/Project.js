@@ -22,7 +22,7 @@ class Project extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            modalOpen: false
+            modalOpen: true
         };
     }
     openModal = () => {
@@ -272,7 +272,7 @@ class Project extends Component {
                 id={id}
             >
                 <div className="card-header">
-                    <Avatar name={name} sources={_.toPairs(avatar)} className={"project-avatar"} />
+                    <Avatar name={name} sources={_.toPairs(avatar)} className="project-avatar" />
                     <ProjectName
                         {...{
                             size,
