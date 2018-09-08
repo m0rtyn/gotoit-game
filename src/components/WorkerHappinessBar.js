@@ -31,7 +31,7 @@ class WorkerHappinessBar extends Component {
                 name: "Happiness",
                 width: happiness_real,
                 color: "#81CC52",
-                value: happiness_real,
+                value: happiness_real + "%",
                 showName: true
             },
             {
