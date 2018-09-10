@@ -260,6 +260,11 @@ class Project extends Component {
             return project_worker(tech_name, technologies[tech_name].acronym);
         });
         let deadlineText = project.getDeadlineText();
+
+        let selectOptions = data.workers.map(worker => {
+            if (!team.includes(worker)) return { value: worker, label: worker.name };
+        });
+
         return (
             <div
                 className={`project card ${data.hovered_projects_id || [].includes(id) ? "hovered" : ""}`}
@@ -326,7 +331,7 @@ class Project extends Component {
                     </div> */}
                     {/* TODO: ^ DESIGN TEMPORARY CLEANING */}
 
-                    <p className="project-team">
+                    <div className="project-team">
                         <span className="icon-workers" />
                         {/* Team: */}
                         {team_label}
@@ -343,7 +348,7 @@ class Project extends Component {
                                 value={null}
                             />
                         ) : null}
-                    </p>
+                    </div>
                     {tech.length !== 0 && (
                         <p className="project-techs">
                             <span className="icon-tech" /> {tech_label}
