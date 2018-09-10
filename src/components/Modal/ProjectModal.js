@@ -55,7 +55,7 @@ export default class ProjectModal extends Component {
     };
 
     addTechnology = event => {
-        if (technologies[event.target.id].price <= this.props.data.money) this.data.helpers.unlockTechnology(event.target.id);
+        if (technologies[event.target.id].price <= this.props.data.money) this.props.data.helpers.unlockTechnology(event.target.id);
     };
 
     onRelease = () => {

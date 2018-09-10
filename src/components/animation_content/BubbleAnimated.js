@@ -76,7 +76,7 @@ class BubbleAnimated extends Component {
         if (!elementFrom || !elementTo) return null;
         return (
             <div>
-                <Animate
+                {/*<Animate
                     start={{
                         x: x,
                         y: y,
@@ -123,7 +123,7 @@ class BubbleAnimated extends Component {
                             </div>
                         );
                     }}
-                </Animate>
+                </Animate>*/}
             </div>
         );
     }
