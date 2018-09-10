@@ -149,11 +149,11 @@ class ProjectModel {
                     let prevented = this.runTests(bugs);
                     if (prevented) {
                         if (tasks !== 0) {
-                            animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id + project_bars[`${focus_on}_completed`].id);
+                            animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id + `_${focus_on}`);
                         }
                         if (bugs !== 0) {
                             console.log("bug!");
-                            animation.addBubbleAnimation(focus_on, bugs, worker.id, project.id + project_bars[`${focus_on}_bugs`].id, true);
+                            animation.addBubbleAnimation(focus_on, bugs, worker.id, project.id + `_${focus_on}`, true);
                         }
                         //chatMessage(formName(), ' does '+tasks+' tasks and creates '+bugs+' bugs in '+stat+', but tests prevent '+prevented+' of them', 'warning');
                         bugs -= prevented;
@@ -161,16 +161,16 @@ class ProjectModel {
                         tasks = Math.min(this.needs(stat), tasks); // а может пусть делают побольше с разбега?) убрать ли?
                     } else {
                         if (tasks !== 0) {
-                            animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id + project_bars[`${focus_on}_completed`].id);
+                            animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id + `_${focus_on}`);
                         }
                         if (bugs !== 0) {
-                            animation.addBubbleAnimation(focus_on, bugs, worker.id, project.id + project_bars[`${focus_on}_bugs`].id, true);
+                            animation.addBubbleAnimation(focus_on, bugs, worker.id, project.id + `_${focus_on}`, true);
                         }
                         //chatMessage(formName(), ' does '+tasks+' tasks and creates '+bugs+' bugs in '+stat, 'warning');
                     }
                 } else {
                     if (tasks !== 0) {
-                        animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id + project_bars[`${focus_on}_completed`].id);
+                        animation.addBubbleAnimation(focus_on, tasks, worker.id, project.id + `_${focus_on}`);
                     }
                 }
 

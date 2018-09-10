@@ -682,6 +682,7 @@ class App extends Component {
 
         const project = ProjectModel.generateOwnProject(project_name, team, project_platform, project_kind);
         this.acceptAndMoveProject(project);
+        this.openProject(project.id);
         console.log("start project");
         this.addTimelineEvent("deadline", "Deadline", project, project.deadline);
 
