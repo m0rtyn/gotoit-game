@@ -823,13 +823,9 @@ class App extends Component {
         let project = _.find(this.state.data.projects, project => {
             return project.id === id;
         });
-        /*let pairs = _.map(data.projects_known_technologies, tech => {
-            return [tech, false];
-        });
-        data.projects_technologies.push(_.fromPairs(pairs));*/
+        data.projects_technologies[project.id] = {};
         project.stage = "open";
         addMessage("Started " + project.name + " project", { timeOut: 5000, extendedTimeOut: 2000 }, "info");
-        this.setState({ data: data });
         //this.checkState();
     }
 
