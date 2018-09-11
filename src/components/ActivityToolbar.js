@@ -93,16 +93,21 @@ class ActivityToolbar extends Component {
                             Loans
                         </a>
                     </li>
-                    <li className="nav-item">
-                        <a
-                            className={`nav-link ${data.context === "exchange" ? "active" : ""}`}
-                            onClick={() => {
-                                data.helpers.changeContent("Exchange", "exchange");
-                            }}
-                        >
-                            Exchange
-                        </a>
-                    </li>
+                    {data.share0_unlock ? (
+                        <li className="nav-item">
+                            <a
+                                className={`nav-link ${data.context === "exchange" ? "active" : ""}`}
+                                onClick={() => {
+                                    data.helpers.changeContent("Exchange", "exchange");
+                                }}
+                            >
+                                Exchange
+                            </a>
+                        </li>
+                    ) : (
+                        ""
+                    )}
+
                     {data.projects_archive_reports.length > 0 ? (
                         <li className="nav-item">
                             <a

@@ -10,6 +10,7 @@ import Modal from "../Modal/Modal";
 import ProjectName from "./ProjectName";
 import ProjectProgressBar from "./ProjectProgressBar";
 import ProjectDeadlineBar from "./ProjectDeadlineBar";
+import TechToggle from "./TechToggle";
 
 import { technologies } from "../../game/knowledge/technologies";
 import { WorkerButton } from "./WorkerButton";
@@ -253,12 +254,21 @@ class Project extends Component {
                 if (data.projects_technologies[project.id][tech_name]) {
                     tech.push(tech_name);
                 }
-            });
+            }); /*
+            deadlineText = { deadlineText };*/
         }
 
-        const tech_label = tech.map(tech_name => {
-            return project_worker(tech_name, technologies[tech_name].acronym);
-        });
+        const tech_label = (() => {
+            let tech_keys = data.projects_known_technologies;
+            return _.map(tech_keys, tech_name => {
+                let enabled = data.projects_technologies[project.id][tech_name];
+                return <TechToggle data={data} name={tech_name} project={project} tech={technologies[tech_name]} enabled={enabled} />;
+            });
+        })();
+
+        /*technologies.map(tech => {
+            return <TechToggle key={i+"tech"} data={data} tech={tech} />;
+        });*/
         let deadlineText = project.getDeadlineText();
 
         let selectOptions = data.workers.map(worker => {
@@ -340,20 +350,27 @@ class Project extends Component {
                             onClick={() => changeTeamSelector(project)}
                         />
                         {data.project_team_selector === id ? (
-                            <Select
-                                onChange={this.onSelectChange}
-                                options={data.workers.map(worker => {
-                                    return { value: worker, label: worker.name };
-                                })}
-                                value={null}
-                            />
+                            <div>
+                                <Select
+                                    onChange={this.onSelectChange}
+                                    style={{ overflow: "visible" }}
+                                    options={(() => {
+                                        let arr = [];
+                                        data.workers.forEach(worker => {
+                                            if (!_.includes(team, worker)) {
+                                                arr.push({ value: worker, label: worker.name });
+                                            }
+                                        });
+                                        return arr;
+                                    })()}
+                                    value={null}
+                                />
+                            </div>
                         ) : null}
                     </div>
-                    {tech.length !== 0 && (
-                        <p className="project-techs">
-                            <span className="icon-tech" /> {tech_label}
-                        </p>
-                    )}
+                    <div className="project-techs">
+                        <span className="icon-tech" /> {tech_label}
+                    </div>
                 </div>
             </div>
         );

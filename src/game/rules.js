@@ -247,8 +247,6 @@ export const rules = {
                     }
                 }
             });
-
-            return state;
         }
     },
 
