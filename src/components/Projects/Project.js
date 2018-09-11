@@ -249,13 +249,15 @@ class Project extends Component {
 
         let tech = [];
 
+        let deadlineText = project.getDeadlineText();
+
         if (id in data.projects_technologies) {
             Object.keys(data.projects_technologies[id]).forEach(tech_name => {
                 if (data.projects_technologies[project.id][tech_name]) {
                     tech.push(tech_name);
                 }
-            }); /*
-            deadlineText = { deadlineText };*/
+            });
+            deadlineText = { deadlineText };
         }
 
         const tech_label = (() => {
@@ -269,7 +271,6 @@ class Project extends Component {
         /*technologies.map(tech => {
             return <TechToggle key={i+"tech"} data={data} tech={tech} />;
         });*/
-        let deadlineText = project.getDeadlineText();
 
         let selectOptions = data.workers.map(worker => {
             if (!team.includes(worker)) return { value: worker, label: worker.name };
