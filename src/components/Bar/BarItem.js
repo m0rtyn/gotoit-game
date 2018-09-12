@@ -2,10 +2,10 @@ import PropTypes from "prop-types";
 import React, { PureComponent } from "react";
 import styled from "styled-components";
 
-const ProgressBar = styled.div`
+/*const ProgressBar = styled.div`
     background-color: ${props => props.color};
     width: ${props => props.width}%;
-`;
+`;*/
 
 class BarItem extends PureComponent {
     static defaultProps = {
@@ -25,9 +25,17 @@ class BarItem extends PureComponent {
     render() {
         let { id, showName, name, value, color, width } = this.props;
         return (
-            <ProgressBar id={id} color={color} width={width} className="progress-bar" role="progressbar">
-                {value} {showName ? name : null}
-            </ProgressBar>
+            <div
+                style={{
+                    background: color,
+                    width: `${width}%`
+                }}
+                id={id}
+                className="progress-bar"
+                role="progressbar"
+            >
+                {value + " "} {showName ? name : null}
+            </div>
         );
     }
 }

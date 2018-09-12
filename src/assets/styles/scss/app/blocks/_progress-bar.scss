@@ -24,6 +24,8 @@
 
   .progress-bar {
     background-color: var(--color-info);
+    transition-property: width;
+    transition-duration: 3s;
   }
 }
 

@@ -233,8 +233,8 @@ class WorkerModel {
         });
         const collective_avg = collective_sum / getData().workers.length;
         const collective = 20 * (1 - (10 + collective_avg) / (10 + this.statsSum()));
-        //console.log(collective_sum, getData().workers.length, collective_avg, this.statsSum(), collective);
         return Math.max(Math.min(Math.floor(collective), 20), -20);
+        //console.log(collective_sum, getData().workers.length, collective_avg, this.statsSum(), collective);
     }
 
     getOverrate() {
@@ -298,7 +298,6 @@ class WorkerModel {
         const tasks_difficulty = this.difficultyPenalty();
         const education_stream = this.educationPenalty();
         const collective = this.collectivePenalty();
-
         let happiness_array = {
             happiness_const: {
                 name: "Happiness const",

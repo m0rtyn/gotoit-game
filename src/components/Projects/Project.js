@@ -10,6 +10,7 @@ import Modal from "../Modal/Modal";
 import ProjectName from "./ProjectName";
 import ProjectProgressBar from "./ProjectProgressBar";
 import ProjectDeadlineBar from "./ProjectDeadlineBar";
+import TechToggle from "./TechToggle";
 
 import { technologies } from "../../game/knowledge/technologies";
 import { WorkerButton } from "./WorkerButton";
@@ -22,7 +23,7 @@ class Project extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            modalOpen: false
+            modalOpen: true
         };
     }
     openModal = () => {
@@ -248,18 +249,33 @@ class Project extends Component {
 
         let tech = [];
 
+        let deadlineText = project.getDeadlineText();
+
         if (id in data.projects_technologies) {
             Object.keys(data.projects_technologies[id]).forEach(tech_name => {
                 if (data.projects_technologies[project.id][tech_name]) {
                     tech.push(tech_name);
                 }
             });
+            deadlineText = { deadlineText };
         }
 
-        const tech_label = tech.map(tech_name => {
-            return project_worker(tech_name, technologies[tech_name].acronym);
+        const tech_label = (() => {
+            let tech_keys = data.projects_known_technologies;
+            return _.map(tech_keys, tech_name => {
+                let enabled = data.projects_technologies[project.id][tech_name];
+                return <TechToggle data={data} name={tech_name} project={project} tech={technologies[tech_name]} enabled={enabled} />;
+            });
+        })();
+
+        /*technologies.map(tech => {
+            return <TechToggle key={i+"tech"} data={data} tech={tech} />;
+        });*/
+
+        let selectOptions = data.workers.map(worker => {
+            if (!team.includes(worker)) return { value: worker, label: worker.name };
         });
-        let deadlineText = project.getDeadlineText();
+
         return (
             <div
                 className={`project card ${data.hovered_projects_id || [].includes(id) ? "hovered" : ""}`}
@@ -272,7 +288,7 @@ class Project extends Component {
                 id={id}
             >
                 <div className="card-header">
-                    <Avatar name={name} sources={_.toPairs(avatar)} className={"project-avatar"} />
+                    <Avatar name={name} sources={_.toPairs(avatar)} className="project-avatar" />
                     <ProjectName
                         {...{
                             size,
@@ -326,7 +342,7 @@ class Project extends Component {
                     </div> */}
                     {/* TODO: ^ DESIGN TEMPORARY CLEANING */}
 
-                    <p className="project-team">
+                    <div className="project-team">
                         <span className="icon-workers" />
                         {/* Team: */}
                         {team_label}
@@ -335,20 +351,27 @@ class Project extends Component {
                             onClick={() => changeTeamSelector(project)}
                         />
                         {data.project_team_selector === id ? (
-                            <Select
-                                onChange={this.onSelectChange}
-                                options={data.workers.map(worker => {
-                                    return { value: worker, label: worker.name };
-                                })}
-                                value={null}
-                            />
+                            <div>
+                                <Select
+                                    onChange={this.onSelectChange}
+                                    style={{ overflow: "visible" }}
+                                    options={(() => {
+                                        let arr = [];
+                                        data.workers.forEach(worker => {
+                                            if (!_.includes(team, worker)) {
+                                                arr.push({ value: worker, label: worker.name });
+                                            }
+                                        });
+                                        return arr;
+                                    })()}
+                                    value={null}
+                                />
+                            </div>
                         ) : null}
-                    </p>
-                    {tech.length !== 0 && (
-                        <p className="project-techs">
-                            <span className="icon-tech" /> {tech_label}
-                        </p>
-                    )}
+                    </div>
+                    <div className="project-techs">
+                        <span className="icon-tech" /> {tech_label}
+                    </div>
                 </div>
             </div>
         );

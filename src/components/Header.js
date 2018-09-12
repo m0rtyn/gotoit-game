@@ -48,8 +48,8 @@ class Header extends Component {
                         >
                             Charts
                         </button>
-                        <button className="topbar-btn" rel="noopener noreferrer" href={support.show}>
-                            Support
+                        <button className="topbar-btn" rel="noopener noreferrer">
+                            <a href={support.show}>Support</a>
                         </button>
                     </div>
 
@@ -71,17 +71,7 @@ class Header extends Component {
                                 }}
                             />
 
-                            <div
-                                className="time-controls"
-                                onClick={() => {
-                                    let i = 1;
-                                    let n = 24;
-                                    while (i <= n) {
-                                        data.helpers.tick(i === n);
-                                        i++;
-                                    }
-                                }}
-                            >
+                            <div className="time-controls">
                                 {[1, 3, 5].map((speed, index) => {
                                     return (
                                         <button
@@ -118,7 +108,17 @@ class Header extends Component {
                                     );
                                 })}
 
-                                <button className="topbar-btn">
+                                <button
+                                    onClick={() => {
+                                        let i = 1;
+                                        let n = 24;
+                                        while (i <= n) {
+                                            data.helpers.tick(i === n);
+                                            i++;
+                                        }
+                                    }}
+                                    className="topbar-btn"
+                                >
                                     <span className="icon-h-cycle" />
                                 </button>
                             </div>

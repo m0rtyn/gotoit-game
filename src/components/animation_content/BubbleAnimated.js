@@ -61,7 +61,8 @@ class BubbleAnimated extends Component {
         let { elementFrom, elementTo } = this.state;
         if (elementTo) {
             to = elementTo.getBoundingClientRect();
-            to.x += to.width / 2;
+            to.x -= to.width / 2;
+            to.y -= to.height / 2;
             this.setState({
                 x: to.x,
                 y: to.y,
@@ -75,7 +76,7 @@ class BubbleAnimated extends Component {
         if (!elementFrom || !elementTo) return null;
         return (
             <div>
-                <Animate
+                {/*<Animate
                     start={{
                         x: x,
                         y: y,
@@ -122,7 +123,7 @@ class BubbleAnimated extends Component {
                             </div>
                         );
                     }}
-                </Animate>
+                </Animate>*/}
             </div>
         );
     }
