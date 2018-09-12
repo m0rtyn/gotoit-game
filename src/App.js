@@ -245,7 +245,7 @@ class App extends Component {
         let helpers = this.state.data.helpers;
 
         let loaded_app_state = JSON.parse(localStorage.getItem(game_name + "_app_state"));
-
+        console.log(loaded_app_state);
         if (loaded_app_state) {
             console.log(loaded_app_state.data);
 
@@ -293,6 +293,10 @@ class App extends Component {
                 item.type === "Resume"
                     ? (loaded_app_state.data.mailbox[id].object = _.create(WorkerModel.prototype, item.object))
                     : (loaded_app_state.data.mailbox[id].object = _.create(ProjectModel.prototype, item.object));
+            });
+
+            _.each(loaded_app_state.data.projects, project => {
+                loaded_app_state.data.projects_technologies[project.id] = {};
             });
 
             loaded_app_state.data.helpers = helpers;
