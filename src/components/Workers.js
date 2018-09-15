@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Worker from "./Worker";
 import { offices } from "../game/knowledge/office";
+import { DefaultClickSoundButton } from "../game/knowledge/sounds";
 
 class Workers extends Component {
     constructor(props) {
@@ -20,6 +21,47 @@ class Workers extends Component {
 
     render() {
         const data = this.props.data;
+        const cancel_office = (
+            <DefaultClickSoundButton
+                onClick={() => {
+                    data.helpers.downOffice();
+                }}
+                className="btn btn-warning btn-xs"
+            >
+                Cancel the Office
+            </DefaultClickSoundButton>
+        );
+
+        const down_office = (
+            <DefaultClickSoundButton
+                onClick={() => {
+                    data.helpers.downOffice();
+                }}
+                className="btn btn-warning btn-xs"
+            >
+                Downgrade the Office
+            </DefaultClickSoundButton>
+        );
+        const extend_office = (
+            <DefaultClickSoundButton
+                onClick={() => {
+                    data.helpers.upOffice();
+                }}
+                className="btn btn-warning btn-xs"
+            >
+                Extend the Office
+            </DefaultClickSoundButton>
+        );
+        const rent_office = (
+            <DefaultClickSoundButton
+                onClick={() => {
+                    data.helpers.upOffice();
+                }}
+                className="btn btn-warning btn-xs"
+            >
+                Rent the Office
+            </DefaultClickSoundButton>
+        );
 
         return (
             <section className="workers">
@@ -33,65 +75,18 @@ class Workers extends Component {
                         </button>
                         */}
 
-                        {data.office.size > 1 && offices[data.office.size - 1].space >= data.workers.length ? (
-                            data.office.size === 2 ? (
-                                <button
-                                    onClick={() => {
-                                        data.helpers.downOffice();
-                                    }}
-                                    className="btn btn-warning btn-xs"
-                                >
-                                    Cancel the Office
-                                </button>
-                            ) : (
-                                <button
-                                    onClick={() => {
-                                        data.helpers.downOffice();
-                                    }}
-                                    className="btn btn-warning btn-xs"
-                                >
-                                    Downgrade the Office
-                                </button>
-                            )
-                        ) : (
-                            ""
-                        )}
+                        {data.office.size > 1 && offices[data.office.size - 1].space >= data.workers.length
+                            ? data.office.size === 2
+                                ? cancel_office
+                                : down_office
+                            : ""}
 
-                        {data.office.size < 4 && data.workers.length === data.office.space ? (
-                            <button
-                                onClick={() => {
-                                    data.helpers.upOffice();
-                                }}
-                                className="btn btn-warning btn-xs"
-                            >
-                                Extend the Office
-                            </button>
-                        ) : (
-                            ""
-                        )}
+                        {data.office.size < 4 && data.workers.length === data.office.space ? { extend_office } : ""}
                     </div>
                 ) : data.office.size === 1 ? (
-                    <div className="column-buttons">
-                        <button
-                            onClick={() => {
-                                data.helpers.upOffice();
-                            }}
-                            className="btn btn-warning btn-xs"
-                        >
-                            Rent an Office
-                        </button>
-                    </div>
+                    <div className="column-buttons">{rent_office}</div>
                 ) : data.office.size < 4 && data.workers.length === data.office.space ? (
-                    <div className="column-buttons">
-                        <button
-                            onClick={() => {
-                                data.helpers.upOffice();
-                            }}
-                            className="btn btn-warning btn-xs"
-                        >
-                            Extend the Office
-                        </button>
-                    </div>
+                    <div className="column-buttons">{extend_office}</div>
                 ) : (
                     ""
                 )}

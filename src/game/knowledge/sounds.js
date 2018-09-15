@@ -9,10 +9,12 @@ import coins_slide from "../../assets/sounds/coins_slide.wav";
 import success from "../../assets/sounds/success2.wav";
 import fail from "../../assets/sounds/fail.wav";
 import steps_and_door from "../../assets/sounds/steps-and-door.wav";
+import { support } from "../app_config";
+import React from "react";
 
 export const sounds = {
     default_click: default_click, //кнопки
-    icon_click: fast_flat_click, //Клик по иконке (изменение скорости, закрытия, навыка и пр.)
+    click: fast_flat_click, //Клик по иконке (изменение скорости, закрытия, навыка и пр.)
     tab_click: click2,
     new_message: bell,
     bubble_appear: null,
@@ -24,3 +26,41 @@ export const sounds = {
     fail_project: fail,
     dismissal: steps_and_door
 };
+
+const makeSoundOnClick = (Component, sound_name) => {
+    class HOC extends React.Component {
+        makeAudio = () => {
+            let audio = new Audio(sounds[sound_name]);
+            audio.play();
+        };
+
+        render() {
+            let props = this.props;
+            return (
+                <Component
+                    {...props}
+                    onClick={() => {
+                        this.makeAudio();
+                        this.props.onClick();
+                    }}
+                />
+            );
+        }
+    }
+
+    return HOC;
+};
+
+const just_button = props => (
+    <button className={props.className} onClick={props.onClick}>
+        {props.children}
+    </button>
+);
+const just_a_link = props => (
+    <a className={props.className} onClick={props.onClick}>
+        {props.children}
+    </a>
+);
+
+export const DefaultClickSoundButton = makeSoundOnClick(just_button, "default_click");
+export const TabClickSoundButton = makeSoundOnClick(just_a_link, "tab_click");

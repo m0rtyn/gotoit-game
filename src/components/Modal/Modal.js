@@ -7,9 +7,13 @@ class Modal extends Component {
                 <div className="modal">
                     <div className="modal-dialog">
                         <div className="modal-content">
-                            <button className="close" onClick={this.props.closeModal}>
-                                ×
-                            </button>
+                            {this.props.showCloseButton ? (
+                                <button className="close" onClick={this.props.closeModal}>
+                                    ×
+                                </button>
+                            ) : (
+                                ""
+                            )}
                             {this.props.children}
                         </div>
                     </div>

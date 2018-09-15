@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import _ from "lodash";
-
+import { TabClickSoundButton } from "../game/knowledge/sounds";
 class ActivityToolbar extends Component {
     static propTypes = {
         data: PropTypes.shape({
@@ -24,7 +24,7 @@ class ActivityToolbar extends Component {
             <div className="card-header">
                 <ul className="nav nav-tabs">
                     <li className="nav-item">
-                        <a
+                        <TabClickSoundButton
                             className={`nav-link ${data.context === "mail" ? "active" : ""}`}
                             onClick={() => {
                                 data.helpers.changeContent("Mail", "mail");
@@ -36,73 +36,59 @@ class ActivityToolbar extends Component {
                             ) : (
                                 ""
                             )}
-                        </a>
+                        </TabClickSoundButton>
                     </li>
                     <li className="nav-item">
-                        <a
+                        <TabClickSoundButton
                             className={`nav-link ${data.context === "relations" ? "active" : ""}`}
                             onClick={() => {
                                 data.helpers.changeContent("PublicRelations", "relations");
                             }}
                         >
                             Relations
-                        </a>
+                        </TabClickSoundButton>
                     </li>
                     <li className="nav-item">
-                        <a
+                        <TabClickSoundButton
                             className={`nav-link ${data.context === "office" ? "active" : ""}`}
                             onClick={() => {
                                 data.helpers.changeContent("Office", "office");
                             }}
                         >
                             Office
-                        </a>
+                        </TabClickSoundButton>
                     </li>
-                    {/*<li className="nav-item">
-                        {data.projects.length > 0 ? (
-                            <a
-                            className={`nav-link ${data.context === "meeting" ? "active" : ""}`}
-                            onClick={() => {
-                                data.helpers.changeContent('StartMeeting', "meeting");
-                            }}
-                            >
-                            Start Meeting
-                            </a>
-                        ) : (
-                            ''
-                        )}
-                    </li>*/}
 
                     <li className="nav-item">
-                        <a
+                        <TabClickSoundButton
                             className={`nav-link ${data.context === "market" ? "active" : ""}`}
                             onClick={() => {
                                 data.helpers.changeContent("MarketTop", "market");
                             }}
                         >
                             Analitics
-                        </a>
+                        </TabClickSoundButton>
                     </li>
                     <li className="nav-item">
-                        <a
+                        <TabClickSoundButton
                             className={`nav-link ${data.context === "loans" ? "active" : ""}`}
                             onClick={() => {
                                 data.helpers.changeContent("Loans", "loans");
                             }}
                         >
                             Loans
-                        </a>
+                        </TabClickSoundButton>
                     </li>
                     {data.share0_unlock ? (
                         <li className="nav-item">
-                            <a
+                            <TabClickSoundButton
                                 className={`nav-link ${data.context === "exchange" ? "active" : ""}`}
                                 onClick={() => {
                                     data.helpers.changeContent("Exchange", "exchange");
                                 }}
                             >
                                 Exchange
-                            </a>
+                            </TabClickSoundButton>
                         </li>
                     ) : (
                         ""
@@ -110,14 +96,14 @@ class ActivityToolbar extends Component {
 
                     {data.projects_archive_reports.length > 0 ? (
                         <li className="nav-item">
-                            <a
+                            <TabClickSoundButton
                                 className={`nav-link ${data.context === "archive" ? "active" : ""}`}
                                 onClick={() => {
                                     data.helpers.changeContent("Archive", "archive");
                                 }}
                             >
                                 Archive
-                            </a>
+                            </TabClickSoundButton>
                         </li>
                     ) : (
                         ""

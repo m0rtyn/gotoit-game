@@ -27,6 +27,8 @@ import { companies } from "./game/knowledge/companies";
 
 import { getDefaultState } from "./game/default_state";
 
+import { sounds } from "./game/knowledge/sounds";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "toastr/build/toastr.min.css";
@@ -2038,7 +2040,13 @@ class App extends Component {
 
     render() {
         return (
-            <div id="app">
+            <div
+                id="app"
+                onClick={() => {
+                    let audio = new Audio(sounds.click);
+                    audio.play();
+                }}
+            >
                 <BubblesAnimation onRef={ref => (this.animation = ref)} />
                 <Popup ref={p => (this.popupHandler = p)} />
                 <Layout data={this.state.data} newGame={this.newGame} />

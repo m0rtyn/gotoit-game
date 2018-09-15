@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { public_relations } from "../../game/knowledge/public_relations";
 import { colors } from "../../game/knowledge/colors";
 import Bar from "../Bar/Bar";
-import { makeSoundOnClick } from "../HOC/makeSound";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 import _ from "lodash";
 
 class PublicRelations extends Component {
@@ -34,18 +34,8 @@ class PublicRelations extends Component {
             }
         ];
 
-        const pr_button = props => {
-            console.log(props);
-            return (
-                <button className={props.className} onClick={props.onClick}>
-                    {props.children}
-                </button>
-            );
-        };
-
-        const ForumThread = makeSoundOnClick(pr_button, "default_click");
         const forum_thread_button_sound = (
-            <ForumThread
+            <DefaultClickSoundButton
                 className={"btn btn-info"}
                 onClick={() => {
                     public_relations["forum_thread"].onClick(data);
@@ -59,11 +49,10 @@ class PublicRelations extends Component {
                         });
                         return effect ? effect.click_count : 0;
                     })()}
-            </ForumThread>
+            </DefaultClickSoundButton>
         );
-        const SearchJob = makeSoundOnClick(pr_button, "default_click");
         const search_job_button_sound = (
-            <SearchJob
+            <DefaultClickSoundButton
                 className={100 <= data.money ? "btn btn-info " : "btn btn-info disabled "}
                 onClick={() => {
                     public_relations["search_job"].onClick(data);
@@ -77,11 +66,11 @@ class PublicRelations extends Component {
                         });
                         return effect ? effect.click_count : 0;
                     })()}
-            </SearchJob>
+            </DefaultClickSoundButton>
         );
-        const SearchSpecialist = makeSoundOnClick(pr_button, "default_click");
+
         const search_specialist_button_sound = (
-            <SearchSpecialist
+            <DefaultClickSoundButton
                 className={250 <= data.money ? "btn btn-info " : "btn btn-info disabled "}
                 onClick={() => {
                     public_relations["search_specialist"].onClick(data);
@@ -95,11 +84,11 @@ class PublicRelations extends Component {
                         });
                         return effect ? effect.click_count : 0;
                     })()}
-            </SearchSpecialist>
+            </DefaultClickSoundButton>
         );
-        const BigEvent = makeSoundOnClick(pr_button, "default_click");
+
         const big_event_button_sound = (
-            <BigEvent
+            <DefaultClickSoundButton
                 className={
                     1000 <= data.money && this.state.next_click_will_able_at < data.date.tick ? "btn btn-info " : "btn btn-info disabled "
                 }
@@ -116,7 +105,7 @@ class PublicRelations extends Component {
                         });
                         return effect ? effect.click_count : 0;
                     })()}
-            </BigEvent>
+            </DefaultClickSoundButton>
         );
 
         return (
