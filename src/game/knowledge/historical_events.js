@@ -52,7 +52,7 @@ export const historical_events = {
     },
     "1993 3 22 1": {
         name: "Mosaic web-browser release",
-        description: "Mosaic web-browser was released.",
+        description: "Mosaic web-browser was released. Browser platform is available now!",
         picture: TimeIcon,
         updateGameData: data => {
             data.projects_unlocked_platforms.push("browser");
@@ -92,7 +92,7 @@ export const historical_events = {
     },
     "1995 4 23 1": {
         name: "JAVA release",
-        description: "Java programming language was released.",
+        description: "Java programming language was released. Crossplatform is available now!",
         picture: TimeIcon,
         updateGameData: data => {
             data.projects_unlocked_platforms.push("crossplatform");
@@ -108,7 +108,7 @@ export const historical_events = {
     },
     "1995 9 10 1": {
         name: "Dotcoms boom",
-        description: "Dotcoms boom has come.",
+        description: "Dotcoms boom has come.\nSome companies have started to trade their shares! (Go to 'Exchange' to check it out)",
         picture: TimeIcon,
         updateGameData: data => {
             data.exchange_unlocked_shares.push("share0");
@@ -176,8 +176,8 @@ export const historical_events = {
         }
     },
     "1999 2 31 1": {
-        name: "Matrix moovie",
-        description: "Matrix moovie was released.",
+        name: "Matrix film",
+        description: "Matrix film was released.",
         picture: TimeIcon,
         updateGameData: data => {
             return data;
@@ -273,7 +273,7 @@ export const historical_events = {
     },
     "2003 9 7 1": {
         name: "Nokia N-Gage release",
-        description: "Nokia N-Gage gaming phone was released.",
+        description: "Nokia N-Gage gaming phone was released. Mobile platform is available now!",
         picture: TimeIcon,
         updateGameData: data => {
             data.projects_unlocked_platforms.push("mobile");
@@ -369,7 +369,7 @@ export const historical_events = {
     },
     "2009 0 3 1": {
         name: "BTC is launching",
-        description: "BTC cryptocurrency has released.",
+        description: "BTC cryptocurrency has released.\nWanna buy some? Go to 'Exchange'!",
         picture: TimeIcon,
         updateGameData: data => {
             data.exchange_unlocked_shares.push("btc");
@@ -482,7 +482,7 @@ export const historical_events = {
     },
     "2013 3 15 1": {
         name: "Google Glass release",
-        description: "AR/VR era has started.",
+        description: "AR/VR era has started. VR platform is available now!",
         picture: TimeIcon,
         updateGameData: data => {
             data.projects_unlocked_platforms.push("VR");
