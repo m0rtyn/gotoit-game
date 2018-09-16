@@ -882,7 +882,7 @@ class App extends Component {
             })
         );
         const platforms_top = _.max(
-            opts.same_platforms_kinds_projects.map(p => {
+            opts.same_platforms_projects.map(p => {
                 return p.total;
             })
         );
