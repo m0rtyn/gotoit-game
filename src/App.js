@@ -91,6 +91,7 @@ class App extends Component {
         this.modifyRelation = this.modifyRelation.bind(this);
         this.modifyRelationPure = this.modifyRelationPure.bind(this);
         this.deepCheckRelation = this.deepCheckRelation.bind(this);
+        this.dreamComeTrueCheck = this.dreamComeTrueCheck.bind(this);
         this.getRole = this.getRole.bind(this);
         this.changeRole = this.changeRole.bind(this);
         this.hireCandidate = this.hireCandidate.bind(this);
@@ -180,6 +181,7 @@ class App extends Component {
         app_state.data.helpers["modifyRelationPure"] = this.modifyRelationPure;
         app_state.data.helpers["getRelation"] = this.getRelation;
         app_state.data.helpers["deepCheckRelation"] = this.deepCheckRelation;
+        app_state.data.helpers["dreamComeTrueCheck"] = this.dreamComeTrueCheck;
         app_state.data.helpers["getRole"] = this.getRole;
         app_state.data.helpers["changeRole"] = this.changeRole;
         app_state.data.helpers["hireCandidate"] = this.hireCandidate;
@@ -867,15 +869,86 @@ class App extends Component {
         this.setState({ data: data });
     }
 
+    dreamComeTrueCheck(worker, project, opts) {
+        if (worker.is_player) return;
+
+        const kinds_top = _.max(
+            opts.same_kinds_projects.map(p => {
+                return p.total;
+            })
+        );
+        const platforms_top = _.max(
+            opts.same_platforms_kinds_projects.map(p => {
+                return p.total;
+            })
+        );
+        const kinds_platforms_top = _.max(
+            opts.same_platforms_kinds_projects.map(p => {
+                return p.total;
+            })
+        );
+        let dream_came_true = false;
+
+        switch (worker.dream.type) {
+            case "development_kind":
+                if (worker.dream.kind === project.kind && opts.project_total_stat >= kinds_top) {
+                    dream_came_true = true;
+                }
+                break;
+
+            case "development_platform":
+                if (worker.dream.platform === project.platform && opts.project_total_stat >= platforms_top) {
+                    dream_came_true = true;
+                }
+                break;
+
+            case "development_complex":
+                if (
+                    worker.dream.kind === project.kind &&
+                    worker.dream.platform === project.platform &&
+                    opts.project_total_stat >= kinds_platforms_top
+                ) {
+                    dream_came_true = true;
+                }
+                break;
+
+            default:
+                dream_came_true = false;
+        }
+
+        if (dream_came_true) {
+            worker.dreamComeTrue();
+            addAction(`The dream of your worker ${worker.name} has come true.`, { timeOut: 3000, extendedTimeOut: 2000 }, "warning");
+        }
+    }
+
     finishProject(id) {
         projects_done++;
+
         const data = this.state.data;
-        let project = _.find(data.projects, project => {
+        const project = _.find(data.projects, project => {
             return project.id === id;
         });
+        const opts = {
+            project_total_stat: _.sum(
+                Object.keys(project.done).map(stat => {
+                    return project.done[stat];
+                })
+            ),
+            same_kinds_projects: data.simplified_reports.filter(p => {
+                return p.kind === project.kind;
+            }),
+            same_platforms_projects: data.simplified_reports.filter(p => {
+                return p.platform === project.platform;
+            }),
+            same_platforms_kinds_projects: data.simplified_reports.filter(p => {
+                return p.kind === project.kind && p.platform === project.platform;
+            })
+        };
 
         data.workers.forEach(worker => {
             worker.facts.project_finished++;
+            this.dreamComeTrueCheck(worker, project, opts);
         });
 
         let all_top_handler = ProjectsTop.getHandler(data.simplified_reports);
