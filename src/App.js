@@ -111,6 +111,7 @@ class App extends Component {
 
         this.contractSearch = this.contractSearch.bind(this);
         this.offerProject = this.offerProject.bind(this);
+        this.pushNewProject = this.pushNewProject.bind(this);
         this.rejectProject = this.rejectProject.bind(this);
         this.rejectOffered = this.rejectOffered.bind(this);
         this.acceptOffered = this.acceptOffered.bind(this);
@@ -201,6 +202,7 @@ class App extends Component {
 
         app_state.data.helpers["contractSearch"] = this.contractSearch;
         app_state.data.helpers["offerProject"] = this.offerProject;
+        app_state.data.helpers["pushNewProject"] = this.pushNewProject;
         app_state.data.helpers["rejectProject"] = this.rejectProject;
         app_state.data.helpers["rejectOffered"] = this.rejectOffered;
         app_state.data.helpers["acceptOffered"] = this.acceptOffered;

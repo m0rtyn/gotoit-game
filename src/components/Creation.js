@@ -167,9 +167,9 @@ class Creation extends Component {
         // i must hard set :(
         data.helpers.brutalSet({ data: data });
 
-        data.helpers.offerProject(ProjectModel.generate(1, 1, "player"));
-        data.helpers.offerProject(ProjectModel.generate(2, 1, "player"));
-        data.helpers.offerProject(ProjectModel.generate(3, 1, "player"));
+        data.helpers.pushNewProject();
+        data.helpers.pushNewProject();
+        data.helpers.pushNewProject();
 
         data.stage = "game";
         this.refs.creation.closePortal();
