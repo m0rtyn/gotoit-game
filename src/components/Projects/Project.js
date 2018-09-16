@@ -19,6 +19,8 @@ import { Avatar } from "./Avatar";
 import { StatsDataItem } from "./StatsDataItem";
 import ProjectModal from "../Modal/ProjectModal";
 
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
+
 class Project extends Component {
     constructor(props) {
         super(props);
@@ -204,10 +206,10 @@ class Project extends Component {
             };
         });*/
 
-        const manage_button = (
-            <button onClick={() => this.openModal()} className="btn btn-manage">
+        const manage_DefaultClickSoundButton = (
+            <DefaultClickSoundButton onClick={() => this.openModal()} className="btn btn-manage">
                 Manage
-            </button>
+            </DefaultClickSoundButton>
         );
 
         //let unoccupied_workers = data.workers.filter((worker) => {return data.helpers.deepCheckRelation(worker, project)});
@@ -314,7 +316,7 @@ class Project extends Component {
                     ) : (
                         " "
                     )}
-                    {manage_button}
+                    {manage_DefaultClickSoundButton}
                 </div>
 
                 {/*{project.deadline > 0 && project.deadline !== Number.POSITIVE_INFINITY ?
@@ -346,7 +348,7 @@ class Project extends Component {
                         <span className="icon-workers" />
                         {/* Team: */}
                         {team_label}
-                        <button
+                        <DefaultClickSoundButton
                             className={`btn icon-add btn-add-worker ${data.project_team_selector === id ? "active" : ""}`}
                             onClick={() => changeTeamSelector(project)}
                         />

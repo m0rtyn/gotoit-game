@@ -9,6 +9,7 @@ import Resume from "../Modal/ResumeModal";
 import Offer from "../Modal/OfferModal";
 import { FormattedDate } from "react-intl";
 import { Avatar } from "../Projects/Avatar";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 
 class Mail extends Component {
     static propTypes = {
@@ -164,9 +165,9 @@ class Mail extends Component {
 
         return (
             <div className="mail">
-                <button className="btn btn-info btn-xs" onClick={this.markAllAsRead}>
+                <DefaultClickSoundButton className="btn btn-info btn-xs" onClick={this.markAllAsRead}>
                     Mark all as read
-                </button>
+                </DefaultClickSoundButton>
                 {letters}
                 {this.state.show_modal ? <Modal closeModal={this.closeModal}> {this.state.current_modal}</Modal> : <div />}
             </div>

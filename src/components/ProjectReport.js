@@ -7,7 +7,6 @@ import ProjectName from "./Projects/ProjectName";
 
 import { technologies } from "../game/knowledge/technologies";
 import { skills } from "../game/knowledge/skills";
-
 class ProjectReport extends Component {
     render() {
         const data = this.props.data;

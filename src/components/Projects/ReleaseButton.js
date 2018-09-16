@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import * as PropTypes from "prop-types";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 
 export class ReleaseButton extends PureComponent {
     static propTypes = {
@@ -14,9 +15,9 @@ export class ReleaseButton extends PureComponent {
         let { onClick, type, stage, doneQuantity } = this.props;
         if (!(doneQuantity > 0 && type === "own" && stage !== "fixing")) return null;
         return (
-            <button className="btn btn-success" onClick={onClick}>
+            <DefaultClickSoundButton className="btn btn-success" onClick={onClick}>
                 Release!
-            </button>
+            </DefaultClickSoundButton>
         );
     }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as PropTypes from "prop-types";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 
 export class Technology extends Component {
     static propTypes = {
@@ -25,7 +26,7 @@ export class Technology extends Component {
                             </h5>
                         ) : (
                             <h5 className="text-center slim">
-                                <button
+                                <DefaultClickSoundButton
                                     id={this.props.id}
                                     className={
                                         this.props.price <= this.props.money
@@ -35,7 +36,7 @@ export class Technology extends Component {
                                     onClick={this.props.onChange}
                                 >
                                     Unlock {this.props.name} {this.props.price}$
-                                </button>
+                                </DefaultClickSoundButton>
                             </h5>
                         )}
 

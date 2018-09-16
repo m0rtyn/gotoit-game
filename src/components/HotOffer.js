@@ -4,6 +4,7 @@ import { skills } from "../game/knowledge/skills";
 import StatsBar from "./StatsBar";
 import ProjectName from "./Projects/ProjectName";
 import { Avatar } from "./Projects/Avatar";
+import { DefaultClickSoundButton } from "../game/knowledge/sounds";
 
 class HotOffer extends PureComponent {
     constructor(props) {
@@ -39,7 +40,7 @@ class HotOffer extends PureComponent {
         return (
             <div>
                 <div>
-                    <button
+                    <DefaultClickSoundButton
                         className="btn btn-warning float-right"
                         onClick={() => {
                             //data.helpers.projectArchiving();
@@ -47,7 +48,7 @@ class HotOffer extends PureComponent {
                         }}
                     >
                         Close
-                    </button>
+                    </DefaultClickSoundButton>
                 </div>
                 <div>
                     <div className="flexbox">
@@ -86,17 +87,17 @@ class HotOffer extends PureComponent {
                             {stage === "ready" ? (
                                 !expired ? (
                                     <div className="btn-group">
-                                        <button className="btn btn-success" id={id} onClick={e => this.acceptOffered(e)}>
+                                        <DefaultClickSoundButton className="btn btn-success" id={id} onClick={e => this.acceptOffered(e)}>
                                             Accept
-                                        </button>
+                                        </DefaultClickSoundButton>
                                         &nbsp;
-                                        <button className="btn btn-warning" id={id} onClick={e => this.startOffered(e)}>
+                                        <DefaultClickSoundButton className="btn btn-warning" id={id} onClick={e => this.startOffered(e)}>
                                             Start
-                                        </button>
+                                        </DefaultClickSoundButton>
                                         &nbsp;
-                                        <button className="btn btn-danger" id={id} onClick={e => this.reject(e)}>
+                                        <DefaultClickSoundButton className="btn btn-danger" id={id} onClick={e => this.reject(e)}>
                                             Hide
-                                        </button>
+                                        </DefaultClickSoundButton>
                                     </div>
                                 ) : (
                                     "This offer has expired"

@@ -1,15 +1,15 @@
-import default_click from "../../assets/sounds/button_click.mp3";
+import default_click from "../../assets/sounds/button_click.wav";
 import fast_flat_click from "../../assets/sounds/fast-flat-click.wav";
 import click2 from "../../assets/sounds/click2.wav";
 import bell from "../../assets/sounds/bell.wav";
+import pop_reverse from "../../assets/sounds/pop-reverse.wav";
 import pop from "../../assets/sounds/pop.wav";
-import alarm1 from "../../assets/sounds/alarm1.mp3";
+import alarm1 from "../../assets/sounds/alarm1.wav";
 import fx_coins from "../../assets/sounds/fx-coins.wav";
 import coins_slide from "../../assets/sounds/coins_slide.wav";
 import success from "../../assets/sounds/success2.wav";
 import fail from "../../assets/sounds/fail.wav";
 import steps_and_door from "../../assets/sounds/steps-and-door.wav";
-import { support } from "../app_config";
 import React from "react";
 
 export const sounds = {
@@ -17,7 +17,7 @@ export const sounds = {
     click: fast_flat_click, //Клик по иконке (изменение скорости, закрытия, навыка и пр.)
     tab_click: click2,
     new_message: bell,
-    bubble_appear: null,
+    bubble_appear: pop_reverse,
     bubble_burst: pop,
     new_day_alarm: alarm1,
     charge_money: fx_coins,
