@@ -78,6 +78,7 @@ var default_state = {
         projects_default_technologies: [],
         projects_unlocked_platforms: ["desktop"],
         project_team_selector: null,
+        top_projects_finished: 0,
         hovered_projects_id: [],
         hovered_workers_id: [],
 

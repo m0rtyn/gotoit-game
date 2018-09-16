@@ -957,6 +957,17 @@ class App extends Component {
             this.dreamComeTrueCheck(worker, project, opts);
         });
 
+        if (
+            opts.project_total_stat >=
+            _.max(
+                data.simplified_reports.map(report => {
+                    return report.total;
+                })
+            )
+        ) {
+            data.top_projects_finished++;
+        }
+
         let all_top_handler = ProjectsTop.getHandler(data.simplified_reports);
         let platform_top_handler = all_top_handler.filter("platform", project.platform);
         let kind_top_handler = all_top_handler.filter("kind", project.kind);

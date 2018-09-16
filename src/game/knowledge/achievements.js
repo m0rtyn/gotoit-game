@@ -261,37 +261,31 @@ export const achievements = {
             }
         }
     },
-    bronze_lazy_one: {
+    bronze_top_projects: {
         rank: "bronze",
         type: "challenge",
-        name: "Lazy one",
-        text: "Earn 200 thousand shifting all work to your employees.",
+        name: "Top projects finished",
+        text: "Create 1 project that will take the top place in the market.",
         rule: state => {
-            if (state.data.money >= 2e5) {
-                return state.data.workers[0].facts.tasks_done === 0;
-            }
+            return state.top_projects_finished >= 1;
         }
     },
-    silver_lazy_one: {
+    silver_top_projects: {
         rank: "silver",
         type: "challenge",
-        name: "Lazy one",
-        text: "Earn 500 thousand shifting all work to your employees.",
+        name: "Top projects finished",
+        text: "Create 10 projects that will take the top place in the market.",
         rule: state => {
-            if (state.data.money >= 5e5) {
-                return state.data.workers[0].facts.tasks_done === 0;
-            }
+            return state.top_projects_finished >= 10;
         }
     },
-    gold_lazy_one: {
+    gold_top_projects: {
         rank: "gold",
         type: "challenge",
-        name: "Lazy one",
-        text: "Earn 1 million shifting all work to your employees.",
+        name: "Top projects finished",
+        text: "Create 100 projects that will take the top place in the market.",
         rule: state => {
-            if (state.data.money >= 1e6) {
-                return state.data.workers[0].facts.tasks_done === 0;
-            }
+            return state.top_projects_finished >= 100;
         }
     }
 };
