@@ -248,11 +248,9 @@ class WorkerModel {
             //console.log(collective_sum, worker.statsSum(), worker);
             collective_sum += worker.statsSum();
         });
-
         const collective_avg = collective_sum / getData().workers.length;
         const collective = 20 * (1 - (10 + collective_avg) / (10 + this.statsSum()));
-        if (isNaN(collective)) return this.collectivePenalty();
-        else return Math.max(Math.min(Math.floor(collective), 20), -20);
+        return Math.max(Math.min(Math.floor(collective), 20), -20);
         //console.log(collective_sum, getData().workers.length, collective_avg, this.statsSum(), collective);
     }
 

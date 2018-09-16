@@ -147,7 +147,7 @@ class ProjectProgressBar extends Component {
             <div className="project-progress-bar">
                 {prog_data[0].value !== 0 ? (
                     <div className="flexbox">
-                        <span className="icon-program" />
+                        <span className="icon-program" id={`${project.id}_program`} />
                         <Bar className="flex-grow" bar_data={prog_data} />
                     </div>
                 ) : (
@@ -155,7 +155,7 @@ class ProjectProgressBar extends Component {
                 )}
                 {design_data[0].value !== 0 ? (
                     <div className="flexbox">
-                        <span className="icon-design" />
+                        <span className="icon-design" id={`${project.id}_design`} />
                         <Bar className="flex-grow" bar_data={design_data} />
                     </div>
                 ) : (
@@ -163,7 +163,7 @@ class ProjectProgressBar extends Component {
                 )}
                 {manage_data[0].value !== 0 ? (
                     <div className="flexbox">
-                        <span className="icon-manage" />
+                        <span className="icon-manage" id={`${project.id}_manage`} />
                         <Bar className="flex-grow" bar_data={manage_data} />
                     </div>
                 ) : (

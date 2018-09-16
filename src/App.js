@@ -684,6 +684,8 @@ class App extends Component {
 
         const project = ProjectModel.generateOwnProject(project_name, team, project_platform, project_kind);
         this.acceptAndMoveProject(project);
+        this.openProject(project.id);
+
         console.log("start project");
         this.addTimelineEvent("deadline", "Deadline", project, project.deadline);
 
@@ -819,9 +821,11 @@ class App extends Component {
     }
 
     openProject(id) {
+        let data = this.state.data;
         let project = _.find(this.state.data.projects, project => {
             return project.id === id;
         });
+        data.projects_technologies[project.id] = {};
         project.stage = "open";
         addMessage("Started " + project.name + " project", { timeOut: 5000, extendedTimeOut: 2000 }, "info");
         //this.checkState();

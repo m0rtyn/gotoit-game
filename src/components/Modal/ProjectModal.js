@@ -27,12 +27,6 @@ export default class ProjectModal extends Component {
     open = () => {
         this.props.data.helpers.openProject(this.props.project.id);
     };
-    pause = () => {
-        this.props.data.helpers.pauseProject(this.props.project.id);
-    };
-    unpause = () => {
-        this.props.data.helpers.unpauseProject(this.props.project.id);
-    };
     getStatsData = worker => {
         let { project, data } = this.props;
         let { getRelation, modifyRelation } = data.helpers;
@@ -61,7 +55,7 @@ export default class ProjectModal extends Component {
     };
 
     addTechnology = event => {
-        if (technologies[event.target.id].price <= this.props.data.money) this.data.helpers.unlockTechnology(event.target.id);
+        if (technologies[event.target.id].price <= this.props.data.money) this.props.data.helpers.unlockTechnology(event.target.id);
     };
 
     onRelease = () => {
@@ -158,13 +152,6 @@ export default class ProjectModal extends Component {
                     <ProjectReward reward={reward} penalty={penalty} />
                     <div>
                         <span>
-                            <StartPauseButton
-                                paused={is_paused}
-                                stage={stage}
-                                onUnpause={this.unpause}
-                                onOpen={this.open}
-                                onPause={this.pause}
-                            />
                             <RejectButton onClick={this.onReject} />
                             <ReleaseButton doneQuantity={doneQuantity} type={type} stage={stage} onClick={this.onRelease} />
                         </span>
