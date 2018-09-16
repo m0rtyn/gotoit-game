@@ -2,6 +2,15 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import _ from "lodash";
 import { TabClickSoundButton } from "../game/knowledge/sounds";
+import mail from "../assets/images/icon/browser/1-mail.png";
+import pr from "../assets/images/icon/browser/2-pr.png";
+import office from "../assets/images/icon/browser/3-office.png";
+import market_analysis from "../assets/images/icon/browser/4-market-analysis.png";
+import loans from "../assets/images/icon/browser/5-loans.png";
+import bsex from "../assets/images/icon/browser/6-bsex.png";
+import archive from "../assets/images/icon/browser/7-archive.png";
+import advertising from "../assets/images/icon/browser/advertising.png";
+
 class ActivityToolbar extends Component {
     static propTypes = {
         data: PropTypes.shape({
@@ -30,9 +39,12 @@ class ActivityToolbar extends Component {
                                 data.helpers.changeContent("Mail", "mail");
                             }}
                         >
-                            <span>Mail </span>
+                            <div className="tab-content">
+                                <img src={mail} className="icon" />
+                                <div>Mail</div>
+                            </div>
                             {unread_messages_count !== 0 ? (
-                                <span className="badge badge-pill badge-info">{unread_messages_count}</span>
+                                <span className="badge badge-pill badge-pink">{unread_messages_count}</span>
                             ) : (
                                 ""
                             )}
@@ -45,7 +57,10 @@ class ActivityToolbar extends Component {
                                 data.helpers.changeContent("PublicRelations", "relations");
                             }}
                         >
-                            Relations
+                            <div className="tab-content">
+                                <img src={pr} className="icon" />
+                                <div>Relations</div>
+                            </div>
                         </TabClickSoundButton>
                     </li>
                     <li className="nav-item">
@@ -55,7 +70,10 @@ class ActivityToolbar extends Component {
                                 data.helpers.changeContent("Office", "office");
                             }}
                         >
-                            Office
+                            <div className="tab-content">
+                                <img src={office} className="icon" />
+                                <div>Office</div>
+                            </div>
                         </TabClickSoundButton>
                     </li>
 
@@ -66,7 +84,10 @@ class ActivityToolbar extends Component {
                                 data.helpers.changeContent("MarketTop", "market");
                             }}
                         >
-                            Analitics
+                            <div className="tab-content">
+                                <img src={market_analysis} className="icon" />
+                                <div>Analitics</div>
+                            </div>
                         </TabClickSoundButton>
                     </li>
                     <li className="nav-item">
@@ -76,7 +97,10 @@ class ActivityToolbar extends Component {
                                 data.helpers.changeContent("Loans", "loans");
                             }}
                         >
-                            Loans
+                            <div className="tab-content">
+                                <img src={loans} className="icon" />
+                                <div>Loans</div>
+                            </div>
                         </TabClickSoundButton>
                     </li>
                     {data.share0_unlock ? (
@@ -87,7 +111,10 @@ class ActivityToolbar extends Component {
                                     data.helpers.changeContent("Exchange", "exchange");
                                 }}
                             >
-                                Exchange
+                                <div className="tab-content">
+                                    <img src={bsex} className="icon" />
+                                    <div>Exchange</div>
+                                </div>
                             </TabClickSoundButton>
                         </li>
                     ) : (
@@ -102,7 +129,10 @@ class ActivityToolbar extends Component {
                                     data.helpers.changeContent("Archive", "archive");
                                 }}
                             >
-                                Archive
+                                <div className="tab-content">
+                                    <img src={archive} className="icon" />
+                                    <div>Archive</div>
+                                </div>
                             </TabClickSoundButton>
                         </li>
                     ) : (
