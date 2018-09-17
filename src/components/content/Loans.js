@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import { loans } from "../../game/knowledge/loans";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 
 class Loans extends Component {
     constructor(props) {
@@ -61,11 +62,13 @@ class Loans extends Component {
                             <div className=" flex-container-column" key={size}>
                                 <h4 className="">
                                     {loan.min_credit_score <= this.calcCreditScore() ? (
-                                        <button className="btn btn-success btn-sm" onClick={() => this.take(size)}>
+                                        <DefaultClickSoundButton className="btn btn-success btn-sm" onClick={() => this.take(size)}>
                                             take
-                                        </button>
+                                        </DefaultClickSoundButton>
                                     ) : (
-                                        <button className="btn btn-success btn-sm disabled">need {loan.min_credit_score} score</button>
+                                        <DefaultClickSoundButton className="btn btn-success btn-sm disabled">
+                                            need {loan.min_credit_score} score
+                                        </DefaultClickSoundButton>
                                     )}
                                     <span> {loan.name} </span>
                                 </h4>
@@ -88,7 +91,7 @@ class Loans extends Component {
                                     <span className=""> Time: {loan.time} month </span>
                                     <span className=""> Interest: {loan.interest}% </span>
                                     <span className={paid_percent ? "" : " hidden"}>
-                                        <button
+                                        <DefaultClickSoundButton
                                             className={
                                                 this.getEarlyCost(loan) <= data.money
                                                     ? "btn btn-success btn-sm"
@@ -99,7 +102,7 @@ class Loans extends Component {
                                             }}
                                         >
                                             early repayment {this.getEarlyCost(loan)}$
-                                        </button>
+                                        </DefaultClickSoundButton>
                                     </span>
                                 </div>
                                 <div className="filament">

@@ -9,6 +9,20 @@ import Resume from "../Modal/ResumeModal";
 import Offer from "../Modal/OfferModal";
 import { FormattedDate } from "react-intl";
 import { Avatar } from "../Projects/Avatar";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
+
+import mail from "../../assets/images/icon/browser/1-mail.png";
+import pr from "../../assets/images/icon/browser/2-pr.png";
+import office from "../../assets/images/icon/browser/3-office.png";
+import market_analysis from "../../assets/images/icon/browser/4-market-analysis.png";
+import loans from "../../assets/images/icon/browser/5-loans.png";
+import bsex from "../../assets/images/icon/browser/6-bsex.png";
+import archive from "../../assets/images/icon/browser/7-archive.png";
+
+import clients from "../../assets/images/icon/service/pr/clients.png";
+import employees from "../../assets/images/icon/service/pr/employees.png";
+
+import news from "../../assets/images/icon/service/news.png";
 
 class Mail extends Component {
     static propTypes = {
@@ -108,37 +122,17 @@ class Mail extends Component {
             return (
                 <div className="letter card" onClick={handleClick} key={i}>
                     {(() => {
-                        if (letter.type === "Resume") {
-                            return (
-                                <Avatar
-                                    className="worker-avatar"
-                                    name={letter.object.name}
-                                    sources={_.toPairs(letter.object.avatar)}
-                                    style={{ position: "absolute" }}
-                                    size={20}
-                                />
-                            );
-                        } else if (letter.type === "Event") {
-                            return (
-                                <Avatar
-                                    // className="worker-avatar"
-                                    name={letter.object.name}
-                                    sources={_.toPairs(letter.object.avatar)}
-                                    style={{ position: "absolute" }}
-                                    size={20}
-                                />
-                            );
-                        } else {
-                            //for project reporting, offer and hotoffer
-                            return (
-                                <Avatar
-                                    className="project-avatar"
-                                    name={letter.object.name}
-                                    sources={_.toPairs(letter.object.avatar)}
-                                    style={{ position: "absolute" }}
-                                    size={20}
-                                />
-                            );
+                        switch (letter.type) {
+                            case "Resume":
+                                return <img src={employees} className="mail-icon" />;
+                            case "Offer":
+                                return <img src={clients} className="mail-icon" />;
+                            case "Event":
+                                return <img src={news} className="mail-icon" />;
+                            case "Office":
+                                return <img src={office} className="mail-icon" />;
+                            default:
+                                return <img src={pr} className="mail-icon" />;
                         }
                     })()}
 
@@ -164,9 +158,9 @@ class Mail extends Component {
 
         return (
             <div className="mail">
-                <button className="btn btn-info btn-xs" onClick={this.markAllAsRead}>
+                <DefaultClickSoundButton className="btn btn-info btn-xs" onClick={this.markAllAsRead}>
                     Mark all as read
-                </button>
+                </DefaultClickSoundButton>
                 {letters}
                 {this.state.show_modal ? (
                     <Modal closeModal={this.closeModal} showCloseButton={true}>

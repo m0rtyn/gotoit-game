@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { FormattedDate } from "react-intl";
 import { support } from "../game/app_config";
 import Timeline from "./Timeline/Timeline";
+import { DefaultClickSoundButton } from "../game/knowledge/sounds";
 
 class Header extends Component {
     render() {
@@ -24,21 +25,24 @@ class Header extends Component {
                             </svg>
                             Go to IT
                         </div>
-
-                        <button className="topbar-btn" href="#" onClick={this.props.newGame} title="Hard Reset For Developers">
+                        <DefaultClickSoundButton
+                            className="topbar-btn"
+                            href="#"
+                            onClick={this.props.newGame}
+                            title="Hard Reset For Developers"
+                        >
                             New game
-                        </button>
-                        <button
+                        </DefaultClickSoundButton>
+                        <DefaultClickSoundButton
                             className="topbar-btn"
                             onClick={() => {
                                 data.helpers.changeContent("Achievements");
                             }}
                             href="#"
-                            title="Achievements bar"
                         >
                             Achievements
-                        </button>
-                        <button
+                        </DefaultClickSoundButton>
+                        <DefaultClickSoundButton
                             className="topbar-btn"
                             onClick={() => {
                                 data.helpers.changeContent("ChartsController");
@@ -47,10 +51,10 @@ class Header extends Component {
                             title="Statistics"
                         >
                             Charts
-                        </button>
-                        <button className="topbar-btn" rel="noopener noreferrer">
+                        </DefaultClickSoundButton>
+                        <DefaultClickSoundButton className="topbar-btn" rel="noopener noreferrer">
                             <a href={support.show}>Support</a>
-                        </button>
+                        </DefaultClickSoundButton>
                     </div>
 
                     <div

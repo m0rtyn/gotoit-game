@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as PropTypes from "prop-types";
 import _ from "lodash";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 
 export default class TechToggle extends Component {
     static propTypes = {

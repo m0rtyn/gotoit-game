@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as PropTypes from "prop-types";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 
 export class StartPauseButton extends Component {
     static propTypes = {
@@ -16,20 +17,20 @@ export class StartPauseButton extends Component {
             <span>
                 {/*{project.stage}*/}
                 {paused && (
-                    <button className="btn btn-sm btn-success" onClick={onUnpause}>
+                    <DefaultClickSoundButton className="btn btn-sm btn-success" onClick={onUnpause}>
                         Start
-                    </button>
+                    </DefaultClickSoundButton>
                 )}
                 {stage === "ready" && (
-                    <button className="btn btn-sm btn-success" onClick={onOpen}>
+                    <DefaultClickSoundButton className="btn btn-sm btn-success" onClick={onOpen}>
                         Start
-                    </button>
+                    </DefaultClickSoundButton>
                 )}
                 {stage === "open" &&
                     !paused && (
-                        <button className="btn btn-sm btn-warning" onClick={onPause}>
+                        <DefaultClickSoundButton className="btn btn-sm btn-warning" onClick={onPause}>
                             Pause
-                        </button>
+                        </DefaultClickSoundButton>
                     )}
             </span>
         );

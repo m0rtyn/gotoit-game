@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { projects_done } from "../App";
+import { projects_done, hired } from "../App";
 import { addAction } from "../components/ToastNest";
 import Lorer from "../services/Lorer";
 import WorkerModel from "../models/WorkerModel";
@@ -9,6 +9,7 @@ import { resume_will_expire_after } from "./knowledge/workers";
 import { project_offer_will_expire_after } from "./knowledge/projects";
 import { historical_events } from "./knowledge/historical_events";
 import { GAME_START_UNIXTIME } from "./knowledge/date";
+import { sounds } from "../game/knowledge/sounds";
 
 export const rules = {
     matrix_show: {
@@ -66,7 +67,11 @@ export const rules = {
                     this.paySalary(worker, current_tick);
                 });
             }
-
+            console.log(time);
+            if (time.hour === 9 && time.day !== 5 && time.day !== 6) {
+                let audio = new Audio(sounds.new_day_alarm);
+                audio.play();
+            }
             if (time.hour === 0) {
                 console.log("A new day");
 
@@ -409,6 +414,7 @@ export const rules = {
                     // worker quiting
                     if (worker.to_leave) {
                         if (worker.to_leave_ticker <= 0) {
+                            hired--;
                             addAction(
                                 worker.name + " resigned from your company",
                                 {
@@ -468,6 +474,26 @@ export const rules = {
                 if (!worker.in_vacation) {
                     // drain even worker do not work
                     worker.drainStamina();
+                }
+
+                if (worker.to_leave) {
+                    worker.to_leave_ticker--;
+                    if (worker.to_leave_ticker <= 0) {
+                        _.remove(data.workers, wrkr => {
+                            return wrkr.id === worker.id;
+                        });
+
+                        data.statistics.workers_hired.buffer = data.workers.length - 1;
+                        addAction(
+                            worker.name + " left the company",
+                            {
+                                timeOut: 5000,
+                                extendedTimeOut: 3000
+                            },
+                            "success"
+                        );
+                        /*state.data.helpers.addTimelineEvent("leave", "Going to leave", worker, 7 * weeks);*/
+                    }
                 }
 
                 // if you don't pay, your guys don't work

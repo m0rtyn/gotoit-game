@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ChartsController from "./ChartsController";
 import { shares } from "../../game/knowledge/shares";
 import _ from "lodash";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 
 class Exchange extends Component {
     constructor(props) {
@@ -47,71 +48,71 @@ class Exchange extends Component {
                     <div className="">
                         Buy {share.short} for
                         <div>
-                            <button
+                            <DefaultClickSoundButton
                                 className={data.money >= 1 ? "btn btn-info" : "btn btn-info disabled"}
                                 onClick={() => share.onBuy(data, 1)}
                             >
                                 $1
-                            </button>
-                            <button
+                            </DefaultClickSoundButton>
+                            <DefaultClickSoundButton
                                 className={data.money >= 10 ? "btn btn-info" : "btn btn-info disabled"}
                                 onClick={() => share.onBuy(data, 10)}
                             >
                                 $10
-                            </button>
-                            <button
+                            </DefaultClickSoundButton>
+                            <DefaultClickSoundButton
                                 className={data.money >= 100 ? "btn btn-info" : "btn btn-info disabled"}
                                 onClick={() => share.onBuy(data, 100)}
                             >
                                 $100
-                            </button>
-                            <button
+                            </DefaultClickSoundButton>
+                            <DefaultClickSoundButton
                                 className={data.money >= 1000 ? "btn btn-info" : "btn btn-info disabled"}
                                 onClick={() => share.onBuy(data, 1000)}
                             >
                                 $1000
-                            </button>
-                            <button
+                            </DefaultClickSoundButton>
+                            <DefaultClickSoundButton
                                 className={data.money >= 10000 ? "btn btn-info" : "btn btn-info disabled"}
                                 onClick={() => share.onBuy(data, 10000)}
                             >
                                 $10000
-                            </button>
+                            </DefaultClickSoundButton>
                         </div>
                     </div>
                     <div className="">
                         Sell {share.short} for
                         <div>
-                            <button
+                            <DefaultClickSoundButton
                                 className={data.btc >= 1 / data.current_btc_price ? "btn btn-info" : "btn btn-info disabled"}
                                 onClick={() => share.onSell(data, 1)}
                             >
                                 $1
-                            </button>
-                            <button
+                            </DefaultClickSoundButton>
+                            <DefaultClickSoundButton
                                 className={data.btc >= 10 / data.current_btc_price ? "btn btn-info" : "btn btn-info disabled"}
                                 onClick={() => share.onSell(data, 10)}
                             >
                                 $10
-                            </button>
-                            <button
+                            </DefaultClickSoundButton>
+                            <DefaultClickSoundButton
                                 className={data.btc >= 100 / data.current_btc_price ? "btn btn-info" : "btn btn-info disabled"}
                                 onClick={() => share.onSell(data, 100)}
                             >
                                 $100
-                            </button>
-                            <button
+                            </DefaultClickSoundButton>
+                            <DefaultClickSoundButton
                                 className={data.btc >= 1000 / data.current_btc_price ? "btn btn-info" : "btn btn-info disabled"}
                                 onClick={() => share.onSell(data, 1000)}
                             >
                                 $1000
-                            </button>
-                            <button
+                            </DefaultClickSoundButton>
+                            <DefaultClickSoundButton
                                 className={data.btc >= 10000 / data.current_btc_price ? "btn btn-info" : "btn btn-info disabled"}
                                 onClick={() => share.onSell(data, 10000)}
                             >
                                 $10000
-                            </button>
+                            </DefaultClickSoundButton>
                         </div>
                     </div>
                 </div>

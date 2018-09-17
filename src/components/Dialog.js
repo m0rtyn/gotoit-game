@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { DefaultClickSoundButton } from "../game/knowledge/sounds";
 
 class Dialog extends Component {
     constructor(props) {
@@ -16,7 +17,7 @@ class Dialog extends Component {
     render() {
         return (
             <div>
-                <button onClick={document.getElementById(this.props.id).close()}>Close</button>
+                <DefaultClickSoundButton onClick={document.getElementById(this.props.id).close()}>Close</DefaultClickSoundButton>
                 {this.props.children}
             </div>
         );

@@ -85,6 +85,8 @@
     "react-bootstrap": "^0.32.1",
     "react-bootstrap-slider": "^2.1.5",
     "react-chartjs-2": "^2.7.2",
+    "react-click-outside": "github:tj/react-click-outside",
+    "react-click-outside-component": "^1.1.1",
     "react-dev-utils": "6.0.0-next.a671462c",
     "react-dom": "^16.4.2",
     "react-hot-loader": "4.3.5",

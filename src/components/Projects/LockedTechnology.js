@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import * as PropTypes from "prop-types";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 
 export class LockedTechnology extends PureComponent {
     render() {
@@ -9,7 +10,7 @@ export class LockedTechnology extends PureComponent {
                     {!this.props.projectsKnownTechnologies.includes(this.props.technology) ? (
                         <span>
                             <h5 className="text-center slim">
-                                <button
+                                <DefaultClickSoundButton
                                     id={this.props.technologyId}
                                     className={
                                         this.props.price <= this.props.money
@@ -19,7 +20,7 @@ export class LockedTechnology extends PureComponent {
                                     onClick={this.props.onClick}
                                 >
                                     Unlock {this.props.name} {this.props.price}$
-                                </button>
+                                </DefaultClickSoundButton>
                             </h5>
                             <p className="small slim">{this.props.description}</p>
                         </span>

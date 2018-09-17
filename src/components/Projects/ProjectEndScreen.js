@@ -5,6 +5,7 @@ import ProjectsTop from "../../services/ProjectsTop";
 
 import { project_kinds, project_platforms } from "../../game/knowledge/projects";
 import { skills_names } from "../../game/knowledge/skills";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 
 class ProjectEndScreen extends Component {
     constructor(props) {
@@ -28,7 +29,7 @@ class ProjectEndScreen extends Component {
             <div>
                 <div>
                     <p>
-                        <button
+                        <DefaultClickSoundButton
                             className="btn btn-warning float-right"
                             onClick={() => {
                                 //data.helpers.projectArchiving();
@@ -36,7 +37,7 @@ class ProjectEndScreen extends Component {
                             }}
                         >
                             Close
-                        </button>
+                        </DefaultClickSoundButton>
                     </p>
                 </div>
                 <div className="text-center">

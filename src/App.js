@@ -27,6 +27,8 @@ import { companies } from "./game/knowledge/companies";
 
 import { getDefaultState } from "./game/default_state";
 
+import { sounds } from "./game/knowledge/sounds";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "toastr/build/toastr.min.css";
@@ -245,7 +247,7 @@ class App extends Component {
         let helpers = this.state.data.helpers;
 
         let loaded_app_state = JSON.parse(localStorage.getItem(game_name + "_app_state"));
-
+        console.log(loaded_app_state);
         if (loaded_app_state) {
             console.log(loaded_app_state.data);
 
@@ -293,6 +295,10 @@ class App extends Component {
                 item.type === "Resume"
                     ? (loaded_app_state.data.mailbox[id].object = _.create(WorkerModel.prototype, item.object))
                     : (loaded_app_state.data.mailbox[id].object = _.create(ProjectModel.prototype, item.object));
+            });
+
+            _.each(loaded_app_state.data.projects, project => {
+                loaded_app_state.data.projects_technologies[project.id] = {};
             });
 
             loaded_app_state.data.helpers = helpers;
@@ -574,13 +580,14 @@ class App extends Component {
     }
 
     dismissEmployer(id) {
-        hired--;
         const data = this.state.data;
         _.remove(data.workers, worker => {
             return worker.id === id;
         });
-        data.statistics.workers_hired.buffer = data.workers.length - 1;
-        this.setState({ data: data });
+        let worker = _.find(data.workers, worker => {
+            if (worker.id === id) return worker;
+        });
+        worker.proposeLeave();
     }
 
     buyItem(worker_id, skill, item_key) {
@@ -859,6 +866,8 @@ class App extends Component {
     failProject(id) {
         this.projectReporting(id, "fail");
         this.checkState();
+        let audio = new Audio(sounds.fail_project);
+        audio.play();
     }
 
     fixProject(id) {
@@ -881,6 +890,9 @@ class App extends Component {
         data.workers.forEach(worker => {
             worker.facts.project_finished++;
         });
+
+        let audio = new Audio(sounds.finish_project);
+        audio.play();
 
         let all_top_handler = ProjectsTop.getHandler(data.simplified_reports);
         let platform_top_handler = all_top_handler.filter("platform", project.platform);
@@ -1085,6 +1097,8 @@ class App extends Component {
     createMail(letter) {
         const data = this.state.data;
         data.mailbox.push(letter);
+        let audio = new Audio(sounds.new_message);
+        audio.play();
         this.setState({ data: data });
     }
 
@@ -1103,7 +1117,8 @@ class App extends Component {
             default:
                 console.log("unknown currency " + currency);
         }
-
+        let audio = new Audio(sounds.earn_money);
+        audio.play();
         addAction(
             "Income to your wallet: " + quantity + { usd: "$", btc: "BTC" }[currency],
             { timeOut: 5000, extendedTimeOut: 1000 },
@@ -1120,6 +1135,8 @@ class App extends Component {
             return false;
         }
         const data = this.state.data;
+        let audio = new Audio(sounds.charge_money);
+        audio.play();
         data.money -= quantity;
         data.statistics.money_spent.buffer += +quantity;
         if (!silent) addAction("Charge from your wallet: " + quantity + "$", { timeOut: 3000, extendedTimeOut: 2000 }, "warning");
@@ -2034,7 +2051,13 @@ class App extends Component {
 
     render() {
         return (
-            <div id="app">
+            <div
+                id="app"
+                onClick={() => {
+                    let audio = new Audio(sounds.click);
+                    audio.play();
+                }}
+            >
                 <BubblesAnimation onRef={ref => (this.animation = ref)} />
                 <Popup ref={p => (this.popupHandler = p)} />
                 <Layout data={this.state.data} newGame={this.newGame} />

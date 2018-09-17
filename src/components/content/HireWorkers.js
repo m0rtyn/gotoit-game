@@ -6,6 +6,7 @@ import Bar from "../Bar/Bar";
 import { colors } from "../../game/knowledge/colors";
 
 import StatsProgressBar from "../StatsProgressBar";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 
 class HireWorkers extends Component {
     constructor(props) {
@@ -46,12 +47,20 @@ class HireWorkers extends Component {
                         </h4>
 
                         <div className="btn-group btn-group-xs">
-                            <button className="btn btn-success btn-outline" id={candidate.id} onClick={e => this.hire(e, type)}>
+                            <DefaultClickSoundButton
+                                className="btn btn-success btn-outline"
+                                id={candidate.id}
+                                onClick={e => this.hire(e, type)}
+                            >
                                 Hire
-                            </button>
-                            <button className="btn btn-danger btn-outline" id={candidate.id} onClick={e => this.reject(e, type)}>
+                            </DefaultClickSoundButton>
+                            <DefaultClickSoundButton
+                                className="btn btn-danger btn-outline"
+                                id={candidate.id}
+                                onClick={e => this.reject(e, type)}
+                            >
                                 Hide
-                            </button>
+                            </DefaultClickSoundButton>
                         </div>
                     </div>
                     <div className="card-body">

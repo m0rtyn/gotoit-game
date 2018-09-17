@@ -7,11 +7,18 @@
   padding: size(0.5);
   transition: background-color 0.33s ease-out;
   position: relative;
+  overflow: visible;
 
   .card-header {
     align-items: start;
     padding: size(0.25) size(0.5);
     border-bottom: none;
+  }
+
+  .select {
+    position: absolute;
+    width: 100%;
+    z-index: 100;
   }
 
   // .project_icon {

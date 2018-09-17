@@ -5,6 +5,7 @@ import ProjectName from "./ProjectName";
 import StatsProgressBar from "../StatsProgressBar";
 
 import { colors } from "../../game/knowledge/colors";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 
 // import Project from './Project';
 
@@ -45,15 +46,27 @@ class ProjectOfferBlock extends Component {
                     <ProjectName project={candidate} />
 
                     <div className="btn-group btn-group-xs">
-                        <button className="btn btn-success btn-outline" id={candidate.id} onClick={e => this.startOffered(e, type)}>
+                        <DefaultClickSoundButton
+                            className="btn btn-success btn-outline"
+                            id={candidate.id}
+                            onClick={e => this.startOffered(e, type)}
+                        >
                             Start
-                        </button>
-                        <button className="btn btn-warning btn-outline" id={candidate.id} onClick={e => this.acceptOffered(e, type)}>
+                        </DefaultClickSoundButton>
+                        <DefaultClickSoundButton
+                            className="btn btn-warning btn-outline"
+                            id={candidate.id}
+                            onClick={e => this.acceptOffered(e, type)}
+                        >
                             Accept
-                        </button>
-                        <button className="btn btn-danger btn-outline" id={candidate.id} onClick={e => this.reject(e, type)}>
+                        </DefaultClickSoundButton>
+                        <DefaultClickSoundButton
+                            className="btn btn-danger btn-outline"
+                            id={candidate.id}
+                            onClick={e => this.reject(e, type)}
+                        >
                             Hide
-                        </button>
+                        </DefaultClickSoundButton>
                     </div>
                 </div>
                 <div className="card-body">

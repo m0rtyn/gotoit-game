@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { DefaultClickSoundButton } from "../game/knowledge/sounds";
 
 class TeamDialog extends Component {
     render() {
@@ -7,9 +8,9 @@ class TeamDialog extends Component {
                 <div className="modal">
                     <div className="modal-dialog">
                         <div className="modal-content">
-                            <button className="close" onClick={this.props.closePortal}>
+                            <DefaultClickSoundButton className="close" onClick={this.props.closePortal}>
                                 <span aria-hidden="true">×</span>
-                            </button>
+                            </DefaultClickSoundButton>
                             {this.props.children}
                         </div>
                     </div>

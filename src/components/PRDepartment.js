@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { colors } from "../game/knowledge/colors";
 import { public_relations } from "../game/knowledge/public_relations";
 import Bar from "./Bar/Bar";
+import { DefaultClickSoundButton } from "../game/knowledge/sounds";
 
 class PRDepartment extends Component {
     constructor(props) {
@@ -48,37 +49,37 @@ class PRDepartment extends Component {
 
                 <div>
                     <div>
-                        <button
+                        <DefaultClickSoundButton
                             className="btn btn-info "
                             onClick={() => {
                                 public_relations["forum_thread"].onClick(data);
                             }}
                         >
                             {public_relations["forum_thread"].name}
-                        </button>
+                        </DefaultClickSoundButton>
                     </div>
                     <div>
-                        <button
+                        <DefaultClickSoundButton
                             className={250 <= data.money ? "btn btn-info " : "btn btn-info disabled "}
                             onClick={() => {
                                 public_relations["search_specialist"].onClick(data);
                             }}
                         >
                             {public_relations["search_specialist"].name}
-                        </button>
+                        </DefaultClickSoundButton>
                     </div>
                     <div>
-                        <button
+                        <DefaultClickSoundButton
                             className={100 <= data.money ? "btn btn-info " : "btn btn-info disabled "}
                             onClick={() => {
                                 public_relations["search_job"].onClick(data);
                             }}
                         >
                             {public_relations["search_job"].name}
-                        </button>
+                        </DefaultClickSoundButton>
                     </div>
                     <div>
-                        <button
+                        <DefaultClickSoundButton
                             className={
                                 1000 <= data.money && this.state.next_click_will_able_at < data.date.tick
                                     ? "btn btn-info "
@@ -90,7 +91,7 @@ class PRDepartment extends Component {
                             }}
                         >
                             {public_relations["big_event"].name}
-                        </button>
+                        </DefaultClickSoundButton>
                     </div>
                 </div>
             </div>
