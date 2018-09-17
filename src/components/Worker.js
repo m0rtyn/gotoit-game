@@ -174,7 +174,7 @@ class Worker extends Component {
         </div>
         {
           this.state.modalOpen ? (
-          <Modal closeModal={this.closeModal}>
+          <Modal closeModal={this.closeModal} showCloseButton={true}>
             <WorkerModal data={data} worker={worker} stats_progressbar_data={stats_progressbar_data}/>
           </Modal>
           ) : ''

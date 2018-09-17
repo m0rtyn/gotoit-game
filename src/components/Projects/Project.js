@@ -303,7 +303,7 @@ class Project extends Component {
                         <ProjectMoney project={project} penalty={penalty} />
                     </ProjectName>
                     {this.state.modalOpen ? (
-                        <Modal closeModal={this.closeModal}>
+                        <Modal closeModal={this.closeModal} showCloseButton={true}>
                             <ProjectModal
                                 project={project}
                                 data={data}
