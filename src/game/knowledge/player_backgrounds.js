@@ -29,7 +29,7 @@ export const player_backgrounds = {
         }
     },
     coworker: {
-        name: "Founder & co",
+        name: "Startup founder & co",
         money: 10000,
         might: "team",
         start_tech: [],
