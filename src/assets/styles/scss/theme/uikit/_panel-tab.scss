@@ -22,7 +22,7 @@
     font-size: 13px;
     text-align: center;
     background-color: transparent;
-    padding: 10px 16px;
+    padding: 10px 5px;
     transition: 0.3s;
     border-radius: size(2) size(2) 0 0;
     box-shadow:
@@ -70,13 +70,15 @@
     }
 
     .icon {
+      margin-top: 4px;
       margin-right: 4px;
-      width: 30px;
-      height: 30px;
+      width: 21px;
+      height: 21px;
     }
 
     .badge {
       margin-top: 4px;
+      background-color: rgba(255, 103, 89, 1);
       width: 26px;
       height: 20px;
       line-height: 20px;
@@ -203,7 +205,7 @@
   }
 
   .tab-content {
-    padding-left: 20px;
+    padding-left: 10px;
   }
 }
 

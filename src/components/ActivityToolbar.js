@@ -44,7 +44,7 @@ class ActivityToolbar extends Component {
                                 <div>Mail</div>
                             </div>
                             {unread_messages_count !== 0 ? (
-                                <span className="badge badge-pill badge-pink">{unread_messages_count}</span>
+                                <span className="badge badge-pill badge-mail">{unread_messages_count}</span>
                             ) : (
                                 ""
                             )}
@@ -86,7 +86,7 @@ class ActivityToolbar extends Component {
                         >
                             <div className="tab-content">
                                 <img src={market_analysis} className="icon" />
-                                <div>Analitics</div>
+                                <div>Analytics</div>
                             </div>
                         </TabClickSoundButton>
                     </li>

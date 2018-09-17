@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 
-import Select from "react-select";
 import "react-select/dist/react-select.css";
 import "bootstrap-slider/dist/css/bootstrap-slider.min.css";
 
 import _ from "lodash";
+
+import Select from "react-select";
+import ClickOutside from "react-click-outside-component";
 
 import Modal from "../Modal/Modal";
 import ProjectName from "./ProjectName";
@@ -50,12 +52,6 @@ class Project extends Component {
         if (technologies[event.target.id].price <= this.props.data.money) this.data.helpers.unlockTechnology(event.target.id);
     };
 
-    onSelectChange = event => {
-        this.props.data.helpers.changeTeamSelector();
-        this.props.data.helpers.modifyRelation(event.value.id, this.props.project.id);
-        this.props.data.helpers.modifyHoveredObjects();
-    };
-
     onRelease = () => {
         this.props.data.helpers.fixProject(this.props.project.id);
     };
@@ -64,6 +60,12 @@ class Project extends Component {
         if (window.confirm(`Reject project ${this.props.project.name}? (penalty: ${this.props.project.penalty})`)) {
             this.close();
         }
+    };
+
+    onSelectChange = event => {
+        this.props.data.helpers.changeTeamSelector();
+        this.props.data.helpers.modifyRelation(event.value.id, this.props.project.id);
+        this.props.data.helpers.modifyHoveredObjects();
     };
 
     open = () => {
@@ -165,6 +167,11 @@ class Project extends Component {
                 )
             };
         });
+    };
+
+    closeSelect = () => {
+        console.log("click outside");
+        this.props.data.helpers.changeTeamSelector();
     };
 
     render() {
@@ -340,7 +347,7 @@ class Project extends Component {
                         <div > Tasks: {project.tasksQuantity()}/{project.planedTasksQuantity()} </div>
                         <div > Bugs: <span className="text-danger">{project.bugsQuantity()}</span> </div>
                         <div > Complexity: {project.complexity} </div>
-                        <div > Iteration: {project.iteration} </div>
+                        <div > Iteration: {project.iteratio n} </div>
                     </div> */}
                     {/* TODO: ^ DESIGN TEMPORARY CLEANING */}
 
@@ -350,13 +357,14 @@ class Project extends Component {
                         {team_label}
                         <DefaultClickSoundButton
                             className={`btn icon-add btn-add-worker ${data.project_team_selector === id ? "active" : ""}`}
-                            onClick={() => changeTeamSelector(project)}
+                            onClick={() => {
+                                changeTeamSelector(project);
+                            }}
                         />
                         {data.project_team_selector === id ? (
-                            <div>
+                            <ClickOutside onClickOutside={this.closeSelect} className="select">
                                 <Select
                                     onChange={this.onSelectChange}
-                                    style={{ overflow: "visible" }}
                                     options={(() => {
                                         let arr = [];
                                         data.workers.forEach(worker => {
@@ -368,7 +376,7 @@ class Project extends Component {
                                     })()}
                                     value={null}
                                 />
-                            </div>
+                            </ClickOutside>
                         ) : null}
                     </div>
                     <div className="project-techs">
