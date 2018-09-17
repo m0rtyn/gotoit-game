@@ -7,6 +7,7 @@ import StatsBar from "../StatsBar";
 
 import ProjectName from "../Projects/ProjectName";
 import { Avatar } from "../Projects/Avatar";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 
 class Offer extends Component {
     constructor(props) {
@@ -16,18 +17,14 @@ class Offer extends Component {
             //   end_screen_project: null
         };
     }
-    acceptOffered(event) {
-        this.props.data.helpers.acceptOffered(event.target.id);
+
+    startOffered(id) {
+        this.props.data.helpers.startOffered(id);
         this.props.closeModal();
     }
 
-    startOffered(event) {
-        this.props.data.helpers.startOffered(event.target.id);
-        this.props.closeModal();
-    }
-
-    reject(event) {
-        this.props.data.helpers.rejectOffered(event.target.id);
+    reject(id) {
+        this.props.data.helpers.rejectOffered(id);
         this.props.expired = true;
         this.props.closeModal();
     }
@@ -79,18 +76,21 @@ class Offer extends Component {
                             !expired ? (
                                 <div>
                                     <h3>{`Will expire in ${hours_to_expire} hours`}</h3>
-                                    <div className="btn-group">
-                                        <button className="btn btn-success" id={project.id} onClick={e => this.startOffered(e)}>
+                                    <div className="btn_group">
+                                        <DefaultClickSoundButton
+                                            className="btn btn-success"
+                                            id={project.id}
+                                            onClick={e => this.startOffered(project.id)}
+                                        >
                                             Start
-                                        </button>
-                                        {/*&nbsp;
-                                        <button className="btn btn-warning" id={project.id} onClick={e => this.acceptOffered(e)}>
-                                            Accept
-                                        </button>*/}
-                                        &nbsp;
-                                        <button className="btn btn-danger" id={project.id} onClick={e => this.reject(e)}>
-                                            Hide
-                                        </button>
+                                        </DefaultClickSoundButton>
+                                        <DefaultClickSoundButton
+                                            className="btn btn-danger"
+                                            id={project.id}
+                                            onClick={e => this.reject(project.id)}
+                                        >
+                                            Reject
+                                        </DefaultClickSoundButton>
                                     </div>
                                 </div>
                             ) : (

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Portal from "react-portal";
 import _ from "lodash";
 
 import Modal from "./Modal/Modal";
@@ -15,6 +14,7 @@ import { player_backgrounds } from "../game/knowledge/player_backgrounds";
 import { Avatar } from "./Projects/Avatar";
 import { generateFemaleAvatar, generateMaleAvatar, customizeAvatar, male_asset, female_asset } from "../game/knowledge/worker_avatar";
 import logo from "../assets/images/go2it-logo.png";
+import { DefaultClickSoundButton, sounds } from "../game/knowledge/sounds";
 
 export var player = null;
 
@@ -172,14 +172,10 @@ class Creation extends Component {
         data.helpers.offerProject(ProjectModel.generate(3, 1, "player"));
 
         data.stage = "game";
-        this.refs.creation.closePortal();
 
         this.props.data.helpers.playGame();
     }
 
-    componentDidMount() {
-        this.refs.creation.openPortal();
-    }
     generateAvatar = gender => {
         let avatar;
         if (gender === "male") {
@@ -269,96 +265,105 @@ class Creation extends Component {
             return (
                 <div className="customizator-item" key={key}>
                     {/* <h4></h4> */}
-                    <button onClick={() => this.fragmentDec(key)}>{"<"}</button>
+                    <DefaultClickSoundButton onClick={() => this.fragmentDec(key)}>{"<"}</DefaultClickSoundButton>
                     <span>{asset[key][this.state.avatar[key]].name}</span>
-                    <button onClick={() => this.fragmentInc(key)}>{">"}</button>
+                    <DefaultClickSoundButton onClick={() => this.fragmentInc(key)}>{">"}</DefaultClickSoundButton>
                 </div>
             );
         });
         return (
             <div>
                 {data.stage === "start" ? (
-                    <Portal ref="creation">
-                        <Modal>
-                            {this.state.step === "welcome" ? (
-                                <div className="modal-content creation welcome">
-                                    <div className="modal-body">
-                                        <img className="logo" src={logo} />
-                                        <h4 className="lead">
-                                            <p>This game is about software development and the rise of your company to the heights.</p>
-                                            <p>
-                                                Start with small contracts, save up some money, hire a couple of assistants and try to
-                                                create something really cool!
-                                            </p>
-                                            <p className="warning text-center">The game is in open beta</p>
-                                        </h4>
-                                    </div>
-                                    <div className="modal-footer mx-auto">
-                                        <button
-                                            className="btn btn-success btn-lg btn-"
-                                            onClick={() => {
-                                                this.setState({ step: "appearance" });
-                                            }}
-                                        >
-                                            Create Your Company!
-                                        </button>
-                                    </div>
+                    <Modal>
+                        {this.state.step === "welcome" ? (
+                            <div className="modal-content creation welcome">
+                                <div className="modal-body">
+                                    <img className="logo" src={logo} />
+                                    <h4 className="lead">
+                                        <p>This game is about software development and the rise of your company to the heights.</p>
+                                        <p>
+                                            Start with small contracts, save up some money, hire a couple of assistants and try to create
+                                            something really cool!
+                                        </p>
+                                        <p className="warning text-center">The game is in open beta</p>
+                                    </h4>
                                 </div>
-                            ) : (
-                                ""
-                            )}
+                                <div className="modal-footer mx-auto">
+                                    <DefaultClickSoundButton
+                                        className="btn btn-success btn-lg btn-"
+                                        onClick={() => {
+                                            this.setState({ step: "appearance" });
+                                        }}
+                                    >
+                                        Create Your Company!
+                                    </DefaultClickSoundButton>
+                                </div>
+                            </div>
+                        ) : (
+                            ""
+                        )}
 
-                            {this.state.step === "appearance" ? (
-                                <div className="modal-content creation appearance">
-                                    <div className="modal-header">
-                                        <p className="modal-title text-center">Create your character</p>
-                                    </div>
-                                    <div className="modal-body">
-                                        {/* <section className="card creation-person"> */}
-                                        <div className="inputs">
-                                            <h3 className="modal-title">Your name</h3>
-                                            <div>
-                                                <div className="input-group creation-player-name ">
-                                                    <input
-                                                        type="text"
-                                                        name="background"
-                                                        className="form-control"
-                                                        value={this.state.suggest_name}
-                                                        onChange={event => {
-                                                            this.setState({
-                                                                suggest_name: event.target.value
-                                                            });
-                                                        }}
-                                                    />
-                                                </div>
+                        {this.state.step === "appearance" ? (
+                            <div className="modal-content creation appearance">
+                                <div className="modal-header">
+                                    <p className="modal-title text-center">Create your character</p>
+                                </div>
+                                <div className="modal-body">
+                                    {/* <section className="card creation-person"> */}
+                                    <div className="inputs">
+                                        <h3 className="modal-title">Your name</h3>
+                                        <div>
+                                            <div className="input-group creation-player-name ">
+                                                <input
+                                                    type="text"
+                                                    name="background"
+                                                    className="form-control"
+                                                    value={this.state.suggest_name}
+                                                    onChange={event => {
+                                                        let audio = new Audio(sounds["default_click"]);
+                                                        audio.play();
+                                                        this.setState({
+                                                            suggest_name: event.target.value
+                                                        });
+                                                    }}
+                                                />
                                             </div>
-                                            <div className="creation-gender-select">
-                                                <h3 className="modal-title mt-16">Choose gender</h3>
-                                                <input
-                                                    className="form-check-input"
-                                                    id="male-gender-radio-button"
-                                                    type="radio"
-                                                    value="male"
-                                                    checked={this.state.gender === "male"}
-                                                    onChange={this.handleGenderChange}
-                                                />
-                                                <label className="form-check-label btn btn-sm" htmlFor="male-gender-radio-button">
-                                                    <span className="icon-gender-men" />
-                                                    Male
-                                                </label>
-                                                <input
-                                                    className="form-check-input"
-                                                    id="female-gender-radio-button"
-                                                    type="radio"
-                                                    value="female"
-                                                    checked={this.state.gender === "female"}
-                                                    onChange={this.handleGenderChange}
-                                                />
-                                                <label className="form-check-label btn btn-sm" htmlFor="female-gender-radio-button">
-                                                    <span className="icon-gender-women" />
-                                                    Female
-                                                </label>
-                                                {/* <input
+                                        </div>
+                                        <div className="creation-gender-select">
+                                            <h3 className="modal-title mt-16">Choose gender</h3>
+                                            <input
+                                                className="form-check-input"
+                                                id="male-gender-radio-button"
+                                                type="radio"
+                                                value="male"
+                                                checked={this.state.gender === "male"}
+                                                onChange={this.handleGenderChange}
+                                                onClick={() => {
+                                                    let audio = new Audio(sounds["default_click"]);
+                                                    audio.play();
+                                                }}
+                                            />
+                                            <label className="form-check-label btn btn-sm" htmlFor="male-gender-radio-button">
+                                                <span className="icon-gender-men" />
+                                                Male
+                                            </label>
+                                            <input
+                                                className="form-check-input"
+                                                id="female-gender-radio-button"
+                                                type="radio"
+                                                value="female"
+                                                checked={this.state.gender === "female"}
+                                                onChange={this.handleGenderChange}
+                                                onClick={() => {
+                                                    let audio = new Audio(sounds["default_click"]);
+                                                    audio.play();
+                                                }}
+                                            />
+                                            <label className="form-check-label btn btn-sm" htmlFor="female-gender-radio-button">
+                                                <span className="icon-gender-women" />
+                                                Female
+                                            </label>
+                                            {/* <input
                                                     className="form-check-input"
                                                     id="female-gender-radio-button"
                                                     type="radio"
@@ -366,186 +371,192 @@ class Creation extends Component {
                                                     checked={this.state.gender === "other"}
                                                     onChange={this.handleGenderChange}
                                                 /> */}
-                                                {/* <label
+                                            {/* <label
                                                     className="form-check-label btn btn-sm btn-primary"
                                                     htmlFor="female-gender-radio-button"
                                                 >
                                                     <span className="icon-gender-other" />
                                                     Other
                                                 </label> */}
-                                            </div>
-                                            <h3 className="modal-title mt-16">Customization</h3>
-                                            <div className="customizator">{selectors}</div>
                                         </div>
-                                        <div className="portrait">
-                                            <Avatar
-                                                className="player-avatar worker-avatar"
-                                                name={"player avatar"}
-                                                // style={{ position: 'absolute'}}
-                                                sources={_.toPairs(this.state.realAvatar)}
-                                            />
-                                            <button className="btn btn-primary" onClick={this.randomize}>
-                                                Randomize
-                                            </button>
-                                        </div>
-                                        {/* </section> */}
+                                        <h3 className="modal-title mt-16">Customization</h3>
+                                        <div className="customizator">{selectors}</div>
                                     </div>
-
-                                    <div className="modal-footer ml-auto">
-                                        <button
-                                            className="btn btn-lg btn-success"
-                                            onClick={() => {
-                                                this.setState({ step: "background" });
-                                            }}
-                                        >
-                                            Next
-                                        </button>
+                                    <div className="portrait">
+                                        <Avatar
+                                            className="player-avatar worker-avatar"
+                                            name={"player avatar"}
+                                            // style={{ position: 'absolute'}}
+                                            sources={_.toPairs(this.state.realAvatar)}
+                                        />
+                                        <DefaultClickSoundButton className="btn btn-primary" onClick={this.randomize}>
+                                            Randomize
+                                        </DefaultClickSoundButton>
                                     </div>
+                                    {/* </section> */}
                                 </div>
-                            ) : (
-                                ""
-                            )}
-                            {this.state.step === "background" ? (
-                                <div className="modal-content creation background">
-                                    <div className="modal-body">
-                                        <section className="card creation-background">
-                                            <div className="card-body">
-                                                <div className="creation-background-select">
-                                                    <div className="creation-select-column">
-                                                        {Object.keys(player_backgrounds).map(background => {
-                                                            return (
-                                                                <div key={background}>
-                                                                    <input
-                                                                        className="form-check-input"
-                                                                        id={background + "-radio-button"}
-                                                                        type="radio"
-                                                                        name="background"
-                                                                        value={background}
-                                                                        checked={this.state.selected_background === background}
-                                                                        onChange={event => {
-                                                                            this.setState({
-                                                                                selected_background: event.target.value
-                                                                            });
-                                                                        }}
-                                                                    />
-                                                                    <label
-                                                                        className="form-check-label btn btn-sm"
-                                                                        htmlFor={background + "-radio-button"}
-                                                                    >
-                                                                        {player_backgrounds[background].name}
-                                                                    </label>
-                                                                </div>
-                                                            );
-                                                        })}
-                                                    </div>
-                                                    <div className="creation-description-column">
-                                                        <h3 className="text-center modal-title">Choose background</h3>
 
-                                                        <div className="creation-description lead text-center">
-                                                            {player_backgrounds[this.state.selected_background].text}
-                                                            <br />
-                                                            {player_backgrounds[this.state.selected_background].start_tech.length > 0 ? (
-                                                                <span>
-                                                                    Start tech:{" "}
-                                                                    {
-                                                                        technologies[
-                                                                            player_backgrounds[this.state.selected_background].start_tech
-                                                                        ].name
-                                                                    }
-                                                                </span>
-                                                            ) : (
-                                                                ""
-                                                            )}
-                                                        </div>
+                                <div className="modal-footer ml-auto">
+                                    <DefaultClickSoundButton
+                                        className="btn btn-lg btn-success"
+                                        onClick={() => {
+                                            this.setState({ step: "background" });
+                                        }}
+                                    >
+                                        Next
+                                    </DefaultClickSoundButton>
+                                </div>
+                            </div>
+                        ) : (
+                            ""
+                        )}
+                        {this.state.step === "background" ? (
+                            <div className="modal-content creation background">
+                                <div className="modal-body">
+                                    <section className="card creation-background">
+                                        <div className="card-body">
+                                            <div className="creation-background-select">
+                                                <div className="creation-select-column">
+                                                    {Object.keys(player_backgrounds).map(background => {
+                                                        return (
+                                                            <div key={background}>
+                                                                <input
+                                                                    className="form-check-input"
+                                                                    id={background + "-radio-button"}
+                                                                    type="radio"
+                                                                    name="background"
+                                                                    value={background}
+                                                                    checked={this.state.selected_background === background}
+                                                                    onChange={event => {
+                                                                        this.setState({
+                                                                            selected_background: event.target.value
+                                                                        });
+                                                                    }}
+                                                                    onClick={() => {
+                                                                        let audio = new Audio(sounds["default_click"]);
+                                                                        audio.play();
+                                                                    }}
+                                                                />
+                                                                <label
+                                                                    className="form-check-label btn btn-sm"
+                                                                    htmlFor={background + "-radio-button"}
+                                                                >
+                                                                    {player_backgrounds[background].name}
+                                                                </label>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
+                                                <div className="creation-description-column">
+                                                    <h3 className="text-center modal-title">Choose background</h3>
+
+                                                    <div className="creation-description lead text-center">
+                                                        {player_backgrounds[this.state.selected_background].text}
+                                                        <br />
+                                                        {player_backgrounds[this.state.selected_background].start_tech.length > 0 ? (
+                                                            <span>
+                                                                Start tech:{" "}
+                                                                {
+                                                                    technologies[
+                                                                        player_backgrounds[this.state.selected_background].start_tech
+                                                                    ].name
+                                                                }
+                                                            </span>
+                                                        ) : (
+                                                            ""
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>
-                                        </section>
+                                        </div>
+                                    </section>
 
-                                        <section className="card creation-technology">
-                                            <div className="card-body">
-                                                <div className="creation-might-select">
-                                                    <div className="creation-select-column">
-                                                        {Object.keys(selected_background.spices).map(spice => {
-                                                            return (
-                                                                <div key={spice} className="">
-                                                                    <input
-                                                                        className="form-check-input"
-                                                                        id={spice + "-radio-button"}
-                                                                        type="radio"
-                                                                        name="spice"
-                                                                        value={spice}
-                                                                        checked={this.state[this.state.selected_background] === spice}
-                                                                        onChange={event => {
-                                                                            const state = {};
-                                                                            state[this.state.selected_background] = event.target.value;
-                                                                            this.setState(state);
-                                                                        }}
-                                                                    />
-                                                                    <label
-                                                                        className="form-check-label btn btn-sm"
-                                                                        htmlFor={spice + "-radio-button"}
-                                                                    >
-                                                                        {selected_background.spices[spice].name}
-                                                                    </label>
-                                                                </div>
-                                                            );
-                                                        })}
-                                                    </div>
-                                                    <div className="creation-description-column">
-                                                        <h3 className="text-center modal-title">Start {selected_background.might}:</h3>
-                                                        <div className="creation-description lead text-center">
-                                                            {
-                                                                selected_background.spices[this.state[this.state.selected_background]]
-                                                                    .description
-                                                            }
-                                                            <br />
-                                                            {player_backgrounds[this.state.selected_background].spices[
-                                                                this.state[this.state.selected_background]
-                                                            ].start_tech.length > 0 ? (
-                                                                <span>
-                                                                    Start tech:{" "}
-                                                                    {
-                                                                        technologies[
-                                                                            player_backgrounds[this.state.selected_background].spices[
-                                                                                this.state[this.state.selected_background]
-                                                                            ].start_tech
-                                                                        ].name
-                                                                    }
-                                                                </span>
-                                                            ) : (
-                                                                ""
-                                                            )}
-                                                        </div>
+                                    <section className="card creation-technology">
+                                        <div className="card-body">
+                                            <div className="creation-might-select">
+                                                <div className="creation-select-column">
+                                                    {Object.keys(selected_background.spices).map(spice => {
+                                                        return (
+                                                            <div key={spice} className="">
+                                                                <input
+                                                                    className="form-check-input"
+                                                                    id={spice + "-radio-button"}
+                                                                    type="radio"
+                                                                    name="spice"
+                                                                    value={spice}
+                                                                    checked={this.state[this.state.selected_background] === spice}
+                                                                    onChange={event => {
+                                                                        const state = {};
+                                                                        let audio = new Audio(sounds["default_click"]);
+                                                                        audio.play();
+                                                                        state[this.state.selected_background] = event.target.value;
+                                                                        this.setState(state);
+                                                                    }}
+                                                                    onClick={() => {
+                                                                        let audio = new Audio(sounds["default_click"]);
+                                                                        audio.play();
+                                                                    }}
+                                                                />
+                                                                <label
+                                                                    className="form-check-label btn btn-sm"
+                                                                    htmlFor={spice + "-radio-button"}
+                                                                >
+                                                                    {selected_background.spices[spice].name}
+                                                                </label>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
+                                                <div className="creation-description-column">
+                                                    <h3 className="text-center modal-title">Start {selected_background.might}:</h3>
+                                                    <div className="creation-description lead text-center">
+                                                        {selected_background.spices[this.state[this.state.selected_background]].description}
+                                                        <br />
+                                                        {player_backgrounds[this.state.selected_background].spices[
+                                                            this.state[this.state.selected_background]
+                                                        ].start_tech.length > 0 ? (
+                                                            <span>
+                                                                Start tech:{" "}
+                                                                {
+                                                                    technologies[
+                                                                        player_backgrounds[this.state.selected_background].spices[
+                                                                            this.state[this.state.selected_background]
+                                                                        ].start_tech
+                                                                    ].name
+                                                                }
+                                                            </span>
+                                                        ) : (
+                                                            ""
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>
-                                        </section>
+                                        </div>
+                                    </section>
 
-                                        <section className="card creation-skills">
-                                            <div className="card-body">
-                                                <div className="creation-start-skills">
-                                                    <h3 className="text-center modal-title">Your start skills:</h3>
-                                                    <StatsBar stats={stats_data} data={data} />
+                                    <section className="card creation-skills">
+                                        <div className="card-body">
+                                            <div className="creation-start-skills">
+                                                <h3 className="text-center modal-title">Your start skills:</h3>
+                                                <StatsBar stats={stats_data} data={data} />
 
-                                                    {/* <StatsProgressBar type={'design'} hideCheckbox={true} max_stat={data.max_stats_projects_offered} stats={stats_progressbar_data} worker={candidate} data={data}/>
+                                                {/* <StatsProgressBar type={'design'} hideCheckbox={true} max_stat={data.max_stats_projects_offered} stats={stats_progressbar_data} worker={candidate} data={data}/>
                                                     <StatsProgressBar type={'program'} hideCheckbox={true} max_stat={data.max_stats_projects_offered} stats={stats_progressbar_data} worker={candidate} data={data}/>
                                                     <StatsProgressBar type={'manage'} hideCheckbox={true} max_stat={data.max_stats_projects_offered} stats={stats_progressbar_data} worker={candidate} data={data}/> */}
-                                                </div>
                                             </div>
-                                        </section>
-                                    </div>
-                                    <div className="modal-footer ml-auto">
-                                        <button className="btn btn-success btn-lg btn-" onClick={this.embark}>
-                                            Embark
-                                        </button>
-                                    </div>
+                                        </div>
+                                    </section>
                                 </div>
-                            ) : (
-                                ""
-                            )}
-                        </Modal>
-                    </Portal>
+                                <div className="modal-footer ml-auto">
+                                    <DefaultClickSoundButton className="btn btn-success btn-lg btn-" onClick={this.embark}>
+                                        Embark
+                                    </DefaultClickSoundButton>
+                                </div>
+                            </div>
+                        ) : (
+                            ""
+                        )}
+                    </Modal>
                 ) : (
                     ""
                 )}

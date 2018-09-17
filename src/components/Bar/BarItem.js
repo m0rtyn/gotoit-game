@@ -31,7 +31,7 @@ class BarItem extends PureComponent {
                     width: `${width}%`
                 }}
                 id={id}
-                className="progress-bar"
+                className="progress-bar transition"
                 role="progressbar"
             >
                 {value + " "} {showName ? name : null}

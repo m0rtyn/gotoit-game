@@ -1,5 +1,6 @@
 import React from "react";
 import { FormattedDate } from "react-intl";
+import { DefaultClickSoundButton } from "../game/knowledge/sounds";
 
 const HistoricalEvent = props => {
     return (
@@ -9,14 +10,14 @@ const HistoricalEvent = props => {
                     <h2>{props.content.name}</h2>
                 </span>
                 <span>
-                    <button
+                    <DefaultClickSoundButton
                         className="btn btn-warning"
                         onClick={() => {
                             props.closeModal();
                         }}
                     >
                         Close
-                    </button>
+                    </DefaultClickSoundButton>
                 </span>
             </div>
             <div>

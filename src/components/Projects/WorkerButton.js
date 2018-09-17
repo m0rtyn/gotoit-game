@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import * as PropTypes from "prop-types";
 import { Avatar } from "./Avatar";
 import _ from "lodash";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 
 export class WorkerButton extends PureComponent {
     constructor(props) {
@@ -13,7 +14,7 @@ export class WorkerButton extends PureComponent {
 
     render() {
         return (
-            <button
+            <DefaultClickSoundButton
                 className="btn btn-worker"
                 onClick={this.props.action}
                 onMouseOver={() => {
@@ -25,7 +26,7 @@ export class WorkerButton extends PureComponent {
             >
                 <Avatar className="worker-avatar" name={this.props.name} sources={_.toPairs(this.props.avatar)} />
                 <span className={`${this.state.avatarHovered ? "icon-close" : ""}`} />
-            </button>
+            </DefaultClickSoundButton>
         );
     }
 }

@@ -13,8 +13,8 @@
   }
 
   .badge {
-    height: var(--height-xs);
-    line-height: var(--height-xs);
+    height: 24px;
+    line-height: 24px;
     border-radius: calc(var(--height-xs) / 2);
     padding: 0 0.75rem;
     font-size: 0.875rem;
@@ -36,7 +36,6 @@
         opacity: 1;
       }
     }
-
   }
 
   .badge:not([class*="badge-"]) {
