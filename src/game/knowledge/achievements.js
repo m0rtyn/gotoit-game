@@ -28,6 +28,8 @@ import bronze_top_projects from "../../assets/images/achievements/bronze_top_pro
 import silver_top_projects from "../../assets/images/achievements/silver_top_projects.png";
 import gold_top_projects from "../../assets/images/achievements/gold_top_projects.png";
 
+import _ from "lodash";
+
 export const achievements = {
     // achievements types: breakthrough :: conquest :: challenge
 
@@ -207,31 +209,46 @@ export const achievements = {
     bronze_dreams: {
         rank: "bronze",
         type: "conquest",
-        name: "Dreams come true",
+        name: "Benefactor",
         text: "Fulfiil the dreams of your employees.",
         icon: bronze_dreams,
         rule: state => {
-            return false;
+            const data = state.data;
+            const fulfilled_dreams_list = data.workers.map(worker => {
+                return worker.dreams_come_true;
+            });
+
+            return _.sum(fulfilled_dreams_list) >= 10;
         }
     },
     silver_dreams: {
         rank: "silver",
         type: "conquesth",
-        name: "Dreams come true",
+        name: "Benefactor",
         text: "Fulfiil the dreams of your employees.",
         icon: silver_dreams,
         rule: state => {
-            return false;
+            const data = state.data;
+            const fulfilled_dreams_list = data.workers.map(worker => {
+                return worker.dreams_come_true;
+            });
+
+            return _.sum(fulfilled_dreams_list) >= 25;
         }
     },
     gold_dreams: {
         rank: "gold",
         type: "conquest",
-        name: "Dreams come true",
+        name: "Benefactor",
         text: "Fulfiil the dreams of your employees.",
         icon: gold_dreams,
         rule: state => {
-            return false;
+            const data = state.data;
+            const fulfilled_dreams_list = data.workers.map(worker => {
+                return worker.dreams_come_true;
+            });
+
+            return _.sum(fulfilled_dreams_list) >= 100;
         }
     },
 
@@ -318,31 +335,31 @@ export const achievements = {
     bronze_top_projects: {
         rank: "bronze",
         type: "challenge",
-        name: "Top projects finished",
+        name: "Top quality",
         text: "Create 1 project that will take the top place in the market.",
         icon: bronze_top_projects,
         rule: state => {
-            return state.top_projects_finished >= 1;
+            return state.data.top_projects_finished >= 1;
         }
     },
     silver_top_projects: {
         rank: "silver",
         type: "challenge",
-        name: "Top projects finished",
+        name: "Top quality",
         text: "Create 10 projects that will take the top place in the market.",
         icon: silver_top_projects,
         rule: state => {
-            return state.top_projects_finished >= 10;
+            return state.data.top_projects_finished >= 10;
         }
     },
     gold_top_projects: {
         rank: "gold",
         type: "challenge",
-        name: "Top projects finished",
+        name: "Top quality",
         text: "Create 100 projects that will take the top place in the market.",
         icon: gold_top_projects,
         rule: state => {
-            return state.top_projects_finished >= 100;
+            return state.data.top_projects_finished >= 100;
         }
     }
 };
