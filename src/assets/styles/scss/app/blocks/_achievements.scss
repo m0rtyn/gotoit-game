@@ -1,53 +1,38 @@
 .achievements {
+
+  & {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   .achievement {
-    border: 2px solid black;
-    height: 10vw;
-    width: 10vw;
+    border: 2px solid rgba(0, 51, 51, 0.2);
+    border-radius: 8px;
+    margin: 8px 8px;
+    height: 160px;
+    width: 160px;
+    display: 1 0 25%;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+    text-align: center;
+
+    h3 {
+      font-size: 18px;
+      line-height: 21px;
+    }
   }
 
-  .medals-bar {
-    background-color: #fff;
-    display: flex;
+  .icon {
+    width: 80px;
+    height: 80px;
+    margin: 32px auto 8px;
+
+    img {
+      border-radius: 8px;
+    }
   }
 
-  .medal {
-    height: 2vw;
-    width: 2vw;
-    border-radius: 50%;
-    border: 1px solid black;
-    background-color: #fff;
+  .blackAndWhite {
+    filter: grayscale(100%);
   }
-
-  .bronze-medal-unlocked {
-    background-color: #cd7f32;
-  }
-
-  .silver-medal-unlocked {
-    background-color: #c0c0c0;
-  }
-
-  .gold-medal-unlocked {
-    background-color: #daa520;
-  }
-
-  .bronze-medal-locked {
-    background-color: #cd7f32;
-    opacity: 0.4;
-  }
-
-  .silver-medal-locked {
-    background-color: #c0c0c0;
-    opacity: 0.4;
-  }
-
-  .gold-medal-locked {
-    background-color: #daa520;
-    opacity: 0.4;
-  }
-
 }

@@ -14,6 +14,8 @@ import ValueCache from "../services/ValueCache";
 
 import { getData } from "../App";
 
+import { get_worker_dream } from "../game/knowledge/workers_dreams";
+
 import { generateFemaleAvatar, generateMaleAvatar } from "../game/knowledge/worker_avatar";
 
 class WorkerModel {
@@ -36,6 +38,9 @@ class WorkerModel {
             variability: _.random(0, 4)
         };
 
+        this.dream = this.is_player ? null : get_worker_dream();
+        this.dreams_come_true = 0;
+        this.dream_completing_multiplier = 0;
         this.character = worker_character_types[_.random(0, 4)];
         this.salary_coefficient = this.character.name === "Workaholic" ? -15 : this.character.name === "Modest" ? 20 : 0;
         this.thirst_to_knowledge_coefficient = this.character.name === "Gifted" ? 0.75 : this.character.name === "Wonk" ? 1.25 : 1;
@@ -141,6 +146,18 @@ class WorkerModel {
         return this.feelings.get();
     }
 
+    generateDream() {
+        let data = getData();
+        let unlocked_platforms = data.projects_unlocked_platforms;
+        return get_worker_dream(unlocked_platforms);
+    }
+
+    dreamComeTrue() {
+        this.dreams_come_true++;
+        this.dream_completing_multiplier++;
+        this.dream = this.generateDream();
+    }
+
     getSalary() {
         if (this.is_player) {
             return 0;
@@ -243,7 +260,13 @@ class WorkerModel {
     }
 
     getOverrate() {
-        return ((1 + this.standing / (24 * 7 * (59.524 + this.salary_coefficient))) * 100 - 100).toFixed(2);
+        if (this.dream_completing_multiplier === 0) {
+            return ((1 + this.standing / (24 * 7 * (59.524 + this.salary_coefficient))) * 100 - 100).toFixed(2);
+        } else {
+            let dreams_multiplier = 1 - (this.dream_completing_multiplier * 10) / 100;
+            this.dream_completing_multiplier = 0;
+            return (((1 + this.standing / (24 * 7 * (59.524 + this.salary_coefficient))) * 100 - 100) * dreams_multiplier).toFixed(2);
+        }
     }
 
     getMotivate() {

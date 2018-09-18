@@ -48,6 +48,7 @@ export default class ModalWorker extends Component {
                             {`${worker.character.description}.`}
                         </p>
                         <p>{worker.tellFeelings()}</p>
+                        {worker.is_player ? "" : <p>{worker.dream.text}</p>}
                         <>
                             {worker.is_player ? (
                                 ""
