@@ -268,19 +268,13 @@ class Creation extends Component {
                 <div className="customizator-item" key={key}>
                     <h4 className="fw-700">Test</h4>
                     <div className="customizator-controls">
-                        <DefaultClickSoundButton
-                            className="control-arrow"
-                            onClick={() => this.fragmentDec(key)}
-                        >
+                        <DefaultClickSoundButton className="control-arrow" onClick={() => this.fragmentDec(key)}>
                             {"<"}
                         </DefaultClickSoundButton>
 
                         <h5 className="text-center">{asset[key][this.state.avatar[key]].name}</h5>
 
-                        <DefaultClickSoundButton
-                            className="control-arrow"
-                            onClick={() => this.fragmentInc(key)}
-                        >
+                        <DefaultClickSoundButton className="control-arrow" onClick={() => this.fragmentInc(key)}>
                             {">"}
                         </DefaultClickSoundButton>
                     </div>
@@ -304,8 +298,8 @@ class Creation extends Component {
                                             </p>
                                         </h4>
                                         <h6 className="warning text-center">
-                                            The game on the early stages of development, bugs are possible! Developers will be grateful
-                                            if in case of any problem you write to the Support.
+                                            The game on the early stages of development, bugs are possible! Developers will be grateful if
+                                            in case of any problem you write to the Support.
                                         </h6>
                                     </div>
                                 </div>
@@ -533,10 +527,9 @@ class Creation extends Component {
                                     </DefaultClickSoundButton>
                                 </div>
                             </div>
-                        </div>
-                    ) : (
-                        ""
-                    )}
+                        ) : (
+                            ""
+                        )}
                     </Modal>
                 ) : (
                     ""
