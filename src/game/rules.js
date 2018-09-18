@@ -67,7 +67,7 @@ export const rules = {
                     this.paySalary(worker, current_tick);
                 });
             }
-            console.log(time);
+
             if (time.hour === 9 && time.day !== 5 && time.day !== 6) {
                 let audio = new Audio(sounds.new_day_alarm);
                 audio.play();
