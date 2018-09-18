@@ -6,6 +6,7 @@ import _ from "lodash";
 import ProjectModel from "../../models/ProjectModel";
 
 import { project_kinds, project_platforms } from "../../game/knowledge/projects";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 
 class StartProject extends Component {
     constructor(props) {
@@ -66,7 +67,7 @@ class StartProject extends Component {
                                         <div className="start-project-platform-select" key={i}>
                                             <input
                                                 className="form-check-input"
-                                                id={platform + "-radio-button"}
+                                                id={platform + "-radio-DefaultClickSoundButton"}
                                                 type="radio"
                                                 name="platform"
                                                 value={platform}
@@ -77,7 +78,10 @@ class StartProject extends Component {
                                                     });
                                                 }}
                                             />
-                                            <label className="form-check-label btn btn-sm" htmlFor={platform + "-radio-button"}>
+                                            <label
+                                                className="form-check-label btn btn-sm"
+                                                htmlFor={platform + "-radio-DefaultClickSoundButton"}
+                                            >
                                                 {platform}
                                             </label>
                                         </div>
@@ -92,7 +96,7 @@ class StartProject extends Component {
                                         <div className="start-project-kind-select" key={i}>
                                             <input
                                                 className="form-check-input"
-                                                id={kind + "-radio-button"}
+                                                id={kind + "-radio-DefaultClickSoundButton"}
                                                 type="radio"
                                                 name="kinds"
                                                 value={kind}
@@ -103,7 +107,10 @@ class StartProject extends Component {
                                                     });
                                                 }}
                                             />
-                                            <label className="form-check-label btn btn-sm" htmlFor={kind + "-radio-button"}>
+                                            <label
+                                                className="form-check-label btn btn-sm"
+                                                htmlFor={kind + "-radio-DefaultClickSoundButton"}
+                                            >
                                                 {kind}
                                             </label>
                                         </div>
@@ -136,7 +143,7 @@ class StartProject extends Component {
                 </div>
 
                 <div className="text-center">
-                    <button
+                    <DefaultClickSoundButton
                         className="btn btn-success btn-lg"
                         onClick={() => {
                             this.props.data.helpers.startProject(
@@ -148,7 +155,7 @@ class StartProject extends Component {
                         }}
                     >
                         Start Project
-                    </button>
+                    </DefaultClickSoundButton>
                 </div>
             </div>
         );

@@ -10,6 +10,7 @@ import TeamDialog from "./TeamDialog";
 import { roles } from "../game/knowledge/workers";
 import { project_sizes } from "../game/knowledge/projects";
 import { skills, skills_names } from "../game/knowledge/skills";
+import { DefaultClickSoundButton } from "../game/knowledge/sounds";
 
 class SalesAgency extends Component {
     constructor(props) {
@@ -90,7 +91,7 @@ class SalesAgency extends Component {
     render() {
         const data = this.props.data;
 
-        const search_button = <button className="btn btn-info hidden">Sales Agency</button>;
+        const search_button = <DefaultClickSoundButton className="btn btn-info hidden">Sales Agency</DefaultClickSoundButton>;
 
         const draw_row = (name, child) => {
             return (
@@ -176,7 +177,7 @@ class SalesAgency extends Component {
                                 />
                             );
                         })}
-                        <button
+                        <DefaultClickSoundButton
                             className={this.calcCost() <= data.money ? "btn btn-success" : "btn btn-success disabled"}
                             onClick={() => {
                                 if (this.calcCost() <= data.money) {
@@ -185,7 +186,7 @@ class SalesAgency extends Component {
                             }}
                         >
                             Search {this.calcCost()}$
-                        </button>
+                        </DefaultClickSoundButton>
                     </div>
                     <div data-provide="slider" data-value={30} data-step={10} className="noUi-target noUi-ltr noUi-horizontal" />
                 </TeamDialog>

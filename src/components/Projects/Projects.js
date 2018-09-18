@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import Meeting from "../Meeting/Meeting";
 import Project from "./Project";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 
 class Projects extends Component {
     constructor(props) {
@@ -15,14 +16,14 @@ class Projects extends Component {
         return (
             <section className="projects">
                 <div className="column-buttons">
-                    <button
+                    <DefaultClickSoundButton
                         className="btn btn-bold btn-w-lg btn-success"
                         onClick={() => {
                             data.helpers.changeContent("StartProject");
                         }}
                     >
                         New project
-                    </button>
+                    </DefaultClickSoundButton>
                 </div>
 
                 <div>

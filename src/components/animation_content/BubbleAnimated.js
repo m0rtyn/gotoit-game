@@ -4,6 +4,7 @@ import { Animate } from "react-move";
 import { easeCubicIn } from "d3-ease";
 import { Motion, spring } from "react-motion";
 import SplashAnimated from "./SplashAnimated";
+import { sounds } from "../../game/knowledge/sounds";
 
 class BubbleAnimated extends Component {
     static propTypes = {
@@ -59,6 +60,8 @@ class BubbleAnimated extends Component {
     componentDidMount() {
         let to;
         let { elementFrom, elementTo } = this.state;
+        let audio = new Audio(sounds.bubble_appear);
+        audio.play();
         if (elementTo) {
             to = elementTo.getBoundingClientRect();
             to.x -= to.width / 2;
@@ -69,6 +72,10 @@ class BubbleAnimated extends Component {
                 step: 2
             });
         }
+    }
+    componentWillUnmount() {
+        let audio = new Audio(sounds.bubble_burst);
+        audio.play();
     }
     render() {
         let { count, queue } = this.props;

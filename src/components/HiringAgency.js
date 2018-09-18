@@ -9,6 +9,7 @@ import TeamDialog from "./TeamDialog";
 
 import { roles } from "../game/knowledge/workers";
 import { skills, skills_names } from "../game/knowledge/skills";
+import { DefaultClickSoundButton } from "../game/knowledge/sounds";
 
 class HiringAgency extends PureComponent {
     constructor(props) {
@@ -95,7 +96,7 @@ class HiringAgency extends PureComponent {
     render() {
         const data = this.props.data;
 
-        const search_button = <button className="btn btn-info hidden">Hiring Agency</button>;
+        const search_button = <DefaultClickSoundButton className="btn btn-info hidden">Hiring Agency</DefaultClickSoundButton>;
 
         const draw_row = (name, child) => {
             return (
@@ -148,7 +149,7 @@ class HiringAgency extends PureComponent {
                                 min={1}
                             />
                         )}
-                        <button
+                        <DefaultClickSoundButton
                             className={this.calcCost() <= data.money ? "btn btn-xs btn-success" : "btn btn-success btn-xs disabled"}
                             onClick={() => {
                                 if (this.calcCost() <= data.money) {
@@ -157,7 +158,7 @@ class HiringAgency extends PureComponent {
                             }}
                         >
                             Search {this.calcCost()}
-                        </button>
+                        </DefaultClickSoundButton>
                     </div>
                 </TeamDialog>
             </Portal>

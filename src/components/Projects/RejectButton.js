@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import * as PropTypes from "prop-types";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 
 export class RejectButton extends PureComponent {
     static propTypes = {
@@ -7,9 +8,9 @@ export class RejectButton extends PureComponent {
     };
     render() {
         return (
-            <button className="btn btn-sm btn-danger" onClick={this.props.onClick}>
+            <DefaultClickSoundButton className="btn btn-sm btn-danger" onClick={this.props.onClick}>
                 Reject
-            </button>
+            </DefaultClickSoundButton>
         );
     }
 }

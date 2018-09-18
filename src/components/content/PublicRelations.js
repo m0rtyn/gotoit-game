@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { public_relations } from "../../game/knowledge/public_relations";
 import { colors } from "../../game/knowledge/colors";
 import Bar from "../Bar/Bar";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 import _ from "lodash";
 
 class PublicRelations extends Component {
@@ -33,6 +34,80 @@ class PublicRelations extends Component {
             }
         ];
 
+        const forum_thread_button_sound = (
+            <DefaultClickSoundButton
+                className={"btn btn-info"}
+                onClick={() => {
+                    public_relations["forum_thread"].onClick(data);
+                }}
+            >
+                {public_relations["forum_thread"].name +
+                    " " +
+                    (() => {
+                        let effect = _.find(data.on_tick_effects, effect => {
+                            return effect.type === "forum_thread";
+                        });
+                        return effect ? effect.click_count : 0;
+                    })()}
+            </DefaultClickSoundButton>
+        );
+        const search_job_button_sound = (
+            <DefaultClickSoundButton
+                className={100 <= data.money ? "btn btn-info " : "btn btn-info disabled "}
+                onClick={() => {
+                    public_relations["search_job"].onClick(data);
+                }}
+            >
+                {public_relations["search_job"].name +
+                    " " +
+                    (() => {
+                        let effect = _.find(data.on_tick_effects, effect => {
+                            return effect.type === "search_job";
+                        });
+                        return effect ? effect.click_count : 0;
+                    })()}
+            </DefaultClickSoundButton>
+        );
+
+        const search_specialist_button_sound = (
+            <DefaultClickSoundButton
+                className={250 <= data.money ? "btn btn-info " : "btn btn-info disabled "}
+                onClick={() => {
+                    public_relations["search_specialist"].onClick(data);
+                }}
+            >
+                {public_relations["search_specialist"].name +
+                    " " +
+                    (() => {
+                        let effect = _.find(data.on_tick_effects, effect => {
+                            return effect.type === "search_specialist";
+                        });
+                        return effect ? effect.click_count : 0;
+                    })()}
+            </DefaultClickSoundButton>
+        );
+
+        const big_event_button_sound = (
+            <DefaultClickSoundButton
+                className={
+                    1000 <= data.money && this.state.next_click_will_able_at < data.date.tick ? "btn btn-info " : "btn btn-info disabled "
+                }
+                onClick={() => {
+                    public_relations["big_event"].onClick(data);
+                    this.setState({ next_click_will_able_at: data.date.tick + 24 }); //only one click at day
+                }}
+            >
+                {public_relations["big_event"].name +
+                    " " +
+                    (() => {
+                        let effect = _.find(data.on_tick_effects, effect => {
+                            return effect.type === "big_event";
+                        });
+                        return effect ? effect.click_count : 0;
+                    })()}
+            </DefaultClickSoundButton>
+        );
+
         return (
             <div className="card border text-center">
                 <h3>Public Relations</h3>
@@ -50,79 +125,10 @@ class PublicRelations extends Component {
                 </div>
 
                 <div>
-                    <div>
-                        <button
-                            className="btn btn-info "
-                            onClick={() => {
-                                public_relations["forum_thread"].onClick(data);
-                            }}
-                        >
-                            {public_relations["forum_thread"].name +
-                                " " +
-                                (() => {
-                                    let effect = _.find(data.on_tick_effects, effect => {
-                                        return effect.type === "forum_thread";
-                                    });
-                                    return effect ? effect.click_count : 0;
-                                })()}
-                        </button>
-                    </div>
-                    <div>
-                        <button
-                            className={250 <= data.money ? "btn btn-info " : "btn btn-info disabled "}
-                            onClick={() => {
-                                public_relations["search_specialist"].onClick(data);
-                            }}
-                        >
-                            {public_relations["search_specialist"].name +
-                                " " +
-                                (() => {
-                                    let effect = _.find(data.on_tick_effects, effect => {
-                                        return effect.type === "search_specialist";
-                                    });
-                                    return effect ? effect.click_count : 0;
-                                })()}
-                        </button>
-                    </div>
-                    <div>
-                        <button
-                            className={100 <= data.money ? "btn btn-info " : "btn btn-info disabled "}
-                            onClick={() => {
-                                public_relations["search_job"].onClick(data);
-                            }}
-                        >
-                            {public_relations["search_job"].name +
-                                " " +
-                                (() => {
-                                    let effect = _.find(data.on_tick_effects, effect => {
-                                        return effect.type === "search_job";
-                                    });
-                                    return effect ? effect.click_count : 0;
-                                })()}
-                        </button>
-                    </div>
-                    <div>
-                        <button
-                            className={
-                                1000 <= data.money && this.state.next_click_will_able_at < data.date.tick
-                                    ? "btn btn-info "
-                                    : "btn btn-info disabled "
-                            }
-                            onClick={() => {
-                                public_relations["big_event"].onClick(data);
-                                this.setState({ next_click_will_able_at: data.date.tick + 24 }); //only one click at day
-                            }}
-                        >
-                            {public_relations["big_event"].name +
-                                " " +
-                                (() => {
-                                    let effect = _.find(data.on_tick_effects, effect => {
-                                        return effect.type === "big_event";
-                                    });
-                                    return effect ? effect.click_count : 0;
-                                })()}
-                        </button>
-                    </div>
+                    <div>{forum_thread_button_sound}</div>
+                    <div>{search_specialist_button_sound}</div>
+                    <div>{search_job_button_sound}</div>
+                    <div>{big_event_button_sound}</div>
                 </div>
             </div>
         );

@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import * as PropTypes from "prop-types";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 
 export class Refactoring extends PureComponent {
     static propTypes = {

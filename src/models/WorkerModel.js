@@ -119,6 +119,11 @@ class WorkerModel {
         );
     }
 
+    proposeLeave() {
+        this.to_leave = true;
+        this.to_leave_ticker = 24 * 7 * 2;
+    }
+
     sendToVacation(long) {
         this.to_vacation = false;
         this.in_vacation = true;

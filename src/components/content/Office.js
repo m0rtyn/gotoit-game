@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { DefaultClickSoundButton } from "../../game/knowledge/sounds";
 
 //import {offices} from '../game/knowledge';
 
@@ -9,7 +10,7 @@ class Office extends Component {
         const coffeemaker = (
             <div className="card">
                 {data.office_things.coffeemaker ? (
-                    <button
+                    <DefaultClickSoundButton
                         className="btn btn-info disabled"
                         data-provide="tooltip"
                         data-placement="top"
@@ -17,18 +18,18 @@ class Office extends Component {
                         data-original-title="Workers come to work earlier because of the Coffeemaker in the office."
                     >
                         Coffeemaker is bought
-                    </button>
+                    </DefaultClickSoundButton>
                 ) : (
                     <div>
                         Workers will come to work earlier if there is a Coffeemaker in the office.
-                        <button
+                        <DefaultClickSoundButton
                             onClick={() => {
                                 data.helpers.buyCoffeemaker();
                             }}
                             className={data.money >= 5000 ? "btn btn-info" : "btn btn-info disabled"}
                         >
                             Buy Coffeemaker $5000
-                        </button>
+                        </DefaultClickSoundButton>
                     </div>
                 )}
             </div>
@@ -39,23 +40,23 @@ class Office extends Component {
                 {" "}
                 After a delicious Lunch for $25, employees will stay at work until night.
                 {data.office_things.lunch ? (
-                    <button
+                    <DefaultClickSoundButton
                         onClick={() => {
                             data.helpers.lunchOff();
                         }}
                         className="btn btn-info"
                     >
                         Off
-                    </button>
+                    </DefaultClickSoundButton>
                 ) : (
-                    <button
+                    <DefaultClickSoundButton
                         onClick={() => {
                             data.helpers.lunchOn();
                         }}
                         className="btn btn-info"
                     >
                         On
-                    </button>
+                    </DefaultClickSoundButton>
                 )}
             </div>
         );
@@ -64,14 +65,14 @@ class Office extends Component {
                 {" "}
                 Fancy gadgets gives 1% happiness Boost per gadget. You Own:
                 {data.office_things.gadget}{" "}
-                <button
+                <DefaultClickSoundButton
                     onClick={() => {
                         data.helpers.buyGadget();
                     }}
                     className={data.money >= data.helpers.getGadgetCost() ? "btn btn-info" : "btn btn-info disabled"}
                 >
                     Buy Gadget ${data.helpers.getGadgetCost()}
-                </button>
+                </DefaultClickSoundButton>
             </div>
         );
 

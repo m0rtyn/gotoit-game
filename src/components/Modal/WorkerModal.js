@@ -7,6 +7,7 @@ import WorkerHappinessBar from "../WorkerHappinessBar";
 import WorkerStaminaBar from "../WorkerStaminaBar";
 import { Avatar } from "../Projects/Avatar";
 import _ from "lodash";
+import { DefaultClickSoundButton, TabClickSoundButton } from "../../game/knowledge/sounds";
 
 export default class ModalWorker extends Component {
     constructor(props) {
@@ -22,7 +23,7 @@ export default class ModalWorker extends Component {
         stats_progressbar_data: PropTypes.object
     };
     dismiss() {
-        this.props.data.helpers.dismissEmployer(this.props.worker.id);
+        this.props.worker.proposeLeave();
     }
     render() {
         let { worker, data, stats_progressbar_data } = this.props;
@@ -40,6 +41,7 @@ export default class ModalWorker extends Component {
                         ) : (
                             ""
                         )}
+                        {worker.to_leave ? <h4>Will leave in {Math.floor(worker.to_leave_ticker / 24)} days</h4> : ""}
                         <p>
                             <strong className="mb-0">{`${worker.character.name}`}</strong>
                             <br />
@@ -51,9 +53,9 @@ export default class ModalWorker extends Component {
                             {worker.is_player ? (
                                 ""
                             ) : (
-                                <button className="btn btn-danger btn-sm worker-dismiss" onClick={this.dismiss}>
+                                <DefaultClickSoundButton className="btn btn-danger btn-sm worker-dismiss" onClick={this.dismiss}>
                                     Dismiss an employee
-                                </button>
+                                </DefaultClickSoundButton>
                             )}
                         </>
                     </div>
@@ -63,14 +65,14 @@ export default class ModalWorker extends Component {
                             ""
                         ) : (
                             <span>
-                                <button
+                                <DefaultClickSoundButton
                                     className="btn btn-danger btn-link"
                                     onClick={() => {
                                         data.helpers.paySalary(worker);
                                     }}
                                 >
                                     Pay a debt
-                                </button>
+                                </DefaultClickSoundButton>
                             </span>
                         )}
 
@@ -176,14 +178,14 @@ export default class ModalWorker extends Component {
                     {skills_names.map(skill => {
                       return (
                         <div className="" key={skill}>
-                          <button
+                          <DefaultClickSoundButton
                             className="btn btn-info"
                             title={education[source].description}
                             id={source}
                             onClick={() => this.teach(skill, source)}
                           >
                             {education[source].name}
-                          </button>
+                          </DefaultClickSoundButton>
                         </div>
                       );
                     })}
@@ -212,7 +214,7 @@ export default class ModalWorker extends Component {
                                 ) : (
                                     <div className="" key={item_key}>
                                         <h3>{item.name}</h3>
-                                        <button
+                                        <DefaultClickSoundButton
                                             className={data.money >= item.money ? "btn btn-info btn-sm" : "btn btn-info btn-sm disabled"}
                                             title={item.description}
                                             id={item}
@@ -223,7 +225,7 @@ export default class ModalWorker extends Component {
                                             }}
                                         >
                                             Buy {item.name} ${item.money}
-                                        </button>
+                                        </DefaultClickSoundButton>
                                         <p>{item.description}</p>
                                     </div>
                                 );
@@ -260,14 +262,14 @@ export default class ModalWorker extends Component {
                                     <div className="worker-salary">
                                         <h3>{worker.getSalary()}$</h3>
                                         {/* // Overrate bonus:{' '} {worker.getOverrate()} % */}
-                                        <button
+                                        <DefaultClickSoundButton
                                             className="btn btn-danger px-8"
                                             onClick={() => {
                                                 data.helpers.riseEmployer(worker.id);
                                             }}
                                         >
                                             <h4 className="fw-700 mb-0 text-white">+10%</h4>
-                                        </button>
+                                        </DefaultClickSoundButton>
                                     </div>
                                 )}
                             </>
@@ -276,7 +278,7 @@ export default class ModalWorker extends Component {
                         <div className="worker-stamina">
                             <WorkerStaminaBar worker={worker} />
 
-                            <button
+                            <DefaultClickSoundButton
                                 className={
                                     "btn btn-danger btn-sm worker-vacation " + (worker.in_vacation || worker.to_vacation ? "disabled" : "")
                                 }
@@ -286,7 +288,7 @@ export default class ModalWorker extends Component {
                                 disabled={worker.in_vacation || worker.to_vacation}
                             >
                                 <h5 className="mb-0 text-white text-center">Propose vacation</h5>
-                            </button>
+                            </DefaultClickSoundButton>
                         </div>
 
                         <div className="worker-stats">
@@ -309,24 +311,24 @@ export default class ModalWorker extends Component {
                 <div className="modal-body">
                     <ul className="nav nav-tabs nav-tabs-light-mode">
                         <li className="nav-item">
-                            <a
+                            <TabClickSoundButton
                                 className={`nav-link ${state.currentTab === 0 ? "active show" : ""}`}
                                 onClick={() => {
                                     this.setState({ currentTab: 0 });
                                 }}
                             >
                                 <h3>Character</h3>
-                            </a>
+                            </TabClickSoundButton>
                         </li>
                         <li className="nav-item">
-                            <a
+                            <TabClickSoundButton
                                 className={"nav-link " + (state.currentTab === 1 ? "active show" : "")}
                                 onClick={() => {
                                     this.setState({ currentTab: 1 });
                                 }}
                             >
                                 <h3>Instrumentary</h3>
-                            </a>
+                            </TabClickSoundButton>
                         </li>
                     </ul>
 
