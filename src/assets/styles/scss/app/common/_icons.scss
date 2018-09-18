@@ -139,6 +139,10 @@
     content: "\e972";
   }
   
+  &gender-other, &gender-men, &gender-women {
+    font-size: 13px;
+  }
+
   &gender-other:before {
     content: "\e90b";
   }
