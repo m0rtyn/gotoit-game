@@ -8,8 +8,8 @@
   align-items: center;
 
   .modal-dialog {
-    max-height: size(85);
-    max-width: size(85);
+    width: size(85);
+    min-width: size(85);
     overflow-y: auto;
     pointer-events: auto;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3), 0px 8px 16px rgba(0, 0, 0, 0.3);

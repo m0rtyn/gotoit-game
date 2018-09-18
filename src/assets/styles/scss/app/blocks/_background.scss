@@ -11,11 +11,12 @@
 
 .background-image {
   position: fixed;
+  top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  display: block;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(../../images/background.png);
+  background-position: bottom;
   background-size: cover;
-  height: 260px;
+  z-index: -1;
 }

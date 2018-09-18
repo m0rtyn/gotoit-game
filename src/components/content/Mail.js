@@ -162,7 +162,14 @@ class Mail extends Component {
                     Mark all as read
                 </DefaultClickSoundButton>
                 {letters}
-                {this.state.show_modal ? <Modal closeModal={this.closeModal}> {this.state.current_modal}</Modal> : <div />}
+                {this.state.show_modal ? (
+                    <Modal closeModal={this.closeModal} showCloseButton={true}>
+                        {" "}
+                        {this.state.current_modal}
+                    </Modal>
+                ) : (
+                    <div />
+                )}
             </div>
         );
     }
